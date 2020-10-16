@@ -1,0 +1,94 @@
+{
+    "ZXD": {
+        "hashtype": "sha256sum",
+        "parts": {
+            "header": [0, 16384, ""],
+            "esxdos": [16384, 8192, "ESXDOS.ZXD"],
+            "roms_dir": [24576, 4096, ""],
+            "cores_dir": [28672, 2560, ""],
+            "BIOS": [32768, 16384, "FIRMWARE.ZXD"],
+            "roms_data": [49152, 573440, ""],
+            "Spectrum": [720896, 802560, "SPECTRUM.ZXD"],
+            "core_base": [1523712, 802816, ""]
+        },
+        "BIOS": {
+            "0.78": "76dae34e09a1e586536e9503b2dbdb67482b661d797521d2cc1ca708cf360736",
+            "0.79": "34d775223d29adc2c793ac11d609c8af58b6834746ea03c5175d38c8dd02a828",
+            "0.80": "7dcb6be6a06502b1c3515f26ff040ac518e9a3826abf15107f8f514d44e3f6b2",
+            "0.81": "b9b4d6074bf69d811f769f7f0eeefcb1471bf4894bb1a03539354a7bdffed3e9",
+            "0.82": "76b1216fffcf262dd5e677e7da4bf08086512978db5c3c84c2f1bbe52354b13b",
+            "Vertical": "b1420767f4cc8d6d77afb8759eeb2e159a805f3f2a9938f81da01e1eaaa230c9"
+        },
+        "esxdos": {
+            "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
+            "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
+            "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8"
+        },
+        "Spectrum": {
+            "EXP26_060818": "4ca484870c4173085ca181a92fadea6fd9e5e2928ee4fd0caa08f07052c9e286",
+            "EXP27": "b73e37eeeb8ed984a98a7c2633716087876195dcd7642e5df9fc901e8a378f21",
+            "EXP27_SVN": "18bb827d1d10671d914830e6af31dd33818ee8145c735590de0bdb45c7585305",
+            "SPECTRUM_EXP27_lx25": "a30ed2c99f65cff88a3d1d898f32d4618753f65c4ee22883b78ab09d037f800d",
+            "EXP27_200820": "4a6cc59602873fa6cea5942a57d378e0413606b3f20079573f19939679fc986c"
+        },
+        "Cores": {
+            "ZX Spectrum Next": {
+                "COREn_NEXT": "a1a4de5df87cfce34129dfd33ba7b0372469344bad53d9a6b2665da89e93e56f",
+                "1": "5f26c4ada12166d6b2cc34664a7c3ddc281c226eb86bc39e9f6c6e465a9225a8",
+                "3": "5dd20bd9a77aa4d3bbe5d60b3d0f75b9524d84071123623748dcf1fb45163bb7",
+                "5": "256c0df300125ab0f5daeaab131f9600cda2aad0d1be04da4799fed5f05b4f6a",
+                "7": "33946f15f8b20a46a8828fe9c84cb5f210899e182b491f18938615be30ffa433",
+                "9": "4f6b7c5038bf4d06719ad4e6170f66775aec980be33f0ac009ac0dcd8e2c6991",
+                "8": "60a4ec832e69b597f2ccdca6c2d5fbf7d30db6685ff71db8c79efa18dffbcc8c",
+                "10": "6d945ecc5b21bb556ab73588dc74dbfbb8b14d217eeaf822891db8d81cb9837e",
+                "Beta (Edge)": "d63bd85037007346977345c19fad1f963dcad7c576e1d186ce78c1fd02752afb",
+                "11": "830e08517e343c2b8ddcd805a02d9d986dce01687bbc1b9ac08f04e591e4330e"
+            },
+            "ZX Spectrum": {
+                "EXP27_100820": "a4be8ef45afb08aa3f5aec99772beec6ffff1058e478b4b55df8360275a193b0",
+                "EXP27_150820_monocromo": "89ccd7c10b91668a9940193dc55e6f30bc0f138dee9b3f671ac440acf8c484e3",
+                "EXP27_160820": "4eaa9f8080035185b1f7b5905f06bd63e7c4dc8645c2a79c32accc5154b4f7fb",
+                "EXP27_190920": "710eb8ac196b0b38ff84761c727e8b4ed8a2f9433db9b4d76899209aed3f757f"
+            },
+            "NES": {
+                "20200920": "35bd42259ab47099d4151c0ff687d3c3355e591ea4fb941e00aed709ab375d3e",
+                "20200923": "a22d70b0faaaf7e6759ee8b90986fd2da4f97b89f37aa5798af805fd363941c7"
+            },
+            "Test": {
+                "0.1": "25034b43ad11a6f93ec5075d761a8c31cc47e08edc3abd4b85115f50a6993926",
+                "test_placa_lx25": "7ac3895c796f1d65ba73498b8799d161713487750c3fd4b56ac8943d871fcc9a"
+            },
+            "MSX": 
+            {
+                "Beta": "a2eb1b6cdaecf67e0a07e9cfe593a247d46e85119c9b5936c57edc5ec88782f8",
+                "1.0": "a64e415a5277d92ea5441cfe02dcc8dfbbe396911d20f732f34f7bb6040ef0fe"
+            },
+            "Amstrad CPC":
+            {
+                "1": "8c0f0b9be6861cbae947ca5d412ec824c9c989a97c2d6a4056dbf3fe8cde3aac",
+                "4": "e88544a8acd89802d96e307fd1bd2ad52386e7a7240a6e045eaf0033a1b494c1"
+            },
+            "Acorn Atom":
+            {
+                "0.1": "ed1ca1ad15ccb73d46259131e363f70fc0cfe8f7dc42654ae87c3dc7f8d573ac"
+            },
+            "Commodore 64": {
+                "1.0": "c917efa18740920da86700ab58dd1dbf4911597faa0a4b6b532727059dd9a975"
+            },
+            "Phoenix": {
+                "0.1": "c881cf7c7e8b383deec958113aa6f6dfe28e9f55544386b4a5e7d67dcc206fd5",
+                "0.2": "ace00fedd5ebb8afab7925c04012d3d9519975c85104e35b2589fb388c67923b",
+                "1.0": "6806637a3eaf51802e4a0e6622a91917adaafae4379a4e1d6cba8e0a750007b9"
+            },
+            "Pong": {
+                "1.0": "f944e49710e30e3de0c89e71b25ac580d90a1d1a6d7a6f4a0279fd452a030c41"
+            },
+            "ColecoVision": {
+                "0.1": "1b640cb200434f735f749e18e34ed37ccba487f5c84ba3d4e2d321363f9aff4f"
+            }
+        },
+        "recovery.zxd.bit": {
+            "1.0": "fe077527253fe618452205a945fcdef5eab1c59d72dd0edafd54c09ccd713ba7"
+        }
+    }
+}
