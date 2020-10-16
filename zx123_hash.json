@@ -1,4 +1,88 @@
 {
+    "ZX1": {
+        "hashtype": "sha256sum",
+        "parts": {
+            "header": [0, 16384, ""],
+            "esxdos": [16384, 8192, "ESXDOS.ZX1"],
+            "roms_dir": [24576, 4096, ""],
+            "cores_dir": [28672, 1792, ""],
+            "BIOS": [30464, 16384, "FIRMWARE.ZX1"],
+            "roms_data": [46848, 573440, ""],
+            "Spectrum": [360464, 343808, "SPECTRUM.ZX1"],
+            "core_base": [704528, 344064, ""]
+        },
+        "BIOS": {
+            "0.75": "753a6f68a15353e3ce46f41640065de19b480dbef9ac8884dddca6fce134acf9",
+            "0.82": "d7fdf9b997b9514a642382f8e28472eed4ac217b5e2279b1d0897cff95cf1622",
+            "Vertical": "645f275502eb862258dc23f6436c7992d5b1623d3b21228dd61c7b1d027975f6"
+        },
+        "esxdos": {
+            "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
+            "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
+            "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8"
+        },
+        "Spectrum": {
+            "EXP27_SVN": "140fe5400fb3aee7dae99c540020d36d14d3c0be7ec3b9dd737a2b198525d618",
+            "EXP27-240320 azesmbog (no UART) +SAA1099": "65e788d92f1b3671934a941a3d8ecc629d4ab03093f75fe65a3c5b9eb6ea09a3"
+        },
+        "Cores": {
+            "ZX Spectrum": {
+                "EXP27_SVN": "613902acb29e3926142a721493c593c0746969261fe7d5cce207194a1fc30a03"
+            },
+            "BBC Micro": {
+                 "1.3": "c35ed68b865139001bde7a8cb1e9fc12e0ab1e40f6d805a174f25dc94b6be73e"
+            },
+            "ColecoVision" : {
+                "1.0": "42a1c25f0c8f767677f6e3c5ebbd0bbc70eed07fc321e4d19770f348436f0c9d"
+            },
+            "Commodore 64" : {
+                "Beta 6": "4c8c757ba1224b9156afb39b6d3157ebabcde601241c601f79df44cbe76211ac",
+                "Beta 7b": "66a25e6a2ba2f492baf673961efe660ec9568ff83d1edd5199aa61b26579c64e"
+            },
+            "MSX": {
+                 "1.3 VGA2M": "dc3ba4afe699aaffff10c0fce5bddd0a105f7d033e180c2e20f2f28122f053ec"
+            },
+            "Sam Coupe": {
+                "1.142": "9caeac28c7e76fd401039bb4afa25b71b9553ec5139be0b830218e869b01ec50"
+            }
+        }
+     },
+    "ZX2": {
+        "hashtype": "sha256sum",
+        "parts": {
+            "header": [0, 16384, ""],
+            "esxdos": [16384, 8192, "ESXDOS.ZX2"],
+            "roms_dir": [24576, 4096, ""],
+            "cores_dir": [28672, 2560, ""],
+            "BIOS": [32768, 16384, "FIRMWARE.ZX2"],
+            "roms_data": [49152, 573440, ""],
+            "Spectrum": [622592, 474880, "SPECTRUM.ZX2"],
+            "core_base": [1097728, 475136, ""]
+        },
+        "BIOS": {
+            "0.80": "4a4af0ea9583add1d4d3e5d965d72192e30bcda12abf30d35d16b27d232c068f",
+            "0.82": "d3482a48486e421aecf5f794fb7618554840956c19fa4c708aa72905fb8f151d",
+            "Vertical": "35c890bf625d88796a68f48fc71485075030cb09217671cccf7aaf914fa7522d"
+        },
+        "esxdos": {
+            "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
+            "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
+            "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8"
+        },
+        "Spectrum": {
+            "EXP27_SVN": "33dcfc9263be150a825f77ffbbab5fc3c9ddac5cc5c733ff189c722c9384478c",
+            "EXP27_140819": "9984c095772d29192563b33855c106c58d75026719a847f325d7dc7ddcf8d078"
+        },
+        "Cores": {
+            "ZX Spectrum": {
+                "EXP27_SVN": "9f10eb6605c428e17db607a7141036a218164eeea02ac4c087e447dce5e5ced4"
+            },
+            "ColecoVision": {
+                "1.0 RGB": "44eb8e83e0bb6d273f194974ac270d94f5738978a779fd37f5624b19ff31a750",
+                "1.0 VGA": "af1962514d1bb73d7ac9d83b6dcf670776ae9e2cb6c818df83b23b03042852b3"
+            }
+        }
+    },
     "ZXD": {
         "hashtype": "sha256sum",
         "parts": {

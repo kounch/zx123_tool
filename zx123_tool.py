@@ -39,7 +39,7 @@ import os
 import json
 import hashlib
 
-__MY_VERSION__ = '0.1'
+__MY_VERSION__ = '0.2'
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
@@ -279,7 +279,7 @@ def get_core_list(str_in_file, dict_parts):
     name_offset = 0x100
     name_len = 0x20
     name_list = []
-    for index in range(15):
+    for index in range(50):
         str_name = bin_data[name_offset + index * name_len:name_offset +
                             (index + 1) * name_len]
         if str_name[0:1] == b'\x00':
