@@ -3,7 +3,7 @@
 # -*- mode: Python; tab-width: 4; indent-tabs-mode: nil; -*-
 # Do not modify previous lines. See PEP 8, PEP 263.
 """
-ZX-Uno, ZXDOS, ZXDOS+, gomaDOS+ Tool for ZXDOS, etc. image files.
+ZX-Uno, ZXDOS, ZXDOS+, gomaDOS+ Tool for ZXDOS, etc. files.
 
 BSD 2-Clause License
 
@@ -38,6 +38,7 @@ import argparse
 import os
 import json
 import hashlib
+from binascii import unhexlify
 
 __MY_VERSION__ = '0.2'
 
@@ -75,12 +76,16 @@ def main():
         LOGGER.error('Unknown file extension {0}'.format(str_extension))
         sys.exit(2)
 
-    if arg_data['list']:
-        list_zxdata(str_file, dict_hash, arg_data['show_hashes'])
+    if validate_file(str_file, dict_hash['parts']['header'][3]):
+        if arg_data['list']:
+            list_zxdata(str_file, dict_hash, arg_data['show_hashes'])
 
-    for x_item in arg_data['extract']:
-        extractfrom_zxdata(str_file, x_item, dict_hash, str_extension)
+        for x_item in arg_data['extract']:
+            extractfrom_zxdata(str_file, x_item, dict_hash, str_extension)
+    else:
+        find_zxfile(str_file, dict_hash, arg_data['show_hashes'])
 
+    print('')
     LOGGER.debug("Finished.")
 
 
@@ -153,7 +158,8 @@ def list_zxdata(str_in_file, hash_dict, show_hashes):
     """
     LOGGER.debug('Listing contents of file: {0}'.format(str_in_file))
     str_name = os.path.basename(str_in_file)
-    print('\nContents of {0}\n'.format(str_name))
+    print('\nContents of {0} (possibly {1})\n'.format(
+        str_name, hash_dict['description']))
     block_list = ['BIOS', 'esxdos', 'Spectrum']
     for block_name in block_list:
         block_version, block_hash = get_version(str_in_file,
@@ -303,6 +309,87 @@ def export_bin(str_in_file, block_info, str_out_bin):
 
     with open(str_out_bin, "wb") as out_zxdata:
         out_zxdata.write(bin_data)
+
+
+def find_zxfile(str_in_file, hash_dict, show_hashes):
+    """
+    Try to guess ZX... file from hash
+    :param str_in_file: Path to file
+    :param hash_dict: Dictionary with hashes for different blocks
+    :param show_hashes: If True, print also found block hashes
+    """
+    found = False
+
+    str_name = os.path.basename(str_in_file)
+    print('\nAnalyzing {0} (possibly {1})...\n '.format(
+        str_name, hash_dict['description']))
+    str_file_hash = get_file_hash(str_in_file)
+    if show_hashes:
+        print('{0}'.format(str_file_hash))
+
+    for block_id in ['BIOS', 'Spectrum']:
+        if validate_file(
+                str_in_file, hash_dict['parts'][block_id][3]) and os.stat(
+                    str_in_file).st_size == hash_dict['parts'][block_id][1]:
+            LOGGER.debug('Looks like {0}'.format(block_id))
+            for block_version in hash_dict[block_id]:
+                LOGGER.debug('Checking {0}'.format(block_version))
+                if str_file_hash == hash_dict[block_id][block_version]:
+                    print('{0} -  Version: {1}'.format(block_id,
+                                                       block_version))
+                    found = True
+                    break
+
+    if not found:
+        if validate_file(
+                str_in_file, hash_dict['parts']['core_base'][3]) and os.stat(
+                    str_in_file).st_size == hash_dict['parts']['core_base'][1]:
+            LOGGER.debug('Looks like a core')
+            for core_item in hash_dict['Cores']:
+                for core_version in hash_dict['Cores'][core_item]:
+                    LOGGER.debug('Checking  {0} v{1}'.format(
+                        core_item, core_version))
+                    if str_file_hash == hash_dict['Cores'][core_item][
+                            core_version]:
+                        print('Core: {0} - Version: {1}'.format(
+                            core_item, core_version))
+                        found = True
+                        break
+
+    if not found:
+        print('Unknown file')
+
+
+def validate_file(str_in_file, str_magic):
+    """
+    Try to detect ZX... file type from first bytes
+    :param str_in_file: Path to file
+    :param str_magic: Bytes to match
+    :return: True if bytes match, False in other case
+    """
+    magic_bin = unhexlify(str_magic)
+    with open(str_in_file, "rb") as bin_file:
+        bin_data = bin_file.read(len(magic_bin))
+
+    if magic_bin == bin_data:
+        return True
+    else:
+        return False
+
+
+def get_file_hash(str_in_file):
+    """
+    Get file sha26 hash
+    :param str_in_file: Path to file
+    :return: String with hash data
+    """
+    sha256_hash = hashlib.sha256()
+    with open(str_in_file, "rb") as f:
+        # Read and update hash string value in blocks of 4K
+        for byte_block in iter(lambda: f.read(4096), b""):
+            sha256_hash.update(byte_block)
+
+    return sha256_hash.hexdigest()
 
 
 if __name__ == "__main__":

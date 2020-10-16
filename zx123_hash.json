@@ -1,15 +1,16 @@
 {
     "ZX1": {
+        "description": "ZX-Uno",
         "hashtype": "sha256sum",
         "parts": {
-            "header": [0, 16384, ""],
-            "esxdos": [16384, 8192, "ESXDOS.ZX1"],
-            "roms_dir": [24576, 4096, ""],
-            "cores_dir": [28672, 1792, ""],
-            "BIOS": [30464, 16384, "FIRMWARE.ZX1"],
-            "roms_data": [46848, 573440, ""],
-            "Spectrum": [360464, 343808, "SPECTRUM.ZX1"],
-            "core_base": [704528, 344064, ""]
+            "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF3261800032816B0532A1400032C16B2A32E10000"],
+            "esxdos": [16384, 8192, "ESXDOS.ZX1", ""],
+            "roms_dir": [24576, 4096, "", ""],
+            "cores_dir": [28672, 1792, "", ""],
+            "BIOS": [30464, 16384, "FIRMWARE.ZX1", "31B0AA3E04013BFCED7904ED70F521"],
+            "roms_data": [46848, 573440, "", ""],
+            "Spectrum": [360464, 343808, "SPECTRUM.ZX1", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A103803141"],
+            "core_base": [704528, 344064, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A103803141"]
         },
         "BIOS": {
             "0.75": "753a6f68a15353e3ce46f41640065de19b480dbef9ac8884dddca6fce134acf9",
@@ -48,16 +49,17 @@
         }
      },
     "ZX2": {
+        "description": "ZXDOS",
         "hashtype": "sha256sum",
         "parts": {
-            "header": [0, 16384, ""],
-            "esxdos": [16384, 8192, "ESXDOS.ZX2"],
-            "roms_dir": [24576, 4096, ""],
-            "cores_dir": [28672, 2560, ""],
-            "BIOS": [32768, 16384, "FIRMWARE.ZX2"],
-            "roms_data": [49152, 573440, ""],
-            "Spectrum": [622592, 474880, "SPECTRUM.ZX2"],
-            "core_base": [1097728, 475136, ""]
+            "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF326180003281030932A1800032C1030932E10000"],
+            "esxdos": [16384, 8192, "ESXDOS.ZX2", ""],
+            "roms_dir": [24576, 4096, "", ""],
+            "cores_dir": [28672, 2560, "", ""],
+            "BIOS": [32768, 16384, "FIRMWARE.ZX2", "31B0AA3E04013BFCED7904ED70F521"],
+            "roms_data": [49152, 573440, "", ""],
+            "Spectrum": [622592, 474880, "SPECTRUM.ZX2", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104303141"],
+            "core_base": [1097728, 475136, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104303141"]
         },
         "BIOS": {
             "0.80": "4a4af0ea9583add1d4d3e5d965d72192e30bcda12abf30d35d16b27d232c068f",
@@ -84,16 +86,17 @@
         }
     },
     "ZXD": {
+        "description": "ZXDOS+/gomaDOS+",
         "hashtype": "sha256sum",
         "parts": {
-            "header": [0, 16384, ""],
+            "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF326100003281030B32A1000032C1030B32E10000"],
             "esxdos": [16384, 8192, "ESXDOS.ZXD"],
-            "roms_dir": [24576, 4096, ""],
-            "cores_dir": [28672, 2560, ""],
-            "BIOS": [32768, 16384, "FIRMWARE.ZXD"],
-            "roms_data": [49152, 573440, ""],
-            "Spectrum": [720896, 802560, "SPECTRUM.ZXD"],
-            "core_base": [1523712, 802816, ""]
+            "roms_dir": [24576, 4096, "", ""],
+            "cores_dir": [28672, 2560, "", ""],
+            "BIOS": [32768, 16384, "FIRMWARE.ZXD", "31B0AA3E04013BFCED7904ED70F521"],
+            "roms_data": [49152, 573440, "", ""],
+            "Spectrum": [720896, 802560, "SPECTRUM.ZXD", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104883141"],
+            "core_base": [1523712, 802816, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104883141"]
         },
         "BIOS": {
             "0.78": "76dae34e09a1e586536e9503b2dbdb67482b661d797521d2cc1ca708cf360736",
