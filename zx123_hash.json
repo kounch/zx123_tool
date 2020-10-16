@@ -3,7 +3,7 @@
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
         "parts": {
-            "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF3261800032816B0532A1400032C16B2A32E10000"],
+            "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF3261800032816B05"],
             "esxdos": [16384, 8192, "ESXDOS.ZX1", ""],
             "roms_dir": [24576, 4096, "", ""],
             "cores_dir": [28672, 1792, "", ""],
@@ -14,6 +14,7 @@
         },
         "BIOS": {
             "0.75": "753a6f68a15353e3ce46f41640065de19b480dbef9ac8884dddca6fce134acf9",
+            "0.76": "23c216b397fe22f18634296b21fda3cc3a0a76b5f9975f9ea9637f1b93621cba",
             "0.82": "d7fdf9b997b9514a642382f8e28472eed4ac217b5e2279b1d0897cff95cf1622",
             "Vertical": "645f275502eb862258dc23f6436c7992d5b1623d3b21228dd61c7b1d027975f6"
         },
@@ -23,6 +24,7 @@
             "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8"
         },
         "Spectrum": {
+            "EXP26 040418": "85023e5c7941f56f74c1badc37f295e08b4c2955b67723851c1c5763891b236a",
             "EXP27_SVN": "140fe5400fb3aee7dae99c540020d36d14d3c0be7ec3b9dd737a2b198525d618",
             "EXP27-240320 azesmbog (no UART) +SAA1099": "65e788d92f1b3671934a941a3d8ecc629d4ab03093f75fe65a3c5b9eb6ea09a3"
         },
@@ -52,7 +54,7 @@
         "description": "ZXDOS",
         "hashtype": "sha256sum",
         "parts": {
-            "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF326180003281030932A1800032C1030932E10000"],
+            "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF3261800032810309"],
             "esxdos": [16384, 8192, "ESXDOS.ZX2", ""],
             "roms_dir": [24576, 4096, "", ""],
             "cores_dir": [28672, 2560, "", ""],
@@ -62,6 +64,7 @@
             "core_base": [1097728, 475136, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104303141"]
         },
         "BIOS": {
+            "0.77": "de8953d614777da03f4cc9fd8bba01d35331c6e16a25df85f9ab7d8e8677a323",
             "0.80": "4a4af0ea9583add1d4d3e5d965d72192e30bcda12abf30d35d16b27d232c068f",
             "0.82": "d3482a48486e421aecf5f794fb7618554840956c19fa4c708aa72905fb8f151d",
             "Vertical": "35c890bf625d88796a68f48fc71485075030cb09217671cccf7aaf914fa7522d"
@@ -89,7 +92,7 @@
         "description": "ZXDOS+/gomaDOS+",
         "hashtype": "sha256sum",
         "parts": {
-            "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF326100003281030B32A1000032C1030B32E10000"],
+            "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF326100003281030B"],
             "esxdos": [16384, 8192, "ESXDOS.ZXD"],
             "roms_dir": [24576, 4096, "", ""],
             "cores_dir": [28672, 2560, "", ""],
