@@ -128,11 +128,12 @@
                 "3": "5dd20bd9a77aa4d3bbe5d60b3d0f75b9524d84071123623748dcf1fb45163bb7",
                 "5": "256c0df300125ab0f5daeaab131f9600cda2aad0d1be04da4799fed5f05b4f6a",
                 "7": "33946f15f8b20a46a8828fe9c84cb5f210899e182b491f18938615be30ffa433",
-                "9": "4f6b7c5038bf4d06719ad4e6170f66775aec980be33f0ac009ac0dcd8e2c6991",
                 "8": "60a4ec832e69b597f2ccdca6c2d5fbf7d30db6685ff71db8c79efa18dffbcc8c",
+                "9": "4f6b7c5038bf4d06719ad4e6170f66775aec980be33f0ac009ac0dcd8e2c6991",
                 "10": "6d945ecc5b21bb556ab73588dc74dbfbb8b14d217eeaf822891db8d81cb9837e",
-                "Beta (Edge)": "d63bd85037007346977345c19fad1f963dcad7c576e1d186ce78c1fd02752afb",
-                "11": "830e08517e343c2b8ddcd805a02d9d986dce01687bbc1b9ac08f04e591e4330e"
+                "11 Beta": "830e08517e343c2b8ddcd805a02d9d986dce01687bbc1b9ac08f04e591e4330e",
+                "11 Beta (Edge)": "d63bd85037007346977345c19fad1f963dcad7c576e1d186ce78c1fd02752afb",
+                "11": "98c7ce7f1a778a24dbebd5d935c42f434c0a38e0e775776f046e44b9b02874c9"
             },
             "ZX Spectrum": {
                 "EXP27_100820": "a4be8ef45afb08aa3f5aec99772beec6ffff1058e478b4b55df8360275a193b0",
