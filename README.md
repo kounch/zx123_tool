@@ -5,34 +5,50 @@ All rights reserved.
 
 ## Description
 
-Analyzes and extracts data from ZXDOS, etc. image files
+Analyzes and extracts data from ZXDOS, etc. SPI flash image files.
 
 Requires a 'zx123_hash.json' file with block estructure (e.g.: ZXD) and,
 optionally, hashes to identify the blocks inside.
 
-Arguments:
-  -h, --help          show help and exit
-  -v, --version       show program's version number and exit
-  -i INPUT_FILE, --input_file INPUT_FILE
-                      ZX-Uno, ZXDOS, etc. File
-  -l, --list_contents List file contents
-  -s, --show_hashes   Show computed hashes
-  -x EXTRACT, --extract EXTRACT
-                      Item(s) to extract (BIOS, Spectrum, esxdos or Core Number)
+    Arguments:
+      -h, --help          show help and exit
+      -v, --version       show program's version number and exit
+      -i INPUT_FILE, --input_file INPUT_FILE
+                          ZX-Uno, ZXDOS, etc. File
+      -d OUTPUT_DIR, --output_dir OUTPUT_DIR
+                            Output directory for extracted files
+      -o OUTPUT_FILE, --output_file OUTPUT_FILE
+                            Output flash file to copy
+      -f, --force           Force overwrite of existing files
+      -l, --list_contents List file contents
+      -s, --show_hashes   Show computed hashes
+      -x EXTRACT, --extract EXTRACT
+                    Item(s) to extract: BIOS, Spectrum, esxdos or Core Number(s)
+      -n N_CORES, --number_of_cores N_CORES
+                    Number of cores to store on output file
+      -m VIDEO_MODE, --video_mode VIDEO_MODE
+                    Default BIOS video mode: 0 (PAL), 1 (NTSC) or 2 (VGA)
+      -k KEYBOARD_LAYOUT, --keyboard_layout KEYBOARD_LAYOUT
+                    Default BIOS Keyboard Layout:
+                                    0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
 
 ## Examples
 
-python3 zx123_tool.py -i FLASH.ZXD -l    -> Show contents of file
+Show contents of file:
 
-py -3 zx123_tool.py -i FLASH32.ZXD -x BIOS    -> Extract FIRMWARE.ZXD file from
-                                              FLASH32.ZXD file
+    python3 zx123_tool.py -i FLASH.ZXD -l
 
-.../zx123_tool.py -l -i FLASH32.ZXD -x Spectrum,3,1,esxdos   -> Show contents
-                                                             of file and extract
-                                                             SPECTRUM.ZXD,
-                                                             ESXDOS.ZXD and
-                                                             .ZXD files for
-                                                             cores 1 and 3
+Extract FIRMWARE.ZXD file from FLASH32.ZXD file (on Windows):
+
+    py -3 zx123_tool.py -i FLASH32.ZXD -x BIOS
+
+Show contents of file and extract SPECTRUM.ZXD, ESXDOS.ZXD and .ZXD files for cores 1 and 3:
+
+    .../zx123_tool.py -l -i FLASH32.ZXD -x Spectrum,3,1,esxdos
+
+Create a copy of FLASH32.ZXD, but removing all cores and setting BIOS default to VGA and Spectrum keyboard layout:
+
+    .../zx123_tool.py -l -i FLASH32.ZXD -o FlashGDOSPlus.ZXD -n 0 -m 2 -k 3
 
 ## License
 

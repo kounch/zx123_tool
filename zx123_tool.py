@@ -39,8 +39,15 @@ import os
 import json
 import hashlib
 from binascii import unhexlify
+import struct
+import six
 
-__MY_VERSION__ = '0.2'
+if six.PY2:
+    input = raw_input
+
+__MY_VERSION__ = '0.3'
+
+MAX_CORES = 45
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
@@ -68,7 +75,10 @@ def main():
         dict_hash = json.load(jsonHandle)
 
     str_file = arg_data['input_file']
-    str_filename, str_extension = os.path.splitext(str_file)
+    str_outdir = arg_data['output_dir']
+    if not str_outdir:
+        str_outdir = os.path.dirname(str_file)
+    str_extension = os.path.splitext(str_file)[1]
     str_extension = str_extension[1:].upper()
     if str_extension in dict_hash:
         dict_hash = dict_hash[str_extension]
@@ -81,7 +91,13 @@ def main():
             list_zxdata(str_file, dict_hash, arg_data['show_hashes'])
 
         for x_item in arg_data['extract']:
-            extractfrom_zxdata(str_file, x_item, dict_hash, str_extension)
+            extractfrom_zxdata(str_file, x_item, dict_hash, str_outdir,
+                               str_extension, arg_data['force'])
+
+        if arg_data['output_file']:
+            savefrom_zxdata(str_file, dict_hash, arg_data['output_file'],
+                            arg_data['n_cores'], arg_data['video_mode'],
+                            arg_data['keyboard_layout'], arg_data['force'])
     else:
         find_zxfile(str_file, dict_hash, arg_data['show_hashes'])
 
@@ -96,9 +112,15 @@ def parse_args():
     """
     values = {}
     values['input_file'] = ''
+    values['output_dir'] = ''
+    values['output_file'] = ''
+    values['force'] = False
     values['list'] = False
     values['show_hashes'] = False
     values['extract'] = []
+    values['n_cores'] = -1
+    values['video_mode'] = -1
+    values['keyboard_layout'] = -1
 
     parser = argparse.ArgumentParser(
         description='ZX123 Tool',
@@ -113,6 +135,24 @@ def parse_args():
                         action='store',
                         dest='input_file',
                         help='ZX-Uno, ZXDOS, etc. File')
+    parser.add_argument('-d',
+                        '--output_dir',
+                        required=False,
+                        action='store',
+                        dest='output_dir',
+                        help='Output directory for extracted files')
+    parser.add_argument('-o',
+                        '--output_file',
+                        required=False,
+                        action='store',
+                        dest='output_file',
+                        help='Output file to copy')
+    parser.add_argument('-f',
+                        '--force',
+                        required=False,
+                        action='store_true',
+                        dest='force',
+                        help='Force overwrite of existing files')
     parser.add_argument('-l',
                         '--list_contents',
                         required=False,
@@ -131,11 +171,39 @@ def parse_args():
                         action='store',
                         dest='extract',
                         help='Item(s) to extract')
+    parser.add_argument('-n',
+                        '--number_of_cores',
+                        required=False,
+                        action='store',
+                        dest='n_cores',
+                        help='Number of cores to store on output file')
+    parser.add_argument('-m',
+                        '--video_mode',
+                        required=False,
+                        action='store',
+                        dest='video_mode',
+                        help='Video mode: 0 (PAL), 1 (NTSC) or 2 (VGA)')
+    parser.add_argument(
+        '-k',
+        '--keyboard_layout',
+        required=False,
+        action='store',
+        dest='keyboard_layout',
+        help='Keyboard Layout: 0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)')
 
     arguments = parser.parse_args()
 
     if arguments.input_file:
         values['input_file'] = os.path.abspath(arguments.input_file)
+
+    if arguments.output_dir:
+        values['output_dir'] = os.path.abspath(arguments.output_dir)
+
+    if arguments.output_file:
+        values['output_file'] = os.path.abspath(arguments.output_file)
+
+    if arguments.force:
+        values['force'] = arguments.force
 
     if arguments.list_contents:
         values['list'] = arguments.list_contents
@@ -145,6 +213,15 @@ def parse_args():
 
     if arguments.extract:
         values['extract'] = arguments.extract.split(',')
+
+    if arguments.n_cores:
+        values['n_cores'] = int(arguments.n_cores)
+
+    if arguments.video_mode:
+        values['video_mode'] = int(arguments.video_mode)
+
+    if arguments.keyboard_layout:
+        values['keyboard_layout'] = int(arguments.keyboard_layout)
 
     return values
 
@@ -181,7 +258,12 @@ def list_zxdata(str_in_file, hash_dict, show_hashes):
             print(block_hash)
 
 
-def extractfrom_zxdata(str_in_file, extract_item, hash_dict, str_extension):
+def extractfrom_zxdata(str_in_file,
+                       extract_item,
+                       hash_dict,
+                       str_dir,
+                       str_extension,
+                       b_force=False):
     """
     Parse and extract data block to file
     :param str_in_file: Path to file
@@ -195,8 +277,8 @@ def extractfrom_zxdata(str_in_file, extract_item, hash_dict, str_extension):
             print('Extracting {0}...'.format(block_name))
             block_info = hash_dict['parts'][block_name]
             str_bin = hash_dict['parts'][block_name][2]
-            export_bin(str_in_file, block_info, str_bin)
-            print('{0} created OK.'.format(str_bin))
+            str_bin = os.path.join(str_dir, str_bin)
+            export_bin(str_in_file, block_info, str_bin, b_force)
             break
 
     core_base = hash_dict['parts']['core_base'][0]
@@ -215,8 +297,8 @@ def extractfrom_zxdata(str_in_file, extract_item, hash_dict, str_extension):
             str_bin = 'CORE{0:02d}_{1}_v{2}.{3}'.format(
                 core_number + 2, block_name.replace(' ', '_'), block_version,
                 str_extension)
-            export_bin(str_in_file, block_info, str_bin)
-            print('{0} created OK.'.format(str_bin))
+            str_bin = os.path.join(str_dir, str_bin)
+            export_bin(str_in_file, block_info, str_bin, b_force)
         else:
             LOGGER.error('Invalid core number: {0}'.format(core_number))
 
@@ -285,7 +367,7 @@ def get_core_list(str_in_file, dict_parts):
     name_offset = 0x100
     name_len = 0x20
     name_list = []
-    for index in range(50):
+    for index in range(MAX_CORES):
         str_name = bin_data[name_offset + index * name_len:name_offset +
                             (index + 1) * name_len]
         if str_name[0:1] == b'\x00':
@@ -296,7 +378,7 @@ def get_core_list(str_in_file, dict_parts):
     return name_list
 
 
-def export_bin(str_in_file, block_info, str_out_bin):
+def export_bin(str_in_file, block_info, str_out_bin, b_force=False):
     """
     Extract data block to file
     :param str_in_file: Path to file
@@ -307,8 +389,10 @@ def export_bin(str_in_file, block_info, str_out_bin):
         in_zxdata.seek(block_info[0])
         bin_data = in_zxdata.read(block_info[1])
 
-    with open(str_out_bin, "wb") as out_zxdata:
-        out_zxdata.write(bin_data)
+    if b_force or check_overwrite(str_out_bin):
+        with open(str_out_bin, "wb") as out_zxdata:
+            out_zxdata.write(bin_data)
+            print('{0} created OK.'.format(str_out_bin))
 
 
 def find_zxfile(str_in_file, hash_dict, show_hashes):
@@ -390,6 +474,81 @@ def get_file_hash(str_in_file):
             sha256_hash.update(byte_block)
 
     return sha256_hash.hexdigest()
+
+
+def savefrom_zxdata(str_in_file,
+                    hash_dict,
+                    str_outfile,
+                    n_cores=-1,
+                    video_mode=-1,
+                    keyboard_layout=-1,
+                    b_force=False):
+    """
+    Create new file from SPI flash file
+    :param str_in_file: Path to file
+    :param hash_dict: Dictionary with hashes for different blocks
+    :param str_extension: Extension for Core files
+    """
+
+    flash_len = 16777216
+    if n_cores > -1:
+        flash_len = hash_dict['parts']['core_base'][0]
+        flash_len += hash_dict['parts']['core_base'][1] * n_cores
+
+    bin_len = os.stat(str_in_file).st_size
+    if bin_len > flash_len:
+        bin_len = flash_len
+
+    print('Copying Flash...')
+    with open(str_in_file, "rb") as in_zxdata:
+        bin_data = in_zxdata.read(bin_len)
+
+    # 28746 0-3 Keyboard Layout: Auto-ES-EN-ZX
+    if keyboard_layout > -1:
+        bin_data = bin_data[:28746] + struct.pack(
+            '<B', keyboard_layout) + bin_data[28747:]
+
+    # 28749 0-2 Video: PAL-NTSC-VGA
+    if video_mode > -1:
+        bin_data = bin_data[:28749] + struct.pack(
+            '<B', video_mode) + bin_data[28750:]
+
+    if n_cores > -1:
+        core_offset = 0x7100 + (n_cores * 0x20)
+        core_len = (MAX_CORES - n_cores) * 0x20
+        bin_data = bin_data[:core_offset] + b'\x00' * core_len + bin_data[
+            core_offset + core_len:]
+
+        # 28928
+        # 28928 + 32
+        # 28928-32767 0x00 (cores_dir + 256: len)
+
+    if b_force or check_overwrite(str_outfile):
+        with open(str_outfile, "wb") as out_zxdata:
+            out_zxdata.write(bin_data)
+            print('{0} created OK.'.format(str_outfile))
+
+
+def check_overwrite(str_file):
+    """
+    Check if file exists. If so, ask permission to overwrite
+    :param str_file: Path to file
+    :return: Bool, if True, permission granted to overwrite
+    """
+    b_writefile = True
+    if os.path.isfile(str_file):
+        str_name = os.path.basename(str_file)
+        b_ask = True
+        while (b_ask):
+            chk_overwrite = input(
+                '{0} exists. Overwrite? (Y/N): '.format(str_name))
+            if chk_overwrite.upper() == 'N' or chk_overwrite == '':
+                b_writefile = False
+                b_ask = False
+            if chk_overwrite.upper() == 'Y':
+                b_ask = False
+
+    return b_writefile
 
 
 if __name__ == "__main__":
