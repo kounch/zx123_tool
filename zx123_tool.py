@@ -257,6 +257,14 @@ def list_zxdata(str_in_file, hash_dict, show_hashes):
         if (show_hashes):
             print(block_hash)
 
+    print('\nBIOS Defaults:')
+
+    keyb_layout = get_peek(str_in_file, 28746)
+    print('\tKeyboard Layout -> {0}'.format(keyb_layout))
+
+    video_mode = get_peek(str_in_file, 28749)
+    print('\tVideo Mode -> {0}'.format(video_mode))
+
 
 def extractfrom_zxdata(str_in_file,
                        extract_item,
@@ -376,6 +384,20 @@ def get_core_list(str_in_file, dict_parts):
             name_list.append(str_name.decode('utf-8'))
 
     return name_list
+
+
+def get_peek(str_in_file, block_offset):
+    """
+    Get value of one byte in binary file
+    :param str_in_file: Path to file
+    :param block_offset: Offset in file to read
+    :return: Number with the obtained value
+    """
+    with open(str_in_file, "rb") as in_zxd:
+        in_zxd.seek(block_offset)
+        bin_data = in_zxd.read(1)
+
+    return struct.unpack('<B', bin_data)[0]
 
 
 def export_bin(str_in_file, block_info, str_out_bin, b_force=False):
