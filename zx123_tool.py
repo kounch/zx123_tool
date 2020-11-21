@@ -45,7 +45,7 @@ import six
 if six.PY2:
     input = raw_input
 
-__MY_VERSION__ = '0.3'
+__MY_VERSION__ = '0.4'
 
 MAX_CORES = 45
 
