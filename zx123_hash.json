@@ -14,7 +14,7 @@
         },
         "BIOS": {
             "0.75": "753a6f68a15353e3ce46f41640065de19b480dbef9ac8884dddca6fce134acf9",
-            "0.76": "23c216b397fe22f18634296b21fda3cc3a0a76b5f9975f9ea9637f1b93621cba",
+            "0.76": "7ee5c7cce34da79b64ae3aa615e1454a98d5ba428bc1488d964c3937acc7f9d8",
             "0.82": "d7fdf9b997b9514a642382f8e28472eed4ac217b5e2279b1d0897cff95cf1622",
             "Vertical": "645f275502eb862258dc23f6436c7992d5b1623d3b21228dd61c7b1d027975f6"
         },
@@ -25,15 +25,32 @@
         },
         "Spectrum": {
             "EXP26 040418": "85023e5c7941f56f74c1badc37f295e08b4c2955b67723851c1c5763891b236a",
-            "EXP27_SVN": "140fe5400fb3aee7dae99c540020d36d14d3c0be7ec3b9dd737a2b198525d618",
+            "EXP27_160820": "140fe5400fb3aee7dae99c540020d36d14d3c0be7ec3b9dd737a2b198525d618",
             "EXP27-240320 azesmbog (no UART) +SAA1099": "65e788d92f1b3671934a941a3d8ecc629d4ab03093f75fe65a3c5b9eb6ea09a3"
         },
         "Cores": {
             "ZX Spectrum": {
-                "EXP27_SVN": "613902acb29e3926142a721493c593c0746969261fe7d5cce207194a1fc30a03"
+                "EXP27_160820": "613902acb29e3926142a721493c593c0746969261fe7d5cce207194a1fc30a03"
+            },
+            "Amstrad CPC464": {
+                "TEST 3b": "5a2363e9ef1f10320cc2ed5309c2ab5331db4b4ca8dbab9e39737a02c9186c36"
+            },
+            "MSX1": {
+                "1.3  (512K)": "994e7b1aac5457ca624b9d4f47db3b6997ecd321031f204c03025ee505674ee6",
+                "1.3 VGA2M": "dc3ba4afe699aaffff10c0fce5bddd0a105f7d033e180c2e20f2f28122f053ec"
+            },
+            "Atari 800 XL": {
+                "1.1 (512K)": "760746ae75c7cf9b80752078145328dd29ba9dbff158287c503c966a41581481"
+            },
+            "Jupiter Ace": {
+                "2019.06.19 aze": "86e782598fa050c76dabac986bb481dc844e96a0e0a94b9ca84b6fe27b2d6603"
+            },
+            "Sega Master System": {
+                "TEST 4.3 (512K)": "c385c9c8b68245ab9a3135e5514fc4e85a0bccc17432226aa1e23ac61c2979c3"
             },
             "BBC Micro": {
-                 "1.3": "c35ed68b865139001bde7a8cb1e9fc12e0ab1e40f6d805a174f25dc94b6be73e"
+                 "1.3b": "c35ed68b865139001bde7a8cb1e9fc12e0ab1e40f6d805a174f25dc94b6be73e",
+                 "1.3": "4bbc3c71e4bfc755e2fa315336bf77c9115a977381949b801cc75e7a087ac53e"
             },
             "ColecoVision" : {
                 "1.0": "42a1c25f0c8f767677f6e3c5ebbd0bbc70eed07fc321e4d19770f348436f0c9d"
@@ -41,9 +58,6 @@
             "Commodore 64" : {
                 "Beta 6": "4c8c757ba1224b9156afb39b6d3157ebabcde601241c601f79df44cbe76211ac",
                 "Beta 7b": "66a25e6a2ba2f492baf673961efe660ec9568ff83d1edd5199aa61b26579c64e"
-            },
-            "MSX": {
-                 "1.3 VGA2M": "dc3ba4afe699aaffff10c0fce5bddd0a105f7d033e180c2e20f2f28122f053ec"
             },
             "Sam Coupe": {
                 "1.142": "9caeac28c7e76fd401039bb4afa25b71b9553ec5139be0b830218e869b01ec50"
@@ -136,6 +150,7 @@
                 "11": "98c7ce7f1a778a24dbebd5d935c42f434c0a38e0e775776f046e44b9b02874c9"
             },
             "ZX Spectrum": {
+                "EXP27": "b73e37eeeb8ed984a98a7c2633716087876195dcd7642e5df9fc901e8a378f21",
                 "EXP27_100820": "a4be8ef45afb08aa3f5aec99772beec6ffff1058e478b4b55df8360275a193b0",
                 "EXP27_150820_monocromo": "89ccd7c10b91668a9940193dc55e6f30bc0f138dee9b3f671ac440acf8c484e3",
                 "EXP27_160820": "4eaa9f8080035185b1f7b5905f06bd63e7c4dc8645c2a79c32accc5154b4f7fb",
@@ -152,7 +167,8 @@
             "MSX": 
             {
                 "Beta": "a2eb1b6cdaecf67e0a07e9cfe593a247d46e85119c9b5936c57edc5ec88782f8",
-                "1.0": "a64e415a5277d92ea5441cfe02dcc8dfbbe396911d20f732f34f7bb6040ef0fe"
+                "1.0": "a64e415a5277d92ea5441cfe02dcc8dfbbe396911d20f732f34f7bb6040ef0fe",
+                "2.1": "bf420194449675258c39fe62a789d09629f7f90cc1d27d2cc25b5cc6500395c9"
             },
             "Amstrad CPC":
             {
@@ -172,10 +188,15 @@
                 "1.0": "6806637a3eaf51802e4a0e6622a91917adaafae4379a4e1d6cba8e0a750007b9"
             },
             "Pong": {
-                "1.0": "f944e49710e30e3de0c89e71b25ac580d90a1d1a6d7a6f4a0279fd452a030c41"
+                "1.0": "f944e49710e30e3de0c89e71b25ac580d90a1d1a6d7a6f4a0279fd452a030c41",
+                "2.1": "9b64a0b0f610db602b00862109c74c77696c68cf4c7b3e54f4b2727547be8b24",
+                "2.2": "3aaf863d3941cc681939064a36a380cc795717909dabf1fbd7021a8628bfeab3"
             },
             "ColecoVision": {
                 "0.1": "1b640cb200434f735f749e18e34ed37ccba487f5c84ba3d4e2d321363f9aff4f"
+            },
+            "Atari 2600": {
+                "2.1": "cc1df50d02ddc1ac48a5064afbf6e6a6a03f007516b1fc6544922bf67e261e81"
             }
         },
         "recovery.zxd.bit": {
