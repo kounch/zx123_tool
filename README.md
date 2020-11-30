@@ -31,6 +31,7 @@ The maximum output Flash image size is 16 MiB (16384 KiB, or 16777216 Bytes), so
                             Output flash file to copy
       -f, --force           Force overwrite of existing files
       -l, --list_contents List file contents
+      -r, --roms          Process ZX Spectrum ROMs instead of Cores
       -s, --show_hashes   Show computed hashes
       -x EXTRACT, --extract EXTRACT
                 Item(s) to extract (split using ","): BIOS, Spectrum, esxdos
@@ -49,9 +50,17 @@ Show contents of file:
 
     python3 zx123_tool.py -i FLASH.ZXD -l
 
+Show contents of file, including ZX Spectrum ROMs data:
+
+    python3 zx123_tool.py -i FLASH.ZXD -l -r
+
 Extract `FIRMWARE.ZXD` file from `FLASH32.ZXD` file (on Windows):
 
     py -3 zx123_tool.py -i FLASH32.ZXD -x BIOS
+
+Extract the third ZX Spectrum ROM to a file:
+
+    ../zx123_tool.py -i FLASH32.ZXD -r -x 3
 
 Show contents of file and extract `SPECTRUM.ZXD`, `ESXDOS.ZXD` and `.ZXD` files for cores 1 and 3:
 
@@ -131,6 +140,7 @@ El tamaño máximo de un fichero copiado de imagen son 16 MiB (16384 KiB, o 1677
                             Fichero donde guardar copia de la imagen flash
       -f, --force           Forzar sobreescribir archivos existentes
       -l, --list_contents Mostrar contenido del fichero de origen
+      -r, --roms          Procesar ROMs de ZX Spectrum ROMs en vez de Cores
       -s, --show_hashes   Mostrar los datos de hash calculados
       -x EXTRACT, --extract EXTRAER
                 Elemento(s) a extraer, separados por ",": BIOS, Spectrum,
@@ -150,9 +160,17 @@ Mostrar contenido de una imagen:
 
     python3 zx123_tool.py -i FLASH.ZXD -l
 
+Mostrar contenido de una imagen, incluyendo datos de ROMs de ZX Spectrum:
+
+    python3 zx123_tool.py -i FLASH.ZXD -l -r
+
 Extraer un fichero `FIRMWARE.ZXD` del archivo de imagen `FLASH32.ZXD` (en Windows):
 
     py -3 zx123_tool.py -i FLASH32.ZXD -x BIOS
+
+Extraer la tercera ROM de ZX Spectrum a un fichero:
+
+    ../zx123_tool.py -i FLASH32.ZXD -r -x 3
 
 Mostrar contenido de archivo de imagen y extraer `SPECTRUM.ZXD`, `ESXDOS.ZXD` y ficheros `.ZXD` para los cores 1 y 3:
 
