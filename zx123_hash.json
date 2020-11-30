@@ -5,12 +5,13 @@
         "parts": {
             "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF3261800032816B05"],
             "esxdos": [16384, 8192, "ESXDOS.ZX1", ""],
-            "roms_dir": [24576, 4096, "", ""],
-            "cores_dir": [28672, 1792, "", ""],
+            "roms_dir": [24576, 4096, "", "", 28672, 19, 45],
+            "cores_dir": [28672, 1792, "", "", 9, 35],
+            "reserved": [30464, 2304, "", ""],
             "BIOS": [32768, 16384, "FIRMWARE.ZX1", "31B0AA3E04013BFCED7904ED70F521"],
-            "roms_data": [49152, 311296, "", ""],
+            "roms_data": [49152, 311296, "", "", 3457024],
             "Spectrum": [360448, 343808, "SPECTRUM.ZX1", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A103803141"],
-            "core_base": [704512, 344064, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A103803141"]
+            "core_base": [704512, 344064, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A103803141", 4194304]
         },
         "BIOS": {
             "0.75": "753a6f68a15353e3ce46f41640065de19b480dbef9ac8884dddca6fce134acf9",
@@ -70,12 +71,13 @@
         "parts": {
             "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF3261800032810309"],
             "esxdos": [16384, 8192, "ESXDOS.ZX2", ""],
-            "roms_dir": [24576, 4096, "", ""],
-            "cores_dir": [28672, 2560, "", ""],
+            "roms_dir": [24576, 4096, "", "", 28672, 35, 9],
+            "cores_dir": [28672, 2560, "", "", 34, 35],
+            "reserved": [31232, 1536, "", ""],
             "BIOS": [32768, 16384, "FIRMWARE.ZX2", "31B0AA3E04013BFCED7904ED70F521"],
-            "roms_data": [49152, 573440, "", ""],
+            "roms_data": [49152, 573440, "", "", 3457024],
             "Spectrum": [622592, 474880, "SPECTRUM.ZX2", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104303141"],
-            "core_base": [1097728, 475136, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104303141"]
+            "core_base": [1097728, 475136, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104303141", 4194304]
         },
         "BIOS": {
             "0.77": "de8953d614777da03f4cc9fd8bba01d35331c6e16a25df85f9ab7d8e8677a323",
@@ -108,12 +110,13 @@
         "parts": {
             "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF326100003281030B"],
             "esxdos": [16384, 8192, "ESXDOS.ZXD"],
-            "roms_dir": [24576, 4096, "", ""],
-            "cores_dir": [28672, 2560, "", ""],
+            "roms_dir": [24576, 4096, "", "", 28672, 41, 23],
+            "cores_dir": [28672, 2560, "", "", 20, 20],
+            "reserved": [31232, 1536, "", ""],
             "BIOS": [32768, 16384, "FIRMWARE.ZXD", "31B0AA3E04013BFCED7904ED70F521"],
-            "roms_data": [49152, 573440, "", ""],
+            "roms_data": [49152, 671744, "", "", 16777216],
             "Spectrum": [720896, 802560, "SPECTRUM.ZXD", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104883141"],
-            "core_base": [1523712, 802816, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104883141"]
+            "core_base": [1523712, 802816, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104883141", 17498112]
         },
         "BIOS": {
             "0.78": "76dae34e09a1e586536e9503b2dbdb67482b661d797521d2cc1ca708cf360736",
@@ -201,6 +204,48 @@
         },
         "recovery.zxd.bit": {
             "1.0": "fe077527253fe618452205a945fcdef5eab1c59d72dd0edafd54c09ccd713ba7"
+        }
+    },
+    "ROM": {
+        "description": "ROM File",
+        "hashtype": "sha256sum",
+        "parts": {
+            "header": [0, 0, "", ""],
+            "16K Spectrum ROM": [0, 16384],
+            "32K Spectrum ROM": [0, 32768],
+            "64K Spectrum ROM": [0, 65536]
+        },
+        "16K Spectrum ROM": {
+                "ZX Spectrum 48": "d55daa439b673b0e3f5897f99ac37ecb45f974d1862b4dadb85dec34af99cb42",
+                "Inves Spectrum+": "b237d9facdc7ecb1b5e277f79870b1d8cba943b05e1b7fb1769a7e43a71742de",
+                "Timex Computer 2048": "8375dc559f35e3584b1141ed1eb50a87c2aba85e560fc7ff5b467c0520dffaf6",
+                "Looking Glass 1.07": "20464ec00063a9aa424c5eb1e6fb225cc96de6b73e3badbec8ec31cf1e7cfd5f",
+                "Gosh Wonderful ROM v1.33": "0127b069644143809310fa73397a540ac0b69d5c0e45b4ce6b424151d740fef4",
+                "ZX Spectrum 48K Cargando Leches": "895240ca1059c7f176cd6702c52c82dc2596591bdcbc9f205474db7a3110de31",
+                "Pokemon": "f71403a3a7f938837e6395c20c2a4eed0949c3e4ae0df0fb4ba670f06ad2f033",
+                "Microdigital Electronica TK90": "f3892b4140901f8289b962f5e097cf330c6997260052baac351026639012beeb",
+                "Microdigital Electronica TK95": "c0f7c0a7b2dd838488189cda052e414cd3474f3a718c1fde0a6cef3e8e0f4776",
+                "Arcade Game Designer 0.1": "73a61aa52def432b8146bd79f8380cc477c5cf54a16a7753a3e7f24cc5c9e179"
+            },
+        "32K Spectrum ROM": {
+            "ZX Spectrum +2": "dae0690d8b433ea22b76b62520341f784071dbde0d02f50af0e3fd20fc6bca4a",
+            "ZX Spectrum 128K EN": "c1ff621d7910105d4ee45c31e9fd8fd0d79a545c78b66c69a562ee1ffbae8d72",
+            "ZX Spectrum 128K Derby+ 32K ROM": "df7181b671ff9fa739bc9f1065e7cb9b04e3f0bd04c4064189dc11f07b761634",
+            "ZX Spectrum +2 Gris ES": "02f9cd74a3f768e60709287999d9c251288afffd796a3985f1cf840045d31f68",
+            "ZX Spectrum +2 FR": "6842c2f29d81af85a87b75c77c01330473ae7d903944222d0f910afb8a36e983",
+            "Pentagon 128": "7b88abff5964f0cf38481ac51bf035be2c01b8827569876b3d15eb3ac340fef3",
+            "ZX80 Emulator": "05758f377bee49dbf8fffada1a90f337eaeab3a7e35c6cf4d12ed439ea4620a6",
+            "ZX81 Emulator": "fdfe8b361f52aa1bcdf8fcd9318af87b58b96a44240acaa753736f8790712ee4",
+            "Timex Computer 2068": "c3df7f1507b2037e38ab1f8866457934bd9aa8ff4d692cd94fcd63949a372e72",
+            "Jupiter Ace": "bfc93f0a367213f2cff5733e0f9fe7d6d3b526765d761fe8582239801c5502ef",
+            "SE Basic IV 4.0 Anya": "6193b0615732a170566367666081c79f275673f41b83cfdc520dbf5bfaabc39f",
+            "BBC Micro": "f627698f7dd1193a6cb7023b61f45203e10b184223954516cca68d8e4e4c0a01"
+        },
+        "64K Spectrum ROM": {
+            "ZX Spectrum +2A EN": "5e7d9b3355ca76f4a99cbcc0bc1c90118ecda6a1549c2cb0f02e98af17694f3e",
+            "ZX Spectrum +2A/+3 EN 4.0": "ee8218fa43ecb672ed45370114294228213a82318c6d1b007ec86bee3293d1f2",
+            "ZX Spectrum +2e ES (DivMMC) 1.43": "5ab12a0864a18f315b25b635a5a0276b7de7a4e88ced43d8581a6d4d52fdc68e",
+            "ZX Next +3e 1.53": "b9b378221d61c328b6538bbd083786ec142e21eec3f5a53bba5f51ad7790568c"
         }
     }
 }
