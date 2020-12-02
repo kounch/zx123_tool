@@ -45,9 +45,7 @@ import six
 if six.PY2:
     input = raw_input
 
-__MY_VERSION__ = '0.5'
-
-MAX_CORES = 45
+__MY_VERSION__ = '0.6'
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
@@ -103,7 +101,8 @@ def main():
                             arg_data['n_cores'], arg_data['video_mode'],
                             arg_data['keyboard_layout'], arg_data['force'])
     else:
-        find_zxfile(str_file, dict_hash, arg_data['show_hashes'])
+        find_zxfile(str_file, fulldict_hash, str_extension,
+                    arg_data['show_hashes'])
 
     print('')
     LOGGER.debug("Finished.")
@@ -280,24 +279,32 @@ def list_zxdata(str_in_file, hash_dict, show_hashes):
     print('\tVideo Mode -> {0}'.format(video_mode))
 
 
-def list_romsdata(str_in_file, hash_dict, in_file_ext, show_hashes):
+def list_romsdata(str_in_file,
+                  hash_dict,
+                  in_file_ext,
+                  show_hashes,
+                  roms_file=False):
     """
     List ZX Spectrum ROMs of file
     :param str_in_file: Path to file
     :param hash_dict: Dictionary
     :param in_file_ext: File key in dictionary (e.g. ZXD)
     :param show_hashes: If True, print also block hashes
+    :param roms_file: If True, add extra offset as in ROM.ZX1 file
+    :return: True if there are ROMs to list
     """
     LOGGER.debug('Listing ROMs of file: {0}'.format(str_in_file))
     str_name = os.path.basename(str_in_file)
     roms_list = get_rom_list(str_in_file, hash_dict[in_file_ext]['parts'])
 
     if roms_list:
+        if roms_file:
+            print('ZX1 ROMs File')
         print('\nZX Spectrum ROMs:')
         for rom in roms_list:
             rom_name = rom[2]
             block_version, block_hash, block_offset = get_rom_version(
-                str_in_file, rom[1], rom[3], hash_dict, in_file_ext)
+                str_in_file, rom[1], rom[3], hash_dict, in_file_ext, roms_file)
             str_rominfo = ' {0:02d} (Slot {1:02d}) {2:>10} ({3:>16}) '.format(
                 rom[0], rom[1], rom[4], rom[5])
             str_rominfo += '"{0}" {1}K -> {2}'.format(rom_name, rom[3] * 16,
@@ -306,6 +313,10 @@ def list_romsdata(str_in_file, hash_dict, in_file_ext, show_hashes):
 
             if (show_hashes):
                 print(block_hash)
+
+        return True
+    else:
+        return False
 
 
 def extractfrom_zxdata(str_in_file,
@@ -339,6 +350,7 @@ def extractfrom_zxdata(str_in_file,
     if cores:
         core_base = hash_dict['parts']['core_base'][0]
         core_len = hash_dict['parts']['core_base'][1]
+
         if extract_item.isdigit():
             core_number = int(extract_item)
             core_list = get_core_list(str_in_file, hash_dict['parts'])
@@ -348,13 +360,15 @@ def extractfrom_zxdata(str_in_file,
                 block_name, block_version, block_hash = get_core_version(
                     str_in_file, core_number, hash_dict['parts'],
                     hash_dict['Cores'])
-                core_offset = core_base + core_number * core_len
-                block_info = [core_offset, core_len]
+                splitcore_index = hash_dict['parts']['cores_dir'][4]
+                core_bases = hash_dict['parts']['core_base']
+                block_data = get_core_blockdata(core_number, splitcore_index,
+                                                core_bases)
                 str_bin = 'CORE{0:02d}_{1}_v{2}.{3}'.format(
                     core_number + 2, block_name.replace(' ', '_'),
                     block_version, str_extension)
                 str_bin = os.path.join(str_dir, str_bin)
-                export_bin(str_in_file, block_info, str_bin, b_force)
+                export_bin(str_in_file, block_data, str_bin, b_force)
             else:
                 LOGGER.error('Invalid core number: {0}'.format(core_number))
     else:
@@ -430,14 +444,23 @@ def get_core_version(str_in_file, core_index, dict_parts, dict_cores):
     :param dict_cores: Dictionary with hashes and info for cores
     :return: List with name string, version string and hash string
     """
-    core_base = dict_parts['core_base'][0]
-    core_len = dict_parts['core_base'][1]
 
-    core_offset = core_base + core_index * core_len
-    block_data = [core_offset, core_len]
+    block_info = dict_parts['cores_dir']
+    max_cores = splitcore_index = block_info[4]
+
+    if len(block_info) > 5:
+        max_cores += block_info[5]
+
+    if core_index > max_cores:
+        LOGGER.error('Invalid core index: {}'.format(core_index))
+
+    core_bases = dict_parts['core_base']
+
     block_name = block_version = 'Unknown'
     block_hash = ''
     for core_name in dict_cores:
+        block_data = get_core_blockdata(core_index, splitcore_index,
+                                        core_bases)
         block_version, block_hash = get_version(str_in_file, block_data,
                                                 dict_cores[core_name])
         if block_version != 'Unknown':
@@ -447,21 +470,51 @@ def get_core_version(str_in_file, core_index, dict_parts, dict_cores):
     return block_name, block_version, block_hash
 
 
-def get_rom_version(str_in_file, rom_slot, rom_blocks, dict_full, in_file_ext):
+def get_core_blockdata(core_index, splitcore_index, core_bases):
+    """
+    Get Core Offset and Length
+    :param core_index: Index of the Core
+    :param splitcore_index: Index of last core before split
+    :param core_bases: Array with base offset and offset after split
+    :return: Array with core offset and core length
+    """
+
+    core_base = core_bases[0]
+    core_len = core_bases[1]
+
+    core_split = 0
+    if len(core_bases) > 4:
+        core_split = core_bases[4]
+
+    core_offset = core_base + core_index * core_len
+    if core_split and core_index > splitcore_index:
+        core_offset = core_split + (core_index - splitcore_index -
+                                    1) * core_len
+
+    return [core_offset, core_len]
+
+
+def get_rom_version(str_in_file,
+                    rom_slot,
+                    rom_blocks,
+                    dict_full,
+                    in_file_ext,
+                    roms_file=False):
     """
     Obtain name and version from ROM block in file
     :param str_in_file: Path to file
-    :param rom_pos: ROM base address in file
-    :param rom_pos: ROM slot number
+    :param rom_slot: ROM slot number
     :param rom_blocks: Size of ROM in 16384 bytes blocks
-    :param dict_cores: Dictionary with hashes and info for cores
+    :param dict_full: Dictionary with hashes and info for cores
+    :param in_file_ext: Extension of input file
+    :param roms_file: If True, add extra offset as in ROM.ZX1 file
     :return: List with version string, hash string and offset
     """
 
     rom_split = dict_full[in_file_ext]['parts']['roms_dir'][5]
     block_bases = dict_full[in_file_ext]['parts']['roms_data']
     rom_data = get_rom_bin(str_in_file, rom_slot, rom_blocks, rom_split,
-                           block_bases)
+                           block_bases, roms_file)
 
     block_version, block_hash = get_romdata_version(rom_data, dict_full['ROM'])
 
@@ -499,10 +552,14 @@ def get_core_list(str_in_file, dict_parts):
         in_zxdata.seek(block_info[0])
         bin_data = in_zxdata.read(block_info[1])
 
+    max_cores = block_info[4]
+    if len(block_info) > 5:
+        max_cores += block_info[5]
+
     name_offset = 0x100
     name_len = 0x20
     name_list = []
-    for index in range(MAX_CORES):
+    for index in range(max_cores):
         str_name = bin_data[name_offset + index * name_len:name_offset +
                             (index + 1) * name_len]
         if str_name[0:1] == b'\x00':
@@ -531,7 +588,7 @@ def get_rom_list(str_in_file, dict_parts):
             roms_use = in_zxdata.read(block_info[5] + block_info[6])
 
         for i in range(0, len(roms_use)):
-            if roms_use[i] != 0xff:
+            if roms_use[i] == i:
                 with open(str_in_file, "rb") as in_zxdata:
                     in_zxdata.seek(block_info[0] + i * 64)
                     rom_data = in_zxdata.read(64)
@@ -559,7 +616,12 @@ def get_rom_list(str_in_file, dict_parts):
     return roms_list
 
 
-def get_rom_bin(str_in_file, rom_slot, rom_blocks, rom_split, rom_bases):
+def get_rom_bin(str_in_file,
+                rom_slot,
+                rom_blocks,
+                rom_split,
+                rom_bases,
+                roms_file=False):
     """
     Extract ROM data blocks to memory
     :param str_in_file: Path to file
@@ -567,6 +629,7 @@ def get_rom_bin(str_in_file, rom_slot, rom_blocks, rom_split, rom_bases):
     :param rom_blocks: Size of ROM in 16384 bytes blocks
     :param rom_split: Slot number where rom binary data is split in two
     :param rom_bases: Offsets for ROM binary data
+    :param roms_file: If True, add extra offset as in ROM.ZX1 file
     :return: Binary data of ROM
     """
 
@@ -578,6 +641,9 @@ def get_rom_bin(str_in_file, rom_slot, rom_blocks, rom_split, rom_bases):
         else:
             rom_base = rom_bases[4]
             rom_offset = rom_base + (rom_block - rom_split) * 16384
+
+        if roms_file:
+            rom_offset += 1
 
         with open(str_in_file, "rb") as in_zxrom:
             in_zxrom.seek(rom_offset)
@@ -641,7 +707,7 @@ def export_bindata(bin_data, str_out_bin, b_force=False):
             print('{0} created OK.'.format(str_out_bin))
 
 
-def find_zxfile(str_in_file, hash_dict, show_hashes):
+def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
     """
     Try to guess ZX... file from hash
     :param str_in_file: Path to file
@@ -649,6 +715,7 @@ def find_zxfile(str_in_file, hash_dict, show_hashes):
     :param show_hashes: If True, print also found block hashes
     """
     found = False
+    hash_dict = fulldict_hash[str_extension]
 
     str_name = os.path.basename(str_in_file)
     print('\nAnalyzing {0} (possibly {1})...\n '.format(
@@ -696,6 +763,10 @@ def find_zxfile(str_in_file, hash_dict, show_hashes):
                         core_item, block_version))
                     found = True
                     break
+
+    if not found and str_extension == 'ZX1':
+        found = list_romsdata(str_in_file, fulldict_hash, 'ROM', show_hashes,
+                              True)
 
     if not found:
         print('Unknown file')
@@ -787,6 +858,10 @@ def savefrom_zxdata(str_in_file,
     :param str_extension: Extension for Core files
     """
 
+    dict_parts = hash_dict['parts']
+    block_info = dict_parts['cores_dir']
+    max_cores = splitcore_index = block_info[4]
+
     flash_len = 16777216
     if n_cores > -1:
         flash_len = hash_dict['parts']['core_base'][0]
@@ -812,7 +887,7 @@ def savefrom_zxdata(str_in_file,
 
     if n_cores > -1:
         core_offset = 0x7100 + (n_cores * 0x20)
-        core_len = (MAX_CORES - n_cores) * 0x20
+        core_len = (max_cores - n_cores) * 0x20
         bin_data = bin_data[:core_offset] + b'\x00' * core_len + bin_data[
             core_offset + core_len:]
 

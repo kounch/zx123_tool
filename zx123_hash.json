@@ -6,7 +6,7 @@
             "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF3261800032816B05"],
             "esxdos": [16384, 8192, "ESXDOS.ZX1", ""],
             "roms_dir": [24576, 4096, "", "", 28672, 19, 45],
-            "cores_dir": [28672, 1792, "", "", 9, 35],
+            "cores_dir": [28672, 1792, "", "", 8, 37],
             "reserved": [30464, 2304, "", ""],
             "BIOS": [32768, 16384, "FIRMWARE.ZX1", "31B0AA3E04013BFCED7904ED70F521"],
             "roms_data": [49152, 311296, "", "", 3457024],
@@ -31,20 +31,21 @@
         },
         "Cores": {
             "ZX Spectrum": {
-                "EXP27_160820": "613902acb29e3926142a721493c593c0746969261fe7d5cce207194a1fc30a03"
+                "EXP27_160820": "613902acb29e3926142a721493c593c0746969261fe7d5cce207194a1fc30a03",
+                "EXP27 SAA1099 NOWIFI": "92571c0edcee44ea3da4fe3835babb2d8985d7e65f04d1c5f2d2164c2081ab34"
             },
             "Amstrad CPC464": {
-                "TEST 3b": "5a2363e9ef1f10320cc2ed5309c2ab5331db4b4ca8dbab9e39737a02c9186c36"
+                "TEST 3a": "5a2363e9ef1f10320cc2ed5309c2ab5331db4b4ca8dbab9e39737a02c9186c36"
             },
             "MSX1": {
-                "1.3  (512K)": "994e7b1aac5457ca624b9d4f47db3b6997ecd321031f204c03025ee505674ee6",
-                "1.3 VGA2M": "dc3ba4afe699aaffff10c0fce5bddd0a105f7d033e180c2e20f2f28122f053ec"
+                "1.3 512K": "7998866f2bcdd566f19e8c73ea53eff575bbd8f3e0f8a7be5716fb274c0d36bc",
+                "1.3 VGA2M": "3750b52f63084765d344d3e1e981389f871c3de63651b414d0034237b42d921e"
             },
             "Atari 800 XL": {
-                "1.1 (512K)": "760746ae75c7cf9b80752078145328dd29ba9dbff158287c503c966a41581481"
+                "1.2 2MB Int": "58abded410ca401efc93c70fe940815f6aebc28dd52d771f480fc28678ca34a0"
             },
             "Jupiter Ace": {
-                "2019.06.19 aze": "86e782598fa050c76dabac986bb481dc844e96a0e0a94b9ca84b6fe27b2d6603"
+                "19.06.2018 dos8d": "32fd2069f416ada27c7a6556b18ebd0b3813817aa6c419cc12dde046a25236f1"
             },
             "Sega Master System": {
                 "TEST 4.3 (512K)": "c385c9c8b68245ab9a3135e5514fc4e85a0bccc17432226aa1e23ac61c2979c3"
@@ -54,15 +55,25 @@
                  "1.3": "4bbc3c71e4bfc755e2fa315336bf77c9115a977381949b801cc75e7a087ac53e"
             },
             "ColecoVision" : {
-                "1.0": "42a1c25f0c8f767677f6e3c5ebbd0bbc70eed07fc321e4d19770f348436f0c9d"
+                "1.0": "42a1c25f0c8f767677f6e3c5ebbd0bbc70eed07fc321e4d19770f348436f0c9d",
+                "1.2 VGA scanlines": "9d7739ac873a60aed8a43d59c697b29de34003f2a098e5b7beff7263fb8d6293"
             },
             "Commodore 64" : {
                 "Beta 6": "4c8c757ba1224b9156afb39b6d3157ebabcde601241c601f79df44cbe76211ac",
                 "Beta 7b": "66a25e6a2ba2f492baf673961efe660ec9568ff83d1edd5199aa61b26579c64e"
             },
             "Sam Coupe": {
-                "1.142": "9caeac28c7e76fd401039bb4afa25b71b9553ec5139be0b830218e869b01ec50"
-            }
+                "1.142": "0e3597b079c65e8f57a24aba7eae69008a21b4537fff490dd1c93e1f915b9977"
+            },
+            "Acorn Electron": {
+                "TEST2": "198a15023991053b4d9891180bbadb2f2f200914d4a0370cf5e08ec4e869d3e8"
+            },
+            "Apple II": {
+                "TEST3": "1e5cd4c7df4d3ae1dae325c6e0bd546bcaf8be15a63a9e7c670948a29be9011a"
+            },
+            "PC XT": {
+                "2MB Int 70Mhz": "03f2681f1b956cc72bb6ea68c19573bb9d24c3bb2f1387af2727203e12f8f9df"
+        }
         }
      },
     "ZX2": {
@@ -111,7 +122,7 @@
             "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF326100003281030B"],
             "esxdos": [16384, 8192, "ESXDOS.ZXD"],
             "roms_dir": [24576, 4096, "", "", 28672, 41, 23],
-            "cores_dir": [28672, 2560, "", "", 20, 20],
+            "cores_dir": [28672, 2560, "", "", 18, 20],
             "reserved": [31232, 1536, "", ""],
             "BIOS": [32768, 16384, "FIRMWARE.ZXD", "31B0AA3E04013BFCED7904ED70F521"],
             "roms_data": [49152, 671744, "", "", 16777216],
@@ -213,7 +224,9 @@
             "header": [0, 0, "", ""],
             "16K Spectrum ROM": [0, 16384],
             "32K Spectrum ROM": [0, 32768],
-            "64K Spectrum ROM": [0, 65536]
+            "64K Spectrum ROM": [0, 65536],
+            "roms_dir": [0, 4096, "", "", 4096, 64, 0],
+            "roms_data": [4160, 1048576, "", "", 0]
         },
         "16K Spectrum ROM": {
                 "ZX Spectrum": "d55daa439b673b0e3f5897f99ac37ecb45f974d1862b4dadb85dec34af99cb42",
@@ -297,8 +310,10 @@
             "ZX Spectrum +2A/+3 ES 4.0": "c266b543f8170d2402f40ae8ab7015e2cccb428132f88459df3d29c902225de3",
             "ZX Spectrum +3e ES (ZXMMC) 4.0": "d9be501bac8796b60deaf26cad558ef203539af18ffcbeb108a685ed46499349",
             "ZX Spectrum +2A/+3 ES 4.1": "3bf9a1741c64a1cff3f1a1c144a34f30345114b01fb2fbccdb9eefa2c884328a",
+            "ZX Spectrum 128K Derby++ 64K rom": "5fe5d6bb92b516b5f1696a52679b23cc8a5301badc033e419aedb08e7d6f8fca",
             "Shadow Of The Unicorn": "d941b6128aba56744e02953dace076a68e9c2ccce01276f2584206dcf428f997",
-            "ZX Spectrum 128K Derby++ 64K rom": "5fe5d6bb92b516b5f1696a52679b23cc8a5301badc033e419aedb08e7d6f8fca"
+            "Sir Ababol": "4fd94891078dc4e4e4e5315742ee5b2a3c3b061a31b8080da90b0eabbc783fde",
+            "Souls Remaster": "4970e14bef5616995eebbcd7c267836882c1195040294ea8f6a3583bde317473"
         }
     }
 }
