@@ -32,7 +32,10 @@
         "Cores": {
             "ZX Spectrum": {
                 "EXP27_160820": "613902acb29e3926142a721493c593c0746969261fe7d5cce207194a1fc30a03",
-                "EXP27 SAA1099 NOWIFI": "92571c0edcee44ea3da4fe3835babb2d8985d7e65f04d1c5f2d2164c2081ab34"
+                "EXP27 SAA1099 NOWIFI": "92571c0edcee44ea3da4fe3835babb2d8985d7e65f04d1c5f2d2164c2081ab34",
+                "kypZX48 2020.08.14": "85ff342c1a2fe0cc3a962221f37847907a5666e46183b13934b99fae4306fe69",
+                "TS-FM azesmbog": "1a8e1441b5cba8036fe9bb7a5f72a6e20fe5629507ba1d49c80d282c48c220c1",
+                "DMA azesmbog": "4fb1f0d47f55039905a10b5fe46f6932ad6dd9728dd976753afd2408dfcc5f09"
             },
             "Amstrad CPC464": {
                 "TEST 3a": "5a2363e9ef1f10320cc2ed5309c2ab5331db4b4ca8dbab9e39737a02c9186c36"
@@ -42,10 +45,12 @@
                 "1.3 VGA2M": "3750b52f63084765d344d3e1e981389f871c3de63651b414d0034237b42d921e"
             },
             "Atari 800 XL": {
+                "1.1 (512K)": "760746ae75c7cf9b80752078145328dd29ba9dbff158287c503c966a41581481",
                 "1.2 2MB Int": "58abded410ca401efc93c70fe940815f6aebc28dd52d771f480fc28678ca34a0"
             },
             "Jupiter Ace": {
-                "19.06.2018 dos8d": "32fd2069f416ada27c7a6556b18ebd0b3813817aa6c419cc12dde046a25236f1"
+                "19.06.2018 dos8d": "32fd2069f416ada27c7a6556b18ebd0b3813817aa6c419cc12dde046a25236f1",
+                "2019.06.19 aze": "86e782598fa050c76dabac986bb481dc844e96a0e0a94b9ca84b6fe27b2d6603"
             },
             "Sega Master System": {
                 "TEST 4.3 (512K)": "c385c9c8b68245ab9a3135e5514fc4e85a0bccc17432226aa1e23ac61c2979c3"
@@ -73,7 +78,83 @@
             },
             "PC XT": {
                 "2MB Int 70Mhz": "03f2681f1b956cc72bb6ea68c19573bb9d24c3bb2f1387af2727203e12f8f9df"
-        }
+            },
+            "Commodore VIC20": {
+                "TEST3": "ccefd756a91ed65afe38f70c03905a2fc839ebb3ddb8c259b18d6c51145aa5a6"
+            },
+            "Oric Atmos": {
+                "27.12.2018 dos8d": "29a26b485e4180245a43dda65650f29331fe3f0a7952993e7834ea9c680c9557"
+            },
+            "Commodore 16/116/Plus4": {
+                "Release 1": "8a60c85e94c1819251ac07d2fc3296809542408531b10968d0c6bdce2f7f8e65"
+            },
+            "HT-1080Z / TRS80 M1L2": {
+                "2M Int": "981403fad352ef8c54c1cc7f57f6cbfd3ce9d50a8e4b29b079ba02192610d799"
+            },
+            "Galaksija": {
+                "0.2 SDOS8.1": "c9f5cc94fda19f5bc7434c4483b12ec513ce4fba4690ec13d86de0be1672d070"
+            },
+            "Multicomp": {
+                "TEST1": "cc23b953fc5eb7914f1d5fb1b9140aacce997a61277a14fb9b8b1e3ca40a092f"
+            },
+            "Vectrex": {
+                "TEST1": "500c94aec1d196497196592dab8098cc2a5076b95fd338df1bd0349bdd9a01b0"
+            },
+            "Atari 2600": {
+                "VGA Spark2k06": "c60e36dc22f25c6d79aea3d733f9accd8b496910c817437b78bc5d68b99b0128"
+            },
+            "ZX TBBlue": {
+                "azesmbog 13.05.2020": "6f03454880ca2e1477430d3a48a5c1755dd9b639ef5121ca6bd04674a6bbc7db"
+            },
+            "Acorn Atom": {
+                "11.05.2020": "b2cfa5f151f0b91d5d1d20546ee55da51c1a17d0c2f753d55456176de7352efd"
+            },
+            "ZX81": {
+                "VGA": "622640413b76a842065ab127c1fecd813016382760e272e97278d5f34f76829b"
+            },
+            "NES": {
+                "TEST4 VGA 2MB INT": "0a2469f0b57dab9055dec1de3c68468f4f9df6d32e6b317343df6d1fd8d6c915"
+            },
+            "Commodore PET": {
+                "VGA": "ed807d4ed1cfa36059919f01307c6a701d2d0835075f725c8aada88ae3f63eff"
+            },
+            "Amstrad CPC6128": {
+                "no SD support": "994e7b1aac5457ca624b9d4f47db3b6997ecd321031f204c03025ee505674ee6",
+                "SD support": "18b620669521a7649d78fa0c2fd057bb792ec238ab9cb9801063759a3439ac00"
+            },
+            "Flappy Bird": {
+                "Unknown Version": "c3d2f7b1c37ff08c67affba3baa9cc9e0de895cd8035782ad366d402499b54e3"
+            },
+            "Frenzy": {
+                "Unknown Version": "a2e6428546643687fb233c1030b5069cfff0a058001121a3f3e69819e7f9bb3a"
+            },
+            "Berzek": {
+                "Unknown Version": "c15c70ea1e42f0a5e2ec4ef57357e40c353183d5e93f1d65a9b649af9a373151"
+            },
+            "New Rally X": {
+                "Unknown Version": "8cf69d262bcd5d836602de0bfa415b337ee1a04050a2d587e1d31baaffad8172"
+            },
+            "Asteroids": {
+                "Unknown Version": "6905d2ca5168cb18e1609f2b15b69c4a9c52a757d50f2920b0803322a9d8d094"
+            },
+            "Defender": {
+                "Unknown Version": "5ecf9ad99902fbc621f412a2b5b635ebb3cd4211bb0167fee48c1ab3f594a4a1"
+            },
+            "Squash": {
+                "Unknown Version": "fdd1268443a548f9450e0cadb9b326e0633301004c847fe9aa3ff8dcaf62dfe0"
+            },
+            "Sprint 1": {
+                "Unknown Version": "6148abf8d3da6bcea2dc58bc9397b31e9be75d78503a0fd89a9a52f3dbd2ca3d"
+            },
+            "Lunar Lander": {
+                "Unknown Version": "29ab2e44293ed3a93297055c09358fadbc4ca95d2efe0651da4b4b4709ed5c80"
+            },
+            "Computer Space": {
+                "Unknown Version": "e8c121d9897c16d326c577c1b45501e53812026c87d203a3b71a5163d722f38b"
+            },
+            "Mayday": {
+                "Unknown Version": "eebedf1a88f35d6e8dd981e1eff93fecc90f99350c0482042b39f62a294dc321"
+            }
         }
      },
     "ZX2": {
