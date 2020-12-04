@@ -78,10 +78,21 @@ def main():
         str_outdir = os.path.dirname(str_file)
     str_extension = os.path.splitext(str_file)[1]
     str_extension = str_extension[1:].upper()
+
+    dict_hash = {}
     if str_extension in fulldict_hash:
         dict_hash = fulldict_hash[str_extension]
     else:
-        LOGGER.error('Unknown file extension {0}'.format(str_extension))
+        for str_kind in fulldict_hash:
+            if "extensions" in fulldict_hash[str_kind]:
+                for str_tmp in fulldict_hash[str_kind]['extensions']:
+                    if str_tmp == str_extension:
+                        str_extension = str_kind
+                        dict_hash = fulldict_hash[str_extension]
+                        break
+
+    if not dict_hash:
+        LOGGER.error('Unknown file extension: .{0}'.format(str_extension))
         sys.exit(2)
 
     if validate_file(str_file, dict_hash['parts']['header'][3]):
@@ -741,7 +752,7 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
                                                        block_version))
                     found = True
 
-    for block_id in ['BIOS', 'Spectrum']:
+    for block_id in ['BIOS', 'Spectrum', 'esxdos']:
         if not found and block_id in hash_dict['parts']:
             if validate_file(
                     str_in_file, hash_dict['parts'][block_id][3]) and os.stat(

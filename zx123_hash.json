@@ -4,7 +4,7 @@
         "hashtype": "sha256sum",
         "parts": {
             "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF3261800032816B05"],
-            "esxdos": [16384, 8192, "ESXDOS.ZX1", ""],
+            "esxdos": [16384, 8192, "ESXDOS.ZX1", "F331005EC30101FFC3"],
             "roms_dir": [24576, 4096, "", "", 28672, 19, 45],
             "cores_dir": [28672, 1792, "", "", 8, 37],
             "reserved": [30464, 2304, "", ""],
@@ -162,7 +162,7 @@
         "hashtype": "sha256sum",
         "parts": {
             "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF3261800032810309"],
-            "esxdos": [16384, 8192, "ESXDOS.ZX2", ""],
+            "esxdos": [16384, 8192, "ESXDOS.ZX1", "F331005EC30101FFC3"],
             "roms_dir": [24576, 4096, "", "", 28672, 35, 9],
             "cores_dir": [28672, 2560, "", "", 34, 35],
             "reserved": [31232, 1536, "", ""],
@@ -201,7 +201,7 @@
         "hashtype": "sha256sum",
         "parts": {
             "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF326100003281030B"],
-            "esxdos": [16384, 8192, "ESXDOS.ZXD"],
+            "esxdos": [16384, 8192, "ESXDOS.ZX1", "F331005EC30101FFC3"],
             "roms_dir": [24576, 4096, "", "", 28672, 41, 23],
             "cores_dir": [28672, 2560, "", "", 18, 20],
             "reserved": [31232, 1536, "", ""],
@@ -301,13 +301,20 @@
     "ROM": {
         "description": "ROM File",
         "hashtype": "sha256sum",
+        "extensions": ["ROM", "BIN"],
         "parts": {
             "header": [0, 0, "", ""],
             "16K Spectrum ROM": [0, 16384],
             "32K Spectrum ROM": [0, 32768],
             "64K Spectrum ROM": [0, 65536],
             "roms_dir": [0, 4096, "", "", 4096, 64, 0],
-            "roms_data": [4160, 1048576, "", "", 0]
+            "roms_data": [4160, 1048576, "", "", 0],
+            "esxdos": [16384, 8192, "ESXDOS.ZX1", "F331005EC30101FFC3"]
+        },
+        "esxdos": {
+            "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
+            "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
+            "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8"
         },
         "16K Spectrum ROM": {
                 "ZX Spectrum": "d55daa439b673b0e3f5897f99ac37ecb45f974d1862b4dadb85dec34af99cb42",
