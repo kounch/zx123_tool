@@ -585,6 +585,19 @@ def get_core_list(str_in_file, dict_parts):
         in_zxdata.seek(block_info[0])
         bin_data = in_zxdata.read(block_info[1])
 
+    name_list = get_core_list_bindata(bin_data, dict_parts)
+
+    return name_list
+
+
+def get_core_list_bindata(bin_data, dict_parts):
+    """
+    Obtain list of core names in binary data
+    :param str_in_file: Binary data
+    :param dict_parts: Dictionary with file blocks info
+    :return: List of name strings
+    """
+    block_info = dict_parts['cores_dir']
     max_cores = block_info[4]
     if len(block_info) > 5:
         max_cores += block_info[5]
@@ -971,6 +984,9 @@ def savefrom_zxdata(str_in_file,
 
 def inject_bindata(str_in_params, hash_dict, b_data):
     """
+    :param str_in_params:
+    :param hash_dict
+    :param b_data:
     """
     arr_params = str_in_params.split(',')
     br_data = b_data
@@ -1004,21 +1020,79 @@ def inject_bindata(str_in_params, hash_dict, b_data):
 
 def inject_coredata(str_in_params, hash_dict, b_data):
     """
+    :param str_in_params:
+    :param hash_dict:
+    :param b_data:
     """
+    dict_parts = hash_dict['parts']
+
     arr_params = str_in_params.split(',')
     br_data = b_data
+
+    block_info = dict_parts['cores_dir']
+    max_cores = splitcore_index = block_info[4]
+    if len(block_info) > 5:
+        max_cores += block_info[5]
+    core_bases = dict_parts['core_base']
+    b_len = core_bases[1]
+    b_head = core_bases[3]
+
+    bl_data = b_data[block_info[0]:block_info[0] + block_info[1]]
+    core_list = get_core_list_bindata(bl_data, dict_parts)
 
     if arr_params[0].upper() == 'CORE':  # Number, Name, Filename
         if len(arr_params) != 4:
             LOGGER.error('Invalid argument: {0}'.format(str_in_params))
         else:
-            print('Injecting core {0}...'.format(arr_params[1]))
+            core_index = int(arr_params[1]) - 2
+            str_name = '{0:<32}'.format(arr_params[2][:32])
+            str_in_file = arr_params[3]
+            str_hash = get_file_hash(str_in_file)
+            if validate_file(str_in_file,
+                             b_head) and os.stat(str_in_file).st_size == b_len:
+                LOGGER.debug('Looks like a core')
+                core_name = ''
+                block_version = 'Unknown'
+                for core_item in hash_dict['Cores']:
+                    block_version = get_data_version(
+                        str_hash, hash_dict['Cores'][core_item])
+                    if block_version != 'Unknown':
+                        core_name = core_item
+                        break
+
+                if core_index - 1 > len(core_list):
+                    core_index = len(core_list)
+
+                if core_index < 0 or core_index > max_cores:
+                    LOGGER.error('Invalid core index: {}'.format(core_index))
+                else:
+                    print('Adding core {0}: {1}({2})...'.format(
+                        core_index + 2, core_name, block_version))
+                    block_data = get_core_blockdata(core_index,
+                                                    splitcore_index,
+                                                    core_bases)
+                    core_index = 0x100 + core_index * 32
+                    bl_data = bl_data[:core_index] + bytes(
+                        str_name, 'utf-8') + bl_data[core_index + 32:]
+
+                    br_data = b_data[:block_info[0]] + bl_data
+                    br_data += b_data[block_info[0] + block_info[1]:]
+
+                    with open(str_in_file, "rb") as in_zxdata:
+                        in_data = in_zxdata.read()
+
+                    b_offset, b_len = block_data
+                    br_data = br_data[:b_offset] + in_data
+                    br_data += b_data[b_offset + b_len:]
 
     return br_data
 
 
 def inject_romdata(str_in_params, hash_dict, b_data):
     """
+    :param str_in_params:
+    :param hash_dict:
+    :param b_data:
     """
     arr_params = str_in_params.split(',')
     br_data = b_data
