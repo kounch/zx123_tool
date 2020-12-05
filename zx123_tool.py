@@ -107,7 +107,19 @@ def main():
                                str_extension, arg_data['force'],
                                not arg_data['roms'])
 
-        if arg_data['output_file']:
+        if arg_data['inject']:
+            if str_extension in ['ZX1', 'ZX2', 'ZXD']:
+                output_file = arg_data['output_file']
+                if not output_file:
+                    output_file = str_file
+                inject_zxfiles(str_file, arg_data['inject'], output_file,
+                               fulldict_hash, str_extension,
+                               arg_data['video_mode'],
+                               arg_data['keyboard_layout'], arg_data['force'])
+            else:
+                LOGGER.error(
+                    'Not a valid filetype: .{0}'.format(str_extension))
+        elif arg_data['output_file']:
             savefrom_zxdata(str_file, dict_hash, arg_data['output_file'],
                             arg_data['n_cores'], arg_data['video_mode'],
                             arg_data['keyboard_layout'], arg_data['force'])
@@ -134,6 +146,7 @@ def parse_args():
     values['show_hashes'] = False
     values['extract'] = []
     values['n_cores'] = -1
+    values['inject'] = []
     values['video_mode'] = -1
     values['keyboard_layout'] = -1
 
@@ -198,6 +211,12 @@ def parse_args():
                         action='store',
                         dest='n_cores',
                         help='Number of cores to store on output file')
+    parser.add_argument('-a',
+                        '--add',
+                        required=False,
+                        action='append',
+                        dest='inject',
+                        help='Item to inject')
     parser.add_argument('-m',
                         '--video_mode',
                         required=False,
@@ -240,6 +259,9 @@ def parse_args():
 
     if arguments.n_cores:
         values['n_cores'] = int(arguments.n_cores)
+
+    if arguments.inject:
+        values['inject'] = arguments.inject
 
     if arguments.video_mode:
         values['video_mode'] = int(arguments.video_mode)
@@ -859,6 +881,45 @@ def get_crc16(data: bytearray, offset, length):
     return crc & 0xFFFF
 
 
+def inject_zxfiles(str_spi_file,
+                   arr_in_files,
+                   str_outfile,
+                   fullhash_dict,
+                   str_extension,
+                   video_mode=-1,
+                   keyboard_layout=-1,
+                   b_force=False):
+    """
+    Add binary from one or more binary files to SPI flash file
+    :param str_spi_file:
+    :param arr_in_files:
+    :param str_outfile:
+    :param fullhash_dict:
+    :param str_extension:
+    :param video_mode:
+    :param keyboard_layout:
+    :param b_force:
+    """
+    hash_dict = fullhash_dict[str_extension]
+
+    LOGGER.debug('Reading Flash...')
+    b_len = os.stat(str_spi_file).st_size
+    with open(str_spi_file, "rb") as in_zxdata:
+        b_data = in_zxdata.read(b_len)
+
+    for str_in_params in arr_in_files:
+        b_data = inject_bindata(str_in_params, hash_dict, b_data)
+        b_data = inject_coredata(str_in_params, hash_dict, b_data)
+        b_data = inject_romdata(str_in_params, hash_dict, b_data)
+
+    b_data = inject_biossettings(b_data, video_mode, keyboard_layout)
+
+    if b_force or check_overwrite(str_outfile):
+        with open(str_outfile, "wb") as out_zxdata:
+            out_zxdata.write(b_data)
+            print('{0} created OK.'.format(str_outfile))
+
+
 def savefrom_zxdata(str_in_file,
                     hash_dict,
                     str_outfile,
@@ -867,10 +928,14 @@ def savefrom_zxdata(str_in_file,
                     keyboard_layout=-1,
                     b_force=False):
     """
-    Create new file from SPI flash file
+    Create truncated SPI flash file
     :param str_in_file: Path to file
     :param hash_dict: Dictionary with hashes for different blocks
-    :param str_extension: Extension for Core files
+    :param str_outfile:
+    :param n_cores:
+    :param video_mode:
+    :param keyboard_layout:
+    :param b_force:
     """
 
     dict_parts = hash_dict['parts']
@@ -890,15 +955,7 @@ def savefrom_zxdata(str_in_file,
     with open(str_in_file, "rb") as in_zxdata:
         bin_data = in_zxdata.read(bin_len)
 
-    # 28746 0-3 Keyboard Layout: Auto-ES-EN-ZX
-    if keyboard_layout > -1:
-        bin_data = bin_data[:28746] + struct.pack(
-            '<B', keyboard_layout) + bin_data[28747:]
-
-    # 28749 0-2 Video: PAL-NTSC-VGA
-    if video_mode > -1:
-        bin_data = bin_data[:28749] + struct.pack(
-            '<B', video_mode) + bin_data[28750:]
+    bin_data = inject_biossettings(bin_data, video_mode, keyboard_layout)
 
     if n_cores > -1:
         core_offset = 0x7100 + (n_cores * 0x20)
@@ -910,6 +967,90 @@ def savefrom_zxdata(str_in_file,
         with open(str_outfile, "wb") as out_zxdata:
             out_zxdata.write(bin_data)
             print('{0} created OK.'.format(str_outfile))
+
+
+def inject_bindata(str_in_params, hash_dict, b_data):
+    """
+    """
+    arr_params = str_in_params.split(',')
+    br_data = b_data
+
+    for bl_id in ['BIOS', 'esxdos', 'Spectrum']:
+        hash_parts = hash_dict['parts'][bl_id]
+        if arr_params[0].upper() == bl_id.upper():
+            if len(arr_params) != 2:  # Filename
+                LOGGER.error('Invalid data: {0}'.format(str_in_params))
+            else:
+                str_in_file = arr_params[1]
+                str_hash = get_file_hash(str_in_file)
+                b_offset = hash_parts[0]
+                b_len = hash_parts[1]
+                b_head = hash_parts[3]
+                if validate_file(
+                        str_in_file,
+                        b_head) and os.stat(str_in_file).st_size == b_len:
+                    LOGGER.debug('Looks like {0}'.format(bl_id))
+                    bl_version = get_data_version(str_hash, hash_dict[bl_id])
+                    print('Adding {0}: {1}...'.format(bl_id, bl_version))
+
+                    with open(str_in_file, "rb") as in_zxdata:
+                        in_data = in_zxdata.read(b_len)
+
+                    br_data = b_data[:b_offset] + in_data
+                    br_data += b_data[b_offset + b_len:]
+
+    return br_data
+
+
+def inject_coredata(str_in_params, hash_dict, b_data):
+    """
+    """
+    arr_params = str_in_params.split(',')
+    br_data = b_data
+
+    if arr_params[0].upper() == 'CORE':  # Number, Name, Filename
+        if len(arr_params) != 4:
+            LOGGER.error('Invalid argument: {0}'.format(str_in_params))
+        else:
+            print('Injecting core {0}...'.format(arr_params[1]))
+
+    return br_data
+
+
+def inject_romdata(str_in_params, hash_dict, b_data):
+    """
+    """
+    arr_params = str_in_params.split(',')
+    br_data = b_data
+
+    if arr_params[0].upper() == 'ROM':  # Slot, Params, Name, Filename
+        if len(arr_params) != 5:
+            LOGGER.error('Invalid argument: {0}'.format(str_in_params))
+        else:
+            print('Injecting core {0}...'.format(arr_params[1]))
+
+    return br_data
+
+
+def inject_biossettings(b_data, video_mode=-1, keyboard_layout=-1):
+    """
+    :param b_data:
+    :param video_mode:
+    :param keyboard_layout:
+    """
+    br_data = b_data
+
+    # 28746 0-3 Keyboard Layout: Auto-ES-EN-ZX
+    if keyboard_layout > -1:
+        br_data = br_data[:28746] + struct.pack(
+            '<B', keyboard_layout) + br_data[28747:]
+
+    # 28749 0-2 Video: PAL-NTSC-VGA
+    if video_mode > -1:
+        br_data = br_data[:28749] + struct.pack('<B',
+                                                video_mode) + br_data[28750:]
+
+    return br_data
 
 
 def check_overwrite(str_file):
