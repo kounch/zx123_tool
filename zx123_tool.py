@@ -684,16 +684,8 @@ def get_rom_bin(str_in_file,
     """
 
     rom_data = b''
-    for rom_block in range(rom_slot, rom_slot + rom_blocks):
-        if rom_block < rom_split:
-            rom_base = rom_bases[0]
-            rom_offset = rom_base + rom_block * 16384
-        else:
-            rom_base = rom_bases[4]
-            rom_offset = rom_base + (rom_block - rom_split) * 16384
-
-        if roms_file:
-            rom_offset += 1
+    for rom_blk in range(rom_slot, rom_slot + rom_blocks):
+        rom_offset = get_romb_offset(rom_blk, rom_split, rom_bases, roms_file)
 
         with open(str_in_file, "rb") as in_zxrom:
             in_zxrom.seek(rom_offset)
@@ -702,11 +694,32 @@ def get_rom_bin(str_in_file,
     return rom_data
 
 
+def get_romb_offset(rom_slot, rom_split, rom_bases, roms_file=False):
+    """
+    Get ROM slot offset in SPI Flash
+    :param rom_slot: ROM slot index
+    :param rom_split: Slot number where rom binary data is split in two
+    :param rom_bases: Offsets for ROM binary data
+    :param roms_file: If True, add extra offset as in ROM.ZX1 file
+    """
+    if rom_slot < rom_split:
+        rom_base = rom_bases[0]
+        rom_offset = rom_base + rom_slot * 16384
+    else:
+        rom_base = rom_bases[4]
+        rom_offset = rom_base + (rom_slot - rom_split) * 16384
+
+    if roms_file:
+        rom_offset += 1
+
+    return rom_offset
+
+
 def bit_to_flag(b_input, str_flags):
     """
     Analyze byte and select string chars depending on bits
-    :param mybyte: Byte to analyze
-    :param mystr: String with chars to use
+    :param b_input: Byte to analyze
+    :param str_flags: String with chars to use
     :return: String with chars according to bit state
     """
     str_result = ''
@@ -715,6 +728,26 @@ def bit_to_flag(b_input, str_flags):
             if str_flags[i] != ' ':
                 str_result += str_flags[i]
     return str_result
+
+
+def flag_to_bits(str_input, str_flags, i_mask=0):
+    """
+    Analyze string  and create byte according to flags string
+    :param str_input: String with 0 or more flags
+    :param str_flags: 8 char string with flags
+    :param i_mask: Byte mask to apply (xor) to result
+    :return: Bytes with bits enabled according to flags
+    """
+
+    str_result = ''
+    i_result = 0
+    for i in range(8):
+        if str_flags[7 - i] in str_input:
+            i_result += 1 << i
+
+    i_result ^= i_mask
+    b_result = (i_result).to_bytes(1, 'little')
+    return b_result
 
 
 def get_peek(str_in_file, block_offset):
@@ -904,14 +937,14 @@ def inject_zxfiles(str_spi_file,
                    b_force=False):
     """
     Add binary from one or more binary files to SPI flash file
-    :param str_spi_file:
-    :param arr_in_files:
-    :param str_outfile:
-    :param fullhash_dict:
-    :param str_extension:
-    :param video_mode:
-    :param keyboard_layout:
-    :param b_force:
+    :param str_spi_file: Input SPI flash file
+    :param arr_in_files: Array with parameters and files to inject
+    :param str_outfile: New SPI flash file to create
+    :param fullhash_dict: Dictionary with hashes data
+    :param str_extension: SPI Flash extension
+    :param video_mode: Video mode: 0 (PAL), 1 (NTSC) or 2 (VGA)
+    :param keyboard_layout: 0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
+    :param b_force: Force overwriting file
     """
     hash_dict = fullhash_dict[str_extension]
 
@@ -923,7 +956,7 @@ def inject_zxfiles(str_spi_file,
     for str_in_params in arr_in_files:
         b_data = inject_bindata(str_in_params, hash_dict, b_data)
         b_data = inject_coredata(str_in_params, hash_dict, b_data)
-        b_data = inject_romdata(str_in_params, hash_dict, b_data)
+        b_data = inject_romdata(str_spi_file, str_in_params, hash_dict, b_data)
 
     b_data = inject_biossettings(b_data, video_mode, keyboard_layout)
 
@@ -942,13 +975,13 @@ def savefrom_zxdata(str_in_file,
                     b_force=False):
     """
     Create truncated SPI flash file
-    :param str_in_file: Path to file
+    :param str_in_file: Path to SPI file
     :param hash_dict: Dictionary with hashes for different blocks
-    :param str_outfile:
-    :param n_cores:
-    :param video_mode:
-    :param keyboard_layout:
-    :param b_force:
+    :param str_outfile: Path to SPI output file to save
+    :param n_cores: Number of cores to keep
+    :param video_mode: Video mode: 0 (PAL), 1 (NTSC) or 2 (VGA)
+    :param keyboard_layout: 0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
+    :param b_force: Force overwriting file
     """
 
     dict_parts = hash_dict['parts']
@@ -984,9 +1017,12 @@ def savefrom_zxdata(str_in_file,
 
 def inject_bindata(str_in_params, hash_dict, b_data):
     """
-    :param str_in_params:
-    :param hash_dict
-    :param b_data:
+    Add binary from one ROM binary file to SPI flash data
+    :param str_in_params: String with one of BIOS, esxdos or Spectrum and,
+     separated with ',', file path to the binary file
+    :param hash_dict: Dictionary with hashes for different blocks
+    :param b_data: SPI flash data
+    :return: Altered binary data
     """
     arr_params = str_in_params.split(',')
     br_data = b_data
@@ -1020,9 +1056,12 @@ def inject_bindata(str_in_params, hash_dict, b_data):
 
 def inject_coredata(str_in_params, hash_dict, b_data):
     """
-    :param str_in_params:
-    :param hash_dict:
-    :param b_data:
+    Add binary from one core binary file to SPI flash data
+    :param str_in_params: String with CORE, and, separated with ',': core
+     number, core name and file path to the core file
+    :param hash_dict: Dictionary with hashes for different blocks
+    :param b_data: SPI flash data
+    :return: Altered binary data
     """
     dict_parts = hash_dict['parts']
 
@@ -1088,29 +1127,133 @@ def inject_coredata(str_in_params, hash_dict, b_data):
     return br_data
 
 
-def inject_romdata(str_in_params, hash_dict, b_data):
+def inject_romdata(str_in_file, str_in_params, hash_dict, b_data):
     """
-    :param str_in_params:
-    :param hash_dict:
-    :param b_data:
+    Add binary from one Spectrum ROM binary file to SPI flash data
+    :param str_in_file: File with SPI flash data
+    :param str_in_params: String with ROM, and, separated with ',': ROM slot
+     number, ROM params (icdnptsmhl172arxu), ROM name to use and file path to
+     the ROM file
+    :param hash_dict: Dictionary with hashes for different blocks
+    :param b_data: SPI flash data obtained from str_in_file
+    :return: Altered binary data
     """
+    dict_parts = hash_dict['parts']
+
     arr_params = str_in_params.split(',')
     br_data = b_data
+
+    block_info = dict_parts['roms_dir']
+    max_slots = rom_split = block_info[5]
+    max_slots += block_info[6]
+    block_bases = dict_parts['roms_data']
+
+    roms_list = get_rom_list(str_in_file, dict_parts)
+    slot_use = []
+    for rom_entry in roms_list:
+        i_slot = rom_entry[1] + 1
+        for i in range(1, rom_entry[3]):
+            slot_use.append(i_slot)
+            i_slot += 1
 
     if arr_params[0].upper() == 'ROM':  # Slot, Params, Name, Filename
         if len(arr_params) != 5:
             LOGGER.error('Invalid argument: {0}'.format(str_in_params))
         else:
-            print('Injecting core {0}...'.format(arr_params[1]))
+            rom_slt = int(arr_params[1])
+            rom_params = arr_params[2]
+            str_name = '{0:<32}'.format(arr_params[3][:32])
+            str_in_file = arr_params[4]
+            str_hash = get_file_hash(str_in_file)
+
+            b_len = os.stat(str_in_file).st_size
+            if b_len != 0 and b_len % 16384 == 0:
+                LOGGER.debug('Looks like a ROM')
+                b_len = int(b_len / 16384)
+
+                if rom_slt in slot_use or rom_slt < 0 or rom_slt > max_slots:
+                    LOGGER.error('Invalid slot number: {0}'.format(rom_slt))
+
+                rom_index = len(roms_list)
+                for rom_entry in roms_list:
+                    if rom_slt == rom_entry[1]:
+                        rom_index = rom_entry[0]
+                        if b_len != rom_entry[3]:
+                            LOGGER.error(
+                                'Invalid ROM size for slot {0}'.format(
+                                    rom_slt))
+                            rom_slt = -1
+                        break
+
+                if rom_slt > -1:
+                    with open(str_in_file, "rb") as in_zxdata:
+                        rom_data = in_zxdata.read()
+
+                    rom_crc = get_rom_crc(rom_data)
+                    rom_entry = new_romentry(rom_slt, str_name, b_len,
+                                             rom_params, rom_crc)
+
+                    print('Injecting ROM {0}...'.format(rom_slt))
+
+                    # Inject ROM entry
+                    cur_pos = block_info[0] + rom_index * 64
+                    br_data = b_data[:cur_pos]
+                    br_data += rom_entry
+                    cur_pos += 64
+
+                    # Inject ROM index
+                    br_data += b_data[cur_pos:block_info[4]]
+                    cur_pos = block_info[4]
+                    br_data += b_data[cur_pos:cur_pos + rom_index]
+                    br_data += (rom_index).to_bytes(1, byteorder='little')
+                    cur_pos += rom_index + 1
+
+                    # Inject ROM binary data
+                    for i in range(b_len):
+                        rom_offset = get_romb_offset(rom_slt + i, rom_split,
+                                                     block_bases)
+                        print(rom_offset)
+                        if rom_offset > cur_pos:
+                            br_data += b_data[cur_pos:rom_offset]
+                        br_data += rom_data[i * 16384:(i + 1) * 16384]
+                        cur_pos = rom_offset + 16384
+
+                    br_data += b_data[cur_pos:]
 
     return br_data
 
 
+def new_romentry(rom_slt, rom_name, rom_len, rom_params, rom_crc):
+    """
+    Creates binary ROM entry data (64 bytes)
+    :param rom_slt: ROM slot number
+    :param rom_name: ROM Name
+    :param rom_len: ROM length (16384k blocks)
+    :param rom_params: ROM parameters (icdnptsmhl172arxu)
+    :param rom_crc: ROM CRC (string with hex values)
+    :return: Binary data for ROM entry
+    """
+    new_entry = (rom_slt).to_bytes(1, byteorder='little')
+    new_entry += (rom_len).to_bytes(1, byteorder='little')
+
+    new_entry += flag_to_bits(rom_params, '* icdnpt', 0b00110000)
+    new_entry += flag_to_bits(rom_params, 'smhl172a', 0b00000000)
+    new_entry += flag_to_bits(rom_params, '     rxu', 0b00000000)
+    new_entry += b'\x00' * 3
+    new_entry += bytes.fromhex(rom_crc)
+    new_entry += b'\x00' * (24 - int(len(rom_crc) / 2))
+    new_entry += bytes(rom_name, 'utf-8')
+
+    return new_entry
+
+
 def inject_biossettings(b_data, video_mode=-1, keyboard_layout=-1):
     """
-    :param b_data:
-    :param video_mode:
-    :param keyboard_layout:
+    Alter SPI flash BIOS settings
+    :param b_data: Binary data to modify
+    :param video_mode: Video mode: 0 (PAL), 1 (NTSC) or 2 (VGA)
+    :param keyboard_layout: 0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
+    :return: Altered SPI flash data
     """
     br_data = b_data
 
