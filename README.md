@@ -31,13 +31,20 @@ The maximum output Flash image size is 16 MiB (16384 KiB, or 16777216 Bytes), so
                             Output flash file to copy
       -f, --force           Force overwrite of existing files
       -l, --list_contents List file contents
-      -r, --roms          Process ZX Spectrum ROMs instead of Cores
+      -r, --roms          Process ZX Spectrum ROMs (extract instead of Cores)
       -s, --show_hashes   Show computed hashes
       -x EXTRACT, --extract EXTRACT
                 Item(s) to extract (split using ","): BIOS, Spectrum, esxdos
                 or core Number(s)
       -n N_CORES, --number_of_cores N_CORES
                     Number of cores to keep on output file
+      -a INJECT_DATA, --add INJECT_DATA
+                Data of item to inject with one of these formats:
+                    BIOS,Path to BIOS binary
+                    esxdos,Path to esxdos ROM binary
+                    Spectrum,Path to Spectrum core binary
+                    CORE,Core Number,Name to use,Path to core binary
+                    ROM,Slot,Parameters,Name to use,Path to Spectrum ROM binary
       -m VIDEO_MODE, --video_mode VIDEO_MODE
                     Default BIOS video mode: 0 (PAL), 1 (NTSC) or 2 (VGA)
       -k KEYBOARD_LAYOUT, --keyboard_layout KEYBOARD_LAYOUT
@@ -65,6 +72,17 @@ Extract the third ZX Spectrum ROM to a file:
 Show contents of file and extract `SPECTRUM.ZXD`, `ESXDOS.ZXD` and `.ZXD` files for cores 1 and 3:
 
     .../zx123_tool.py -l -i FLASH32.ZXD -x Spectrum,3,1,esxdos
+
+Add core `NEXT.ZXD` as number `3`, with name `SpecNext`:
+
+    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a CORE,3,SpecNext,NEXT.ZXD
+
+Add file `48.rom` (Spectrum ROM) in slot `5`, with name `Spec48`:
+
+    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a ROM,5,xdnlh17,Spec48,48.rom
+
+Add BIOS and esxdos ROMs:
+    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a BIOS,FIRMWARE.ZXD -a esxdos,ESXMMC.BIN
 
 Create a copy of `FLASH32.ZXD`, but removing all cores and setting BIOS default to VGA and Spectrum keyboard layout:
 
@@ -132,21 +150,28 @@ El tamaño máximo de un fichero copiado de imagen son 16 MiB (16384 KiB, o 1677
     Argumentos:
       -h, --help          Mostrar ayuda y salir
       -v, --version       Mostras versión del programa y salir
-      -i INPUT_FILE, --input_file FICHERO_ORIGEN
+      -i FICHERO_ORIGEN, --input_file FICHERO_ORIGEN
                           Archivo ZX-Uno, ZXDOS, etc.
-      -d OUTPUT_DIR, --output_dir DIRECTORIO_DESTINO
+      -d DIRECTORIO_DESTINO, --output_dir DIRECTORIO_DESTINO
                             Directorio donde guardar los archivos extraídos
-      -o OUTPUT_FILE, --output_file FICHERO_DESTINO
+      -o FICHERO_DESTINO, --output_file FICHERO_DESTINO
                             Fichero donde guardar copia de la imagen flash
       -f, --force           Forzar sobreescribir archivos existentes
       -l, --list_contents Mostrar contenido del fichero de origen
-      -r, --roms          Procesar ROMs de ZX Spectrum ROMs en vez de Cores
+      -r, --roms          Procesar ROMs de ZX Spectrum (extraer en vez de Core)
       -s, --show_hashes   Mostrar los datos de hash calculados
-      -x EXTRACT, --extract EXTRAER
+      -x EXTRAER, --extract EXTRAER
                 Elemento(s) a extraer, separados por ",": BIOS, Spectrum,
                 esxdos o número(s) de core
       -n N_CORES, --number_of_cores N_CORES
                     Número de cores a guardar en la copia
+      -a DATOS, --add DATOS
+                Datos de un elemento a añadir siguiendo uno de estos formatos:
+                    BIOS,Ruta a fichero de BIOS
+                    esxdos,Ruta a fichero ROM de esxdos
+                    Spectrum,Ruta a core principal de Spectrum
+                    CORE,Número,Nombre a usar,Ruta a fichero de core
+                    ROM,Slot,Parámetros,Nombre a usar,Ruta a ROM de Spectrum
       -m VIDEO_MODE, --video_mode MODO_VIDEO
                     Modo de vídeo por defecto de la BIOS:
                                                 0 (PAL), 1 (NTSC) o 2 (VGA)
@@ -175,6 +200,18 @@ Extraer la tercera ROM de ZX Spectrum a un fichero:
 Mostrar contenido de archivo de imagen y extraer `SPECTRUM.ZXD`, `ESXDOS.ZXD` y ficheros `.ZXD` para los cores 1 y 3:
 
     .../zx123_tool.py -l -i FLASH32.ZXD -x Spectrum,3,1,esxdos
+
+Añadir el core `NEXT.ZXD` con el número `3`, con nombre`SpecNext`:
+
+    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a CORE,3,SpecNext,NEXT.ZXD
+
+Añadir ROM de Spectrum `48.rom` en el slot`5`, con el nombre `Spec48`:
+
+    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a ROM,5,xdnlh17,Spec48,48.rom
+
+Añadir ROMs de BIOS y esxdos:
+
+    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a BIOS,FIRMWARE.ZXD -a esxdos,ESXMMC.BIN
 
 Crear una copia de `FLASH32.ZXD`, pero quitando todos los cores opcionales y configurando por defecto la BIOS para VGA y distribución de teclado tipo Spectrum:
 
