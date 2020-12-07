@@ -7,7 +7,9 @@ All rights reserved.
 
 ### Features
 
-Analyzes, extracts and injects data in SPI flash image files for ZX-Uno, ZXDOS and similar devices. These are the main features:
+Analyzes, extracts and injects data in SPI flash image files for ZX-Uno, ZXDOS and similar devices.
+
+These are the main features:
 
 - List the contents of a ZX-Uno, etc. SPI flash image, showing, if possible, the version of BIOS, esxdos, main Spectrum core and optional cores, Spectrum ROMs and several BIOS settings
 - Extract BIOS, esxdos ROM, Spectrum core and/or other cores, Spectrum ROMs to individual files
@@ -146,7 +148,9 @@ The JSON file is an object where the main name are file extensions (like `ZXD` o
 
 ### Características
 
-Analiza, extrae o añade datos en ficheros de imagen de SPI flash de ZX-Uno, ZXDOS y otros dispostivos similares. Estas son sus funciones principales:
+Analiza, extrae o añade datos en ficheros de imagen de SPI flash de ZX-Uno, ZXDOS y otros dispostivos similares.
+
+Estas son sus funciones principales:
 
 - Mostrar el contenido de la imagen, diciendo, si es posible, la versión de BIOS, esxdos, el core principal de Spectrum, otros cores que haya instalados, ROMs de Spectrum y algunos ajustes de la BIOS
 - Extraer la BIOS, la ROM de esxdos, el core de Spectrum y/o otros cores, ROMs de Spectrum a ficheros individuales
@@ -156,8 +160,6 @@ Analiza, extrae o añade datos en ficheros de imagen de SPI flash de ZX-Uno, ZXD
 - Si se tratase de un tipo distinto de fichero (como un archivo de instalación de core o BIOS), también puede intentar identificar su versión
 
 Necesita un fichero  `zx123_hash.json` con la estructrua de bloques de la imagen y, opcionalmente, datos para identificar dichos bloques.
-
-El tamaño máximo de un fichero copiado de imagen son 16 MiB (16384 KiB, o 16777216 Bytes), así que las imágenes con un tamaño mayor (como 32 MiB) serán truncadas si fuera neceario.
 
 ### Uso
 
