@@ -45,7 +45,7 @@ import six
 if six.PY2:
     input = raw_input
 
-__MY_VERSION__ = '0.7'
+__MY_VERSION__ = '0.8'
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
@@ -726,7 +726,7 @@ def get_rom_bin(str_in_file,
 
 def get_romb_offset(rom_slot, rom_split, rom_bases, roms_file=False):
     """
-    Get ROM slot offset in SPI Flash
+    Get ROM slot offset in SPI Flash or ROMS.ZX1 file
     :param rom_slot: ROM slot index
     :param rom_split: Slot number where rom binary data is split in two
     :param rom_bases: Offsets for ROM binary data
@@ -992,6 +992,8 @@ def inject_zxfiles(str_spi_file,
         b_data = inject_coredata(str_in_params, hash_dict, b_data)
         b_data = inject_romdata(str_spi_file, str_in_params, fullhash_dict,
                                 str_extension, b_data)
+        b_data = inject_romszx1data(str_in_params, fullhash_dict,
+                                    str_extension, b_data)
 
     b_data = inject_biossettings(b_data, video_mode, keyboard_layout,
                                  default_core, default_rom)
@@ -1263,6 +1265,95 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
                         cur_pos = rom_offset + 16384
 
                     br_data += b_data[cur_pos:]
+
+    return br_data
+
+
+def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
+    """
+    Add ROMs from a Spectrum ROMS.ZX1 binary file to SPI flash data
+    :param str_in_file: File with SPI flash data
+    :param str_in_params: String with ROMS, and, separated with ',': file path
+     to ROMS.ZX1
+    :param fullhash_dict: Dictionary with hashes data
+    :param str_extension: SPI Flash extension
+    :param b_data: SPI flash data obtained from str_in_file
+    :return: Altered binary data
+    """
+
+    # SPI flash ROMs
+    hash_dict = fullhash_dict[str_extension]
+    dict_parts = hash_dict['parts']
+    block_info = dict_parts['roms_dir']
+    max_slots = rom_split = block_info[5]
+    max_slots += block_info[6]
+    block_bases = dict_parts['roms_data']
+
+    # Empty ROMs list
+    roms_use = b'\xff' * (block_info[5] + block_info[6])
+
+    # ZX1 ROMS
+    rom_dict_parts = fullhash_dict['ROM']['parts']
+    blk_info = rom_dict_parts['roms_dir']
+    rm_split = blk_info[5]
+    blk_bases = rom_dict_parts['roms_data']
+
+    arr_params = str_in_params.split(',')
+    br_data = b_data
+
+    if arr_params[0].upper() == 'ROMS':  # Filename
+        if len(arr_params) != 2:
+            LOGGER.error('Invalid argument: {0}'.format(str_in_params))
+        else:
+            str_name = arr_params[1]
+            roms_list = get_rom_list(str_name, rom_dict_parts)
+
+            if roms_list:
+                # Clear ROMs list in SPI flash (Temp Binary Data)
+                bt_data = b_data[:block_info[4]] + roms_use
+                bt_data += b_data[block_info[4] + len(roms_use):]
+
+                print('Injecting ROMs from {0}...'.format(str_name))
+                for rom_item in roms_list:
+                    rom_index = rom_item[0]
+                    rom_slt = rom_item[1]
+                    rom_name = rom_item[2]
+                    rom_len = rom_item[3]
+                    rom_entry = new_romentry(rom_slt, rom_name, rom_len,
+                                             rom_item[4], rom_item[5])
+
+                    rom_data = get_rom_bin(str_name, rom_item[1], rom_item[3],
+                                           rm_split, blk_bases, True)
+
+                    LOGGER.debug('Injecting ROM {0} ({1})...'.format(
+                        rom_slt, rom_name))
+
+                    # Inject ROM entry
+                    cur_pos = block_info[0] + rom_index * 64
+                    br_data = bt_data[:cur_pos]
+                    br_data += rom_entry
+                    cur_pos += 64
+
+                    # Inject ROM index
+                    br_data += bt_data[cur_pos:block_info[4]]
+                    cur_pos = block_info[4]
+                    br_data += bt_data[cur_pos:cur_pos + rom_index]
+                    br_data += (rom_index).to_bytes(1, byteorder='little')
+                    cur_pos += rom_index + 1
+
+                    # Inject ROM binary data
+                    for i in range(rom_len):
+                        rom_offset = get_romb_offset(rom_slt + i, rom_split,
+                                                     block_bases, False)
+                        if rom_offset > cur_pos:
+                            br_data += bt_data[cur_pos:rom_offset]
+                        br_data += rom_data[i * 16384:(i + 1) * 16384]
+                        cur_pos = rom_offset + 16384
+
+                    br_data += bt_data[cur_pos:]
+
+                    # Consolidate Temp Binary Data
+                    bt_data = br_data
 
     return br_data
 

@@ -47,6 +47,7 @@ Requires a `zx123_hash.json` file with block estructure (e.g.: ZXD) and, optiona
                     Spectrum,Path to Spectrum core binary
                     CORE,Core Number,Name to use,Path to core binary
                     ROM,Slot,Parameters,Name to use,Path to Spectrum ROM binary
+                    ROMS,Path to ROMS.ZX1 file with some ROMs inside
       -c DEFAULT_CORE, --default_core DEFAULT_CORE
                 Default core number: 1 and up
       -z DEFAULT_ROM, --default_rom DEFAULT_ROM
@@ -188,6 +189,7 @@ Necesita un fichero  `zx123_hash.json` con la estructrua de bloques de la imagen
                     Spectrum,Ruta a core principal de Spectrum
                     CORE,Número,Nombre a usar,Ruta a fichero de core
                     ROM,Slot,Parámetros,Nombre a usar,Ruta a ROM de Spectrum
+                    ROMS,Ruta a un archivo ROMS.ZX1 con varias ROMs
       -c CORE_D, --default_core CORE_D
                 Número de core por defecto: 1 o superior
       -z ROM_D, --default_rom ROM_D
