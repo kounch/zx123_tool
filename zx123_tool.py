@@ -852,9 +852,9 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
 
     for block_id in ['BIOS', 'Spectrum', 'esxdos']:
         if not found and block_id in hash_dict['parts']:
-            if validate_file(
-                    str_in_file, hash_dict['parts'][block_id][3]) and os.stat(
-                    str_in_file).st_size == hash_dict['parts'][block_id][1]:
+            if os.stat(str_in_file).st_size == hash_dict['parts'][
+                    block_id][1] and validate_file(
+                        str_in_file, hash_dict['parts'][block_id][3]):
                 LOGGER.debug('Looks like {0}'.format(block_id))
                 block_version = get_data_version(str_file_hash,
                                                  hash_dict[block_id])
@@ -990,7 +990,8 @@ def inject_zxfiles(str_spi_file,
     for str_in_params in arr_in_files:
         b_data = inject_bindata(str_in_params, hash_dict, b_data)
         b_data = inject_coredata(str_in_params, hash_dict, b_data)
-        b_data = inject_romdata(str_spi_file, str_in_params, hash_dict, b_data)
+        b_data = inject_romdata(str_spi_file, str_in_params, fullhash_dict,
+                                str_extension, b_data)
 
     b_data = inject_biossettings(b_data, video_mode, keyboard_layout,
                                  default_core, default_rom)
@@ -1167,17 +1168,20 @@ def inject_coredata(str_in_params, hash_dict, b_data):
     return br_data
 
 
-def inject_romdata(str_in_file, str_in_params, hash_dict, b_data):
+def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
+                   b_data):
     """
     Add binary from one Spectrum ROM binary file to SPI flash data
     :param str_in_file: File with SPI flash data
     :param str_in_params: String with ROM, and, separated with ',': ROM slot
      number, ROM params (icdnptsmhl172arxu), ROM name to use and file path to
      the ROM file
-    :param hash_dict: Dictionary with hashes for different blocks
+    :param fullhash_dict: Dictionary with hashes data
+    :param str_extension: SPI Flash extension
     :param b_data: SPI flash data obtained from str_in_file
     :return: Altered binary data
     """
+    hash_dict = fullhash_dict[str_extension]
     dict_parts = hash_dict['parts']
 
     arr_params = str_in_params.split(',')
@@ -1204,7 +1208,6 @@ def inject_romdata(str_in_file, str_in_params, hash_dict, b_data):
             rom_params = arr_params[2]
             str_name = '{0:<32}'.format(arr_params[3][:32])
             str_in_file = arr_params[4]
-            str_hash = get_file_hash(str_in_file)
 
             b_len = os.stat(str_in_file).st_size
             if b_len != 0 and b_len % 16384 == 0:
@@ -1229,11 +1232,13 @@ def inject_romdata(str_in_file, str_in_params, hash_dict, b_data):
                     with open(str_in_file, "rb") as in_zxdata:
                         rom_data = in_zxdata.read()
 
+                    r_v = get_romdata_version(rom_data, fullhash_dict['ROM'])
+
                     rom_crc = get_rom_crc(rom_data)
                     rom_entry = new_romentry(rom_slt, str_name, b_len,
                                              rom_params, rom_crc)
 
-                    print('Injecting ROM {0}...'.format(rom_slt))
+                    print('Injecting ROM {0} ({1})...'.format(rom_slt, r_v[0]))
 
                     # Inject ROM entry
                     cur_pos = block_info[0] + rom_index * 64
@@ -1252,7 +1257,6 @@ def inject_romdata(str_in_file, str_in_params, hash_dict, b_data):
                     for i in range(b_len):
                         rom_offset = get_romb_offset(rom_slt + i, rom_split,
                                                      block_bases)
-                        print(rom_offset)
                         if rom_offset > cur_pos:
                             br_data += b_data[cur_pos:rom_offset]
                         br_data += rom_data[i * 16384:(i + 1) * 16384]
