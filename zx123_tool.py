@@ -234,7 +234,7 @@ def parse_args():
                         required=False,
                         action='store',
                         dest='default_rom',
-                        help='Default Spectrum ROM: 0 and up')
+                        help='Default Spectrum ROM index: 0 and up')
     parser.add_argument('-m',
                         '--video_mode',
                         required=False,

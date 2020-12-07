@@ -37,7 +37,7 @@ The maximum output Flash image size is 16 MiB (16384 KiB, or 16777216 Bytes), so
                 Item(s) to extract (split using ","): BIOS, Spectrum, esxdos
                 or core Number(s)
       -n N_CORES, --number_of_cores N_CORES
-                    Number of cores to keep on output file
+                Number of cores to keep on output file
       -a INJECT_DATA, --add INJECT_DATA
                 Data of item to inject with one of these formats:
                     BIOS,Path to BIOS binary
@@ -45,6 +45,10 @@ The maximum output Flash image size is 16 MiB (16384 KiB, or 16777216 Bytes), so
                     Spectrum,Path to Spectrum core binary
                     CORE,Core Number,Name to use,Path to core binary
                     ROM,Slot,Parameters,Name to use,Path to Spectrum ROM binary
+      -c DEFAULT_CORE, --default_core DEFAULT_CORE
+                Default core number: 1 and up
+      -z DEFAULT_ROM, --default_rom DEFAULT_ROM
+                Index of default Spectrum ROM: 0 and up
       -m VIDEO_MODE, --video_mode VIDEO_MODE
                     Default BIOS video mode: 0 (PAL), 1 (NTSC) or 2 (VGA)
       -k KEYBOARD_LAYOUT, --keyboard_layout KEYBOARD_LAYOUT
@@ -77,9 +81,17 @@ Add core `NEXT.ZXD` as number `3`, with name `SpecNext`:
 
     .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a CORE,3,SpecNext,NEXT.ZXD
 
+Add core `NEXT.ZXD` as number `3`, with name `SpecNext`, and set as the default boot core:
+
+    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a CORE,3,SpecNext,NEXT.ZXD -c 3
+
 Add file `48.rom` (Spectrum ROM) in slot `5`, with name `Spec48`:
 
     .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a ROM,5,xdnlh17,Spec48,48.rom
+
+Set ROM with index 2 (do not mistake with slot index) as the default Spectrum ROM:
+
+    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -z 2
 
 Add BIOS and esxdos ROMs:
     .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a BIOS,FIRMWARE.ZXD -a esxdos,ESXMMC.BIN
@@ -164,7 +176,7 @@ El tamaño máximo de un fichero copiado de imagen son 16 MiB (16384 KiB, o 1677
                 Elemento(s) a extraer, separados por ",": BIOS, Spectrum,
                 esxdos o número(s) de core
       -n N_CORES, --number_of_cores N_CORES
-                    Número de cores a guardar en la copia
+                Número de cores a guardar en la copia
       -a DATOS, --add DATOS
                 Datos de un elemento a añadir siguiendo uno de estos formatos:
                     BIOS,Ruta a fichero de BIOS
@@ -172,6 +184,10 @@ El tamaño máximo de un fichero copiado de imagen son 16 MiB (16384 KiB, o 1677
                     Spectrum,Ruta a core principal de Spectrum
                     CORE,Número,Nombre a usar,Ruta a fichero de core
                     ROM,Slot,Parámetros,Nombre a usar,Ruta a ROM de Spectrum
+      -c CORE_D, --default_core CORE_D
+                Número de core por defecto: 1 o superior
+      -z ROM_D, --default_rom ROM_D
+                Índice de ROM de Spectrum por defecto: 0 o superior
       -m VIDEO_MODE, --video_mode MODO_VIDEO
                     Modo de vídeo por defecto de la BIOS:
                                                 0 (PAL), 1 (NTSC) o 2 (VGA)
@@ -205,9 +221,17 @@ Añadir el core `NEXT.ZXD` con el número `3`, con nombre`SpecNext`:
 
     .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a CORE,3,SpecNext,NEXT.ZXD
 
+Añadir el core `NEXT.ZXD` con el número `3`, con nombre`SpecNext`,y configurar como core de inicio por defecto:
+
+    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a CORE,3,SpecNext,NEXT.ZXD -c 3
+
 Añadir ROM de Spectrum `48.rom` en el slot `5`, con el nombre `Spec48`:
 
     .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a ROM,5,xdnlh17,Spec48,48.rom
+
+Configurar la ROM con índice 2 (no confundir con número de slot) como la ROM de Spectrum por defecto:
+
+    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -z 2
 
 Añadir ROMs de BIOS y esxdos:
 
