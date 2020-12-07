@@ -45,7 +45,7 @@ import six
 if six.PY2:
     input = raw_input
 
-__MY_VERSION__ = '0.6'
+__MY_VERSION__ = '0.7'
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
@@ -115,14 +115,18 @@ def main():
                 inject_zxfiles(str_file, arg_data['inject'], output_file,
                                fulldict_hash, str_extension,
                                arg_data['video_mode'],
-                               arg_data['keyboard_layout'], arg_data['force'])
+                               arg_data['keyboard_layout'],
+                               arg_data['default_core'],
+                               arg_data['default_rom'], arg_data['force'])
             else:
                 LOGGER.error(
                     'Not a valid filetype: .{0}'.format(str_extension))
         elif arg_data['output_file']:
             savefrom_zxdata(str_file, dict_hash, arg_data['output_file'],
                             arg_data['n_cores'], arg_data['video_mode'],
-                            arg_data['keyboard_layout'], arg_data['force'])
+                            arg_data['keyboard_layout'],
+                            arg_data['default_core'], arg_data['default_rom'],
+                            arg_data['force'])
     else:
         find_zxfile(str_file, fulldict_hash, str_extension,
                     arg_data['show_hashes'])
@@ -149,6 +153,8 @@ def parse_args():
     values['inject'] = []
     values['video_mode'] = -1
     values['keyboard_layout'] = -1
+    values['default_core'] = -1
+    values['default_rom'] = -1
 
     parser = argparse.ArgumentParser(
         description='ZX123 Tool',
@@ -217,6 +223,18 @@ def parse_args():
                         action='append',
                         dest='inject',
                         help='Item to inject')
+    parser.add_argument('-c',
+                        '--default_core',
+                        required=False,
+                        action='store',
+                        dest='default_core',
+                        help='Default core number: 1 and up')
+    parser.add_argument('-z',
+                        '--default_rom',
+                        required=False,
+                        action='store',
+                        dest='default_rom',
+                        help='Default Spectrum ROM: 0 and up')
     parser.add_argument('-m',
                         '--video_mode',
                         required=False,
@@ -263,6 +281,12 @@ def parse_args():
     if arguments.inject:
         values['inject'] = arguments.inject
 
+    if arguments.default_core:
+        values['default_core'] = int(arguments.default_core) - 1
+
+    if arguments.default_rom:
+        values['default_rom'] = int(arguments.default_rom)
+
     if arguments.video_mode:
         values['video_mode'] = int(arguments.video_mode)
 
@@ -304,6 +328,12 @@ def list_zxdata(str_in_file, hash_dict, show_hashes):
             print(block_hash)
 
     print('\nBIOS Defaults:')
+
+    default_rom = get_peek(str_in_file, 28736)
+    print('\tDefault ROM -> {0:02}'.format(default_rom))
+
+    default_core = get_peek(str_in_file, 28737) + 1
+    print('\tDefault Core -> {0:02}'.format(default_core))
 
     keyb_layout = get_peek(str_in_file, 28746)
     print('\tKeyboard Layout -> {0}'.format(keyb_layout))
@@ -934,6 +964,8 @@ def inject_zxfiles(str_spi_file,
                    str_extension,
                    video_mode=-1,
                    keyboard_layout=-1,
+                   default_core=-1,
+                   default_rom=-1,
                    b_force=False):
     """
     Add binary from one or more binary files to SPI flash file
@@ -944,6 +976,8 @@ def inject_zxfiles(str_spi_file,
     :param str_extension: SPI Flash extension
     :param video_mode: Video mode: 0 (PAL), 1 (NTSC) or 2 (VGA)
     :param keyboard_layout: 0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
+    :param default_core: Default boot core (0 and up)
+    :param default_rom: :Default boot Spectrum ROM (0 or greater)
     :param b_force: Force overwriting file
     """
     hash_dict = fullhash_dict[str_extension]
@@ -958,7 +992,8 @@ def inject_zxfiles(str_spi_file,
         b_data = inject_coredata(str_in_params, hash_dict, b_data)
         b_data = inject_romdata(str_spi_file, str_in_params, hash_dict, b_data)
 
-    b_data = inject_biossettings(b_data, video_mode, keyboard_layout)
+    b_data = inject_biossettings(b_data, video_mode, keyboard_layout,
+                                 default_core, default_rom)
 
     if b_force or check_overwrite(str_outfile):
         with open(str_outfile, "wb") as out_zxdata:
@@ -972,6 +1007,8 @@ def savefrom_zxdata(str_in_file,
                     n_cores=-1,
                     video_mode=-1,
                     keyboard_layout=-1,
+                    default_core=-1,
+                    default_rom=-1,
                     b_force=False):
     """
     Create truncated SPI flash file
@@ -981,6 +1018,8 @@ def savefrom_zxdata(str_in_file,
     :param n_cores: Number of cores to keep
     :param video_mode: Video mode: 0 (PAL), 1 (NTSC) or 2 (VGA)
     :param keyboard_layout: 0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
+    :param default_core: Default boot core (0 and up)
+    :param default_rom: :Default boot Spectrum ROM (0 or greater)
     :param b_force: Force overwriting file
     """
 
@@ -1001,7 +1040,8 @@ def savefrom_zxdata(str_in_file,
     with open(str_in_file, "rb") as in_zxdata:
         bin_data = in_zxdata.read(bin_len)
 
-    bin_data = inject_biossettings(bin_data, video_mode, keyboard_layout)
+    bin_data = inject_biossettings(bin_data, video_mode, keyboard_layout,
+                                   default_core, default_rom)
 
     if n_cores > -1:
         core_offset = 0x7100 + (n_cores * 0x20)
@@ -1247,7 +1287,11 @@ def new_romentry(rom_slt, rom_name, rom_len, rom_params, rom_crc):
     return new_entry
 
 
-def inject_biossettings(b_data, video_mode=-1, keyboard_layout=-1):
+def inject_biossettings(b_data,
+                        video_mode=-1,
+                        keyboard_layout=-1,
+                        default_core=-1,
+                        default_rom=-1):
     """
     Alter SPI flash BIOS settings
     :param b_data: Binary data to modify
@@ -1256,6 +1300,16 @@ def inject_biossettings(b_data, video_mode=-1, keyboard_layout=-1):
     :return: Altered SPI flash data
     """
     br_data = b_data
+
+    # 28736 Default ROM: 00-xx
+    if default_rom > -1:
+        br_data = br_data[:28736] + struct.pack('<B',
+                                                default_rom) + br_data[28737:]
+
+    # 28737 Default Core: 01-xx
+    if default_core > -1:
+        br_data = br_data[:28737] + struct.pack('<B',
+                                                default_core) + br_data[28738:]
 
     # 28746 0-3 Keyboard Layout: Auto-ES-EN-ZX
     if keyboard_layout > -1:

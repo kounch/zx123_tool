@@ -205,7 +205,7 @@ Añadir el core `NEXT.ZXD` con el número `3`, con nombre`SpecNext`:
 
     .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a CORE,3,SpecNext,NEXT.ZXD
 
-Añadir ROM de Spectrum `48.rom` en el slot`5`, con el nombre `Spec48`:
+Añadir ROM de Spectrum `48.rom` en el slot `5`, con el nombre `Spec48`:
 
     .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a ROM,5,xdnlh17,Spec48,48.rom
 
