@@ -256,7 +256,7 @@ Añadir ROMs de BIOS y esxdos:
 
     ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a BIOS,FIRMWARE.ZXD -a esxdos,ESXMMC.BIN
 
-Reemplazar todas las ROMs con el conteido del fichero RomPack `MisROMS.ZX1`:
+Reemplazar todas las ROMs con el contenido del fichero RomPack `MisROMS.ZX1`:
 
     ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a ROMS,MisROMS.ZX1
 
