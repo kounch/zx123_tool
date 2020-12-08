@@ -45,7 +45,7 @@ import six
 if six.PY2:
     input = raw_input
 
-__MY_VERSION__ = '0.9'
+__MY_VERSION__ = '1.0'
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
@@ -1242,6 +1242,11 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
 
                 if rom_slt in slot_use or rom_slt < 0 or rom_slt > max_slots:
                     LOGGER.error('Invalid slot number: {0}'.format(rom_slt))
+                    rom_slt = -1
+
+                if rom_slt + b_len >= max_slots:
+                    LOGGER.error('Slot number too high ({slot 0})'.format(rom_slt))
+                    rom_slt = -1
 
                 rom_index = len(roms_list)
                 for rom_entry in roms_list:
@@ -1284,7 +1289,7 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
     hash_dict = fullhash_dict[str_extension]
     dict_parts = hash_dict['parts']
     block_info = dict_parts['roms_dir']
-    max_slots = rom_split = block_info[5]
+    max_slots = block_info[5]
     max_slots += block_info[6]
     block_bases = dict_parts['roms_data']
 
@@ -1324,13 +1329,19 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
                     rom_data = get_rom_bin(str_name, rom_item[1], rom_item[3],
                                            rm_split, blk_bases, True)
 
-                    LOGGER.debug('Injecting ROM {0} ({1})...'.format(
-                        rom_slt, rom_name))
+                    rom_len = int(len(rom_data) / 16384)
+                    if rom_slt + rom_len < max_slots:
+                        LOGGER.debug('Injecting ROM {0} ({1})...'.format(
+                            rom_slt, rom_name))
 
-                    br_data = inject_rom_tobin(br_data, block_info,
-                                               block_bases, rom_index, rom_slt,
-                                               rom_name, rom_params, rom_data,
-                                               rom_crc, False)
+                        br_data = inject_rom_tobin(br_data, block_info,
+                                                   block_bases, rom_index,
+                                                   rom_slt, rom_name,
+                                                   rom_params, rom_data,
+                                                   rom_crc, False)
+                    else:
+                        LOGGER.error(
+                            'Slot number too high: {0}'.format(rom_slt))
 
                 br_data = inject_biossettings(br_data, default_rom=def_rom)
 
