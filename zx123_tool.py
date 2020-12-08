@@ -45,7 +45,7 @@ import six
 if six.PY2:
     input = raw_input
 
-__MY_VERSION__ = '0.8'
+__MY_VERSION__ = '0.9'
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
@@ -363,10 +363,13 @@ def list_romsdata(str_in_file,
     if roms_list:
         if roms_file:
             print('ZX1 ROMs File')
+            default_rom = get_peek(str_in_file, 0x1040)
+            print('\tDefault ROM -> {0:02}'.format(default_rom))
+
         print('\nZX Spectrum ROMs:')
         for rom in roms_list:
             rom_name = rom[2]
-            block_version, block_hash, block_offset = get_rom_version(
+            block_version, block_hash, block_data = get_rom(
                 str_in_file, rom[1], rom[3], hash_dict, in_file_ext, roms_file)
             str_rominfo = ' {0:02d} (Slot {1:02d}) {2:>10} ({3:>16}) '.format(
                 rom[0], rom[1], rom[4], rom[5])
@@ -402,7 +405,7 @@ def extractfrom_zxdata(str_in_file,
 
     block_list = ['BIOS', 'esxdos', 'Spectrum']
     for block_name in block_list:
-        if extract_item.lower() == block_name.lower():
+        if extract_item.upper() == block_name.upper():
             print('Extracting {0}...'.format(block_name))
             block_info = hash_dict['parts'][block_name]
             str_bin = hash_dict['parts'][block_name][2]
@@ -442,17 +445,10 @@ def extractfrom_zxdata(str_in_file,
                 print('Extracting ZX Spectrum ROM {0}...'.format(rom_number))
                 for rom in rom_list:
                     if rom[0] == rom_number:
-                        rom_slot = rom[1]
+                        rom_version, rom_hash, rom_data = get_rom(
+                            str_in_file, rom[1], rom[3], fullhash_dict,
+                            str_extension)
                         rom_name = rom[2]
-                        rom_blocks = rom[3]
-
-                        rom_split = hash_dict['parts']['roms_dir'][5]
-                        block_bases = hash_dict['parts']['roms_data']
-                        rom_data = get_rom_bin(str_in_file, rom_slot,
-                                               rom_blocks, rom_split,
-                                               block_bases)
-                        rom_version, rom_hash = get_romdata_version(
-                            rom_data, fullhash_dict['ROM'])
                         if rom_version != 'Unknown':
                             rom_name = rom_version
                         str_bin = '{0:02d}_{1}.rom'.format(rom[0], rom_name)
@@ -461,6 +457,34 @@ def extractfrom_zxdata(str_in_file,
                         break
             else:
                 LOGGER.error('Invalid ROM index: {0}'.format(rom_number))
+
+    if extract_item.upper() == 'ROMS':
+        default_rom = get_peek(str_in_file, 28736).to_bytes(1, 'little')
+        rom_dict_parts = fullhash_dict['ROM']['parts']
+        blk_info = rom_dict_parts['roms_dir']
+        blk_bases = rom_dict_parts['roms_data']
+        roms_data = 0x1000 * b'\x00' + 0x40 * b'\xff' + default_rom
+        roms_data += 0x100000 * b'\x00'
+        roms_list = get_rom_list(str_in_file, hash_dict['parts'])
+        for rom_item in roms_list:
+            rom_index = rom_item[0]
+            rom_slt = rom_item[1]
+            rom_name = rom_item[2]
+            rom_params = rom_item[4]
+            rom_crc = rom_item[5]
+
+            rom_version, rom_hash, rom_data = get_rom(str_in_file, rom_slt,
+                                                      rom_item[3],
+                                                      fullhash_dict,
+                                                      str_extension)
+
+            roms_data = inject_rom_tobin(roms_data, blk_info, blk_bases,
+                                         rom_index, rom_slt, rom_name,
+                                         rom_params, rom_data, rom_crc, True)
+
+        str_bin = 'ROMS.ZX1'
+        str_bin = os.path.join(str_dir, str_bin)
+        export_bindata(roms_data, str_bin, b_force)
 
 
 def get_version(str_in_file, block_info, hash_dict):
@@ -557,14 +581,14 @@ def get_core_blockdata(core_index, splitcore_index, core_bases):
     return [core_offset, core_len]
 
 
-def get_rom_version(str_in_file,
-                    rom_slot,
-                    rom_blocks,
-                    dict_full,
-                    in_file_ext,
-                    roms_file=False):
+def get_rom(str_in_file,
+            rom_slot,
+            rom_blocks,
+            dict_full,
+            in_file_ext,
+            roms_file=False):
     """
-    Obtain name and version from ROM block in file
+    Obtain name, version and data from ROM block in file
     :param str_in_file: Path to file
     :param rom_slot: ROM slot number
     :param rom_blocks: Size of ROM in 16384 bytes blocks
@@ -581,7 +605,7 @@ def get_rom_version(str_in_file,
 
     block_version, block_hash = get_romdata_version(rom_data, dict_full['ROM'])
 
-    return block_version, block_hash, rom_slot
+    return block_version, block_hash, rom_data
 
 
 def get_romdata_version(rom_data, dict_rom_hash):
@@ -1190,7 +1214,7 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
     br_data = b_data
 
     block_info = dict_parts['roms_dir']
-    max_slots = rom_split = block_info[5]
+    max_slots = block_info[5]
     max_slots += block_info[6]
     block_bases = dict_parts['roms_data']
 
@@ -1208,7 +1232,7 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
         else:
             rom_slt = int(arr_params[1])
             rom_params = arr_params[2]
-            str_name = '{0:<32}'.format(arr_params[3][:32])
+            str_name = arr_params[3]
             str_in_file = arr_params[4]
 
             b_len = os.stat(str_in_file).st_size
@@ -1235,36 +1259,11 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
                         rom_data = in_zxdata.read()
 
                     r_v = get_romdata_version(rom_data, fullhash_dict['ROM'])
-
-                    rom_crc = get_rom_crc(rom_data)
-                    rom_entry = new_romentry(rom_slt, str_name, b_len,
-                                             rom_params, rom_crc)
-
                     print('Injecting ROM {0} ({1})...'.format(rom_slt, r_v[0]))
 
-                    # Inject ROM entry
-                    cur_pos = block_info[0] + rom_index * 64
-                    br_data = b_data[:cur_pos]
-                    br_data += rom_entry
-                    cur_pos += 64
-
-                    # Inject ROM index
-                    br_data += b_data[cur_pos:block_info[4]]
-                    cur_pos = block_info[4]
-                    br_data += b_data[cur_pos:cur_pos + rom_index]
-                    br_data += (rom_index).to_bytes(1, byteorder='little')
-                    cur_pos += rom_index + 1
-
-                    # Inject ROM binary data
-                    for i in range(b_len):
-                        rom_offset = get_romb_offset(rom_slt + i, rom_split,
-                                                     block_bases)
-                        if rom_offset > cur_pos:
-                            br_data += b_data[cur_pos:rom_offset]
-                        br_data += rom_data[i * 16384:(i + 1) * 16384]
-                        cur_pos = rom_offset + 16384
-
-                    br_data += b_data[cur_pos:]
+                    br_data = inject_rom_tobin(b_data, block_info, block_bases,
+                                               rom_index, rom_slt, str_name,
+                                               rom_params, rom_data)
 
     return br_data
 
@@ -1309,18 +1308,18 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
             roms_list = get_rom_list(str_name, rom_dict_parts)
 
             if roms_list:
+                def_rom = get_peek(str_name, 4160)
                 # Clear ROMs list in SPI flash (Temp Binary Data)
-                bt_data = b_data[:block_info[4]] + roms_use
-                bt_data += b_data[block_info[4] + len(roms_use):]
+                br_data = b_data[:block_info[4]] + roms_use
+                br_data += b_data[block_info[4] + len(roms_use):]
 
                 print('Injecting ROMs from {0}...'.format(str_name))
                 for rom_item in roms_list:
                     rom_index = rom_item[0]
                     rom_slt = rom_item[1]
                     rom_name = rom_item[2]
-                    rom_len = rom_item[3]
-                    rom_entry = new_romentry(rom_slt, rom_name, rom_len,
-                                             rom_item[4], rom_item[5])
+                    rom_params = rom_item[4]
+                    rom_crc = rom_item[5]
 
                     rom_data = get_rom_bin(str_name, rom_item[1], rom_item[3],
                                            rm_split, blk_bases, True)
@@ -1328,32 +1327,71 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
                     LOGGER.debug('Injecting ROM {0} ({1})...'.format(
                         rom_slt, rom_name))
 
-                    # Inject ROM entry
-                    cur_pos = block_info[0] + rom_index * 64
-                    br_data = bt_data[:cur_pos]
-                    br_data += rom_entry
-                    cur_pos += 64
+                    br_data = inject_rom_tobin(br_data, block_info,
+                                               block_bases, rom_index, rom_slt,
+                                               rom_name, rom_params, rom_data,
+                                               rom_crc, False)
 
-                    # Inject ROM index
-                    br_data += bt_data[cur_pos:block_info[4]]
-                    cur_pos = block_info[4]
-                    br_data += bt_data[cur_pos:cur_pos + rom_index]
-                    br_data += (rom_index).to_bytes(1, byteorder='little')
-                    cur_pos += rom_index + 1
+                br_data = inject_biossettings(br_data, default_rom=def_rom)
 
-                    # Inject ROM binary data
-                    for i in range(rom_len):
-                        rom_offset = get_romb_offset(rom_slt + i, rom_split,
-                                                     block_bases, False)
-                        if rom_offset > cur_pos:
-                            br_data += bt_data[cur_pos:rom_offset]
-                        br_data += rom_data[i * 16384:(i + 1) * 16384]
-                        cur_pos = rom_offset + 16384
+    return br_data
 
-                    br_data += bt_data[cur_pos:]
 
-                    # Consolidate Temp Binary Data
-                    bt_data = br_data
+def inject_rom_tobin(b_data,
+                     block_info,
+                     block_bases,
+                     rom_index,
+                     rom_slt,
+                     rom_name,
+                     rom_params,
+                     rom_data,
+                     rom_crc=None,
+                     roms_file=False):
+    """
+    Add binary data of a ROM to binary file data (SPI Flash or ROMS.ZX1)
+    :param b_data: SPI flash data obtained from str_in_file
+    :param block_info: 'roms_dir' entry of hashes dict
+    :param block_bases: 'roms_data' entry of hashes dict
+    :param rom_index: ROM index number
+    :param rom_slt: ROM slot number
+    :param rom_name: String with ROM name
+    :param rom_params: String tiwh ROM params (icdnptsmhl172arxu)
+    :param rom_data: ROM binary data
+    :param rom_crc: Optional string with ROM crc16
+    :param roms_file: If True, parse output data as ROMS.ZX1 file
+    :return: Altered binary file data
+    """
+    rom_split = block_info[5]
+
+    rom_name = '{0:<32}'.format(rom_name[:32])
+    rom_len = int(len(rom_data) / 16384)
+    if not rom_crc:
+        rom_crc = get_rom_crc(rom_data)
+    rom_entry = new_romentry(rom_slt, rom_name, rom_len, rom_params, rom_crc)
+
+    # Inject ROM entry
+    cur_pos = block_info[0] + rom_index * 64
+    br_data = b_data[:cur_pos]
+    br_data += rom_entry
+    cur_pos += 64
+
+    # Inject ROM index
+    br_data += b_data[cur_pos:block_info[4]]
+    cur_pos = block_info[4]
+    br_data += b_data[cur_pos:cur_pos + rom_index]
+    br_data += (rom_index).to_bytes(1, byteorder='little')
+    cur_pos += rom_index + 1
+
+    # Inject ROM binary data
+    for i in range(rom_len):
+        rom_offset = get_romb_offset(rom_slt + i, rom_split, block_bases,
+                                     roms_file)
+        if rom_offset > cur_pos:
+            br_data += b_data[cur_pos:rom_offset]
+        br_data += rom_data[i * 16384:(i + 1) * 16384]
+        cur_pos = rom_offset + 16384
+
+    br_data += b_data[cur_pos:]
 
     return br_data
 

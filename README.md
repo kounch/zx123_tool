@@ -36,8 +36,8 @@ Requires a `zx123_hash.json` file with block estructure (e.g.: ZXD) and, optiona
       -r, --roms          Process ZX Spectrum ROMs (extract instead of Cores)
       -s, --show_hashes   Show computed hashes
       -x EXTRACT, --extract EXTRACT
-                Item(s) to extract (split using ","): BIOS, Spectrum, esxdos
-                or core Number(s)
+                Item(s) to extract, split using ",": BIOS, Spectrum, ROMS, 
+                esxdos and/or core/ROM Number(s)
       -n N_CORES, --number_of_cores N_CORES
                 Number of cores to keep on output file
       -a INJECT_DATA, --add INJECT_DATA
@@ -47,7 +47,7 @@ Requires a `zx123_hash.json` file with block estructure (e.g.: ZXD) and, optiona
                     Spectrum,Path to Spectrum core binary
                     CORE,Core Number,Name to use,Path to core binary
                     ROM,Slot,Parameters,Name to use,Path to Spectrum ROM binary
-                    ROMS,Path to ROMS.ZX1 file with some ROMs inside
+                    ROMS,Path to RomPack file with some ROMs inside
       -c DEFAULT_CORE, --default_core DEFAULT_CORE
                 Default core number: 1 and up
       -z DEFAULT_ROM, --default_rom DEFAULT_ROM
@@ -74,38 +74,47 @@ Extract `FIRMWARE.ZXD` file from `FLASH32.ZXD` file (on Windows):
 
 Extract the third ZX Spectrum ROM to a file:
 
-    ../zx123_tool.py -i FLASH32.ZXD -r -x 3
+    ...zx123_tool.py -i FLASH32.ZXD -r -x 3
+
+Extract all Spectrum ROMs to `ROMS.ZX1` RomPack file from `FLASH32.ZXD` file:
+
+    ...zx123_tool.py -i FLASH32.ZXD -x ROMS
 
 Show contents of file and extract `SPECTRUM.ZXD`, `ESXDOS.ZXD` and `.ZXD` files for cores 1 and 3:
 
-    .../zx123_tool.py -l -i FLASH32.ZXD -x Spectrum,3,1,esxdos
+    ...zx123_tool.py -l -i FLASH32.ZXD -x Spectrum,3,1,esxdos
 
 Add core `NEXT.ZXD` as number `3`, with name `SpecNext`:
 
-    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a CORE,3,SpecNext,NEXT.ZXD
+    ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a CORE,3,SpecNext,NEXT.ZXD
 
 Add core `NEXT.ZXD` as number `3`, with name `SpecNext`, and set as the default boot core:
 
-    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a CORE,3,SpecNext,NEXT.ZXD -c 3
+    ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a CORE,3,SpecNext,NEXT.ZXD -c 3
 
 Add file `48.rom` (Spectrum ROM) in slot `5`, with name `Spec48`:
 
-    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a ROM,5,xdnlh17,Spec48,48.rom
+    ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a ROM,5,xdnlh17,Spec48,48.rom
 
 Set ROM with index 2 (do not mistake with slot index) as the default Spectrum ROM:
 
-    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -z 2
+    ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -z 2
 
 Add BIOS and esxdos ROMs:
-    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a BIOS,FIRMWARE.ZXD -a esxdos,ESXMMC.BIN
+
+    ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a BIOS,FIRMWARE.ZXD -a esxdos,ESXMMC.BIN
+
+Replace all Spectrum ROMs with the contents of `MyROMS.ZX1` RomPack file:
+
+    ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a ROMS,MyROMS.ZX1
 
 Create a copy of `FLASH32.ZXD`, but removing all cores and setting BIOS default to VGA and Spectrum keyboard layout:
 
-    .../zx123_tool.py -i FLASH32.ZXD -o FlashGDOSPlus.ZXD -n 0 -m 2 -k 3
+    ...zx123_tool.py -i FLASH32.ZXD -o FlashGDOSPlus.ZXD -n 0 -m 2 -k 3
 
 Find out the version of a BIOS installation file:
 
-    zx123_tool.py -i FIRMWARE.ZXD -l
+    ...zx123_tool.py -i FIRMWARE.ZXD -l
 
 ### Description of JSON file
 
@@ -178,8 +187,8 @@ Necesita un fichero  `zx123_hash.json` con la estructrua de bloques de la imagen
       -r, --roms          Procesar ROMs de ZX Spectrum (extraer en vez de Core)
       -s, --show_hashes   Mostrar los datos de hash calculados
       -x EXTRAER, --extract EXTRAER
-                Elemento(s) a extraer, separados por ",": BIOS, Spectrum,
-                esxdos o número(s) de core
+                Elemento(s) a extraer, separados por ",": BIOS, Spectrum, ROMS,
+                esxdos y/o número(s) de core/ROM
       -n N_CORES, --number_of_cores N_CORES
                 Número de cores a guardar en la copia
       -a DATOS, --add DATOS
@@ -189,7 +198,7 @@ Necesita un fichero  `zx123_hash.json` con la estructrua de bloques de la imagen
                     Spectrum,Ruta a core principal de Spectrum
                     CORE,Número,Nombre a usar,Ruta a fichero de core
                     ROM,Slot,Parámetros,Nombre a usar,Ruta a ROM de Spectrum
-                    ROMS,Ruta a un archivo ROMS.ZX1 con varias ROMs
+                    ROMS,Ruta a un archivo RomPack con varias ROMs
       -c CORE_D, --default_core CORE_D
                 Número de core por defecto: 1 o superior
       -z ROM_D, --default_rom ROM_D
@@ -217,39 +226,47 @@ Extraer un fichero `FIRMWARE.ZXD` del archivo de imagen `FLASH32.ZXD` (en Window
 
 Extraer la tercera ROM de ZX Spectrum a un fichero:
 
-    ../zx123_tool.py -i FLASH32.ZXD -r -x 3
+    ...zx123_tool.py -i FLASH32.ZXD -r -x 3
+
+Extraer todas las ROMs de Spectrum a un archivo RomPack `ROMS.ZX1` desde el archivo de imagen `FLASH32.ZXD`:
+
+    ...zx123_tool.py -i FLASH32.ZXD -x ROMS
 
 Mostrar contenido de archivo de imagen y extraer `SPECTRUM.ZXD`, `ESXDOS.ZXD` y ficheros `.ZXD` para los cores 1 y 3:
 
-    .../zx123_tool.py -l -i FLASH32.ZXD -x Spectrum,3,1,esxdos
+    ...zx123_tool.py -l -i FLASH32.ZXD -x Spectrum,3,1,esxdos
 
 Añadir el core `NEXT.ZXD` con el número `3`, con nombre`SpecNext`:
 
-    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a CORE,3,SpecNext,NEXT.ZXD
+    ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a CORE,3,SpecNext,NEXT.ZXD
 
 Añadir el core `NEXT.ZXD` con el número `3`, con nombre`SpecNext`,y configurar como core de inicio por defecto:
 
-    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a CORE,3,SpecNext,NEXT.ZXD -c 3
+    ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a CORE,3,SpecNext,NEXT.ZXD -c 3
 
 Añadir ROM de Spectrum `48.rom` en el slot `5`, con el nombre `Spec48`:
 
-    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a ROM,5,xdnlh17,Spec48,48.rom
+    ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a ROM,5,xdnlh17,Spec48,48.rom
 
 Configurar la ROM con índice 2 (no confundir con número de slot) como la ROM de Spectrum por defecto:
 
-    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -z 2
+    ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -z 2
 
 Añadir ROMs de BIOS y esxdos:
 
-    .../zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a BIOS,FIRMWARE.ZXD -a esxdos,ESXMMC.BIN
+    ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a BIOS,FIRMWARE.ZXD -a esxdos,ESXMMC.BIN
+
+Reemplazar todas las ROMs con el conteido del fichero RomPack `MisROMS.ZX1`:
+
+    ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a ROMS,MisROMS.ZX1
 
 Crear una copia de `FLASH32.ZXD`, pero quitando todos los cores opcionales y configurando por defecto la BIOS para VGA y distribución de teclado tipo Spectrum:
 
-    .../zx123_tool.py -i FLASH32.ZXD -o FlashGDOSPlus.ZXD -n 0 -m 2 -k 3
+    ...zx123_tool.py -i FLASH32.ZXD -o FlashGDOSPlus.ZXD -n 0 -m 2 -k 3
 
 Averiguar la versión de un archivo de instalación de BIOS:
 
-    zx123_tool.py -i FIRMWARE.ZXD -l
+    ...zx123_tool.py -i FIRMWARE.ZXD -l
 
 ### Descripción del arhivo JSON
 
