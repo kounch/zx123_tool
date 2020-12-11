@@ -28,17 +28,19 @@
         "Spectrum": {
             "EXP26 040418": "85023e5c7941f56f74c1badc37f295e08b4c2955b67723851c1c5763891b236a",
             "EXP27_160820": "140fe5400fb3aee7dae99c540020d36d14d3c0be7ec3b9dd737a2b198525d618",
-            "EXP27-240320 azesmbog (no UART) +SAA1099": "65e788d92f1b3671934a941a3d8ecc629d4ab03093f75fe65a3c5b9eb6ea09a3"
+            "EXP27 azesmbog 240320 (no UART+SAA1099)": "5a07296d1a2ec159e3ce2e56482120c3a2d6b67714dc350a46ff3a27739962e6"
         },
         "Cores": {
             "ZX Spectrum": {
-                "EXP27_160820": "613902acb29e3926142a721493c593c0746969261fe7d5cce207194a1fc30a03",
-                "EXP27 SAA1099 NOWIFI": "92571c0edcee44ea3da4fe3835babb2d8985d7e65f04d1c5f2d2164c2081ab34",
-                "kypZX48 2020.08.14": "db39811185a8fcfc371226353f7d6527373372cf3b25981d208c64a0707df507",
-                "kypZX128 2020.10.09": "e8f535ea695d405df2fd5eaeb2bfa449ab08657a52062da8abc5fe4261d7ab30",
-                "TS-FM azesmbog": "4fb1f0d47f55039905a10b5fe46f6932ad6dd9728dd976753afd2408dfcc5f09",
-                "DMA azesmbog": "6a0cd7879a98182aeec5b92c36523cf11a1ed5be9f128341609d5a4246e94ec9",
-                "VGA 60Hz": "3bc28ff2692f038f3938e6b38d0980a567460a06657aa5e4327ba93b36d98261"
+                "EXP27 160820": "613902acb29e3926142a721493c593c0746969261fe7d5cce207194a1fc30a03",
+                "EXP27 azesmbog 240320": "85ff342c1a2fe0cc3a962221f37847907a5666e46183b13934b99fae4306fe69",
+                "kyp ZX48 2020.08.13": "7998866f2bcdd566f19e8c73ea53eff575bbd8f3e0f8a7be5716fb274c0d36bc",
+                "kyp ZX48 2020.09.06": "db39811185a8fcfc371226353f7d6527373372cf3b25981d208c64a0707df507",
+                "kyp ZX128 2020.10.09": "e8f535ea695d405df2fd5eaeb2bfa449ab08657a52062da8abc5fe4261d7ab30",
+                "azesmbog TS-FM 24.03.20": "4fb1f0d47f55039905a10b5fe46f6932ad6dd9728dd976753afd2408dfcc5f09",
+                "azesmbog DMA 24.05.30": "6a0cd7879a98182aeec5b92c36523cf11a1ed5be9f128341609d5a4246e94ec9",
+                "VGA 60Hz": "3bc28ff2692f038f3938e6b38d0980a567460a06657aa5e4327ba93b36d98261",
+                "VGA27 110420": "1a8e1441b5cba8036fe9bb7a5f72a6e20fe5629507ba1d49c80d282c48c220c1"
             },
             "Amstrad CPC464": {
                 "TEST 3a": "5a2363e9ef1f10320cc2ed5309c2ab5331db4b4ca8dbab9e39737a02c9186c36"
@@ -52,19 +54,20 @@
                 "1.2 2MB Int": "58abded410ca401efc93c70fe940815f6aebc28dd52d771f480fc28678ca34a0"
             },
             "Jupiter Ace": {
-                "19.06.2018 dos8d": "86e782598fa050c76dabac986bb481dc844e96a0e0a94b9ca84b6fe27b2d6603",
-                "2019.06.19 aze": "86e782598fa050c76dabac986bb481dc844e96a0e0a94b9ca84b6fe27b2d6603"
+                "19.06.2018 dos8d": "6e782598fa050c76dabac986bb481dc844e96a0e0a94b9ca84b6fe27b2d6603",
+                "2019.06.19 azesmbog": "86e782598fa050c76dabac986bb481dc844e96a0e0a94b9ca84b6fe27b2d6603"
             },
             "Sega Master System": {
-                "TEST 4.3 (512K)": "8a60c85e94c1819251ac07d2fc3296809542408531b10968d0c6bdce2f7f8e65"
+                "TEST 4.3 (512K)": "c385c9c8b68245ab9a3135e5514fc4e85a0bccc17432226aa1e23ac61c2979c3",
+                "SMS (TEST 4.3 2MB Int) ": "8a60c85e94c1819251ac07d2fc3296809542408531b10968d0c6bdce2f7f8e65"
             },
             "BBC Micro": {
                  "1.3b": "c35ed68b865139001bde7a8cb1e9fc12e0ab1e40f6d805a174f25dc94b6be73e",
                  "1.3": "4bbc3c71e4bfc755e2fa315336bf77c9115a977381949b801cc75e7a087ac53e"
             },
             "ColecoVision" : {
-                "1.0": "42a1c25f0c8f767677f6e3c5ebbd0bbc70eed07fc321e4d19770f348436f0c9d",
-                "1.2 VGA scanlines": "500c94aec1d196497196592dab8098cc2a5076b95fd338df1bd0349bdd9a01b0"
+                "512K": "42a1c25f0c8f767677f6e3c5ebbd0bbc70eed07fc321e4d19770f348436f0c9d",
+                "1.2 VGA 2MB 2 joysticks": "500c94aec1d196497196592dab8098cc2a5076b95fd338df1bd0349bdd9a01b0"
             },
             "Commodore 64" : {
                 "Beta 6": "4c8c757ba1224b9156afb39b6d3157ebabcde601241c601f79df44cbe76211ac",
@@ -92,7 +95,7 @@
                 "Release 1": "981403fad352ef8c54c1cc7f57f6cbfd3ce9d50a8e4b29b079ba02192610d799"
             },
             "HT-1080Z - TRS80 M1L2": {
-                "2M Int": "c9f5cc94fda19f5bc7434c4483b12ec513ce4fba4690ec13d86de0be1672d070"
+                "2MB Int": "c9f5cc94fda19f5bc7434c4483b12ec513ce4fba4690ec13d86de0be1672d070"
             },
             "Galaksija": {
                 "0.2 SDOS8.1": "cc23b953fc5eb7914f1d5fb1b9140aacce997a61277a14fb9b8b1e3ca40a092f"
@@ -110,7 +113,7 @@
                 "azesmbog 13.05.2020": "b2cfa5f151f0b91d5d1d20546ee55da51c1a17d0c2f753d55456176de7352efd"
             },
             "Acorn Atom": {
-                "11.05.2020": "622640413b76a842065ab127c1fecd813016382760e272e97278d5f34f76829b"
+                "carmeloco 11.05.2020": "622640413b76a842065ab127c1fecd813016382760e272e97278d5f34f76829b"
             },
             "ZX81": {
                 "VGA": "0a2469f0b57dab9055dec1de3c68468f4f9df6d32e6b317343df6d1fd8d6c915"
@@ -150,13 +153,14 @@
                 "Unknown Version": "6148abf8d3da6bcea2dc58bc9397b31e9be75d78503a0fd89a9a52f3dbd2ca3d"
             },
             "Sprint 1": {
-                "Unknown Version": "f32a966de73f6c871508515128e60bced91e19270a73e935bed395458c7a6402"
+                "Unknown Version": "29ab2e44293ed3a93297055c09358fadbc4ca95d2efe0651da4b4b4709ed5c80",
+                "Unknown Vers": "f32a966de73f6c871508515128e60bced91e19270a73e935bed395458c7a6402"
             },
             "Lunar Lander": {
-                "Unknown Version": "29ab2e44293ed3a93297055c09358fadbc4ca95d2efe0651da4b4b4709ed5c80"
+                "Unknown Version": "e8c121d9897c16d326c577c1b45501e53812026c87d203a3b71a5163d722f38b"
             },
             "Computer Space": {
-                "Unknown Version": "e8c121d9897c16d326c577c1b45501e53812026c87d203a3b71a5163d722f38b"
+                "Unknown Version": "eebedf1a88f35d6e8dd981e1eff93fecc90f99350c0482042b39f62a294dc321"
             },
             "Mayday": {
                 "Unknown Version": "eebedf1a88f35d6e8dd981e1eff93fecc90f99350c0482042b39f62a294dc321"
@@ -173,7 +177,7 @@
             "cores_dir": [28672, 2560, "", "", 34, 35],
             "reserved": [31232, 1536, "", ""],
             "BIOS": [32768, 16384, "FIRMWARE.ZX2", "31B0AA3E04013BFCED7904ED70F521"],
-            "roms_data": [49152, 573440, "", "", 3457024],
+            "roms_data": [49152, 573440, "", "", 16777216],
             "Spectrum": [622592, 474880, "SPECTRUM.ZX2", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104303141"],
             "core_base": [1097728, 475136, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104303141", 4194304]
         },
@@ -353,6 +357,7 @@
                 "Sin Leches": "ef60a214261863fb606879d07103e1e8dd387c62f46a8314b63eeaa08aeb2e40",
                 "ZX82 by Daniel A. Nagy": "b69c8483f209e756265d1cc4b09df4e1961f7fcaa591f167a41214b61783f32f",
                 "Pretty BASIC": "028011105dc47c3abe8b06ccdc9c7713435b67a938989c4edb34439720a0ae12",
+                "RaK 48 Turbo 1991 ": "26e6d7eb1d52acf18e078cf520a1a280721165252905bcd5210d16cb9427e771",
                 "Test ROM McLeod": "ceff0e3d79e4cf2805e4350d4439cae8f01758b9ba784c799b0f314a85ef02c4",
                 "Backgammon": "272f69f52fe62f2a64f8ac30a9b19b3932471b02328fa7df5eab770faa3e5f59",
                 "Chess": "9a8c3600011acb2c446f7fbc2ba2385f521fa5577a09e0eed1602bbe638dba72",
@@ -393,8 +398,10 @@
             "Jupiter Ace": "bfc93f0a367213f2cff5733e0f9fe7d6d3b526765d761fe8582239801c5502ef",
             "SE Basic IV 4.0 Anya": "6193b0615732a170566367666081c79f275673f41b83cfdc520dbf5bfaabc39f",
             "SE Basic IV 4.2  20.07.15 Morton": "5b513e45a7448f00706aaffb8db639fd7a0eda6ae9b3224af0f4d172f4792e3b",
+            "SE Basic IV 4.2  20.09.30 Iggy": "121dcf1571a9be7c83b1e28f6d313495bd89909abe65b227301bc9a4282f72c7",
             "BBC Micro": "f627698f7dd1193a6cb7023b61f45203e10b184223954516cca68d8e4e4c0a01",
-            "ZX85 by Daniel A. Nagy": "9add1a988fe9d428d26fc39ee5530a3d93df4a991969cc6b1f2e3085f25d75c1"
+            "ZX85 by Daniel A. Nagy": "9add1a988fe9d428d26fc39ee5530a3d93df4a991969cc6b1f2e3085f25d75c1",
+            "ZX85 by Daniel A. Nagy  20.10.04": "cb25aa879274143db6d3e734ab7ecaa50ccb34b2a2904cf7f7d0c12cd045b209"
         },
         "64K Spectrum ROM": {
             "ZX Spectrum +2A EN": "5e7d9b3355ca76f4a99cbcc0bc1c90118ecda6a1549c2cb0f02e98af17694f3e",
