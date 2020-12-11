@@ -98,9 +98,10 @@ def main():
     if validate_file(str_file, dict_hash['parts']['header'][3]):
         if arg_data['list']:
             list_zxdata(str_file, dict_hash, arg_data['show_hashes'])
-            if arg_data['roms']:
-                list_romsdata(str_file, fulldict_hash, str_extension,
-                              arg_data['show_hashes'])
+
+        if arg_data['roms']:
+            list_romsdata(str_file, fulldict_hash, str_extension,
+                          arg_data['show_hashes'])
 
         for x_item in arg_data['extract']:
             extractfrom_zxdata(str_file, x_item, fulldict_hash, str_outdir,
@@ -325,7 +326,7 @@ def list_zxdata(str_in_file, hash_dict, show_hashes):
                                                       block_name,
                                                       block_version))
         if (show_hashes):
-            print(block_hash)
+            print('Core {0:02d}: {1}'.format(index + 2, block_hash))
 
     print('\nBIOS Defaults:')
 
@@ -545,9 +546,10 @@ def get_core_version(str_in_file, core_index, dict_parts, dict_cores):
 
     block_name = block_version = 'Unknown'
     block_hash = ''
+    block_data = get_core_blockdata(core_index, splitcore_index, core_bases)
+    LOGGER.debug('Index {0}: {1:X}({1})'.format(core_index + 2, block_data[0]))
+
     for core_name in dict_cores:
-        block_data = get_core_blockdata(core_index, splitcore_index,
-                                        core_bases)
         block_version, block_hash = get_version(str_in_file, block_data,
                                                 dict_cores[core_name])
         if block_version != 'Unknown':
@@ -557,7 +559,7 @@ def get_core_version(str_in_file, core_index, dict_parts, dict_cores):
     return block_name, block_version, block_hash
 
 
-def get_core_blockdata(core_index, splitcore_index, core_bases):
+def get_core_blockdata(core_index, spltcore_index, core_bases):
     """
     Get Core Offset and Length
     :param core_index: Index of the Core
@@ -574,9 +576,8 @@ def get_core_blockdata(core_index, splitcore_index, core_bases):
         core_split = core_bases[4]
 
     core_offset = core_base + core_index * core_len
-    if core_split and core_index > splitcore_index:
-        core_offset = core_split + (core_index - splitcore_index -
-                                    1) * core_len
+    if core_split and core_index + 2 > spltcore_index:
+        core_offset = core_split + (core_index - spltcore_index + 1) * core_len
 
     return [core_offset, core_len]
 
@@ -688,9 +689,10 @@ def get_rom_list(str_in_file, dict_parts):
             roms_use = in_zxdata.read(block_info[5] + block_info[6])
 
         for i in range(0, len(roms_use)):
-            if roms_use[i] == i:
+            if roms_use[i] != 0xff:
                 with open(str_in_file, "rb") as in_zxdata:
                     in_zxdata.seek(block_info[0] + i * 64)
+                    rom_index = roms_use[i]
                     rom_data = in_zxdata.read(64)
                     rom_slot = rom_data[0]
                     rom_size = rom_data[1]
@@ -708,7 +710,7 @@ def get_rom_list(str_in_file, dict_parts):
                     rom_name = rom_data[32:]
                     try:
                         roms_list.append([
-                            i, rom_slot,
+                            rom_index, rom_slot,
                             rom_name.decode('utf-8'), rom_size, rom_flags,
                             rom_crc
                         ])
@@ -740,6 +742,7 @@ def get_rom_bin(str_in_file,
     rom_data = b''
     for rom_blk in range(rom_slot, rom_slot + rom_blocks):
         rom_offset = get_romb_offset(rom_blk, rom_split, rom_bases, roms_file)
+        LOGGER.debug('Slot {0}: {1:X} ({1})'.format(rom_blk, rom_offset))
 
         with open(str_in_file, "rb") as in_zxrom:
             in_zxrom.seek(rom_offset)
@@ -1150,7 +1153,7 @@ def inject_coredata(str_in_params, hash_dict, b_data):
         if len(arr_params) != 4:
             LOGGER.error('Invalid argument: {0}'.format(str_in_params))
         else:
-            core_index = int(arr_params[1]) - 2
+            core_index = int(arr_params[1])
             str_name = '{0:<32}'.format(arr_params[2][:32])
             str_in_file = arr_params[3]
             str_hash = get_file_hash(str_in_file)
@@ -1166,14 +1169,15 @@ def inject_coredata(str_in_params, hash_dict, b_data):
                         core_name = core_item
                         break
 
-                if core_index - 1 > len(core_list):
-                    core_index = len(core_list)
+                if core_index > len(core_list) + 1:
+                    core_index = len(core_list) + 2
 
-                if core_index < 0 or core_index > max_cores:
+                if core_index < 2 or core_index > max_cores:
                     LOGGER.error('Invalid core index: {}'.format(core_index))
                 else:
                     print('Adding core {0}: {1}({2})...'.format(
-                        core_index + 2, core_name, block_version))
+                        core_index, core_name, block_version))
+                    core_index -= 2
                     block_data = get_core_blockdata(core_index,
                                                     splitcore_index,
                                                     core_bases)
@@ -1188,6 +1192,7 @@ def inject_coredata(str_in_params, hash_dict, b_data):
                         in_data = in_zxdata.read()
 
                     b_offset, b_len = block_data
+                    LOGGER.debug("Offset: {0:X} ({0})".format(b_offset))
                     br_data = br_data[:b_offset] + in_data
                     br_data += b_data[b_offset + b_len:]
 
@@ -1244,8 +1249,9 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
                     LOGGER.error('Invalid slot number: {0}'.format(rom_slt))
                     rom_slt = -1
 
-                if rom_slt + b_len >= max_slots:
-                    LOGGER.error('Slot number too high ({slot 0})'.format(rom_slt))
+                if rom_slt + b_len > max_slots:
+                    LOGGER.error(
+                        'Slot number too high ({slot 0})'.format(rom_slt))
                     rom_slt = -1
 
                 rom_index = len(roms_list)
