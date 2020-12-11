@@ -33,7 +33,8 @@ Requires a `zx123_hash.json` file with block estructure (e.g.: ZXD) and, optiona
                             Output flash file to copy
       -f, --force           Force overwrite of existing files
       -l, --list_contents List file contents
-      -r, --roms          Process ZX Spectrum ROMs (extract instead of Cores)
+      -r, --roms          Process ZX Spectrum ROMs (list or, in extract mode,
+                          extract instead of Cores)
       -s, --show_hashes   Show computed hashes
       -x EXTRACT, --extract EXTRACT
                 Item(s) to extract, split using ",": BIOS, Spectrum, ROMS, 
@@ -184,7 +185,8 @@ Necesita un fichero  `zx123_hash.json` con la estructrua de bloques de la imagen
                             Fichero donde guardar copia de la imagen flash
       -f, --force           Forzar sobreescribir archivos existentes
       -l, --list_contents Mostrar contenido del fichero de origen
-      -r, --roms          Procesar ROMs de ZX Spectrum (extraer en vez de Core)
+      -r, --roms          Procesar ROMs de ZX Spectrum (listar o, en modo de 
+                          extracción, extraer en vez de Core)
       -s, --show_hashes   Mostrar los datos de hash calculados
       -x EXTRAER, --extract EXTRAER
                 Elemento(s) a extraer, separados por ",": BIOS, Spectrum, ROMS,
