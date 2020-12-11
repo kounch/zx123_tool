@@ -1181,20 +1181,24 @@ def inject_coredata(str_in_params, hash_dict, b_data):
                     block_data = get_core_blockdata(core_index,
                                                     splitcore_index,
                                                     core_bases)
-                    core_index = 0x100 + core_index * 32
-                    bl_data = bl_data[:core_index] + bytes(
-                        str_name, 'utf-8') + bl_data[core_index + 32:]
-
-                    br_data = b_data[:block_info[0]] + bl_data
-                    br_data += b_data[block_info[0] + block_info[1]:]
-
-                    with open(str_in_file, "rb") as in_zxdata:
-                        in_data = in_zxdata.read()
 
                     b_offset, b_len = block_data
                     LOGGER.debug("Offset: {0:X} ({0})".format(b_offset))
-                    br_data = br_data[:b_offset] + in_data
-                    br_data += b_data[b_offset + b_len:]
+                    if b_offset + b_len > len(b_data):
+                        LOGGER.error('Flash image too small for data')
+                    else:
+                        core_index = 0x100 + core_index * 32
+                        bl_data = bl_data[:core_index] + bytes(
+                            str_name, 'utf-8') + bl_data[core_index + 32:]
+
+                        br_data = b_data[:block_info[0]] + bl_data
+                        br_data += b_data[block_info[0] + block_info[1]:]
+
+                        with open(str_in_file, "rb") as in_zxdata:
+                            in_data = in_zxdata.read()
+                            br_data = br_data[:b_offset] + in_data
+
+                        br_data += b_data[b_offset + b_len:]
 
     return br_data
 
@@ -1404,7 +1408,11 @@ def inject_rom_tobin(b_data,
         rom_offset = get_romb_offset(rom_slt + i, rom_split, block_bases,
                                      roms_file)
         if rom_offset > cur_pos:
-            br_data += b_data[cur_pos:rom_offset]
+            if rom_offset + 16384 <= len(b_data):
+                br_data += b_data[cur_pos:rom_offset]
+            else:
+                LOGGER.error('Flash image too small for ROM')
+                break
         br_data += rom_data[i * 16384:(i + 1) * 16384]
         cur_pos = rom_offset + 16384
 
