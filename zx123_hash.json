@@ -6,7 +6,7 @@
             "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF3261800032816B05"],
             "esxdos": [16384, 8192, "ESXDOS.ZX1", "F331005EC30101FFC3"],
             "roms_dir": [24576, 4096, "", "", 28672, 19, 45],
-            "cores_dir": [28672, 1792, "", "", 7, 37],
+            "cores_dir": [28672, 1792, "", "", 9, 36],
             "reserved": [30464, 2304, "", ""],
             "BIOS": [32768, 16384, "FIRMWARE.ZX1", "31B0AA3E04013BFCED7904ED70F521"],
             "roms_data": [49152, 311296, "", "", 3457024],
@@ -179,7 +179,7 @@
             "BIOS": [32768, 16384, "FIRMWARE.ZX2", "31B0AA3E04013BFCED7904ED70F521"],
             "roms_data": [49152, 573440, "", "", 16777216],
             "Spectrum": [622592, 474880, "SPECTRUM.ZX2", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104303141"],
-            "core_base": [1097728, 475136, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104303141", 4194304]
+            "core_base": [1097728, 475136, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104303141", 16924672]
         },
         "BIOS": {
             "0.77": "de8953d614777da03f4cc9fd8bba01d35331c6e16a25df85f9ab7d8e8677a323",
@@ -201,6 +201,9 @@
             "ZX Spectrum": {
                 "EXP27_SVN": "9f10eb6605c428e17db607a7141036a218164eeea02ac4c087e447dce5e5ced4"
             },
+            "Amstrad CPC": {
+                "Unknown Version": "3d87c1b4f02aea41645e9ff82505a44dc30f09e040d6eb08461d648b400854b2"
+            },
             "ColecoVision": {
                 "1.0 RGB": "44eb8e83e0bb6d273f194974ac270d94f5738978a779fd37f5624b19ff31a750",
                 "1.0 VGA": "af1962514d1bb73d7ac9d83b6dcf670776ae9e2cb6c818df83b23b03042852b3"
@@ -214,7 +217,7 @@
             "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF326100003281030B"],
             "esxdos": [16384, 8192, "ESXDOS.ZX1", "F331005EC30101FFC3"],
             "roms_dir": [24576, 4096, "", "", 28672, 41, 23],
-            "cores_dir": [28672, 2560, "", "", 18, 20],
+            "cores_dir": [28672, 2560, "", "", 20, 20],
             "reserved": [31232, 1536, "", ""],
             "BIOS": [32768, 16384, "FIRMWARE.ZXD", "31B0AA3E04013BFCED7904ED70F521"],
             "roms_data": [49152, 671744, "", "", 16777216],
