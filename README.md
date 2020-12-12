@@ -193,6 +193,22 @@ The JSON file is an object where the main name are file extensions (like `ZXD` o
     }.
     (...)
 
+`roms_dir` format:
+
+    [roms directory offset, directory block size, "", "", enabled entries offset, first ROMs block length, second ROMs block length]
+
+`cores_dir` format:
+
+     [cores directory offset, directory block size, "", "", first cores block length, second cores block length]
+
+`roms_data` format:
+
+    [first slot offset, first ROMs block size, "", "", second ROMs block offset],
+
+`core_base` format:
+
+    [first core offset, core length, "", First bytes of a binary core data, second cores block offset]
+
 ## Castellano
 
 ### Características
@@ -383,6 +399,22 @@ El archivo JSON es un objeto donde los nombres principales son extensiones de ar
         }
     }.
     (...)
+
+Para `roms_dir`, el formato es el siguiente:
+
+    [offseet de inicio del directorio, tamaño del bloque de directorio, "", "", offset de entradas activas, longitud del primer bloque de ROMs, longitud del segundo bloque de ROMs]
+
+Para `cores_dir`, el formato es el siguiente:
+
+     [offset de inicio del directorio, tamaño del bloque de directorio, "", "", longitud del primer bloque de cores, longitud del segundo bloque de cores]
+
+Para `roms_data` y `core_base`, el formato es el siguiente:
+
+    [offset del primer slot, tamaño del primer bloque de ROMs, "", "", offset del segundo bloque de ROMs],
+
+Para `core_base`, el formato es el siguiente:
+
+    [offset del primer core, longitud de un core, "", Primeros bytes de un fichero binario de core, offset del segundo bloque de cores]
 
 ## License
 
