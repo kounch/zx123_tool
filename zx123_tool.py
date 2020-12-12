@@ -480,9 +480,10 @@ def extractfrom_zxdata(str_in_file,
                                                       fullhash_dict,
                                                       str_extension)
 
-            roms_data = inject_rom_tobin(roms_data, blk_info, blk_bases,
-                                         rom_index, rom_slt, rom_name,
-                                         rom_params, rom_data, rom_crc, True)
+            roms_data, b_chg = inject_rom_tobin(roms_data, blk_info, blk_bases,
+                                                rom_index, rom_slt, rom_name,
+                                                rom_params, rom_data, rom_crc,
+                                                True)
 
         str_bin = 'ROMS.ZX1'
         str_bin = os.path.join(str_dir, str_bin)
@@ -1047,6 +1048,7 @@ def inject_zxfiles(str_spi_file,
     :param default_rom: :Default boot Spectrum ROM (0 or greater)
     :param b_force: Force overwriting file
     """
+    b_changed = False
     hash_dict = fullhash_dict[str_extension]
 
     LOGGER.debug('Reading Flash...')
@@ -1055,20 +1057,26 @@ def inject_zxfiles(str_spi_file,
         b_data = in_zxdata.read(b_len)
 
     for str_in_params in arr_in_files:
-        b_data = inject_bindata(str_in_params, hash_dict, b_data)
-        b_data = inject_coredata(str_in_params, hash_dict, b_data)
-        b_data = inject_romdata(str_spi_file, str_in_params, fullhash_dict,
-                                str_extension, b_data)
-        b_data = inject_romszx1data(str_in_params, fullhash_dict,
-                                    str_extension, b_data)
+        b_data, b_chg = inject_bindata(str_in_params, hash_dict, b_data)
+        b_changed |= b_chg
+        b_data, b_chg = inject_coredata(str_in_params, hash_dict, b_data)
+        b_changed |= b_chg
+        b_data, b_chg = inject_romdata(str_spi_file, str_in_params,
+                                       fullhash_dict, str_extension, b_data)
+        b_changed |= b_chg
+        b_data, b_chg = inject_romszx1data(str_in_params, fullhash_dict,
+                                           str_extension, b_data)
+        b_changed |= b_chg
 
-    b_data = inject_biossettings(b_data, video_mode, keyboard_layout,
-                                 default_core, default_rom)
+    b_data, b_chg = inject_biossettings(b_data, video_mode, keyboard_layout,
+                                        default_core, default_rom)
+    b_changed |= b_chg
 
-    if b_force or check_overwrite(str_outfile):
-        with open(str_outfile, "wb") as out_zxdata:
-            out_zxdata.write(b_data)
-            print('{0} created OK.'.format(str_outfile))
+    if b_changed:
+        if b_force or check_overwrite(str_outfile):
+            with open(str_outfile, "wb") as out_zxdata:
+                out_zxdata.write(b_data)
+                print('{0} created OK.'.format(str_outfile))
 
 
 def savefrom_zxdata(str_in_file,
@@ -1132,8 +1140,9 @@ def inject_bindata(str_in_params, hash_dict, b_data):
      separated with ',', file path to the binary file
     :param hash_dict: Dictionary with hashes for different blocks
     :param b_data: SPI flash data
-    :return: Altered binary data
+    :return: Altered binary data and boolean indicating if it changed
     """
+    b_changed = False
     arr_params = str_in_params.split(',')
     br_data = b_data
 
@@ -1160,8 +1169,9 @@ def inject_bindata(str_in_params, hash_dict, b_data):
 
                     br_data = b_data[:b_offset] + in_data
                     br_data += b_data[b_offset + b_len:]
+                    b_changed = True
 
-    return br_data
+    return br_data, b_changed
 
 
 def inject_coredata(str_in_params, hash_dict, b_data):
@@ -1171,8 +1181,9 @@ def inject_coredata(str_in_params, hash_dict, b_data):
      number, core name and file path to the core file
     :param hash_dict: Dictionary with hashes for different blocks
     :param b_data: SPI flash data
-    :return: Altered binary data
+    :return: Altered binary data and boolean indicating if it changed
     """
+    b_changed = False
     dict_parts = hash_dict['parts']
 
     arr_params = str_in_params.split(',')
@@ -1239,8 +1250,9 @@ def inject_coredata(str_in_params, hash_dict, b_data):
                             br_data = br_data[:b_offset] + in_data
 
                         br_data += b_data[b_offset + b_len:]
+                        b_changed = True
 
-    return br_data
+    return br_data, b_changed
 
 
 def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
@@ -1254,8 +1266,9 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
     :param fullhash_dict: Dictionary with hashes data
     :param str_extension: SPI Flash extension
     :param b_data: SPI flash data obtained from str_in_file
-    :return: Altered binary data
+    :return: Altered binary data and boolean indicating if it changed
     """
+    b_changed = False
     hash_dict = fullhash_dict[str_extension]
     dict_parts = hash_dict['parts']
 
@@ -1316,11 +1329,11 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
                     r_v = get_romdata_version(rom_data, fullhash_dict['ROM'])
                     print('Injecting ROM {0} ({1})...'.format(rom_slt, r_v[0]))
 
-                    br_data = inject_rom_tobin(b_data, block_info, block_bases,
-                                               rom_index, rom_slt, str_name,
-                                               rom_params, rom_data)
+                    br_data, b_changed = inject_rom_tobin(
+                        b_data, block_info, block_bases, rom_index, rom_slt,
+                        str_name, rom_params, rom_data)
 
-    return br_data
+    return br_data, b_changed
 
 
 def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
@@ -1332,8 +1345,9 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
     :param fullhash_dict: Dictionary with hashes data
     :param str_extension: SPI Flash extension
     :param b_data: SPI flash data obtained from str_in_file
-    :return: Altered binary data
+    :return: Altered binary data and boolean indicating if it changed
     """
+    b_changed = False
 
     # SPI flash ROMs
     hash_dict = fullhash_dict[str_extension]
@@ -1384,18 +1398,20 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
                         LOGGER.debug('Injecting ROM {0} ({1})...'.format(
                             rom_slt, rom_name))
 
-                        br_data = inject_rom_tobin(br_data, block_info,
-                                                   block_bases, rom_index,
-                                                   rom_slt, rom_name,
-                                                   rom_params, rom_data,
-                                                   rom_crc, False)
+                        br_data, b_chg = inject_rom_tobin(
+                            br_data, block_info, block_bases, rom_index,
+                            rom_slt, rom_name, rom_params, rom_data, rom_crc,
+                            False)
+                        b_changed |= b_chg
                     else:
                         LOGGER.error(
                             'Slot number too high: {0}'.format(rom_slt))
 
-                br_data = inject_biossettings(br_data, default_rom=def_rom)
+                if b_changed:
+                    br_data, b_chg = inject_biossettings(br_data,
+                                                         default_rom=def_rom)
 
-    return br_data
+    return br_data, b_changed
 
 
 def inject_rom_tobin(b_data,
@@ -1420,8 +1436,9 @@ def inject_rom_tobin(b_data,
     :param rom_data: ROM binary data
     :param rom_crc: Optional string with ROM crc16
     :param roms_file: If True, parse output data as ROMS.ZX1 file
-    :return: Altered binary file data
+    :return: Altered binary file data and boolean indicating if it changed
     """
+    b_changed = False
     rom_split = block_info[5]
 
     rom_name = '{0:<32}'.format(rom_name[:32])
@@ -1450,15 +1467,21 @@ def inject_rom_tobin(b_data,
         if rom_offset > cur_pos:
             if rom_offset + 16384 <= len(b_data):
                 br_data += b_data[cur_pos:rom_offset]
+                b_changed = True
             else:
                 LOGGER.error('Flash image too small for ROM')
+                b_changed = False
                 break
+
         br_data += rom_data[i * 16384:(i + 1) * 16384]
         cur_pos = rom_offset + 16384
 
-    br_data += b_data[cur_pos:]
+    if b_changed:
+        br_data += b_data[cur_pos:]
+    else:
+        br_data = b_data
 
-    return br_data
+    return br_data, b_changed
 
 
 def new_romentry(rom_slt, rom_name, rom_len, rom_params, rom_crc):
@@ -1497,29 +1520,34 @@ def inject_biossettings(b_data,
     :param keyboard_layout: 0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
     :return: Altered SPI flash data
     """
+    b_changed = False
     br_data = b_data
 
     # 28736 Default ROM: 00-xx
     if default_rom > -1:
         br_data = br_data[:28736] + struct.pack('<B',
                                                 default_rom) + br_data[28737:]
+        b_changed = True
 
     # 28737 Default Core: 01-xx
     if default_core > -1:
         br_data = br_data[:28737] + struct.pack('<B',
                                                 default_core) + br_data[28738:]
+        b_changed = True
 
     # 28746 0-3 Keyboard Layout: Auto-ES-EN-ZX
     if keyboard_layout > -1:
         br_data = br_data[:28746] + struct.pack(
             '<B', keyboard_layout) + br_data[28747:]
+        b_changed = True
 
     # 28749 0-2 Video: PAL-NTSC-VGA
     if video_mode > -1:
         br_data = br_data[:28749] + struct.pack('<B',
                                                 video_mode) + br_data[28750:]
+        b_changed = True
 
-    return br_data
+    return br_data, b_changed
 
 
 def check_overwrite(str_file):
