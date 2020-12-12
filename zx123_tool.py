@@ -409,15 +409,14 @@ def extractfrom_zxdata(str_in_file,
         if extract_item.upper() == block_name.upper():
             print('Extracting {0}...'.format(block_name))
             block_info = hash_dict['parts'][block_name]
-            str_bin = hash_dict['parts'][block_name][2]
+            str_bin = block_info[2]
             str_bin = os.path.join(str_dir, str_bin)
-            export_bin(str_in_file, block_info, str_bin, b_force)
+            block_magic = block_info[3]
+            validate_and_export_bin(str_in_file, block_info, str_bin, b_force,
+                                    block_magic)
             break
 
     if cores:
-        core_base = hash_dict['parts']['core_base'][0]
-        core_len = hash_dict['parts']['core_base'][1]
-
         if extract_item.isdigit():
             core_number = int(extract_item)
             core_list = get_core_list(str_in_file, hash_dict['parts'])
@@ -435,7 +434,9 @@ def extractfrom_zxdata(str_in_file,
                     core_number + 2, block_name.replace(' ', '_'),
                     block_version, str_extension)
                 str_bin = os.path.join(str_dir, str_bin)
-                export_bin(str_in_file, block_data, str_bin, b_force)
+                core_magic = core_bases[3]
+                validate_and_export_bin(str_in_file, block_data, str_bin,
+                                        b_force, core_magic)
             else:
                 LOGGER.error('Invalid core number: {0}'.format(core_number))
     else:
@@ -821,6 +822,30 @@ def get_peek(str_in_file, block_offset):
     return struct.unpack('<B', bin_data)[0]
 
 
+def validate_and_export_bin(str_in_file,
+                            block_info,
+                            str_out_bin,
+                            b_force=False,
+                            str_magic=None):
+    """
+    Extract data block to file, optionally vallidating the header
+    :param str_in_file: Path to file
+    :param block_info: List with block offset and block length
+    :param str_out_bin: Path to bin file to create
+    :param str_magic: String with the bytes to match
+    """
+    with open(str_in_file, "rb") as in_zxdata:
+        in_zxdata.seek(block_info[0])
+        bin_data = in_zxdata.read(block_info[1])
+
+    if str_magic:
+        if not validate_bin(bin_data, str_magic):
+            LOGGER.error('Invalid data')
+            return
+
+    export_bindata(bin_data, str_out_bin, b_force)
+
+
 def export_bin(str_in_file, block_info, str_out_bin, b_force=False):
     """
     Extract data block to file
@@ -916,15 +941,30 @@ def validate_file(str_in_file, str_magic):
     """
     Try to detect ZX... file type from first bytes
     :param str_in_file: Path to file
-    :param str_magic: Bytes to match
+    :param str_magic: String with the bytes to match
+    :return: True if bytes match, False in other case
+    """
+    magic_bin = unhexlify(str_magic)
+    if str_magic:
+        with open(str_in_file, "rb") as bin_file:
+            bin_data = bin_file.read(len(magic_bin))
+            b_validate = validate_bin(bin_data, str_magic)
+
+        return b_validate
+    else:
+        return False
+
+
+def validate_bin(bin_data, str_magic):
+    """
+    Try to detect ZX data type from first bytes
+    :param bin_data: binary data of file
+    :param str_magic: String with the bytes to match
     :return: True if bytes match, False in other case
     """
     magic_bin = unhexlify(str_magic)
     if magic_bin:
-        with open(str_in_file, "rb") as bin_file:
-            bin_data = bin_file.read(len(magic_bin))
-
-        if magic_bin == bin_data:
+        if magic_bin == bin_data[:len(magic_bin)]:
             return True
         else:
             return False
