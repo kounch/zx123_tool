@@ -59,6 +59,44 @@ Requires a `zx123_hash.json` file with block estructure (e.g.: ZXD) and, optiona
                     Default BIOS Keyboard Layout:
                                     0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
 
+#### ROM Parameters
+
+When adding individual ROM data to a flash image, you can specify any of the following flags when using the ROM:
+
+-`i`: Keyboard issue 3 enabled (instead of issue 2)
+
+-`c`: Disable memory contention
+
+-`d`: Enable DivMMC
+
+-`n`: Enable NMI DivMMC (esxdos Menu)
+
+-`p`: Use Pentagon Timings
+
+-`t`: Use 128K timings
+
+-`s`: Disable DivMMC and ZXMMC ports
+
+-`m`: Enable Timex Horizontal MMU
+
+-`h`: Disable ROM high bit (1FFD bit 2)
+
+-`l`: Disable ROM low bit (7FFD bit 4)
+
+-`1`: Disable 1FFD port (+2A/3 paging)
+
+-`7`: Disable 7FFD port (128K paging)
+
+-`2`: Disable TurboSound (secondary AY chip)
+
+-`a`: Disable AY chip
+
+-`r`: Disable Radastanian mode
+
+-`x`: Disable Timex mode
+
+-`u`: Disable ULAPlus
+
 ### Examples
 
 Show contents of file:
@@ -211,6 +249,44 @@ Necesita un fichero  `zx123_hash.json` con la estructrua de bloques de la imagen
       -k KEYBOARD_LAYOUT, --keyboard_layout DISTRIB_TECLADO
                     Distribución de teclado por defecto de la BIOS:
                                     0 (Auto), 1 (ES), 2 (EN) o 3 (Spectrum)
+
+#### Parámetros de ROM
+
+Al añadir datos de una ROM indivicual a una imagen flash, se pueden especificar los siguientes indicadores para usar al utilizar la ROM:
+
+- `i`: Habilitar teclado issue 3 (en vez de issue 2)
+
+- `c`: Deshabilitar la contención de memoria
+
+- `d`: Habilitar DivMMC
+
+- `n`: Habilitar NMI DivMMC (menú de esxdos)
+
+- `p`: Usar timings de Pentagon
+
+- `t`: Usar timings de 128K
+
+- `s`: Deshabilitar puertos de DivMMC y ZXMMC
+
+- `m`: Habilitar MMU horizontal de Timex
+
+- `h`: Deshabilitar bit alto de ROM (bitd 2 de 1FFD)
+
+- `l`: Deshabilitar bit bajo de ROM (bit 4 de 7FFD)
+
+- `1`: Deshabilitar puerto 1FFD (paginado de +2A/3)
+
+- `7`: Deshabilitar puerto 7FFD (paginado de 128K)
+
+- `2`: Deshabilitar TurboSound (chip AY secundario)
+
+- `a`: Deshabilitar chip AY
+
+- `r`: Deshabilitar modo Radastaniano
+
+- `x`: Deshabilitar modo Timex
+
+- `u`: Deshabilitar ULAPlus
 
 ### Ejemplos
 
