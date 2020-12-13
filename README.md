@@ -278,7 +278,7 @@ Necesita un fichero  `zx123_hash.json` con la estructrua de bloques de la imagen
 
 #### Parámetros de ROM
 
-Al añadir datos de una ROM indivicual a una imagen flash, se pueden especificar los siguientes indicadores para usar al utilizar la ROM:
+Al añadir datos de una ROM individual a una imagen flash, se pueden especificar los siguientes indicadores para usar al utilizar la ROM:
 
 - `i`: Habilitar teclado issue 3 (en vez de issue 2)
 
