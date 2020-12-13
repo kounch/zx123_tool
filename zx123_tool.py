@@ -42,7 +42,6 @@ from binascii import unhexlify
 import struct
 import six
 
-
 __MY_VERSION__ = '1.0'
 
 LOGGER = logging.getLogger(__name__)
@@ -118,7 +117,8 @@ def main():
                     output_file = str_file
                 wipe_zxdata(str_file, output_file, dict_hash,
                             arg_data['video_mode'],
-                            arg_data['keyboard_layout'], arg_data['force'])
+                            arg_data['keyboard_layout'],
+                            arg_data['boot_timer'], arg_data['force'])
 
         if arg_data['inject']:
             if str_extension in ['ZX1', 'ZX2', 'ZXD']:
@@ -130,12 +130,11 @@ def main():
                     output_file = arg_data['output_file']
                     if not output_file:
                         output_file = str_file
-                inject_zxfiles(str_file, arg_data['inject'], output_file,
-                               fulldict_hash, str_extension,
-                               arg_data['video_mode'],
-                               arg_data['keyboard_layout'],
-                               arg_data['default_core'],
-                               arg_data['default_rom'], b_force)
+                inject_zxfiles(
+                    str_file, arg_data['inject'], output_file, fulldict_hash,
+                    str_extension, arg_data['video_mode'],
+                    arg_data['keyboard_layout'], arg_data['boot_timer'],
+                    arg_data['default_core'], arg_data['default_rom'], b_force)
             else:
                 LOGGER.error(
                     'Not a valid filetype: .{0}'.format(str_extension))
@@ -143,8 +142,8 @@ def main():
             savefrom_zxdata(str_file, dict_hash, arg_data['output_file'],
                             arg_data['n_cores'], arg_data['video_mode'],
                             arg_data['keyboard_layout'],
-                            arg_data['default_core'], arg_data['default_rom'],
-                            arg_data['force'])
+                            arg_data['boot_timer'], arg_data['default_core'],
+                            arg_data['default_rom'], arg_data['force'])
     else:
         find_zxfile(str_file, fulldict_hash, str_extension,
                     arg_data['show_hashes'])
@@ -174,6 +173,7 @@ def parse_args():
     values['keyboard_layout'] = -1
     values['default_core'] = -1
     values['default_rom'] = -1
+    values['boot_timer'] = -1
 
     parser = argparse.ArgumentParser(
         description='ZX123 Tool',
@@ -233,6 +233,7 @@ def parse_args():
     parser.add_argument('-n',
                         '--number_of_cores',
                         required=False,
+                        type=int,
                         action='store',
                         dest='n_cores',
                         help='Number of cores to store on output file')
@@ -250,6 +251,7 @@ def parse_args():
                         help='Wipe all secondary cores and ROM data')
     parser.add_argument('-c',
                         '--default_core',
+                        type=int,
                         required=False,
                         action='store',
                         dest='default_core',
@@ -257,12 +259,14 @@ def parse_args():
     parser.add_argument('-z',
                         '--default_rom',
                         required=False,
+                        type=int,
                         action='store',
                         dest='default_rom',
                         help='Default Spectrum ROM index: 0 and up')
     parser.add_argument('-m',
                         '--video_mode',
                         required=False,
+                        type=int,
                         action='store',
                         dest='video_mode',
                         help='Video mode: 0 (PAL), 1 (NTSC) or 2 (VGA)')
@@ -270,9 +274,17 @@ def parse_args():
         '-k',
         '--keyboard_layout',
         required=False,
+        type=int,
         action='store',
         dest='keyboard_layout',
         help='Keyboard Layout: 0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)')
+    parser.add_argument('-b',
+                        '--boot_timer',
+                        required=False,
+                        type=int,
+                        action='store',
+                        dest='boot_timer',
+                        help='Boot Timer: 0 (No Timer), 1, 2, 3 or 4')
 
     arguments = parser.parse_args()
 
@@ -301,7 +313,7 @@ def parse_args():
         values['extract'] = arguments.extract.split(',')
 
     if arguments.n_cores:
-        values['n_cores'] = int(arguments.n_cores)
+        values['n_cores'] = arguments.n_cores
 
     if arguments.inject:
         values['inject'] = arguments.inject
@@ -310,16 +322,19 @@ def parse_args():
         values['wipe_flash'] = arguments.wipe_flash
 
     if arguments.default_core:
-        values['default_core'] = int(arguments.default_core) - 1
+        values['default_core'] = arguments.default_core - 1
 
     if arguments.default_rom:
-        values['default_rom'] = int(arguments.default_rom)
+        values['default_rom'] = arguments.default_rom
 
     if arguments.video_mode:
-        values['video_mode'] = int(arguments.video_mode)
+        values['video_mode'] = arguments.video_mode
 
     if arguments.keyboard_layout:
-        values['keyboard_layout'] = int(arguments.keyboard_layout)
+        values['keyboard_layout'] = arguments.keyboard_layout
+
+    if arguments.boot_timer:
+        values['boot_timer'] = arguments.boot_timer
 
     return values
 
@@ -365,6 +380,9 @@ def list_zxdata(str_in_file, hash_dict, show_hashes):
 
     default_core = get_peek(str_in_file, 28737) + 1
     print('\tDefault Core -> {0:02}'.format(default_core))
+
+    boot_timer = get_peek(str_in_file, 28738)
+    print('\tBoot Timer -> {0}'.format(boot_timer))
 
     keyb_layout = get_peek(str_in_file, 28746)
     print('\tKeyboard Layout -> {0}'.format(keyb_layout))
@@ -525,6 +543,7 @@ def wipe_zxdata(str_spi_file,
                 hash_dict,
                 vid_mode=-1,
                 keyb_layout=-1,
+                boot_timer=-1,
                 b_force=False):
     """
     Wipe all cores and ROMs
@@ -535,6 +554,7 @@ def wipe_zxdata(str_spi_file,
     :param str_extension: SPI Flash extension
     :param vid_mode: Video mode: 0 (PAL), 1 (NTSC) or 2 (VGA)
     :param keyb_layout: 0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
+    :param boot_timer: 0 (No timer), 1, 2 (2x), 3 (4x), 4 (8x)
     :param default_core: Default boot core (0 and up)
     :param default_rom: :Default boot Spectrum ROM (0 or greater)
     :param b_force: Force overwriting file
@@ -589,7 +609,8 @@ def wipe_zxdata(str_spi_file,
     br_data += b_data[cur_pos:core_end]
     br_data += b'\x00' * (len(b_data) - core_end)
 
-    br_data, b_chg = inject_biossettings(br_data, vid_mode, keyb_layout, 0, 0)
+    br_data, b_chg = inject_biossettings(br_data, vid_mode, keyb_layout,
+                                         boot_timer, 0, 0)
 
     # Write Data
     if b_force or check_overwrite(str_outfile):
@@ -605,6 +626,7 @@ def inject_zxfiles(str_spi_file,
                    str_extension,
                    video_mode=-1,
                    keyboard_layout=-1,
+                   boot_timer=-1,
                    default_core=-1,
                    default_rom=-1,
                    b_force=False):
@@ -617,6 +639,7 @@ def inject_zxfiles(str_spi_file,
     :param str_extension: SPI Flash extension
     :param video_mode: Video mode: 0 (PAL), 1 (NTSC) or 2 (VGA)
     :param keyboard_layout: 0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
+    :param boot_timer: 0 (No timer), 1, 2 (2x), 3 (4x), 4 (8x)
     :param default_core: Default boot core (0 and up)
     :param default_rom: :Default boot Spectrum ROM (0 or greater)
     :param b_force: Force overwriting file
@@ -642,7 +665,7 @@ def inject_zxfiles(str_spi_file,
         b_changed |= b_chg
 
     b_data, b_chg = inject_biossettings(b_data, video_mode, keyboard_layout,
-                                        default_core, default_rom)
+                                        boot_timer, default_core, default_rom)
     b_changed |= b_chg
 
     if b_changed:
@@ -658,6 +681,7 @@ def savefrom_zxdata(str_in_file,
                     n_cores=-1,
                     video_mode=-1,
                     keyboard_layout=-1,
+                    boot_timer=-1,
                     default_core=-1,
                     default_rom=-1,
                     b_force=False):
@@ -669,6 +693,7 @@ def savefrom_zxdata(str_in_file,
     :param n_cores: Number of cores to keep
     :param video_mode: Video mode: 0 (PAL), 1 (NTSC) or 2 (VGA)
     :param keyboard_layout: 0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
+    :param boot_timer: 0 (No timer), 1, 2 (2x), 3 (4x), 4 (8x)
     :param default_core: Default boot core (0 and up)
     :param default_rom: :Default boot Spectrum ROM (0 or greater)
     :param b_force: Force overwriting file
@@ -691,8 +716,9 @@ def savefrom_zxdata(str_in_file,
     with open(str_in_file, "rb") as in_zxdata:
         bin_data = in_zxdata.read(bin_len)
 
-    bin_data = inject_biossettings(bin_data, video_mode, keyboard_layout,
-                                   default_core, default_rom)
+    bin_data, b_chg = inject_biossettings(bin_data, video_mode,
+                                          keyboard_layout, boot_timer,
+                                          default_core, default_rom)
 
     if n_cores > -1:
         core_offset = 0x7100 + (n_cores * 0x20)
@@ -772,6 +798,7 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
 
 
 # Core Data Functions
+
 
 def get_core_version(str_in_file, core_index, dict_parts, dict_cores):
     """
@@ -1478,6 +1505,7 @@ def inject_rom_tobin(b_data,
 def inject_biossettings(b_data,
                         video_mode=-1,
                         keyboard_layout=-1,
+                        boot_timer=-1,
                         default_core=-1,
                         default_rom=-1):
     """
@@ -1485,6 +1513,9 @@ def inject_biossettings(b_data,
     :param b_data: Binary data to modify
     :param video_mode: Video mode: 0 (PAL), 1 (NTSC) or 2 (VGA)
     :param keyboard_layout: 0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
+    :param boot_timer: 0 (No timer), 1, 2 (2x), 3 (4x), 4 (8x)
+    :param default_core: Default boot core (0 and up)
+    :param default_rom: :Default boot Spectrum ROM (0 or greater)
     :return: Altered SPI flash data
     """
     b_changed = False
@@ -1502,17 +1533,32 @@ def inject_biossettings(b_data,
                                                 default_core) + br_data[28738:]
         b_changed = True
 
+    # 28738 0-4 Boot Timer
+    if boot_timer > -1:
+        if boot_timer > 4:
+            LOGGER.error('Wrong Boot Timer: {0}'.format(boot_timer))
+        else:
+            br_data = br_data[:28738] + struct.pack(
+                '<B', boot_timer) + br_data[28739:]
+            b_changed = True
+
     # 28746 0-3 Keyboard Layout: Auto-ES-EN-ZX
     if keyboard_layout > -1:
-        br_data = br_data[:28746] + struct.pack(
-            '<B', keyboard_layout) + br_data[28747:]
-        b_changed = True
+        if keyboard_layout > 3:
+            LOGGER.error('Wrong Keyboard Layout: {0}'.format(keyboard_layout))
+        else:
+            br_data = br_data[:28746] + struct.pack(
+                '<B', keyboard_layout) + br_data[28747:]
+            b_changed = True
 
     # 28749 0-2 Video: PAL-NTSC-VGA
     if video_mode > -1:
-        br_data = br_data[:28749] + struct.pack('<B',
-                                                video_mode) + br_data[28750:]
-        b_changed = True
+        if video_mode > 3:
+            LOGGER.error('Wrong Video Mode: {0}'.format(video_mode))
+        else:
+            br_data = br_data[:28749] + struct.pack(
+                '<B', video_mode) + br_data[28750:]
+            b_changed = True
 
     return br_data, b_changed
 

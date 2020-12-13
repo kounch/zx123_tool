@@ -59,6 +59,8 @@ Requires a `zx123_hash.json` file with block estructure (e.g.: ZXD) and, optiona
       -k KEYBOARD_LAYOUT, --keyboard_layout KEYBOARD_LAYOUT
                     Default BIOS Keyboard Layout:
                                     0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
+      -b BOOT_TIMER, --boot_timer BOOT_TIMER
+                                    Boot Timer: 0 (No Timer), 1, 2, 3 or 4
 
 #### ROM Parameters
 
@@ -271,10 +273,12 @@ Necesita un fichero  `zx123_hash.json` con la estructrua de bloques de la imagen
                 Índice de ROM de Spectrum por defecto: 0 o superior
       -m VIDEO_MODE, --video_mode MODO_VIDEO
                     Modo de vídeo por defecto de la BIOS:
-                                                0 (PAL), 1 (NTSC) o 2 (VGA)
+                                                0 (PAL), 1 (NTSC) ó 2 (VGA)
       -k KEYBOARD_LAYOUT, --keyboard_layout DISTRIB_TECLADO
                     Distribución de teclado por defecto de la BIOS:
-                                    0 (Auto), 1 (ES), 2 (EN) o 3 (Spectrum)
+                                    0 (Auto), 1 (ES), 2 (EN) ó 3 (Spectrum)
+      -b BOOT_TIMER, --boot_timer RETRASO
+                       Retraso en el arranque: 0 (Sin retraso), 1, 2, 3 ó 4
 
 #### Parámetros de ROM
 
