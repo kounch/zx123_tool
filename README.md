@@ -49,6 +49,7 @@ Requires a `zx123_hash.json` file with block estructure (e.g.: ZXD) and, optiona
                     CORE,Core Number,Name to use,Path to core binary
                     ROM,Slot,Parameters,Name to use,Path to Spectrum ROM binary
                     ROMS,Path to RomPack file with some ROMs inside
+      -w, --wipe            Wipe all ROMs and all secondary cores from image
       -c DEFAULT_CORE, --default_core DEFAULT_CORE
                 Default core number: 1 and up
       -z DEFAULT_ROM, --default_rom DEFAULT_ROM
@@ -146,6 +147,14 @@ Add BIOS and esxdos ROMs:
 Replace all Spectrum ROMs with the contents of `MyROMS.ZX1` RomPack file:
 
     ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a ROMS,MyROMS.ZX1
+
+Wipe all ROMs data and all secondary cores data:
+
+    ...zx123_tool.py -i FLASH.ZXD -w -o FLASHempty.ZXD
+
+Wipe all ROMs data and all secondary cores data, and then add file `48.rom` (Spectrum ROM) in slot `0`, with name `ZX Spectrum`:
+
+    ...zx123_tool.py -i FLASH.ZXD -w -o FLASHnew.ZXD -a "ROM,0,xdnlh17,ZX Spectrum,48.rom"
 
 Create a copy of `FLASH32.ZXD`, but removing all cores and setting BIOS default to VGA and Spectrum keyboard layout:
 
@@ -255,6 +264,7 @@ Necesita un fichero  `zx123_hash.json` con la estructrua de bloques de la imagen
                     CORE,Número,Nombre a usar,Ruta a fichero de core
                     ROM,Slot,Parámetros,Nombre a usar,Ruta a ROM de Spectrum
                     ROMS,Ruta a un archivo RomPack con varias ROMs
+      -w, --wipe           Borrar todas las ROMs y todos los cores secundarios
       -c CORE_D, --default_core CORE_D
                 Número de core por defecto: 1 o superior
       -z ROM_D, --default_rom ROM_D
@@ -353,6 +363,14 @@ Añadir ROMs de BIOS y esxdos:
 Reemplazar todas las ROMs con el contenido del fichero RomPack `MisROMS.ZX1`:
 
     ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a ROMS,MisROMS.ZX1
+
+Borrar todos los datos de ROMs y todos los datos de los cores secundarios:
+
+    ...zx123_tool.py -i FLASH.ZXD -w -o FLASHempty.ZXD
+
+Borrar todos los datos de ROMs y todos los datos de los cores secundarios, y luego añadir el fichero ROM de Spectrum `48.rom` en el slot `0`, con el nombre `ZX Spectrum`:
+
+    ...zx123_tool.py -i FLASH.ZXD -w -o FLASHnew.ZXD -a "ROM,0,xdnlh17,ZX Spectrum,48.rom"
 
 Crear una copia de `FLASH32.ZXD`, pero quitando todos los cores opcionales y configurando por defecto la BIOS para VGA y distribución de teclado tipo Spectrum:
 
