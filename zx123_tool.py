@@ -324,6 +324,9 @@ def parse_args():
     return values
 
 
+# Main Functions
+
+
 def list_zxdata(str_in_file, hash_dict, show_hashes):
     """
     List content of file
@@ -517,541 +520,6 @@ def extractfrom_zxdata(str_in_file,
         export_bindata(roms_data, str_bin, b_force)
 
 
-def get_version(str_in_file, block_info, hash_dict):
-    """
-    Obtain version string in block in file using dictionary of hashes
-    :param str_in_file: Path to file
-    :param block_info: List with block offset and block length
-    :param hash_dict: Dictionary with hashes for different blocks
-    :return: List with version string and hash string
-    """
-    with open(str_in_file, "rb") as in_zxd:
-        in_zxd.seek(block_info[0])
-        bin_data = in_zxd.read(block_info[1])
-        str_hash = hashlib.sha256(bin_data).hexdigest()
-        del bin_data
-
-    str_version = get_data_version(str_hash, hash_dict)
-
-    return str_version, str_hash
-
-
-def get_data_version(str_hash, hash_dict):
-    """
-    Obtain version string from hash
-    :param str_hash: Hash string to check
-    :param hash_dict: Dictionary with hashes for different blocks
-    :return: List with version string and hash string
-    """
-    str_version = 'Unknown'
-    for hash_elem in hash_dict:
-        if str_hash == hash_dict[hash_elem]:
-            str_version = hash_elem
-            break
-
-    return str_version
-
-
-def get_core_version(str_in_file, core_index, dict_parts, dict_cores):
-    """
-    Obtain name and version from core block in file
-    :param str_in_file: Path to file
-    :param core_index: Core Index in file
-    :param dict_parts: Dictionary with file blocks info
-    :param dict_cores: Dictionary with hashes and info for cores
-    :return: List with name string, version string and hash string
-    """
-
-    block_info = dict_parts['cores_dir']
-    max_cores = splitcore_index = block_info[4]
-
-    if len(block_info) > 5:
-        max_cores += block_info[5]
-
-    if core_index > max_cores:
-        LOGGER.error('Invalid core index: {}'.format(core_index))
-
-    core_bases = dict_parts['core_base']
-
-    block_name = block_version = 'Unknown'
-    block_hash = ''
-    block_data = get_core_blockdata(core_index, splitcore_index, core_bases)
-    LOGGER.debug('Index {0}: {1:X}({1})'.format(core_index + 2, block_data[0]))
-
-    for core_name in dict_cores:
-        block_version, block_hash = get_version(str_in_file, block_data,
-                                                dict_cores[core_name])
-        if block_version != 'Unknown':
-            block_name = core_name
-            break
-
-    return block_name, block_version, block_hash
-
-
-def get_core_blockdata(core_index, spltcore_index, core_bases):
-    """
-    Get Core Offset and Length
-    :param core_index: Index of the Core
-    :param splitcore_index: Index of last core before split
-    :param core_bases: Array with base offset and offset after split
-    :return: Array with core offset and core length
-    """
-
-    core_base = core_bases[0]
-    core_len = core_bases[1]
-
-    core_split = 0
-    if len(core_bases) > 4:
-        core_split = core_bases[4]
-
-    core_offset = core_base + core_index * core_len
-    if core_split and core_index + 2 > spltcore_index:
-        core_offset = core_split + (core_index - spltcore_index + 1) * core_len
-
-    return [core_offset, core_len]
-
-
-def get_rom(str_in_file,
-            rom_slot,
-            rom_blocks,
-            dict_full,
-            in_file_ext,
-            roms_file=False):
-    """
-    Obtain name, version and data from ROM block in file
-    :param str_in_file: Path to file
-    :param rom_slot: ROM slot number
-    :param rom_blocks: Size of ROM in 16384 bytes blocks
-    :param dict_full: Dictionary with hashes and info for cores
-    :param in_file_ext: Extension of input file
-    :param roms_file: If True, add extra offset as in ROM.ZX1 file
-    :return: List with version string, hash string and offset
-    """
-
-    rom_split = dict_full[in_file_ext]['parts']['roms_dir'][5]
-    block_bases = dict_full[in_file_ext]['parts']['roms_data']
-    rom_data = get_rom_bin(str_in_file, rom_slot, rom_blocks, rom_split,
-                           block_bases, roms_file)
-
-    block_version, block_hash = get_romdata_version(rom_data, dict_full['ROM'])
-
-    return block_version, block_hash, rom_data
-
-
-def get_romdata_version(rom_data, dict_rom_hash):
-    """
-    Obtain name and version from ROM binary data
-    :param rom_data: ROM binary data
-    :param dict_rom_hash: Dictionary with hashes and info for ROMs
-    :return: List with version string, hash string and offset
-    """
-    rom_blocks = int(len(rom_data) / 16384)
-    block_hash = hashlib.sha256(rom_data).hexdigest()
-
-    rom_types = [
-        '16K Spectrum ROM', '32K Spectrum ROM', '', '64K Spectrum ROM'
-    ]
-    block_version = get_data_version(block_hash,
-                                     dict_rom_hash[rom_types[rom_blocks - 1]])
-
-    return block_version, block_hash
-
-
-def get_core_list(str_in_file, dict_parts):
-    """
-    Obtain list of core names in file
-    :param str_in_file: Path to file
-    :param dict_parts: Dictionary with file blocks info
-    :return: List of name strings
-    """
-    block_info = dict_parts['cores_dir']
-    with open(str_in_file, "rb") as in_zxdata:
-        in_zxdata.seek(block_info[0])
-        bin_data = in_zxdata.read(block_info[1])
-
-    name_list = get_core_list_bindata(bin_data, dict_parts)
-
-    return name_list
-
-
-def get_core_list_bindata(bin_data, dict_parts):
-    """
-    Obtain list of core names in binary data
-    :param str_in_file: Binary data
-    :param dict_parts: Dictionary with file blocks info
-    :return: List of name strings
-    """
-    block_info = dict_parts['cores_dir']
-    max_cores = block_info[4]
-    if len(block_info) > 5:
-        max_cores += block_info[5]
-
-    name_offset = 0x100
-    name_len = 0x20
-    name_list = []
-    for index in range(max_cores):
-        str_name = bin_data[name_offset + index * name_len:name_offset +
-                            (index + 1) * name_len]
-        if str_name[0:1] == b'\x00':
-            break
-        else:
-            name_list.append(str_name.decode('utf-8'))
-
-    return name_list
-
-
-def get_rom_list(str_in_file, dict_parts):
-    """
-    Obtain list of ROM names ands slots in file
-    :param str_in_file: Path to file
-    :param dict_parts: Dictionary with file blocks info
-    :return: List of slots, name strings and other info
-    """
-    roms_list = []
-
-    block_info = dict_parts['roms_dir']
-    if len(block_info) < 6:
-        LOGGER.error('ROMs dir data missing from database')
-    else:
-        with open(str_in_file, "rb") as in_zxdata:
-            in_zxdata.seek(block_info[4])
-            roms_use = in_zxdata.read(block_info[5] + block_info[6])
-
-        for i in range(0, len(roms_use)):
-            if roms_use[i] != 0xff:
-                with open(str_in_file, "rb") as in_zxdata:
-                    in_zxdata.seek(block_info[0] + i * 64)
-                    rom_index = roms_use[i]
-                    rom_data = in_zxdata.read(64)
-                    rom_slot = rom_data[0]
-                    rom_size = rom_data[1]
-                    rom_flags = bit_to_flag(rom_data[2] ^ 0b00110000,
-                                            '* icdnpt')
-                    rom_flags += bit_to_flag(rom_data[3] ^ 0b00000000,
-                                             'smhl172a')
-                    rom_flags += bit_to_flag(rom_data[4] ^ 0b00000000,
-                                             '     rxu')
-                    rom_crc = ''
-                    for j in range(0, 16):
-                        byte = rom_data[8 + j]
-                        if byte:
-                            rom_crc += '{0:02X}'.format(byte)
-                    rom_name = rom_data[32:]
-                    try:
-                        roms_list.append([
-                            rom_index, rom_slot,
-                            rom_name.decode('utf-8'), rom_size, rom_flags,
-                            rom_crc
-                        ])
-                    except UnicodeDecodeError:
-                        LOGGER.debug('Not a ROM entry or corrupted ROM name')
-            else:
-                break
-
-    return roms_list
-
-
-def get_rom_bin(str_in_file,
-                rom_slot,
-                rom_blocks,
-                rom_split,
-                rom_bases,
-                roms_file=False):
-    """
-    Extract ROM data blocks to memory
-    :param str_in_file: Path to file
-    :param rom_slot: Slot number
-    :param rom_blocks: Size of ROM in 16384 bytes blocks
-    :param rom_split: Slot number where rom binary data is split in two
-    :param rom_bases: Offsets for ROM binary data
-    :param roms_file: If True, add extra offset as in ROM.ZX1 file
-    :return: Binary data of ROM
-    """
-
-    rom_data = b''
-    for rom_blk in range(rom_slot, rom_slot + rom_blocks):
-        rom_offset = get_romb_offset(rom_blk, rom_split, rom_bases, roms_file)
-        LOGGER.debug('Slot {0}: {1:X} ({1})'.format(rom_blk, rom_offset))
-
-        with open(str_in_file, "rb") as in_zxrom:
-            in_zxrom.seek(rom_offset)
-            rom_data += in_zxrom.read(16384)
-
-    return rom_data
-
-
-def get_romb_offset(rom_slot, rom_split, rom_bases, roms_file=False):
-    """
-    Get ROM slot offset in SPI Flash or ROMS.ZX1 file
-    :param rom_slot: ROM slot index
-    :param rom_split: Slot number where rom binary data is split in two
-    :param rom_bases: Offsets for ROM binary data
-    :param roms_file: If True, add extra offset as in ROM.ZX1 file
-    """
-    if rom_slot < rom_split:
-        rom_base = rom_bases[0]
-        rom_offset = rom_base + rom_slot * 16384
-    else:
-        rom_base = rom_bases[4]
-        rom_offset = rom_base + (rom_slot - rom_split) * 16384
-
-    if roms_file:
-        rom_offset += 1
-
-    return rom_offset
-
-
-def bit_to_flag(b_input, str_flags):
-    """
-    Analyze byte and select string chars depending on bits
-    :param b_input: Byte to analyze
-    :param str_flags: String with chars to use
-    :return: String with chars according to bit state
-    """
-    str_result = ''
-    for i in range(8):
-        if b_input << i & 128:
-            if str_flags[i] != ' ':
-                str_result += str_flags[i]
-    return str_result
-
-
-def flag_to_bits(str_input, str_flags, i_mask=0):
-    """
-    Analyze string  and create byte according to flags string
-    :param str_input: String with 0 or more flags
-    :param str_flags: 8 char string with flags
-    :param i_mask: Byte mask to apply (xor) to result
-    :return: Bytes with bits enabled according to flags
-    """
-
-    str_result = ''
-    i_result = 0
-    for i in range(8):
-        if str_flags[7 - i] in str_input:
-            i_result += 1 << i
-
-    i_result ^= i_mask
-    b_result = (i_result).to_bytes(1, 'little')
-    return b_result
-
-
-def get_peek(str_in_file, block_offset):
-    """
-    Get value of one byte in binary file
-    :param str_in_file: Path to file
-    :param block_offset: Offset in file to read
-    :return: Number with the obtained value
-    """
-    with open(str_in_file, "rb") as in_zxd:
-        in_zxd.seek(block_offset)
-        bin_data = in_zxd.read(1)
-
-    return struct.unpack('<B', bin_data)[0]
-
-
-def validate_and_export_bin(str_in_file,
-                            block_info,
-                            str_out_bin,
-                            b_force=False,
-                            str_magic=None):
-    """
-    Extract data block to file, optionally vallidating the header
-    :param str_in_file: Path to file
-    :param block_info: List with block offset and block length
-    :param str_out_bin: Path to bin file to create
-    :param str_magic: String with the bytes to match
-    """
-    with open(str_in_file, "rb") as in_zxdata:
-        in_zxdata.seek(block_info[0])
-        bin_data = in_zxdata.read(block_info[1])
-
-    if str_magic:
-        if not validate_bin(bin_data, str_magic):
-            LOGGER.error('Invalid data')
-            return
-
-    export_bindata(bin_data, str_out_bin, b_force)
-
-
-def export_bin(str_in_file, block_info, str_out_bin, b_force=False):
-    """
-    Extract data block to file
-    :param str_in_file: Path to file
-    :param block_info: List with block offset and block length
-    :param str_out_bin: Path to bin file to create
-    """
-    with open(str_in_file, "rb") as in_zxdata:
-        in_zxdata.seek(block_info[0])
-        bin_data = in_zxdata.read(block_info[1])
-
-    export_bindata(bin_data, str_out_bin, b_force)
-
-
-def export_bindata(bin_data, str_out_bin, b_force=False):
-    """
-    Extract binary data to file
-    :param bin_data: Binary data
-    :param str_out_bin: Path to bin file to create
-    """
-    if b_force or check_overwrite(str_out_bin):
-        with open(str_out_bin, "wb") as out_zxdata:
-            out_zxdata.write(bin_data)
-            print('{0} created OK.'.format(str_out_bin))
-
-
-def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
-    """
-    Try to guess ZX... file from hash
-    :param str_in_file: Path to file
-    :param hash_dict: Dictionary with hashes for different blocks
-    :param show_hashes: If True, print also found block hashes
-    """
-    found = False
-    hash_dict = fulldict_hash[str_extension]
-
-    str_name = os.path.basename(str_in_file)
-    print('\nAnalyzing {0} (possibly {1})...\n '.format(
-        str_name, hash_dict['description']))
-    str_file_hash = get_file_hash(str_in_file)
-    if show_hashes:
-        print('{0}'.format(str_file_hash))
-
-    for block_id in [
-            '16K Spectrum ROM', '32K Spectrum ROM', '64K Spectrum ROM'
-    ]:
-        if block_id in hash_dict['parts']:
-            if os.stat(str_in_file).st_size == hash_dict['parts'][block_id][1]:
-                LOGGER.debug('Looks like {0}'.format(block_id))
-                block_version = get_data_version(str_file_hash,
-                                                 hash_dict[block_id])
-                if block_version != 'Unknown':
-                    print('{0} -  Version: {1}'.format(block_id,
-                                                       block_version))
-                    found = True
-
-    for block_id in ['BIOS', 'Spectrum', 'esxdos']:
-        if not found and block_id in hash_dict['parts']:
-            if os.stat(str_in_file).st_size == hash_dict['parts'][
-                    block_id][1] and validate_file(
-                        str_in_file, hash_dict['parts'][block_id][3]):
-                LOGGER.debug('Looks like {0}'.format(block_id))
-                block_version = get_data_version(str_file_hash,
-                                                 hash_dict[block_id])
-                if block_version != 'Unknown':
-                    print('{0} -  Version: {1}'.format(block_id,
-                                                       block_version))
-                    found = True
-
-    if not found and 'core_base' in hash_dict['parts']:
-        if validate_file(
-                str_in_file, hash_dict['parts']['core_base'][3]) and os.stat(
-                    str_in_file).st_size == hash_dict['parts']['core_base'][1]:
-            LOGGER.debug('Looks like a core')
-            for core_item in hash_dict['Cores']:
-                block_version = get_data_version(str_file_hash,
-                                                 hash_dict['Cores'][core_item])
-                if block_version != 'Unknown':
-                    print('Core: {0} - Version: {1}'.format(
-                        core_item, block_version))
-                    found = True
-                    break
-
-    if not found and str_extension == 'ZX1':
-        found = list_romsdata(str_in_file, fulldict_hash, 'ROM', show_hashes,
-                              True)
-
-    if not found:
-        print('Unknown file')
-
-
-def validate_file(str_in_file, str_magic):
-    """
-    Try to detect ZX... file type from first bytes
-    :param str_in_file: Path to file
-    :param str_magic: String with the bytes to match
-    :return: True if bytes match, False in other case
-    """
-    magic_bin = unhexlify(str_magic)
-    if str_magic:
-        with open(str_in_file, "rb") as bin_file:
-            bin_data = bin_file.read(len(magic_bin))
-            b_validate = validate_bin(bin_data, str_magic)
-
-        return b_validate
-    else:
-        return False
-
-
-def validate_bin(bin_data, str_magic):
-    """
-    Try to detect ZX data type from first bytes
-    :param bin_data: binary data of file
-    :param str_magic: String with the bytes to match
-    :return: True if bytes match, False in other case
-    """
-    magic_bin = unhexlify(str_magic)
-    if magic_bin:
-        if magic_bin == bin_data[:len(magic_bin)]:
-            return True
-        else:
-            return False
-    else:
-        return False
-
-
-def get_file_hash(str_in_file):
-    """
-    Get file sha26 hash
-    :param str_in_file: Path to file
-    :return: String with hash data
-    """
-    sha256_hash = hashlib.sha256()
-    with open(str_in_file, "rb") as f:
-        # Read and update hash string value in blocks of 4K
-        for byte_block in iter(lambda: f.read(4096), b""):
-            sha256_hash.update(byte_block)
-
-    return sha256_hash.hexdigest()
-
-
-def get_rom_crc(rom_data):
-    """
-    Computes ROM crc as string
-    :param data: ByteArray wich contains the data
-    :return: String with CRC
-    """
-    rom_blocks = int(len(rom_data) / 16384)
-    str_crc = ''
-    for rom_block in range(0, rom_blocks):
-        block_crc = get_crc16(rom_data, rom_block * 16384, 16384)
-        str_crc = '{0:04X}'.format(block_crc) + str_crc
-
-    return str_crc
-
-
-def get_crc16(data, offset, length):
-    """
-    Computes CRC16
-    :param data: ByteArray wich contains the data
-    :param offset: Data offset to begin the calculation
-    :param length: Number of bytes after the offset
-    :return: Integer (4 bytes) with CRC or 0000 on error
-    """
-    if data is None or offset < 0 or offset > len(
-            data) - 1 and offset + length > len(data):
-        return 0
-    crc = 0xFFFF
-    for i in range(0, length):
-        crc ^= data[offset + i] << 8
-        for j in range(0, 8):
-            if (crc & 0x8000) > 0:
-                crc = (crc << 1) ^ 0x1021
-            else:
-                crc = crc << 1
-    return crc & 0xFFFF
-
-
 def wipe_zxdata(str_spi_file,
                 str_outfile,
                 hash_dict,
@@ -1107,7 +575,6 @@ def wipe_zxdata(str_spi_file,
     # Clear Core Names in directory
     br_data += b_data[cur_pos:blk_info[0] + 0x100]
     cur_pos = blk_info[0] + 0x100
-    print(cur_pos)
     br_data += b'\x00' * 32 * max_cores
     cur_pos += 32 * max_cores
 
@@ -1237,6 +704,424 @@ def savefrom_zxdata(str_in_file,
         with open(str_outfile, "wb") as out_zxdata:
             out_zxdata.write(bin_data)
             print('{0} created OK.'.format(str_outfile))
+
+
+def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
+    """
+    Try to guess ZX... file from hash
+    :param str_in_file: Path to file
+    :param hash_dict: Dictionary with hashes for different blocks
+    :param show_hashes: If True, print also found block hashes
+    """
+    found = False
+    hash_dict = fulldict_hash[str_extension]
+
+    str_name = os.path.basename(str_in_file)
+    print('\nAnalyzing {0} (possibly {1})...\n '.format(
+        str_name, hash_dict['description']))
+    str_file_hash = get_file_hash(str_in_file)
+    if show_hashes:
+        print('{0}'.format(str_file_hash))
+
+    for block_id in [
+            '16K Spectrum ROM', '32K Spectrum ROM', '64K Spectrum ROM'
+    ]:
+        if block_id in hash_dict['parts']:
+            if os.stat(str_in_file).st_size == hash_dict['parts'][block_id][1]:
+                LOGGER.debug('Looks like {0}'.format(block_id))
+                block_version = get_data_version(str_file_hash,
+                                                 hash_dict[block_id])
+                if block_version != 'Unknown':
+                    print('{0} -  Version: {1}'.format(block_id,
+                                                       block_version))
+                    found = True
+
+    for block_id in ['BIOS', 'Spectrum', 'esxdos']:
+        if not found and block_id in hash_dict['parts']:
+            if os.stat(str_in_file).st_size == hash_dict['parts'][
+                    block_id][1] and validate_file(
+                        str_in_file, hash_dict['parts'][block_id][3]):
+                LOGGER.debug('Looks like {0}'.format(block_id))
+                block_version = get_data_version(str_file_hash,
+                                                 hash_dict[block_id])
+                if block_version != 'Unknown':
+                    print('{0} -  Version: {1}'.format(block_id,
+                                                       block_version))
+                    found = True
+
+    if not found and 'core_base' in hash_dict['parts']:
+        if validate_file(
+                str_in_file, hash_dict['parts']['core_base'][3]) and os.stat(
+                    str_in_file).st_size == hash_dict['parts']['core_base'][1]:
+            LOGGER.debug('Looks like a core')
+            for core_item in hash_dict['Cores']:
+                block_version = get_data_version(str_file_hash,
+                                                 hash_dict['Cores'][core_item])
+                if block_version != 'Unknown':
+                    print('Core: {0} - Version: {1}'.format(
+                        core_item, block_version))
+                    found = True
+                    break
+
+    if not found and str_extension == 'ZX1':
+        found = list_romsdata(str_in_file, fulldict_hash, 'ROM', show_hashes,
+                              True)
+
+    if not found:
+        print('Unknown file')
+
+
+# Core Data Functions
+
+def get_core_version(str_in_file, core_index, dict_parts, dict_cores):
+    """
+    Obtain name and version from core block in file
+    :param str_in_file: Path to file
+    :param core_index: Core Index in file
+    :param dict_parts: Dictionary with file blocks info
+    :param dict_cores: Dictionary with hashes and info for cores
+    :return: List with name string, version string and hash string
+    """
+
+    block_info = dict_parts['cores_dir']
+    max_cores = splitcore_index = block_info[4]
+
+    if len(block_info) > 5:
+        max_cores += block_info[5]
+
+    if core_index > max_cores:
+        LOGGER.error('Invalid core index: {}'.format(core_index))
+
+    core_bases = dict_parts['core_base']
+
+    block_name = block_version = 'Unknown'
+    block_hash = ''
+    block_data = get_core_blockdata(core_index, splitcore_index, core_bases)
+    LOGGER.debug('Index {0}: {1:X}({1})'.format(core_index + 2, block_data[0]))
+
+    for core_name in dict_cores:
+        block_version, block_hash = get_version(str_in_file, block_data,
+                                                dict_cores[core_name])
+        if block_version != 'Unknown':
+            block_name = core_name
+            break
+
+    return block_name, block_version, block_hash
+
+
+def get_core_blockdata(core_index, spltcore_index, core_bases):
+    """
+    Get Core Offset and Length
+    :param core_index: Index of the Core
+    :param splitcore_index: Index of last core before split
+    :param core_bases: Array with base offset and offset after split
+    :return: Array with core offset and core length
+    """
+
+    core_base = core_bases[0]
+    core_len = core_bases[1]
+
+    core_split = 0
+    if len(core_bases) > 4:
+        core_split = core_bases[4]
+
+    core_offset = core_base + core_index * core_len
+    if core_split and core_index + 2 > spltcore_index:
+        core_offset = core_split + (core_index - spltcore_index + 1) * core_len
+
+    return [core_offset, core_len]
+
+
+def get_core_list(str_in_file, dict_parts):
+    """
+    Obtain list of core names in file
+    :param str_in_file: Path to file
+    :param dict_parts: Dictionary with file blocks info
+    :return: List of name strings
+    """
+    block_info = dict_parts['cores_dir']
+    with open(str_in_file, "rb") as in_zxdata:
+        in_zxdata.seek(block_info[0])
+        bin_data = in_zxdata.read(block_info[1])
+
+    name_list = get_core_list_bindata(bin_data, dict_parts)
+
+    return name_list
+
+
+def get_core_list_bindata(bin_data, dict_parts):
+    """
+    Obtain list of core names in binary data
+    :param str_in_file: Binary data
+    :param dict_parts: Dictionary with file blocks info
+    :return: List of name strings
+    """
+    block_info = dict_parts['cores_dir']
+    max_cores = block_info[4]
+    if len(block_info) > 5:
+        max_cores += block_info[5]
+
+    name_offset = 0x100
+    name_len = 0x20
+    name_list = []
+    for index in range(max_cores):
+        str_name = bin_data[name_offset + index * name_len:name_offset +
+                            (index + 1) * name_len]
+        if str_name[0:1] == b'\x00':
+            break
+        else:
+            name_list.append(str_name.decode('utf-8'))
+
+    return name_list
+
+
+# ROM data functions
+
+
+def get_rom(str_in_file,
+            rom_slot,
+            rom_blocks,
+            dict_full,
+            in_file_ext,
+            roms_file=False):
+    """
+    Obtain name, version and data from ROM block in file
+    :param str_in_file: Path to file
+    :param rom_slot: ROM slot number
+    :param rom_blocks: Size of ROM in 16384 bytes blocks
+    :param dict_full: Dictionary with hashes and info for cores
+    :param in_file_ext: Extension of input file
+    :param roms_file: If True, add extra offset as in ROM.ZX1 file
+    :return: List with version string, hash string and offset
+    """
+
+    rom_split = dict_full[in_file_ext]['parts']['roms_dir'][5]
+    block_bases = dict_full[in_file_ext]['parts']['roms_data']
+    rom_data = get_rom_bin(str_in_file, rom_slot, rom_blocks, rom_split,
+                           block_bases, roms_file)
+
+    block_version, block_hash = get_romdata_version(rom_data, dict_full['ROM'])
+
+    return block_version, block_hash, rom_data
+
+
+def get_romdata_version(rom_data, dict_rom_hash):
+    """
+    Obtain name and version from ROM binary data
+    :param rom_data: ROM binary data
+    :param dict_rom_hash: Dictionary with hashes and info for ROMs
+    :return: List with version string, hash string and offset
+    """
+    rom_blocks = int(len(rom_data) / 16384)
+    block_hash = hashlib.sha256(rom_data).hexdigest()
+
+    rom_types = [
+        '16K Spectrum ROM', '32K Spectrum ROM', '', '64K Spectrum ROM'
+    ]
+    block_version = get_data_version(block_hash,
+                                     dict_rom_hash[rom_types[rom_blocks - 1]])
+
+    return block_version, block_hash
+
+
+def get_rom_list(str_in_file, dict_parts):
+    """
+    Obtain list of ROM names ands slots in file
+    :param str_in_file: Path to file
+    :param dict_parts: Dictionary with file blocks info
+    :return: List of slots, name strings and other info
+    """
+    roms_list = []
+
+    block_info = dict_parts['roms_dir']
+    if len(block_info) < 6:
+        LOGGER.error('ROMs dir data missing from database')
+    else:
+        with open(str_in_file, "rb") as in_zxdata:
+            in_zxdata.seek(block_info[4])
+            roms_use = in_zxdata.read(block_info[5] + block_info[6])
+
+        for i in range(0, len(roms_use)):
+            if roms_use[i] != 0xff:
+                with open(str_in_file, "rb") as in_zxdata:
+                    in_zxdata.seek(block_info[0] + i * 64)
+                    rom_index = roms_use[i]
+                    rom_data = in_zxdata.read(64)
+                    rom_slot = rom_data[0]
+                    rom_size = rom_data[1]
+                    rom_flags = bit_to_flag(rom_data[2] ^ 0b00110000,
+                                            '* icdnpt')
+                    rom_flags += bit_to_flag(rom_data[3] ^ 0b00000000,
+                                             'smhl172a')
+                    rom_flags += bit_to_flag(rom_data[4] ^ 0b00000000,
+                                             '     rxu')
+                    rom_crc = ''
+                    for j in range(0, 16):
+                        byte = rom_data[8 + j]
+                        if byte:
+                            rom_crc += '{0:02X}'.format(byte)
+                    rom_name = rom_data[32:]
+                    try:
+                        roms_list.append([
+                            rom_index, rom_slot,
+                            rom_name.decode('utf-8'), rom_size, rom_flags,
+                            rom_crc
+                        ])
+                    except UnicodeDecodeError:
+                        LOGGER.debug('Not a ROM entry or corrupted ROM name')
+            else:
+                break
+
+    return roms_list
+
+
+def get_rom_bin(str_in_file,
+                rom_slot,
+                rom_blocks,
+                rom_split,
+                rom_bases,
+                roms_file=False):
+    """
+    Extract ROM data blocks to memory
+    :param str_in_file: Path to file
+    :param rom_slot: Slot number
+    :param rom_blocks: Size of ROM in 16384 bytes blocks
+    :param rom_split: Slot number where rom binary data is split in two
+    :param rom_bases: Offsets for ROM binary data
+    :param roms_file: If True, add extra offset as in ROM.ZX1 file
+    :return: Binary data of ROM
+    """
+
+    rom_data = b''
+    for rom_blk in range(rom_slot, rom_slot + rom_blocks):
+        rom_offset = get_romb_offset(rom_blk, rom_split, rom_bases, roms_file)
+        LOGGER.debug('Slot {0}: {1:X} ({1})'.format(rom_blk, rom_offset))
+
+        with open(str_in_file, "rb") as in_zxrom:
+            in_zxrom.seek(rom_offset)
+            rom_data += in_zxrom.read(16384)
+
+    return rom_data
+
+
+def get_romb_offset(rom_slot, rom_split, rom_bases, roms_file=False):
+    """
+    Get ROM slot offset in SPI Flash or ROMS.ZX1 file
+    :param rom_slot: ROM slot index
+    :param rom_split: Slot number where rom binary data is split in two
+    :param rom_bases: Offsets for ROM binary data
+    :param roms_file: If True, add extra offset as in ROM.ZX1 file
+    """
+    if rom_slot < rom_split:
+        rom_base = rom_bases[0]
+        rom_offset = rom_base + rom_slot * 16384
+    else:
+        rom_base = rom_bases[4]
+        rom_offset = rom_base + (rom_slot - rom_split) * 16384
+
+    if roms_file:
+        rom_offset += 1
+
+    return rom_offset
+
+
+def new_romentry(rom_slt, rom_name, rom_len, rom_params, rom_crc):
+    """
+    Creates binary ROM entry data (64 bytes)
+    :param rom_slt: ROM slot number
+    :param rom_name: ROM Name
+    :param rom_len: ROM length (16384k blocks)
+    :param rom_params: ROM parameters (icdnptsmhl172arxu)
+    :param rom_crc: ROM CRC (string with hex values)
+    :return: Binary data for ROM entry
+    """
+    new_entry = (rom_slt).to_bytes(1, byteorder='little')
+    new_entry += (rom_len).to_bytes(1, byteorder='little')
+
+    new_entry += flag_to_bits(rom_params, '* icdnpt', 0b00110000)
+    new_entry += flag_to_bits(rom_params, 'smhl172a', 0b00000000)
+    new_entry += flag_to_bits(rom_params, '     rxu', 0b00000000)
+    new_entry += b'\x00' * 3
+    new_entry += bytes.fromhex(rom_crc)
+    new_entry += b'\x00' * (24 - int(len(rom_crc) / 2))
+    new_entry += bytes(rom_name, 'utf-8')
+
+    return new_entry
+
+
+def get_rom_crc(rom_data):
+    """
+    Computes ROM crc as string
+    :param data: ByteArray wich contains the data
+    :return: String with CRC
+    """
+    rom_blocks = int(len(rom_data) / 16384)
+    str_crc = ''
+    for rom_block in range(0, rom_blocks):
+        block_crc = get_crc16(rom_data, rom_block * 16384, 16384)
+        str_crc = '{0:04X}'.format(block_crc) + str_crc
+
+    return str_crc
+
+
+def get_crc16(data, offset, length):
+    """
+    Computes CRC16
+    :param data: ByteArray wich contains the data
+    :param offset: Data offset to begin the calculation
+    :param length: Number of bytes after the offset
+    :return: Integer (4 bytes) with CRC or 0000 on error
+    """
+    if data is None or offset < 0 or offset > len(
+            data) - 1 and offset + length > len(data):
+        return 0
+    crc = 0xFFFF
+    for i in range(0, length):
+        crc ^= data[offset + i] << 8
+        for j in range(0, 8):
+            if (crc & 0x8000) > 0:
+                crc = (crc << 1) ^ 0x1021
+            else:
+                crc = crc << 1
+    return crc & 0xFFFF
+
+
+def bit_to_flag(b_input, str_flags):
+    """
+    Analyze byte and select string chars depending on bits
+    :param b_input: Byte to analyze
+    :param str_flags: String with chars to use
+    :return: String with chars according to bit state
+    """
+    str_result = ''
+    for i in range(8):
+        if b_input << i & 128:
+            if str_flags[i] != ' ':
+                str_result += str_flags[i]
+    return str_result
+
+
+def flag_to_bits(str_input, str_flags, i_mask=0):
+    """
+    Analyze string  and create byte according to flags string
+    :param str_input: String with 0 or more flags
+    :param str_flags: 8 char string with flags
+    :param i_mask: Byte mask to apply (xor) to result
+    :return: Bytes with bits enabled according to flags
+    """
+
+    str_result = ''
+    i_result = 0
+    for i in range(8):
+        if str_flags[7 - i] in str_input:
+            i_result += 1 << i
+
+    i_result ^= i_mask
+    b_result = (i_result).to_bytes(1, 'little')
+    return b_result
+
+
+# Injection functions
 
 
 def inject_bindata(str_in_params, hash_dict, b_data):
@@ -1590,30 +1475,6 @@ def inject_rom_tobin(b_data,
     return br_data, b_changed
 
 
-def new_romentry(rom_slt, rom_name, rom_len, rom_params, rom_crc):
-    """
-    Creates binary ROM entry data (64 bytes)
-    :param rom_slt: ROM slot number
-    :param rom_name: ROM Name
-    :param rom_len: ROM length (16384k blocks)
-    :param rom_params: ROM parameters (icdnptsmhl172arxu)
-    :param rom_crc: ROM CRC (string with hex values)
-    :return: Binary data for ROM entry
-    """
-    new_entry = (rom_slt).to_bytes(1, byteorder='little')
-    new_entry += (rom_len).to_bytes(1, byteorder='little')
-
-    new_entry += flag_to_bits(rom_params, '* icdnpt', 0b00110000)
-    new_entry += flag_to_bits(rom_params, 'smhl172a', 0b00000000)
-    new_entry += flag_to_bits(rom_params, '     rxu', 0b00000000)
-    new_entry += b'\x00' * 3
-    new_entry += bytes.fromhex(rom_crc)
-    new_entry += b'\x00' * (24 - int(len(rom_crc) / 2))
-    new_entry += bytes(rom_name, 'utf-8')
-
-    return new_entry
-
-
 def inject_biossettings(b_data,
                         video_mode=-1,
                         keyboard_layout=-1,
@@ -1654,6 +1515,161 @@ def inject_biossettings(b_data,
         b_changed = True
 
     return br_data, b_changed
+
+
+# SPI/ROM file generic functions
+
+
+def get_version(str_in_file, block_info, hash_dict):
+    """
+    Obtain version string in block in file using dictionary of hashes
+    :param str_in_file: Path to file
+    :param block_info: List with block offset and block length
+    :param hash_dict: Dictionary with hashes for different blocks
+    :return: List with version string and hash string
+    """
+    with open(str_in_file, "rb") as in_zxd:
+        in_zxd.seek(block_info[0])
+        bin_data = in_zxd.read(block_info[1])
+        str_hash = hashlib.sha256(bin_data).hexdigest()
+        del bin_data
+
+    str_version = get_data_version(str_hash, hash_dict)
+
+    return str_version, str_hash
+
+
+def get_data_version(str_hash, hash_dict):
+    """
+    Obtain version string from hash
+    :param str_hash: Hash string to check
+    :param hash_dict: Dictionary with hashes for different blocks
+    :return: List with version string and hash string
+    """
+    str_version = 'Unknown'
+    for hash_elem in hash_dict:
+        if str_hash == hash_dict[hash_elem]:
+            str_version = hash_elem
+            break
+
+    return str_version
+
+
+def get_peek(str_in_file, block_offset):
+    """
+    Get value of one byte in binary file
+    :param str_in_file: Path to file
+    :param block_offset: Offset in file to read
+    :return: Number with the obtained value
+    """
+    with open(str_in_file, "rb") as in_zxd:
+        in_zxd.seek(block_offset)
+        bin_data = in_zxd.read(1)
+
+    return struct.unpack('<B', bin_data)[0]
+
+
+def validate_and_export_bin(str_in_file,
+                            block_info,
+                            str_out_bin,
+                            b_force=False,
+                            str_magic=None):
+    """
+    Extract data block to file, optionally vallidating the header
+    :param str_in_file: Path to file
+    :param block_info: List with block offset and block length
+    :param str_out_bin: Path to bin file to create
+    :param str_magic: String with the bytes to match
+    """
+    with open(str_in_file, "rb") as in_zxdata:
+        in_zxdata.seek(block_info[0])
+        bin_data = in_zxdata.read(block_info[1])
+
+    if str_magic:
+        if not validate_bin(bin_data, str_magic):
+            LOGGER.error('Invalid data')
+            return
+
+    export_bindata(bin_data, str_out_bin, b_force)
+
+
+def export_bin(str_in_file, block_info, str_out_bin, b_force=False):
+    """
+    Extract data block to file
+    :param str_in_file: Path to file
+    :param block_info: List with block offset and block length
+    :param str_out_bin: Path to bin file to create
+    """
+    with open(str_in_file, "rb") as in_zxdata:
+        in_zxdata.seek(block_info[0])
+        bin_data = in_zxdata.read(block_info[1])
+
+    export_bindata(bin_data, str_out_bin, b_force)
+
+
+# Generic File Functions
+
+
+def validate_file(str_in_file, str_magic):
+    """
+    Try to detect ZX... file type from first bytes
+    :param str_in_file: Path to file
+    :param str_magic: String with the bytes to match
+    :return: True if bytes match, False in other case
+    """
+    magic_bin = unhexlify(str_magic)
+    if str_magic:
+        with open(str_in_file, "rb") as bin_file:
+            bin_data = bin_file.read(len(magic_bin))
+            b_validate = validate_bin(bin_data, str_magic)
+
+        return b_validate
+    else:
+        return False
+
+
+def validate_bin(bin_data, str_magic):
+    """
+    Try to detect ZX data type from first bytes
+    :param bin_data: binary data of file
+    :param str_magic: String with the bytes to match
+    :return: True if bytes match, False in other case
+    """
+    magic_bin = unhexlify(str_magic)
+    if magic_bin:
+        if magic_bin == bin_data[:len(magic_bin)]:
+            return True
+        else:
+            return False
+    else:
+        return False
+
+
+def get_file_hash(str_in_file):
+    """
+    Get file sha26 hash
+    :param str_in_file: Path to file
+    :return: String with hash data
+    """
+    sha256_hash = hashlib.sha256()
+    with open(str_in_file, "rb") as f:
+        # Read and update hash string value in blocks of 4K
+        for byte_block in iter(lambda: f.read(4096), b""):
+            sha256_hash.update(byte_block)
+
+    return sha256_hash.hexdigest()
+
+
+def export_bindata(bin_data, str_out_bin, b_force=False):
+    """
+    Extract binary data to file
+    :param bin_data: Binary data
+    :param str_out_bin: Path to bin file to create
+    """
+    if b_force or check_overwrite(str_out_bin):
+        with open(str_out_bin, "wb") as out_zxdata:
+            out_zxdata.write(bin_data)
+            print('{0} created OK.'.format(str_out_bin))
 
 
 def check_overwrite(str_file):
