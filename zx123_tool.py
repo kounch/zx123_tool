@@ -42,8 +42,6 @@ from binascii import unhexlify
 import struct
 import six
 
-if six.PY2:
-    input = raw_input
 
 __MY_VERSION__ = '1.0'
 
@@ -54,6 +52,10 @@ LOG_FORMAT = logging.Formatter(
 LOG_STREAM = logging.StreamHandler(sys.stdout)
 LOG_STREAM.setFormatter(LOG_FORMAT)
 LOGGER.addHandler(LOG_STREAM)
+
+if six.PY2:
+    LOGGER.error('This software requires Python version 3')
+    sys.exit(1)
 
 
 def main():
@@ -108,21 +110,36 @@ def main():
                                str_extension, arg_data['force'],
                                not arg_data['roms'])
 
-        if arg_data['inject']:
+        output_file = ''
+        if arg_data['wipe_flash']:
             if str_extension in ['ZX1', 'ZX2', 'ZXD']:
                 output_file = arg_data['output_file']
                 if not output_file:
                     output_file = str_file
+                wipe_zxdata(str_file, output_file, dict_hash,
+                            arg_data['video_mode'],
+                            arg_data['keyboard_layout'], arg_data['force'])
+
+        if arg_data['inject']:
+            if str_extension in ['ZX1', 'ZX2', 'ZXD']:
+                b_force = arg_data['force']
+                if arg_data['wipe_flash']:
+                    b_force = True
+                    str_file = output_file
+                else:
+                    output_file = arg_data['output_file']
+                    if not output_file:
+                        output_file = str_file
                 inject_zxfiles(str_file, arg_data['inject'], output_file,
                                fulldict_hash, str_extension,
                                arg_data['video_mode'],
                                arg_data['keyboard_layout'],
                                arg_data['default_core'],
-                               arg_data['default_rom'], arg_data['force'])
+                               arg_data['default_rom'], b_force)
             else:
                 LOGGER.error(
                     'Not a valid filetype: .{0}'.format(str_extension))
-        elif arg_data['output_file']:
+        elif arg_data['output_file'] and not arg_data['wipe_flash']:
             savefrom_zxdata(str_file, dict_hash, arg_data['output_file'],
                             arg_data['n_cores'], arg_data['video_mode'],
                             arg_data['keyboard_layout'],
@@ -152,6 +169,7 @@ def parse_args():
     values['extract'] = []
     values['n_cores'] = -1
     values['inject'] = []
+    values['wipe_flash'] = False
     values['video_mode'] = -1
     values['keyboard_layout'] = -1
     values['default_core'] = -1
@@ -224,6 +242,12 @@ def parse_args():
                         action='append',
                         dest='inject',
                         help='Item to inject')
+    parser.add_argument('-w',
+                        '--wipe',
+                        required=False,
+                        action='store_true',
+                        dest='wipe_flash',
+                        help='Wipe all secondary cores and ROM data')
     parser.add_argument('-c',
                         '--default_core',
                         required=False,
@@ -281,6 +305,9 @@ def parse_args():
 
     if arguments.inject:
         values['inject'] = arguments.inject
+
+    if arguments.wipe_flash:
+        values['wipe_flash'] = arguments.wipe_flash
 
     if arguments.default_core:
         values['default_core'] = int(arguments.default_core) - 1
@@ -1003,7 +1030,7 @@ def get_rom_crc(rom_data):
     return str_crc
 
 
-def get_crc16(data: bytearray, offset, length):
+def get_crc16(data, offset, length):
     """
     Computes CRC16
     :param data: ByteArray wich contains the data
@@ -1023,6 +1050,85 @@ def get_crc16(data: bytearray, offset, length):
             else:
                 crc = crc << 1
     return crc & 0xFFFF
+
+
+def wipe_zxdata(str_spi_file,
+                str_outfile,
+                hash_dict,
+                vid_mode=-1,
+                keyb_layout=-1,
+                b_force=False):
+    """
+    Wipe all cores and ROMs
+    :param str_spi_file: Input SPI flash file
+    :param arr_in_files: Array with parameters and files to inject
+    :param str_outfile: New SPI flash file to create
+    :param fullhash_dict: Dictionary with hashes data
+    :param str_extension: SPI Flash extension
+    :param vid_mode: Video mode: 0 (PAL), 1 (NTSC) or 2 (VGA)
+    :param keyb_layout: 0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
+    :param default_core: Default boot core (0 and up)
+    :param default_rom: :Default boot Spectrum ROM (0 or greater)
+    :param b_force: Force overwriting file
+    """
+    b_changed = False
+    dict_parts = hash_dict['parts']
+
+    LOGGER.debug('Reading Flash...')
+    b_len = os.stat(str_spi_file).st_size
+    with open(str_spi_file, "rb") as in_zxdata:
+        b_data = in_zxdata.read(b_len)
+
+    # SPI flash ROMs
+    block_info = dict_parts['roms_dir']
+    base_slots = block_info[5]
+    max_slots = base_slots + block_info[6]
+    rom_bases = dict_parts['roms_data']
+
+    # SPI flash Cores
+    blk_info = dict_parts['cores_dir']
+    max_cores = splitcore_index = blk_info[4]
+    if len(blk_info) > 5:
+        max_cores += blk_info[5]
+    core_bases = dict_parts['core_base']
+
+    # Clear ROM names in directory
+    cur_pos = block_info[0]
+    br_data = b_data[:cur_pos]
+    br_data += b'\x00' * 64 * max_slots
+    cur_pos += 64 * max_slots
+
+    # Clear ROMs list in SPI flash (Temp Binary Data)
+    br_data += b_data[cur_pos:block_info[4]]
+    cur_pos = block_info[4]
+    br_data += b'\xff' * max_slots
+    cur_pos += max_slots
+
+    # Clear Core Names in directory
+    br_data += b_data[cur_pos:blk_info[0] + 0x100]
+    cur_pos = blk_info[0] + 0x100
+    print(cur_pos)
+    br_data += b'\x00' * 32 * max_cores
+    cur_pos += 32 * max_cores
+
+    # Clear data blocks of ROMs
+    br_data += b_data[cur_pos:rom_bases[0]]
+    cur_pos = rom_bases[0]
+    br_data += b'\x00' * 16384 * base_slots
+    cur_pos += 16384 * base_slots
+
+    # Clear remaining data blocks (from Core 2)
+    core_end = get_core_blockdata(0, splitcore_index, core_bases)[0]
+    br_data += b_data[cur_pos:core_end]
+    br_data += b'\x00' * (len(b_data) - core_end)
+
+    br_data, b_chg = inject_biossettings(br_data, vid_mode, keyb_layout, 0, 0)
+
+    # Write Data
+    if b_force or check_overwrite(str_outfile):
+        with open(str_outfile, "wb") as out_zxdata:
+            out_zxdata.write(br_data)
+            print('{0} created OK.'.format(str_outfile))
 
 
 def inject_zxfiles(str_spi_file,
