@@ -18,18 +18,19 @@ Select your desired language / Elija idioma:
 
 ### Features
 
-Analyzes, extracts and injects data in SPI flash image files for ZX-Uno, ZXDOS and similar devices.
+This is a tool that analyzes, extracts and injects data in SPI flash image files for ZX-Uno, ZXDOS and similar devices.
 
 These are the main features:
 
 - List the contents of a ZX-Uno, etc. SPI flash image, showing, if possible, the version of BIOS, esxdos, main Spectrum core and optional cores, Spectrum ROMs and several BIOS settings
 - Extract BIOS, esxdos ROM, Spectrum core and/or other cores, Spectrum ROMs to individual files
 - Create a copy of the flash image and, optionally, and/or truncate some (or all) of the optional cores
-- Change some BIOS default options (video mode, keyboard layout, default core or ROM number)
-- Add or replace FPGA cores and/or Spectrum ROM images
+- Change some BIOS default options (video mode, keyboard layout, default core, default ROM, etc.)
+- Add or replace FPGA cores and/or Spectrum ROM images (from individual ROM files or RomPack files)
+- Wipe with  0s all Cores an ZX Spectrum ROMs data
 - If supplied a different kind of file (like a core or BIOS installation file) it will also try to identify its contents
 
-Requires a `zx123_hash.json` file with block estructure (e.g.: ZXD) and, optionally, hashes to identify the blocks inside.
+Requires a [`zx123_hash.json`](##description-of-json-file) file with block estructure for a kind of SPI flash file (e.g.: ZXD) and, optionally, hashes to identify the blocks inside.
 
 ### Use
 
@@ -235,18 +236,19 @@ The JSON file is an object where the main name are file extensions (like `ZXD` o
 
 ### Características
 
-Analiza, extrae o añade datos en ficheros de imagen de SPI flash de ZX-Uno, ZXDOS y otros dispostivos similares.
+Esta es una herramienta que analiza, extrae o añade datos en ficheros de imagen de SPI flash de ZX-Uno, ZXDOS y otros dispostivos similares.
 
 Estas son sus funciones principales:
 
 - Mostrar el contenido de la imagen, diciendo, si es posible, la versión de BIOS, esxdos, el core principal de Spectrum, otros cores que haya instalados, ROMs de Spectrum y algunos ajustes de la BIOS
 - Extraer la BIOS, la ROM de esxdos, el core de Spectrum y/o otros cores, ROMs de Spectrum a ficheros individuales
 - Crear una copia de la imagen y, opcionalmente, truncar alguno (o todos) los cores opcionales
-- Cambiar algunas opciones por defecto de la BIOS (modo de vídeo, distribución de teclado, core o ROM de Spectrum por defecto)
-- Añadir o reemplazar cores de la FPGA y/o imágenes de ROM de Spectrum
+- Cambiar algunas opciones por defecto de la BIOS (modo de vídeo, distribución de teclado, core por defecto, ROM de Spectrum por defecto, etc.)
+- Añadir o reemplazar cores de la FPGA y/o imágenes de ROM de Spectrum (desde ficheros de ROM individuales o un fichero RomPack)
+- Borrar con 0s todos los datos de los Cores y las ROMs de ZX Spectrum
 - Si se tratase de un tipo distinto de fichero (como un archivo de instalación de core o BIOS), también puede intentar identificar su versión
 
-Necesita un fichero  `zx123_hash.json` con la estructrua de bloques de la imagen y, opcionalmente, datos para identificar dichos bloques.
+Necesita un fichero  [`zx123_hash.json`](#descripción-del-arhivo-json) con la estructura de bloques del archivo de imagen y, opcionalmente, datos para identificar dichos bloques.
 
 ### Uso
 

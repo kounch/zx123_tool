@@ -63,6 +63,7 @@ def main():
     LOGGER.debug('Starting up...')
     arg_data = parse_args()
 
+    # Load Hash Database
     my_dirpath = os.path.dirname(sys.argv[0])
     my_dirpath = os.path.abspath(my_dirpath)
     str_json = os.path.join(my_dirpath, 'zx123_hash.json')
@@ -73,6 +74,7 @@ def main():
         LOGGER.debug('Loading dictionary with hashes...')
         fulldict_hash = json.load(jsonHandle)
 
+    # Analyze/initialize input file and output dir location and extension
     str_file = arg_data['input_file']
     str_outdir = arg_data['output_dir']
     if not str_outdir:
@@ -80,6 +82,7 @@ def main():
     str_extension = os.path.splitext(str_file)[1]
     str_extension = str_extension[1:].upper()
 
+    # Check that file extension is available in Hash Database
     dict_hash = {}
     if str_extension in fulldict_hash:
         dict_hash = fulldict_hash[str_extension]
@@ -91,25 +94,30 @@ def main():
                         str_extension = str_kind
                         dict_hash = fulldict_hash[str_extension]
                         break
-
     if not dict_hash:
         LOGGER.error('Unknown file extension: .{0}'.format(str_extension))
         sys.exit(2)
 
+    # Is the file header known?
     if validate_file(str_file, dict_hash['parts']['header'][3]):
+
+        # List main ROMs, Cores and BIOS settings
         if arg_data['list']:
             list_zxdata(str_file, dict_hash, arg_data['show_hashes'])
 
+        # List ZX Spectrum ROMs
         if arg_data['roms']:
             list_romsdata(str_file, fulldict_hash, str_extension,
                           arg_data['show_hashes'])
 
+        # Extract Cores and/or ROMs
         for x_item in arg_data['extract']:
             extractfrom_zxdata(str_file, x_item, fulldict_hash, str_outdir,
                                str_extension, arg_data['force'],
                                not arg_data['roms'])
 
         output_file = ''
+        # Wipe Secondary Cores and all ZX Spectrum ROMs
         if arg_data['wipe_flash']:
             if str_extension in ['ZX1', 'ZX2', 'ZXD']:
                 output_file = arg_data['output_file']
@@ -120,6 +128,7 @@ def main():
                             arg_data['keyboard_layout'],
                             arg_data['boot_timer'], arg_data['force'])
 
+        # Inject Cores and/or ROMs
         if arg_data['inject']:
             if str_extension in ['ZX1', 'ZX2', 'ZXD']:
                 b_force = arg_data['force']
@@ -138,6 +147,8 @@ def main():
             else:
                 LOGGER.error(
                     'Not a valid filetype: .{0}'.format(str_extension))
+
+        # Truncate image
         elif arg_data['output_file'] and not arg_data['wipe_flash']:
             savefrom_zxdata(str_file, dict_hash, arg_data['output_file'],
                             arg_data['n_cores'], arg_data['video_mode'],
@@ -145,6 +156,7 @@ def main():
                             arg_data['boot_timer'], arg_data['default_core'],
                             arg_data['default_rom'], arg_data['force'])
     else:
+        # File header unknown, try to gues only from hash
         find_zxfile(str_file, fulldict_hash, str_extension,
                     arg_data['show_hashes'])
 
@@ -344,7 +356,7 @@ def parse_args():
 
 def list_zxdata(str_in_file, hash_dict, show_hashes):
     """
-    List content of file
+    List contents of file
     :param str_in_file: Path to file
     :param hash_dict: Dictionary with hashes for different blocks
     :param show_hashes: If True, print also block hashes
@@ -454,6 +466,7 @@ def extractfrom_zxdata(str_in_file,
 
     block_list = ['BIOS', 'esxdos', 'Spectrum']
     for block_name in block_list:
+        # Extract main ROMs
         if extract_item.upper() == block_name.upper():
             print('Extracting {0}...'.format(block_name))
             block_info = hash_dict['parts'][block_name]
@@ -465,6 +478,7 @@ def extractfrom_zxdata(str_in_file,
             break
 
     if cores:
+        # Extract Cores
         if extract_item.isdigit():
             core_number = int(extract_item)
             core_list = get_core_list(str_in_file, hash_dict['parts'])
@@ -488,6 +502,7 @@ def extractfrom_zxdata(str_in_file,
             else:
                 LOGGER.error('Invalid core number: {0}'.format(core_number))
     else:
+        # Extract individual ZX Spectrum ROMs
         if extract_item.isdigit():
             rom_number = int(extract_item)
             rom_list = get_rom_list(str_in_file, hash_dict['parts'])
@@ -509,6 +524,7 @@ def extractfrom_zxdata(str_in_file,
                 LOGGER.error('Invalid ROM index: {0}'.format(rom_number))
 
     if extract_item.upper() == 'ROMS':
+        # Extract all ZX Spectrum ROMs to RomPack file
         default_rom = get_peek(str_in_file, 28736).to_bytes(1, 'little')
         rom_dict_parts = fullhash_dict['ROM']['parts']
         blk_info = rom_dict_parts['roms_dir']
@@ -653,17 +669,22 @@ def inject_zxfiles(str_spi_file,
         b_data = in_zxdata.read(b_len)
 
     for str_in_params in arr_in_files:
+        # Inject main ROMs
         b_data, b_chg = inject_bindata(str_in_params, hash_dict, b_data)
         b_changed |= b_chg
+        # Inject Cores
         b_data, b_chg = inject_coredata(str_in_params, hash_dict, b_data)
         b_changed |= b_chg
+        # Inject ZX Spectrum ROMs from individual files
         b_data, b_chg = inject_romdata(str_spi_file, str_in_params,
                                        fullhash_dict, str_extension, b_data)
         b_changed |= b_chg
+        # Inject ZX Spectrum ROMs from RomPack
         b_data, b_chg = inject_romszx1data(str_in_params, fullhash_dict,
                                            str_extension, b_data)
         b_changed |= b_chg
 
+    # Modify BIOS settings
     b_data, b_chg = inject_biossettings(b_data, video_mode, keyboard_layout,
                                         boot_timer, default_core, default_rom)
     b_changed |= b_chg
@@ -749,6 +770,7 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
     if show_hashes:
         print('{0}'.format(str_file_hash))
 
+    # Check if it's a known ZX Spectrum ROM
     for block_id in [
             '16K Spectrum ROM', '32K Spectrum ROM', '64K Spectrum ROM'
     ]:
@@ -762,6 +784,7 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
                                                        block_version))
                     found = True
 
+    # Check if it's a main ROM
     for block_id in ['BIOS', 'Spectrum', 'esxdos']:
         if not found and block_id in hash_dict['parts']:
             if os.stat(str_in_file).st_size == hash_dict['parts'][
@@ -775,6 +798,7 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
                                                        block_version))
                     found = True
 
+    # Check if it's a Core
     if not found and 'core_base' in hash_dict['parts']:
         if validate_file(
                 str_in_file, hash_dict['parts']['core_base'][3]) and os.stat(
@@ -789,6 +813,7 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
                     found = True
                     break
 
+    # Check if it's a RomPack ROMs file
     if not found and str_extension == 'ZX1':
         found = list_romsdata(str_in_file, fulldict_hash, 'ROM', show_hashes,
                               True)
@@ -815,7 +840,6 @@ def get_core_version(str_in_file, core_index, dict_parts, dict_cores):
 
     if len(block_info) > 5:
         max_cores += block_info[5]
-
     if core_index > max_cores:
         LOGGER.error('Invalid core index: {}'.format(core_index))
 
@@ -1226,6 +1250,7 @@ def inject_coredata(str_in_params, hash_dict, b_data):
             str_name = '{0:<32}'.format(arr_params[2][:32])
             str_in_file = arr_params[3]
             str_hash = get_file_hash(str_in_file)
+            # Check header and length
             if validate_file(str_in_file,
                              b_head) and os.stat(str_in_file).st_size == b_len:
                 LOGGER.debug('Looks like a core')
@@ -1250,9 +1275,9 @@ def inject_coredata(str_in_params, hash_dict, b_data):
                     block_data = get_core_blockdata(core_index,
                                                     splitcore_index,
                                                     core_bases)
-
                     b_offset, b_len = block_data
                     LOGGER.debug("Offset: {0:X} ({0})".format(b_offset))
+
                     if b_offset + b_len > len(b_data):
                         LOGGER.error('Flash image too small for data')
                     else:
