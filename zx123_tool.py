@@ -1012,14 +1012,15 @@ def get_rom_list(str_in_file, dict_parts):
                         if byte:
                             rom_crc += '{0:02X}'.format(byte)
                     rom_name = rom_data[32:]
-                    try:
-                        roms_list.append([
-                            rom_index, rom_slot,
-                            rom_name.decode('utf-8'), rom_size, rom_flags,
-                            rom_crc
-                        ])
-                    except UnicodeDecodeError:
-                        LOGGER.debug('Not a ROM entry or corrupted ROM name')
+                    if rom_name[0] >= 32:
+                        try:
+                            roms_list.append([
+                                rom_index, rom_slot,
+                                rom_name.decode('utf-8'), rom_size, rom_flags,
+                                rom_crc
+                            ])
+                        except UnicodeDecodeError:
+                            LOGGER.debug('Bad ROM entry or corrupted ROM name')
             else:
                 break
 
