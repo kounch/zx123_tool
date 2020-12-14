@@ -1,7 +1,18 @@
 # zx123_tool
 
 Copyright (c) 2020, kounch
+
 All rights reserved.
+
+---
+
+Select your desired language / Elija idioma:
+
+- Click [this link for English](#english)
+
+- Pulse [este enlace para Castellano](#castellano)
+
+---
 
 ## English
 
