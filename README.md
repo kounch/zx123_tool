@@ -30,7 +30,7 @@ These are the main features:
 - Wipe with  0s all Cores an ZX Spectrum ROMs data
 - If supplied a different kind of file (like a core or BIOS installation file) it will also try to identify its contents
 
-Requires a [`zx123_hash.json`](##description-of-json-file) file with block estructure for a kind of SPI flash file (e.g.: ZXD) and, optionally, hashes to identify the blocks inside.
+Requires a [`zx123_hash.json`](##description-of-json-file) file with block structure for the kind of SPI flash file (e.g.: ZXD) and, optionally, hashes to identify the blocks inside.
 
 ### Use
 

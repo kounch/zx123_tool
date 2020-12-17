@@ -3,33 +3,33 @@
 # -*- mode: Python; tab-width: 4; indent-tabs-mode: nil; -*-
 # Do not modify previous lines. See PEP 8, PEP 263.
 """
-ZX-Uno, ZXDOS, ZXDOS+, gomaDOS+ Tool for ZXDOS, etc. files.
-
-BSD 2-Clause License
-
 Copyright (c) 2020, kounch
 All rights reserved.
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
+SPDX-License-Identifier: BSD-2-Clause
 
-* Redistributions of source code must retain the above copyright notice, this
-  list of conditions and the following disclaimer.
+This is a tool that analyzes, extracts and injects data in SPI flash image
+files for ZX-Uno, ZXDOS and similar devices.
 
-* Redistributions in binary form must reproduce the above copyright notice,
-  this list of conditions and the following disclaimer in the documentation
-  and/or other materials provided with the distribution.
+These are the main features:
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+- List the contents of a ZX-Uno, etc. SPI flash image, showing, if possible,
+  the version of BIOS, esxdos, main Spectrum core and optional cores, Spectrum
+  ROMs and several BIOS settings
+- Extract BIOS, esxdos ROM, Spectrum core and/or other cores, Spectrum ROMs to
+  individual files
+- Create a copy of the flash image and, optionally, and/or truncate some (or
+  all) of the optional cores
+- Change some BIOS default options (video mode, keyboard layout, default core,
+  default ROM, etc.)
+- Add or replace FPGA cores and/or Spectrum ROM images (from individual ROM
+  files or RomPack files)
+- Wipe with  0s all Cores an ZX Spectrum ROMs data
+- If supplied a different kind of file (like a core or BIOS installation file)
+  it will also try to identify its contents
+
+Requires a zx123_hash.json file with block structure for a kind of SPI flash
+file (e.g.: ZXD) and, optionally, hashes to identify the blocks inside.
 """
 
 import logging
