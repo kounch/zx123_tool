@@ -240,6 +240,9 @@
             "Sega Master System": {
                 "2.0 Memorias_ISSI": "661f0b4f3b703e906ced8548f1514cc4c889c646e87e897c2b11584ef137a02d"
             },
+            "Videopac": {
+                "Beta 1": "fe9f9b7e75c9ef3ed3ebcca0985b0086626e8eeb1c43c0cb7237b98a183cf0b5"
+            },
             "ZX80yUno": {
                 "1.0": "ad070a0695c33d7c54b65895c07b60c03e3ebdc9bedc275ae491c16bdd60e982",
                 "2.0 Beta Tape": "ed6b291fc0e54e84aa9db379a352396200562874ae079355e210854d16b69aa4",
@@ -331,6 +334,9 @@
             "Test": {
                 "0.1": "25034b43ad11a6f93ec5075d761a8c31cc47e08edc3abd4b85115f50a6993926",
                 "test_placa_lx25": "7ac3895c796f1d65ba73498b8799d161713487750c3fd4b56ac8943d871fcc9a"
+            },
+            "Videopac": {
+                "Beta 1": "e9842c20136c3d232e8521a033e3fbca1b1a8eafb8244795589eaa9ad5e7cb36"
             },
             "ZX Spectrum": {
                 "EXP27": "b73e37eeeb8ed984a98a7c2633716087876195dcd7642e5df9fc901e8a378f21",
