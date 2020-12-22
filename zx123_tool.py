@@ -1351,8 +1351,7 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
                     rom_slt = -1
 
                 if rom_slt + b_len > max_slots:
-                    LOGGER.error(
-                        'Slot number too high ({slot 0})'.format(rom_slt))
+                    LOGGER.error('Slot number too high ({0})'.format(rom_slt))
                     rom_slt = -1
 
                 rom_index = len(roms_list)
@@ -1438,7 +1437,7 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
                                            rm_split, blk_bases, True)
 
                     rom_len = int(len(rom_data) / 16384)
-                    if rom_slt + rom_len < max_slots:
+                    if rom_slt + rom_len - 1 < max_slots:
                         LOGGER.debug('Injecting ROM {0} ({1})...'.format(
                             rom_slt, rom_name))
 
