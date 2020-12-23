@@ -1270,7 +1270,7 @@ def inject_coredata(str_in_params, hash_dict, b_data):
                 if core_index < 2 or core_index > max_cores:
                     LOGGER.error('Invalid core index: {}'.format(core_index))
                 else:
-                    print('Adding core {0}: {1}({2})...'.format(
+                    print('Adding core {0}: {1} ({2})...'.format(
                         core_index, core_name, block_version))
                     core_index -= 2
                     block_data = get_core_blockdata(core_index,
