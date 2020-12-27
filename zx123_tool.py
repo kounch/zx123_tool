@@ -41,8 +41,10 @@ import hashlib
 from binascii import unhexlify
 import struct
 import six
+import urllib.request
+import ssl
 
-__MY_VERSION__ = '1.0'
+__MY_VERSION__ = '2.0'
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
@@ -67,6 +69,16 @@ def main():
     my_dirpath = os.path.dirname(sys.argv[0])
     my_dirpath = os.path.abspath(my_dirpath)
     str_json = os.path.join(my_dirpath, 'zx123_hash.json')
+
+    # Update JSON
+    if arg_data['update'] or not os.path.isfile(str_json):
+        dl_url = 'https://raw.githubusercontent.com/kounch/zx123_tool'
+        dl_url += '/main/zx123_hash.json'
+        print('\nDownloading JSON database...', end='')
+        ssl._create_default_https_context = ssl._create_unverified_context
+        urllib.request.urlretrieve(dl_url, str_json)
+        print('OK')
+
     if not os.path.isfile(str_json):
         LOGGER.error('Hash database not found: {0}'.format(str_json))
         sys.exit(1)
@@ -103,7 +115,8 @@ def main():
 
         # List main ROMs, Cores and BIOS settings
         if arg_data['list']:
-            list_zxdata(str_file, dict_hash, arg_data['show_hashes'])
+            list_zxdata(str_file, dict_hash, arg_data['show_hashes'],
+                        arg_data['check_updated'])
 
         # List ZX Spectrum ROMs
         if arg_data['roms']:
@@ -181,6 +194,8 @@ def parse_args():
     values['n_cores'] = -1
     values['inject'] = []
     values['wipe_flash'] = False
+    values['update'] = False
+    values['check_updated'] = False
     values['video_mode'] = -1
     values['keyboard_layout'] = -1
     values['default_core'] = -1
@@ -261,6 +276,18 @@ def parse_args():
                         action='store_true',
                         dest='wipe_flash',
                         help='Wipe all secondary cores and ROM data')
+    parser.add_argument('-u',
+                        '--update',
+                        required=False,
+                        action='store_true',
+                        dest='update',
+                        help='Update JSON')
+    parser.add_argument('-q',
+                        '--check',
+                        required=False,
+                        action='store_true',
+                        dest='check_updated',
+                        help='Check if cores are up to date')
     parser.add_argument('-c',
                         '--default_core',
                         type=int,
@@ -333,6 +360,12 @@ def parse_args():
     if arguments.wipe_flash:
         values['wipe_flash'] = arguments.wipe_flash
 
+    if arguments.update:
+        values['update'] = arguments.update
+
+    if arguments.check_updated:
+        values['check_updated'] = arguments.check_updated
+
     if arguments.default_core:
         values['default_core'] = arguments.default_core - 1
 
@@ -354,12 +387,13 @@ def parse_args():
 # Main Functions
 
 
-def list_zxdata(str_in_file, hash_dict, show_hashes):
+def list_zxdata(str_in_file, hash_dict, show_hashes, check_updated=False):
     """
     List contents of file
     :param str_in_file: Path to file
     :param hash_dict: Dictionary with hashes for different blocks
     :param show_hashes: If True, print also block hashes
+    :param check_updated: If True, compare with 'latest' entries in JSON
     """
     LOGGER.debug('Listing contents of file: {0}'.format(str_in_file))
     str_name = os.path.basename(str_in_file)
@@ -370,7 +404,10 @@ def list_zxdata(str_in_file, hash_dict, show_hashes):
         block_version, block_hash = get_version(str_in_file,
                                                 hash_dict['parts'][block_name],
                                                 hash_dict[block_name])
-        print('{0}: {1}'.format(block_name, block_version))
+        print('{0}: {1}'.format(block_name, block_version), end='')
+        if check_updated:
+            update_check(hash_dict[block_name], block_version)
+        print('')
         if (show_hashes):
             print(block_hash)
 
@@ -381,7 +418,11 @@ def list_zxdata(str_in_file, hash_dict, show_hashes):
 
         print('Core {0:02d} "{1}" -> {2}: {3}'.format(index + 2, name,
                                                       block_name,
-                                                      block_version))
+                                                      block_version),
+              end='')
+        if check_updated:
+            update_check(hash_dict['Cores'][block_name], block_version)
+        print('')
         if (show_hashes):
             print('Core {0:02d}: {1}'.format(index + 2, block_hash))
 
@@ -401,6 +442,20 @@ def list_zxdata(str_in_file, hash_dict, show_hashes):
 
     video_mode = get_peek(str_in_file, 28749)
     print('\tVideo Mode -> {0}'.format(video_mode))
+
+
+def update_check(hash_dict, block_version):
+    """
+    """
+    if 'latest' in hash_dict:
+        last_version = hash_dict['latest']
+        if block_version == last_version:
+            print('    >> Up to date', end='')
+        else:
+            print('    >> Outdated!. Latest version: {0}'.format(last_version),
+                  end='')
+    else:
+        LOGGER.debug('Latest entry not found in JSON')
 
 
 def list_romsdata(str_in_file,
