@@ -336,16 +336,16 @@ def parse_args():
     if arguments.default_core:
         values['default_core'] = arguments.default_core - 1
 
-    if arguments.default_rom:
+    if arguments.default_rom is not None:
         values['default_rom'] = arguments.default_rom
 
-    if arguments.video_mode:
+    if arguments.video_mode is not None:
         values['video_mode'] = arguments.video_mode
 
-    if arguments.keyboard_layout:
+    if arguments.keyboard_layout is not None:
         values['keyboard_layout'] = arguments.keyboard_layout
 
-    if arguments.boot_timer:
+    if arguments.boot_timer is not None:
         values['boot_timer'] = arguments.boot_timer
 
     return values
