@@ -446,9 +446,12 @@ def list_zxdata(str_in_file, hash_dict, show_hashes, check_updated=False):
 
 def update_check(hash_dict, block_version):
     """
+    Check block version against latest entry and print the result
+    :param hash_dict: Dictionary for entry (e.g. Spectrum Core)
+    :param block_version: Version string to check
     """
     if 'latest' in hash_dict:
-        last_version = hash_dict['latest']
+        last_version = hash_dict['latest'][0]
         if block_version == last_version:
             print('    >> Up to date', end='')
         else:
