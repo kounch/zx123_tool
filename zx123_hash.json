@@ -356,7 +356,9 @@
                 "10": "6d945ecc5b21bb556ab73588dc74dbfbb8b14d217eeaf822891db8d81cb9837e",
                 "11 Beta": "830e08517e343c2b8ddcd805a02d9d986dce01687bbc1b9ac08f04e591e4330e",
                 "11 Beta (Edge)": "d63bd85037007346977345c19fad1f963dcad7c576e1d186ce78c1fd02752afb",
-                "11": "98c7ce7f1a778a24dbebd5d935c42f434c0a38e0e775776f046e44b9b02874c9"
+                "11": "98c7ce7f1a778a24dbebd5d935c42f434c0a38e0e775776f046e44b9b02874c9",
+                "3.01.09 Beta": "ca92f2fcf2320621c1bd9e28e95c961232871c35585b84d0ee1e7e8cefa7389d",
+                "3.01.09": "348adf724d4d38734ab74b25083445a859ac7569b5b8007bb1f76a1044b90385"
             }
         },
         "recovery.zxd.bit": {
