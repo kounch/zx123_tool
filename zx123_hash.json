@@ -14,6 +14,7 @@
             "core_base": [704512, 344064, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A103803141", 4194304]
         },
         "BIOS": {
+            "latest": "0.82",
             "0.72": "fa51e6e7d656925453ffc4c57a08a6a0f35c3fa93ba823cdd72a3c6e8fd477ec",
             "0.75": "753a6f68a15353e3ce46f41640065de19b480dbef9ac8884dddca6fce134acf9",
             "0.76": "7ee5c7cce34da79b64ae3aa615e1454a98d5ba428bc1488d964c3937acc7f9d8",
@@ -21,6 +22,7 @@
             "Vertical": "645f275502eb862258dc23f6436c7992d5b1623d3b21228dd61c7b1d027975f6"
         },
         "esxdos": {
+            "latest": "0.8.8",
             "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
             "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
             "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
@@ -41,6 +43,7 @@
                 "TEST2": "198a15023991053b4d9891180bbadb2f2f200914d4a0370cf5e08ec4e869d3e8"
             },
             "Amstrad CPC464": {
+                "latest": "TEST 3a",
                 "Test2 - 20170408": "6341fb122713725ebe758cfbf8ea357cf9ce6f0dd410cc1de715719cd77d17ed",
                 "TEST 3a": "5a2363e9ef1f10320cc2ed5309c2ab5331db4b4ca8dbab9e39737a02c9186c36"
             },
@@ -55,6 +58,7 @@
                 "Unknown Version": "5ecf9ad99902fbc621f412a2b5b635ebb3cd4211bb0167fee48c1ab3f594a4a1"
             },
             "Atari 800 XL": {
+                "latest": "1.2 2MB Int",
                 "1.1 (512K)": "760746ae75c7cf9b80752078145328dd29ba9dbff158287c503c966a41581481",
                 "1.2 2MB Int": "58abded410ca401efc93c70fe940815f6aebc28dd52d771f480fc28678ca34a0"
             },
@@ -63,6 +67,7 @@
                 "VGA Spark2k06": "6f03454880ca2e1477430d3a48a5c1755dd9b639ef5121ca6bd04674a6bbc7db"
             },
             "BBC Micro": {
+                "latest": "1.3",
                 "1.3b": "c35ed68b865139001bde7a8cb1e9fc12e0ab1e40f6d805a174f25dc94b6be73e",
                 "1.3": "4bbc3c71e4bfc755e2fa315336bf77c9115a977381949b801cc75e7a087ac53e"
             },
@@ -83,6 +88,7 @@
                 "Release 1": "981403fad352ef8c54c1cc7f57f6cbfd3ce9d50a8e4b29b079ba02192610d799"
             },
             "Commodore 64" : {
+                "latest": "Beta 7b",
                 "Beta 6": "4c8c757ba1224b9156afb39b6d3157ebabcde601241c601f79df44cbe76211ac",
                 "Beta 7b": "66a25e6a2ba2f492baf673961efe660ec9568ff83d1edd5199aa61b26579c64e"
             },
@@ -105,6 +111,7 @@
                 "2MB Int": "c9f5cc94fda19f5bc7434c4483b12ec513ce4fba4690ec13d86de0be1672d070"
             },
             "Jupiter Ace": {
+                "latest": "2019.06.19 azesmbog",
                 "1-142": "34443281df7d65c7a4a1bec2053980374955cceed9dbd88dd7b9820bee0adf2b",
                 "19.06.2018 dos8d": "6e782598fa050c76dabac986bb481dc844e96a0e0a94b9ca84b6fe27b2d6603",
                 "2019.06.19 azesmbog": "86e782598fa050c76dabac986bb481dc844e96a0e0a94b9ca84b6fe27b2d6603"
@@ -137,6 +144,7 @@
                 "Unknown Version": "6905d2ca5168cb18e1609f2b15b69c4a9c52a757d50f2920b0803322a9d8d094"
             },
             "Oric Atmos": {
+                "latest": "27.12.2018 dos8d",
                 "TEST1 - 20170701": "0fbd7f0195ab840e655ffd5946478e34ee8b1b953bae4609c855912f9ce05be4",
                 "27.12.2018 dos8d": "0e3597b079c65e8f57a24aba7eae69008a21b4537fff490dd1c93e1f915b9977"
             },
@@ -151,7 +159,7 @@
             "Sega Master System": {
                 "TEST 4.2 - 20170214": "b99a952e0aa433263fab620ff5f283cf6be2265103fc17f232791ee33c26e425",
                 "TEST 4.3 (512K)": "c385c9c8b68245ab9a3135e5514fc4e85a0bccc17432226aa1e23ac61c2979c3",
-                "SMS (TEST 4.3 2MB Int) ": "8a60c85e94c1819251ac07d2fc3296809542408531b10968d0c6bdce2f7f8e65"
+                "TEST 4.3 2MB Int": "8a60c85e94c1819251ac07d2fc3296809542408531b10968d0c6bdce2f7f8e65"
             },
             "Sprint 1": {
                 "Unknown Version": "29ab2e44293ed3a93297055c09358fadbc4ca95d2efe0651da4b4b4709ed5c80",
@@ -180,6 +188,7 @@
                 "VGA27 110420": "1a8e1441b5cba8036fe9bb7a5f72a6e20fe5629507ba1d49c80d282c48c220c1"
             },
             "ZX TBBlue": {
+                "latest": "azesmbog 13.05.2020",
                 "20161207": "64a0ba1a226466c561e4aaa8ed366562b29e24bb12fa99bdc599a91e86dd7e8b",
                 "azesmbog 13.05.2020": "b2cfa5f151f0b91d5d1d20546ee55da51c1a17d0c2f753d55456176de7352efd"
             }
@@ -200,18 +209,21 @@
             "core_base": [1097728, 475136, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104303141", 16924672]
         },
         "BIOS": {
+            "latest": "0.82",
             "0.77": "de8953d614777da03f4cc9fd8bba01d35331c6e16a25df85f9ab7d8e8677a323",
             "0.80": "4a4af0ea9583add1d4d3e5d965d72192e30bcda12abf30d35d16b27d232c068f",
             "0.82": "d3482a48486e421aecf5f794fb7618554840956c19fa4c708aa72905fb8f151d",
             "Vertical": "35c890bf625d88796a68f48fc71485075030cb09217671cccf7aaf914fa7522d"
         },
         "esxdos": {
+            "latest": "0.8.8",
             "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
             "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
             "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
             "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8"
         },
         "Spectrum": {
+            "latest": "EXP27_SVN",
             "EXP27_SVN": "33dcfc9263be150a825f77ffbbab5fc3c9ddac5cc5c733ff189c722c9384478c",
             "EXP27_140819": "9984c095772d29192563b33855c106c58d75026719a847f325d7dc7ddcf8d078"
         },
@@ -233,6 +245,7 @@
                 "1.3": "f2c9748dd988e894ccf9278702e1a6c290e74ab4ff22fd79eaba8b085b91d4ee"
             },
             "Pong": {
+                "latest": "3.0",
                 "1.0": "828e2feb5dc09b921497573d7e154c73dbe7f0c5a00f19fdf4085d14b88241ac", 
                 "2.0": "e776b5b4f31b33798d2238c77969c248a85a99035b70f9b3ce65c0fd3f4a1345",
                 "3.0": "ea48b20431c8d6a392b857001247954281e85f00f9ff54f0222dd68ccd4fda08"
@@ -244,6 +257,7 @@
                 "Beta 1": "fe9f9b7e75c9ef3ed3ebcca0985b0086626e8eeb1c43c0cb7237b98a183cf0b5"
             },
             "ZX80yUno": {
+                "latest": "3.0",
                 "1.0": "ad070a0695c33d7c54b65895c07b60c03e3ebdc9bedc275ae491c16bdd60e982",
                 "2.0 Beta Tape": "ed6b291fc0e54e84aa9db379a352396200562874ae079355e210854d16b69aa4",
                 "3.0": "504f9b44494daede44072dec653e7b9d5fd39c7279e6bf67a3dac2cb68c518c6"
@@ -252,8 +266,10 @@
                 "EXP27_SVN": "9f10eb6605c428e17db607a7141036a218164eeea02ac4c087e447dce5e5ced4"
             },
             "ZX Spectrum Next": {
+                "latest": "3.01.09",
                 "3.01.05 Issue2": "86a0f9ee8405c787209ded1b2a1035e47fd461c4b435f4e75ab53ede8c320531",
-                "3.01.05 Issue2 DDR3 Black": "55fa0ba05d0fdd49e35c89abc62e2f3d43f0e398b59575396d75f582231c1745"
+                "3.01.05 Issue2 DDR3 Black": "55fa0ba05d0fdd49e35c89abc62e2f3d43f0e398b59575396d75f582231c1745",
+                "3.01.09 Beta": "0b9a4bc393fe1160f15e6b9960199f34835ba3867449571839202a750908f8df"
             }
         }
     },
@@ -272,6 +288,7 @@
             "core_base": [1523712, 802816, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104883141", 17498112]
         },
         "BIOS": {
+            "latest": "0.82",
             "0.78": "76dae34e09a1e586536e9503b2dbdb67482b661d797521d2cc1ca708cf360736",
             "0.79": "34d775223d29adc2c793ac11d609c8af58b6834746ea03c5175d38c8dd02a828",
             "0.80": "7dcb6be6a06502b1c3515f26ff040ac518e9a3826abf15107f8f514d44e3f6b2",
@@ -280,12 +297,14 @@
             "Vertical": "b1420767f4cc8d6d77afb8759eeb2e159a805f3f2a9938f81da01e1eaaa230c9"
         },
         "esxdos": {
+            "latest": "0.8.8",
             "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
             "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
             "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
             "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8"
         },
         "Spectrum": {
+            "latest": "EXP27_200820",
             "EXP26_060818": "4ca484870c4173085ca181a92fadea6fd9e5e2928ee4fd0caa08f07052c9e286",
             "EXP27": "b73e37eeeb8ed984a98a7c2633716087876195dcd7642e5df9fc901e8a378f21",
             "EXP27_SVN": "18bb827d1d10671d914830e6af31dd33818ee8145c735590de0bdb45c7585305",
@@ -295,50 +314,62 @@
         "Cores": {
             "Acorn Atom":
             {
+                "latest": "0.1",
                 "0.1": "ed1ca1ad15ccb73d46259131e363f70fc0cfe8f7dc42654ae87c3dc7f8d573ac"
             },
             "Amstrad CPC":
             {
+                "latest": "4",
                 "1": "8c0f0b9be6861cbae947ca5d412ec824c9c989a97c2d6a4056dbf3fe8cde3aac",
                 "4": "e88544a8acd89802d96e307fd1bd2ad52386e7a7240a6e045eaf0033a1b494c1"
             },
             "Atari 2600": {
+                "latest": "2.1",
                 "2.1": "cc1df50d02ddc1ac48a5064afbf6e6a6a03f007516b1fc6544922bf67e261e81"
             },
             "ColecoVision": {
+                "latest": "0.1",
                 "0.1": "1b640cb200434f735f749e18e34ed37ccba487f5c84ba3d4e2d321363f9aff4f"
             },
             "Commodore 64": {
+                "latest": "1.0",
                 "1.0": "c917efa18740920da86700ab58dd1dbf4911597faa0a4b6b532727059dd9a975"
             },
             "MSX": 
             {
+                "latest": "2.1",
                 "Beta": "a2eb1b6cdaecf67e0a07e9cfe593a247d46e85119c9b5936c57edc5ec88782f8",
                 "1.0": "a64e415a5277d92ea5441cfe02dcc8dfbbe396911d20f732f34f7bb6040ef0fe",
                 "2.1": "bf420194449675258c39fe62a789d09629f7f90cc1d27d2cc25b5cc6500395c9"
             },
             "NES": {
+                "latest": "20200923",
                 "20200920": "35bd42259ab47099d4151c0ff687d3c3355e591ea4fb941e00aed709ab375d3e",
                 "20200923": "a22d70b0faaaf7e6759ee8b90986fd2da4f97b89f37aa5798af805fd363941c7"
             },
             "Phoenix": {
+                "latest": "1.0",
                 "0.1": "c881cf7c7e8b383deec958113aa6f6dfe28e9f55544386b4a5e7d67dcc206fd5",
                 "0.2": "ace00fedd5ebb8afab7925c04012d3d9519975c85104e35b2589fb388c67923b",
                 "1.0": "6806637a3eaf51802e4a0e6622a91917adaafae4379a4e1d6cba8e0a750007b9"
             },
             "Pong": {
+                "latest": "2.2",
                 "1.0": "f944e49710e30e3de0c89e71b25ac580d90a1d1a6d7a6f4a0279fd452a030c41",
                 "2.1": "9b64a0b0f610db602b00862109c74c77696c68cf4c7b3e54f4b2727547be8b24",
                 "2.2": "3aaf863d3941cc681939064a36a380cc795717909dabf1fbd7021a8628bfeab3"
             },
             "Test": {
+                "latest": "0.1",
                 "0.1": "25034b43ad11a6f93ec5075d761a8c31cc47e08edc3abd4b85115f50a6993926",
                 "test_placa_lx25": "7ac3895c796f1d65ba73498b8799d161713487750c3fd4b56ac8943d871fcc9a"
             },
             "Videopac": {
+                "latest": "Beta 1",
                 "Beta 1": "e9842c20136c3d232e8521a033e3fbca1b1a8eafb8244795589eaa9ad5e7cb36"
             },
             "ZX Spectrum": {
+                "latest": "EXP27_190920",
                 "EXP27": "b73e37eeeb8ed984a98a7c2633716087876195dcd7642e5df9fc901e8a378f21",
                 "EXP27_100820": "a4be8ef45afb08aa3f5aec99772beec6ffff1058e478b4b55df8360275a193b0",
                 "EXP27_150820_monocromo": "89ccd7c10b91668a9940193dc55e6f30bc0f138dee9b3f671ac440acf8c484e3",
@@ -346,6 +377,7 @@
                 "EXP27_190920": "710eb8ac196b0b38ff84761c727e8b4ed8a2f9433db9b4d76899209aed3f757f"
             },
             "ZX Spectrum Next": {
+                "latest": "3.01.09",
                 "COREn_NEXT": "a1a4de5df87cfce34129dfd33ba7b0372469344bad53d9a6b2665da89e93e56f",
                 "1": "5f26c4ada12166d6b2cc34664a7c3ddc281c226eb86bc39e9f6c6e465a9225a8",
                 "3": "5dd20bd9a77aa4d3bbe5d60b3d0f75b9524d84071123623748dcf1fb45163bb7",
@@ -362,6 +394,7 @@
             }
         },
         "recovery.zxd.bit": {
+            "latest": "1.0",
             "1.0": "fe077527253fe618452205a945fcdef5eab1c59d72dd0edafd54c09ccd713ba7"
         }
     },
