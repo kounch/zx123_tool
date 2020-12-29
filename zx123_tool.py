@@ -43,8 +43,13 @@ import struct
 import six
 import urllib.request
 import ssl
+from zipfile import ZipFile
+import tempfile
+import shutil
 
 __MY_VERSION__ = '2.0'
+
+MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
@@ -72,8 +77,7 @@ def main():
 
     # Update JSON
     if arg_data['update'] or not os.path.isfile(str_json):
-        dl_url = 'https://raw.githubusercontent.com/kounch/zx123_tool'
-        dl_url += '/main/zx123_hash.json'
+        dl_url = MAIN_URL + '/zx123_hash.json'
         print('\nDownloading JSON database...', end='')
         ssl._create_default_https_context = ssl._create_unverified_context
         urllib.request.urlretrieve(dl_url, str_json)
@@ -81,7 +85,7 @@ def main():
 
     if not os.path.isfile(str_json):
         LOGGER.error('Hash database not found: {0}'.format(str_json))
-        sys.exit(1)
+        sys.exit(2)
     with open(str_json, 'r') as jsonHandle:
         LOGGER.debug('Loading dictionary with hashes...')
         fulldict_hash = json.load(jsonHandle)
@@ -89,8 +93,20 @@ def main():
     # Analyze/initialize input file and output dir location and extension
     str_file = arg_data['input_file']
     str_outdir = arg_data['output_dir']
-    if not str_outdir:
-        str_outdir = os.path.dirname(str_file)
+    if not str_file:
+        if arg_data['output_file']:
+            str_file = unzip_image(my_dirpath, arg_data['output_file'],
+                                   fulldict_hash)
+            arg_data['force'] = True
+            if not str_file:
+                sys.exit(3)
+        else:
+            LOGGER.error("There's no input file")
+            sys.exit(3)
+    else:
+        if not str_outdir:
+            str_outdir = os.path.dirname(str_file)
+
     str_extension = os.path.splitext(str_file)[1]
     str_extension = str_extension[1:].upper()
 
@@ -108,7 +124,7 @@ def main():
                         break
     if not dict_hash:
         LOGGER.error('Unknown file extension: .{0}'.format(str_extension))
-        sys.exit(2)
+        sys.exit(4)
 
     # Is the file header known?
     if validate_file(str_file, dict_hash['parts']['header'][3]):
@@ -211,7 +227,7 @@ def parse_args():
                         version='%(prog)s {0}'.format(__MY_VERSION__))
     parser.add_argument('-i',
                         '--input_file',
-                        required=True,
+                        required=False,
                         action='store',
                         dest='input_file',
                         help='ZX-Uno, ZXDOS, etc. File')
@@ -385,6 +401,55 @@ def parse_args():
 
 
 # Main Functions
+
+
+def unzip_image(str_path, str_output, hash_dict):
+    """
+    Extract base image file from ZIP. Download ZIP from repository if needed.
+    :param str_path: Directory where ZIP files are
+    :param str_output: Path to image file to create
+    :param hash_dict: Full dictionary of hashes
+    :return: New image file path if created or else an empty string
+    """
+    str_file = ''
+    str_extension = os.path.splitext(str_output)[1]
+    str_extension = str_extension[1:].upper()
+
+    if str_extension in hash_dict:
+        str_image = 'FLASH16_empty.{0}'.format(str_extension)
+        str_zip = '{0}.zip'.format(str_image)
+        str_zip = os.path.join(str_path, str_zip)
+        if not os.path.isfile(str_zip):
+            dl_url = MAIN_URL + '/{0}'.format(str_zip)
+            print('\nDownloading ZIP file...', end='')
+            ssl._create_default_https_context = ssl._create_unverified_context
+            urllib.request.urlretrieve(dl_url, str_zip)
+            print('OK')
+
+        if os.path.isfile(str_zip):
+            with ZipFile(str_zip, 'r') as zipObj:
+                arr_files = zipObj.namelist()
+                for str_name in arr_files:
+                    if str_name == str_image:
+                        with tempfile.TemporaryDirectory() as str_tmpdir:
+                            print(str_tmpdir)
+                            print('\nExtracting image...', end='')
+                            zipObj.extract(str_name, str_tmpdir)
+                            print('OK')
+                            str_file = os.path.join(str_tmpdir, str_name)
+                            if check_overwrite(str_output):
+                                shutil.move(str_file, str_output)
+                                str_file = str_output
+                            else:
+                                str_file = ''
+            if not str_file:
+                LOGGER.error('Image file not extracted')
+        else:
+            LOGGER.error('Could not get base image file')
+    else:
+        LOGGER.error('Unknown extension: .{0}'.format(str_extension))
+
+    return str_file
 
 
 def list_zxdata(str_in_file, hash_dict, show_hashes, check_updated=False):
