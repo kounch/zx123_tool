@@ -361,9 +361,9 @@
                 "2.2": "3aaf863d3941cc681939064a36a380cc795717909dabf1fbd7021a8628bfeab3"
             },
             "Test": {
-                "latest": ["test_placa_lx25", "https://github.com/zxdos/zxdos-plus/raw/master/cores/COREN_test_placa_lx25.ZXD"],
-                "0.1": "25034b43ad11a6f93ec5075d761a8c31cc47e08edc3abd4b85115f50a6993926",
-                "test_placa_lx25": "7ac3895c796f1d65ba73498b8799d161713487750c3fd4b56ac8943d871fcc9a"
+                "latest": ["1.1", "https://github.com/zxdos/zxdos-plus/raw/master/cores/COREN_test_placa_lx25.ZXD"],
+                "1.0": "25034b43ad11a6f93ec5075d761a8c31cc47e08edc3abd4b85115f50a6993926",
+                "1.1": "7ac3895c796f1d65ba73498b8799d161713487750c3fd4b56ac8943d871fcc9a"
             },
             "Videopac": {
                 "latest": ["Beta 1","https://github.com/zxdos/zxdos-plus/raw/master/cores/videopac_zxdos_lx25_beta1.ZxD"],
