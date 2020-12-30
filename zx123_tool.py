@@ -42,7 +42,7 @@ from binascii import unhexlify
 import struct
 import six
 
-__MY_VERSION__ = '1.0'
+__MY_VERSION__ = '1.0.1'
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
