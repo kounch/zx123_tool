@@ -486,7 +486,8 @@ def list_zxdata(str_in_file, hash_dict, show_hashes, check_updated=False):
                                                       block_version),
               end='')
         if check_updated:
-            update_check(hash_dict['Cores'][block_name], block_version)
+            if block_name in hash_dict['Cores']:
+                update_check(hash_dict['Cores'][block_name], block_version)
         print('')
         if (show_hashes):
             print('Core {0:02d}: {1}'.format(index + 2, block_hash))
