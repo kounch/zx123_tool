@@ -176,16 +176,23 @@
                 "VGA": "0a2469f0b57dab9055dec1de3c68468f4f9df6d32e6b317343df6d1fd8d6c915"
             },
             "ZX Spectrum": {
+                "latest": ["EXP27 160820"],
                 "EXP26 040418": "31a1373cf3d99f66a00c76cb96bebd4b8db0b3782ac55c0423a3373d7a083a29",
                 "EXP27 160820": "613902acb29e3926142a721493c593c0746969261fe7d5cce207194a1fc30a03",
-                "EXP27 azesmbog 240320": "85ff342c1a2fe0cc3a962221f37847907a5666e46183b13934b99fae4306fe69",
-                "kyp ZX48 2020.08.13": "7998866f2bcdd566f19e8c73ea53eff575bbd8f3e0f8a7be5716fb274c0d36bc",
-                "kyp ZX48 2020.09.06": "db39811185a8fcfc371226353f7d6527373372cf3b25981d208c64a0707df507",
-                "kyp ZX128 2020.10.09": "e8f535ea695d405df2fd5eaeb2bfa449ab08657a52062da8abc5fe4261d7ab30",
-                "azesmbog TS-FM 24.03.20": "4fb1f0d47f55039905a10b5fe46f6932ad6dd9728dd976753afd2408dfcc5f09",
-                "azesmbog DMA 24.05.30": "6a0cd7879a98182aeec5b92c36523cf11a1ed5be9f128341609d5a4246e94ec9",
                 "VGA 60Hz": "3bc28ff2692f038f3938e6b38d0980a567460a06657aa5e4327ba93b36d98261",
-                "VGA27 110420": "1a8e1441b5cba8036fe9bb7a5f72a6e20fe5629507ba1d49c80d282c48c220c1"
+                "VGA 110420": "1a8e1441b5cba8036fe9bb7a5f72a6e20fe5629507ba1d49c80d282c48c220c1"
+            },
+            "ZX Spectrum 48K (Kyp)": {
+                "kyp ZX48 2020.08.13": "7998866f2bcdd566f19e8c73ea53eff575bbd8f3e0f8a7be5716fb274c0d36bc",
+                "kyp ZX48 2020.09.06": "db39811185a8fcfc371226353f7d6527373372cf3b25981d208c64a0707df507"
+            },
+            "ZX Spectrum 128K (Kyp)": {
+                "2020.10.09": "e8f535ea695d405df2fd5eaeb2bfa449ab08657a52062da8abc5fe4261d7ab30"
+            },
+            "ZX Spectrum (azesmbog)": {
+                "EXP27 azesmbog 240320": "85ff342c1a2fe0cc3a962221f37847907a5666e46183b13934b99fae4306fe69",
+                "azesmbog TS-FM 24.03.20": "4fb1f0d47f55039905a10b5fe46f6932ad6dd9728dd976753afd2408dfcc5f09",
+                "azesmbog DMA 24.05.30": "6a0cd7879a98182aeec5b92c36523cf11a1ed5be9f128341609d5a4246e94ec9"
             },
             "ZX TBBlue": {
                 "latest": ["azesmbog 13.05.2020"],
@@ -266,7 +273,7 @@
                 "EXP27_SVN": "9f10eb6605c428e17db607a7141036a218164eeea02ac4c087e447dce5e5ced4"
             },
             "ZX Spectrum Next": {
-                "latest": ["3.01.09"],
+                "latest": ["3.01.09 Beta"],
                 "3.01.05 Issue2": "86a0f9ee8405c787209ded1b2a1035e47fd461c4b435f4e75ab53ede8c320531",
                 "3.01.05 Issue2 DDR3 Black": "55fa0ba05d0fdd49e35c89abc62e2f3d43f0e398b59575396d75f582231c1745",
                 "3.01.09 Beta": "0b9a4bc393fe1160f15e6b9960199f34835ba3867449571839202a750908f8df"
