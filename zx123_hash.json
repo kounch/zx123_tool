@@ -216,10 +216,11 @@
             "core_base": [1097728, 475136, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104303141", 16924672]
         },
         "BIOS": {
-            "latest": ["0.82", "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE.ZX2"],
+            "latest": ["0.83", "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE.ZX2"],
             "0.77": "de8953d614777da03f4cc9fd8bba01d35331c6e16a25df85f9ab7d8e8677a323",
             "0.80": "4a4af0ea9583add1d4d3e5d965d72192e30bcda12abf30d35d16b27d232c068f",
             "0.82": "d3482a48486e421aecf5f794fb7618554840956c19fa4c708aa72905fb8f151d",
+            "0.83": "33f7da03849ace04f07fe0bc38575749759ce13ad601e1d8f13c7789d058f708",
             "Vertical": "35c890bf625d88796a68f48fc71485075030cb09217671cccf7aaf914fa7522d"
         },
         "esxdos": {
@@ -295,12 +296,13 @@
             "core_base": [1523712, 802816, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104883141", 17498112]
         },
         "BIOS": {
-            "latest": ["0.82", "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE.ZXD"],
+            "latest": ["0.83", "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE.ZXD"],
             "0.78": "76dae34e09a1e586536e9503b2dbdb67482b661d797521d2cc1ca708cf360736",
             "0.79": "34d775223d29adc2c793ac11d609c8af58b6834746ea03c5175d38c8dd02a828",
             "0.80": "7dcb6be6a06502b1c3515f26ff040ac518e9a3826abf15107f8f514d44e3f6b2",
             "0.81": "b9b4d6074bf69d811f769f7f0eeefcb1471bf4894bb1a03539354a7bdffed3e9",
             "0.82": "76b1216fffcf262dd5e677e7da4bf08086512978db5c3c84c2f1bbe52354b13b",
+            "0.83": "795c9ad56ecd0efdbeb4da8efe3e1b5fdc74e64dbf69d2274ff808e20827b2eb",
             "Vertical": "b1420767f4cc8d6d77afb8759eeb2e159a805f3f2a9938f81da01e1eaaa230c9"
         },
         "esxdos": {
@@ -488,7 +490,8 @@
             "ZX Emulator Mod": "937886a4fd478b86dc022721265e639d8da01b0f3d1325345786283c4865973d",
             "ZX Spectrum Simulator Mod": "fd877e3e388ae7570c14a232abffe559fef5e5d88b12a06b92c98418a494e3b7",
             "ZX Spectrum": "d55daa439b673b0e3f5897f99ac37ecb45f974d1862b4dadb85dec34af99cb42",
-            "ZX Spectrum 48K Cargando Leches": "895240ca1059c7f176cd6702c52c82dc2596591bdcbc9f205474db7a3110de31"
+            "ZX Spectrum 48K Cargando Leches": "895240ca1059c7f176cd6702c52c82dc2596591bdcbc9f205474db7a3110de31",
+            "ZX Spectrum 48K Cargando Leches (Ant)": "2cfbeef248657810448ec028042520311e9ec572858d71dccf1aec0c64607070"
             },
         "32K Spectrum ROM": {
             "BBC Micro": "f627698f7dd1193a6cb7023b61f45203e10b184223954516cca68d8e4e4c0a01",
