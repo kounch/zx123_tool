@@ -848,12 +848,11 @@ def savefrom_zxdata(str_in_file,
     block_info = dict_parts['cores_dir']
     max_cores = splitcore_index = block_info[4]
 
-    flash_len = 16777216
+    flash_len = bin_len = os.stat(str_in_file).st_size
     if n_cores > -1:
         flash_len = hash_dict['parts']['core_base'][0]
         flash_len += hash_dict['parts']['core_base'][1] * n_cores
 
-    bin_len = os.stat(str_in_file).st_size
     if bin_len > flash_len:
         bin_len = flash_len
 
