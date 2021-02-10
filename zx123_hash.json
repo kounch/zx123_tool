@@ -353,10 +353,16 @@
             },
             "MSX": 
             {
-                "latest": ["2.1"],
+                "latest": ["1.3 v6 (Benitoss)"],
                 "Beta": "a2eb1b6cdaecf67e0a07e9cfe593a247d46e85119c9b5936c57edc5ec88782f8",
                 "1.0": "a64e415a5277d92ea5441cfe02dcc8dfbbe396911d20f732f34f7bb6040ef0fe",
-                "2.1": "bf420194449675258c39fe62a789d09629f7f90cc1d27d2cc25b5cc6500395c9"
+                "1.2": "bf420194449675258c39fe62a789d09629f7f90cc1d27d2cc25b5cc6500395c9",
+                "1.3 v1 (Benitoss)": "035694d34eb709e6f9b726ad2c819b95b1fbdb5b8464ab7595a1628c3d7d48c2",
+                "1.3 v2 (Benitoss)": "03524268d7007a68a570e422f3cc36b4e2fdb041066e3f0ed6cb1c6fd1d9936a",
+                "1.3 v3 (Benitoss)": "899150df22c98bb8edde878f39febb04e15f4b0c1a31f834c1a8001e838a644d",
+                "1.3 v4 (Benitoss)": "f10bd0977139653fcb2bcdf879dd5c60db9f300cd2cad884323cc1c542a64277",
+                "1.3 v5 (Benitoss)": "a1d60559481198235a59cf192851b920a7460661156f4f8bd97d135cf1d77a46",
+                "1.3 v6 (Benitoss)": "1a390b1663472ec4656347f10bdca4d200b3abd20cae4488d41754f3ea993902"
             },
             "NES": {
                 "latest": ["20200923", "https://github.com/zxdos/zxdos-plus/raw/master/cores/COREn_NES_VGA_lx25.zxd"],
@@ -418,7 +424,8 @@
                 "11 Beta (Edge)": "d63bd85037007346977345c19fad1f963dcad7c576e1d186ce78c1fd02752afb",
                 "11": "98c7ce7f1a778a24dbebd5d935c42f434c0a38e0e775776f046e44b9b02874c9",
                 "3.01.09 Beta": "ca92f2fcf2320621c1bd9e28e95c961232871c35585b84d0ee1e7e8cefa7389d",
-                "3.01.09": "348adf724d4d38734ab74b25083445a859ac7569b5b8007bb1f76a1044b90385"
+                "3.01.09": "348adf724d4d38734ab74b25083445a859ac7569b5b8007bb1f76a1044b90385",
+                "3.01.09 2MB (Benitoss)": "9fe2e6c09caf073dd778ce1552da18f55c16653f2eb40673d917bc4ba4648bb0"
             }
         },
         "recovery.zxd.bit": {
