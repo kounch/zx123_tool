@@ -325,7 +325,7 @@ def parse_args():
                         required=False,
                         action='store_true',
                         dest='update',
-                        help='Update JSON')
+                        help='Update JSON or BIOS and Cores')
     parser.add_argument('-q',
                         '--check',
                         required=False,

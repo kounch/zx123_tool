@@ -75,7 +75,9 @@ Requires a [`zx123_hash.json`](##description-of-json-file) file with block struc
                                     0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
       -b BOOT_TIMER, --boot_timer BOOT_TIMER
                                     Boot Timer: 0 (No Timer), 1, 2, 3 or 4
-      -u, --update   Download JSON from GitHub repository
+      -u, --update   If the only argument, download JSON from repository
+                     If there's an SPI flash image file, updte BIOS and Cores to
+                    the latest version according to JSON file contents
 
 #### ROM Parameters
 
@@ -297,7 +299,9 @@ Necesita un fichero  [`zx123_hash.json`](#descripción-del-arhivo-json) con la e
                                     0 (Auto), 1 (ES), 2 (EN) ó 3 (Spectrum)
       -b BOOT_TIMER, --boot_timer RETRASO
                        Retraso en el arranque: 0 (Sin retraso), 1, 2, 3 ó 4
-      -u, --update   Descargar JSON del repositorio en GitHub
+      -u, --update   Si no hay más argumentos, descargar JSON del repositorio
+                     Si hay imagen SPI flash, actualizar BIOS y Cores a la 
+                    última versión posible según se indica en el fichero JSON
 
 #### Parámetros de ROM
 
