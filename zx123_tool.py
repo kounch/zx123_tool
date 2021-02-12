@@ -41,8 +41,17 @@ import hashlib
 from binascii import unhexlify
 import struct
 import six
+import urllib.request
+import ssl
+from zipfile import ZipFile
+import tempfile
+import shutil
 
-__MY_VERSION__ = '1.0.1'
+__MY_VERSION__ = '2.0'
+
+MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
+MY_DIRPATH = os.path.dirname(sys.argv[0])
+MY_DIRPATH = os.path.abspath(MY_DIRPATH)
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
@@ -56,6 +65,8 @@ if six.PY2:
     LOGGER.error('This software requires Python version 3')
     sys.exit(1)
 
+ssl._create_default_https_context = ssl._create_unverified_context
+
 
 def main():
     """Main routine"""
@@ -63,22 +74,48 @@ def main():
     LOGGER.debug('Starting up...')
     arg_data = parse_args()
 
-    # Load Hash Database
-    my_dirpath = os.path.dirname(sys.argv[0])
-    my_dirpath = os.path.abspath(my_dirpath)
-    str_json = os.path.join(my_dirpath, 'zx123_hash.json')
+    str_file = arg_data['input_file']
+    str_outdir = arg_data['output_dir']
+    output_file = arg_data['output_file']
+
+    # Hash Database
+    str_json = os.path.join(MY_DIRPATH, 'zx123_hash.json')
+
+    # Update JSON
+    if arg_data['update']:
+        if not str_file and not str_outdir and not output_file:
+            if os.path.isfile(str_json):
+                os.remove(str_json)
+
+    if not os.path.isfile(str_json):
+        dl_url = MAIN_URL + '/zx123_hash.json'
+        print('\nDownloading JSON database...', end='')
+        urllib.request.urlretrieve(dl_url, str_json)
+        print('OK')
+        sys.exit(0)
+
     if not os.path.isfile(str_json):
         LOGGER.error('Hash database not found: {0}'.format(str_json))
-        sys.exit(1)
+        sys.exit(2)
     with open(str_json, 'r') as jsonHandle:
         LOGGER.debug('Loading dictionary with hashes...')
         fulldict_hash = json.load(jsonHandle)
 
     # Analyze/initialize input file and output dir location and extension
-    str_file = arg_data['input_file']
-    str_outdir = arg_data['output_dir']
-    if not str_outdir:
-        str_outdir = os.path.dirname(str_file)
+    if not str_file:
+        if arg_data['output_file']:
+            str_file = unzip_image(MY_DIRPATH, arg_data['output_file'],
+                                   fulldict_hash)
+            arg_data['force'] = True
+            if not str_file:
+                sys.exit(3)
+        else:
+            LOGGER.error("There's no input file")
+            sys.exit(3)
+    else:
+        if not str_outdir:
+            str_outdir = os.path.dirname(str_file)
+
     str_extension = os.path.splitext(str_file)[1]
     str_extension = str_extension[1:].upper()
 
@@ -96,14 +133,15 @@ def main():
                         break
     if not dict_hash:
         LOGGER.error('Unknown file extension: .{0}'.format(str_extension))
-        sys.exit(2)
+        sys.exit(4)
 
     # Is the file header known?
     if validate_file(str_file, dict_hash['parts']['header'][3]):
 
         # List main ROMs, Cores and BIOS settings
         if arg_data['list']:
-            list_zxdata(str_file, dict_hash, arg_data['show_hashes'])
+            list_zxdata(str_file, dict_hash, arg_data['show_hashes'],
+                        arg_data['check_updated'])
 
         # List ZX Spectrum ROMs
         if arg_data['roms']:
@@ -116,7 +154,26 @@ def main():
                                str_extension, arg_data['force'],
                                not arg_data['roms'])
 
-        output_file = ''
+        # Try to update contents from internet
+        if arg_data['update']:
+            if str_extension in ['ZX1', 'ZX2', 'ZXD']:
+                print('\nStarting update...')
+                if not output_file:
+                    output_file = str_file
+                arr_upd_f = prep_update_zxdata(str_file, dict_hash)
+                prep_update_cores(arr_upd_f, str_file, dict_hash)
+
+                if arr_upd_f:
+                    arg_data['force'] = inject_zxfiles(
+                        str_file,
+                        arr_upd_f,
+                        output_file,
+                        fulldict_hash,
+                        str_extension,
+                        b_force=arg_data['force'])
+                else:
+                    print('Nothing to update')
+
         # Wipe Secondary Cores and all ZX Spectrum ROMs
         if arg_data['wipe_flash']:
             if str_extension in ['ZX1', 'ZX2', 'ZXD']:
@@ -181,6 +238,8 @@ def parse_args():
     values['n_cores'] = -1
     values['inject'] = []
     values['wipe_flash'] = False
+    values['update'] = False
+    values['check_updated'] = False
     values['video_mode'] = -1
     values['keyboard_layout'] = -1
     values['default_core'] = -1
@@ -196,7 +255,7 @@ def parse_args():
                         version='%(prog)s {0}'.format(__MY_VERSION__))
     parser.add_argument('-i',
                         '--input_file',
-                        required=True,
+                        required=False,
                         action='store',
                         dest='input_file',
                         help='ZX-Uno, ZXDOS, etc. File')
@@ -261,6 +320,18 @@ def parse_args():
                         action='store_true',
                         dest='wipe_flash',
                         help='Wipe all secondary cores and ROM data')
+    parser.add_argument('-u',
+                        '--update',
+                        required=False,
+                        action='store_true',
+                        dest='update',
+                        help='Update JSON or BIOS and Cores')
+    parser.add_argument('-q',
+                        '--check',
+                        required=False,
+                        action='store_true',
+                        dest='check_updated',
+                        help='Check if cores are up to date')
     parser.add_argument('-c',
                         '--default_core',
                         type=int,
@@ -333,6 +404,12 @@ def parse_args():
     if arguments.wipe_flash:
         values['wipe_flash'] = arguments.wipe_flash
 
+    if arguments.update:
+        values['update'] = arguments.update
+
+    if arguments.check_updated:
+        values['check_updated'] = arguments.check_updated
+
     if arguments.default_core:
         values['default_core'] = arguments.default_core - 1
 
@@ -354,12 +431,60 @@ def parse_args():
 # Main Functions
 
 
-def list_zxdata(str_in_file, hash_dict, show_hashes):
+def unzip_image(str_path, str_output, hash_dict):
+    """
+    Extract base image file from ZIP. Download ZIP from repository if needed.
+    :param str_path: Directory where ZIP files are
+    :param str_output: Path to image file to create
+    :param hash_dict: Full dictionary of hashes
+    :return: New image file path if created or else an empty string
+    """
+    str_file = ''
+    str_extension = os.path.splitext(str_output)[1]
+    str_extension = str_extension[1:].upper()
+
+    if str_extension in hash_dict:
+        str_image = 'FLASH16_empty.{0}'.format(str_extension)
+        str_zip = '{0}.zip'.format(str_image)
+        str_zip = os.path.join(str_path, str_zip)
+        if not os.path.isfile(str_zip):
+            dl_url = MAIN_URL + '/{0}'.format(str_zip)
+            print('\nDownloading ZIP file...', end='')
+            urllib.request.urlretrieve(dl_url, str_zip)
+            print('OK')
+
+        if os.path.isfile(str_zip):
+            with ZipFile(str_zip, 'r') as zipObj:
+                arr_files = zipObj.namelist()
+                for str_name in arr_files:
+                    if str_name == str_image:
+                        with tempfile.TemporaryDirectory() as str_tmpdir:
+                            print('\nExtracting image...', end='')
+                            zipObj.extract(str_name, str_tmpdir)
+                            print('OK')
+                            str_file = os.path.join(str_tmpdir, str_name)
+                            if check_overwrite(str_output):
+                                shutil.move(str_file, str_output)
+                                str_file = str_output
+                            else:
+                                str_file = ''
+            if not str_file:
+                LOGGER.error('Image file not extracted')
+        else:
+            LOGGER.error('Could not get base image file')
+    else:
+        LOGGER.error('Unknown extension: .{0}'.format(str_extension))
+
+    return str_file
+
+
+def list_zxdata(str_in_file, hash_dict, show_hashes, check_updated=False):
     """
     List contents of file
     :param str_in_file: Path to file
     :param hash_dict: Dictionary with hashes for different blocks
     :param show_hashes: If True, print also block hashes
+    :param check_updated: If True, compare with 'latest' entries in JSON
     """
     LOGGER.debug('Listing contents of file: {0}'.format(str_in_file))
     str_name = os.path.basename(str_in_file)
@@ -370,7 +495,10 @@ def list_zxdata(str_in_file, hash_dict, show_hashes):
         block_version, block_hash = get_version(str_in_file,
                                                 hash_dict['parts'][block_name],
                                                 hash_dict[block_name])
-        print('{0}: {1}'.format(block_name, block_version))
+        print('{0}: {1}'.format(block_name, block_version), end='')
+        if check_updated:
+            update_check(hash_dict[block_name], block_version)
+        print('')
         if (show_hashes):
             print(block_hash)
 
@@ -381,7 +509,12 @@ def list_zxdata(str_in_file, hash_dict, show_hashes):
 
         print('Core {0:02d} "{1}" -> {2}: {3}'.format(index + 2, name,
                                                       block_name,
-                                                      block_version))
+                                                      block_version),
+              end='')
+        if check_updated:
+            if block_name in hash_dict['Cores']:
+                update_check(hash_dict['Cores'][block_name], block_version)
+        print('')
         if (show_hashes):
             print('Core {0:02d}: {1}'.format(index + 2, block_hash))
 
@@ -401,6 +534,23 @@ def list_zxdata(str_in_file, hash_dict, show_hashes):
 
     video_mode = get_peek(str_in_file, 28749)
     print('\tVideo Mode -> {0}'.format(video_mode))
+
+
+def update_check(hash_dict, block_version):
+    """
+    Check block version against latest entry and print the result
+    :param hash_dict: Dictionary for entry (e.g. Spectrum Core)
+    :param block_version: Version string to check
+    """
+    if 'latest' in hash_dict:
+        last_version = hash_dict['latest'][0]
+        if block_version == last_version:
+            print('    >> Up to date', end='')
+        else:
+            print('    >> Outdated!. Latest version: {0}'.format(last_version),
+                  end='')
+    else:
+        LOGGER.debug('Latest entry not found in JSON')
 
 
 def list_romsdata(str_in_file,
@@ -554,6 +704,67 @@ def extractfrom_zxdata(str_in_file,
         export_bindata(roms_data, str_bin, b_force)
 
 
+def prep_update_zxdata(str_spi_file, hash_dict):
+    """
+    Try to prepare to update several BIOS
+    :param str_spi_file: Input SPI flash file
+    :param hash_dict: Dictionary with hashes for different blocks
+    :return: A valid array for inject_zxfiles
+    """
+    arr_in_files = []
+
+    block_list = ['BIOS', 'esxdos', 'Spectrum']
+    for block_name in block_list:
+        block_version, block_hash = get_version(str_spi_file,
+                                                hash_dict['parts'][block_name],
+                                                hash_dict[block_name])
+
+        latest = hash_dict[block_name]['latest']
+        new_hash = hash_dict[block_name][latest[0]]
+
+        if block_hash != new_hash and len(latest) > 1:
+            dl_url = latest[1]
+            str_file = '{0}_{1}.ZXD'.format(block_name, latest[0])
+            str_file = os.path.join(MY_DIRPATH, str_file)
+            print('Downloading latest {0}...'.format(block_name), end='')
+            urllib.request.urlretrieve(dl_url, str_file)
+            print('OK')
+
+            arr_in_files.append('{0},{1}'.format(block_name, str_file))
+
+    return arr_in_files
+
+
+def prep_update_cores(arr_in_files, str_spi_file, hash_dict):
+    """
+    Try to prepare to update cores
+    :param arr_in_files: Array for inject_zxfiles, updated if needed
+    :param str_spi_file: Input SPI flash file
+    :param hash_dict: Dictionary with hashes for different blocks
+    """
+
+    core_list = get_core_list(str_spi_file, hash_dict['parts'])
+    for index, name in enumerate(core_list):
+        block_name, block_version, block_hash = get_core_version(
+            str_spi_file, index, hash_dict['parts'], hash_dict['Cores'])
+
+        index += 2
+        if block_name in hash_dict['Cores']:
+            latest = hash_dict['Cores'][block_name]['latest']
+            new_hash = hash_dict['Cores'][block_name][latest[0]]
+            if block_hash != new_hash and len(latest) > 1:
+                dl_url = latest[1]
+                str_file = 'CORE{0:0>2}_{1}_{2}.ZXD'.format(
+                    index, block_name, latest[0])
+                str_file = os.path.join(MY_DIRPATH, str_file)
+                print('Downloading latest {0}...'.format(block_name), end='')
+                urllib.request.urlretrieve(dl_url, str_file)
+                print('OK')
+
+                new_in_file = 'CORE,{0},{1},{2}'.format(index, name, str_file)
+                arr_in_files.append(new_in_file)
+
+
 def wipe_zxdata(str_spi_file,
                 str_outfile,
                 hash_dict,
@@ -659,6 +870,7 @@ def inject_zxfiles(str_spi_file,
     :param default_core: Default boot core (0 and up)
     :param default_rom: :Default boot Spectrum ROM (0 or greater)
     :param b_force: Force overwriting file
+    :return: Updated b_force
     """
     b_changed = False
     hash_dict = fullhash_dict[str_extension]
@@ -691,9 +903,12 @@ def inject_zxfiles(str_spi_file,
 
     if b_changed:
         if b_force or check_overwrite(str_outfile):
+            b_force = True
             with open(str_outfile, "wb") as out_zxdata:
                 out_zxdata.write(b_data)
                 print('{0} created OK.'.format(str_outfile))
+
+    return b_force
 
 
 def savefrom_zxdata(str_in_file,
@@ -724,12 +939,11 @@ def savefrom_zxdata(str_in_file,
     block_info = dict_parts['cores_dir']
     max_cores = splitcore_index = block_info[4]
 
-    flash_len = 16777216
+    flash_len = bin_len = os.stat(str_in_file).st_size
     if n_cores > -1:
         flash_len = hash_dict['parts']['core_base'][0]
         flash_len += hash_dict['parts']['core_base'][1] * n_cores
 
-    bin_len = os.stat(str_in_file).st_size
     if bin_len > flash_len:
         bin_len = flash_len
 

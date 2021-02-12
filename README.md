@@ -30,7 +30,7 @@ These are the main features:
 - Wipe with  0s all Cores an ZX Spectrum ROMs data
 - If supplied a different kind of file (like a core or BIOS installation file) it will also try to identify its contents
 
-Requires a [`zx123_hash.json`](##description-of-json-file) file with block structure for the kind of SPI flash file (e.g.: ZXD) and, optionally, hashes to identify the blocks inside.
+Requires a [`zx123_hash.json`](##description-of-json-file) file with block structure for the kind of SPI flash file (e.g.: ZXD) and, optionally, hashes to identify the blocks inside. If not found, it tries to download it from the GitHub repository.
 
 ### Use
 
@@ -47,6 +47,8 @@ Requires a [`zx123_hash.json`](##description-of-json-file) file with block struc
       -l, --list_contents List file contents
       -r, --roms          Process ZX Spectrum ROMs (list or, in extract mode,
                           extract instead of Cores)
+      -q, --check_updated For each Core or non Spectrum ROM, check version
+                          against 'latest' entry in the JSON database
       -s, --show_hashes   Show computed hashes
       -x EXTRACT, --extract EXTRACT
                 Item(s) to extract, split using ",": BIOS, Spectrum, ROMS, 
@@ -73,6 +75,9 @@ Requires a [`zx123_hash.json`](##description-of-json-file) file with block struc
                                     0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
       -b BOOT_TIMER, --boot_timer BOOT_TIMER
                                     Boot Timer: 0 (No Timer), 1, 2, 3 or 4
+      -u, --update   If the only argument, download JSON from repository
+                     If there's an SPI flash image file, updte BIOS and Cores to
+                    the latest version according to JSON file contents
 
 #### ROM Parameters
 
@@ -248,7 +253,7 @@ Estas son sus funciones principales:
 - Borrar con 0s todos los datos de los Cores y las ROMs de ZX Spectrum
 - Si se tratase de un tipo distinto de fichero (como un archivo de instalación de core o BIOS), también puede intentar identificar su versión
 
-Necesita un fichero  [`zx123_hash.json`](#descripción-del-arhivo-json) con la estructura de bloques del archivo de imagen y, opcionalmente, datos para identificar dichos bloques.
+Necesita un fichero  [`zx123_hash.json`](#descripción-del-arhivo-json) con la estructura de bloques del archivo de imagen y, opcionalmente, datos para identificar dichos bloques. Si no se encuentra, intentará descargarlo desde el repositorio en GitHub.
 
 ### Uso
 
@@ -265,6 +270,8 @@ Necesita un fichero  [`zx123_hash.json`](#descripción-del-arhivo-json) con la e
       -l, --list_contents Mostrar contenido del fichero de origen
       -r, --roms          Procesar ROMs de ZX Spectrum (listar o, en modo de 
                           extracción, extraer en vez de Core)
+      -q, --check_updated Para cada Core o ROM que no sea de Spectrum, comparar
+                          la versión con la entrada 'latest' del JSON
       -s, --show_hashes   Mostrar los datos de hash calculados
       -x EXTRAER, --extract EXTRAER
                 Elemento(s) a extraer, separados por ",": BIOS, Spectrum, ROMS,
@@ -292,6 +299,9 @@ Necesita un fichero  [`zx123_hash.json`](#descripción-del-arhivo-json) con la e
                                     0 (Auto), 1 (ES), 2 (EN) ó 3 (Spectrum)
       -b BOOT_TIMER, --boot_timer RETRASO
                        Retraso en el arranque: 0 (Sin retraso), 1, 2, 3 ó 4
+      -u, --update   Si no hay más argumentos, descargar JSON del repositorio
+                     Si hay imagen SPI flash, actualizar BIOS y Cores a la 
+                    última versión posible según se indica en el fichero JSON
 
 #### Parámetros de ROM
 
