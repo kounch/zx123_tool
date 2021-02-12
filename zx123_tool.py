@@ -50,6 +50,8 @@ import shutil
 __MY_VERSION__ = '2.0'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
+MY_DIRPATH = os.path.dirname(sys.argv[0])
+MY_DIRPATH = os.path.abspath(MY_DIRPATH)
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
@@ -63,6 +65,8 @@ if six.PY2:
     LOGGER.error('This software requires Python version 3')
     sys.exit(1)
 
+ssl._create_default_https_context = ssl._create_unverified_context
+
 
 def main():
     """Main routine"""
@@ -70,18 +74,25 @@ def main():
     LOGGER.debug('Starting up...')
     arg_data = parse_args()
 
-    # Load Hash Database
-    my_dirpath = os.path.dirname(sys.argv[0])
-    my_dirpath = os.path.abspath(my_dirpath)
-    str_json = os.path.join(my_dirpath, 'zx123_hash.json')
+    str_file = arg_data['input_file']
+    str_outdir = arg_data['output_dir']
+    output_file = arg_data['output_file']
+
+    # Hash Database
+    str_json = os.path.join(MY_DIRPATH, 'zx123_hash.json')
 
     # Update JSON
-    if arg_data['update'] or not os.path.isfile(str_json):
+    if arg_data['update']:
+        if not str_file and not str_outdir and not output_file:
+            if os.path.isfile(str_json):
+                os.remove(str_json)
+
+    if not os.path.isfile(str_json):
         dl_url = MAIN_URL + '/zx123_hash.json'
         print('\nDownloading JSON database...', end='')
-        ssl._create_default_https_context = ssl._create_unverified_context
         urllib.request.urlretrieve(dl_url, str_json)
         print('OK')
+        sys.exit(0)
 
     if not os.path.isfile(str_json):
         LOGGER.error('Hash database not found: {0}'.format(str_json))
@@ -91,11 +102,9 @@ def main():
         fulldict_hash = json.load(jsonHandle)
 
     # Analyze/initialize input file and output dir location and extension
-    str_file = arg_data['input_file']
-    str_outdir = arg_data['output_dir']
     if not str_file:
         if arg_data['output_file']:
-            str_file = unzip_image(my_dirpath, arg_data['output_file'],
+            str_file = unzip_image(MY_DIRPATH, arg_data['output_file'],
                                    fulldict_hash)
             arg_data['force'] = True
             if not str_file:
@@ -145,7 +154,26 @@ def main():
                                str_extension, arg_data['force'],
                                not arg_data['roms'])
 
-        output_file = ''
+        # Try to update contents from internet
+        if arg_data['update']:
+            if str_extension in ['ZX1', 'ZX2', 'ZXD']:
+                print('\nStarting update...')
+                if not output_file:
+                    output_file = str_file
+                arr_upd_f = prep_update_zxdata(str_file, dict_hash)
+                prep_update_cores(arr_upd_f, str_file, dict_hash)
+
+                if arr_upd_f:
+                    arg_data['force'] = inject_zxfiles(
+                        str_file,
+                        arr_upd_f,
+                        output_file,
+                        fulldict_hash,
+                        str_extension,
+                        b_force=arg_data['force'])
+                else:
+                    print('Nothing to update')
+
         # Wipe Secondary Cores and all ZX Spectrum ROMs
         if arg_data['wipe_flash']:
             if str_extension in ['ZX1', 'ZX2', 'ZXD']:
@@ -422,7 +450,6 @@ def unzip_image(str_path, str_output, hash_dict):
         if not os.path.isfile(str_zip):
             dl_url = MAIN_URL + '/{0}'.format(str_zip)
             print('\nDownloading ZIP file...', end='')
-            ssl._create_default_https_context = ssl._create_unverified_context
             urllib.request.urlretrieve(dl_url, str_zip)
             print('OK')
 
@@ -432,7 +459,6 @@ def unzip_image(str_path, str_output, hash_dict):
                 for str_name in arr_files:
                     if str_name == str_image:
                         with tempfile.TemporaryDirectory() as str_tmpdir:
-                            print(str_tmpdir)
                             print('\nExtracting image...', end='')
                             zipObj.extract(str_name, str_tmpdir)
                             print('OK')
@@ -678,6 +704,67 @@ def extractfrom_zxdata(str_in_file,
         export_bindata(roms_data, str_bin, b_force)
 
 
+def prep_update_zxdata(str_spi_file, hash_dict):
+    """
+    Try to prepare to update several BIOS
+    :param str_spi_file: Input SPI flash file
+    :param hash_dict: Dictionary with hashes for different blocks
+    :return: A valid array for inject_zxfiles
+    """
+    arr_in_files = []
+
+    block_list = ['BIOS', 'esxdos', 'Spectrum']
+    for block_name in block_list:
+        block_version, block_hash = get_version(str_spi_file,
+                                                hash_dict['parts'][block_name],
+                                                hash_dict[block_name])
+
+        latest = hash_dict[block_name]['latest']
+        new_hash = hash_dict[block_name][latest[0]]
+
+        if block_hash != new_hash and len(latest) > 1:
+            dl_url = latest[1]
+            str_file = '{0}_{1}.ZXD'.format(block_name, latest[0])
+            str_file = os.path.join(MY_DIRPATH, str_file)
+            print('Downloading latest {0}...'.format(block_name), end='')
+            urllib.request.urlretrieve(dl_url, str_file)
+            print('OK')
+
+            arr_in_files.append('{0},{1}'.format(block_name, str_file))
+
+    return arr_in_files
+
+
+def prep_update_cores(arr_in_files, str_spi_file, hash_dict):
+    """
+    Try to prepare to update cores
+    :param arr_in_files: Array for inject_zxfiles, updated if needed
+    :param str_spi_file: Input SPI flash file
+    :param hash_dict: Dictionary with hashes for different blocks
+    """
+
+    core_list = get_core_list(str_spi_file, hash_dict['parts'])
+    for index, name in enumerate(core_list):
+        block_name, block_version, block_hash = get_core_version(
+            str_spi_file, index, hash_dict['parts'], hash_dict['Cores'])
+
+        index += 2
+        if block_name in hash_dict['Cores']:
+            latest = hash_dict['Cores'][block_name]['latest']
+            new_hash = hash_dict['Cores'][block_name][latest[0]]
+            if block_hash != new_hash and len(latest) > 1:
+                dl_url = latest[1]
+                str_file = 'CORE{0:0>2}_{1}_{2}.ZXD'.format(
+                    index, block_name, latest[0])
+                str_file = os.path.join(MY_DIRPATH, str_file)
+                print('Downloading latest {0}...'.format(block_name), end='')
+                urllib.request.urlretrieve(dl_url, str_file)
+                print('OK')
+
+                new_in_file = 'CORE,{0},{1},{2}'.format(index, name, str_file)
+                arr_in_files.append(new_in_file)
+
+
 def wipe_zxdata(str_spi_file,
                 str_outfile,
                 hash_dict,
@@ -783,6 +870,7 @@ def inject_zxfiles(str_spi_file,
     :param default_core: Default boot core (0 and up)
     :param default_rom: :Default boot Spectrum ROM (0 or greater)
     :param b_force: Force overwriting file
+    :return: Updated b_force
     """
     b_changed = False
     hash_dict = fullhash_dict[str_extension]
@@ -815,9 +903,12 @@ def inject_zxfiles(str_spi_file,
 
     if b_changed:
         if b_force or check_overwrite(str_outfile):
+            b_force = True
             with open(str_outfile, "wb") as out_zxdata:
                 out_zxdata.write(b_data)
                 print('{0} created OK.'.format(str_outfile))
+
+    return b_force
 
 
 def savefrom_zxdata(str_in_file,
