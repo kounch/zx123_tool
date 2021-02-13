@@ -47,7 +47,7 @@ from zipfile import ZipFile
 import tempfile
 import shutil
 
-__MY_VERSION__ = '2.0'
+__MY_VERSION__ = '2.0,1'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
@@ -82,8 +82,9 @@ def main():
     str_json = os.path.join(MY_DIRPATH, 'zx123_hash.json')
 
     # Update JSON
-    if arg_data['update']:
-        if not str_file and not str_outdir and not output_file:
+    if arg_data['update'] != '':
+        if arg_data['update'] == 'json' or (not str_file and not str_outdir
+                                            and not output_file):
             if os.path.isfile(str_json):
                 os.remove(str_json)
 
@@ -155,13 +156,20 @@ def main():
                                not arg_data['roms'])
 
         # Try to update contents from internet
-        if arg_data['update']:
+        if arg_data['update'] != '':
             if str_extension in ['ZX1', 'ZX2', 'ZXD']:
                 print('\nStarting update...')
                 if not output_file:
                     output_file = str_file
-                arr_upd_f = prep_update_zxdata(str_file, dict_hash)
-                prep_update_cores(arr_upd_f, str_file, dict_hash)
+                arr_upd_f = []
+                if arg_data['update'].lower() in ['all', 'bios']:
+                    prep_update_zxdata(arr_upd_f, str_file, dict_hash,
+                                       ['BIOS'])
+                if arg_data['update'].lower() in ['all', 'spectrum']:
+                    prep_update_zxdata(arr_upd_f, str_file, dict_hash,
+                                       ['Spectrum'])
+                if arg_data['update'].lower() in ['all', 'cores']:
+                    prep_update_cores(arr_upd_f, str_file, dict_hash)
 
                 if arr_upd_f:
                     arg_data['force'] = inject_zxfiles(
@@ -238,7 +246,7 @@ def parse_args():
     values['n_cores'] = -1
     values['inject'] = []
     values['wipe_flash'] = False
-    values['update'] = False
+    values['update'] = ''
     values['check_updated'] = False
     values['video_mode'] = -1
     values['keyboard_layout'] = -1
@@ -323,9 +331,12 @@ def parse_args():
     parser.add_argument('-u',
                         '--update',
                         required=False,
-                        action='store_true',
+                        nargs='?',
+                        choices=['all', 'bios', 'spectrum', 'cores', 'json'],
+                        const='all',
+                        default='',
                         dest='update',
-                        help='Update JSON or BIOS and Cores')
+                        help='Update JSON or BIOS and/or Cores')
     parser.add_argument('-q',
                         '--check',
                         required=False,
@@ -704,16 +715,17 @@ def extractfrom_zxdata(str_in_file,
         export_bindata(roms_data, str_bin, b_force)
 
 
-def prep_update_zxdata(str_spi_file, hash_dict):
+def prep_update_zxdata(arr_in_files, str_spi_file, hash_dict, block_list):
     """
     Try to prepare to update several BIOS
     :param str_spi_file: Input SPI flash file
     :param hash_dict: Dictionary with hashes for different blocks
     :return: A valid array for inject_zxfiles
     """
-    arr_in_files = []
 
-    block_list = ['BIOS', 'esxdos', 'Spectrum']
+    if not block_list:
+        block_list = ['BIOS', 'esxdos', 'Spectrum']
+
     for block_name in block_list:
         block_version, block_hash = get_version(str_spi_file,
                                                 hash_dict['parts'][block_name],
@@ -731,8 +743,6 @@ def prep_update_zxdata(str_spi_file, hash_dict):
             print('OK')
 
             arr_in_files.append('{0},{1}'.format(block_name, str_file))
-
-    return arr_in_files
 
 
 def prep_update_cores(arr_in_files, str_spi_file, hash_dict):
