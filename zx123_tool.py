@@ -52,6 +52,8 @@ __MY_VERSION__ = '2.0,1'
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
 MY_DIRPATH = os.path.abspath(MY_DIRPATH)
+STR_OUTDIR = ''
+ROMS_URL = 'https://github.com/zxdos/zxuno/raw/master/utils/ROMS.ZX1'
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
@@ -75,7 +77,7 @@ def main():
     arg_data = parse_args()
 
     str_file = arg_data['input_file']
-    str_outdir = arg_data['output_dir']
+    STR_OUTDIR = arg_data['output_dir']
     output_file = arg_data['output_file']
 
     # Hash Database
@@ -83,7 +85,7 @@ def main():
 
     # Update JSON
     if arg_data['update'] != '':
-        if arg_data['update'] == 'json' or (not str_file and not str_outdir
+        if arg_data['update'] == 'json' or (not str_file and not STR_OUTDIR
                                             and not output_file):
             if os.path.isfile(str_json):
                 os.remove(str_json)
@@ -103,10 +105,12 @@ def main():
         fulldict_hash = json.load(jsonHandle)
 
     # Analyze/initialize input file and output dir location and extension
+    b_new_img = False
     if not str_file:
         if arg_data['output_file']:
             str_file = unzip_image(MY_DIRPATH, arg_data['output_file'],
                                    fulldict_hash)
+            b_new_img = True
             arg_data['force'] = True
             if not str_file:
                 sys.exit(3)
@@ -114,8 +118,8 @@ def main():
             LOGGER.error("There's no input file")
             sys.exit(3)
     else:
-        if not str_outdir:
-            str_outdir = os.path.dirname(str_file)
+        if not STR_OUTDIR:
+            STR_OUTDIR = os.path.dirname(str_file)
 
     str_extension = os.path.splitext(str_file)[1]
     str_extension = str_extension[1:].upper()
@@ -151,7 +155,7 @@ def main():
 
         # Extract Cores and/or ROMs
         for x_item in arg_data['extract']:
-            extractfrom_zxdata(str_file, x_item, fulldict_hash, str_outdir,
+            extractfrom_zxdata(str_file, x_item, fulldict_hash, STR_OUTDIR,
                                str_extension, arg_data['force'],
                                not arg_data['roms'])
 
@@ -161,20 +165,26 @@ def main():
                 print('\nStarting update...')
                 if not output_file:
                     output_file = str_file
-                arr_upd_f = []
+                arr_upd = []
                 if arg_data['update'].lower() in ['all', 'bios']:
-                    prep_update_zxdata(arr_upd_f, str_file, dict_hash,
-                                       ['BIOS'])
+                    prep_update_zxdata(arr_upd, str_file, dict_hash, ['BIOS'])
                 if arg_data['update'].lower() in ['all', 'spectrum']:
-                    prep_update_zxdata(arr_upd_f, str_file, dict_hash,
+                    prep_update_zxdata(arr_upd, str_file, dict_hash,
                                        ['Spectrum'])
                 if arg_data['update'].lower() in ['all', 'cores']:
-                    prep_update_cores(arr_upd_f, str_file, dict_hash)
+                    prep_update_cores(arr_upd, str_file, dict_hash, b_new_img)
 
-                if arr_upd_f:
+                if b_new_img:
+                    str_roms = os.path.join(STR_OUTDIR, 'ROMS.ZX1')
+                    print('Downloading ROMS...', end='')
+                    urllib.request.urlretrieve(ROMS_URL, str_roms)
+                    print('OK')
+                    arr_upd.append('ROMS,{0}'.format(str_roms))
+
+                if arr_upd:
                     arg_data['force'] = inject_zxfiles(
                         str_file,
-                        arr_upd_f,
+                        arr_upd,
                         output_file,
                         fulldict_hash,
                         str_extension,
@@ -737,7 +747,7 @@ def prep_update_zxdata(arr_in_files, str_spi_file, hash_dict, block_list):
         if block_hash != new_hash and len(latest) > 1:
             dl_url = latest[1]
             str_file = '{0}_{1}.ZXD'.format(block_name, latest[0])
-            str_file = os.path.join(MY_DIRPATH, str_file)
+            str_file = os.path.join(STR_OUTDIR, str_file)
             print('Downloading latest {0}...'.format(block_name), end='')
             urllib.request.urlretrieve(dl_url, str_file)
             print('OK')
@@ -745,7 +755,7 @@ def prep_update_zxdata(arr_in_files, str_spi_file, hash_dict, block_list):
             arr_in_files.append('{0},{1}'.format(block_name, str_file))
 
 
-def prep_update_cores(arr_in_files, str_spi_file, hash_dict):
+def prep_update_cores(arr_in_files, str_spi_file, hash_dict, b_new=False):
     """
     Try to prepare to update cores
     :param arr_in_files: Array for inject_zxfiles, updated if needed
@@ -753,11 +763,18 @@ def prep_update_cores(arr_in_files, str_spi_file, hash_dict):
     :param hash_dict: Dictionary with hashes for different blocks
     """
 
-    core_list = get_core_list(str_spi_file, hash_dict['parts'])
-    for index, name in enumerate(core_list):
-        block_name, block_version, block_hash = get_core_version(
-            str_spi_file, index, hash_dict['parts'], hash_dict['Cores'])
+    core_list = []
+    tmp_list = get_core_list(str_spi_file, hash_dict['parts'])
+    if tmp_list:
+        for index, name in enumerate(tmp_list):
+            core_list.append([index, name.strip()] + list(
+                get_core_version(str_spi_file, index, hash_dict['parts'],
+                                 hash_dict['Cores'])))
+    else:
+        for index, block_name in enumerate(hash_dict['Cores']):
+            core_list.append([index, block_name, block_name, '1.0', 'Nadia'])
 
+    for index, name, block_name, block_version, block_hash in core_list:
         index += 2
         if block_name in hash_dict['Cores']:
             latest = hash_dict['Cores'][block_name]['latest']
@@ -766,7 +783,7 @@ def prep_update_cores(arr_in_files, str_spi_file, hash_dict):
                 dl_url = latest[1]
                 str_file = 'CORE{0:0>2}_{1}_{2}.ZXD'.format(
                     index, block_name, latest[0])
-                str_file = os.path.join(MY_DIRPATH, str_file)
+                str_file = os.path.join(STR_OUTDIR, str_file)
                 print('Downloading latest {0}...'.format(block_name), end='')
                 urllib.request.urlretrieve(dl_url, str_file)
                 print('OK')

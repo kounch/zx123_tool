@@ -394,7 +394,7 @@
                 "20210130": "f69d6076e200c84a6189f69126445c91876d31a01587f50400648c89853b39e1"
             },
             "ZX Spectrum": {
-                "latest": ["EXP27_160820", "https://github.com/mcleod-ideafix/zxuno_spectrum_core/blob/master/zxdos_lx25/COREx.ZXD"],
+                "latest": ["EXP27_100820", "https://github.com/mcleod-ideafix/zxuno_spectrum_core/blob/master/zxdos_lx25/COREx.ZXD"],
                 "EXP26_060818": "5806919127973f3297b3b97e05ddc8c4790495cf2a065f31fad0a8cabad11840",
                 "EXP27_unknown": "b73e37eeeb8ed984a98a7c2633716087876195dcd7642e5df9fc901e8a378f21",
                 "EXP27_100820": "a4be8ef45afb08aa3f5aec99772beec6ffff1058e478b4b55df8360275a193b0",
