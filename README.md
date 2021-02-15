@@ -64,6 +64,7 @@ Requires a [`zx123_hash.json`](##description-of-json-file) file with block struc
                     ROM,Slot,Parameters,Name to use,Path to Spectrum ROM binary
                     ROMS,Path to RomPack file with some ROMs inside
       -w, --wipe            Wipe all ROMs and all secondary cores from image
+      -e, --32              Expand, if needed, flash file to 32MiB
       -c DEFAULT_CORE, --default_core DEFAULT_CORE
                 Default core number: 1 and up
       -z DEFAULT_ROM, --default_rom DEFAULT_ROM
@@ -287,6 +288,7 @@ Necesita un fichero  [`zx123_hash.json`](#descripción-del-arhivo-json) con la e
                     ROM,Slot,Parámetros,Nombre a usar,Ruta a ROM de Spectrum
                     ROMS,Ruta a un archivo RomPack con varias ROMs
       -w, --wipe           Borrar todas las ROMs y todos los cores secundarios
+      -e, --32             Expandir, si hiciera falta la imagen a 32MiB
       -c CORE_D, --default_core CORE_D
                 Número de core por defecto: 1 o superior
       -z ROM_D, --default_rom ROM_D

@@ -346,7 +346,7 @@ def parse_args():
                         required=False,
                         action='store_true',
                         dest='expand_flash',
-                        help='Expand, if needed, flash file to 32M')
+                        help='Expand, if needed, flash file to 32MiB')
     parser.add_argument(
         '-u',
         '--update',
