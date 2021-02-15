@@ -394,17 +394,17 @@
                 "20210130": "f69d6076e200c84a6189f69126445c91876d31a01587f50400648c89853b39e1"
             },
             "ZX Spectrum": {
-                "latest": ["EXP27_100820", "https://github.com/mcleod-ideafix/zxuno_spectrum_core/blob/master/zxdos_lx25/COREx.ZXD"],
+                "latest": ["EXP27_100820", "https://github.com/mcleod-ideafix/zxuno_spectrum_core/raw/master/zxdos_lx25/COREx.ZXD"],
                 "EXP26_060818": "5806919127973f3297b3b97e05ddc8c4790495cf2a065f31fad0a8cabad11840",
                 "EXP27_unknown": "b73e37eeeb8ed984a98a7c2633716087876195dcd7642e5df9fc901e8a378f21",
-                "EXP27_100820": "a4be8ef45afb08aa3f5aec99772beec6ffff1058e478b4b55df8360275a193b0",
-                "EXP27_160820": "4eaa9f8080035185b1f7b5905f06bd63e7c4dc8645c2a79c32accc5154b4f7fb"
+                "EXP27_100820": "4eaa9f8080035185b1f7b5905f06bd63e7c4dc8645c2a79c32accc5154b4f7fb"
             },
             "ZX Spectrum (Avlixa)":
             {
                 "latest": ["EXP27_190920_test_BnW", "https://github.com/zxdos/zxdos-plus/raw/master/cores/CORE21_SPECTRUM_EXP27_zxdos_lx25.ZXD"],
                 "EXP27_150820_monocromo": "89ccd7c10b91668a9940193dc55e6f30bc0f138dee9b3f671ac440acf8c484e3",
-                "EXP27_190920_test_BnW": "710eb8ac196b0b38ff84761c727e8b4ed8a2f9433db9b4d76899209aed3f757f"
+                "EXP27_190920_test_BnW": "710eb8ac196b0b38ff84761c727e8b4ed8a2f9433db9b4d76899209aed3f757f",
+                "EXP27_190920_BnW": "a4be8ef45afb08aa3f5aec99772beec6ffff1058e478b4b55df8360275a193b0"
             },
             "ZX Spectrum 48K (Kyp)": {
                 "latest": ["1.0", "https://github.com/Kyp069/zx48.zxdosplus/releases/download/1.0/COREnn.zx48.by.Kyp.v1.0.ZXD"],
@@ -545,5 +545,9 @@
             "ZX Spectrum 128K Derby++ 64K rom": "5fe5d6bb92b516b5f1696a52679b23cc8a5301badc033e419aedb08e7d6f8fca",
             "ZX Spectrum Next +3e 1.53": "b9b378221d61c328b6538bbd083786ec142e21eec3f5a53bba5f51ad7790568c"
         }
+    },
+    "ROMS": {
+        "latest": ["desUBIKado_20210112", "https://github.com/zxdos/zxuno/raw/master/utils/ROMS.ZX1"],
+        "desUBIKado_20210112": "8ed16c2d63ce6369e56685cabeb048d75e7a2c72a03cf9844c45e3a0f0f59391"
     }
 }

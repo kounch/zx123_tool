@@ -47,13 +47,12 @@ from zipfile import ZipFile
 import tempfile
 import shutil
 
-__MY_VERSION__ = '2.0,1'
+__MY_VERSION__ = '2.0.1'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
 MY_DIRPATH = os.path.abspath(MY_DIRPATH)
 STR_OUTDIR = ''
-ROMS_URL = 'https://github.com/zxdos/zxuno/raw/master/utils/ROMS.ZX1'
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
@@ -159,6 +158,15 @@ def main():
                                str_extension, arg_data['force'],
                                not arg_data['roms'])
 
+        # Expand image file if needed
+        if arg_data['expand_flash']:
+            if not output_file:
+                output_file = str_file
+            img_len = 33554432
+            if expand_image(str_file, output_file, img_len, arg_data['force']):
+                arg_data['force'] = True
+                str_file = output_file
+
         # Try to update contents from internet
         if arg_data['update'] != '':
             if str_extension in ['ZX1', 'ZX2', 'ZXD']:
@@ -173,29 +181,24 @@ def main():
                                        ['Spectrum'])
                 if arg_data['update'].lower() in ['all', 'cores']:
                     prep_update_cores(arr_upd, str_file, dict_hash, b_new_img)
-
-                if b_new_img:
-                    str_roms = os.path.join(STR_OUTDIR, 'ROMS.ZX1')
-                    print('Downloading ROMS...', end='')
-                    urllib.request.urlretrieve(ROMS_URL, str_roms)
-                    print('OK')
-                    arr_upd.append('ROMS,{0}'.format(str_roms))
+                if b_new_img or arg_data['update'].lower() == 'roms':
+                    prep_update_roms(arr_upd, fulldict_hash, b_new_img)
 
                 if arr_upd:
-                    arg_data['force'] = inject_zxfiles(
-                        str_file,
-                        arr_upd,
-                        output_file,
-                        fulldict_hash,
-                        str_extension,
-                        b_force=arg_data['force'])
+                    if inject_zxfiles(str_file,
+                                      arr_upd,
+                                      output_file,
+                                      fulldict_hash,
+                                      str_extension,
+                                      b_force=arg_data['force']):
+                        arg_data['force'] = True
+                        str_file = output_file
                 else:
                     print('Nothing to update')
 
         # Wipe Secondary Cores and all ZX Spectrum ROMs
         if arg_data['wipe_flash']:
             if str_extension in ['ZX1', 'ZX2', 'ZXD']:
-                output_file = arg_data['output_file']
                 if not output_file:
                     output_file = str_file
                 wipe_zxdata(str_file, output_file, dict_hash,
@@ -211,7 +214,6 @@ def main():
                     b_force = True
                     str_file = output_file
                 else:
-                    output_file = arg_data['output_file']
                     if not output_file:
                         output_file = str_file
                 inject_zxfiles(
@@ -256,6 +258,7 @@ def parse_args():
     values['n_cores'] = -1
     values['inject'] = []
     values['wipe_flash'] = False
+    values['expand_flash'] = False
     values['update'] = ''
     values['check_updated'] = False
     values['video_mode'] = -1
@@ -338,15 +341,22 @@ def parse_args():
                         action='store_true',
                         dest='wipe_flash',
                         help='Wipe all secondary cores and ROM data')
-    parser.add_argument('-u',
-                        '--update',
+    parser.add_argument('-e',
+                        '--32',
                         required=False,
-                        nargs='?',
-                        choices=['all', 'bios', 'spectrum', 'cores', 'json'],
-                        const='all',
-                        default='',
-                        dest='update',
-                        help='Update JSON or BIOS and/or Cores')
+                        action='store_true',
+                        dest='expand_flash',
+                        help='Expand, if needed, flash file to 32M')
+    parser.add_argument(
+        '-u',
+        '--update',
+        required=False,
+        nargs='?',
+        choices=['all', 'bios', 'spectrum', 'cores', 'json', 'roms'],
+        const='all',
+        default='',
+        dest='update',
+        help='Update JSON or BIOS and/or Cores')
     parser.add_argument('-q',
                         '--check',
                         required=False,
@@ -424,6 +434,9 @@ def parse_args():
 
     if arguments.wipe_flash:
         values['wipe_flash'] = arguments.wipe_flash
+
+    if arguments.expand_flash:
+        values['expand_flash'] = arguments.expand_flash
 
     if arguments.update:
         values['update'] = arguments.update
@@ -744,15 +757,18 @@ def prep_update_zxdata(arr_in_files, str_spi_file, hash_dict, block_list):
         latest = hash_dict[block_name]['latest']
         new_hash = hash_dict[block_name][latest[0]]
 
-        if block_hash != new_hash and len(latest) > 1:
+        dl_url = ''
+        if len(latest) > 1:
             dl_url = latest[1]
-            str_file = '{0}_{1}.ZXD'.format(block_name, latest[0])
-            str_file = os.path.join(STR_OUTDIR, str_file)
-            print('Downloading latest {0}...'.format(block_name), end='')
-            urllib.request.urlretrieve(dl_url, str_file)
-            print('OK')
 
-            arr_in_files.append('{0},{1}'.format(block_name, str_file))
+        str_file = '{0}_{1}.ZXD'.format(block_name, latest[0])
+        str_file = os.path.join(STR_OUTDIR, str_file)
+
+        if block_hash != new_hash:
+            b_append = check_and_update(str_file, new_hash, dl_url, block_name)
+
+            if b_append:
+                arr_in_files.append('{0},{1}'.format(block_name, str_file))
 
 
 def prep_update_cores(arr_in_files, str_spi_file, hash_dict, b_new=False):
@@ -761,6 +777,7 @@ def prep_update_cores(arr_in_files, str_spi_file, hash_dict, b_new=False):
     :param arr_in_files: Array for inject_zxfiles, updated if needed
     :param str_spi_file: Input SPI flash file
     :param hash_dict: Dictionary with hashes for different blocks
+    :b_new: Is this a new Flash Image?
     """
 
     core_list = []
@@ -772,24 +789,107 @@ def prep_update_cores(arr_in_files, str_spi_file, hash_dict, b_new=False):
                                  hash_dict['Cores'])))
     else:
         for index, block_name in enumerate(hash_dict['Cores']):
-            core_list.append([index, block_name, block_name, '1.0', 'Nadia'])
+            core_list.append([index, block_name, block_name, '0', 'Para Sara'])
 
     for index, name, block_name, block_version, block_hash in core_list:
         index += 2
         if block_name in hash_dict['Cores']:
             latest = hash_dict['Cores'][block_name]['latest']
             new_hash = hash_dict['Cores'][block_name][latest[0]]
-            if block_hash != new_hash and len(latest) > 1:
-                dl_url = latest[1]
-                str_file = 'CORE{0:0>2}_{1}_{2}.ZXD'.format(
-                    index, block_name, latest[0])
-                str_file = os.path.join(STR_OUTDIR, str_file)
-                print('Downloading latest {0}...'.format(block_name), end='')
-                urllib.request.urlretrieve(dl_url, str_file)
-                print('OK')
 
-                new_in_file = 'CORE,{0},{1},{2}'.format(index, name, str_file)
-                arr_in_files.append(new_in_file)
+            dl_url = ''
+            if len(latest) > 1:
+                dl_url = latest[1]
+
+            str_file = 'CORE{0:0>2}_{1}_{2}.ZXD'.format(
+                index, block_name, latest[0])
+            str_file = os.path.join(STR_OUTDIR, str_file)
+
+            if block_hash != new_hash:
+                b_append = check_and_update(str_file, new_hash, dl_url,
+                                            block_name)
+
+                if b_append:
+                    new_in_file = 'CORE,{0},{1},{2}'.format(
+                        index, name, str_file)
+                    arr_in_files.append(new_in_file)
+
+
+def prep_update_roms(arr_in_files, fullhash_dict, b_new=False):
+    """
+    Try to prepare to update ROMs
+    :param arr_in_files: Array for inject_zxfiles, updated if needed
+    :param fullhash_dict: Dictionary with hashes data
+    :b_new: Is this a new Flash Image?
+    """
+
+    if 'ROMS' in fullhash_dict:
+        latest = fullhash_dict['ROMS']['latest']
+        new_hash = fullhash_dict['ROMS'][latest[0]]
+
+        dl_url = ''
+        if len(latest) > 1:
+            dl_url = latest[1]
+
+        str_roms = os.path.join(STR_OUTDIR, 'ROMS.ZX1')
+        b_append = check_and_update(str_roms, new_hash, dl_url, 'ROMS')
+
+        if b_append:
+            new_in_file = 'ROMS,{0}'.format(str_roms)
+            arr_in_files.append(new_in_file)
+
+
+def check_and_update(update_file, update_hash, update_url, update_name):
+    """
+    Checks if a file with the desired hashexists. If not, download from the URL
+    :param update_file: Path to the file
+    :param update_hash: Hash to check
+    :param update_url: URL to download if not found or wrong hash
+    :param update_name: Text to show while downloading
+    :returns: True if a new file was needed, found and downloaded
+    """
+
+    dl_result = False
+    if os.path.isfile(update_file):
+        file_hash = get_file_hash(update_file)
+        if file_hash == update_hash:
+            dl_result = True
+
+    if not dl_result and update_url:
+        print('Downloading latest {0}...'.format(update_name), end='')
+        urllib.request.urlretrieve(update_url, update_file)
+        print('OK')
+        dl_result = True
+
+    return dl_result
+
+
+def expand_image(str_spi_file, str_outfile, flash_len, b_force=False):
+    """
+    Expands, if needed, an image file
+    :param str_spi_file: Input SPI flash file
+    :param str_outfile: New SPI flash file to create
+    :param flash_len: Desired size, in bytes
+    :param b_force: Force overwriting file
+    """
+
+    b_len = os.stat(str_spi_file).st_size
+    if b_len < flash_len:
+        extra_len = flash_len - b_len
+        print('Expanding image file...')
+        if b_force or check_overwrite(str_outfile):
+            with open(str_spi_file, "rb") as in_zxdata:
+                b_data = in_zxdata.read(b_len)
+
+            # Extra 0s
+            b_data += b'\x00' * extra_len
+
+            with open(str_outfile, "wb") as out_zxdata:
+                out_zxdata.write(b_data)
+                print('{0} created OK.'.format(str_outfile))
+                b_force = True
+
+    return b_force
 
 
 def wipe_zxdata(str_spi_file,
@@ -1753,7 +1853,7 @@ def inject_rom_tobin(b_data,
                 br_data += b_data[cur_pos:rom_offset]
                 b_changed = True
             else:
-                LOGGER.error('Flash image too small for ROM')
+                LOGGER.error('Flash image too small for: {0}'.format(rom_name))
                 b_changed = False
                 break
 
