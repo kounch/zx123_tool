@@ -221,8 +221,9 @@
             "0.77": "de8953d614777da03f4cc9fd8bba01d35331c6e16a25df85f9ab7d8e8677a323",
             "0.80": "4a4af0ea9583add1d4d3e5d965d72192e30bcda12abf30d35d16b27d232c068f",
             "0.82": "d3482a48486e421aecf5f794fb7618554840956c19fa4c708aa72905fb8f151d",
-            "0.83b": "33f7da03849ace04f07fe0bc38575749759ce13ad601e1d8f13c7789d058f708",
-            "0.83": "637a3d58577491f4a81615b7291062529cae62958f763163fc1e5cf02895bff6",
+            "0.83b1": "33f7da03849ace04f07fe0bc38575749759ce13ad601e1d8f13c7789d058f708",
+            "0.83b2": "637a3d58577491f4a81615b7291062529cae62958f763163fc1e5cf02895bff6",
+            "0.83": "7e086501f0a07dbef8aba4d8d177131e2e2217bfbd95a039449c3471a83eb703",
             "Vertical": "35c890bf625d88796a68f48fc71485075030cb09217671cccf7aaf914fa7522d"
         },
         "esxdos": {
@@ -239,49 +240,64 @@
         },
         "Cores": {
             "Amstrad CPC": {
-                "Unknown Version": "3d87c1b4f02aea41645e9ff82505a44dc30f09e040d6eb08461d648b400854b2"
+                "latest":["1.0", "https://github.com/zxdos/binaries/raw/master/AmstradCPC.ZX2"],
+                "1.0": "3d87c1b4f02aea41645e9ff82505a44dc30f09e040d6eb08461d648b400854b2"
             },
             "Atari 2600": {
-                "2.0": "1d626327a8fda918676b2c3c2cd6c173c5d97c8be79b3808b842202398157ccf"
+                "latest": ["2.1", "https://github.com/zxdos/binaries/raw/master/COREN_A2600_zxdos_lx16_v2_1.ZX2"],
+                "2.0": "1d626327a8fda918676b2c3c2cd6c173c5d97c8be79b3808b842202398157ccf",
+                "2.1": "b18e337c48e007ff8272624934bcc87a2173a5c06aecd8e3a493f3dff8120961"
             },
             "ColecoVision": {
+                "latest": ["1.0 VGA"],
                 "1.0 RGB": "44eb8e83e0bb6d273f194974ac270d94f5738978a779fd37f5624b19ff31a750",
                 "1.0 VGA": "af1962514d1bb73d7ac9d83b6dcf670776ae9e2cb6c818df83b23b03042852b3"
             },
             "Jupiter ACE": {
+                "latest": ["4.0", "https://github.com/zxdos/binaries/raw/master/tld_jace_v4.ZX2"],
                 "4.0": "01152abf42f4cca0fc4accb4d054e3ec18381c239524aa0559d0d6485b6206da"
             },
             "MSX": {
+                "latest": ["1.3", "https://github.com/zxdos/binaries/raw/master/MSX1FPGA.ZX2"],
                 "1.3": "f2c9748dd988e894ccf9278702e1a6c290e74ab4ff22fd79eaba8b085b91d4ee"
             },
+            "Phoenix": {
+                "latest": ["1.0", "https://github.com/zxdos/binaries/raw/master/COREN_phoenix_zxdoslx16.ZX2"],
+                "1.0": "48eb3dd20c23b99fba5800181aca4bc08ea111e601ddbe1cdd6d795db931beb3"
+            },
             "Pong": {
-                "latest": ["3.0"],
+                "latest": ["2.2", "https://github.com/zxdos/binaries/raw/master/COREN_pong_ay38500_zxdoslx16_v2_2.ZX2"],
                 "1.0": "828e2feb5dc09b921497573d7e154c73dbe7f0c5a00f19fdf4085d14b88241ac", 
                 "2.0": "e776b5b4f31b33798d2238c77969c248a85a99035b70f9b3ce65c0fd3f4a1345",
-                "3.0": "ea48b20431c8d6a392b857001247954281e85f00f9ff54f0222dd68ccd4fda08"
+                "2.1": "1ea35d5068347520d6a61b2f1d24823681eade2b0dd48882d89b57f74ec69951",
+                "2.2": "dc902e126c56369e79203c31a90ac77fb0c2d6bc42c7891e3c0788d571d775e2"
             },
             "Sega Master System": {
+                "latest": ["2.0 Memorias_ISSI"],
                 "2.0 Memorias_ISSI": "661f0b4f3b703e906ced8548f1514cc4c889c646e87e897c2b11584ef137a02d"
             },
             "Videopac": {
-                "latest": ["20210129", "https://github.com/zxdos/binaries/raw/master/videopac_zxdos_lx16_20210129.ZX2"],
+                "latest": ["20210131", "https://github.com/zxdos/binaries/raw/master/videopac_zxdos_lx16_20210131.ZX2"],
                 "Beta 1": "fe9f9b7e75c9ef3ed3ebcca0985b0086626e8eeb1c43c0cb7237b98a183cf0b5",
                 "Beta 4": "182c1d1ae6fc52007ae6ccff4abbbcc7980608d8074e66db59de972d4bee3ac1",
-                "20210129": "58acba0846b14dcb5b8ddab8764e2cb8591033d528be7f799ab08093309eebe3"
+                "20210129": "58acba0846b14dcb5b8ddab8764e2cb8591033d528be7f799ab08093309eebe3",
+                "20210131": "8c5de11a0bd34ede3b55589adcc4f8d2fe9d62da173afe38712e16e6935b495c"
             },
             "ZX80yUno": {
-                "latest": ["3.0"],
+                "latest": ["3.0", "https://github.com/zxdos/binaries/raw/master/COREn_zx80yunoV3.ZX2"],
                 "1.0": "ad070a0695c33d7c54b65895c07b60c03e3ebdc9bedc275ae491c16bdd60e982",
                 "2.0 Beta Tape": "ed6b291fc0e54e84aa9db379a352396200562874ae079355e210854d16b69aa4",
                 "3.0": "504f9b44494daede44072dec653e7b9d5fd39c7279e6bf67a3dac2cb68c518c6"
             },
             "ZX Spectrum": {
+                "latest": ["EXP27_SVN"],
                 "EXP27_SVN": "9f10eb6605c428e17db607a7141036a218164eeea02ac4c087e447dce5e5ced4"
             },
             "ZX Spectrum Next": {
-                "latest": ["3.01.09 Beta"],
+                "latest": ["3.01.06 v11", "https://github.com/zxdos/binaries/raw/master/zxnext_top_issue2_zxdos_1M_lx16_v11.ZX2"],
                 "3.01.05 Issue2": "86a0f9ee8405c787209ded1b2a1035e47fd461c4b435f4e75ab53ede8c320531",
                 "3.01.05 Issue2 DDR3 Black": "55fa0ba05d0fdd49e35c89abc62e2f3d43f0e398b59575396d75f582231c1745",
+                "3.01.06 v11": "a7ab1245134151b5da4245c053dea2c19b200aedf4cbc1542b892007829753d3",
                 "3.01.09 Beta": "0b9a4bc393fe1160f15e6b9960199f34835ba3867449571839202a750908f8df"
             }
         }
@@ -401,7 +417,7 @@
             },
             "ZX Spectrum (Avlixa)":
             {
-                "latest": ["EXP27_190920_test_BnW", "https://github.com/zxdos/zxdos-plus/raw/master/cores/CORE21_SPECTRUM_EXP27_zxdos_lx25.ZXD"],
+                "latest": ["EXP27_190920_BnW        ", "https://github.com/zxdos/zxdos-plus/raw/master/cores/CORE21_SPECTRUM_EXP27_zxdos_lx25.ZXD"],
                 "EXP27_150820_monocromo": "89ccd7c10b91668a9940193dc55e6f30bc0f138dee9b3f671ac440acf8c484e3",
                 "EXP27_190920_test_BnW": "710eb8ac196b0b38ff84761c727e8b4ed8a2f9433db9b4d76899209aed3f757f",
                 "EXP27_190920_BnW": "a4be8ef45afb08aa3f5aec99772beec6ffff1058e478b4b55df8360275a193b0"
