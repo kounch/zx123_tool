@@ -38,16 +38,16 @@
         },
         "Cores": {
             "Acorn Atom": {
-                "latest": ["carmeloco 11.05.2020"],
+                "latest": ["TEST1 - 20150817", "https://github.com/zxdos/zxuno/raw/master/cores/AcornAtom/CORE21.ZX1"],
                 "TEST1 - 20150817": "a11b505d89a90371461307a8bd4148e6cbec42435032055400c233f019daff26",
                 "carmeloco 11.05.2020": "622640413b76a842065ab127c1fecd813016382760e272e97278d5f34f76829b"
             },
             "Acorn Electron": {
-                "latest": ["TEST2"],
+                "latest": ["TEST2", "https://github.com/zxdos/zxuno/raw/master/cores/AcornElectron/CORE11.ZX1"],
                 "TEST2": "198a15023991053b4d9891180bbadb2f2f200914d4a0370cf5e08ec4e869d3e8"
             },
             "Amstrad CPC464": {
-                "latest": ["TEST 3a"],
+                "latest": ["Test2 - 20170408", "https://github.com/zxdos/zxuno/raw/master/cores/CPC/CORE4.ZX1"],
                 "Test2 - 20170408": "6341fb122713725ebe758cfbf8ea357cf9ce6f0dd410cc1de715719cd77d17ed",
                 "TEST 3a": "5a2363e9ef1f10320cc2ed5309c2ab5331db4b4ca8dbab9e39737a02c9186c36"
             },
@@ -70,7 +70,7 @@
                 "1.2 2MB Int": "58abded410ca401efc93c70fe940815f6aebc28dd52d771f480fc28678ca34a0"
             },
             "Atari 2600": {
-                "latest": ["VGA Spark2k06"],
+                "latest": ["1.227", "https://github.com/zxdos/zxuno/raw/master/cores/Atari2600/CORE20.ZX1"],
                 "1.227": "e0ce080c35a8d9f8020635112a1794c9b69ff01127be4bc3a0a81ea645163c08",
                 "VGA Spark2k06": "6f03454880ca2e1477430d3a48a5c1755dd9b639ef5121ca6bd04674a6bbc7db"
             },
@@ -92,7 +92,7 @@
                 "Unknown Version": "eebedf1a88f35d6e8dd981e1eff93fecc90f99350c0482042b39f62a294dc321"
             },
             "ColecoVision" : {
-                "latest": ["1.2 VGA 2MB 2 joysticks"],
+                "latest": ["512K", "https://github.com/zxdos/zxuno/raw/master/cores/Colecovision/CORE13.ZX1"],
                 "512K": "42a1c25f0c8f767677f6e3c5ebbd0bbc70eed07fc321e4d19770f348436f0c9d",
                 "1.2 VGA 2MB 2 joysticks": "500c94aec1d196497196592dab8098cc2a5076b95fd338df1bd0349bdd9a01b0"
             },
@@ -101,7 +101,7 @@
                 "Release 1": "981403fad352ef8c54c1cc7f57f6cbfd3ce9d50a8e4b29b079ba02192610d799"
             },
             "Commodore 64" : {
-                "latest": ["Beta 7b"],
+                "latest": ["Beta 7b", "https://github.com/zxdos/zxuno/raw/master/cores/C64/CORE_beta7b.ZX1"],
                 "Beta 6": "4c8c757ba1224b9156afb39b6d3157ebabcde601241c601f79df44cbe76211ac",
                 "Beta 7b": "66a25e6a2ba2f492baf673961efe660ec9568ff83d1edd5199aa61b26579c64e"
             },
@@ -129,6 +129,10 @@
                 "latest": ["2MB Int"],
                 "2MB Int": "c9f5cc94fda19f5bc7434c4483b12ec513ce4fba4690ec13d86de0be1672d070"
             },
+            "Invaders": {
+                "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/cores/Arcade/Invaders/CORE29.ZX1"],
+                "1.0": "84a7531ed31ea2a7109fe2948cd52fea06430a7348c15f6489181d72040185f2"
+            },
             "Jupiter Ace": {
                 "latest": ["2019.06.19 azesmbog"],
                 "1-142": "34443281df7d65c7a4a1bec2053980374955cceed9dbd88dd7b9820bee0adf2b",
@@ -148,7 +152,7 @@
                 "Unknown Version": "6bfa0cfabb371eec73f5e06cff4f2abf57c18ed306797c377f79b7a4d5d62506"
             },
             "MSX1": {
-                "latest": ["1.3 VGA2M"],
+                "latest": ["1.1 - 20161118", "https://github.com/zxdos/zxuno/raw/master/cores/MSX/CORE14.ZX1"],
                 "1.1 - 20161118": "93cd6f516dec75fbd48f6ca5b5e344f7fee4391974f478979302426e2730eaa9",
                 "1.3 512K": "994e7b1aac5457ca624b9d4f47db3b6997ecd321031f204c03025ee505674ee6",
                 "1.3 VGA2M": "3750b52f63084765d344d3e1e981389f871c3de63651b414d0034237b42d921e"
@@ -158,11 +162,11 @@
                 "TEST1": "9d7739ac873a60aed8a43d59c697b29de34003f2a098e5b7beff7263fb8d6293"
             },
             "MZ700": {
-                "latest": ["20161218"],
+                "latest": ["20161218", "https://github.com/zxdos/zxuno/raw/master/cores/MZ700/CORE22.ZX1"],
                 "20161218": "15bd4192d04f523e14108c4fce2f90775b38c821d963e11da9fb36ea63eee39a"
             },
             "NES": {
-                "latest": ["TEST4 VGA 2MB INT"],
+                "latest": ["TEST2 - 20160910", "https://github.com/zxdos/zxuno/raw/master/cores/NES/CORE19.ZX1"],
                 "TEST2 - 20160910": "50c057349a7e9e993c841ad72b652caef060110348ce1e91b6033fb9e4bfafda",
                 "TEST4 VGA 2MB INT": "ed807d4ed1cfa36059919f01307c6a701d2d0835075f725c8aada88ae3f63eff"
             },
@@ -171,22 +175,26 @@
                 "Unknown Version": "6905d2ca5168cb18e1609f2b15b69c4a9c52a757d50f2920b0803322a9d8d094"
             },
             "Oric Atmos": {
-                "latest": ["27.12.2018 dos8d"],
+                "latest": ["27.12.2018 dos8d", "https://github.com/zxdos/zxuno/raw/master/cores/Oric/CORE16.ZX1"],
                 "TEST1 - 20170701": "0fbd7f0195ab840e655ffd5946478e34ee8b1b953bae4609c855912f9ce05be4",
                 "27.12.2018 dos8d": "0e3597b079c65e8f57a24aba7eae69008a21b4537fff490dd1c93e1f915b9977"
             },
+            "Pac-Man": {
+                "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/cores/Arcade/Pacman/CORE30.ZX1"],
+                "1.0": "d9c37122ea0e345131dafb70c10575928b2661c1a6333bc134c0492b55c089e0"
+            },
             "PC XT": {
-                "latest": ["2MB Int 70Mhz"],
+                "latest": ["512KB 70Mhz", "https://github.com/zxdos/zxuno/raw/master/cores/PC/CORE23.ZX1"],
                 "2MB Ext 70MHz": "b560afa672db76b3e0476c20130e14e07f9569761cc20315a83cf6cfa8bf167a",
                 "512KB 70Mhz": "81e89e258fb00fd46f37c8d06055c23821290e265433cd24e8cd1cd0a5993202",
                 "2MB Int 70Mhz": "29a26b485e4180245a43dda65650f29331fe3f0a7952993e7834ea9c680c9557"
             },
             "Sam Coupe": {
-                "latest": ["1.142"],
+                "latest": ["1.142", "https://github.com/zxdos/zxuno/raw/master/cores/SamCoupe/CORE2.ZX1"],
                 "1.142": "32fd2069f416ada27c7a6556b18ebd0b3813817aa6c419cc12dde046a25236f1"
             },
             "Sega Master System": {
-                "latest": ["TEST 4.3 2MB Int"],
+                "latest": ["TEST 4.2 - 20170214", "https://github.com/zxdos/zxuno/raw/master/cores/MasterSystem/CORE6.ZX1"],
                 "TEST 4.2 - 20170214": "b99a952e0aa433263fab620ff5f283cf6be2265103fc17f232791ee33c26e425",
                 "TEST 4.3 (512K)": "c385c9c8b68245ab9a3135e5514fc4e85a0bccc17432226aa1e23ac61c2979c3",
                 "TEST 4.3 2MB Int": "8a60c85e94c1819251ac07d2fc3296809542408531b10968d0c6bdce2f7f8e65"
@@ -200,12 +208,16 @@
                 "latest": ["Unknown Version"],
                 "Unknown Version": "6148abf8d3da6bcea2dc58bc9397b31e9be75d78503a0fd89a9a52f3dbd2ca3d"
             },
+            "Test": {
+                "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/cores/test/CORE9.ZX1"],
+                "1.0": "18ebf52a9f33e6f7af40d832d7b9d512d08964c3c8f9355234126b1662ec9d36"
+            },
             "Vectrex": {
                 "latest": ["TEST1"],
                 "TEST1": "c60e36dc22f25c6d79aea3d733f9accd8b496910c817437b78bc5d68b99b0128"
             },
             "ZX81": {
-                "latest": ["VGA"],
+                "latest": ["20161105", "https://github.com/zxdos/zxuno/raw/master/cores/ZX81/CORE15.ZX1"],
                 "20161105": "926198a4a6ba89748209e0d25ed34d35d8d51149c6ced0e9452a93440117eec4",
                 "VGA": "0a2469f0b57dab9055dec1de3c68468f4f9df6d32e6b317343df6d1fd8d6c915"
             },
@@ -232,7 +244,7 @@
                 "azesmbog DMA 24.05.30": "6a0cd7879a98182aeec5b92c36523cf11a1ed5be9f128341609d5a4246e94ec9"
             },
             "ZX TBBlue": {
-                "latest": ["azesmbog 13.05.2020"],
+                "latest": ["20161207", "https://github.com/zxdos/zxuno/raw/master/cores/TBBlue/CORE12.ZX1"],
                 "20161207": "64a0ba1a226466c561e4aaa8ed366562b29e24bb12fa99bdc599a91e86dd7e8b",
                 "azesmbog 13.05.2020": "b2cfa5f151f0b91d5d1d20546ee55da51c1a17d0c2f753d55456176de7352efd"
             }
