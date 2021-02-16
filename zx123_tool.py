@@ -47,7 +47,7 @@ from zipfile import ZipFile
 import tempfile
 import shutil
 
-__MY_VERSION__ = '2.0.1'
+__MY_VERSION__ = '2.1.0'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
@@ -175,12 +175,14 @@ def main():
                     output_file = str_file
                 arr_upd = []
                 if arg_data['update'].lower() in ['all', 'bios']:
-                    prep_update_zxdata(arr_upd, str_file, dict_hash, ['BIOS'])
+                    prep_update_zxdata(arr_upd, str_file, fulldict_hash,
+                                       str_extension, ['BIOS'])
                 if arg_data['update'].lower() in ['all', 'spectrum']:
-                    prep_update_zxdata(arr_upd, str_file, dict_hash,
-                                       ['Spectrum'])
+                    prep_update_zxdata(arr_upd, str_file, fulldict_hash,
+                                       str_extension, ['Spectrum'])
                 if arg_data['update'].lower() in ['all', 'cores']:
-                    prep_update_cores(arr_upd, str_file, dict_hash, b_new_img)
+                    prep_update_cores(arr_upd, str_file, fulldict_hash,
+                                      str_extension, b_new_img)
                 if b_new_img or arg_data['update'].lower() == 'roms':
                     prep_update_roms(arr_upd, fulldict_hash, b_new_img)
 
@@ -738,13 +740,15 @@ def extractfrom_zxdata(str_in_file,
         export_bindata(roms_data, str_bin, b_force)
 
 
-def prep_update_zxdata(arr_in_files, str_spi_file, hash_dict, block_list):
+def prep_update_zxdata(arr_in_files, str_spi_file, fullhash_dict, str_extension, block_list):
     """
     Try to prepare to update several BIOS
     :param str_spi_file: Input SPI flash file
     :param hash_dict: Dictionary with hashes for different blocks
     :return: A valid array for inject_zxfiles
     """
+
+    hash_dict = fullhash_dict[str_extension]
 
     if not block_list:
         block_list = ['BIOS', 'esxdos', 'Spectrum']
@@ -761,7 +765,7 @@ def prep_update_zxdata(arr_in_files, str_spi_file, hash_dict, block_list):
         if len(latest) > 1:
             dl_url = latest[1]
 
-        str_file = '{0}_{1}.ZXD'.format(block_name, latest[0])
+        str_file = '{0}_{1}.{2}'.format(block_name, latest[0], str_extension)
         str_file = os.path.join(STR_OUTDIR, str_file)
 
         if block_hash != new_hash:
@@ -771,7 +775,7 @@ def prep_update_zxdata(arr_in_files, str_spi_file, hash_dict, block_list):
                 arr_in_files.append('{0},{1}'.format(block_name, str_file))
 
 
-def prep_update_cores(arr_in_files, str_spi_file, hash_dict, b_new=False):
+def prep_update_cores(arr_in_files, str_spi_file, fullhash_dict, str_extension, b_new=False):
     """
     Try to prepare to update cores
     :param arr_in_files: Array for inject_zxfiles, updated if needed
@@ -779,6 +783,8 @@ def prep_update_cores(arr_in_files, str_spi_file, hash_dict, b_new=False):
     :param hash_dict: Dictionary with hashes for different blocks
     :b_new: Is this a new Flash Image?
     """
+
+    hash_dict = fullhash_dict[str_extension]
 
     core_list = []
     tmp_list = get_core_list(str_spi_file, hash_dict['parts'])
@@ -801,8 +807,8 @@ def prep_update_cores(arr_in_files, str_spi_file, hash_dict, b_new=False):
             if len(latest) > 1:
                 dl_url = latest[1]
 
-            str_file = 'CORE{0:0>2}_{1}_{2}.ZXD'.format(
-                index, block_name, latest[0])
+            str_file = 'CORE{0:0>2}_{1}_{2}.{3}'.format(
+                index, block_name, latest[0], str_extension)
             str_file = os.path.join(STR_OUTDIR, str_file)
 
             if block_hash != new_hash:
