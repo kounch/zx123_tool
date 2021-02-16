@@ -30,7 +30,7 @@
             "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8"
         },
         "Spectrum": {
-            "latest": ["EXP27_160820"],
+            "latest": ["EXP27_160820", "https://github.com/mcleod-ideafix/zxuno_spectrum_core/raw/master/zxuno_v4/SPECTRUM.ZX1"],
             "EXP26-19022018": "8c677536500eee76873d9a2462ff44adbf3a57477157e275930304fc981a4604",
             "EXP26 040418": "85023e5c7941f56f74c1badc37f295e08b4c2955b67723851c1c5763891b236a",
             "EXP27_160820": "140fe5400fb3aee7dae99c540020d36d14d3c0be7ec3b9dd737a2b198525d618",
@@ -43,8 +43,8 @@
                 "carmeloco 11.05.2020": "622640413b76a842065ab127c1fecd813016382760e272e97278d5f34f76829b"
             },
             "Acorn Electron": {
-                "latest": ["TEST2", "https://github.com/zxdos/zxuno/raw/master/cores/AcornElectron/CORE11.ZX1"],
-                "TEST2": "198a15023991053b4d9891180bbadb2f2f200914d4a0370cf5e08ec4e869d3e8"
+                "latest": ["TEST1 - 20160108", "https://github.com/zxdos/zxuno/raw/master/cores/AcornElectron/CORE11.ZX1"],
+                "TEST1 - 20160108": "198a15023991053b4d9891180bbadb2f2f200914d4a0370cf5e08ec4e869d3e8"
             },
             "Amstrad CPC464": {
                 "latest": ["Test2 - 20170408", "https://github.com/zxdos/zxuno/raw/master/cores/CPC/CORE4.ZX1"],
@@ -52,20 +52,22 @@
                 "TEST 3a": "5a2363e9ef1f10320cc2ed5309c2ab5331db4b4ca8dbab9e39737a02c9186c36"
             },
             "Amstrad CPC6128": {
-                "latest": ["SD support"],
+                "latest": ["Unknown Vers", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/CPC6128.ZX1"],
+                "Unknown Vers": "00c62d213755c76feb8a27f3e98a0cafd212206bf10912b9ebf2c2e34c4a2db1",
                 "no SD support": "18b620669521a7649d78fa0c2fd057bb792ec238ab9cb9801063759a3439ac00",
                 "SD support": "c3d2f7b1c37ff08c67affba3baa9cc9e0de895cd8035782ad366d402499b54e3"
             },
             "Apple II": {
-                "latest": ["TEST3"],
-                "TEST3": "1e5cd4c7df4d3ae1dae325c6e0bd546bcaf8be15a63a9e7c670948a29be9011a"
+                "latest": ["1.13", "https://github.com/zxdos/zxuno/raw/master/cores/Apple2/CORE18.ZX1"],
+                "TEST3": "1e5cd4c7df4d3ae1dae325c6e0bd546bcaf8be15a63a9e7c670948a29be9011a",
+                "1.13": "06ff87a84a8a7566de427b0a485735edb826fadefeae872a730ef7f9716bb9fb"
             },
             "Asteroids": {
                 "latest": ["Unknown Version"],
                 "Unknown Version": "5ecf9ad99902fbc621f412a2b5b635ebb3cd4211bb0167fee48c1ab3f594a4a1"
             },
             "Atari 800 XL": {
-                "latest": ["1.2 2MB Int"],
+                "latest": ["1.1 (512K)", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Atari800XL.ZX1"],
                 "1.1 (512K)": "760746ae75c7cf9b80752078145328dd29ba9dbff158287c503c966a41581481",
                 "1.2 2MB Int": "58abded410ca401efc93c70fe940815f6aebc28dd52d771f480fc28678ca34a0"
             },
@@ -75,8 +77,9 @@
                 "VGA Spark2k06": "6f03454880ca2e1477430d3a48a5c1755dd9b639ef5121ca6bd04674a6bbc7db"
             },
             "BBC Micro": {
-                "latest": ["1.3"],
+                "latest": ["1.227", "https://github.com/zxdos/zxuno/raw/master/cores/BBCMicro/CORE8.ZX1"],
                 "1.3b": "c35ed68b865139001bde7a8cb1e9fc12e0ab1e40f6d805a174f25dc94b6be73e",
+                "1.227": "aea03129db713abe793f83754f4fff3381d3f1acd4d8bd02b183dae08bff3769",
                 "1.3": "4bbc3c71e4bfc755e2fa315336bf77c9115a977381949b801cc75e7a087ac53e"
             },
             "Berzek": {
@@ -97,7 +100,7 @@
                 "1.2 VGA 2MB 2 joysticks": "500c94aec1d196497196592dab8098cc2a5076b95fd338df1bd0349bdd9a01b0"
             },
             "Commodore 16 - 116 - Plus4": {
-                "latest": ["Release 1"],
+                "latest": ["Release 1", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/C16.ZX1"],
                 "Release 1": "981403fad352ef8c54c1cc7f57f6cbfd3ce9d50a8e4b29b079ba02192610d799"
             },
             "Commodore 64" : {
@@ -106,11 +109,12 @@
                 "Beta 7b": "66a25e6a2ba2f492baf673961efe660ec9568ff83d1edd5199aa61b26579c64e"
             },
             "Commodore PET": {
-                "latest": ["VGA"],
+                "latest": ["VGA", "https://github.com/zxdos/zxuno/raw/master/cores/PET/CORE17.ZX1"],
                 "VGA": "92571c0edcee44ea3da4fe3835babb2d8985d7e65f04d1c5f2d2164c2081ab34"
             },
             "Commodore VIC20": {
-                "latest": ["TEST3 - 20170701"],
+                "latest": ["1.227", "https://github.com/zxdos/zxuno/raw/master/cores/VIC20/CORE10.ZX1"],
+                "1.227": "35638cdc8937fcfbd39b7042c0bd5598421dd9d1831ace662b94502a144a7cd3",
                 "TEST3 - 20170701": "ccefd756a91ed65afe38f70c03905a2fc839ebb3ddb8c259b18d6c51145aa5a6"
             },
             "Defender": {
@@ -134,7 +138,8 @@
                 "1.0": "84a7531ed31ea2a7109fe2948cd52fea06430a7348c15f6489181d72040185f2"
             },
             "Jupiter Ace": {
-                "latest": ["2019.06.19 azesmbog"],
+                "latest": ["CORE3", "https://github.com/zxdos/zxuno/raw/master/cores/JupiterAce/CORE3.ZX1"],
+                "CORE3": "bc7e6c7f7afdc4465245a77dcf8c426ec246d7737477d0eb65a73c217dd57c92",
                 "1-142": "34443281df7d65c7a4a1bec2053980374955cceed9dbd88dd7b9820bee0adf2b",
                 "19.06.2018 dos8d": "6e782598fa050c76dabac986bb481dc844e96a0e0a94b9ca84b6fe27b2d6603",
                 "2019.06.19 azesmbog": "86e782598fa050c76dabac986bb481dc844e96a0e0a94b9ca84b6fe27b2d6603"
@@ -185,6 +190,7 @@
             },
             "PC XT": {
                 "latest": ["512KB 70Mhz", "https://github.com/zxdos/zxuno/raw/master/cores/PC/CORE23.ZX1"],
+                "CORE24": "de55a3817acacc55ae90fef0db6c4137ed3c13e84d927a4d7862a7ce1bf178ab",
                 "2MB Ext 70MHz": "b560afa672db76b3e0476c20130e14e07f9569761cc20315a83cf6cfa8bf167a",
                 "512KB 70Mhz": "81e89e258fb00fd46f37c8d06055c23821290e265433cd24e8cd1cd0a5993202",
                 "2MB Int 70Mhz": "29a26b485e4180245a43dda65650f29331fe3f0a7952993e7834ea9c680c9557"
@@ -213,7 +219,7 @@
                 "1.0": "18ebf52a9f33e6f7af40d832d7b9d512d08964c3c8f9355234126b1662ec9d36"
             },
             "Vectrex": {
-                "latest": ["TEST1"],
+                "latest": ["TEST1", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Vectrex.ZX1"],
                 "TEST1": "c60e36dc22f25c6d79aea3d733f9accd8b496910c817437b78bc5d68b99b0128"
             },
             "ZX81": {
@@ -222,19 +228,22 @@
                 "VGA": "0a2469f0b57dab9055dec1de3c68468f4f9df6d32e6b317343df6d1fd8d6c915"
             },
             "ZX Spectrum": {
-                "latest": ["EXP27 160820"],
+                "latest": ["EXP27 160820", "https://github.com/mcleod-ideafix/zxuno_spectrum_core/raw/master/zxuno_v4/COREx.ZX1"],
+                "CORE2": "eff15961241c3bd360261af20bb1823c8b798c54e47129f681aad8e54b4e2496",
                 "EXP26 040418": "31a1373cf3d99f66a00c76cb96bebd4b8db0b3782ac55c0423a3373d7a083a29",
                 "EXP27 160820": "613902acb29e3926142a721493c593c0746969261fe7d5cce207194a1fc30a03",
                 "VGA 60Hz": "3bc28ff2692f038f3938e6b38d0980a567460a06657aa5e4327ba93b36d98261",
                 "VGA 110420": "1a8e1441b5cba8036fe9bb7a5f72a6e20fe5629507ba1d49c80d282c48c220c1"
             },
             "ZX Spectrum 48K (Kyp)": {
-                "latest": ["kyp ZX48 2020.09.06"],
+                "latest": ["CORE25", "https://github.com/zxdos/zxuno/raw/master/cores/KypSpectrum/CORE25.ZX1"],
+                "CORE25": "575286b932f45cb48d498cbce197b04ef51379f7dc77745b39d10340e10209d5",
                 "kyp ZX48 2020.08.13": "7998866f2bcdd566f19e8c73ea53eff575bbd8f3e0f8a7be5716fb274c0d36bc",
                 "kyp ZX48 2020.09.06": "db39811185a8fcfc371226353f7d6527373372cf3b25981d208c64a0707df507"
             },
             "ZX Spectrum 128K (Kyp)": {
-                "latest": ["2020.10.09"],
+                "latest": ["CORE26", "https://github.com/zxdos/zxuno/raw/master/cores/KypSpectrum/CORE26.ZX1"],
+                "CORE26": "49ec4c96aaaa7e783abd9f2fba2ad4437a4c70f92f53c466b9cc2d4c6fe2de2e",
                 "2020.10.09": "e8f535ea695d405df2fd5eaeb2bfa449ab08657a52062da8abc5fe4261d7ab30"
             },
             "ZX Spectrum (azesmbog)": {
@@ -465,7 +474,7 @@
             },
             "ZX Spectrum (Avlixa)":
             {
-                "latest": ["EXP27_190920_BnW        ", "https://github.com/zxdos/zxdos-plus/raw/master/cores/CORE21_SPECTRUM_EXP27_zxdos_lx25.ZXD"],
+                "latest": ["EXP27_190920_BnW", "https://github.com/zxdos/zxdos-plus/raw/master/cores/CORE21_SPECTRUM_EXP27_zxdos_lx25.ZXD"],
                 "EXP27_150820_monocromo": "89ccd7c10b91668a9940193dc55e6f30bc0f138dee9b3f671ac440acf8c484e3",
                 "EXP27_190920_test_BnW": "710eb8ac196b0b38ff84761c727e8b4ed8a2f9433db9b4d76899209aed3f757f",
                 "EXP27_190920_BnW": "a4be8ef45afb08aa3f5aec99772beec6ffff1058e478b4b55df8360275a193b0"

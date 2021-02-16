@@ -740,7 +740,8 @@ def extractfrom_zxdata(str_in_file,
         export_bindata(roms_data, str_bin, b_force)
 
 
-def prep_update_zxdata(arr_in_files, str_spi_file, fullhash_dict, str_extension, block_list):
+def prep_update_zxdata(arr_in_files, str_spi_file, fullhash_dict,
+                       str_extension, block_list):
     """
     Try to prepare to update several BIOS
     :param str_spi_file: Input SPI flash file
@@ -775,7 +776,11 @@ def prep_update_zxdata(arr_in_files, str_spi_file, fullhash_dict, str_extension,
                 arr_in_files.append('{0},{1}'.format(block_name, str_file))
 
 
-def prep_update_cores(arr_in_files, str_spi_file, fullhash_dict, str_extension, b_new=False):
+def prep_update_cores(arr_in_files,
+                      str_spi_file,
+                      fullhash_dict,
+                      str_extension,
+                      b_new=False):
     """
     Try to prepare to update cores
     :param arr_in_files: Array for inject_zxfiles, updated if needed
