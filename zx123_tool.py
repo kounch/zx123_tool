@@ -32,6 +32,7 @@ Requires a zx123_hash.json file with block structure for a kind of SPI flash
 file (e.g.: ZXD) and, optionally, hashes to identify the blocks inside.
 """
 
+from __future__ import print_function
 import logging
 import sys
 import argparse
@@ -41,7 +42,8 @@ import hashlib
 from binascii import unhexlify
 import struct
 import six
-import urllib.request
+if six.PY3:
+    import urllib.request
 import ssl
 from zipfile import ZipFile
 import tempfile
@@ -671,9 +673,12 @@ def extractfrom_zxdata(str_in_file,
             if core_number > 1 and core_number < (len(core_list) + 2):
                 print('Extracting Core {0}...'.format(core_number))
                 core_number -= 2
+                core_name = core_list[core_number].strip()
                 block_name, block_version, block_hash = get_core_version(
                     str_in_file, core_number, hash_dict['parts'],
                     hash_dict['Cores'])
+                if block_name == 'Unknown':
+                    block_name = core_name
                 splitcore_index = hash_dict['parts']['cores_dir'][4]
                 core_bases = hash_dict['parts']['core_base']
                 block_data = get_core_blockdata(core_number, splitcore_index,
