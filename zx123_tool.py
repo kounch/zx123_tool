@@ -759,26 +759,22 @@ def prep_update_zxdata(arr_in_files, str_spi_file, fullhash_dict,
     if not block_list:
         block_list = ['BIOS', 'esxdos', 'Spectrum']
 
-    for block_name in block_list:
+    for block in block_list:
         block_version, block_hash = get_version(str_spi_file,
-                                                hash_dict['parts'][block_name],
-                                                hash_dict[block_name])
+                                                hash_dict['parts'][block],
+                                                hash_dict[block])
 
-        latest = hash_dict[block_name]['latest']
-        new_hash = hash_dict[block_name][latest[0]]
+        latest = hash_dict[block]['latest']
+        new_hash = hash_dict[block][latest[0]]
 
-        dl_url = ''
-        if len(latest) > 1:
-            dl_url = latest[1]
-
-        str_file = '{0}_{1}.{2}'.format(block_name, latest[0], str_extension)
+        str_file = '{0}_{1}.{2}'.format(block, latest[0], str_extension)
         str_file = os.path.join(STR_OUTDIR, str_file)
 
         if block_hash != new_hash:
-            b_append = check_and_update(str_file, new_hash, dl_url, block_name)
+            b_append = check_and_update(str_file, new_hash, latest[1:], block)
 
             if b_append:
-                arr_in_files.append('{0},{1}'.format(block_name, str_file))
+                arr_in_files.append('{0},{1}'.format(block, str_file))
 
 
 def prep_update_cores(arr_in_files,
@@ -813,17 +809,13 @@ def prep_update_cores(arr_in_files,
             latest = hash_dict['Cores'][block_name]['latest']
             new_hash = hash_dict['Cores'][block_name][latest[0]]
 
-            dl_url = ''
-            if len(latest) > 1:
-                dl_url = latest[1]
-
             str_file = 'CORE{0:0>2}_{1}_{2}.{3}'.format(
                 index, block_name, latest[0], str_extension)
             str_file = os.path.join(STR_OUTDIR, str_file)
 
             if block_hash != new_hash:
-                b_append = check_and_update(str_file, new_hash, dl_url,
-                                            block_name)
+                b_append = check_and_update(str_file, new_hash, latest[1:],
+                                            block_name, block_hash)
 
                 if b_append:
                     new_in_file = 'CORE,{0},{1},{2}'.format(
@@ -843,36 +835,39 @@ def prep_update_roms(arr_in_files, fullhash_dict, b_new=False):
         latest = fullhash_dict['ROMS']['latest']
         new_hash = fullhash_dict['ROMS'][latest[0]]
 
-        dl_url = ''
-        if len(latest) > 1:
-            dl_url = latest[1]
-
         str_roms = os.path.join(STR_OUTDIR, 'ROMS.ZX1')
-        b_append = check_and_update(str_roms, new_hash, dl_url, 'ROMS')
+        b_append = check_and_update(str_roms, new_hash, latest[1:], 'ROMS')
 
         if b_append:
             new_in_file = 'ROMS,{0}'.format(str_roms)
             arr_in_files.append(new_in_file)
 
 
-def check_and_update(update_file, update_hash, update_url, update_name):
+def check_and_update(update_file, upd_hash, upd_urls, upd_name, uchk=''):
     """
     Checks if a file with the desired hashexists. If not, download from the URL
     :param update_file: Path to the file
-    :param update_hash: Hash to check
-    :param update_url: URL to download if not found or wrong hash
-    :param update_name: Text to show while downloading
+    :param upd_hash: Hash to check
+    :param upd_urls: array of URLs to download if not found or wrong hash
+    :param upd_name: Text to show while downloading
+    :param uchk: Control text to download older versions
     :returns: True if a new file was needed, found and downloaded
     """
 
     dl_result = False
     if os.path.isfile(update_file):
         file_hash = get_file_hash(update_file)
-        if file_hash == update_hash:
+        if file_hash == upd_hash:
             dl_result = True
 
+    update_url = ''
+    if upd_urls:
+        update_url = upd_urls[0]
+        if not update_url and len(upd_urls) > 1 and uchk == 'Para Sara':
+            update_url = upd_urls[1]
+
     if not dl_result and update_url:
-        print('Downloading latest {0}...'.format(update_name), end='')
+        print('Downloading {0}...'.format(upd_name), end='')
         urllib.request.urlretrieve(update_url, update_file)
         print('OK')
         dl_result = True
