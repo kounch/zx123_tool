@@ -31,6 +31,7 @@
         },
         "Spectrum": {
             "latest": ["EXP27_160820", "https://github.com/mcleod-ideafix/zxuno_spectrum_core/raw/master/zxuno_v4/SPECTRUM.ZX1"],
+            "EXP26_190218": "85624005e8256600bca5fac953a29720e4a5a4ee68c0e25d9a47ffc153fb8668",
             "EXP26-19022018": "8c677536500eee76873d9a2462ff44adbf3a57477157e275930304fc981a4604",
             "EXP26 040418": "85023e5c7941f56f74c1badc37f295e08b4c2955b67723851c1c5763891b236a",
             "EXP27_160820": "140fe5400fb3aee7dae99c540020d36d14d3c0be7ec3b9dd737a2b198525d618",
@@ -43,8 +44,8 @@
                 "carmeloco 11.05.2020": "622640413b76a842065ab127c1fecd813016382760e272e97278d5f34f76829b"
             },
             "Acorn Electron": {
-                "latest": ["TEST1 - 20160108", "https://github.com/zxdos/zxuno/raw/master/cores/AcornElectron/CORE11.ZX1"],
-                "TEST1 - 20160108": "198a15023991053b4d9891180bbadb2f2f200914d4a0370cf5e08ec4e869d3e8"
+                "latest": ["4 TEST2", "https://github.com/zxdos/zxuno/raw/master/cores/AcornElectron/CORE11.ZX1"],
+                "4 TEST2": "198a15023991053b4d9891180bbadb2f2f200914d4a0370cf5e08ec4e869d3e8"
             },
             "Amstrad CPC464": {
                 "latest": ["Test2 - 20170408", "https://github.com/zxdos/zxuno/raw/master/cores/CPC/CORE4.ZX1"],
@@ -95,8 +96,10 @@
                 "Unknown Version": "eebedf1a88f35d6e8dd981e1eff93fecc90f99350c0482042b39f62a294dc321"
             },
             "ColecoVision" : {
-                "latest": ["512K", "https://github.com/zxdos/zxuno/raw/master/cores/Colecovision/CORE13.ZX1"],
+                "latest": ["1.2 (VGA+HDMI)", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Coleco.ZX1"],
                 "512K": "42a1c25f0c8f767677f6e3c5ebbd0bbc70eed07fc321e4d19770f348436f0c9d",
+                "1.1": "45926ae8763802ae8ed23e1904321618262e5bc2edc2fa0854aa3db4c84f96c0",
+                "1.2 (VGA+HDMI)": "e2cb44f744be56592412c0a9478c9d15ec447f8cd773d9da81219fc05619310a",
                 "1.2 VGA 2MB 2 joysticks": "500c94aec1d196497196592dab8098cc2a5076b95fd338df1bd0349bdd9a01b0"
             },
             "Commodore 16 - 116 - Plus4": {
@@ -128,6 +131,10 @@
             "Frenzy": {
                 "latest": ["Unknown Version"],
                 "Unknown Version": "c15c70ea1e42f0a5e2ec4ef57357e40c353183d5e93f1d65a9b649af9a373151"
+            },
+            "Galaxian": {
+                "latest": ["CORE19"],
+                "CORE19": "0f59941d576db46a5c259b7af0656a1ab9598b950829d9db1adcc65d021a3994"
             },
             "HT-1080Z - TRS80 M1L2": {
                 "latest": ["2MB Int"],
@@ -186,7 +193,12 @@
             },
             "Pac-Man": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/cores/Arcade/Pacman/CORE30.ZX1"],
+                "CORE18": "60b7d859be6ced09bbb0709eb2bdfcb23606e6d9915eca60c7252ea0ca64754b",
                 "1.0": "d9c37122ea0e345131dafb70c10575928b2661c1a6333bc134c0492b55c089e0"
+            },
+            "Phoenix": {
+                "latest": ["CORE20"],
+                "CORE20": "5df41ad9f51498a48c9778ec1a77bda294cf003ae7d38d2045cd7292b59cf1b5"
             },
             "PC XT": {
                 "latest": ["512KB 70Mhz", "https://github.com/zxdos/zxuno/raw/master/cores/PC/CORE23.ZX1"],
@@ -200,9 +212,11 @@
                 "1.142": "32fd2069f416ada27c7a6556b18ebd0b3813817aa6c419cc12dde046a25236f1"
             },
             "Sega Master System": {
-                "latest": ["TEST 4.2 - 20170214", "https://github.com/zxdos/zxuno/raw/master/cores/MasterSystem/CORE6.ZX1"],
+                "latest": ["TEST 4.3 (512K)", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/SMS.ZX1"],
+                "TEST 4.1": "26fc9a021465430b27d4adea4d2478b51a96f19354f5e6e1c07e9dd49515d474",
                 "TEST 4.2 - 20170214": "b99a952e0aa433263fab620ff5f283cf6be2265103fc17f232791ee33c26e425",
                 "TEST 4.3 (512K)": "c385c9c8b68245ab9a3135e5514fc4e85a0bccc17432226aa1e23ac61c2979c3",
+                "Desconocida": "9b486e5ebd8e25fbc500c6369a96190522b3dc1227a732d4e7aeb811eef4956b",
                 "TEST 4.3 2MB Int": "8a60c85e94c1819251ac07d2fc3296809542408531b10968d0c6bdce2f7f8e65"
             },
             "Sprint 1": {
@@ -215,8 +229,13 @@
                 "Unknown Version": "6148abf8d3da6bcea2dc58bc9397b31e9be75d78503a0fd89a9a52f3dbd2ca3d"
             },
             "Test": {
-                "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/cores/test/CORE9.ZX1"],
-                "1.0": "18ebf52a9f33e6f7af40d832d7b9d512d08964c3c8f9355234126b1662ec9d36"
+                "latest": ["2", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Test.ZX1"],
+                "1": "18ebf52a9f33e6f7af40d832d7b9d512d08964c3c8f9355234126b1662ec9d36",
+                "2": "9addac6bed7be862fc06e538b6a8455651e4bbf9dec9bd7554333a5eb6ac6226"
+            },
+            "The Glob": {
+                "latest": ["CORE21"],
+                "CORE21": "5f07da17253f90cc0a9e12126e47ddefc6fc46eb1423f9b7c5cdd246e6b2c2ef"
             },
             "Vectrex": {
                 "latest": ["TEST1", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Vectrex.ZX1"],
