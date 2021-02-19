@@ -184,7 +184,10 @@ def main():
                                        str_extension, ['Spectrum'])
                 if arg_data['update'].lower() in ['all', 'cores']:
                     prep_update_cores(arr_upd, str_file, fulldict_hash,
-                                      str_extension, b_new_img)
+                                      str_extension, b_new_img, False)
+                if arg_data['update'].lower() == 'arcade':
+                    prep_update_cores(arr_upd, str_file, fulldict_hash,
+                                      str_extension, b_new_img, True)
                 if b_new_img or arg_data['update'].lower() == 'roms':
                     prep_update_roms(arr_upd, fulldict_hash, b_new_img)
 
@@ -356,7 +359,7 @@ def parse_args():
         '--update',
         required=False,
         nargs='?',
-        choices=['all', 'bios', 'spectrum', 'cores', 'json', 'roms'],
+        choices=['all', 'bios', 'spectrum', 'cores', 'arcade', 'json', 'roms'],
         const='all',
         default='',
         dest='update',
@@ -704,9 +707,9 @@ def extractfrom_zxdata(str_in_file,
                         rom_version, rom_hash, rom_data = get_rom(
                             str_in_file, rom[1], rom[3], fullhash_dict,
                             str_extension)
-                        rom_name = rom[2]
+                        rom_name = rom[2].strip()
                         if rom_version != 'Unknown':
-                            rom_name = rom_version
+                            rom_name = rom_version.strip()
                         str_bin = '{0:02d}_{1}.rom'.format(rom[0], rom_name)
                         str_bin = os.path.join(str_dir, str_bin)
                         export_bindata(rom_data, str_bin, b_force)
@@ -781,13 +784,15 @@ def prep_update_cores(arr_in_files,
                       str_spi_file,
                       fullhash_dict,
                       str_extension,
-                      b_new=False):
+                      b_new=False,
+                      b_arcade=False):
     """
     Try to prepare to update cores
     :param arr_in_files: Array for inject_zxfiles, updated if needed
     :param str_spi_file: Input SPI flash file
     :param hash_dict: Dictionary with hashes for different blocks
     :b_new: Is this a new Flash Image?
+    :b_arcade: When new, only include arcades, else do not include any arcade
     """
 
     hash_dict = fullhash_dict[str_extension]
@@ -801,7 +806,14 @@ def prep_update_cores(arr_in_files,
                                  hash_dict['Cores'])))
     else:
         for index, block_name in enumerate(hash_dict['Cores']):
-            core_list.append([index, block_name, block_name, '0', 'Para Sara'])
+            append = False
+            if b_arcade and ("Arcade " in block_name):
+                append = True
+            elif not b_arcade and ("Arcade " not in block_name):
+                append = True
+            if append:
+                core_list.append(
+                    [index, block_name, block_name, '0', 'Para Sara'])
 
     for index, name, block_name, block_version, block_hash in core_list:
         index += 2
