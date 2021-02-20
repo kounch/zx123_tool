@@ -50,9 +50,9 @@
                 "4 TEST2": "198a15023991053b4d9891180bbadb2f2f200914d4a0370cf5e08ec4e869d3e8"
             },
             "Amstrad CPC464": {
-                "latest": ["Test2 - 20170408", "https://github.com/zxdos/zxuno/raw/master/cores/CPC/CORE4.ZX1"],
-                "Test2 - 20170408": "6341fb122713725ebe758cfbf8ea357cf9ce6f0dd410cc1de715719cd77d17ed",
-                "TEST 3a": "5a2363e9ef1f10320cc2ed5309c2ab5331db4b4ca8dbab9e39737a02c9186c36"
+                "latest": ["Test 3a", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/CPC464.ZX1"],
+                "Test 2 - 20170408": "6341fb122713725ebe758cfbf8ea357cf9ce6f0dd410cc1de715719cd77d17ed",
+                "Test 3a": "5a2363e9ef1f10320cc2ed5309c2ab5331db4b4ca8dbab9e39737a02c9186c36"
             },
             "Amstrad CPC6128": {
                 "latest": ["Unknown Version", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/CPC6128.ZX1"],
@@ -131,8 +131,10 @@
                 "2019.06.19 azesmbog": "86e782598fa050c76dabac986bb481dc844e96a0e0a94b9ca84b6fe27b2d6603"
             },
             "MSX1": {
-                "latest": ["1.1 - 20161118", "https://github.com/zxdos/zxuno/raw/master/cores/MSX/CORE14.ZX1"],
-                "1.1 - 20161118": "93cd6f516dec75fbd48f6ca5b5e344f7fee4391974f478979302426e2730eaa9",
+                "latest": ["1.3 512K", ""],
+                "base": ["1.1 - 20161118", "https://github.com/zxdos/zxuno/raw/master/cores/MSX/CORE14.ZX1"],
+                "Unknown Version": "875bb4433587b607d0a67c953c467058022c4a2dbef77408cba5467fa51d232a",
+                "1.227": "93cd6f516dec75fbd48f6ca5b5e344f7fee4391974f478979302426e2730eaa9",
                 "1.3 512K": "994e7b1aac5457ca624b9d4f47db3b6997ecd321031f204c03025ee505674ee6",
                 "1.3 VGA2M": "3750b52f63084765d344d3e1e981389f871c3de63651b414d0034237b42d921e"
             },
@@ -154,12 +156,19 @@
                 "TEST1 - 20170701": "0fbd7f0195ab840e655ffd5946478e34ee8b1b953bae4609c855912f9ce05be4",
                 "27.12.2018 dos8d": "0e3597b079c65e8f57a24aba7eae69008a21b4537fff490dd1c93e1f915b9977"
             },
-            "PC XT": {
-                "latest": ["512KB 70Mhz", "https://github.com/zxdos/zxuno/raw/master/cores/PC/CORE23.ZX1"],
-                "CORE24": "de55a3817acacc55ae90fef0db6c4137ed3c13e84d927a4d7862a7ce1bf178ab",
-                "2MB Ext 70MHz": "b560afa672db76b3e0476c20130e14e07f9569761cc20315a83cf6cfa8bf167a",
-                "512KB 70Mhz": "81e89e258fb00fd46f37c8d06055c23821290e265433cd24e8cd1cd0a5993202",
-                "2MB Int 70Mhz": "29a26b485e4180245a43dda65650f29331fe3f0a7952993e7834ea9c680c9557"
+            "PC XT 512KB": {
+                "latest": ["2017.02.18", "https://github.com/zxdos/zxuno/raw/master/cores/PC/CORE23.ZX1"],
+                "70 MHz 2017.02.18": "81e89e258fb00fd46f37c8d06055c23821290e265433cd24e8cd1cd0a5993202"
+            },
+            "PC XT 2MB Ext": {
+                "latest": ["2017.02.18", ""],
+                "Beta 75 MHz 2017.01.20":"69ec81d182134eb095a9d111966ee0e780a0410da48bdf69e6f918c5b528bfa6",
+                "70 MHz 2017.02.18": "b560afa672db76b3e0476c20130e14e07f9569761cc20315a83cf6cfa8bf167a"
+            },
+            "PC XT 2MB Int": {
+                "latest": ["2017.02.18", ""],
+                "Beta 75 MHz 2017.01.20": "de55a3817acacc55ae90fef0db6c4137ed3c13e84d927a4d7862a7ce1bf178ab",
+                "70 MHz 2017.02.18": "652be2ab706d2835309b84c6e52c026dea07d8d8f42e4d8b13791df14af55163"
             },
             "Sam Coupe": {
                 "latest": ["1.142", "https://github.com/zxdos/zxuno/raw/master/cores/SamCoupe/CORE2.ZX1"],
@@ -192,7 +201,6 @@
                 "Unknown Version": "eff15961241c3bd360261af20bb1823c8b798c54e47129f681aad8e54b4e2496",
                 "EXP26 040418": "31a1373cf3d99f66a00c76cb96bebd4b8db0b3782ac55c0423a3373d7a083a29",
                 "VGA 60Hz": "3bc28ff2692f038f3938e6b38d0980a567460a06657aa5e4327ba93b36d98261",
-                "VGA 110420": "1a8e1441b5cba8036fe9bb7a5f72a6e20fe5629507ba1d49c80d282c48c220c1",
                 "EXP27 160820": "613902acb29e3926142a721493c593c0746969261fe7d5cce207194a1fc30a03"
             },
             "ZX Spectrum 48K (Kyp)": {
@@ -436,8 +444,9 @@
                 "0.2": "674764da89942d845d1874596729454f6ba0188086643c5ad4535009b4f4530c"
             },
             "Arcade Mayday": {
-                "latest": ["0.1"],
-                "0.1": "eebedf1a88f35d6e8dd981e1eff93fecc90f99350c0482042b39f62a294dc321"
+                "latest": ["0.2"],
+                "0.1": "eebedf1a88f35d6e8dd981e1eff93fecc90f99350c0482042b39f62a294dc321",
+                "0.2": "1a8e1441b5cba8036fe9bb7a5f72a6e20fe5629507ba1d49c80d282c48c220c1"
             },
             "Arcade moonal2": {
                 "latest": ["0.1", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/moonal2.ZX1"],
