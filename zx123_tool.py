@@ -818,8 +818,10 @@ def prep_update_cores(arr_in_files,
     for index, name, block_name, block_version, block_hash in core_list:
         index += 2
         if block_name in hash_dict['Cores']:
-            latest = hash_dict['Cores'][block_name]['latest']
-            new_hash = hash_dict['Cores'][block_name][latest[0]]
+            latest = hash_dict['Cores'][block_name].get('latest', [''])
+            new_hash = hash_dict['Cores'][block_name].get(latest[0], '')
+            base = hash_dict['Cores'][block_name].get('base', [''])
+            base_hash = hash_dict['Cores'][block_name].get(base[0], '')
 
             str_file = 'CORE{0:0>2}_{1}_{2}.{3}'.format(
                 index, block_name, latest[0], str_extension)
@@ -827,7 +829,8 @@ def prep_update_cores(arr_in_files,
 
             if block_hash != new_hash:
                 b_append = check_and_update(str_file, new_hash, latest[1:],
-                                            block_name, block_hash)
+                                            block_name, block_hash, base_hash,
+                                            base[1:])
 
                 if b_append:
                     new_in_file = 'CORE,{0},{1},{2}'.format(
@@ -855,7 +858,13 @@ def prep_update_roms(arr_in_files, fullhash_dict, b_new=False):
             arr_in_files.append(new_in_file)
 
 
-def check_and_update(update_file, upd_hash, upd_urls, upd_name, uchk=''):
+def check_and_update(update_file,
+                     upd_hash,
+                     upd_urls,
+                     upd_name,
+                     uchk='',
+                     bs_hash='',
+                     bs_urls=[]):
     """
     Checks if a file with the desired hashexists. If not, download from the URL
     :param update_file: Path to the file
@@ -863,20 +872,28 @@ def check_and_update(update_file, upd_hash, upd_urls, upd_name, uchk=''):
     :param upd_urls: array of URLs to download if not found or wrong hash
     :param upd_name: Text to show while downloading
     :param uchk: Control text to download older versions
+    :param bs_hash:
+    :param bs_urls:
     :returns: True if a new file was needed, found and downloaded
     """
 
+    update_url = ''
+    file_hash = ''
     dl_result = False
     if os.path.isfile(update_file):
         file_hash = get_file_hash(update_file)
         if file_hash == upd_hash:
+            LOGGER.debug('Not downloading updated...')
             dl_result = True
 
-    update_url = ''
     if upd_urls:
         update_url = upd_urls[0]
-        if not update_url and len(upd_urls) > 1 and uchk == 'Para Sara':
-            update_url = upd_urls[1]
+
+    if not update_url and bs_urls and uchk == 'Para Sara':
+        if file_hash == bs_hash:
+            LOGGER.debug('Not downloading base...')
+            dl_result = True
+        update_url = bs_urls[0]
 
     if not dl_result and update_url:
         print('Downloading {0}...'.format(upd_name), end='')
