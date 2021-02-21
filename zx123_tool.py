@@ -184,12 +184,17 @@ def main():
                                        str_extension, ['Spectrum'])
                 if arg_data['update'].lower() in ['all', 'cores']:
                     prep_update_cores(arr_upd, str_file, fulldict_hash,
-                                      str_extension, b_new_img, False)
+                                      str_extension, b_new_img)
+                if b_new_img or arg_data['update'].lower() == 'roms':
+                    prep_update_roms(arr_upd, fulldict_hash, str_extension,
+                                     b_new_img)
                 if arg_data['update'].lower() == 'arcade':
+                    prep_update_zxdata(arr_upd, str_file, fulldict_hash,
+                                       str_extension, ['BIOS'], True)
                     prep_update_cores(arr_upd, str_file, fulldict_hash,
                                       str_extension, b_new_img, True)
-                if b_new_img or arg_data['update'].lower() == 'roms':
-                    prep_update_roms(arr_upd, fulldict_hash, b_new_img)
+                    prep_update_roms(arr_upd, fulldict_hash, str_extension,
+                                     b_new_img, True)
 
                 if arr_upd:
                     if inject_zxfiles(str_file,
@@ -748,8 +753,12 @@ def extractfrom_zxdata(str_in_file,
         export_bindata(roms_data, str_bin, b_force)
 
 
-def prep_update_zxdata(arr_in_files, str_spi_file, fullhash_dict,
-                       str_extension, block_list):
+def prep_update_zxdata(arr_in_files,
+                       str_spi_file,
+                       fullhash_dict,
+                       str_extension,
+                       block_list,
+                       b_arcade=False):
     """
     Try to prepare to update several BIOS
     :param str_spi_file: Input SPI flash file
@@ -768,6 +777,8 @@ def prep_update_zxdata(arr_in_files, str_spi_file, fullhash_dict,
                                                 hash_dict[block])
 
         latest = hash_dict[block]['latest']
+        if block == 'BIOS' and b_arcade:
+            latest = hash_dict[block]['arcade']
         new_hash = hash_dict[block][latest[0]]
 
         str_file = '{0}_{1}.{2}'.format(block, latest[0], str_extension)
@@ -804,7 +815,8 @@ def prep_update_cores(arr_in_files,
             core_list.append([index, name.strip()] + list(
                 get_core_version(str_spi_file, index, hash_dict['parts'],
                                  hash_dict['Cores'])))
-    else:
+
+    if b_new:
         for index, block_name in enumerate(hash_dict['Cores']):
             append = False
             if b_arcade and ("Arcade " in block_name):
@@ -838,7 +850,11 @@ def prep_update_cores(arr_in_files,
                     arr_in_files.append(new_in_file)
 
 
-def prep_update_roms(arr_in_files, fullhash_dict, b_new=False):
+def prep_update_roms(arr_in_files,
+                     fullhash_dict,
+                     str_extension,
+                     b_new=False,
+                     b_arcade=False):
     """
     Try to prepare to update ROMs
     :param arr_in_files: Array for inject_zxfiles, updated if needed
@@ -846,7 +862,7 @@ def prep_update_roms(arr_in_files, fullhash_dict, b_new=False):
     :b_new: Is this a new Flash Image?
     """
 
-    if 'ROMS' in fullhash_dict:
+    if 'ROMS' in fullhash_dict and b_new:
         latest = fullhash_dict['ROMS']['latest']
         new_hash = fullhash_dict['ROMS'][latest[0]]
 
@@ -856,6 +872,19 @@ def prep_update_roms(arr_in_files, fullhash_dict, b_new=False):
         if b_append:
             new_in_file = 'ROMS,{0}'.format(str_roms)
             arr_in_files.append(new_in_file)
+
+        if b_arcade:
+            b_append = False
+            jamma = fullhash_dict['ROM']['16K Spectrum ROM']['arcade']
+            j_hash = fullhash_dict['ROM']['16K Spectrum ROM'][jamma[0]]
+
+            str_rom = os.path.join(STR_OUTDIR, 'Jamma.rom')
+            b_append = check_and_update(str_rom, j_hash, jamma[1:], 'Jamma')
+            if b_append:
+                roms_info = fullhash_dict[str_extension]['parts']['roms_dir']
+                i_slot = roms_info[5] + roms_info[6] - 1
+                new_in_file = 'ROM,{0},hl17x,Jamma,{1}'.format(i_slot, str_rom)
+                arr_in_files.append(new_in_file)
 
 
 def check_and_update(update_file,
@@ -1356,7 +1385,7 @@ def get_romdata_version(rom_data, dict_rom_hash):
     return block_version, block_hash
 
 
-def get_rom_list(str_in_file, dict_parts):
+def get_rom_list(str_in_file, dict_parts, b_data=None):
     """
     Obtain list of ROM names ands slots in file
     :param str_in_file: Path to file
@@ -1369,39 +1398,47 @@ def get_rom_list(str_in_file, dict_parts):
     if len(block_info) < 6:
         LOGGER.error('ROMs dir data missing from database')
     else:
-        with open(str_in_file, "rb") as in_zxdata:
-            in_zxdata.seek(block_info[4])
-            roms_use = in_zxdata.read(block_info[5] + block_info[6])
+        b_start = block_info[4]
+        b_len = block_info[5] + block_info[6]
+        if b_data:
+            roms_use = b_data[b_start:b_start + b_len]
+        else:
+            with open(str_in_file, "rb") as in_zxdata:
+                in_zxdata.seek(b_start)
+                roms_use = in_zxdata.read(b_len)
 
         for i in range(0, len(roms_use)):
             if roms_use[i] != 0xff:
-                with open(str_in_file, "rb") as in_zxdata:
-                    in_zxdata.seek(block_info[0] + i * 64)
-                    rom_index = roms_use[i]
-                    rom_data = in_zxdata.read(64)
-                    rom_slot = rom_data[0]
-                    rom_size = rom_data[1]
-                    rom_flags = bit_to_flag(rom_data[2] ^ 0b00110000,
-                                            '* icdnpt')
-                    rom_flags += bit_to_flag(rom_data[3] ^ 0b00000000,
-                                             'smhl172a')
-                    rom_flags += bit_to_flag(rom_data[4] ^ 0b00000000,
-                                             '     rxu')
-                    rom_crc = ''
-                    for j in range(0, 16):
-                        byte = rom_data[8 + j]
-                        if byte:
-                            rom_crc += '{0:02X}'.format(byte)
-                    rom_name = rom_data[32:]
-                    if rom_name[0] >= 32:
-                        try:
-                            roms_list.append([
-                                rom_index, rom_slot,
-                                rom_name.decode('utf-8'), rom_size, rom_flags,
-                                rom_crc
-                            ])
-                        except UnicodeDecodeError:
-                            LOGGER.debug('Bad ROM entry or corrupted ROM name')
+                b_start = block_info[0] + i * 64
+                b_len = 64
+                if b_data:
+                    rom_data = b_data[b_start:b_start + b_len]
+                else:
+                    with open(str_in_file, "rb") as in_zxdata:
+                        in_zxdata.seek(b_start)
+                        rom_data = in_zxdata.read(b_len)
+
+                rom_index = roms_use[i]
+                rom_slot = rom_data[0]
+                rom_size = rom_data[1]
+                rom_flags = bit_to_flag(rom_data[2] ^ 0b00110000, '* icdnpt')
+                rom_flags += bit_to_flag(rom_data[3] ^ 0b00000000, 'smhl172a')
+                rom_flags += bit_to_flag(rom_data[4] ^ 0b00000000, '     rxu')
+                rom_crc = ''
+                for j in range(0, 16):
+                    byte = rom_data[8 + j]
+                    if byte:
+                        rom_crc += '{0:02X}'.format(byte)
+                rom_name = rom_data[32:]
+                if rom_name[0] >= 32:
+                    try:
+                        roms_list.append([
+                            rom_index, rom_slot,
+                            rom_name.decode('utf-8'), rom_size, rom_flags,
+                            rom_crc
+                        ])
+                    except UnicodeDecodeError:
+                        LOGGER.debug('Bad ROM entry or corrupted ROM name')
             else:
                 break
 
@@ -1705,24 +1742,24 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
     max_slots += block_info[6]
     block_bases = dict_parts['roms_data']
 
-    roms_list = get_rom_list(str_in_file, dict_parts)
-    slot_use = []
-    for rom_entry in roms_list:
-        i_slot = rom_entry[1] + 1
-        for i in range(1, rom_entry[3]):
-            slot_use.append(i_slot)
-            i_slot += 1
-
     if arr_params[0].upper() == 'ROM':  # Slot, Params, Name, Filename
         if len(arr_params) != 5:
             LOGGER.error('Invalid argument: {0}'.format(str_in_params))
         else:
+            roms_list = get_rom_list(str_in_file, dict_parts, br_data)
+            slot_use = []
+            for rom_entry in roms_list:
+                i_slot = rom_entry[1] + 1
+                for i in range(1, rom_entry[3]):
+                    slot_use.append(i_slot)
+                    i_slot += 1
+
             rom_slt = int(arr_params[1])
             rom_params = arr_params[2]
             str_name = arr_params[3]
-            str_in_file = arr_params[4]
+            str_rom_file = arr_params[4]
 
-            b_len = os.stat(str_in_file).st_size
+            b_len = os.stat(str_rom_file).st_size
             if b_len != 0 and b_len % 16384 == 0:
                 LOGGER.debug('Looks like a ROM')
                 b_len = int(b_len / 16384)
@@ -1747,7 +1784,7 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
                         break
 
                 if rom_slt > -1:
-                    with open(str_in_file, "rb") as in_zxdata:
+                    with open(str_rom_file, "rb") as in_zxdata:
                         rom_data = in_zxdata.read()
 
                     r_v = get_romdata_version(rom_data, fullhash_dict['ROM'])
