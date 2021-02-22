@@ -1697,7 +1697,7 @@ def inject_coredata(str_in_params, hash_dict, b_data):
     br_data = b_data
 
     if arr_params[0].upper() == 'CORE':  # Number, Name, Filename
-        block_info = dict_parts.bet(['cores_dir'], [])
+        block_info = dict_parts.get('cores_dir', [])
         max_cores = splitcore_index = block_info[4]
         if len(block_info) > 5:
             max_cores += block_info[5]
