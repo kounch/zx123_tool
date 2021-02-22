@@ -1,6 +1,6 @@
 # zx123_tool
 
-Copyright (c) 2020, kounch
+Copyright (c) 2020-2021, kounch
 
 All rights reserved.
 
@@ -29,6 +29,7 @@ These are the main features:
 - Add or replace FPGA cores and/or Spectrum ROM images (from individual ROM files or RomPack files)
 - Wipe with  0s all Cores an ZX Spectrum ROMs data
 - If supplied a different kind of file (like a core or BIOS installation file) it will also try to identify its contents
+- List, add or extract ROMs from a ROMPack v2 ROms file
 
 Requires a [`zx123_hash.json`](##description-of-json-file) file with block structure for the kind of SPI flash file (e.g.: ZXD) and, optionally, hashes to identify the blocks inside. If not found, it tries to download it from the GitHub repository.
 
@@ -82,7 +83,7 @@ Requires a [`zx123_hash.json`](##description-of-json-file) file with block struc
 
 #### ROM Parameters
 
-When adding individual ROM data to a flash image, you can specify any of the following flags when using the ROM:
+When adding individual ROM data to a file, you can specify any of the following flags when using the ROM:
 
 -`i`: Keyboard issue 3 enabled (instead of issue 2)
 
@@ -184,6 +185,14 @@ Find out the version of a BIOS installation file:
 
     ...zx123_tool.py -i FIRMWARE.ZXD -l
 
+Inject the contents of a classic ROMPack file to a ROMPack v2 file:
+
+    ...zx123_tool.py -i ROM_255_orig.ZX1 -o ROM_255.ZX1 -a ROMS,MyROMS.ZX1
+
+Add a ROM to a ROMPack v2 file:
+
+    ...zx123_tool.py -i ROM_255_orig.ZX1 -o ROM_255.ZX1 -a "ROM,0,xdnlh17,ZX Spectrum,48.rom"
+
 ### Description of JSON file
 
 The JSON file is an object where the main name are file extensions (like `ZXD` or `ZX1`). For each of these, there is another object with the following structure:
@@ -196,7 +205,7 @@ The JSON file is an object where the main name are file extensions (like `ZXD` o
                          For each of these, an array is provided with this data:
                                 [offset, size, <output name>, <magic bytes>]
                          The blocks are:
-                            - "header"    -> SPI Flash Header and descriptors
+                            - "header"    -> File header and descriptors
                             - "esxdos"    -> esxdos binary ROM
                             - "roms_dir"  -> Description of installed Spectrum ROMs
                             - "cores_dir" -> Description of installed extra FPGA cores
@@ -215,7 +224,9 @@ The JSON file is an object where the main name are file extensions (like `ZXD` o
                            "(Version Description)": "(Hash)"
         "Cores": {   -> Dictionary for different FPGA cores       
             "(Core name)": {   -> Dictionary of hashes for different core versions in the format:
-                                "(Version Description)": "(Hash)"
+                                "(Version Description)": "(Hash)",
+                                "latest" -> Name of the latest version and (optionally) download URL
+                                "base"   -> Name of another version with download URL if there's no URL for the latest
             },
             (...)
         }
@@ -253,6 +264,7 @@ Estas son sus funciones principales:
 - Añadir o reemplazar cores de la FPGA y/o imágenes de ROM de Spectrum (desde ficheros de ROM individuales o un fichero RomPack)
 - Borrar con 0s todos los datos de los Cores y las ROMs de ZX Spectrum
 - Si se tratase de un tipo distinto de fichero (como un archivo de instalación de core o BIOS), también puede intentar identificar su versión
+- Mostrar, añadir o extraer ROMs de un fichero ROMPack v2
 
 Necesita un fichero  [`zx123_hash.json`](#descripción-del-arhivo-json) con la estructura de bloques del archivo de imagen y, opcionalmente, datos para identificar dichos bloques. Si no se encuentra, intentará descargarlo desde el repositorio en GitHub.
 
@@ -307,7 +319,7 @@ Necesita un fichero  [`zx123_hash.json`](#descripción-del-arhivo-json) con la e
 
 #### Parámetros de ROM
 
-Al añadir datos de una ROM individual a una imagen flash, se pueden especificar los siguientes indicadores para usar al utilizar la ROM:
+Al añadir datos de una ROM individual a un fichero, se pueden especificar los siguientes indicadores para usar al utilizar la ROM:
 
 - `i`: Habilitar teclado issue 3 (en vez de issue 2)
 
@@ -409,6 +421,14 @@ Averiguar la versión de un archivo de instalación de BIOS:
 
     ...zx123_tool.py -i FIRMWARE.ZXD -l
 
+Añadir el contenido de un fichero ROMPack clásico en un fichero ROMPack v2:
+
+    ...zx123_tool.py -i ROM_255_orig.ZX1 -o ROM_255.ZX1 -a ROMS,MyROMS.ZX1
+
+Añadir una ROM a un fichero ROMPack v2:
+
+    ...zx123_tool.py -i ROM_255_orig.ZX1 -o ROM_255.ZX1 -a "ROM,0,xdnlh17,ZX Spectrum,48.rom"
+
 ### Descripción del arhivo JSON
 
 El archivo JSON es un objeto donde los nombres principales son extensiones de archivo (como `ZXD` o `ZX1`). Para cada una, se define otro objeto con la siguiente estructura:
@@ -441,6 +461,8 @@ El archivo JSON es un objeto donde los nombres principales son extensiones de ar
         "Cores": {   -> Diccionario para distintos cores extra para la FPGA      
             "(Nombre de core)": {   -> Diccionario con hashes para distintas versiones del core, con el formato:
                                        "(Descripción de versión)": "(Hash)"
+                                       "latest" -> Nombre de la última versión y (opcionalmente) URL de descarga
+                                       "base"   -> Nombre de otra versión descargable si la última no la tiene
             },
             (...)
         }
@@ -449,13 +471,13 @@ El archivo JSON es un objeto donde los nombres principales son extensiones de ar
 
 Para `roms_dir`, el formato es el siguiente:
 
-    [offseet de inicio del directorio, tamaño del bloque de directorio, "", "", offset de entradas activas, longitud del primer bloque de ROMs, longitud del segundo bloque de ROMs]
+    [offset de inicio del directorio, tamaño del bloque de directorio, "", "", offset de entradas activas, longitud del primer bloque de ROMs, longitud del segundo bloque de ROMs]
 
 Para `cores_dir`, el formato es el siguiente:
 
      [offset de inicio del directorio, tamaño del bloque de directorio, "", "", longitud del primer bloque de cores, longitud del segundo bloque de cores]
 
-Para `roms_data` y `core_base`, el formato es el siguiente:
+Para `roms_data`, el formato es el siguiente:
 
     [offset del primer slot, tamaño del primer bloque de ROMs, "", "", offset del segundo bloque de ROMs],
 
@@ -467,7 +489,7 @@ Para `core_base`, el formato es el siguiente:
 
 BSD 2-Clause License
 
-Copyright (c) 2020, kounch
+Copyright (c) 2020-2021, kounch
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
