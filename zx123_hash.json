@@ -175,6 +175,10 @@
                 "latest": ["1.142", "https://github.com/zxdos/zxuno/raw/master/cores/SamCoupe/CORE2.ZX1"],
                 "1.142": "32fd2069f416ada27c7a6556b18ebd0b3813817aa6c419cc12dde046a25236f1"
             },
+            "smartROM": {
+                "latest": ["2021.01.31", "https://github.com/Utodev/smartROM/raw/master/binaries/COREnnSmartROM.ZX1"],
+                "2021.01.31": "68772a698cd0316a92ee37c50ad6dc93b6b5764d1b745ce454a10ce7d4781bdc"
+            },
             "Sega Master System": {
                 "latest": ["TEST 4.3 (512K)", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/SMS.ZX1"],
                 "Unknown Version": "9b486e5ebd8e25fbc500c6369a96190522b3dc1227a732d4e7aeb811eef4956b",
@@ -894,8 +898,6 @@
             "16K Spectrum ROM": [0, 16384],
             "32K Spectrum ROM": [0, 32768],
             "64K Spectrum ROM": [0, 65536],
-            "roms_dir": [0, 4096, "", "", 4096, 64, 0],
-            "roms_data": [4160, 1048576, "", "", 0],
             "esxdos": [16384, 8192, "ESXDOS.ZX1", "F331005EC30101FFC3"]
         },
         "esxdos": {
@@ -1001,7 +1003,23 @@
         }
     },
     "ROMS": {
+        "description": "ZX-Uno RomPack",
+        "hashtype": "sha256sum",
+        "parts": {
+            "header": [0, 1052737, "ROMS.ZX1", ""],
+            "roms_dir": [0, 4096, "", "", 4096, 64, 0],
+            "roms_data": [4160, 1048576, "", "", 0]
+        },
         "latest": ["desUBIKado_20210112", "https://github.com/zxdos/zxuno/raw/master/utils/ROMS.ZX1"],
         "desUBIKado_20210112": "8ed16c2d63ce6369e56685cabeb048d75e7a2c72a03cf9844c45e3a0f0f59391"
+    },
+    "RPv2": {
+        "description": "ZX RomPack v2",
+        "hashtype": "sha256sum",
+        "parts": {
+            "header": [0, 4194560, "ROMS2.ZX1", "52507632"],
+            "roms_dir": [64, 16320, "", "", 16384, 255, 0],
+            "roms_data": [16639, 4161280, "", "", 0]
+        }
     }
 }

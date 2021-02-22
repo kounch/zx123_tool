@@ -3,7 +3,7 @@
 # -*- mode: Python; tab-width: 4; indent-tabs-mode: nil; -*-
 # Do not modify previous lines. See PEP 8, PEP 263.
 """
-Copyright (c) 2020, kounch
+Copyright (c) 2020-2021, kounch
 All rights reserved.
 
 SPDX-License-Identifier: BSD-2-Clause
@@ -24,7 +24,8 @@ These are the main features:
   default ROM, etc.)
 - Add or replace FPGA cores and/or Spectrum ROM images (from individual ROM
   files or RomPack files)
-- Wipe with  0s all Cores an ZX Spectrum ROMs data
+- Wipe with 0s all Cores an ZX Spectrum ROMs data
+- List, add or insert ROM files from a ZX1 ROMPack v2 file
 - If supplied a different kind of file (like a core or BIOS installation file)
   it will also try to identify its contents
 
@@ -245,9 +246,34 @@ def main():
                             arg_data['boot_timer'], arg_data['default_core'],
                             arg_data['default_rom'], arg_data['force'])
     else:
-        # File header unknown, try to gues only from hash
-        find_zxfile(str_file, fulldict_hash, str_extension,
-                    arg_data['show_hashes'])
+        # Check if it's ROMPack v2
+        rpk_header = fulldict_hash['RPv2']['parts']['header']
+        f_size = os.stat(str_file).st_size
+        if validate_file(str_file, rpk_header[3]) and rpk_header[1] == f_size:
+            if str_extension == 'ZX1':
+                # List ZX Spectrum ROMs
+                if not arg_data['extract'] and not arg_data['inject']:
+                    list_romsdata(str_file, fulldict_hash, 'RPv2',
+                                  arg_data['show_hashes'], True)
+
+                # Extract ROMs
+                for x_item in arg_data['extract']:
+                    extractfrom_zxdata(str_file, x_item, fulldict_hash,
+                                       STR_OUTDIR, 'RPv2', arg_data['force'],
+                                       False)
+
+                # Inject  ROMs
+                if arg_data['inject']:
+                    if not output_file:
+                        output_file = str_file
+                    inject_zxfiles(str_file, arg_data['inject'], output_file,
+                                   fulldict_hash, 'RPv2', -1, -1, -1, -1,
+                                   arg_data['default_rom'], arg_data['force'])
+
+        else:
+            # File header unknown, try to guess only from hash and size
+            find_zxfile(str_file, fulldict_hash, str_extension,
+                        arg_data['show_hashes'])
 
     print('')
     LOGGER.debug("Finished.")
@@ -610,7 +636,7 @@ def list_romsdata(str_in_file,
     :param hash_dict: Dictionary
     :param in_file_ext: File key in dictionary (e.g. ZXD)
     :param show_hashes: If True, print also block hashes
-    :param roms_file: If True, add extra offset as in ROM.ZX1 file
+    :param roms_file: If True, add extra offset as in ROMS.ZX1 file
     :return: True if there are ROMs to list
     """
     LOGGER.debug('Listing ROMs of file: {0}'.format(str_in_file))
@@ -619,8 +645,12 @@ def list_romsdata(str_in_file,
 
     if roms_list:
         if roms_file:
-            print('ZX1 ROMs File')
-            default_rom = get_peek(str_in_file, 0x1040)
+            if in_file_ext == 'RPv2':
+                print('ZX ROMPack file (v2)')
+            else:
+                print('ZX1 ROMPack File')
+            def_addr = hash_dict[in_file_ext]['parts']['roms_data'][0]
+            default_rom = get_peek(str_in_file, def_addr)
             print('\tDefault ROM -> {0:02}'.format(default_rom))
 
         print('\nZX Spectrum ROMs:')
@@ -659,6 +689,10 @@ def extractfrom_zxdata(str_in_file,
     :param cores: If True, export Core, if False, export ROM
     """
     hash_dict = fullhash_dict[str_extension]
+
+    b_romfile = False
+    if str_extension == 'RPv2':
+        b_romfile = True
 
     block_list = ['BIOS', 'esxdos', 'Spectrum']
     for block_name in block_list:
@@ -711,7 +745,7 @@ def extractfrom_zxdata(str_in_file,
                     if rom[0] == rom_number:
                         rom_version, rom_hash, rom_data = get_rom(
                             str_in_file, rom[1], rom[3], fullhash_dict,
-                            str_extension)
+                            str_extension, b_romfile)
                         rom_name = rom[2].strip()
                         if rom_version != 'Unknown':
                             rom_name = rom_version.strip()
@@ -1054,12 +1088,12 @@ def inject_zxfiles(str_spi_file,
                    default_rom=-1,
                    b_force=False):
     """
-    Add binary from one or more binary files to SPI flash file
-    :param str_spi_file: Input SPI flash file
+    Add binary from one or more binary files to SPI flash or ROMPackV2 file
+    :param str_spi_file: Input SPI flash or ROMPack v2 file
     :param arr_in_files: Array with parameters and files to inject
     :param str_outfile: New SPI flash file to create
     :param fullhash_dict: Dictionary with hashes data
-    :param str_extension: SPI Flash extension
+    :param str_extension: SPI Flash extension (or RPv2 for ROMPack v2)
     :param video_mode: Video mode: 0 (PAL), 1 (NTSC) or 2 (VGA)
     :param keyboard_layout: 0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
     :param boot_timer: 0 (No timer), 1, 2 (2x), 3 (4x), 4 (8x)
@@ -1071,7 +1105,11 @@ def inject_zxfiles(str_spi_file,
     b_changed = False
     hash_dict = fullhash_dict[str_extension]
 
-    LOGGER.debug('Reading Flash...')
+    def_rom_addr = 28736
+    if str_extension == 'RPv2':
+        def_rom_addr = hash_dict['parts']['roms_data'][0]
+
+    LOGGER.debug('Reading Destination File...')
     b_len = os.stat(str_spi_file).st_size
     with open(str_spi_file, "rb") as in_zxdata:
         b_data = in_zxdata.read(b_len)
@@ -1093,8 +1131,13 @@ def inject_zxfiles(str_spi_file,
         b_changed |= b_chg
 
     # Modify BIOS settings
-    b_data, b_chg = inject_biossettings(b_data, video_mode, keyboard_layout,
-                                        boot_timer, default_core, default_rom)
+    b_data, b_chg = inject_biossettings(b_data,
+                                        video_mode,
+                                        keyboard_layout,
+                                        boot_timer,
+                                        default_core,
+                                        default_rom,
+                                        d_rom_addr=def_rom_addr)
     b_changed |= b_chg
 
     if b_changed:
@@ -1172,11 +1215,13 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
     """
     found = False
     hash_dict = fulldict_hash[str_extension]
+    d_parts = hash_dict['parts']
 
     str_name = os.path.basename(str_in_file)
     print('\nAnalyzing {0} (possibly {1})...\n '.format(
         str_name, hash_dict['description']))
     str_file_hash = get_file_hash(str_in_file)
+    i_file_size = os.stat(str_in_file).st_size
     if show_hashes:
         print('{0}'.format(str_file_hash))
 
@@ -1184,8 +1229,8 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
     for block_id in [
             '16K Spectrum ROM', '32K Spectrum ROM', '64K Spectrum ROM'
     ]:
-        if block_id in hash_dict['parts']:
-            if os.stat(str_in_file).st_size == hash_dict['parts'][block_id][1]:
+        if block_id in d_parts:
+            if i_file_size == d_parts[block_id][1]:
                 LOGGER.debug('Looks like {0}'.format(block_id))
                 block_version = get_data_version(str_file_hash,
                                                  hash_dict[block_id])
@@ -1196,10 +1241,9 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
 
     # Check if it's a main ROM
     for block_id in ['BIOS', 'Spectrum', 'esxdos']:
-        if not found and block_id in hash_dict['parts']:
-            if os.stat(str_in_file).st_size == hash_dict['parts'][
-                    block_id][1] and validate_file(
-                        str_in_file, hash_dict['parts'][block_id][3]):
+        if not found and block_id in d_parts:
+            if i_file_size == d_parts[block_id][1] and validate_file(
+                    str_in_file, d_parts[block_id][3]):
                 LOGGER.debug('Looks like {0}'.format(block_id))
                 block_version = get_data_version(str_file_hash,
                                                  hash_dict[block_id])
@@ -1209,10 +1253,9 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
                     found = True
 
     # Check if it's a Core
-    if not found and 'core_base' in hash_dict['parts']:
-        if validate_file(
-                str_in_file, hash_dict['parts']['core_base'][3]) and os.stat(
-                    str_in_file).st_size == hash_dict['parts']['core_base'][1]:
+    if not found and 'core_base' in d_parts:
+        if validate_file(str_in_file, d_parts['core_base']
+                         [3]) and i_file_size == d_parts['core_base'][1]:
             LOGGER.debug('Looks like a core')
             for core_item in hash_dict['Cores']:
                 block_version = get_data_version(str_file_hash,
@@ -1225,8 +1268,11 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
 
     # Check if it's a RomPack ROMs file
     if not found and str_extension == 'ZX1':
-        found = list_romsdata(str_in_file, fulldict_hash, 'ROM', show_hashes,
-                              True)
+        rompack = fulldict_hash['ROMS']['parts']
+        i_rpck_size = rompack['header'][1]
+        if i_rpck_size == i_file_size:
+            found = list_romsdata(str_in_file, fulldict_hash, 'ROMS',
+                                  show_hashes, True)
 
     if not found:
         print('Unknown file')
@@ -1608,7 +1654,7 @@ def inject_bindata(str_in_params, hash_dict, b_data):
     br_data = b_data
 
     for bl_id in ['BIOS', 'esxdos', 'Spectrum']:
-        hash_parts = hash_dict['parts'][bl_id]
+        hash_parts = hash_dict['parts'].get(bl_id, [])
         if arr_params[0].upper() == bl_id.upper():
             if len(arr_params) != 2:  # Filename
                 LOGGER.error('Invalid data: {0}'.format(str_in_params))
@@ -1650,18 +1696,18 @@ def inject_coredata(str_in_params, hash_dict, b_data):
     arr_params = str_in_params.split(',')
     br_data = b_data
 
-    block_info = dict_parts['cores_dir']
-    max_cores = splitcore_index = block_info[4]
-    if len(block_info) > 5:
-        max_cores += block_info[5]
-    core_bases = dict_parts['core_base']
-    b_len = core_bases[1]
-    b_head = core_bases[3]
-
-    bl_data = b_data[block_info[0]:block_info[0] + block_info[1]]
-    core_list = get_core_list_bindata(bl_data, dict_parts)
-
     if arr_params[0].upper() == 'CORE':  # Number, Name, Filename
+        block_info = dict_parts.bet(['cores_dir'], [])
+        max_cores = splitcore_index = block_info[4]
+        if len(block_info) > 5:
+            max_cores += block_info[5]
+        core_bases = dict_parts['core_base']
+        b_len = core_bases[1]
+        b_head = core_bases[3]
+
+        bl_data = b_data[block_info[0]:block_info[0] + block_info[1]]
+        core_list = get_core_list_bindata(bl_data, dict_parts)
+
         if len(arr_params) != 4:
             LOGGER.error('Invalid argument: {0}'.format(str_in_params))
         else:
@@ -1720,8 +1766,8 @@ def inject_coredata(str_in_params, hash_dict, b_data):
 def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
                    b_data):
     """
-    Add binary from one Spectrum ROM binary file to SPI flash data
-    :param str_in_file: File with SPI flash data
+    Add binary from one Spectrum ROM binary file to SPI flash or RPv2 data
+    :param str_in_file: File with SPI flash (or ROMPackV2) data
     :param str_in_params: String with ROM, and, separated with ',': ROM slot
      number, ROM params (icdnptsmhl172arxu), ROM name to use and file path to
      the ROM file
@@ -1731,6 +1777,10 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
     :return: Altered binary data and boolean indicating if it changed
     """
     b_changed = False
+    b_roms = False
+    if str_extension == 'RPv2':
+        b_roms = True
+
     hash_dict = fullhash_dict[str_extension]
     dict_parts = hash_dict['parts']
 
@@ -1790,17 +1840,23 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
                     r_v = get_romdata_version(rom_data, fullhash_dict['ROM'])
                     print('Injecting ROM {0} ({1})...'.format(rom_slt, r_v[0]))
 
-                    br_data, b_changed = inject_rom_tobin(
-                        b_data, block_info, block_bases, rom_index, rom_slt,
-                        str_name, rom_params, rom_data)
+                    br_data, b_changed = inject_rom_tobin(b_data,
+                                                          block_info,
+                                                          block_bases,
+                                                          rom_index,
+                                                          rom_slt,
+                                                          str_name,
+                                                          rom_params,
+                                                          rom_data,
+                                                          roms_file=b_roms)
 
     return br_data, b_changed
 
 
 def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
     """
-    Add ROMs from a Spectrum ROMS.ZX1 binary file to SPI flash data
-    :param str_in_file: File with SPI flash data
+    Add ROMs from a Spectrum ROMS.ZX1 binary file to SPI flash or RPv2 data
+    :param str_in_file: File with SPI flash (or ROMPackV2) data
     :param str_in_params: String with ROMS, and, separated with ',': file path
      to ROMS.ZX1
     :param fullhash_dict: Dictionary with hashes data
@@ -1813,6 +1869,13 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
     # SPI flash ROMs
     hash_dict = fullhash_dict[str_extension]
     dict_parts = hash_dict['parts']
+
+    b_roms = False
+    def_r_addr = 28736
+    if str_extension == 'RPv2':
+        b_roms = True
+        def_r_addr = dict_parts['roms_data'][0]
+
     block_info = dict_parts['roms_dir']
     max_slots = block_info[5]
     max_slots += block_info[6]
@@ -1822,7 +1885,7 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
     roms_use = b'\xff' * (block_info[5] + block_info[6])
 
     # ZX1 ROMS
-    rom_dict_parts = fullhash_dict['ROM']['parts']
+    rom_dict_parts = fullhash_dict['ROMS']['parts']
     blk_info = rom_dict_parts['roms_dir']
     rm_split = blk_info[5]
     blk_bases = rom_dict_parts['roms_data']
@@ -1862,7 +1925,7 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
                         br_data, b_chg = inject_rom_tobin(
                             br_data, block_info, block_bases, rom_index,
                             rom_slt, rom_name, rom_params, rom_data, rom_crc,
-                            False)
+                            b_roms)
                         b_changed |= b_chg
                     else:
                         LOGGER.error(
@@ -1870,7 +1933,8 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
 
                 if b_changed:
                     br_data, b_chg = inject_biossettings(br_data,
-                                                         default_rom=def_rom)
+                                                         default_rom=def_rom,
+                                                         d_rom_addr=def_r_addr)
 
     return br_data, b_changed
 
@@ -1950,9 +2014,10 @@ def inject_biossettings(b_data,
                         keyboard_layout=-1,
                         boot_timer=-1,
                         default_core=-1,
-                        default_rom=-1):
+                        default_rom=-1,
+                        d_rom_addr=28736):
     """
-    Alter SPI flash BIOS settings
+    Alter SPI flash BIOS or RPv2 settings
     :param b_data: Binary data to modify
     :param video_mode: Video mode: 0 (PAL), 1 (NTSC) or 2 (VGA)
     :param keyboard_layout: 0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
@@ -1966,8 +2031,8 @@ def inject_biossettings(b_data,
 
     # 28736 Default ROM: 00-xx
     if default_rom > -1:
-        br_data = br_data[:28736] + struct.pack('<B',
-                                                default_rom) + br_data[28737:]
+        br_data = br_data[:d_rom_addr] + struct.pack(
+            '<B', default_rom) + br_data[d_rom_addr + 1:]
         b_changed = True
 
     # 28737 Default Core: 01-xx
