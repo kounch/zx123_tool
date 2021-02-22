@@ -422,19 +422,19 @@
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/invadersmod2.ZX1"],
                 "1.0": "8e7aa76552ac91e3e1861328e96bc9eb1962449e71bbe5770fd5c1dd6b56456b"
             },
-            "Arcade invadpt2": {
+            "Arcade Invaders Pt2": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/invadpt2.ZX1"],
                 "1.0": "c54adfa3ef3bb18dc5d24ca75e907b8de91f0ce9174c4efcb902f9d9ac342235"
             },
-            "Arcade jumpshot": {
+            "Arcade Jump Shot": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/jumpshot.ZX1"],
                 "1.0": "5f3bb886fe7944b538f68dd87eda64f5d1e5647b1bbc6fb621a803b53118301d"
             },
-            "Arcade ladybug": {
+            "Arcade Lady Bug": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/ladybug.ZX1"],
                 "1.0": "93ed62d2333a608356b1ce943c676d14795d9b51609f12987dcbf5724562e177"
             },
-            "Arcade lizwiz": {
+            "Arcade Lizar Wizard": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/lizwiz.ZX1"],
                 "1.0": "38ccb246821f6e4b727545327f85d18aa23f1a59f9aca9e7ae17d2ba73b24c56"
             },
@@ -443,50 +443,50 @@
                 "1.0": "e8c121d9897c16d326c577c1b45501e53812026c87d203a3b71a5163d722f38b",
                 "1.1": "9b2a6fcecc92c0615d73ad0d1a4047d2aa298ba9159de3406275638b68d65ee2"
             },
-            "Arcade lrescue": {
+            "Arcade Lunar Rescue": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/lrescue.ZX1"],
                 "1.0": "4ff6abf4f80153f3ffbc558e0bc514622b20a7120cfa98c52edbda265a5891e3"
             },
-            "Arcade luctoday": {
+            "Arcade Lucky Today": {
                 "latest": ["1.1", ""],
                 "base": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/luctoday.ZX1"],
                 "1.0": "2f476fc94cca7c3807c45b1ee066ffb7549d39933c87bb8d492ee5cd4c831490",
                 "0.2": "674764da89942d845d1874596729454f6ba0188086643c5ad4535009b4f4530c"
             },
-            "Arcade Mayday": {
+            "Arcade Mayday!!": {
                 "latest": ["1.1"],
                 "1.0": "eebedf1a88f35d6e8dd981e1eff93fecc90f99350c0482042b39f62a294dc321",
                 "1.1": "1a8e1441b5cba8036fe9bb7a5f72a6e20fe5629507ba1d49c80d282c48c220c1"
             },
-            "Arcade moonal2": {
+            "Arcade Moon Alien Pt2": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/moonal2.ZX1"],
                 "1.0": "b4db92e4bc4437567d7371fdf23b3cdb34333c94280900adcd0f5e5c2cfbbdcb"
             },
-            "Arcade mrtnt": {
+            "Arcade Mr. TNT": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/mrtnt.ZX1"],
                 "1.0": "154b16c85f2fa5be6976dfbab0a5d464bb287b172a6e838dc17103012fea9247"
             },
-            "Arcade omega": {
+            "Arcade Omega": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/omega.ZX1"],
                 "1.0": "9cae15b80ca2703fd3932b204e043a0fa2cfaf820c78be36e84558588bcaadd5"
             },
-            "Arcade orbitron": {
+            "Arcade Orbitron": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/orbitron.ZX1"],
                 "1.0": "e0e34d79a13c7345d4b9fd0c6ca439d830543c3f440654dc27d3ca2cf21f39d0"
             },
-            "Arcade pacminer": {
+            "Arcade Pac-Manic-Miner": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/pacminer.ZX1"],
                 "1.0": "d58546710c03de95326d4bac2cb228445a990877f418bf8a9e0806f0d6aaceec"
             },
-            "Arcade pacplus": {
+            "Arcade Pac-Man Plus": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/pacplus.ZX1"],
                 "1.0": "d259f1bfed68283ad571106f4f4d5aea58ae68c2700472dec64b4fdafed83a25"
             },
-            "Arcade pengo": {
+            "Arcade Pengo": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/pengo.ZX1"],
                 "1.0": "63f843019f3cd84c957fcbc26a244cbd0b5f20510e92dbf4932347699dfc9abb"
             },
-            "Arcade pisces": {
+            "Arcade Pisces": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/pisces.ZX1"],
                 "1.0": "b272ffc8dc0eb88c89fe424dc5cd9ea19b36b8165cb9f95cec14fcba51a1b0bb"
             },
@@ -494,31 +494,31 @@
                 "latest": ["1.0", ""],
                 "1.0": "fb0045c03221b1bfa16fc7cae3b5f349c2eb45bccd0a0f22639f0eb698238345"
             },
-            "Arcade ponpoko": {
+            "Arcade Ponpoko": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/ponpoko.ZX1"],
                 "1.0": "c49cd99eb61945f575980a4ed7d3edb7e0f7154133844545dffbc3b9834b7859"
             },
-            "Arcade pooyan": {
+            "Arcade Pooyan": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/pooyan.ZX1"],
                 "1.0": "86cb6677516cde8d26451c7e24c5b7e8bc69f3586710af73ff1a93385bea7e1e"
             },
-            "Arcade redufo": {
+            "Arcade Red UFO": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/redufo.ZX1"],
                 "1.0": "667ef94f5060bab59d4a1a2da0a7cc7ce8fa762cb2d920e50dbdf0f3fe488d3e"
             },
-            "Arcade sglob": {
+            "Arcade Super Glob": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/sglob.ZX1"],
                 "1.0": "52be8037942ba9032d7c07d1e4f9e05e2607ea73447ceaa47993076d23e7cffa"
             },
-            "Arcade shootbul": {
+            "Arcade Shoot The Bull": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/shootbul.ZX1"],
                 "1.0": "c20c2df89fac9b09e48dacc660a0050e0d037ce37eea25949244364bb426d7b4"
             },
-            "Arcade snapjack": {
+            "Arcade Snap Jack": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/snapjack.ZX1"],
                 "1.0": "4b8987c1a0fda0b3cd9d17d23e5642ff209377fb34468f0bcc24d61fdf1922e8"
             },
-            "Arcade spclaser": {
+            "Arcade Space Laser": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/spclaser.ZX1"],
                 "1.0": "063026865e9f4b7fdf5397b372c27563662cd230c13bed2448b5af0ad3e60b89"
             },
@@ -537,7 +537,7 @@
                 "1.0": "ef6fe1528e987354cbb9cf20fd7a7d8a6ddfed59fb7b5debd0657ad65d055518",
                 "1.1": "b728882a669c7c4480d84b1f326597de24adb15e0bdc89fa5797745dac9e6389"
             },
-            "Arcade sprint2j": {
+            "Arcade Sprint 2 (J)": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/sprint2j.ZX1"],
                 "1.0": "d996883dd4412d40feff8ce8cf80fc4961e2e88aaa86a39d238e29fdf8f1c13e"
             },
@@ -549,11 +549,11 @@
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/superbreakoutj.ZX1"],
                 "1.0": "f73b3982554f0184c66239f1552367e9194857fd8e6829de1fb3bd383356a237"
             },
-            "Arcade tdpgal": {
+            "Arcade Triple Draw Poker": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/tdpgal.ZX1"],
                 "1.0": "6bf779589264255b59f001a0f809f8c861ce5f689dc362b5ba2f88a95327fd6e"
             },
-            "Arcade theend": {
+            "Arcade The End": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/theend.ZX1"],
                 "1.0": "b8b0a20d679890c34a3950eff93c27dc99f78ef2c360864d9df7eccd62ffe0f6"
             },
@@ -561,37 +561,37 @@
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/theblob.ZX1"],
                 "1.0": "5f07da17253f90cc0a9e12126e47ddefc6fc46eb1423f9b7c5cdd246e6b2c2ef"
             },
-            "Arcade timepilot": {
+            "Arcade Time Pilot": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/timepilot.ZX1"],
                 "1.0": "ba45e0d0760013c645f341aaea780035060d4c28fee43fff03009615c8049411"
             },
-            "Arcade ultratank": {
+            "Arcade Ultra Tank": {
                 "latest": ["1.1", ""],
                 "base": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/ultratank.ZX1"],
                 "1.0": "2c0e86880acaa4684d985788c57502b1b254d7e409689db9e43d4f8badcf1e55",
                 "1.1": "e730ddcbcb9a19f79a13e343223f39f886c530ce53d60c517f4b866c80c7028a"
             },
-            "Arcade ultratankj": {
+            "Arcade Ultra Tank (J)": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/ultratankj.ZX1"],
                 "1.0": "8de85904b21400c3824ec1872d16d401e9e43afe1a0a038dc72163049cb1fc8e"
             },
-            "Arcade uniwars": {
+            "Arcade UniWar S": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/uniwars.ZX1"],
                 "1.0": "39a89ba84e8cdd47a42782099655c9d9568a8f521f9154ecd171924fd2fe41ce"
             },
-            "Arcade vanvan": {
+            "Arcade Van Van Car": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/vanvan.ZX1"],
                 "1.0": "8523f9b0fc6fe8a81aeec925e3db593fd25febf2642363e04e72390ba8b4c17e"
             },
-            "Arcade victoryc": {
+            "Arcade Victory": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/victoryc.ZX1"],
                 "1.0": "7e5ab1d6fe24935fb1994840f314a72b46001bbacd73558a1c991c6f4d30714d"
             },
-            "Arcade warofbug": {
+            "Arcade War Of Bugs": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/warofbug.ZX1"],
                 "1.0": "9abe93abfecdfcf6aa03624da43c6d2aae852eedf11362b49d48bace3a7de165"
             },
-            "Arcade woodpeck": {
+            "Arcade Woodpecker": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/woodpeck.ZX1"],
                 "1.0": "40575d83f2d6243d80d44735db615816da303de11984ba0c3536f44f60614287"
             },
@@ -603,43 +603,43 @@
                 "latest": ["Unknown Version"],
                 "Unknown Version": "6148abf8d3da6bcea2dc58bc9397b31e9be75d78503a0fd89a9a52f3dbd2ca3d"
             },
-            "Arcade capitol": {
+            "Arcade Capitol": {
                 "latest": ["1.0", ""],
                 "1.0": "735514c905948db3bbc4fcc410fd2d87ea084d9a26b414b5aab5ebd1bba2afeb"
             },
-            "Arcade kingball": {
+            "Arcade King & Balloon": {
                 "latest": ["1.0", ""],
                 "1.0": "d8f84baf4640fc654fe57e7dd4560732539d779ad5762393443dcdba2ce859de"
             },
-            "Arcade colony7": {
+            "Arcade Colony 7": {
                 "latest": ["1.0", ""],
                 "1.0": "a37084e9d3ba398cd01882a2ab80e1000587dc9c098fd368f1a624349795ed22"
             },
-            "Arcade jin": {
+            "Arcade Jin": {
                 "latest": ["1.0", ""],
                 "1.0": "f84f5acedc4b2f5ed3d0b0abfa26e1d25313e73fc82340952da98b6b7dc4072a"
             },
-            "Arcade eggor": {
+            "Arcade Eggor": {
                 "latest": ["1.0", ""],
                 "1.0": "a80c1f47986f167ab11b77d37bd2b36dd0a6f6fc45bb7a55823c86a322061b92"
             },
-            "Arcade birdiy": {
+            "Arcade Birdiy": {
                 "latest": ["1.0", ""],
                 "1.0": "3eed79b9509e2c177c3532269e029a4cf9560a2776c49fcffb2392d14ea1dd36"
             },
-            "Arcade zigzag": {
+            "Arcade Zig Zag": {
                 "latest": ["1.0", ""],
                 "1.0": "cbf02b6b9ec19f29cd423719aaf8dafeab890aa977e94ba3fa0e6d74ca94ed6b"
             },
-            "Arcade travrusa": {
+            "Arcade Traverse USA": {
                 "latest": ["1.0", ""],
                 "1.0": "f78fc3b6fcff553c8979de29cfc444c7866c61a81ea4b158a51b8706f14284ce"
             },
-            "Arcade sbagman": {
+            "Arcade Super Bagman": {
                 "latest": ["1.0", ""],
                 "1.0": "6f072cb27a94ddaaca7b52fd2b6d8d7cdc99cade13069c559b7c00e054364081"
             },
-            "Arcade bwidow": {
+            "Arcade Black Eidow": {
                 "latest": ["1.0", ""],
                 "1.0": "9803832a7756fa1c1b572dd8af13edd3329cebff087d8ce10a7fc03fe88b7d5a"
             }
