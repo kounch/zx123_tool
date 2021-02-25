@@ -185,7 +185,7 @@ Find out the version of a BIOS installation file:
 
     ...zx123_tool.py -i FIRMWARE.ZXD -l
 
-Inject the contents of a classic ROMPack file to a ROMPack v2 file:
+Convert the contents of a classic ROMPack file to a ROMPack v2 file:
 
     ...zx123_tool.py -i ROM_255_orig.ZX1 -o ROM_255.ZX1 -a ROMS,MyROMS.ZX1
 
@@ -421,7 +421,7 @@ Averiguar la versión de un archivo de instalación de BIOS:
 
     ...zx123_tool.py -i FIRMWARE.ZXD -l
 
-Añadir el contenido de un fichero ROMPack clásico en un fichero ROMPack v2:
+Convertir el contenido de un fichero ROMPack clásico a un fichero ROMPack v2:
 
     ...zx123_tool.py -i ROM_255_orig.ZX1 -o ROM_255.ZX1 -a ROMS,MyROMS.ZX1
 

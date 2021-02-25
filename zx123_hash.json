@@ -56,10 +56,10 @@
                 "Test 3a": "5a2363e9ef1f10320cc2ed5309c2ab5331db4b4ca8dbab9e39737a02c9186c36"
             },
             "Amstrad CPC6128": {
-                "latest": ["Unknown Version", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/CPC6128.ZX1"],
-                "Unknown Version": "00c62d213755c76feb8a27f3e98a0cafd212206bf10912b9ebf2c2e34c4a2db1",
+                "latest": ["Test 3", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/CPC6128.ZX1"],
+                "Test 3": "00c62d213755c76feb8a27f3e98a0cafd212206bf10912b9ebf2c2e34c4a2db1",
                 "no SD support": "18b620669521a7649d78fa0c2fd057bb792ec238ab9cb9801063759a3439ac00",
-                "SD support": "c3d2f7b1c37ff08c67affba3baa9cc9e0de895cd8035782ad366d402499b54e3"
+                "SD support Renaul Helias": "c3d2f7b1c37ff08c67affba3baa9cc9e0de895cd8035782ad366d402499b54e3"
             },
             "Apple II": {
                 "latest": ["1.13", "https://github.com/zxdos/zxuno/raw/master/cores/Apple2/CORE18.ZX1"],
@@ -89,12 +89,12 @@
                 "96K (2020.09.09)": "ead77977e33230931a82b25436feab2ca21fc101de3baab7a8ae6904656d255b"
             },
             "ColecoVision" : {
-                "latest": ["1.2 VGA + Scanlines", ""],
+                "latest": ["512K", ""],
                 "base": ["1.2 (VGA+HDMI)", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Coleco.ZX1"],
                 "512K": "42a1c25f0c8f767677f6e3c5ebbd0bbc70eed07fc321e4d19770f348436f0c9d",
                 "1.1": "45926ae8763802ae8ed23e1904321618262e5bc2edc2fa0854aa3db4c84f96c0",
                 "1.2 (VGA+HDMI)": "e2cb44f744be56592412c0a9478c9d15ec447f8cd773d9da81219fc05619310a",
-                "1.2 VGA + Scanlines": "500c94aec1d196497196592dab8098cc2a5076b95fd338df1bd0349bdd9a01b0"
+                "1.2 VGA 2M": "500c94aec1d196497196592dab8098cc2a5076b95fd338df1bd0349bdd9a01b0"
             },
             "Commodore 16 - 116 - Plus4": {
                 "latest": ["Release 1", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/C16.ZX1"],
@@ -106,8 +106,8 @@
                 "Beta 7b": "66a25e6a2ba2f492baf673961efe660ec9568ff83d1edd5199aa61b26579c64e"
             },
             "Commodore PET": {
-                "latest": ["VGA", "https://github.com/zxdos/zxuno/raw/master/cores/PET/CORE17.ZX1"],
-                "VGA": "92571c0edcee44ea3da4fe3835babb2d8985d7e65f04d1c5f2d2164c2081ab34"
+                "latest": ["VGA jepalza", "https://github.com/zxdos/zxuno/raw/master/cores/PET/CORE17.ZX1"],
+                "VGA jepalza": "92571c0edcee44ea3da4fe3835babb2d8985d7e65f04d1c5f2d2164c2081ab34"
             },
             "Commodore VIC20": {
                 "latest": ["1.227", "https://github.com/zxdos/zxuno/raw/master/cores/VIC20/CORE10.ZX1"],
@@ -115,15 +115,16 @@
                 "TEST3 - 20170701": "ccefd756a91ed65afe38f70c03905a2fc839ebb3ddb8c259b18d6c51145aa5a6"
             },
             "Flappy Bird": {
-                "latest": ["0.1"],
-                "0.1": "a2e6428546643687fb233c1030b5069cfff0a058001121a3f3e69819e7f9bb3a"
+                "latest": ["0.1 VGA"],
+                "0.1 VGA": "a2e6428546643687fb233c1030b5069cfff0a058001121a3f3e69819e7f9bb3a"
             },
             "Galaksija": {
-                "latest": ["0.1", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Galaksija.zx1"],
-                "0.1": "cc23b953fc5eb7914f1d5fb1b9140aacce997a61277a14fb9b8b1e3ca40a092f"
+                "latest": ["0.2 SDOS8.1", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Galaksija.zx1"],
+                "0.2 SDOS8.1": "cc23b953fc5eb7914f1d5fb1b9140aacce997a61277a14fb9b8b1e3ca40a092f"
             },
             "HT-1080Z - TRS80 M1L2": {
-                "latest": ["2MB Int"],
+                "latest": ["512K", ""],
+                "512K": "8f1d098f17c5839824f1f998dd2a43765e2cde47af8dd9b340f438b1218f271a",
                 "2MB Int": "c9f5cc94fda19f5bc7434c4483b12ec513ce4fba4690ec13d86de0be1672d070"
             },
             "Jupiter Ace": {
@@ -141,7 +142,7 @@
                 "Unknown Version": "875bb4433587b607d0a67c953c467058022c4a2dbef77408cba5467fa51d232a",
                 "1.227": "93cd6f516dec75fbd48f6ca5b5e344f7fee4391974f478979302426e2730eaa9",
                 "1.3 512K": "994e7b1aac5457ca624b9d4f47db3b6997ecd321031f204c03025ee505674ee6",
-                "1.3 VGA2M": "3750b52f63084765d344d3e1e981389f871c3de63651b414d0034237b42d921e"
+                "1.3 VGA2M": "5b1218ca4f62cceb14ca842ff111aa3e9bd12af61b309ddce70a0b0546ea2ece"
             },
             "Multicomp": {
                 "latest": ["TEST1"],
@@ -152,8 +153,10 @@
                 "20161218": "15bd4192d04f523e14108c4fce2f90775b38c821d963e11da9fb36ea63eee39a"
             },
             "NES": {
-                "latest": ["TEST2 - 20160910", "https://github.com/zxdos/zxuno/raw/master/cores/NES/CORE19.ZX1"],
+                "latest": ["512K", ""],
+                "base": ["TEST2 - 20160910", "https://github.com/zxdos/zxuno/raw/master/cores/NES/CORE19.ZX1"],
                 "TEST2 - 20160910": "50c057349a7e9e993c841ad72b652caef060110348ce1e91b6033fb9e4bfafda",
+                "512K": "89968ae4d58d91238ee48fc301ed268ce28b79a30b28d934b3769b8adecab56b",
                 "TEST4 VGA 2MB INT": "ed807d4ed1cfa36059919f01307c6a701d2d0835075f725c8aada88ae3f63eff"
             },
             "Oric Atmos": {
@@ -161,8 +164,8 @@
                 "TEST1 - 20170701": "0fbd7f0195ab840e655ffd5946478e34ee8b1b953bae4609c855912f9ce05be4",
                 "27.12.2018 dos8d": "0e3597b079c65e8f57a24aba7eae69008a21b4537fff490dd1c93e1f915b9977"
             },
-            "PC XT 512KB": {
-                "latest": ["2017.02.18", "https://github.com/zxdos/zxuno/raw/master/cores/PC/CORE23.ZX1"],
+            "PC XT 512K": {
+                "latest": ["70 MHz 2017.02.18", "https://github.com/zxdos/zxuno/raw/master/cores/PC/CORE23.ZX1"],
                 "70 MHz 2017.02.18": "81e89e258fb00fd46f37c8d06055c23821290e265433cd24e8cd1cd0a5993202"
             },
             "PC XT 2MB Ext": {
@@ -173,11 +176,12 @@
             "PC XT 2MB Int": {
                 "latest": ["2017.02.18", ""],
                 "Beta 75 MHz 2017.01.20": "de55a3817acacc55ae90fef0db6c4137ed3c13e84d927a4d7862a7ce1bf178ab",
-                "70 MHz 2017.02.18": "652be2ab706d2835309b84c6e52c026dea07d8d8f42e4d8b13791df14af55163"
+                "70 MHz 2017.02.18": "652be2ab706d2835309b84c6e52c026dea07d8d8f42e4d8b13791df14af55163",
+                "70 MHz": "29a26b485e4180245a43dda65650f29331fe3f0a7952993e7834ea9c680c9557"
             },
             "Sam Coupe": {
-                "latest": ["1.142", "https://github.com/zxdos/zxuno/raw/master/cores/SamCoupe/CORE2.ZX1"],
-                "1.142": "32fd2069f416ada27c7a6556b18ebd0b3813817aa6c419cc12dde046a25236f1"
+                "latest": ["TEST5", "https://github.com/zxdos/zxuno/raw/master/cores/SamCoupe/CORE2.ZX1"],
+                "TEST5": "32fd2069f416ada27c7a6556b18ebd0b3813817aa6c419cc12dde046a25236f1"
             },
             "smartROM": {
                 "latest": ["2021.01.31", "https://github.com/Utodev/smartROM/raw/master/binaries/COREnnSmartROM.ZX1"],
@@ -203,7 +207,7 @@
             "ZX81": {
                 "latest": ["20161105", "https://github.com/zxdos/zxuno/raw/master/cores/ZX81/CORE15.ZX1"],
                 "20161105": "926198a4a6ba89748209e0d25ed34d35d8d51149c6ced0e9452a93440117eec4",
-                "VGA": "0a2469f0b57dab9055dec1de3c68468f4f9df6d32e6b317343df6d1fd8d6c915"
+                "VGA jepalza": "0a2469f0b57dab9055dec1de3c68468f4f9df6d32e6b317343df6d1fd8d6c915"
             },
             "ZX Spectrum": {
                 "latest": ["EXP27 160820", "https://github.com/mcleod-ideafix/zxuno_spectrum_core/raw/master/zxuno_v4/COREx.ZX1"],
@@ -290,7 +294,7 @@
                 "1.0": "c4f3df77ac71cebc3e2c90e56c850dec4ce3aec63a1198e4a460b5a1ccaa2329"
             },
             "Arcade Asteroids": {
-                "latest": ["1.0"],
+                "latest": ["1.1"],
                 "1.0": "5ecf9ad99902fbc621f412a2b5b635ebb3cd4211bb0167fee48c1ab3f594a4a1",
                 "1.1": "fff0f29e0ef4ca3b97090657461a2658fe4f6794e78eb5fed2eb9a0565c5fd42"
             },
@@ -527,9 +531,10 @@
                 "1.0": "aaa7022e75870b3547e7dccbb423ef71e47709df39335229d0b5c44eac6ef5d6"
             },
             "Arcade Sprint 1 (J)": {
-                "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/sprint1j.ZX1"],
-                "Unknown Version": "f32a966de73f6c871508515128e60bced91e19270a73e935bed395458c7a6402",
-                "1.0": "29ab2e44293ed3a93297055c09358fadbc4ca95d2efe0651da4b4b4709ed5c80"
+                "latest": ["1.1", ""],
+                "base": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/sprint1j.ZX1"],
+                "1.0": "29ab2e44293ed3a93297055c09358fadbc4ca95d2efe0651da4b4b4709ed5c80",
+                "1.1": "f32a966de73f6c871508515128e60bced91e19270a73e935bed395458c7a6402"
             },
             "Arcade Sprint 2": {
                 "latest": ["1.1", ""],
@@ -596,12 +601,12 @@
                 "1.0": "40575d83f2d6243d80d44735db615816da303de11984ba0c3536f44f60614287"
             },
             "Arcade Frenzy": {
-                "latest": ["Unknown Version"],
-                "Unknown Version": "c15c70ea1e42f0a5e2ec4ef57357e40c353183d5e93f1d65a9b649af9a373151"
+                "latest": ["1.0", ""],
+                "1.0": "c15c70ea1e42f0a5e2ec4ef57357e40c353183d5e93f1d65a9b649af9a373151"
             },
             "Arcade Squash": {
-                "latest": ["Unknown Version"],
-                "Unknown Version": "6148abf8d3da6bcea2dc58bc9397b31e9be75d78503a0fd89a9a52f3dbd2ca3d"
+                "latest": ["1.0", ""],
+                "1.0": "6148abf8d3da6bcea2dc58bc9397b31e9be75d78503a0fd89a9a52f3dbd2ca3d"
             },
             "Arcade Capitol": {
                 "latest": ["1.0", ""],
