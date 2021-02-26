@@ -187,11 +187,17 @@ Find out the version of a BIOS installation file:
 
 Convert the contents of a classic ROMPack file to a ROMPack v2 file:
 
-    ...zx123_tool.py -i ROM_255_orig.ZX1 -o ROM_255.ZX1 -a ROMS,MyROMS.ZX1
+    ...zx123_tool.py -i ROMS_255_orig.ZX1 -o ROMS_255.ZX1 -a ROMS,MyROMS.ZX1
 
 Add a ROM to a ROMPack v2 file:
 
-    ...zx123_tool.py -i ROM_255_orig.ZX1 -o ROM_255.ZX1 -a "ROM,0,xdnlh17,ZX Spectrum,48.rom"
+    ...zx123_tool.py -i ROMS_255_orig.ZX1 -o ROMS_255.ZX1 -a "ROM,0,xdnlh17,ZX Spectrum,48.rom"
+
+    ...zx123_tool.py -i ROMS_255_orig.ZX1 -o ROMS_255.ZX1 -a ROMS,MyROMS.ZX1
+
+Extract ROMs with indexes 3, 5 and 6 from a ROMPack v2 file:
+
+    ...zx123_tool.py -i ROMS_255.ZX1 -x 3,5,6
 
 ### Description of JSON file
 
@@ -248,6 +254,44 @@ The JSON file is an object where the main name are file extensions (like `ZXD` o
 `core_base` format:
 
     [first core offset, core length, "", First bytes of a binary core data, second cores block offset]
+
+### Description of ROMPack v2 file
+
+ROMPack v2 files are based on classic ROMPack files, used to extract and insert all the ROM files in a ZX-Uno, ZXDOS SPI flash. Classic ROMpack files have 64 ROM slots while ROMPack v2 files have 255 ROM slots. The file structure of a ROMPAck file is as follows:
+
+ Start     | End        | Description
+ -----     | ---        | -----------
+`0x000000` | `0x000003` | Signature 'RPv2'
+`0x000004` | `0x00003F` | Reserved. Unused (pad with `0x00`)
+`0x000040` | `0x003FFF` | Up to 255 64 bytes blocks (ROM Entries) (pad with `0x00`)
+`0x004000` | `0x0040FE` | Up to 255 1 byte blocks with ROM Index Entries (pad with `0xFF`)
+`0x0040FF` | `0x0040FF` | Default ROM Index (1 byte)
+`0x004100` | `0x4000FF` | Up to 255 16384 bytes ROM slots (pad with `0x00`)
+
+#### ROM entry detail
+
+ Start              | End      | Description
+ -----              | ---      | -----------
+`0x00`              | `0x00`   | Slot offset
+`0x01`              | `0x01`   | Slot size
+`0x02`              | `0x02`   | Flags 1:
+`0x02`:Bit `0`      |  Bit `1` | Machine timings: `00`=48K `01`=128K, `10`=Pentagon
+`0x02`:Bit `2`      | Bit `2`  | NMI DivMMC: `0`=disabled, `1`=enabled
+`0x02`:Bit `3`      | Bit `3`  | DivMMC: `0`=disabled, `1`=enabled
+`0x02`:Bit `4`      | Bit `4`  | Contention: `0`=disabled, `1`=enabled
+`0x02`:Bit `5`      | Bit `5`  | Keyboard issue: `0`=issue 2, `1`=issue 3
+`0x03`              | `0x03`   | Flags 2:
+`0x03`:Bit `0`      | Bit `0`  | AY chip: `0`=enabled, `1`=disabled
+`0x03`:Bit `1`      | Bit `1`  | 2nd AY chip (TurboSound): `0`=enabled, `1`=disabled
+`0x03`:Bit `2`      | Bit `2`  | `7ffd` port: `0`=enabled, `1`=disabled
+`0x03`:Bit `3`      | Bit `3`  | `1ffd` port: `0`=enabled, `1`=disabled
+`0x03`:Bit `4`      | Bit `4`  | ROM low bit: `0`=enabled, `1`=disabled
+`0x03`:Bit `5`      | Bit `5`  | ROM high bit: `0`=enabled, `1`=disabled
+`0x03`:Bit `6`      | Bit `6`  | horizontal MMU in Timex: `0`=disabled, `1`=enabled
+`0x03`:Bit `7`      | Bit `7`  | DivMMC and ZXMMC ports: `0`=enabled, `1`=disabled
+`0x08`              | `0x0F`   | crc16-ccitt values. Up to 4 16-bit values in reverse order
+`0x10`              | `0x1F`   | unused
+`0x20`              | `0x3F`   |Name of ROM in ASCII, space padded
 
 ## Castellano
 
@@ -423,11 +467,15 @@ Averiguar la versión de un archivo de instalación de BIOS:
 
 Convertir el contenido de un fichero ROMPack clásico a un fichero ROMPack v2:
 
-    ...zx123_tool.py -i ROM_255_orig.ZX1 -o ROM_255.ZX1 -a ROMS,MyROMS.ZX1
+    ...zx123_tool.py -i ROMS_255_orig.ZX1 -o ROMS_255.ZX1 -a ROMS,MyROMS.ZX1
 
 Añadir una ROM a un fichero ROMPack v2:
 
-    ...zx123_tool.py -i ROM_255_orig.ZX1 -o ROM_255.ZX1 -a "ROM,0,xdnlh17,ZX Spectrum,48.rom"
+    ...zx123_tool.py -i ROMS_255_orig.ZX1 -o ROMS_255.ZX1 -a "ROM,0,xdnlh17,ZX Spectrum,48.rom"
+
+Extraer las ROMs con índices 3, 5 y 6 de un fichero ROMPack v2:
+
+    ...zx123_tool.py -i ROMS_255.ZX1 -x 3,5,6
 
 ### Descripción del arhivo JSON
 
@@ -484,6 +532,44 @@ Para `roms_data`, el formato es el siguiente:
 Para `core_base`, el formato es el siguiente:
 
     [offset del primer core, longitud de un core, "", Primeros bytes de un fichero binario de core, offset del segundo bloque de cores]
+
+### Descripción de un fichero ROMPack v2
+
+ROMPack v2 files are based on classic ROMPack files, used to extract and insert all the ROM files in a ZX-Uno, ZXDOS SPI flash. Classic ROMpack files have 64 ROM slots while ROMPack v2 files have 255 ROM slots. The file structure of a ROMPAck file is as follows:
+
+ Inicio    | Fin        | Descripción
+ ------    | ----       | -----------
+`0x000000` | `0x000003` | Firma 'RPv2'
+`0x000004` | `0x00003F` | Reservado. Sin usar (rellenar con `0x00` hasta el final)
+`0x000040` | `0x003FFF` | Hasta 255 bloques de 64 bytes (ROM Entry) (rellenar con 0x00 hasta el final)
+`0x004000` | `0x0040FE` | Hasta 255 bloques de 1 byte con índice de ROM Entry (rellenar con `0xFF` hasta el final)
+`0x0040FF` | `0x0040FF` | Índice de ROM por defecto (1 byte)
+`0x004100` | `0x4000FF` | Hasta 255 slots de 16384 bytes (rellenar con `0x00` hasta el final)
+
+#### Detalle de ROM Entry
+
+ Start              | End     | Description
+ -----              | ---     | -----------
+`0x00`              | `0x00`  | Offset de primer Slot utilizado
+`0x01`              | `0x01`  | Tamaño en slots
+`0x02`              | `0x02`  | Flags 1:
+`0x02`:Bit `0`      | Bit `1` | Machine timings: `00`=48K `01`=128K, `10`=Pentagon
+`0x02`:Bit `2`      | Bit `2` | NMI DivMMC: `0`=deshabilitado, `1`=habilitado
+`0x02`:Bit `3`      | Bit `3` | DivMMC: `0`=deshabilitado, `1`=habilitado
+`0x02`:Bit `4`      | Bit `4` | Contención: `0`=deshabilitada, `1`=habilitada
+`0x02`:Bit `5`      | Bit `5` | Keyboard issue: `0`=issue 2, `1`=issue 3
+`0x03`              | `0x03`  | Flags 2
+`0x03`:Bit `0`      | Bit `0` | Chip AY: `0`=habilitado, `1`=deshabilitado
+`0x03`:Bit `1`      | Bit `1` | Segundo Chip AY (TurboSound): `0`=habilitado, `1`=deshabilitado
+`0x03`:Bit `2`      | Bit `2` | Puerto 7ffd: `0`=habilitado, `1`=deshabilitado
+`0x03`:Bit `3`      | Bit `3` | Puerto 1ffd: `0`=habilitado, `1`=deshabilitado
+`0x03`:Bit `4`      | Bit `4` | ROM low bit: `0`=habilitado, `1`=deshabilitado
+`0x03`:Bit `5`      | Bit `5` | ROM high bit: `0`=habilitado, `1`=deshabilitado
+`0x03`:Bit `6`      | Bit `6` | MMU horizontal en Timex: `0`=deshabilitado, `1`=habilitado
+`0x03`:Bit `7`      | Bit `7` | Puertos DivMMC y ZXMMC: `0`=habilitado, `1`=deshabilitado
+`0x08`              | `0x0F`  | Valores de crc16-ccitt. Hata 4 valores de 16-bit en orden inverso
+`0x10`              | `0x1F`  | Sin usar
+`0x20`              | `0x3F`  | Nombre de la ROM en ASCII (rellenar con espacios hasta el final)
 
 ## License
 
