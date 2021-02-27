@@ -227,10 +227,11 @@
                 "zx48 v2.0": "b9082eb6a4056c468f67c141c26a4887477b563b5a371dfc9125b3616def8576" 
             },
             "ZX Spectrum 128K (Kyp)": {
-                "latest": ["2020.10.09", ""],
+                "latest": ["zx128 v1.0", "https://github.com/Kyp069/zx128.zxuno/releases/download/1.0/COREnn.zx128.ZX1"],
                 "base": ["2017.01.08", "https://github.com/zxdos/zxuno/raw/master/cores/KypSpectrum/CORE26.ZX1"],
                 "2017.01.08": "49ec4c96aaaa7e783abd9f2fba2ad4437a4c70f92f53c466b9cc2d4c6fe2de2e",
-                "2020.10.09": "e8f535ea695d405df2fd5eaeb2bfa449ab08657a52062da8abc5fe4261d7ab30"
+                "2020.10.09": "e8f535ea695d405df2fd5eaeb2bfa449ab08657a52062da8abc5fe4261d7ab30",
+                "zx128 v1.0": "2b2db414eaf8986af99e899f6fb28f5743be36d41e85a5a7302729bb12812d3d"
             },
             "ZX Spectrum (azesmbog)": {
                 "latest": ["azesmbog DMA 24.05.30"],
