@@ -860,6 +860,10 @@
                 "20210130_beta": "a394b556e6b7864b2f5f2ae8b8ba18865442df89fd3809faf79c5696d0be093c",
                 "20210130": "f69d6076e200c84a6189f69126445c91876d31a01587f50400648c89853b39e1"
             },
+            "ZX81": {
+                "latest": ["Beta 0", ""],
+            	"Beta 0": "a6e7c35054fbfa95e3de2d2a62d2aec92db2b65e87086438aac5faa2c30d9c8c"
+            },
             "ZX Spectrum": {
                 "latest": ["EXP27_100820", "https://github.com/mcleod-ideafix/zxuno_spectrum_core/raw/master/zxdos_lx25/COREx.ZXD"],
                 "EXP26_060818": "5806919127973f3297b3b97e05ddc8c4790495cf2a065f31fad0a8cabad11840",
