@@ -868,7 +868,8 @@
                 "latest": ["EXP27_100820", "https://github.com/mcleod-ideafix/zxuno_spectrum_core/raw/master/zxdos_lx25/COREx.ZXD"],
                 "EXP26_060818": "5806919127973f3297b3b97e05ddc8c4790495cf2a065f31fad0a8cabad11840",
                 "EXP27_unknown": "b73e37eeeb8ed984a98a7c2633716087876195dcd7642e5df9fc901e8a378f21",
-                "EXP27_100820": "4eaa9f8080035185b1f7b5905f06bd63e7c4dc8645c2a79c32accc5154b4f7fb"
+                "EXP27_100820": "4eaa9f8080035185b1f7b5905f06bd63e7c4dc8645c2a79c32accc5154b4f7fb",
+                "EXP27 (I2S MIDI)": "6c0bc134858328564c817e1bdf10307bdf7a4a9ebdf40c582739255aa283ed9d"
             },
             "ZX Spectrum (Avlixa)":
             {
@@ -894,6 +895,7 @@
                 "11 Beta": "830e08517e343c2b8ddcd805a02d9d986dce01687bbc1b9ac08f04e591e4330e",
                 "11 Beta (Edge)": "d63bd85037007346977345c19fad1f963dcad7c576e1d186ce78c1fd02752afb",
                 "11": "98c7ce7f1a778a24dbebd5d935c42f434c0a38e0e775776f046e44b9b02874c9",
+                "3.01.06 (Pi Zero)": "ec5eede4ebd1233b1cfc70f7dbcd507787f904a86ee2be15a46dac40efaa10c0",
                 "3.01.09 Beta": "ca92f2fcf2320621c1bd9e28e95c961232871c35585b84d0ee1e7e8cefa7389d",
                 "3.01.09": "348adf724d4d38734ab74b25083445a859ac7569b5b8007bb1f76a1044b90385",
                 "3.01.09 2MB (Benitoss)": "9fe2e6c09caf073dd778ce1552da18f55c16653f2eb40673d917bc4ba4648bb0"
