@@ -895,10 +895,12 @@
                 "11 Beta": "830e08517e343c2b8ddcd805a02d9d986dce01687bbc1b9ac08f04e591e4330e",
                 "11 Beta (Edge)": "d63bd85037007346977345c19fad1f963dcad7c576e1d186ce78c1fd02752afb",
                 "11": "98c7ce7f1a778a24dbebd5d935c42f434c0a38e0e775776f046e44b9b02874c9",
-                "3.01.06 (Pi Zero)": "ec5eede4ebd1233b1cfc70f7dbcd507787f904a86ee2be15a46dac40efaa10c0",
+                "3.01.06b (Pi Zero)": "ec5eede4ebd1233b1cfc70f7dbcd507787f904a86ee2be15a46dac40efaa10c0",
                 "3.01.09 Beta": "ca92f2fcf2320621c1bd9e28e95c961232871c35585b84d0ee1e7e8cefa7389d",
                 "3.01.09": "348adf724d4d38734ab74b25083445a859ac7569b5b8007bb1f76a1044b90385",
-                "3.01.09 2MB (Benitoss)": "9fe2e6c09caf073dd778ce1552da18f55c16653f2eb40673d917bc4ba4648bb0"
+                "3.01.09 2MB (Benitoss)": "9fe2e6c09caf073dd778ce1552da18f55c16653f2eb40673d917bc4ba4648bb0",
+                "3.01.09b1 (Pi Zero)": "b532cb08990ec43a2a90f91a9dfd26313c8604e61e6262c191a58f0fa4740281",
+                "3.01.09b2 (Pi Zero)": "4ccbabc3bd9d29867bacca6ea333861cd054f0d796ad26a83d7830b62db8e74f"
             }
         },
         "recovery.zxd.bit": {
