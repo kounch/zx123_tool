@@ -818,9 +818,9 @@
                 "latest": ["1.0"],
                 "1.0": "c917efa18740920da86700ab58dd1dbf4911597faa0a4b6b532727059dd9a975"
             },
-            "MSX": 
+            "MSX":
             {
-                "latest": ["1.3 v6 (Benitoss)"],
+                "latest": ["1.3", "https://github.com/zxdos/zxdos-plus/raw/master/cores/msx1-3_zxdoslx25.ZXD"],
                 "Beta": "a2eb1b6cdaecf67e0a07e9cfe593a247d46e85119c9b5936c57edc5ec88782f8",
                 "1.0": "a64e415a5277d92ea5441cfe02dcc8dfbbe396911d20f732f34f7bb6040ef0fe",
                 "1.2": "bf420194449675258c39fe62a789d09629f7f90cc1d27d2cc25b5cc6500395c9",
@@ -829,7 +829,8 @@
                 "1.3 v3 (Benitoss)": "899150df22c98bb8edde878f39febb04e15f4b0c1a31f834c1a8001e838a644d",
                 "1.3 v4 (Benitoss)": "f10bd0977139653fcb2bcdf879dd5c60db9f300cd2cad884323cc1c542a64277",
                 "1.3 v5 (Benitoss)": "a1d60559481198235a59cf192851b920a7460661156f4f8bd97d135cf1d77a46",
-                "1.3 v6 (Benitoss)": "1a390b1663472ec4656347f10bdca4d200b3abd20cae4488d41754f3ea993902"
+                "1.3 v6 (Benitoss)": "1a390b1663472ec4656347f10bdca4d200b3abd20cae4488d41754f3ea993902",
+                "1.3": "06e922c18daaa3e2b8388836d96e4f80a8505daa82de0914b2ffb8f696a68aec"
             },
             "NES": {
                 "latest": ["20200923", "https://github.com/zxdos/zxdos-plus/raw/master/cores/COREn_NES_VGA_lx25.zxd"],
@@ -900,7 +901,11 @@
                 "3.01.09": "348adf724d4d38734ab74b25083445a859ac7569b5b8007bb1f76a1044b90385",
                 "3.01.09 2MB (Benitoss)": "9fe2e6c09caf073dd778ce1552da18f55c16653f2eb40673d917bc4ba4648bb0",
                 "3.01.09b1 (Pi Zero)": "b532cb08990ec43a2a90f91a9dfd26313c8604e61e6262c191a58f0fa4740281",
-                "3.01.09b2 (Pi Zero)": "4ccbabc3bd9d29867bacca6ea333861cd054f0d796ad26a83d7830b62db8e74f"
+                "3.01.09b2 (Pi Zero)": "4ccbabc3bd9d29867bacca6ea333861cd054f0d796ad26a83d7830b62db8e74f",
+                "3.01.08b1 (Pi Zero)": "5de55399bde50edb1064ce013fd30e47cb14389653aa3e710dd2dc077af67261",
+                "3.01.08b2 (Pi Zero)": "9be5a1a27cdf97260666630d762db21778e2e1e8716ad64f943a4250bff659c7",
+                "3.01.08b3 (Pi Zero)": "e0a0b59eb450ed74590b862d4fa5e89cafa82e5a4cb6188a8950bc43e1428799",
+                "3.01.08b4 (Pi Zero)": "caaf0798314d97a7f4a79a91e62af4c111e5239760097f2008c850ec2045955a"
             }
         },
         "recovery.zxd.bit": {
