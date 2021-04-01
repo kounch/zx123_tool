@@ -224,7 +224,8 @@
                 "zx48 1.0": "3d9ae01086f46be013d09656b1efff6109ca426ee6ee593ec0069f8c1fad1d7c",
                 "zx48 2020.08.13": "7998866f2bcdd566f19e8c73ea53eff575bbd8f3e0f8a7be5716fb274c0d36bc",
                 "zx48 2020.09.06": "db39811185a8fcfc371226353f7d6527373372cf3b25981d208c64a0707df507",
-                "zx48 v2.0": "b9082eb6a4056c468f67c141c26a4887477b563b5a371dfc9125b3616def8576" 
+                "zx48 v2.0": "b9082eb6a4056c468f67c141c26a4887477b563b5a371dfc9125b3616def8576",
+                "zx48 Beta": "ec83637db79fcbca50d925dd0a53107c4461a0abb53c476899d517b07e548d95"
             },
             "ZX Spectrum 128K (Kyp)": {
                 "latest": ["zx128 v1.0", "https://github.com/Kyp069/zx128.zxuno/releases/download/1.0/COREnn.zx128.ZX1"],
@@ -743,6 +744,10 @@
                 "latest": ["EXP27_SVN"],
                 "EXP27_SVN": "9f10eb6605c428e17db607a7141036a218164eeea02ac4c087e447dce5e5ced4"
             },
+            "ZX Spectrum 48K (Kyp)": {
+                "latest": ["zx48 Beta", ""],
+                "zx48 Beta": "e3fdf4e30ccdd0303eebc931b6aa5c7c0b7d49d8e84cfe4853e8b8f328663b61"
+            },
             "ZX Spectrum Next": {
                 "latest": ["3.01.06 v11", "https://github.com/zxdos/binaries/raw/master/zxnext_top_issue2_zxdos_1M_lx16_v11.ZX2"],
                 "3.01.05 Issue2": "86a0f9ee8405c787209ded1b2a1035e47fd461c4b435f4e75ab53ede8c320531",
@@ -881,7 +886,8 @@
             },
             "ZX Spectrum 48K (Kyp)": {
                 "latest": ["1.0", "https://github.com/Kyp069/zx48.zxdosplus/releases/download/1.0/COREnn.zx48.by.Kyp.v1.0.ZXD"],
-                "1.0": "3f57104e7af35ec0b06f5c22322fd535962dcf850969592c070e786888f0433e"
+                "1.0": "3f57104e7af35ec0b06f5c22322fd535962dcf850969592c070e786888f0433e",
+                "Beta": "aca4d1a11805c3badd832cdc7b53ea1592313b6c272a5a8fa68695b0b46e35a1"
             },
             "ZX Spectrum Next": {
                 "latest": ["3.01.09", "https://github.com/zxdos/zxdos-plus/raw/master/cores/zxnext_top_issue2_gomados_2M_lx25_3_1_9.ZXD"],
