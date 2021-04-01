@@ -50,7 +50,7 @@ from zipfile import ZipFile
 import tempfile
 import shutil
 
-__MY_VERSION__ = '2.1.0'
+__MY_VERSION__ = '2.1.1'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
