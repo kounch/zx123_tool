@@ -84,7 +84,7 @@
                 "1.2 (azesmbog)": "fe0eec22bd05063a725ca7e7e5cbeb3436931007048a810d49a1f4ab3bc5692b",
                 "1.3": "4bbc3c71e4bfc755e2fa315336bf77c9115a977381949b801cc75e7a087ac53e"
             },
-            "Camputer Lynx": {
+            "Camputers Lynx": {
                 "latest": ["96K (2020.09.09)"],
                 "96K (2020.09.09)": "ead77977e33230931a82b25436feab2ca21fc101de3baab7a8ae6904656d255b"
             },
@@ -815,6 +815,10 @@
                 "latest": ["2.1", "https://github.com/zxdos/zxdos-plus/raw/master/cores/A2600_zxdos_lx25_v2_1.ZXD"],
                 "2.1": "cc1df50d02ddc1ac48a5064afbf6e6a6a03f007516b1fc6544922bf67e261e81"
             },
+            "Camputers Lynx": {
+                "latest": ["2021.04.21"],
+                "2021.04.21": "289aa2a08403d9fb5e497b1992986072f468172e961b649489eb3ca20297dcd2"
+            },
             "ColecoVision": {
                 "latest": ["0.1"],
                 "0.1": "1b640cb200434f735f749e18e34ed37ccba487f5c84ba3d4e2d321363f9aff4f"
@@ -887,7 +891,9 @@
             "ZX Spectrum 48K (Kyp)": {
                 "latest": ["1.0", "https://github.com/Kyp069/zx48.zxdosplus/releases/download/1.0/COREnn.zx48.by.Kyp.v1.0.ZXD"],
                 "1.0": "3f57104e7af35ec0b06f5c22322fd535962dcf850969592c070e786888f0433e",
-                "Beta": "aca4d1a11805c3badd832cdc7b53ea1592313b6c272a5a8fa68695b0b46e35a1"
+                "Beta": "aca4d1a11805c3badd832cdc7b53ea1592313b6c272a5a8fa68695b0b46e35a1",
+                "2021.04.01 (RGB)": "552af7753a6ca2c940dccc5398e38951902f8b69653f726322ed3d3d0ad190c2",
+                "2021.04.01": "ef5faf702638387f6fa5bf31b0452bd4e1e2a7a1d54cf33c12b396fe65b6fdde"
             },
             "ZX Spectrum Next": {
                 "latest": ["3.01.09", "https://github.com/zxdos/zxdos-plus/raw/master/cores/zxnext_top_issue2_gomados_2M_lx25_3_1_9.ZXD"],
