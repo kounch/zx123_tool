@@ -816,8 +816,10 @@
                 "2.1": "cc1df50d02ddc1ac48a5064afbf6e6a6a03f007516b1fc6544922bf67e261e81"
             },
             "Camputers Lynx": {
-                "latest": ["2021.04.21"],
-                "2021.04.21": "289aa2a08403d9fb5e497b1992986072f468172e961b649489eb3ca20297dcd2"
+                "latest": ["2021.04.03"],
+                "2021.04.01": "289aa2a08403d9fb5e497b1992986072f468172e961b649489eb3ca20297dcd2",
+                "2021.04.02": "e426499ee91411bbbec0a8edec59d8d843e3352c5e508a0c574cb3b9979f7d33",
+                "2021.04.03"; "c23bf294fba796180f5891d93190eeb764cf00cccbb3aad991d753adc6efe05c"
             },
             "ColecoVision": {
                 "latest": ["0.1"],
@@ -893,7 +895,9 @@
                 "1.0": "3f57104e7af35ec0b06f5c22322fd535962dcf850969592c070e786888f0433e",
                 "Beta": "aca4d1a11805c3badd832cdc7b53ea1592313b6c272a5a8fa68695b0b46e35a1",
                 "2021.04.01 (RGB)": "552af7753a6ca2c940dccc5398e38951902f8b69653f726322ed3d3d0ad190c2",
-                "2021.04.01": "ef5faf702638387f6fa5bf31b0452bd4e1e2a7a1d54cf33c12b396fe65b6fdde"
+                "2021.04.01": "ef5faf702638387f6fa5bf31b0452bd4e1e2a7a1d54cf33c12b396fe65b6fdde",
+                "2021.04.02 b1": "dfd98e66aea4035517098edde062f257f6721acbef2680d357bf895dced64e4a",
+                "2021.04.02": "80c544e3b506a4362e79b4bd1c890d40047f22ee3aae70d5034372b63d27dc93"
             },
             "ZX Spectrum Next": {
                 "latest": ["3.01.09", "https://github.com/zxdos/zxdos-plus/raw/master/cores/zxnext_top_issue2_gomados_2M_lx25_3_1_9.ZXD"],
