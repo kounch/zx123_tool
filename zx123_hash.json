@@ -85,8 +85,9 @@
                 "1.3": "4bbc3c71e4bfc755e2fa315336bf77c9115a977381949b801cc75e7a087ac53e"
             },
             "Camputers Lynx": {
-                "latest": ["96K (2020.09.09)"],
-                "96K (2020.09.09)": "ead77977e33230931a82b25436feab2ca21fc101de3baab7a8ae6904656d255b"
+                "latest": ["96K (2021.03.25)"],
+                "96K (2020.09.09)": "ead77977e33230931a82b25436feab2ca21fc101de3baab7a8ae6904656d255b",
+                "96K (2021.03.25)": "55e0ec5ab386b75d6f6583531d4feb563d38d01908af93ffdb9851e17523e3c5"
             },
             "ColecoVision" : {
                 "latest": ["512K", ""],
@@ -217,15 +218,16 @@
                 "EXP27 160820": "613902acb29e3926142a721493c593c0746969261fe7d5cce207194a1fc30a03"
             },
             "ZX Spectrum 48K (Kyp)": {
-                "latest": ["zx48 v2.0", "https://github.com/Kyp069/zx48.zxuno/releases/download/2.0/COREnn.zx48.ZX1"],
-                "base": ["2017.01.08", "https://github.com/zxdos/zxuno/raw/master/cores/KypSpectrum/CORE25.ZX1"],
+                "latest": ["zx48 2021.04.02"],
+                "base": ["zx48 v2.0", "https://github.com/Kyp069/zx48.zxuno/releases/download/2.0/COREnn.zx48.ZX1"],
                 "2017.01.08": "575286b932f45cb48d498cbce197b04ef51379f7dc77745b39d10340e10209d5",
                 "2016.12.03": "1cccd9fc02173775b62fee44daa663a1b2127268630fcbd26875883f60a0fc8d",
                 "zx48 1.0": "3d9ae01086f46be013d09656b1efff6109ca426ee6ee593ec0069f8c1fad1d7c",
                 "zx48 2020.08.13": "7998866f2bcdd566f19e8c73ea53eff575bbd8f3e0f8a7be5716fb274c0d36bc",
                 "zx48 2020.09.06": "db39811185a8fcfc371226353f7d6527373372cf3b25981d208c64a0707df507",
                 "zx48 v2.0": "b9082eb6a4056c468f67c141c26a4887477b563b5a371dfc9125b3616def8576",
-                "zx48 Beta": "ec83637db79fcbca50d925dd0a53107c4461a0abb53c476899d517b07e548d95"
+                "zx48 Beta": "ec83637db79fcbca50d925dd0a53107c4461a0abb53c476899d517b07e548d95",
+                "zx48 2021.04.02": "430ef2522473b958c299c53d9981993d9f83424df446dc1db2d2f53cdbb63bcd"
             },
             "ZX Spectrum 128K (Kyp)": {
                 "latest": ["zx128 v1.0", "https://github.com/Kyp069/zx128.zxuno/releases/download/1.0/COREnn.zx128.ZX1"],
@@ -819,7 +821,7 @@
                 "latest": ["2021.04.03"],
                 "2021.04.01": "289aa2a08403d9fb5e497b1992986072f468172e961b649489eb3ca20297dcd2",
                 "2021.04.02": "e426499ee91411bbbec0a8edec59d8d843e3352c5e508a0c574cb3b9979f7d33",
-                "2021.04.03"; "c23bf294fba796180f5891d93190eeb764cf00cccbb3aad991d753adc6efe05c"
+                "2021.04.03": "c23bf294fba796180f5891d93190eeb764cf00cccbb3aad991d753adc6efe05c"
             },
             "ColecoVision": {
                 "latest": ["0.1"],
@@ -891,13 +893,14 @@
                 "EXP27_190920_BnW": "a4be8ef45afb08aa3f5aec99772beec6ffff1058e478b4b55df8360275a193b0"
             },
             "ZX Spectrum 48K (Kyp)": {
-                "latest": ["1.0", "https://github.com/Kyp069/zx48.zxdosplus/releases/download/1.0/COREnn.zx48.by.Kyp.v1.0.ZXD"],
+                "latest": ["2021.04.03"],
+                "base": ["1.0", "https://github.com/Kyp069/zx48.zxdosplus/releases/download/1.0/COREnn.zx48.by.Kyp.v1.0.ZXD"],
                 "1.0": "3f57104e7af35ec0b06f5c22322fd535962dcf850969592c070e786888f0433e",
                 "Beta": "aca4d1a11805c3badd832cdc7b53ea1592313b6c272a5a8fa68695b0b46e35a1",
                 "2021.04.01 (RGB)": "552af7753a6ca2c940dccc5398e38951902f8b69653f726322ed3d3d0ad190c2",
                 "2021.04.01": "ef5faf702638387f6fa5bf31b0452bd4e1e2a7a1d54cf33c12b396fe65b6fdde",
-                "2021.04.02 b1": "dfd98e66aea4035517098edde062f257f6721acbef2680d357bf895dced64e4a",
-                "2021.04.02": "80c544e3b506a4362e79b4bd1c890d40047f22ee3aae70d5034372b63d27dc93"
+                "2021.04.02": "80c544e3b506a4362e79b4bd1c890d40047f22ee3aae70d5034372b63d27dc93",
+                "2021.04.03": "20199ca1737b44ba18b146da969e5f3faca42a013dcf118ed804872d28cb4f4c"
             },
             "ZX Spectrum Next": {
                 "latest": ["3.01.09", "https://github.com/zxdos/zxdos-plus/raw/master/cores/zxnext_top_issue2_gomados_2M_lx25_3_1_9.ZXD"],
