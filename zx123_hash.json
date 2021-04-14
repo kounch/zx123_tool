@@ -714,6 +714,10 @@
                 "latest": ["1.3", "https://github.com/zxdos/binaries/raw/master/MSX1FPGA.ZX2"],
                 "1.3": "f2c9748dd988e894ccf9278702e1a6c290e74ab4ff22fd79eaba8b085b91d4ee"
             },
+            "PC XT": {
+                "latest": ["Next186 DDR3 v1", "https://github.com/zxdos/binaries/raw/master/next186_zxdos_ddr3_lx16_v1_COREXX.ZX2"],
+                "Next186 DDR3 v1": "66beafd187d6cce0e5b4a945b2348154bda300961eb2b9f27393c86a1ef7cffe"
+            },
             "Phoenix": {
                 "latest": ["1.0", "https://github.com/zxdos/binaries/raw/master/COREN_phoenix_zxdoslx16.ZX2"],
                 "1.0": "48eb3dd20c23b99fba5800181aca4bc08ea111e601ddbe1cdd6d795db931beb3"
@@ -823,6 +827,10 @@
                 "2021.04.02": "e426499ee91411bbbec0a8edec59d8d843e3352c5e508a0c574cb3b9979f7d33",
                 "2021.04.03": "c23bf294fba796180f5891d93190eeb764cf00cccbb3aad991d753adc6efe05c"
             },
+            "Chip-8": {
+                "latest": ["2021.04.11"],
+                "2021.04.11": "7a0c29281b3a92a02e11707b1adb7b8c58ed3aad2c8f598fde67f4e098ce0ab0"
+            },
             "ColecoVision": {
                 "latest": ["0.1"],
                 "0.1": "1b640cb200434f735f749e18e34ed37ccba487f5c84ba3d4e2d321363f9aff4f"
@@ -849,6 +857,11 @@
                 "latest": ["20200923", "https://github.com/zxdos/zxdos-plus/raw/master/cores/COREn_NES_VGA_lx25.zxd"],
                 "20200920": "35bd42259ab47099d4151c0ff687d3c3355e591ea4fb941e00aed709ab375d3e",
                 "20200923": "a22d70b0faaaf7e6759ee8b90986fd2da4f97b89f37aa5798af805fd363941c7"
+            },
+            "PC XT": {
+                "latest": ["Next186 DDR3 v1", "https://github.com/zxdos/binaries/raw/master/next186_zxdos_ddr3_lx25_v1_COREXX.ZXD"],
+                "Next186 DDR3 Test1": "b01f7b892fcedafa9f067cc3449a9d7142f4e2d7e8a5ee53ecbe1d8be96725a9",
+                "Next186 DDR3 v1": "3468f9ccc441828e16243edaabfd9fe30b5125a0e1dc5591f9e0137ad9402e63"
             },
             "Phoenix": {
                 "latest": ["1.0"],
