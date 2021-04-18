@@ -25,11 +25,12 @@
             "0.83": "8d086c0ef440abc89f5edf37c8d482d69619065f4d27f573d7d57a83942ea91f"
         },
         "esxdos": {
-            "latest": ["0.8.8"],
+            "latest": ["0.8.9"],
             "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
             "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
             "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
-            "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8"
+            "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8",
+            "0.8.9": "89706de560d66432fe19ddb895e7cde49e252e932687dcb57fb92259a0259339"
         },
         "Spectrum": {
             "latest": ["EXP27_160820", "https://github.com/mcleod-ideafix/zxuno_spectrum_core/raw/master/zxuno_v4/SPECTRUM.ZX1"],
@@ -680,11 +681,12 @@
             "0.83": "7e086501f0a07dbef8aba4d8d177131e2e2217bfbd95a039449c3471a83eb703"
         },
         "esxdos": {
-            "latest": ["0.8.8"],
+            "latest": ["0.8.9"],
             "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
             "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
             "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
-            "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8"
+            "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8",
+            "0.8.9": "89706de560d66432fe19ddb895e7cde49e252e932687dcb57fb92259a0259339"
         },
         "Spectrum": {
             "latest": ["EXP27_SVN"],
@@ -794,11 +796,12 @@
             "0.84": "9bb23ad02947c9b378dd2a4d9d35f994fd2407affdc5952d1470f51bc0cd94e7"
         },
         "esxdos": {
-            "latest": ["0.8.8"],
+            "latest": ["0.8.9"],
             "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
             "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
             "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
-            "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8"
+            "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8",
+            "0.8.9": "89706de560d66432fe19ddb895e7cde49e252e932687dcb57fb92259a0259339"
         },
         "Spectrum": {
             "latest": ["EXP27_100820", "https://github.com/zxdos/zxdos-plus/raw/master/cores/SPECTRUM_EXP27_lx25.ZXD"],
@@ -969,7 +972,8 @@
             "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
             "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
             "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
-            "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8"
+            "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8",
+            "0.8.9": "89706de560d66432fe19ddb895e7cde49e252e932687dcb57fb92259a0259339"
         },
         "16K Spectrum ROM": {
             "latest": ["ZX Spectrum", "https://github.com/zxdos/zxuno/raw/master/modflash/roms/48.rom"],
