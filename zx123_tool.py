@@ -50,7 +50,7 @@ from zipfile import ZipFile
 import tempfile
 import shutil
 
-__MY_VERSION__ = '2.1.1'
+__MY_VERSION__ = '2.2.0'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
@@ -1730,6 +1730,14 @@ def inject_coredata(str_in_params, hash_dict, b_data):
 
                 if core_index > len(core_list) + 1:
                     core_index = len(core_list) + 2
+
+                # Is there a dummy core definition?
+                if len(block_info) > 6 and core_index == block_info[4] + 1:
+                    if block_version in hash_dict['Cores'][block_info[6]]:
+                        LOGGER.debug('Valid Dummy Core')
+                    else:
+                        LOGGER.error('Invalid Dummy Core')
+                        core_index = -1
 
                 if core_index < 2 or core_index > max_cores:
                     LOGGER.error('Invalid core index: {}'.format(core_index))
