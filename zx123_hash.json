@@ -823,7 +823,7 @@
                 "2.1": "cc1df50d02ddc1ac48a5064afbf6e6a6a03f007516b1fc6544922bf67e261e81"
             },
             "Camputers Lynx": {
-                "latest": ["2021.04.03"],
+                "latest": ["2021.04.03", "https://github.com/zxdos/zxdos-plus/raw/master/cores/camputers_lynx_lx25_2021-04-03.ZXD"],
                 "2021.04.01": "289aa2a08403d9fb5e497b1992986072f468172e961b649489eb3ca20297dcd2",
                 "2021.04.02": "e426499ee91411bbbec0a8edec59d8d843e3352c5e508a0c574cb3b9979f7d33",
                 "2021.04.03": "c23bf294fba796180f5891d93190eeb764cf00cccbb3aad991d753adc6efe05c"
@@ -907,7 +907,7 @@
                 "EXP27_190920_BnW": "a4be8ef45afb08aa3f5aec99772beec6ffff1058e478b4b55df8360275a193b0"
             },
             "ZX Spectrum 48K (Kyp)": {
-                "latest": ["2021.04.03"],
+                "latest": ["2021.04.03", "https://github.com/zxdos/zxdos-plus/raw/master/cores/zx48_2021-04-03.ZXD"],
                 "base": ["1.0", "https://github.com/Kyp069/zx48.zxdosplus/releases/download/1.0/COREnn.zx48.by.Kyp.v1.0.ZXD"],
                 "1.0": "3f57104e7af35ec0b06f5c22322fd535962dcf850969592c070e786888f0433e",
                 "Beta": "aca4d1a11805c3badd832cdc7b53ea1592313b6c272a5a8fa68695b0b46e35a1",
@@ -915,6 +915,11 @@
                 "2021.04.01": "ef5faf702638387f6fa5bf31b0452bd4e1e2a7a1d54cf33c12b396fe65b6fdde",
                 "2021.04.02": "80c544e3b506a4362e79b4bd1c890d40047f22ee3aae70d5034372b63d27dc93",
                 "2021.04.03": "20199ca1737b44ba18b146da969e5f3faca42a013dcf118ed804872d28cb4f4c"
+            },
+            "ZX Spectrum 128K (Kyp)": {
+                "latest": ["2021.04.17"],
+                "2021.04.16": "1ae16087e16588b0fffc069440364a11d11103a73d0f160d638b4cad066a24b4",
+                "2021.04.17": "0c756d7a53a727184876023303480bca8e5aa4efef953b31817e078c3e169673"
             },
             "ZX Spectrum Next": {
                 "latest": ["3.01.09", "https://github.com/zxdos/zxdos-plus/raw/master/cores/zxnext_top_issue2_gomados_2M_lx25_3_1_9.ZXD"],
