@@ -183,6 +183,9 @@ def main():
                 if arg_data['update'].lower() in ['all', 'spectrum']:
                     prep_update_zxdata(arr_upd, str_file, fulldict_hash,
                                        str_extension, ['Spectrum'])
+                if arg_data['update'].lower() in ['all', 'special']:
+                    prep_update_zxdata(arr_upd, str_file, fulldict_hash,
+                                       str_extension, ['Special'])
                 if arg_data['update'].lower() in ['all', 'cores']:
                     prep_update_cores(arr_upd, str_file, fulldict_hash,
                                       str_extension, b_new_img)
@@ -385,16 +388,18 @@ def parse_args():
                         action='store_true',
                         dest='expand_flash',
                         help='Expand, if needed, flash file to 32MiB')
-    parser.add_argument(
-        '-u',
-        '--update',
-        required=False,
-        nargs='?',
-        choices=['all', 'bios', 'spectrum', 'cores', 'arcade', 'json', 'roms'],
-        const='all',
-        default='',
-        dest='update',
-        help='Update JSON or BIOS and/or Cores')
+    parser.add_argument('-u',
+                        '--update',
+                        required=False,
+                        nargs='?',
+                        choices=[
+                            'all', 'bios', 'spectrum', 'special', 'cores',
+                            'arcade', 'json', 'roms'
+                        ],
+                        const='all',
+                        default='',
+                        dest='update',
+                        help='Update JSON or BIOS and/or Cores')
     parser.add_argument('-q',
                         '--check',
                         required=False,
@@ -518,15 +523,15 @@ def unzip_image(str_path, str_output, hash_dict):
     if str_extension in hash_dict:
         str_image = 'FLASH16_empty.{0}'.format(str_extension)
         str_zip = '{0}.zip'.format(str_image)
-        str_zip = os.path.join(str_path, str_zip)
+        str_zipfile = os.path.join(str_path, str_zip)
         if not os.path.isfile(str_zip):
             dl_url = MAIN_URL + '/{0}'.format(str_zip)
             print('\nDownloading ZIP file...', end='')
-            urllib.request.urlretrieve(dl_url, str_zip)
+            urllib.request.urlretrieve(dl_url, str_zipfile)
             print('OK')
 
-        if os.path.isfile(str_zip):
-            with ZipFile(str_zip, 'r') as zipObj:
+        if os.path.isfile(str_zipfile):
+            with ZipFile(str_zipfile, 'r') as zipObj:
                 arr_files = zipObj.namelist()
                 for str_name in arr_files:
                     if str_name == str_image:
@@ -562,17 +567,19 @@ def list_zxdata(str_in_file, hash_dict, show_hashes, check_updated=False):
     str_name = os.path.basename(str_in_file)
     print('\nContents of {0} (possibly {1})\n'.format(
         str_name, hash_dict['description']))
-    block_list = ['BIOS', 'esxdos', 'Spectrum']
+    block_list = ['BIOS', 'esxdos', 'Spectrum', 'Special']
     for block_name in block_list:
-        block_version, block_hash = get_version(str_in_file,
-                                                hash_dict['parts'][block_name],
-                                                hash_dict[block_name])
-        print('{0}: {1}'.format(block_name, block_version), end='')
-        if check_updated:
-            update_check(hash_dict[block_name], block_version)
-        print('')
-        if (show_hashes):
-            print(block_hash)
+        if block_name in hash_dict['parts']:
+            block_version, block_hash = get_version(
+                str_in_file, hash_dict['parts'][block_name],
+                hash_dict[block_name])
+            if block_version:
+                print('{0}: {1}'.format(block_name, block_version), end='')
+                if check_updated:
+                    update_check(hash_dict[block_name], block_version)
+                print('')
+                if (show_hashes):
+                    print(block_hash)
 
     core_list = get_core_list(str_in_file, hash_dict['parts'])
     for index, name in enumerate(core_list):
@@ -694,18 +701,19 @@ def extractfrom_zxdata(str_in_file,
     if str_extension == 'RPv2':
         b_romfile = True
 
-    block_list = ['BIOS', 'esxdos', 'Spectrum']
+    block_list = ['BIOS', 'esxdos', 'Spectrum', 'Special']
     for block_name in block_list:
-        # Extract main ROMs
-        if extract_item.upper() == block_name.upper():
-            print('Extracting {0}...'.format(block_name))
-            block_info = hash_dict['parts'][block_name]
-            str_bin = block_info[2]
-            str_bin = os.path.join(str_dir, str_bin)
-            block_magic = block_info[3]
-            validate_and_export_bin(str_in_file, block_info, str_bin, b_force,
-                                    block_magic)
-            break
+        if block_name in hash_dict['parts']:
+            # Extract main ROMs
+            if extract_item.upper() == block_name.upper():
+                print('Extracting {0}...'.format(block_name))
+                block_info = hash_dict['parts'][block_name]
+                str_bin = block_info[2]
+                str_bin = os.path.join(str_dir, str_bin)
+                block_magic = block_info[3]
+                validate_and_export_bin(str_in_file, block_info, str_bin,
+                                        b_force, block_magic)
+                break
 
     if cores:
         # Extract Cores
@@ -803,26 +811,29 @@ def prep_update_zxdata(arr_in_files,
     hash_dict = fullhash_dict[str_extension]
 
     if not block_list:
-        block_list = ['BIOS', 'esxdos', 'Spectrum']
+        block_list = ['BIOS', 'esxdos', 'Spectrum', 'Special']
 
     for block in block_list:
-        block_version, block_hash = get_version(str_spi_file,
-                                                hash_dict['parts'][block],
-                                                hash_dict[block])
+        if block in hash_dict['parts']:
+            block_version, block_hash = get_version(str_spi_file,
+                                                    hash_dict['parts'][block],
+                                                    hash_dict[block])
+            if block_version:
+                latest = hash_dict[block]['latest']
+                if block == 'BIOS' and b_arcade:
+                    latest = hash_dict[block]['arcade']
+                new_hash = hash_dict[block][latest[0]]
 
-        latest = hash_dict[block]['latest']
-        if block == 'BIOS' and b_arcade:
-            latest = hash_dict[block]['arcade']
-        new_hash = hash_dict[block][latest[0]]
+                str_file = '{0}_{1}.{2}'.format(block, latest[0],
+                                                str_extension)
+                str_file = os.path.join(STR_OUTDIR, str_file)
 
-        str_file = '{0}_{1}.{2}'.format(block, latest[0], str_extension)
-        str_file = os.path.join(STR_OUTDIR, str_file)
+                if block_hash != new_hash:
+                    b_append = check_and_update(str_file, new_hash, latest[1:],
+                                                block)
 
-        if block_hash != new_hash:
-            b_append = check_and_update(str_file, new_hash, latest[1:], block)
-
-            if b_append:
-                arr_in_files.append('{0},{1}'.format(block, str_file))
+                    if b_append:
+                        arr_in_files.append('{0},{1}'.format(block, str_file))
 
 
 def prep_update_cores(arr_in_files,
@@ -1240,7 +1251,7 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
                     found = True
 
     # Check if it's a main ROM
-    for block_id in ['BIOS', 'Spectrum', 'esxdos']:
+    for block_id in ['BIOS', 'Spectrum', 'Special', 'esxdos']:
         if not found and block_id in d_parts:
             if i_file_size == d_parts[block_id][1] and validate_file(
                     str_in_file, d_parts[block_id][3]):
@@ -1653,7 +1664,7 @@ def inject_bindata(str_in_params, hash_dict, b_data):
     arr_params = str_in_params.split(',')
     br_data = b_data
 
-    for bl_id in ['BIOS', 'esxdos', 'Spectrum']:
+    for bl_id in ['BIOS', 'esxdos', 'Spectrum', 'Special']:
         hash_parts = hash_dict['parts'].get(bl_id, [])
         if arr_params[0].upper() == bl_id.upper():
             if len(arr_params) != 2:  # Filename
@@ -1674,9 +1685,10 @@ def inject_bindata(str_in_params, hash_dict, b_data):
                     with open(str_in_file, "rb") as in_zxdata:
                         in_data = in_zxdata.read(b_len)
 
-                    br_data = b_data[:b_offset] + in_data
-                    br_data += b_data[b_offset + b_len:]
-                    b_changed = True
+                    if len(b_data) >= b_offset + b_len:
+                        br_data = b_data[:b_offset] + in_data
+                        br_data += b_data[b_offset + b_len:]
+                        b_changed = True
 
     return br_data, b_changed
 
@@ -1730,14 +1742,6 @@ def inject_coredata(str_in_params, hash_dict, b_data):
 
                 if core_index > len(core_list) + 1:
                     core_index = len(core_list) + 2
-
-                # Is there a dummy core definition?
-                if len(block_info) > 6 and core_index == block_info[4] + 1:
-                    if block_version in hash_dict['Cores'][block_info[6]]:
-                        LOGGER.debug('Valid Dummy Core')
-                    else:
-                        LOGGER.error('Invalid Dummy Core')
-                        core_index = -1
 
                 if core_index < 2 or core_index > max_cores:
                     LOGGER.error('Invalid core index: {}'.format(core_index))
@@ -2090,13 +2094,20 @@ def get_version(str_in_file, block_info, hash_dict):
     :param hash_dict: Dictionary with hashes for different blocks
     :return: List with version string and hash string
     """
-    with open(str_in_file, "rb") as in_zxd:
-        in_zxd.seek(block_info[0])
-        bin_data = in_zxd.read(block_info[1])
-        str_hash = hashlib.sha256(bin_data).hexdigest()
-        del bin_data
+    f_size = os.stat(str_in_file).st_size
+    str_version = ''
+    str_hash = ''
 
-    str_version = get_data_version(str_hash, hash_dict)
+    if f_size >= block_info[0] + block_info[1]:
+        with open(str_in_file, "rb") as in_zxd:
+            in_zxd.seek(block_info[0])
+            bin_data = in_zxd.read(block_info[1])
+            str_hash = hashlib.sha256(bin_data).hexdigest()
+            del bin_data
+
+        str_version = get_data_version(str_hash, hash_dict)
+    else:
+        LOGGER.debug('File too small to check version')
 
     return str_version, str_hash
 
@@ -2143,16 +2154,22 @@ def validate_and_export_bin(str_in_file,
     :param str_out_bin: Path to bin file to create
     :param str_magic: String with the bytes to match
     """
-    with open(str_in_file, "rb") as in_zxdata:
-        in_zxdata.seek(block_info[0])
-        bin_data = in_zxdata.read(block_info[1])
+    f_size = os.stat(str_in_file).st_size
+    bin_data = None
 
-    if str_magic:
-        if not validate_bin(bin_data, str_magic):
-            LOGGER.error('Invalid data')
-            return
+    if f_size >= block_info[0] + block_info[1]:
+        with open(str_in_file, "rb") as in_zxdata:
+            in_zxdata.seek(block_info[0])
+            bin_data = in_zxdata.read(block_info[1])
 
-    export_bindata(bin_data, str_out_bin, b_force)
+        if str_magic:
+            if not validate_bin(bin_data, str_magic):
+                LOGGER.error('Invalid data')
+                return
+
+        export_bindata(bin_data, str_out_bin, b_force)
+    else:
+        LOGGER.debug('File too small to export')
 
 
 def export_bin(str_in_file, block_info, str_out_bin, b_force=False):

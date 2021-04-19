@@ -772,12 +772,13 @@
             "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF326100003281030B"],
             "esxdos": [16384, 8192, "ESXDOS.ZX1", "F331005EC30101FFC3"],
             "roms_dir": [24576, 4096, "", "", 28672, 41, 23],
-            "cores_dir": [28672, 2560, "", "", 20, 20, "ZX Spectrum"],
+            "cores_dir": [28672, 2560, "", "", 20, 19],
             "reserved": [31232, 1536, "", ""],
             "BIOS": [32768, 16384, "FIRMWARE.ZXD", "31B0AA3E04013BFCED7904ED70F521"],
             "roms_data": [49152, 671744, "", "", 16777216],
             "Spectrum": [720896, 802560, "SPECTRUM.ZXD", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104883141"],
-            "core_base": [1523712, 802816, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104883141", 17498112]
+            "Special": [17498112, 802816, "CORE21_special.ZXD", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104883141"],
+            "core_base": [1523712, 802816, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104883141", 18300928]
         },
         "BIOS": {
             "latest": ["0.84", "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE.ZXD"],
@@ -793,7 +794,8 @@
             "0.83b2": "96bee60894081dacb2a4cfaffd54493c5e173a454c305a357371f785f044a1dc",
             "0.84b": "1ba5207016cb452cc0560e98f2e3f4e8d70a0ad4e5bbbb8be0edb35c85eadc79",
             "0.84b2": "ffeb0f96a0293f351a11662901e9207d52604ce0783068b4d5a4c5d1166ad517",
-            "0.84": "9bb23ad02947c9b378dd2a4d9d35f994fd2407affdc5952d1470f51bc0cd94e7"
+            "0.84b3": "9bb23ad02947c9b378dd2a4d9d35f994fd2407affdc5952d1470f51bc0cd94e7",
+            "0.84": "227e9e716bbffb0d0b69efda88d09c9ab66c45dc3a90f581e23d6438cedb233c"
         },
         "esxdos": {
             "latest": ["0.8.9"],
@@ -811,6 +813,10 @@
             "EXP27_160820": "18bb827d1d10671d914830e6af31dd33818ee8145c735590de0bdb45c7585305",
             "EXP27_150820_monocromo (Avlixa)": "5d752fc11e79de3993b3d78d155ac79b19e50f4bff0e22ef9fe205ae801a33d6",
             "EXP27_190920_test_BnW (Avlixa)": "4a6cc59602873fa6cea5942a57d378e0413606b3f20079573f19939679fc986c"
+        },
+        "Special": {
+            "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/firmware/CORE21_special.ZXD"],
+            "1.0": "c59b2db95cd7250b1588550a9bdb8bd552537992e3bf78b535ba6722c3aa837d"
         },
         "Cores": {
             "Acorn Atom":

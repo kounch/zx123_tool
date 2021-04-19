@@ -52,8 +52,8 @@ Requires a [`zx123_hash.json`](##description-of-json-file) file with block struc
                           against 'latest' entry in the JSON database
       -s, --show_hashes   Show computed hashes
       -x EXTRACT, --extract EXTRACT
-                Item(s) to extract, split using ",": BIOS, Spectrum, ROMS, 
-                esxdos and/or core/ROM Number(s)
+                Item(s) to extract, split using ",": BIOS, Spectrum, Special, 
+                ROMS, esxdos and/or core/ROM Number(s)
       -n N_CORES, --number_of_cores N_CORES
                 Number of cores to keep on output file
       -a INJECT_DATA, --add INJECT_DATA
@@ -61,6 +61,7 @@ Requires a [`zx123_hash.json`](##description-of-json-file) file with block struc
                     BIOS,Path to BIOS binary
                     esxdos,Path to esxdos ROM binary
                     Spectrum,Path to Spectrum core binary
+                    Special,Path to Special core binary (for 32Mb SPI flash)
                     CORE,Core Number,Name to use,Path to core binary
                     ROM,Slot,Parameters,Name to use,Path to Spectrum ROM binary
                     ROMS,Path to RomPack file with some ROMs inside
@@ -218,6 +219,7 @@ The JSON file is an object where the main name are file extensions (like `ZXD` o
                             - "BIOS"      -> Binary image of firmware
                             - "roms_data" -> Spectrum ROMs binary data
                             - "Spectrum"  -> Main FPGA core
+                            - "Special"   -> Special core (if it exists) for 32Mb SPI flash
                             - "core_base" -> Extra cores starting offset and size
         },
         "BIOS": {   -> Dictionary of hashes for different firmware versions in the format:
@@ -227,6 +229,8 @@ The JSON file is an object where the main name are file extensions (like `ZXD` o
                         "(Version Description)": "(Hash)"
         },
         "Spectrum": {   -> Dictionary of hashes for different Spectrum core versions in the format:
+                           "(Version Description)": "(Hash)"
+        "Special": {   -> Dictionary of hashes for different Special core versions in the format:
                            "(Version Description)": "(Hash)"
         "Cores": {   -> Dictionary for different FPGA cores       
             "(Core name)": {   -> Dictionary of hashes for different core versions in the format:
@@ -331,8 +335,8 @@ Necesita un fichero  [`zx123_hash.json`](#descripción-del-arhivo-json) con la e
                           la versión con la entrada 'latest' del JSON
       -s, --show_hashes   Mostrar los datos de hash calculados
       -x EXTRAER, --extract EXTRAER
-                Elemento(s) a extraer, separados por ",": BIOS, Spectrum, ROMS,
-                esxdos y/o número(s) de core/ROM
+                Elemento(s) a extraer, separados por ",": BIOS, Spectrum,
+                Special, ROMS, esxdos y/o número(s) de core/ROM
       -n N_CORES, --number_of_cores N_CORES
                 Número de cores a guardar en la copia
       -a DATOS, --add DATOS
@@ -340,6 +344,7 @@ Necesita un fichero  [`zx123_hash.json`](#descripción-del-arhivo-json) con la e
                     BIOS,Ruta a fichero de BIOS
                     esxdos,Ruta a fichero ROM de esxdos
                     Spectrum,Ruta a core principal de Spectrum
+                    Special,Ruta a core especial para SPI flash de 32Mb
                     CORE,Número,Nombre a usar,Ruta a fichero de core
                     ROM,Slot,Parámetros,Nombre a usar,Ruta a ROM de Spectrum
                     ROMS,Ruta a un archivo RomPack con varias ROMs
@@ -496,6 +501,7 @@ El archivo JSON es un objeto donde los nombres principales son extensiones de ar
                             - "BIOS"      -> Imagen binaria del firmware
                             - "roms_data" -> Datos binarios de las ROMs de Spectrum
                             - "Spectrum"  -> core principal de la FPGA
+                            - "Special"   -> core especial (si existe) para SPI Flash de 32Mb
                             - "core_base" -> Desplazamiento y tamaño del primer core Extra
         },
         "BIOS": {   -> Diccionario con hashes para distintas versiones del firmware, con el formato:
@@ -505,6 +511,8 @@ El archivo JSON es un objeto donde los nombres principales son extensiones de ar
                         "(Descripción de versión)": "(Hash)"
         },
         "Spectrum": {   -> Diccionario con hashes para distintas versiones del core principal de Spectrum, con el formato:
+                           "(Descripción de versión)": "(Hash)"
+        "Special": {   -> Diccionario con hashes para distintas versiones del core espcial (si existe), con el formato:
                            "(Descripción de versión)": "(Hash)"
         "Cores": {   -> Diccionario para distintos cores extra para la FPGA      
             "(Nombre de core)": {   -> Diccionario con hashes para distintas versiones del core, con el formato:
