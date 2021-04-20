@@ -220,7 +220,7 @@
             },
             "ZX Spectrum 48K (Kyp)": {
                 "latest": ["zx48 2021.04.02"],
-                "base": ["zx48 v2.0", "https://github.com/Kyp069/zx48.zxuno/releases/download/2.0/COREnn.zx48.ZX1"],
+                "base": ["zx48 v2.0", "https://github.com/Kyp069/zx48/releases/download/2.0/COREnn.zx48.ZX1"],
                 "2017.01.08": "575286b932f45cb48d498cbce197b04ef51379f7dc77745b39d10340e10209d5",
                 "2016.12.03": "1cccd9fc02173775b62fee44daa663a1b2127268630fcbd26875883f60a0fc8d",
                 "zx48 1.0": "3d9ae01086f46be013d09656b1efff6109ca426ee6ee593ec0069f8c1fad1d7c",
