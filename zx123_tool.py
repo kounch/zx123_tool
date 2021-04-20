@@ -50,7 +50,7 @@ from zipfile import ZipFile
 import tempfile
 import shutil
 
-__MY_VERSION__ = '2.2.0'
+__MY_VERSION__ = '2.2.1'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
@@ -971,9 +971,12 @@ def check_and_update(update_file,
 
     if not dl_result and update_url:
         print('Downloading {0}...'.format(upd_name), end='')
-        urllib.request.urlretrieve(update_url, update_file)
-        print('OK')
-        dl_result = True
+        try:
+            urllib.request.urlretrieve(update_url, update_file)
+            print('OK')
+            dl_result = True
+        except urllib.error.HTTPError:
+            print('Error! Is the JSON file up to date?')
 
     return dl_result
 
