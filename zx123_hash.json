@@ -797,13 +797,15 @@
             "0.81": "b9b4d6074bf69d811f769f7f0eeefcb1471bf4894bb1a03539354a7bdffed3e9",
             "0.82": "76b1216fffcf262dd5e677e7da4bf08086512978db5c3c84c2f1bbe52354b13b",
             "0.82 Vertical": "b1420767f4cc8d6d77afb8759eeb2e159a805f3f2a9938f81da01e1eaaa230c9",
-            "0.83b": "795c9ad56ecd0efdbeb4da8efe3e1b5fdc74e64dbf69d2274ff808e20827b2eb",
+            "0.83b1": "795c9ad56ecd0efdbeb4da8efe3e1b5fdc74e64dbf69d2274ff808e20827b2eb",
             "0.83": "f480e9f81623191306b45f1cc1e5636cd6f4c4e51e1c5bdcea12e87de4cd8cc0",
             "0.83b2": "96bee60894081dacb2a4cfaffd54493c5e173a454c305a357371f785f044a1dc",
-            "0.84b": "1ba5207016cb452cc0560e98f2e3f4e8d70a0ad4e5bbbb8be0edb35c85eadc79",
+            "0.84b1": "1ba5207016cb452cc0560e98f2e3f4e8d70a0ad4e5bbbb8be0edb35c85eadc79",
             "0.84b2": "ffeb0f96a0293f351a11662901e9207d52604ce0783068b4d5a4c5d1166ad517",
             "0.84b3": "9bb23ad02947c9b378dd2a4d9d35f994fd2407affdc5952d1470f51bc0cd94e7",
-            "0.84": "227e9e716bbffb0d0b69efda88d09c9ab66c45dc3a90f581e23d6438cedb233c"
+            "0.84b4": "227e9e716bbffb0d0b69efda88d09c9ab66c45dc3a90f581e23d6438cedb233c",
+            "0.84b5": "200a81f06e3f7a0c350ac620cac25ec842e362d81b619f138f2cfa77b1a66f00",
+            "0.84": "dddf08a468e83ffeb51da7db33e004c0cc613a50e4477842105efd6127b5ebd7"
         },
         "esxdos": {
             "latest": ["0.8.9"],
