@@ -749,11 +749,12 @@
                 "2.0 Memorias_ISSI": "661f0b4f3b703e906ced8548f1514cc4c889c646e87e897c2b11584ef137a02d"
             },
             "Videopac": {
-                "latest": ["20210131", "https://github.com/zxdos/binaries/raw/master/videopac_zxdos_lx16_20210131.ZX2"],
+                "latest": ["20210501", "https://github.com/zxdos/binaries/raw/master/videopac_zxdos_lx16_20210501.ZX2"],
                 "Beta 1": "fe9f9b7e75c9ef3ed3ebcca0985b0086626e8eeb1c43c0cb7237b98a183cf0b5",
                 "Beta 4": "182c1d1ae6fc52007ae6ccff4abbbcc7980608d8074e66db59de972d4bee3ac1",
                 "20210129": "58acba0846b14dcb5b8ddab8764e2cb8591033d528be7f799ab08093309eebe3",
-                "20210131": "8c5de11a0bd34ede3b55589adcc4f8d2fe9d62da173afe38712e16e6935b495c"
+                "20210131": "8c5de11a0bd34ede3b55589adcc4f8d2fe9d62da173afe38712e16e6935b495c",
+                "20210501": "5d164337d4a8f780ce625d5c5ab9b012bb6f3edb2691cb929766069f7340489d"
             },
             "ZX80yUno": {
                 "latest": ["3.0", "https://github.com/zxdos/binaries/raw/master/COREn_zx80yunoV3.ZX2"],
