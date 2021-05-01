@@ -207,8 +207,9 @@
                 "2": "9addac6bed7be862fc06e538b6a8455651e4bbf9dec9bd7554333a5eb6ac6226"
             },
             "Videopac": {
-                "latest": ["2021.04.27"],
-                "2021.04.27": "27af0a695648c22bca912e5ae2e4703a06d448f1fe00cc22811dab7cd8074230"
+                "latest": ["2021.05.01", "https://github.com/zxdos/zxuno/raw/master/cores/Videopac/videopac_zxuno_lx9_20210501.ZX1"],
+                "2021.04.27": "27af0a695648c22bca912e5ae2e4703a06d448f1fe00cc22811dab7cd8074230",
+                "2021.05.01": "3fbfaa07c9dc14abdeccbf135424d03822371178f52c6ab17f68f2ba889b0e0c"
             },
             "Vectrex": {
                 "latest": ["TEST1", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Vectrex.ZX1"],
