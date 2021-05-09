@@ -62,6 +62,10 @@
                 "no SD support": "18b620669521a7649d78fa0c2fd057bb792ec238ab9cb9801063759a3439ac00",
                 "SD support Renaul Helias": "c3d2f7b1c37ff08c67affba3baa9cc9e0de895cd8035782ad366d402499b54e3"
             },
+            "Apple I": {
+                "latest": ["0.1"],
+                "0.1": "7501a4296a039c44f129ebc861bd7af11340a146ce536e84706f1bc87e21ab92"
+            },
             "Apple II": {
                 "latest": ["1.13", "https://github.com/zxdos/zxuno/raw/master/cores/Apple2/CORE18.ZX1"],
                 "TEST3": "1e5cd4c7df4d3ae1dae325c6e0bd546bcaf8be15a63a9e7c670948a29be9011a",
@@ -119,6 +123,10 @@
                 "latest": ["1.227", "https://github.com/zxdos/zxuno/raw/master/cores/VIC20/CORE10.ZX1"],
                 "1.227": "35638cdc8937fcfbd39b7042c0bd5598421dd9d1831ace662b94502a144a7cd3",
                 "TEST3 - 20170701": "ccefd756a91ed65afe38f70c03905a2fc839ebb3ddb8c259b18d6c51145aa5a6"
+            },
+            "Colour Genie": {
+                "latest": ["1.0", "https://github.com/Kyp069/eg2000/releases/download/1.0/COREnn.eg2000.ZX1"],
+                "1.0": "7631f04ddc02f204cd32e28782f3c79d390e0590e659a3d07eedc91893c8ae83"
             },
             "Flappy Bird": {
                 "latest": ["0.1 VGA"],
@@ -205,6 +213,10 @@
                 "latest": ["2", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Test.ZX1"],
                 "1": "18ebf52a9f33e6f7af40d832d7b9d512d08964c3c8f9355234126b1662ec9d36",
                 "2": "9addac6bed7be862fc06e538b6a8455651e4bbf9dec9bd7554333a5eb6ac6226"
+            },
+            "HT-1080Z": {
+              "latest": ["0.1"],
+              "0.1": "8f1d098f17c5839824f1f998dd2a43765e2cde47af8dd9b340f438b1218f271a"  
             },
             "Videopac": {
                 "latest": ["2021.05.01", "https://github.com/zxdos/zxuno/raw/master/cores/Videopac/videopac_zxuno_lx9_20210501.ZX1"],
