@@ -267,7 +267,8 @@
             "ZX TBBlue": {
                 "latest": ["azesmbog 13.05.2020", "https://zxuno.com/forum/download/file.php?id=2501"],
                 "base": ["20161207", "https://github.com/zxdos/zxuno/raw/master/cores/TBBlue/CORE12.ZX1"],
-                "20161207": "64a0ba1a226466c561e4aaa8ed366562b29e24bb12fa99bdc599a91e86dd7e8b",
+                "1.06": "64a0ba1a226466c561e4aaa8ed366562b29e24bb12fa99bdc599a91e86dd7e8b",
+                "1.08": "425f843f6cd268a10295edc7c663921fb26bec16770e5465fa260dd6a01800b0",
                 "azesmbog 13.05.2020": "b2cfa5f151f0b91d5d1d20546ee55da51c1a17d0c2f753d55456176de7352efd"
             },
             "Arcade Pac-Man": {
