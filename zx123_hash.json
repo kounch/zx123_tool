@@ -139,7 +139,8 @@
             "HT-1080Z - TRS80 M1L2": {
                 "latest": ["512K", ""],
                 "512K": "8f1d098f17c5839824f1f998dd2a43765e2cde47af8dd9b340f438b1218f271a",
-                "2MB Int": "c9f5cc94fda19f5bc7434c4483b12ec513ce4fba4690ec13d86de0be1672d070"
+                "2MB Int": "474627471a17b4dc3220dde0dfef5d0aeb4ee4eb89e2b3313b266c3184fc2387",
+                "2MB Int Keyb Fix": "c9f5cc94fda19f5bc7434c4483b12ec513ce4fba4690ec13d86de0be1672d070"
             },
             "Jupiter Ace": {
                 "latest": ["2019.06.19 azesmbog", ""],
