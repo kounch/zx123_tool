@@ -220,9 +220,10 @@
               "0.1": "8f1d098f17c5839824f1f998dd2a43765e2cde47af8dd9b340f438b1218f271a"  
             },
             "Videopac": {
-                "latest": ["2021.05.01", "https://github.com/zxdos/zxuno/raw/master/cores/Videopac/videopac_zxuno_lx9_20210501.ZX1"],
+                "latest": ["2021.05.15", "https://github.com/zxdos/zxuno/raw/master/cores/Videopac/videopac_zxuno_lx9_20210515.ZX1"],
                 "2021.04.27": "27af0a695648c22bca912e5ae2e4703a06d448f1fe00cc22811dab7cd8074230",
-                "2021.05.01": "3fbfaa07c9dc14abdeccbf135424d03822371178f52c6ab17f68f2ba889b0e0c"
+                "2021.05.01": "3fbfaa07c9dc14abdeccbf135424d03822371178f52c6ab17f68f2ba889b0e0c",
+                "2021.05.15": "a23ab8954f6083ee089dcc5baacca10238292b0ec9eb75a67167487830eb1730"
             },
             "Vectrex": {
                 "latest": ["TEST1", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Vectrex.ZX1"],
@@ -763,12 +764,13 @@
                 "2.0 Memorias_ISSI": "661f0b4f3b703e906ced8548f1514cc4c889c646e87e897c2b11584ef137a02d"
             },
             "Videopac": {
-                "latest": ["20210501", "https://github.com/zxdos/binaries/raw/master/videopac_zxdos_lx16_20210501.ZX2"],
+                "latest": ["20210515", "https://github.com/zxdos/binaries/raw/master/videopac_zxdos_lx16_20210515.ZX2"],
                 "Beta 1": "fe9f9b7e75c9ef3ed3ebcca0985b0086626e8eeb1c43c0cb7237b98a183cf0b5",
                 "Beta 4": "182c1d1ae6fc52007ae6ccff4abbbcc7980608d8074e66db59de972d4bee3ac1",
                 "20210129": "58acba0846b14dcb5b8ddab8764e2cb8591033d528be7f799ab08093309eebe3",
                 "20210131": "8c5de11a0bd34ede3b55589adcc4f8d2fe9d62da173afe38712e16e6935b495c",
-                "20210501": "5d164337d4a8f780ce625d5c5ab9b012bb6f3edb2691cb929766069f7340489d"
+                "20210501": "5d164337d4a8f780ce625d5c5ab9b012bb6f3edb2691cb929766069f7340489d",
+                "20210515": "870fc383dd1e7742cbb7df2df11dd7ccb62f14f84569f011563d662a878cdbd0"
             },
             "ZX80yUno": {
                 "latest": ["3.0", "https://github.com/zxdos/binaries/raw/master/COREn_zx80yunoV3.ZX2"],
@@ -925,11 +927,12 @@
                 "1.1": "7ac3895c796f1d65ba73498b8799d161713487750c3fd4b56ac8943d871fcc9a"
             },
             "Videopac": {
-                "latest": ["20210130", "https://github.com/zxdos/zxdos-plus/raw/master/cores/videopac_zxdos_lx25_20210130.ZXD"],
+                "latest": ["20210515", "https://github.com/zxdos/zxdos-plus/raw/master/cores/videopac_zxdos_lx25_20210515.ZXD"],
                 "Beta 1": "e9842c20136c3d232e8521a033e3fbca1b1a8eafb8244795589eaa9ad5e7cb36",
                 "Beta 4": "182c1d1ae6fc52007ae6ccff4abbbcc7980608d8074e66db59de972d4bee3ac1",
                 "20210130_beta": "a394b556e6b7864b2f5f2ae8b8ba18865442df89fd3809faf79c5696d0be093c",
-                "20210130": "f69d6076e200c84a6189f69126445c91876d31a01587f50400648c89853b39e1"
+                "20210130": "f69d6076e200c84a6189f69126445c91876d31a01587f50400648c89853b39e1",
+                "202100515": "dae9084601ffa788cfcf6bf95a873aaac492224cad1552befcd34c7f5ddfb51b"
             },
             "ZX81": {
                 "latest": ["Beta 0", ""],
