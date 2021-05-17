@@ -829,7 +829,8 @@
             "0.84b3": "9bb23ad02947c9b378dd2a4d9d35f994fd2407affdc5952d1470f51bc0cd94e7",
             "0.84b4": "227e9e716bbffb0d0b69efda88d09c9ab66c45dc3a90f581e23d6438cedb233c",
             "0.84b5": "200a81f06e3f7a0c350ac620cac25ec842e362d81b619f138f2cfa77b1a66f00",
-            "0.84": "dddf08a468e83ffeb51da7db33e004c0cc613a50e4477842105efd6127b5ebd7"
+            "0.84b6": "dddf08a468e83ffeb51da7db33e004c0cc613a50e4477842105efd6127b5ebd7",
+            "0.84": "9473e55d9136435a5cf064fba27a72a085d6ec6c32d2c9a0adf9c234eb0b0cea"
         },
         "esxdos": {
             "latest": ["0.8.9"],
