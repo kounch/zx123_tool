@@ -194,9 +194,16 @@ def main():
                                      b_new_img)
                 if arg_data['update'].lower() == 'arcade':
                     prep_update_zxdata(arr_upd, str_file, fulldict_hash,
+                                       str_extension, ['BIOS'])
+                    prep_update_cores(arr_upd, str_file, fulldict_hash,
+                                      str_extension, b_new_img, 'arcade')
+                    prep_update_roms(arr_upd, fulldict_hash, str_extension,
+                                     b_new_img, True)
+                if arg_data['update'].lower() == 'varcade':
+                    prep_update_zxdata(arr_upd, str_file, fulldict_hash,
                                        str_extension, ['BIOS'], True)
                     prep_update_cores(arr_upd, str_file, fulldict_hash,
-                                      str_extension, b_new_img, True)
+                                      str_extension, b_new_img, 'varcade')
                     prep_update_roms(arr_upd, fulldict_hash, str_extension,
                                      b_new_img, True)
 
@@ -280,6 +287,17 @@ def main():
 
     print('')
     LOGGER.debug("Finished.")
+
+
+class colors:
+    # https://ozzmaker.com/add-colour-to-text-in-python/
+    RED = '\033[1;31m'
+    GREEN = '\033[1;32m'
+    YELLOW = '\033[1;33m'
+    BLUE = '\033[1;34m'
+    PURPLE = '\033[1;35m'
+    CYAN = '\033[1;36m'
+    ENDC = '\033[m'
 
 
 def parse_args():
@@ -394,7 +412,7 @@ def parse_args():
                         nargs='?',
                         choices=[
                             'all', 'bios', 'spectrum', 'special', 'cores',
-                            'arcade', 'json', 'roms'
+                            'arcade', 'varcade', 'json', 'roms'
                         ],
                         const='all',
                         default='',
@@ -624,9 +642,11 @@ def update_check(hash_dict, block_version):
     if 'latest' in hash_dict:
         last_version = hash_dict['latest'][0]
         if block_version == last_version:
-            print('    >> Up to date', end='')
+            print('{0}    >> Up to date{1}'.format(colors.GREEN, colors.ENDC),
+                  end='')
         else:
-            print('    >> Outdated!. Latest version: {0}'.format(last_version),
+            print('{0}    >> Outdated!. Latest version: {1}{2}'.format(
+                colors.YELLOW, last_version, colors.ENDC),
                   end='')
     else:
         LOGGER.debug('Latest entry not found in JSON')
@@ -800,7 +820,7 @@ def prep_update_zxdata(arr_in_files,
                        fullhash_dict,
                        str_extension,
                        block_list,
-                       b_arcade=False):
+                       b_varcade=''):
     """
     Try to prepare to update several BIOS
     :param str_spi_file: Input SPI flash file
@@ -820,8 +840,8 @@ def prep_update_zxdata(arr_in_files,
                                                     hash_dict[block])
             if block_version:
                 latest = hash_dict[block]['latest']
-                if block == 'BIOS' and b_arcade:
-                    latest = hash_dict[block]['arcade']
+                if block == 'BIOS' and b_varcade:
+                    latest = hash_dict[block]['vertical']
                 new_hash = hash_dict[block][latest[0]]
 
                 str_file = '{0}_{1}.{2}'.format(block, latest[0],
@@ -841,7 +861,7 @@ def prep_update_cores(arr_in_files,
                       fullhash_dict,
                       str_extension,
                       b_new=False,
-                      b_arcade=False):
+                      arcade_type=''):
     """
     Try to prepare to update cores
     :param arr_in_files: Array for inject_zxfiles, updated if needed
@@ -864,10 +884,14 @@ def prep_update_cores(arr_in_files,
     if b_new:
         for index, block_name in enumerate(hash_dict['Cores']):
             append = False
-            if b_arcade and ("Arcade " in block_name):
+            if arcade_type == 'arcade' and ("Arcade " in block_name):
                 append = True
-            elif not b_arcade and ("Arcade " not in block_name):
+            elif arcade_type == 'varcade' and ("ArcadeV " in block_name):
                 append = True
+            elif arcade_type == 'None':
+                if ("Arcade " not in block_name) and ("ArcadeV "
+                                                      not in block_name):
+                    append = True
             if append:
                 core_list.append(
                     [index, block_name, block_name, '0', 'Para Sara'])
@@ -879,6 +903,8 @@ def prep_update_cores(arr_in_files,
             new_hash = hash_dict['Cores'][block_name].get(latest[0], '')
             base = hash_dict['Cores'][block_name].get('base', [''])
             base_hash = hash_dict['Cores'][block_name].get(base[0], '')
+            dosmb = hash_dict['Cores'][block_name].get('2m', [''])
+            dosmb_hash = hash_dict['Cores'][block_name].get(dosmb[0], '') 
 
             str_file = 'CORE{0:0>2}_{1}_{2}.{3}'.format(
                 index, block_name, latest[0], str_extension)
