@@ -90,9 +90,10 @@
                 "1.3": "4bbc3c71e4bfc755e2fa315336bf77c9115a977381949b801cc75e7a087ac53e"
             },
             "CHIP-8": {
-                "latest": ["2021.05.16", "https://github.com/zxdos/zxuno/raw/master/cores/chip-8/chip8_zxunolx9_20210516.ZX1"],
+                "latest": ["2021.05.22", "https://github.com/zxdos/zxuno/raw/master/cores/chip-8/chip8_zxunolx9_20210522.ZX1"],
                 "2021.04.24": "3b84ba7ce4024b66b04662b58ccf08a0b367d408fef98a75e557f85c1e0e1761",
-                "2021.05.16": "5b247eba0b69dcf4c24a1955eabbb00d9983eecd4b15568d53a012dca49d630b"
+                "2021.05.16": "5b247eba0b69dcf4c24a1955eabbb00d9983eecd4b15568d53a012dca49d630b",
+                "2021.05.22": "92203f30c8474b1b5fc0b2edfdb6752059be18a658ff28f45b814b9e9608bb1c"
             },
             "Camputers Lynx": {
                 "latest": ["96K (2021.03.25)"],
