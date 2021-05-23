@@ -42,15 +42,14 @@ import json
 import hashlib
 from binascii import unhexlify
 import struct
-import six
-if six.PY3:
+if sys.version_info.major == 3:
     import urllib.request
 import ssl
 from zipfile import ZipFile
 import tempfile
 import shutil
 
-__MY_VERSION__ = '2.2.1'
+__MY_VERSION__ = '2.5.0'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
@@ -65,7 +64,7 @@ LOG_STREAM = logging.StreamHandler(sys.stdout)
 LOG_STREAM.setFormatter(LOG_FORMAT)
 LOGGER.addHandler(LOG_STREAM)
 
-if six.PY2:
+if not sys.version_info.major == 3:
     LOGGER.error('This software requires Python version 3')
     sys.exit(1)
 
@@ -904,7 +903,7 @@ def prep_update_cores(arr_in_files,
             base = hash_dict['Cores'][block_name].get('base', [''])
             base_hash = hash_dict['Cores'][block_name].get(base[0], '')
             dosmb = hash_dict['Cores'][block_name].get('2m', [''])
-            dosmb_hash = hash_dict['Cores'][block_name].get(dosmb[0], '') 
+            dosmb_hash = hash_dict['Cores'][block_name].get(dosmb[0], '')
 
             str_file = 'CORE{0:0>2}_{1}_{2}.{3}'.format(
                 index, block_name, latest[0], str_extension)
