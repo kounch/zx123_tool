@@ -48,6 +48,9 @@ import ssl
 from zipfile import ZipFile
 import tempfile
 import shutil
+import ctypes
+if os.name == 'nt':
+    import msvcrt
 
 __MY_VERSION__ = '2.5.0'
 
@@ -55,6 +58,7 @@ MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
 MY_DIRPATH = os.path.abspath(MY_DIRPATH)
 STR_OUTDIR = ''
+IS_COL_TERM = False
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
@@ -73,6 +77,8 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 def main():
     """Main routine"""
+
+    enable_term_col()
 
     LOGGER.debug('Starting up...')
     arg_data = parse_args()
@@ -288,8 +294,30 @@ def main():
     LOGGER.debug("Finished.")
 
 
-class colors:
-    # https://ozzmaker.com/add-colour-to-text-in-python/
+def enable_term_col():
+    """
+    Enable TERM colours (Windows 10)
+    https://stackoverflow.com/questions/53574442/how-to-reliably-test-color-capability-of-an-output-terminal-in-python3
+    """
+
+    if os.name == 'nt':
+        ENABLE_VIRTUAL_TERMINAL_PROCESSING = 4
+        kernel32 = ctypes.WinDLL('kernel32', use_last_error=True)
+        hstdout = msvcrt.get_osfhandle(sys.stdout.fileno())
+        mode = ctypes.c_ulong()
+        IS_COL_TERM = kernel32.GetConsoleMode(
+            hstdout, ctypes.byref(mode)) and (
+                mode.value & ENABLE_VIRTUAL_TERMINAL_PROCESSING != 0)
+
+        if not IS_COL_TERM:
+            IS_COL_TERM = kernel32.SetConsoleMode(
+                hstdout, mode.value | ENABLE_VIRTUAL_TERMINAL_PROCESSING) > 0
+    else:
+        IS_COL_TERM = True
+
+
+# https://ozzmaker.com/add-colour-to-text-in-python/
+class colours:
     RED = '\033[1;31m'
     GREEN = '\033[1;32m'
     YELLOW = '\033[1;33m'
@@ -297,6 +325,14 @@ class colors:
     PURPLE = '\033[1;35m'
     CYAN = '\033[1;36m'
     ENDC = '\033[m'
+
+
+def printcol(i_col, str_txt, end=''):
+    """Print with TERM colour"""
+    if IS_COL_TERM:
+        print('{0}{1}{2}'.format(i_col, str_txt, colours.ENDC), end=end)
+    else:
+        print(str_txt, end=end)
 
 
 def parse_args():
@@ -541,7 +577,7 @@ def unzip_image(str_path, str_output, hash_dict):
         str_image = 'FLASH16_empty.{0}'.format(str_extension)
         str_zip = '{0}.zip'.format(str_image)
         str_zipfile = os.path.join(str_path, str_zip)
-        if not os.path.isfile(str_zip):
+        if not os.path.isfile(str_zipfile):
             dl_url = MAIN_URL + '/{0}'.format(str_zip)
             print('\nDownloading ZIP file...', end='')
             urllib.request.urlretrieve(dl_url, str_zipfile)
@@ -641,11 +677,12 @@ def update_check(hash_dict, block_version):
     if 'latest' in hash_dict:
         last_version = hash_dict['latest'][0]
         if block_version == last_version:
-            print('{0}    >> Up to date{1}'.format(colors.GREEN, colors.ENDC),
+            print('{0}    >> Up to date{1}'.format(colours.GREEN,
+                                                   colours.ENDC),
                   end='')
         else:
             print('{0}    >> Outdated!. Latest version: {1}{2}'.format(
-                colors.YELLOW, last_version, colors.ENDC),
+                colours.YELLOW, last_version, colours.ENDC),
                   end='')
     else:
         LOGGER.debug('Latest entry not found in JSON')
@@ -860,7 +897,7 @@ def prep_update_cores(arr_in_files,
                       fullhash_dict,
                       str_extension,
                       b_new=False,
-                      arcade_type=''):
+                      arcade_type='None'):
     """
     Try to prepare to update cores
     :param arr_in_files: Array for inject_zxfiles, updated if needed
