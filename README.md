@@ -81,6 +81,7 @@ Requires a [`zx123_hash.json`](##description-of-json-file) file with block struc
       -u, --update   If the only argument, download JSON from repository
                      If there's an SPI flash image file, updte BIOS and Cores to
                     the latest version according to JSON file contents
+      -N, --nocolours Disable the use of colours in terminal text output
 
 #### ROM Parameters
 
@@ -365,6 +366,7 @@ Necesita un fichero  [`zx123_hash.json`](#descripción-del-arhivo-json) con la e
       -u, --update   Si no hay más argumentos, descargar JSON del repositorio
                      Si hay imagen SPI flash, actualizar BIOS y Cores a la 
                     última versión posible según se indica en el fichero JSON
+      -N, --nocolours Deshabilitar el uso de colores en el texto mostrado
 
 #### Parámetros de ROM
 

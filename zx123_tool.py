@@ -300,6 +300,8 @@ def enable_term_col():
     https://stackoverflow.com/questions/53574442/how-to-reliably-test-color-capability-of-an-output-terminal-in-python3
     """
 
+    global IS_COL_TERM
+
     if os.name == 'nt':
         ENABLE_VIRTUAL_TERMINAL_PROCESSING = 4
         kernel32 = ctypes.WinDLL('kernel32', use_last_error=True)
@@ -327,10 +329,10 @@ class colours:
     ENDC = '\033[m'
 
 
-def printcol(i_col, str_txt, end=''):
+def printcol(str_col, str_txt, end=''):
     """Print with TERM colour"""
     if IS_COL_TERM:
-        print('{0}{1}{2}'.format(i_col, str_txt, colours.ENDC), end=end)
+        print('{0}{1}{2}'.format(str_col, str_txt, colours.ENDC), end=end)
     else:
         print(str_txt, end=end)
 
@@ -340,6 +342,9 @@ def parse_args():
     Parses command line
     :return: Dictionary with different options
     """
+    global LOGGER
+    global IS_COL_TERM
+
     values = {}
     values['input_file'] = ''
     values['output_dir'] = ''
@@ -495,8 +500,22 @@ def parse_args():
                         action='store',
                         dest='boot_timer',
                         help='Boot Timer: 0 (No Timer), 1, 2, 3 or 4')
+    parser.add_argument('-N',
+                        '--nocolours',
+                        required=False,
+                        action='store_true',
+                        dest='nocol',
+                        help='Do not use termina colours')
+    parser.add_argument('--debug', action='store_true', dest='debug')
 
     arguments = parser.parse_args()
+
+    if arguments.nocol:
+        IS_COL_TERM = False
+
+    if arguments.debug:
+        printcol(colours.PURPLE, 'Debugging Enabled!!', end='\n')
+        LOGGER.setLevel(logging.DEBUG)
 
     if arguments.input_file:
         values['input_file'] = os.path.abspath(arguments.input_file)
@@ -677,13 +696,12 @@ def update_check(hash_dict, block_version):
     if 'latest' in hash_dict:
         last_version = hash_dict['latest'][0]
         if block_version == last_version:
-            print('{0}    >> Up to date{1}'.format(colours.GREEN,
-                                                   colours.ENDC),
-                  end='')
+            printcol(colours.GREEN, '    >> Up to date', end='')
         else:
-            print('{0}    >> Outdated!. Latest version: {1}{2}'.format(
-                colours.YELLOW, last_version, colours.ENDC),
-                  end='')
+            printcol(
+                colours.YELLOW,
+                '    >> Outdated!. Latest version: {0}'.format(last_version),
+                end='')
     else:
         LOGGER.debug('Latest entry not found in JSON')
 
