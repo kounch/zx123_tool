@@ -78,9 +78,8 @@ Requires a [`zx123_hash.json`](##description-of-json-file) file with block struc
                                     0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
       -b BOOT_TIMER, --boot_timer BOOT_TIMER
                                     Boot Timer: 0 (No Timer), 1, 2, 3 or 4
-      -u, --update   If the only argument, download JSON from repository
-                     If there's an SPI flash image file, updte BIOS and Cores to
-                    the latest version according to JSON file contents
+      -u, --update   If it's the only argument, download JSON from repository
+                     If there's an SPI flash image file, update BIOS and Cores to the latest version according to JSON file contents
       -N, --nocolours Disable the use of colours in terminal text output
 
 #### ROM Parameters
