@@ -42,20 +42,23 @@ import json
 import hashlib
 from binascii import unhexlify
 import struct
-import six
-if six.PY3:
+if sys.version_info.major == 3:
     import urllib.request
 import ssl
-from zipfile import ZipFile
+from zipfile import ZipFile, is_zipfile
 import tempfile
 import shutil
+import ctypes
+if os.name == 'nt':
+    import msvcrt
 
-__MY_VERSION__ = '2.2.1'
+__MY_VERSION__ = '2.5.0'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
 MY_DIRPATH = os.path.abspath(MY_DIRPATH)
 STR_OUTDIR = ''
+IS_COL_TERM = False
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
@@ -65,7 +68,7 @@ LOG_STREAM = logging.StreamHandler(sys.stdout)
 LOG_STREAM.setFormatter(LOG_FORMAT)
 LOGGER.addHandler(LOG_STREAM)
 
-if six.PY2:
+if not sys.version_info.major == 3:
     LOGGER.error('This software requires Python version 3')
     sys.exit(1)
 
@@ -74,6 +77,10 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 def main():
     """Main routine"""
+
+    global STR_OUTDIR
+
+    enable_term_col()
 
     LOGGER.debug('Starting up...')
     arg_data = parse_args()
@@ -148,7 +155,7 @@ def main():
         # List main ROMs, Cores and BIOS settings
         if arg_data['list']:
             list_zxdata(str_file, dict_hash, arg_data['show_hashes'],
-                        arg_data['check_updated'])
+                        arg_data['check_updated'], arg_data['2mb'])
 
         # List ZX Spectrum ROMs
         if arg_data['roms']:
@@ -187,16 +194,27 @@ def main():
                     prep_update_zxdata(arr_upd, str_file, fulldict_hash,
                                        str_extension, ['Special'])
                 if arg_data['update'].lower() in ['all', 'cores']:
-                    prep_update_cores(arr_upd, str_file, fulldict_hash,
-                                      str_extension, b_new_img)
+                    prep_update_cores(arr_upd,
+                                      str_file,
+                                      fulldict_hash,
+                                      str_extension,
+                                      b_new_img,
+                                      get_2mb=arg_data['2mb'])
                 if b_new_img or arg_data['update'].lower() == 'roms':
                     prep_update_roms(arr_upd, fulldict_hash, str_extension,
                                      b_new_img)
                 if arg_data['update'].lower() == 'arcade':
                     prep_update_zxdata(arr_upd, str_file, fulldict_hash,
+                                       str_extension, ['BIOS'])
+                    prep_update_cores(arr_upd, str_file, fulldict_hash,
+                                      str_extension, b_new_img, 'arcade')
+                    prep_update_roms(arr_upd, fulldict_hash, str_extension,
+                                     b_new_img, True)
+                if arg_data['update'].lower() == 'varcade':
+                    prep_update_zxdata(arr_upd, str_file, fulldict_hash,
                                        str_extension, ['BIOS'], True)
                     prep_update_cores(arr_upd, str_file, fulldict_hash,
-                                      str_extension, b_new_img, True)
+                                      str_extension, b_new_img, 'varcade')
                     prep_update_roms(arr_upd, fulldict_hash, str_extension,
                                      b_new_img, True)
 
@@ -282,11 +300,57 @@ def main():
     LOGGER.debug("Finished.")
 
 
+def enable_term_col():
+    """
+    Enable TERM colours (Windows 10)
+    https://stackoverflow.com/questions/53574442/how-to-reliably-test-color-capability-of-an-output-terminal-in-python3
+    """
+
+    global IS_COL_TERM
+
+    if os.name == 'nt':
+        ENABLE_VIRTUAL_TERMINAL_PROCESSING = 4
+        kernel32 = ctypes.WinDLL('kernel32', use_last_error=True)
+        hstdout = msvcrt.get_osfhandle(sys.stdout.fileno())
+        mode = ctypes.c_ulong()
+        IS_COL_TERM = kernel32.GetConsoleMode(
+            hstdout, ctypes.byref(mode)) and (
+                mode.value & ENABLE_VIRTUAL_TERMINAL_PROCESSING != 0)
+
+        if not IS_COL_TERM:
+            IS_COL_TERM = kernel32.SetConsoleMode(
+                hstdout, mode.value | ENABLE_VIRTUAL_TERMINAL_PROCESSING) > 0
+    else:
+        IS_COL_TERM = True
+
+
+# https://ozzmaker.com/add-colour-to-text-in-python/
+class colours:
+    RED = '\033[1;31m'
+    GREEN = '\033[1;32m'
+    YELLOW = '\033[1;33m'
+    BLUE = '\033[1;34m'
+    PURPLE = '\033[1;35m'
+    CYAN = '\033[1;36m'
+    ENDC = '\033[m'
+
+
+def printcol(str_col, str_txt, end=''):
+    """Print with TERM colour"""
+    if IS_COL_TERM:
+        print('{0}{1}{2}'.format(str_col, str_txt, colours.ENDC), end=end)
+    else:
+        print(str_txt, end=end)
+
+
 def parse_args():
     """
     Parses command line
     :return: Dictionary with different options
     """
+    global LOGGER
+    global IS_COL_TERM
+
     values = {}
     values['input_file'] = ''
     values['output_dir'] = ''
@@ -300,6 +364,7 @@ def parse_args():
     values['inject'] = []
     values['wipe_flash'] = False
     values['expand_flash'] = False
+    values['2mb'] = False
     values['update'] = ''
     values['check_updated'] = False
     values['video_mode'] = -1
@@ -388,13 +453,19 @@ def parse_args():
                         action='store_true',
                         dest='expand_flash',
                         help='Expand, if needed, flash file to 32MiB')
+    parser.add_argument('-2',
+                        '--2mb',
+                        required=False,
+                        action='store_true',
+                        dest='use_2mb',
+                        help='Use, if available, 2MB cores for ZX-Uno')
     parser.add_argument('-u',
                         '--update',
                         required=False,
                         nargs='?',
                         choices=[
                             'all', 'bios', 'spectrum', 'special', 'cores',
-                            'arcade', 'json', 'roms'
+                            'arcade', 'varcade', 'json', 'roms'
                         ],
                         const='all',
                         default='',
@@ -442,8 +513,22 @@ def parse_args():
                         action='store',
                         dest='boot_timer',
                         help='Boot Timer: 0 (No Timer), 1, 2, 3 or 4')
+    parser.add_argument('-N',
+                        '--nocolours',
+                        required=False,
+                        action='store_true',
+                        dest='nocol',
+                        help='Do not use termina colours')
+    parser.add_argument('--debug', action='store_true', dest='debug')
 
     arguments = parser.parse_args()
+
+    if arguments.nocol:
+        IS_COL_TERM = False
+
+    if arguments.debug:
+        printcol(colours.PURPLE, 'Debugging Enabled!!', end='\n')
+        LOGGER.setLevel(logging.DEBUG)
 
     if arguments.input_file:
         values['input_file'] = os.path.abspath(arguments.input_file)
@@ -480,6 +565,9 @@ def parse_args():
 
     if arguments.expand_flash:
         values['expand_flash'] = arguments.expand_flash
+
+    if arguments.use_2mb:
+        values['2mb'] = arguments.use_2mb
 
     if arguments.update:
         values['update'] = arguments.update
@@ -524,13 +612,13 @@ def unzip_image(str_path, str_output, hash_dict):
         str_image = 'FLASH16_empty.{0}'.format(str_extension)
         str_zip = '{0}.zip'.format(str_image)
         str_zipfile = os.path.join(str_path, str_zip)
-        if not os.path.isfile(str_zip):
+        if not os.path.isfile(str_zipfile):
             dl_url = MAIN_URL + '/{0}'.format(str_zip)
             print('\nDownloading ZIP file...', end='')
             urllib.request.urlretrieve(dl_url, str_zipfile)
             print('OK')
 
-        if os.path.isfile(str_zipfile):
+        if is_zipfile(str_zipfile):
             with ZipFile(str_zipfile, 'r') as zipObj:
                 arr_files = zipObj.namelist()
                 for str_name in arr_files:
@@ -555,13 +643,17 @@ def unzip_image(str_path, str_output, hash_dict):
     return str_file
 
 
-def list_zxdata(str_in_file, hash_dict, show_hashes, check_updated=False):
+def list_zxdata(str_in_file,
+                hash_dict,
+                show_hashes,
+                check_updated=False,
+                get_2mb=False):
     """
     List contents of file
     :param str_in_file: Path to file
     :param hash_dict: Dictionary with hashes for different blocks
     :param show_hashes: If True, print also block hashes
-    :param check_updated: If True, compare with 'latest' entries in JSON
+    :param check_updated: If True, check with 'latest' or '2m' entries in JSON
     """
     LOGGER.debug('Listing contents of file: {0}'.format(str_in_file))
     str_name = os.path.basename(str_in_file)
@@ -592,7 +684,8 @@ def list_zxdata(str_in_file, hash_dict, show_hashes, check_updated=False):
               end='')
         if check_updated:
             if block_name in hash_dict['Cores']:
-                update_check(hash_dict['Cores'][block_name], block_version)
+                update_check(hash_dict['Cores'][block_name], block_version,
+                             get_2mb)
         print('')
         if (show_hashes):
             print('Core {0:02d}: {1}'.format(index + 2, block_hash))
@@ -615,19 +708,24 @@ def list_zxdata(str_in_file, hash_dict, show_hashes, check_updated=False):
     print('\tVideo Mode -> {0}'.format(video_mode))
 
 
-def update_check(hash_dict, block_version):
+def update_check(hash_dict, block_version, get_2mb=False):
     """
     Check block version against latest entry and print the result
     :param hash_dict: Dictionary for entry (e.g. Spectrum Core)
     :param block_version: Version string to check
     """
-    if 'latest' in hash_dict:
-        last_version = hash_dict['latest'][0]
+    last_version = hash_dict.get('latest', [''])[0]
+    if get_2mb and '2m' in hash_dict:
+        last_version = hash_dict['2m'][0]
+
+    if last_version:
         if block_version == last_version:
-            print('    >> Up to date', end='')
+            printcol(colours.GREEN, '    >> Up to date', end='')
         else:
-            print('    >> Outdated!. Latest version: {0}'.format(last_version),
-                  end='')
+            printcol(
+                colours.YELLOW,
+                '    >> Outdated!. Latest version: {0}'.format(last_version),
+                end='')
     else:
         LOGGER.debug('Latest entry not found in JSON')
 
@@ -800,7 +898,7 @@ def prep_update_zxdata(arr_in_files,
                        fullhash_dict,
                        str_extension,
                        block_list,
-                       b_arcade=False):
+                       b_varcade=''):
     """
     Try to prepare to update several BIOS
     :param str_spi_file: Input SPI flash file
@@ -820,17 +918,17 @@ def prep_update_zxdata(arr_in_files,
                                                     hash_dict[block])
             if block_version:
                 latest = hash_dict[block]['latest']
-                if block == 'BIOS' and b_arcade:
-                    latest = hash_dict[block]['arcade']
-                new_hash = hash_dict[block][latest[0]]
+                if block == 'BIOS' and b_varcade:
+                    latest = hash_dict[block]['vertical']
+                latest_hash = hash_dict[block][latest[0]]
 
                 str_file = '{0}_{1}.{2}'.format(block, latest[0],
                                                 str_extension)
                 str_file = os.path.join(STR_OUTDIR, str_file)
 
-                if block_hash != new_hash:
-                    b_append = check_and_update(str_file, new_hash, latest[1:],
-                                                block)
+                if block_hash != latest_hash:
+                    b_append = check_and_update(str_file, latest_hash,
+                                                latest[1:], block)
 
                     if b_append:
                         arr_in_files.append('{0},{1}'.format(block, str_file))
@@ -841,7 +939,8 @@ def prep_update_cores(arr_in_files,
                       fullhash_dict,
                       str_extension,
                       b_new=False,
-                      b_arcade=False):
+                      arcade_type='None',
+                      get_2mb=False):
     """
     Try to prepare to update cores
     :param arr_in_files: Array for inject_zxfiles, updated if needed
@@ -864,10 +963,14 @@ def prep_update_cores(arr_in_files,
     if b_new:
         for index, block_name in enumerate(hash_dict['Cores']):
             append = False
-            if b_arcade and ("Arcade " in block_name):
+            if arcade_type == 'arcade' and ("Arcade " in block_name):
                 append = True
-            elif not b_arcade and ("Arcade " not in block_name):
+            elif arcade_type == 'varcade' and ("ArcadeV " in block_name):
                 append = True
+            elif arcade_type == 'None':
+                if ("Arcade " not in block_name) and ("ArcadeV "
+                                                      not in block_name):
+                    append = True
             if append:
                 core_list.append(
                     [index, block_name, block_name, '0', 'Para Sara'])
@@ -876,7 +979,10 @@ def prep_update_cores(arr_in_files,
         index += 2
         if block_name in hash_dict['Cores']:
             latest = hash_dict['Cores'][block_name].get('latest', [''])
-            new_hash = hash_dict['Cores'][block_name].get(latest[0], '')
+            if get_2mb and '2m' in hash_dict['Cores'][block_name]:
+                latest = hash_dict['Cores'][block_name]['2m']
+            latest_hash = hash_dict['Cores'][block_name].get(latest[0], '')
+
             base = hash_dict['Cores'][block_name].get('base', [''])
             base_hash = hash_dict['Cores'][block_name].get(base[0], '')
 
@@ -884,8 +990,8 @@ def prep_update_cores(arr_in_files,
                 index, block_name, latest[0], str_extension)
             str_file = os.path.join(STR_OUTDIR, str_file)
 
-            if block_hash != new_hash:
-                b_append = check_and_update(str_file, new_hash, latest[1:],
+            if block_hash != latest_hash:
+                b_append = check_and_update(str_file, latest_hash, latest[1:],
                                             block_name, block_hash, base_hash,
                                             base[1:])
 
@@ -909,10 +1015,10 @@ def prep_update_roms(arr_in_files,
 
     if 'ROMS' in fullhash_dict and b_new:
         latest = fullhash_dict['ROMS']['latest']
-        new_hash = fullhash_dict['ROMS'][latest[0]]
+        latest_hash = fullhash_dict['ROMS'][latest[0]]
 
         str_roms = os.path.join(STR_OUTDIR, 'ROMS.ZX1')
-        b_append = check_and_update(str_roms, new_hash, latest[1:], 'ROMS')
+        b_append = check_and_update(str_roms, latest_hash, latest[1:], 'ROMS')
 
         if b_append:
             new_in_file = 'ROMS,{0}'.format(str_roms)
@@ -973,6 +1079,22 @@ def check_and_update(update_file,
         print('Downloading {0}...'.format(upd_name), end='')
         try:
             urllib.request.urlretrieve(update_url, update_file)
+            if is_zipfile(update_file):
+                print('Extracting...', end='')
+                str_zipfile = update_file + '.zip'
+                os.rename(update_file, str_zipfile)
+                with ZipFile(str_zipfile, 'r') as zipObj:
+                    arr_files = zipObj.namelist()
+                    if len(arr_files) == 1:
+                        str_name = arr_files[0]
+                        with tempfile.TemporaryDirectory() as str_tmpdir:
+                            zipObj.extract(str_name, str_tmpdir)
+                            str_file = os.path.join(str_tmpdir, str_name)
+                            shutil.move(str_file, update_file)
+                    else:
+                        LOGGER.warn('Not a valid ZIP (too many files inside)')
+
+                os.remove(str_zipfile)
             print('OK')
             dl_result = True
         except urllib.error.HTTPError:
