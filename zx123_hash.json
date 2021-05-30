@@ -98,7 +98,8 @@
                 "2021.05.23": "7bc478a57f24bdc465b630a24ab132e44e1eab5e1ee9f976894ee64f23cb159a"
             },
             "Camputers Lynx": {
-                "latest": ["96K (2021.03.25)", "https://www.zxuno.com/forum/download/file.php?id=2573"],
+                "latest": ["96K (2021.03.25)"],
+                "base": ["96K (2020.09.09)", "https://www.zxuno.com/forum/download/file.php?id=2573"],
                 "96K (2020.09.09)": "ead77977e33230931a82b25436feab2ca21fc101de3baab7a8ae6904656d255b",
                 "96K (2021.03.25)": "55e0ec5ab386b75d6f6583531d4feb563d38d01908af93ffdb9851e17523e3c5"
             },
