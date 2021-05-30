@@ -1059,11 +1059,12 @@ def check_and_update(update_file,
 
     update_url = ''
     file_hash = ''
+    update_extension = os.path.splitext(update_file)[1].upper()
     dl_result = False
     if os.path.isfile(update_file):
         file_hash = get_file_hash(update_file)
         if file_hash == upd_hash:
-            LOGGER.debug('Not downloading updated...')
+            LOGGER.debug('Not downloading, already available...')
             dl_result = True
 
     if upd_urls:
@@ -1081,19 +1082,23 @@ def check_and_update(update_file,
             urllib.request.urlretrieve(update_url, update_file)
             if is_zipfile(update_file):
                 print('Extracting...', end='')
+                b_found = False
                 str_zipfile = update_file + '.zip'
                 os.rename(update_file, str_zipfile)
                 with ZipFile(str_zipfile, 'r') as zipObj:
                     arr_files = zipObj.namelist()
-                    if len(arr_files) == 1:
-                        str_name = arr_files[0]
-                        with tempfile.TemporaryDirectory() as str_tmpdir:
-                            zipObj.extract(str_name, str_tmpdir)
-                            str_file = os.path.join(str_tmpdir, str_name)
-                            shutil.move(str_file, update_file)
-                    else:
-                        LOGGER.warn('Not a valid ZIP (too many files inside)')
-
+                    b_found = False
+                    for str_name in arr_files:
+                        str_extension = os.path.splitext(str_name)[1].upper()
+                        if update_extension == str_extension:
+                            with tempfile.TemporaryDirectory() as str_tmpdir:
+                                zipObj.extract(str_name, str_tmpdir)
+                                str_file = os.path.join(str_tmpdir, str_name)
+                                shutil.move(str_file, update_file)
+                            b_found = True
+                            break
+                if not b_found:
+                    LOGGER.warn('Not a valid ZIP file')
                 os.remove(str_zipfile)
             print('OK')
             dl_result = True

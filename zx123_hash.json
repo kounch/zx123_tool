@@ -83,7 +83,7 @@
                 "VGA Spark2k06": "6f03454880ca2e1477430d3a48a5c1755dd9b639ef5121ca6bd04674a6bbc7db"
             },
             "BBC Micro": {
-                "latest": ["1.3", ""],
+                "latest": ["1.3", "https://www.zxuno.com/forum/download/file.php?id=1552"],
                 "base": ["1.227", "https://github.com/zxdos/zxuno/raw/master/cores/BBCMicro/CORE8.ZX1"],
                 "1.2": "c35ed68b865139001bde7a8cb1e9fc12e0ab1e40f6d805a174f25dc94b6be73e",
                 "1.227": "aea03129db713abe793f83754f4fff3381d3f1acd4d8bd02b183dae08bff3769",
@@ -149,7 +149,7 @@
                 "2MB Int Keyb Fix": "c9f5cc94fda19f5bc7434c4483b12ec513ce4fba4690ec13d86de0be1672d070"
             },
             "Jupiter Ace": {
-                "latest": ["2019.06.19 azesmbog", ""],
+                "latest": ["2019.06.19 azesmbog", "https://www.zxuno.com/forum/download/file.php?id=2261"],
                 "base": ["1.142", "https://github.com/zxdos/zxuno/raw/master/cores/JupiterAce/CORE3.ZX1"],
                 "1-142": "34443281df7d65c7a4a1bec2053980374955cceed9dbd88dd7b9820bee0adf2b",
                 "1.142": "bc7e6c7f7afdc4465245a77dcf8c426ec246d7737477d0eb65a73c217dd57c92",
@@ -177,7 +177,7 @@
             "NES": {
                 "latest": ["512K", ""],
                 "base": ["TEST2 - 20160910", "https://github.com/zxdos/zxuno/raw/master/cores/NES/CORE19.ZX1"],
-                "2m": ["TEST4 VGA 2MB INT"],
+                "2m": ["TEST4 VGA 2MB INT", "https://www.zxuno.com/forum/download/file.php?id=1860"],
                 "TEST2 - 20160910": "50c057349a7e9e993c841ad72b652caef060110348ce1e91b6033fb9e4bfafda",
                 "512K": "89968ae4d58d91238ee48fc301ed268ce28b79a30b28d934b3769b8adecab56b",
                 "TEST4 VGA 2MB INT": "ed807d4ed1cfa36059919f01307c6a701d2d0835075f725c8aada88ae3f63eff"
