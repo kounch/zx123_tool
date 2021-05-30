@@ -63,7 +63,7 @@
                 "SD support Renaul Helias": "c3d2f7b1c37ff08c67affba3baa9cc9e0de895cd8035782ad366d402499b54e3"
             },
             "Apple I": {
-                "latest": ["0.1"],
+                "latest": ["0.1", "https://www.zxuno.com/forum/download/file.php?id=2227"],
                 "0.1": "7501a4296a039c44f129ebc861bd7af11340a146ce536e84706f1bc87e21ab92"
             },
             "Apple II": {
@@ -98,7 +98,7 @@
                 "2021.05.23": "7bc478a57f24bdc465b630a24ab132e44e1eab5e1ee9f976894ee64f23cb159a"
             },
             "Camputers Lynx": {
-                "latest": ["96K (2021.03.25)"],
+                "latest": ["96K (2021.03.25)", "https://www.zxuno.com/forum/download/file.php?id=2573"],
                 "96K (2020.09.09)": "ead77977e33230931a82b25436feab2ca21fc101de3baab7a8ae6904656d255b",
                 "96K (2021.03.25)": "55e0ec5ab386b75d6f6583531d4feb563d38d01908af93ffdb9851e17523e3c5"
             },
@@ -134,7 +134,7 @@
                 "1.0": "7631f04ddc02f204cd32e28782f3c79d390e0590e659a3d07eedc91893c8ae83"
             },
             "Flappy Bird": {
-                "latest": ["0.1 VGA"],
+                "latest": ["0.1 VGA", "https://www.zxuno.com/forum/download/file.php?id=1721"],
                 "0.1 VGA": "a2e6428546643687fb233c1030b5069cfff0a058001121a3f3e69819e7f9bb3a"
             },
             "Galaksija": {
@@ -175,7 +175,7 @@
                 "20161218": "15bd4192d04f523e14108c4fce2f90775b38c821d963e11da9fb36ea63eee39a"
             },
             "NES": {
-                "latest": ["512K", ""],
+                "latest": ["512K", "https://www.zxuno.com/forum/download/file.php?id=1857"],
                 "base": ["TEST2 - 20160910", "https://github.com/zxdos/zxuno/raw/master/cores/NES/CORE19.ZX1"],
                 "2m": ["TEST4 VGA 2MB INT", "https://www.zxuno.com/forum/download/file.php?id=1860"],
                 "TEST2 - 20160910": "50c057349a7e9e993c841ad72b652caef060110348ce1e91b6033fb9e4bfafda",
@@ -220,7 +220,7 @@
                 "2": "9addac6bed7be862fc06e538b6a8455651e4bbf9dec9bd7554333a5eb6ac6226"
             },
             "HT-1080Z": {
-              "latest": ["0.1"],
+              "latest": ["0.1","https://www.zxuno.com/forum/download/file.php?id=1766"],
               "0.1": "8f1d098f17c5839824f1f998dd2a43765e2cde47af8dd9b340f438b1218f271a"  
             },
             "Videopac": {
@@ -246,7 +246,7 @@
                 "EXP27 160820": "613902acb29e3926142a721493c593c0746969261fe7d5cce207194a1fc30a03"
             },
             "ZX Spectrum 48K (Kyp)": {
-                "latest": ["zx48 2021.04.02"],
+                "latest": ["zx48 2021.04.20"],
                 "base": ["zx48 v2.0", "https://github.com/Kyp069/zx48/releases/download/2.0/COREnn.zx48.ZX1"],
                 "2017.01.08": "575286b932f45cb48d498cbce197b04ef51379f7dc77745b39d10340e10209d5",
                 "2016.12.03": "1cccd9fc02173775b62fee44daa663a1b2127268630fcbd26875883f60a0fc8d",
@@ -255,13 +255,15 @@
                 "zx48 2020.09.06": "db39811185a8fcfc371226353f7d6527373372cf3b25981d208c64a0707df507",
                 "zx48 v2.0": "b9082eb6a4056c468f67c141c26a4887477b563b5a371dfc9125b3616def8576",
                 "zx48 Beta": "ec83637db79fcbca50d925dd0a53107c4461a0abb53c476899d517b07e548d95",
-                "zx48 2021.04.02": "430ef2522473b958c299c53d9981993d9f83424df446dc1db2d2f53cdbb63bcd"
+                "zx48 2021.04.02": "430ef2522473b958c299c53d9981993d9f83424df446dc1db2d2f53cdbb63bcd",
+                "zx48 2021.04.20": "0c79338aa33a5abeb8390b02835b6e88b949a8f02d037c364ab5628edede1d17"
             },
             "ZX Spectrum 128K (Kyp)": {
                 "latest": ["zx128 v1.0", "https://github.com/Kyp069/zx128.zxuno/releases/download/1.0/COREnn.zx128.ZX1"],
                 "base": ["2017.01.08", "https://github.com/zxdos/zxuno/raw/master/cores/KypSpectrum/CORE26.ZX1"],
                 "2017.01.08": "49ec4c96aaaa7e783abd9f2fba2ad4437a4c70f92f53c466b9cc2d4c6fe2de2e",
                 "2020.10.09": "e8f535ea695d405df2fd5eaeb2bfa449ab08657a52062da8abc5fe4261d7ab30",
+                "2021.04.20": "e4b418bd632d9ef56dbd6c5aef289a43ca5d4166014e0caf10d304d4ef529822",
                 "zx128 v1.0": "2b2db414eaf8986af99e899f6fb28f5743be36d41e85a5a7302729bb12812d3d"
             },
             "ZX Spectrum (azesmbog)": {
