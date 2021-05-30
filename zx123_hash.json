@@ -73,7 +73,7 @@
             },
             "Atari 800 XL": {
                 "latest": ["1.1 (512K)", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Atari800XL.ZX1"],
-                "2m": ["1.2 2MB Int"],
+                "2m": ["1.2 2MB Int", "https://www.zxuno.com/forum/download/file.php?id=1056"],
                 "1.1 (512K)": "760746ae75c7cf9b80752078145328dd29ba9dbff158287c503c966a41581481",
                 "1.2 2MB Int": "58abded410ca401efc93c70fe940815f6aebc28dd52d771f480fc28678ca34a0"
             },
@@ -142,8 +142,8 @@
                 "0.2 SDOS8.1": "cc23b953fc5eb7914f1d5fb1b9140aacce997a61277a14fb9b8b1e3ca40a092f"
             },
             "HT-1080Z - TRS80 M1L2": {
-                "latest": ["512K", ""],
-                "2m": ["2MB Int Keyb Fix"],
+                "latest": ["512K", "https://www.zxuno.com/forum/download/file.php?id=1766"],
+                "2m": ["2MB Int Keyb Fix","https://www.zxuno.com/forum/download/file.php?id=2237"],
                 "512K": "8f1d098f17c5839824f1f998dd2a43765e2cde47af8dd9b340f438b1218f271a",
                 "2MB Int": "474627471a17b4dc3220dde0dfef5d0aeb4ee4eb89e2b3313b266c3184fc2387",
                 "2MB Int Keyb Fix": "c9f5cc94fda19f5bc7434c4483b12ec513ce4fba4690ec13d86de0be1672d070"
@@ -207,7 +207,7 @@
             },
             "Sega Master System": {
                 "latest": ["TEST 4.3 (512K)", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/SMS.ZX1"],
-                "2m": ["TEST 4.3 2MB Int"],
+                "2m": ["TEST 4.3 2MB Int", "https://www.zxuno.com/forum/download/file.php?id=1241"],
                 "Unknown Version": "9b486e5ebd8e25fbc500c6369a96190522b3dc1227a732d4e7aeb811eef4956b",
                 "TEST 4.1": "26fc9a021465430b27d4adea4d2478b51a96f19354f5e6e1c07e9dd49515d474",
                 "TEST 4.2 - 20170214": "b99a952e0aa433263fab620ff5f283cf6be2265103fc17f232791ee33c26e425",
@@ -933,7 +933,8 @@
             "Test": {
                 "latest": ["1.1", "https://github.com/zxdos/zxdos-plus/raw/master/cores/COREN_test_placa_lx25.ZXD"],
                 "1.0": "25034b43ad11a6f93ec5075d761a8c31cc47e08edc3abd4b85115f50a6993926",
-                "1.1": "7ac3895c796f1d65ba73498b8799d161713487750c3fd4b56ac8943d871fcc9a"
+                "1.1": "7ac3895c796f1d65ba73498b8799d161713487750c3fd4b56ac8943d871fcc9a",
+                "1.1 Test": "ce737020ed78f5b90aa772447b149a8fb18c73540c4750861e8f7db1d4aaff67"
             },
             "Videopac": {
                 "latest": ["20210515", "https://github.com/zxdos/zxdos-plus/raw/master/cores/videopac_zxdos_lx25_20210515.ZXD"],
