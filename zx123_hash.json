@@ -54,7 +54,8 @@
             "Amstrad CPC464": {
                 "latest": ["Test 3a", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/CPC464.ZX1"],
                 "Test 2 - 20170408": "6341fb122713725ebe758cfbf8ea357cf9ce6f0dd410cc1de715719cd77d17ed",
-                "Test 3a": "5a2363e9ef1f10320cc2ed5309c2ab5331db4b4ca8dbab9e39737a02c9186c36"
+                "Test 3a": "5a2363e9ef1f10320cc2ed5309c2ab5331db4b4ca8dbab9e39737a02c9186c36",
+                "Test External 512Kb": "25fdd4422da297aa6fc925c120751daf288b999bf0e3a0bf039ce08dee6467e9"
             },
             "Amstrad CPC6128": {
                 "latest": ["Test 3", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/CPC6128.ZX1"],
@@ -272,6 +273,11 @@
                 "EXP27 azesmbog 240320": "85ff342c1a2fe0cc3a962221f37847907a5666e46183b13934b99fae4306fe69",
                 "azesmbog TS-FM 24.03.20": "4fb1f0d47f55039905a10b5fe46f6932ad6dd9728dd976753afd2408dfcc5f09",
                 "azesmbog DMA 24.05.30": "6a0cd7879a98182aeec5b92c36523cf11a1ed5be9f128341609d5a4246e94ec9"
+            },
+            "ZX Spectrum (spark2k06)": {
+                "latest": ["EXP27 Monocromo 20210530"],
+                "EXP27 Monocromo 20210522": "9fff67427bf174f0bd9627662eb77e00161275729b02584eaf4e5e915aef94a5",
+                "EXP27 Monocromo 20210530": "6c6c2ad9065a6b1433b585d03c8f11fe608030ffd82216911ffe3944ee6805c4"
             },
             "ZX TBBlue": {
                 "latest": ["azesmbog 13.05.2020", "https://zxuno.com/forum/download/file.php?id=2501"],
@@ -854,7 +860,8 @@
             "EXP27_100820": "a30ed2c99f65cff88a3d1d898f32d4618753f65c4ee22883b78ab09d037f800d",
             "EXP27_160820": "18bb827d1d10671d914830e6af31dd33818ee8145c735590de0bdb45c7585305",
             "EXP27_150820_monocromo (Avlixa)": "5d752fc11e79de3993b3d78d155ac79b19e50f4bff0e22ef9fe205ae801a33d6",
-            "EXP27_190920_test_BnW (Avlixa)": "4a6cc59602873fa6cea5942a57d378e0413606b3f20079573f19939679fc986c"
+            "EXP27_190920_test_BnW (Avlixa)": "4a6cc59602873fa6cea5942a57d378e0413606b3f20079573f19939679fc986c",
+            "EXP27_20210525_test": "366582a5f4a6c054565f216f512b062589b7abc3aeb2bce122fab56da6a4e444"
         },
         "Special": {
             "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/firmware/CORE21_special.ZXD"],
@@ -963,7 +970,9 @@
                 "latest": ["EXP27_190920_BnW", "https://github.com/zxdos/zxdos-plus/raw/master/cores/CORE21_SPECTRUM_EXP27_zxdos_lx25.ZXD"],
                 "EXP27_150820_monocromo": "89ccd7c10b91668a9940193dc55e6f30bc0f138dee9b3f671ac440acf8c484e3",
                 "EXP27_190920_test_BnW": "710eb8ac196b0b38ff84761c727e8b4ed8a2f9433db9b4d76899209aed3f757f",
-                "EXP27_190920_BnW": "a4be8ef45afb08aa3f5aec99772beec6ffff1058e478b4b55df8360275a193b0"
+                "EXP27_190920_BnW": "a4be8ef45afb08aa3f5aec99772beec6ffff1058e478b4b55df8360275a193b0",
+                "EXP27_20210525_test": "a2643327f4e7fc07ded7b1f3f5c74cf3136fd353770b85d19609c611d7fddee0",
+                "EXP27_20210530_test": "2f4aa6a4d92b9d198201feb32c54df8e6eff14737918d4c43b9f3b424d11d159"
             },
             "ZX Spectrum 48K (Kyp)": {
                 "latest": ["2021.04.03", "https://github.com/zxdos/zxdos-plus/raw/master/cores/zx48_2021-04-03.ZXD"],
