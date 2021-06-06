@@ -39,7 +39,8 @@
             "EXP26-19022018": "8c677536500eee76873d9a2462ff44adbf3a57477157e275930304fc981a4604",
             "EXP26 040418": "85023e5c7941f56f74c1badc37f295e08b4c2955b67723851c1c5763891b236a",
             "EXP27_160820": "140fe5400fb3aee7dae99c540020d36d14d3c0be7ec3b9dd737a2b198525d618",
-            "EXP27 azesmbog 240320 (no UART+SAA1099)": "5a07296d1a2ec159e3ce2e56482120c3a2d6b67714dc350a46ff3a27739962e6"
+            "EXP27 azesmbog 240320 (no UART+SAA1099)": "5a07296d1a2ec159e3ce2e56482120c3a2d6b67714dc350a46ff3a27739962e6",
+            "EXP27 spark2k06 20210606 Ext RAM": "d2e435b69d324a9aa26d2df0b4403bc38ede62cc184f0532c330e3598e27f3a1"
         },
         "Cores": {
             "Acorn Atom": {
@@ -166,7 +167,9 @@
                 "Unknown Version": "875bb4433587b607d0a67c953c467058022c4a2dbef77408cba5467fa51d232a",
                 "1.227": "93cd6f516dec75fbd48f6ca5b5e344f7fee4391974f478979302426e2730eaa9",
                 "1.3 512K": "994e7b1aac5457ca624b9d4f47db3b6997ecd321031f204c03025ee505674ee6",
-                "1.3 VGA2M": "5b1218ca4f62cceb14ca842ff111aa3e9bd12af61b309ddce70a0b0546ea2ece"
+                "1.3 VGA2M": "5b1218ca4f62cceb14ca842ff111aa3e9bd12af61b309ddce70a0b0546ea2ece",
+                "Prueba VGA 2M": "a96c6b1736852a490c85cd913cf28264851fa86960dcf37efa12e5ec95a5b18a",
+                "Prueba 2M Int": "2a0a16735d3e31f9eb2559739c3b9d1889ba5616d78f418c722afa6ffd89c6ef"
             },
             "Multicomp": {
                 "latest": ["TEST1"],
@@ -277,7 +280,8 @@
             "ZX Spectrum (spark2k06)": {
                 "latest": ["EXP27 Monocromo 20210530"],
                 "EXP27 Monocromo 20210522": "9fff67427bf174f0bd9627662eb77e00161275729b02584eaf4e5e915aef94a5",
-                "EXP27 Monocromo 20210530": "6c6c2ad9065a6b1433b585d03c8f11fe608030ffd82216911ffe3944ee6805c4"
+                "EXP27 Monocromo 20210530": "6c6c2ad9065a6b1433b585d03c8f11fe608030ffd82216911ffe3944ee6805c4",
+                "EXP27 Ext RAM 20210606": "7b59c0295840ad65c55e642873e22e094f93b5562ceb728d27f5d0c892b21acc"
             },
             "ZX TBBlue": {
                 "latest": ["azesmbog 13.05.2020", "https://zxuno.com/forum/download/file.php?id=2501"],
@@ -1011,7 +1015,10 @@
                 "3.01.08b1 (Pi Zero)": "5de55399bde50edb1064ce013fd30e47cb14389653aa3e710dd2dc077af67261",
                 "3.01.08b2 (Pi Zero)": "9be5a1a27cdf97260666630d762db21778e2e1e8716ad64f943a4250bff659c7",
                 "3.01.08b3 (Pi Zero)": "e0a0b59eb450ed74590b862d4fa5e89cafa82e5a4cb6188a8950bc43e1428799",
-                "3.01.08b4 (Pi Zero)": "caaf0798314d97a7f4a79a91e62af4c111e5239760097f2008c850ec2045955a"
+                "3.01.08b4 (Pi Zero)": "caaf0798314d97a7f4a79a91e62af4c111e5239760097f2008c850ec2045955a",
+                "3.01.09 1x16": "f9e47369621315f26fa01d7e896a2258c5a25b80837816f81c1046d105dee3a9",
+                "3.01.09 2x16": "e9178d424df986295e59c6ac69da00a52fbe1dd32d2478556c2ba89bf9ece974",
+                "3.01.10 1x16": "c5f289eb0ad547f4e7b42179e9f7f7de7a53f424de102adb037dc217e880174a"
             }
         },
         "recovery.zxd.bit": {
