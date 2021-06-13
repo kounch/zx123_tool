@@ -858,14 +858,15 @@
             "0.8.9": "89706de560d66432fe19ddb895e7cde49e252e932687dcb57fb92259a0259339"
         },
         "Spectrum": {
-            "latest": ["EXP27_100820", "https://github.com/zxdos/zxdos-plus/raw/master/cores/SPECTRUM_EXP27_lx25.ZXD"],
+            "latest": ["EXP27_20210530 (Avlixa)", "https://github.com/zxdos/zxdos-plus/raw/master/cores/SPECTRUM_EXP27_lx25_20210530.ZXD"],
             "EXP26_060818": "4ca484870c4173085ca181a92fadea6fd9e5e2928ee4fd0caa08f07052c9e286",
             "EXP27_unknown": "6ea083833edae73b9d78f8c227dd230bef55711eca676a410fcf097ca1d6dc41",
             "EXP27_100820": "a30ed2c99f65cff88a3d1d898f32d4618753f65c4ee22883b78ab09d037f800d",
             "EXP27_160820": "18bb827d1d10671d914830e6af31dd33818ee8145c735590de0bdb45c7585305",
             "EXP27_150820_monocromo (Avlixa)": "5d752fc11e79de3993b3d78d155ac79b19e50f4bff0e22ef9fe205ae801a33d6",
             "EXP27_190920_test_BnW (Avlixa)": "4a6cc59602873fa6cea5942a57d378e0413606b3f20079573f19939679fc986c",
-            "EXP27_20210525_test": "366582a5f4a6c054565f216f512b062589b7abc3aeb2bce122fab56da6a4e444"
+            "EXP27_20210525_test": "366582a5f4a6c054565f216f512b062589b7abc3aeb2bce122fab56da6a4e444",
+            "EXP27_20210530 (Avlixa)": "f5e6790a2ed4cf8702eba3168b9ff337563d03204e5eb21f6004d941d2a9fa5e"
         },
         "Special": {
             "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/firmware/CORE21_special.ZXD"],
@@ -910,7 +911,8 @@
             },
             "MSX":
             {
-                "latest": ["1.3", "https://github.com/zxdos/zxdos-plus/raw/master/cores/msx1-3_zxdoslx25.ZXD"],
+                "latest": ["1.3 20210606 (Avlixa)", "https://github.com/zxdos/zxdos-plus/raw/master/cores/msx1-3_zxdoslx25_20210606.ZXD"],
+                "base": ["1.3", "https://github.com/zxdos/zxdos-plus/raw/master/cores/msx1-3_zxdoslx25.ZXD"],
                 "Beta": "a2eb1b6cdaecf67e0a07e9cfe593a247d46e85119c9b5936c57edc5ec88782f8",
                 "1.0": "a64e415a5277d92ea5441cfe02dcc8dfbbe396911d20f732f34f7bb6040ef0fe",
                 "1.2": "bf420194449675258c39fe62a789d09629f7f90cc1d27d2cc25b5cc6500395c9",
@@ -920,7 +922,8 @@
                 "1.3 v4 (Benitoss)": "f10bd0977139653fcb2bcdf879dd5c60db9f300cd2cad884323cc1c542a64277",
                 "1.3 v5 (Benitoss)": "a1d60559481198235a59cf192851b920a7460661156f4f8bd97d135cf1d77a46",
                 "1.3 v6 (Benitoss)": "1a390b1663472ec4656347f10bdca4d200b3abd20cae4488d41754f3ea993902",
-                "1.3": "06e922c18daaa3e2b8388836d96e4f80a8505daa82de0914b2ffb8f696a68aec"
+                "1.3": "06e922c18daaa3e2b8388836d96e4f80a8505daa82de0914b2ffb8f696a68aec",
+                "1.3 20210606 (Avlixa)": "d41f2bd943f3b8f5e186064f2df6da8926d4c741de2cd59a9c127a2f35f23244"
             },
             "NES": {
                 "latest": ["20200923", "https://github.com/zxdos/zxdos-plus/raw/master/cores/COREn_NES_VGA_lx25.zxd"],
@@ -971,12 +974,12 @@
             },
             "ZX Spectrum (Avlixa)":
             {
-                "latest": ["EXP27_190920_BnW", "https://github.com/zxdos/zxdos-plus/raw/master/cores/CORE21_SPECTRUM_EXP27_zxdos_lx25.ZXD"],
+                "latest": ["EXP27_20210530", "https://github.com/zxdos/zxdos-plus/raw/master/cores/CORENN_SPECTRUM_EXP27_lx25_20210530.ZXD"],
                 "EXP27_150820_monocromo": "89ccd7c10b91668a9940193dc55e6f30bc0f138dee9b3f671ac440acf8c484e3",
                 "EXP27_190920_test_BnW": "710eb8ac196b0b38ff84761c727e8b4ed8a2f9433db9b4d76899209aed3f757f",
                 "EXP27_190920_BnW": "a4be8ef45afb08aa3f5aec99772beec6ffff1058e478b4b55df8360275a193b0",
                 "EXP27_20210525_test": "a2643327f4e7fc07ded7b1f3f5c74cf3136fd353770b85d19609c611d7fddee0",
-                "EXP27_20210530_test": "2f4aa6a4d92b9d198201feb32c54df8e6eff14737918d4c43b9f3b424d11d159"
+                "EXP27_20210530": "2f4aa6a4d92b9d198201feb32c54df8e6eff14737918d4c43b9f3b424d11d159"
             },
             "ZX Spectrum 48K (Kyp)": {
                 "latest": ["2021.04.03", "https://github.com/zxdos/zxdos-plus/raw/master/cores/zx48_2021-04-03.ZXD"],
@@ -994,7 +997,7 @@
                 "2021.04.17": "0c756d7a53a727184876023303480bca8e5aa4efef953b31817e078c3e169673"
             },
             "ZX Spectrum Next": {
-                "latest": ["3.01.09", "https://github.com/zxdos/zxdos-plus/raw/master/cores/zxnext_top_issue2_gomados_2M_lx25_3_1_9.ZXD"],
+                "latest": ["3.01.10 1x16", "https://github.com/zxdos/zxdos-plus/raw/master/cores/zxnext_top_issue2_zxdos_lx25_2M_3_1_10_1x16.ZXD"],
                 "Unknown Version": "a1a4de5df87cfce34129dfd33ba7b0372469344bad53d9a6b2665da89e93e56f",
                 "1": "5f26c4ada12166d6b2cc34664a7c3ddc281c226eb86bc39e9f6c6e465a9225a8",
                 "3": "5dd20bd9a77aa4d3bbe5d60b3d0f75b9524d84071123623748dcf1fb45163bb7",
@@ -1018,7 +1021,8 @@
                 "3.01.08b4 (Pi Zero)": "caaf0798314d97a7f4a79a91e62af4c111e5239760097f2008c850ec2045955a",
                 "3.01.09 1x16": "f9e47369621315f26fa01d7e896a2258c5a25b80837816f81c1046d105dee3a9",
                 "3.01.09 2x16": "e9178d424df986295e59c6ac69da00a52fbe1dd32d2478556c2ba89bf9ece974",
-                "3.01.10 1x16": "c5f289eb0ad547f4e7b42179e9f7f7de7a53f424de102adb037dc217e880174a"
+                "3.01.10 1x16": "c5f289eb0ad547f4e7b42179e9f7f7de7a53f424de102adb037dc217e880174a",
+                "3.01.10 2x16": "5fbc10cceb57dab41d62944ac42bb61dd2f5aa725c991ac2c9f20b888e81807b"
             }
         },
         "recovery.zxd.bit": {
