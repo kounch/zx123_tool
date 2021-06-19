@@ -3,15 +3,15 @@
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
         "parts": {
-            "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF3261800032816B05"],
-            "esxdos": [16384, 8192, "ESXDOS.ZX1", "F331005EC30101FFC3"],
-            "roms_dir": [24576, 4096, "", "", 28672, 19, 45],
-            "cores_dir": [28672, 1792, "", "", 9, 36],
-            "reserved": [30464, 2304, "", ""],
-            "BIOS": [32768, 16384, "FIRMWARE.ZX1", "31B0AA3E04013BFCED7904ED70F521"],
-            "roms_data": [49152, 311296, "", "", 3457024],
-            "Spectrum": [360448, 343808, "SPECTRUM.ZX1", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A103803141"],
-            "core_base": [704512, 344064, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A103803141", 4194304]
+            "header": ["0", "16384", "", "FFFFFFFFAA99556631E1FFFF3261800032816B05"],
+            "esxdos": ["16384", "8192", "ESXDOS.ZX1", "F331005EC30101FFC3"],
+            "roms_dir": ["24576", "4096", "", "", "28672", "19", "45"],
+            "cores_dir": ["28672", "1792", "", "", 9, 36],
+            "reserved": ["30464", "2304", "", ""],
+            "BIOS": ["32768", "16384", "FIRMWARE.ZX1", "31B0AA3E04013BFCED7904ED70F521"],
+            "roms_data": ["49152", "311296", "", "", "3457024"],
+            "Spectrum": ["360448", "343808", "SPECTRUM.ZX1", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A103803141"],
+            "core_base": ["704512", "344064", "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A103803141", "4194304"]
         },
         "BIOS": {
             "latest": ["0.83", "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE.ZX1"],
@@ -708,15 +708,15 @@
         "description": "ZXDOS",
         "hashtype": "sha256sum",
         "parts": {
-            "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF3261800032810309"],
-            "esxdos": [16384, 8192, "ESXDOS.ZX1", "F331005EC30101FFC3"],
-            "roms_dir": [24576, 2816, "", "", 28672, 35, 9],
-            "cores_dir": [28672, 2560, "", "", 34, 35],
-            "reserved": [31232, 1536, "", ""],
-            "BIOS": [32768, 16384, "FIRMWARE.ZX2", "31B0AA3E04013BFCED7904ED70F521"],
-            "roms_data": [49152, 573440, "", "", 16777216],
-            "Spectrum": [622592, 474880, "SPECTRUM.ZX2", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104303141"],
-            "core_base": [1097728, 475136, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104303141", 16924672]
+            "header": ["0", "16384", "", "FFFFFFFFAA99556631E1FFFF3261800032810309"],
+            "esxdos": ["16384", "8192", "ESXDOS.ZX1", "F331005EC30101FFC3"],
+            "roms_dir": ["24576", "2816", "", "", "28672", "35", "9"],
+            "cores_dir": ["28672", "2560", "", "", 34, 35],
+            "reserved": ["31232", "1536", "", ""],
+            "BIOS": ["32768", "16384", "FIRMWARE.ZX2", "31B0AA3E04013BFCED7904ED70F521"],
+            "roms_data": ["49152", "573440", "", "", "16777216"],
+            "Spectrum": ["622592", "474880", "SPECTRUM.ZX2", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104303141"],
+            "core_base": ["1097728", "475136", "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104303141", "16924672"]
         },
         "BIOS": {
             "latest": ["0.83", "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE.ZX2"],
@@ -826,16 +826,16 @@
         "description": "ZXDOS+/gomaDOS+",
         "hashtype": "sha256sum",
         "parts": {
-            "header": [0, 16384, "", "FFFFFFFFAA99556631E1FFFF326100003281030B"],
-            "esxdos": [16384, 8192, "ESXDOS.ZX1", "F331005EC30101FFC3"],
-            "roms_dir": [24576, 4096, "", "", 28672, 41, 23],
-            "cores_dir": [28672, 2560, "", "", 20, 19],
-            "reserved": [31232, 1536, "", ""],
-            "BIOS": [32768, 16384, "FIRMWARE.ZXD", "31B0AA3E04013BFCED7904ED70F521"],
-            "roms_data": [49152, 671744, "", "", 16777216],
-            "Spectrum": [720896, 802560, "SPECTRUM.ZXD", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104883141"],
-            "Special": [17498112, 802816, "CORE21_special.ZXD", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104883141"],
-            "core_base": [1523712, 802816, "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104883141", 18300928]
+            "header": ["0", "16384", "", "FFFFFFFFAA99556631E1FFFF326100003281030B"],
+            "esxdos": ["16384", "8192", "ESXDOS.ZX1", "F331005EC30101FFC3"],
+            "roms_dir": ["24576", "4096", "", "", "28672", "41", "23"],
+            "cores_dir": ["28672", "2560", "", "", "20", "19"],
+            "reserved": ["31232", "1536", "", ""],
+            "BIOS": ["32768", "16384", "FIRMWARE.ZXD", "31B0AA3E04013BFCED7904ED70F521"],
+            "roms_data": ["49152", "671744", "", "", "16777216"],
+            "Spectrum": ["720896", "802560", "SPECTRUM.ZXD", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104883141"],
+            "Special": ["17498112", "802816", "CORE21_special.ZXD", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104883141"],
+            "core_base": ["1523712", "802816", "", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAA99556630A10007200031A104883141", "18300928"]
         },
         "BIOS": {
             "latest": ["0.84", "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE.ZXD"],
@@ -1046,11 +1046,11 @@
         "hashtype": "sha256sum",
         "extensions": ["ROM", "BIN"],
         "parts": {
-            "header": [0, 0, "", ""],
-            "16K Spectrum ROM": [0, 16384],
-            "32K Spectrum ROM": [0, 32768],
-            "64K Spectrum ROM": [0, 65536],
-            "esxdos": [16384, 8192, "ESXDOS.ZX1", "F331005EC30101FFC3"]
+            "header": ["0", 0, "", ""],
+            "16K Spectrum ROM": ["0", 16384],
+            "32K Spectrum ROM": ["0", 32768],
+            "64K Spectrum ROM": ["0", 65536],
+            "esxdos": ["16384", 8192, "ESXDOS.ZX1", "F331005EC30101FFC3"]
         },
         "esxdos": {
             "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
@@ -1160,9 +1160,9 @@
         "description": "ZX-Uno RomPack",
         "hashtype": "sha256sum",
         "parts": {
-            "header": [0, 1052737, "ROMS.ZX1", ""],
-            "roms_dir": [0, 4096, "", "", 4096, 64, 0],
-            "roms_data": [4160, 1048576, "", "", 0]
+            "header": ["0", "1052737", "ROMS.ZX1", ""],
+            "roms_dir": ["0", "4096", "", "", "4096", "64", "0"],
+            "roms_data": ["4160", "1048576", "", "", "0"]
         },
         "latest": ["desUBIKado_20210112", "https://github.com/zxdos/zxuno/raw/master/utils/ROMS.ZX1"],
         "desUBIKado_20210112": "8ed16c2d63ce6369e56685cabeb048d75e7a2c72a03cf9844c45e3a0f0f59391"
@@ -1171,9 +1171,9 @@
         "description": "ZX RomPack v2",
         "hashtype": "sha256sum",
         "parts": {
-            "header": [0, 4194560, "ROMS2.ZX1", "52507632"],
-            "roms_dir": [64, 16320, "", "", 16384, 255, 0],
-            "roms_data": [16639, 4161280, "", "", 0]
+            "header": ["0", "4194560", "ROMS2.ZX1", "52507632"],
+            "roms_dir": ["64", "16320", "", "", "16384", "255", "0"],
+            "roms_data": ["16639", "4161280", "", "", "0"]
         }
     }
 }

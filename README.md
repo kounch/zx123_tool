@@ -202,7 +202,7 @@ Extract ROMs with indexes 3, 5 and 6 from a ROMPack v2 file:
 
 ### Description of JSON file
 
-The JSON file is an object where the main name are file extensions (like `ZXD` or `ZX1`). For each of these, there is another object with the following structure:
+The JSON file is an object where the main name are file extensions (like `ZXD` or `ZX1`). All the data in the JSON is stored as a string. For each of the possible extensions, there is another object with the following structure:
 
     (...)
     "(Extension)": {
@@ -485,7 +485,7 @@ Extraer las ROMs con índices 3, 5 y 6 de un fichero ROMPack v2:
 
 ### Descripción del arhivo JSON
 
-El archivo JSON es un objeto donde los nombres principales son extensiones de archivo (como `ZXD` o `ZX1`). Para cada una, se define otro objeto con la siguiente estructura:
+El archivo JSON es un objeto donde los nombres principales son extensiones de archivo (como `ZXD` o `ZX1`). Todos los datos del fichero JSON se almacenan como cadenas de texto. Para cada exension, se define otro objeto con la siguiente estructura:
 
     (...)
     "(Extensión)": {

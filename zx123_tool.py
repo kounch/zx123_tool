@@ -52,7 +52,7 @@ import ctypes
 if os.name == 'nt':
     import msvcrt
 
-__MY_VERSION__ = '2.5.0'
+__MY_VERSION__ = '3.0'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
@@ -270,7 +270,8 @@ def main():
         # Check if it's ROMPack v2
         rpk_header = fulldict_hash['RPv2']['parts']['header']
         f_size = os.stat(str_file).st_size
-        if validate_file(str_file, rpk_header[3]) and rpk_header[1] == f_size:
+        if validate_file(str_file, rpk_header[3]) and int(
+                rpk_header[1]) == f_size:
             if str_extension == 'ZX1':
                 # List ZX Spectrum ROMs
                 if not arg_data['extract'] and not arg_data['inject']:
@@ -530,6 +531,8 @@ def parse_args():
         printcol(colours.PURPLE, 'Debugging Enabled!!', end='\n')
         LOGGER.setLevel(logging.DEBUG)
 
+    LOGGER.debug(sys.argv)
+
     if arguments.input_file:
         values['input_file'] = os.path.abspath(arguments.input_file)
 
@@ -754,7 +757,7 @@ def list_romsdata(str_in_file,
                 print('ZX ROMPack file (v2)')
             else:
                 print('ZX1 ROMPack File')
-            def_addr = hash_dict[in_file_ext]['parts']['roms_data'][0]
+            def_addr = int(hash_dict[in_file_ext]['parts']['roms_data'][0])
             default_rom = get_peek(str_in_file, def_addr)
             print('\tDefault ROM -> {0:02}'.format(default_rom))
 
@@ -827,7 +830,7 @@ def extractfrom_zxdata(str_in_file,
                     hash_dict['Cores'])
                 if block_name == 'Unknown':
                     block_name = core_name
-                splitcore_index = hash_dict['parts']['cores_dir'][4]
+                splitcore_index = int(hash_dict['parts']['cores_dir'][4])
                 core_bases = hash_dict['parts']['core_base']
                 block_data = get_core_blockdata(core_number, splitcore_index,
                                                 core_bases)
@@ -1167,38 +1170,38 @@ def wipe_zxdata(str_spi_file,
 
     # SPI flash ROMs
     block_info = dict_parts['roms_dir']
-    base_slots = block_info[5]
-    max_slots = base_slots + block_info[6]
+    base_slots = int(block_info[5])
+    max_slots = base_slots + int(block_info[6])
     rom_bases = dict_parts['roms_data']
 
     # SPI flash Cores
     blk_info = dict_parts['cores_dir']
-    max_cores = splitcore_index = blk_info[4]
+    max_cores = splitcore_index = int(blk_info[4])
     if len(blk_info) > 5:
-        max_cores += blk_info[5]
+        max_cores += int(blk_info[5])
     core_bases = dict_parts['core_base']
 
     # Clear ROM names in directory
-    cur_pos = block_info[0]
+    cur_pos = int(block_info[0])
     br_data = b_data[:cur_pos]
     br_data += b'\x00' * 64 * max_slots
     cur_pos += 64 * max_slots
 
     # Clear ROMs list in SPI flash (Temp Binary Data)
-    br_data += b_data[cur_pos:block_info[4]]
-    cur_pos = block_info[4]
+    br_data += b_data[cur_pos:int(block_info[4])]
+    cur_pos = int(block_info[4])
     br_data += b'\xff' * max_slots
     cur_pos += max_slots
 
     # Clear Core Names in directory
-    br_data += b_data[cur_pos:blk_info[0] + 0x100]
-    cur_pos = blk_info[0] + 0x100
+    br_data += b_data[cur_pos:int(blk_info[0]) + 0x100]
+    cur_pos = int(blk_info[0]) + 0x100
     br_data += b'\x00' * 32 * max_cores
     cur_pos += 32 * max_cores
 
     # Clear data blocks of ROMs
-    br_data += b_data[cur_pos:rom_bases[0]]
-    cur_pos = rom_bases[0]
+    br_data += b_data[cur_pos:int(rom_bases[0])]
+    cur_pos = int(rom_bases[0])
     br_data += b'\x00' * 16384 * base_slots
     cur_pos += 16384 * base_slots
 
@@ -1248,7 +1251,7 @@ def inject_zxfiles(str_spi_file,
 
     def_rom_addr = 28736
     if str_extension == 'RPv2':
-        def_rom_addr = hash_dict['parts']['roms_data'][0]
+        def_rom_addr = int(hash_dict['parts']['roms_data'][0])
 
     LOGGER.debug('Reading Destination File...')
     b_len = os.stat(str_spi_file).st_size
@@ -1317,12 +1320,12 @@ def savefrom_zxdata(str_in_file,
 
     dict_parts = hash_dict['parts']
     block_info = dict_parts['cores_dir']
-    max_cores = splitcore_index = block_info[4]
+    max_cores = splitcore_index = int(block_info[4])
 
     flash_len = bin_len = os.stat(str_in_file).st_size
     if n_cores > -1:
-        flash_len = hash_dict['parts']['core_base'][0]
-        flash_len += hash_dict['parts']['core_base'][1] * n_cores
+        flash_len = int(hash_dict['parts']['core_base'][0])
+        flash_len += int(hash_dict['parts']['core_base'][1]) * n_cores
 
     if bin_len > flash_len:
         bin_len = flash_len
@@ -1371,7 +1374,7 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
             '16K Spectrum ROM', '32K Spectrum ROM', '64K Spectrum ROM'
     ]:
         if block_id in d_parts:
-            if i_file_size == d_parts[block_id][1]:
+            if i_file_size == int(d_parts[block_id][1]):
                 LOGGER.debug('Looks like {0}'.format(block_id))
                 block_version = get_data_version(str_file_hash,
                                                  hash_dict[block_id])
@@ -1383,7 +1386,7 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
     # Check if it's a main ROM
     for block_id in ['BIOS', 'Spectrum', 'Special', 'esxdos']:
         if not found and block_id in d_parts:
-            if i_file_size == d_parts[block_id][1] and validate_file(
+            if i_file_size == int(d_parts[block_id][1]) and validate_file(
                     str_in_file, d_parts[block_id][3]):
                 LOGGER.debug('Looks like {0}'.format(block_id))
                 block_version = get_data_version(str_file_hash,
@@ -1395,8 +1398,9 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
 
     # Check if it's a Core
     if not found and 'core_base' in d_parts:
-        if validate_file(str_in_file, d_parts['core_base']
-                         [3]) and i_file_size == d_parts['core_base'][1]:
+        if validate_file(str_in_file,
+                         d_parts['core_base'][3]) and i_file_size == int(
+                             d_parts['core_base'][1]):
             LOGGER.debug('Looks like a core')
             for core_item in hash_dict['Cores']:
                 block_version = get_data_version(str_file_hash,
@@ -1410,7 +1414,7 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
     # Check if it's a RomPack ROMs file
     if not found and str_extension == 'ZX1':
         rompack = fulldict_hash['ROMS']['parts']
-        i_rpck_size = rompack['header'][1]
+        i_rpck_size = int(rompack['header'][1])
         if i_rpck_size == i_file_size:
             found = list_romsdata(str_in_file, fulldict_hash, 'ROMS',
                                   show_hashes, True)
@@ -1433,10 +1437,10 @@ def get_core_version(str_in_file, core_index, dict_parts, dict_cores):
     """
 
     block_info = dict_parts['cores_dir']
-    max_cores = splitcore_index = block_info[4]
+    max_cores = splitcore_index = int(block_info[4])
 
     if len(block_info) > 5:
-        max_cores += block_info[5]
+        max_cores += int(block_info[5])
     if core_index > max_cores:
         LOGGER.error('Invalid core index: {}'.format(core_index))
 
@@ -1445,7 +1449,8 @@ def get_core_version(str_in_file, core_index, dict_parts, dict_cores):
     block_name = block_version = 'Unknown'
     block_hash = ''
     block_data = get_core_blockdata(core_index, splitcore_index, core_bases)
-    LOGGER.debug('Index {0}: {1:X}({1})'.format(core_index + 2, block_data[0]))
+    LOGGER.debug('Index {0}: {1:X}({1})'.format(core_index + 2,
+                                                int(block_data[0])))
 
     for core_name in dict_cores:
         block_version, block_hash = get_version(str_in_file, block_data,
@@ -1466,12 +1471,12 @@ def get_core_blockdata(core_index, spltcore_index, core_bases):
     :return: Array with core offset and core length
     """
 
-    core_base = core_bases[0]
-    core_len = core_bases[1]
+    core_base = int(core_bases[0])
+    core_len = int(core_bases[1])
 
     core_split = 0
     if len(core_bases) > 4:
-        core_split = core_bases[4]
+        core_split = int(core_bases[4])
 
     core_offset = core_base + core_index * core_len
     if core_split and core_index + 2 > spltcore_index:
@@ -1488,9 +1493,12 @@ def get_core_list(str_in_file, dict_parts):
     :return: List of name strings
     """
     block_info = dict_parts['cores_dir']
+    i_start = int(block_info[0])
+    i_len = int(block_info[1])
+
     with open(str_in_file, "rb") as in_zxdata:
-        in_zxdata.seek(block_info[0])
-        bin_data = in_zxdata.read(block_info[1])
+        in_zxdata.seek(i_start)
+        bin_data = in_zxdata.read(i_len)
 
     name_list = get_core_list_bindata(bin_data, dict_parts)
 
@@ -1505,9 +1513,9 @@ def get_core_list_bindata(bin_data, dict_parts):
     :return: List of name strings
     """
     block_info = dict_parts['cores_dir']
-    max_cores = block_info[4]
+    max_cores = int(block_info[4])
     if len(block_info) > 5:
-        max_cores += block_info[5]
+        max_cores += int(block_info[5])
 
     name_offset = 0x100
     name_len = 0x20
@@ -1543,7 +1551,7 @@ def get_rom(str_in_file,
     :return: List with version string, hash string and offset
     """
 
-    rom_split = dict_full[in_file_ext]['parts']['roms_dir'][5]
+    rom_split = int(dict_full[in_file_ext]['parts']['roms_dir'][5])
     block_bases = dict_full[in_file_ext]['parts']['roms_data']
     rom_data = get_rom_bin(str_in_file, rom_slot, rom_blocks, rom_split,
                            block_bases, roms_file)
@@ -1585,8 +1593,8 @@ def get_rom_list(str_in_file, dict_parts, b_data=None):
     if len(block_info) < 6:
         LOGGER.error('ROMs dir data missing from database')
     else:
-        b_start = block_info[4]
-        b_len = block_info[5] + block_info[6]
+        b_start = int(block_info[4])
+        b_len = int(block_info[5]) + int(block_info[6])
         if b_data:
             roms_use = b_data[b_start:b_start + b_len]
         else:
@@ -1596,7 +1604,7 @@ def get_rom_list(str_in_file, dict_parts, b_data=None):
 
         for i in range(0, len(roms_use)):
             if roms_use[i] != 0xff:
-                b_start = block_info[0] + i * 64
+                b_start = int(block_info[0]) + i * 64
                 b_len = 64
                 if b_data:
                     rom_data = b_data[b_start:b_start + b_len]
@@ -1670,10 +1678,10 @@ def get_romb_offset(rom_slot, rom_split, rom_bases, roms_file=False):
     :param roms_file: If True, add extra offset as in ROM.ZX1 file
     """
     if rom_slot < rom_split:
-        rom_base = rom_bases[0]
+        rom_base = int(rom_bases[0])
         rom_offset = rom_base + rom_slot * 16384
     else:
-        rom_base = rom_bases[4]
+        rom_base = int(rom_bases[4])
         rom_offset = rom_base + (rom_slot - rom_split) * 16384
 
     if roms_file:
@@ -1802,8 +1810,8 @@ def inject_bindata(str_in_params, hash_dict, b_data):
             else:
                 str_in_file = arr_params[1]
                 str_hash = get_file_hash(str_in_file)
-                b_offset = hash_parts[0]
-                b_len = hash_parts[1]
+                b_offset = int(hash_parts[0])
+                b_len = int(hash_parts[1])
                 b_head = hash_parts[3]
                 if validate_file(
                         str_in_file,
@@ -1840,14 +1848,15 @@ def inject_coredata(str_in_params, hash_dict, b_data):
 
     if arr_params[0].upper() == 'CORE':  # Number, Name, Filename
         block_info = dict_parts.get('cores_dir', [])
-        max_cores = splitcore_index = block_info[4]
+        max_cores = splitcore_index = int(block_info[4])
         if len(block_info) > 5:
-            max_cores += block_info[5]
+            max_cores += int(block_info[5])
         core_bases = dict_parts['core_base']
-        b_len = core_bases[1]
+        b_len = int(core_bases[1])
         b_head = core_bases[3]
 
-        bl_data = b_data[block_info[0]:block_info[0] + block_info[1]]
+        bl_data = b_data[int(block_info[0]):int(block_info[0]) +
+                         int(block_info[1])]
         core_list = get_core_list_bindata(bl_data, dict_parts)
 
         if len(arr_params) != 4:
@@ -1892,8 +1901,9 @@ def inject_coredata(str_in_params, hash_dict, b_data):
                         bl_data = bl_data[:core_index] + bytes(
                             str_name, 'utf-8') + bl_data[core_index + 32:]
 
-                        br_data = b_data[:block_info[0]] + bl_data
-                        br_data += b_data[block_info[0] + block_info[1]:]
+                        br_data = b_data[:int(block_info[0])] + bl_data
+                        br_data += b_data[int(block_info[0]) +
+                                          int(block_info[1]):]
 
                         with open(str_in_file, "rb") as in_zxdata:
                             in_data = in_zxdata.read()
@@ -1930,8 +1940,8 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
     br_data = b_data
 
     block_info = dict_parts['roms_dir']
-    max_slots = block_info[5]
-    max_slots += block_info[6]
+    max_slots = int(block_info[5])
+    max_slots += int(block_info[6])
     block_bases = dict_parts['roms_data']
 
     if arr_params[0].upper() == 'ROM':  # Slot, Params, Name, Filename
@@ -2016,20 +2026,19 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
     def_r_addr = 28736
     if str_extension == 'RPv2':
         b_roms = True
-        def_r_addr = dict_parts['roms_data'][0]
-
+        def_r_addr = int(dict_parts['roms_data'][0])
     block_info = dict_parts['roms_dir']
-    max_slots = block_info[5]
-    max_slots += block_info[6]
+    max_slots = int(block_info[5])
+    max_slots += int(block_info[6])
     block_bases = dict_parts['roms_data']
 
     # Empty ROMs list
-    roms_use = b'\xff' * (block_info[5] + block_info[6])
+    roms_use = b'\xff' * (int(block_info[5]) + int(block_info[6]))
 
     # ZX1 ROMS
     rom_dict_parts = fullhash_dict['ROMS']['parts']
     blk_info = rom_dict_parts['roms_dir']
-    rm_split = blk_info[5]
+    rm_split = int(blk_info[5])
     blk_bases = rom_dict_parts['roms_data']
 
     arr_params = str_in_params.split(',')
@@ -2045,8 +2054,8 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
             if roms_list:
                 def_rom = get_peek(str_name, 4160)
                 # Clear ROMs list in SPI flash (Temp Binary Data)
-                br_data = b_data[:block_info[4]] + roms_use
-                br_data += b_data[block_info[4] + len(roms_use):]
+                br_data = b_data[:int(block_info[4])] + roms_use
+                br_data += b_data[int(block_info[4]) + len(roms_use):]
 
                 print('Injecting ROMs from {0}...'.format(str_name))
                 for rom_item in roms_list:
@@ -2106,7 +2115,7 @@ def inject_rom_tobin(b_data,
     :return: Altered binary file data and boolean indicating if it changed
     """
     b_changed = False
-    rom_split = block_info[5]
+    rom_split = int(block_info[5])
 
     rom_name = '{0:<32}'.format(rom_name[:32])
     rom_len = int(len(rom_data) / 16384)
@@ -2115,14 +2124,14 @@ def inject_rom_tobin(b_data,
     rom_entry = new_romentry(rom_slt, rom_name, rom_len, rom_params, rom_crc)
 
     # Inject ROM entry
-    cur_pos = block_info[0] + rom_index * 64
+    cur_pos = int(block_info[0]) + rom_index * 64
     br_data = b_data[:cur_pos]
     br_data += rom_entry
     cur_pos += 64
 
     # Inject ROM index
-    br_data += b_data[cur_pos:block_info[4]]
-    cur_pos = block_info[4]
+    br_data += b_data[cur_pos:int(block_info[4])]
+    cur_pos = int(block_info[4])
     br_data += b_data[cur_pos:cur_pos + rom_index]
     br_data += (rom_index).to_bytes(1, byteorder='little')
     cur_pos += rom_index + 1
@@ -2228,10 +2237,12 @@ def get_version(str_in_file, block_info, hash_dict):
     str_version = ''
     str_hash = ''
 
-    if f_size >= block_info[0] + block_info[1]:
+    i_start = int(block_info[0])
+    i_len = int(block_info[1])
+    if f_size >= i_start + i_len:
         with open(str_in_file, "rb") as in_zxd:
-            in_zxd.seek(block_info[0])
-            bin_data = in_zxd.read(block_info[1])
+            in_zxd.seek(i_start)
+            bin_data = in_zxd.read(i_len)
             str_hash = hashlib.sha256(bin_data).hexdigest()
             del bin_data
 
@@ -2286,11 +2297,13 @@ def validate_and_export_bin(str_in_file,
     """
     f_size = os.stat(str_in_file).st_size
     bin_data = None
+    i_start = int(block_info[0])
+    i_len = int(block_info[1])
 
-    if f_size >= block_info[0] + block_info[1]:
+    if f_size >= i_start + i_len:
         with open(str_in_file, "rb") as in_zxdata:
-            in_zxdata.seek(block_info[0])
-            bin_data = in_zxdata.read(block_info[1])
+            in_zxdata.seek(i_start)
+            bin_data = in_zxdata.read(i_len)
 
         if str_magic:
             if not validate_bin(bin_data, str_magic):
