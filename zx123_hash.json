@@ -1030,7 +1030,10 @@
                 "3.01.09 1x16": "f9e47369621315f26fa01d7e896a2258c5a25b80837816f81c1046d105dee3a9",
                 "3.01.09 2x16": "e9178d424df986295e59c6ac69da00a52fbe1dd32d2478556c2ba89bf9ece974",
                 "3.01.10 1x16": "c5f289eb0ad547f4e7b42179e9f7f7de7a53f424de102adb037dc217e880174a",
-                "3.01.10 2x16": "5fbc10cceb57dab41d62944ac42bb61dd2f5aa725c991ac2c9f20b888e81807b"
+                "3.01.10 2x16": "5fbc10cceb57dab41d62944ac42bb61dd2f5aa725c991ac2c9f20b888e81807b",
+                "EDGE Beta01 (1x8_sM1)": "d1fe861f00ba91ff5c0ac213157ccba980b40ca7d5ac0f47357d192c86634009",
+                "EDGE Beta02 (1x8_sM1)": "2cfdb072f26b80d637b09f7b813b4a609a78722f54659a00e949eab7d4ec49be",
+                "EDGE Beta03 (2x16_cM1)": "eab771dcd624d66e0e1924c510bf6333388f00687902cfbf0718579c97274260"
             }
         },
         "recovery.zxd.bit": {
