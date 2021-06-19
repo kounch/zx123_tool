@@ -40,7 +40,10 @@
             "EXP26 040418": "85023e5c7941f56f74c1badc37f295e08b4c2955b67723851c1c5763891b236a",
             "EXP27_160820": "140fe5400fb3aee7dae99c540020d36d14d3c0be7ec3b9dd737a2b198525d618",
             "EXP27 azesmbog 240320 (no UART+SAA1099)": "5a07296d1a2ec159e3ce2e56482120c3a2d6b67714dc350a46ff3a27739962e6",
-            "EXP27 spark2k06 20210606 Ext RAM": "d2e435b69d324a9aa26d2df0b4403bc38ede62cc184f0532c330e3598e27f3a1"
+            "EXP27 spark2k06 20210606 Ext RAM": "d2e435b69d324a9aa26d2df0b4403bc38ede62cc184f0532c330e3598e27f3a1",
+            "EXP27 spark2k06 20210613 Ext RAM": "d0ce23fceb4b559eac7898c06861f485ce46d5a227d0ae91886bb1ed6ec7eb56",
+            "EXP27 spark2k06 20210613 PZX (no SAA1099)": "af97f6e9bcda69db8e21dcbe07965dbc47b9c242cd407acef97fba474d653393",
+            "EXP27 spark2k06 20210613 SAA1099 (no PZX)": "a07b36e6b559ea434de2ec84fcf0fa7b6e5ce53b8b9bff98ed7d3ce769d24a1c"
         },
         "Cores": {
             "Acorn Atom": {
@@ -275,13 +278,18 @@
                 "latest": ["azesmbog DMA 24.05.30"],
                 "EXP27 azesmbog 240320": "85ff342c1a2fe0cc3a962221f37847907a5666e46183b13934b99fae4306fe69",
                 "azesmbog TS-FM 24.03.20": "4fb1f0d47f55039905a10b5fe46f6932ad6dd9728dd976753afd2408dfcc5f09",
-                "azesmbog DMA 24.05.30": "6a0cd7879a98182aeec5b92c36523cf11a1ed5be9f128341609d5a4246e94ec9"
+                "azesmbog DMA 24.05.30": "6a0cd7879a98182aeec5b92c36523cf11a1ed5be9f128341609d5a4246e94ec9",
+                "kyp 2021.04.23": "b65153e392e3c045ae0e50ede3ff570aa38af1e9861c7e762c1b60a553b7f4fd"
             },
             "ZX Spectrum (spark2k06)": {
                 "latest": ["EXP27 Monocromo 20210530"],
                 "EXP27 Monocromo 20210522": "9fff67427bf174f0bd9627662eb77e00161275729b02584eaf4e5e915aef94a5",
                 "EXP27 Monocromo 20210530": "6c6c2ad9065a6b1433b585d03c8f11fe608030ffd82216911ffe3944ee6805c4",
-                "EXP27 Ext RAM 20210606": "7b59c0295840ad65c55e642873e22e094f93b5562ceb728d27f5d0c892b21acc"
+                "EXP27 Ext RAM 20210606": "7b59c0295840ad65c55e642873e22e094f93b5562ceb728d27f5d0c892b21acc",
+                "EXP27 20210613": "f795fab8f9effbf79f5f39cc8dfaac76941c98d3b5cc171f4ff68968445b90d0",
+                "EXP27 Ext RAM 20210613": "dc9ca57bfa51894e45c1692c6b2caffb2c588111330fa87039921bdd48fc2f97",
+                "EXP27 PZX (no SAA1099) 20210613": "fec6cb6a2bc4b4b07cd1dd897dc9299052d7e08bb484ed29afabdfdf8bac8724",
+                "EXP27 SAA1099 (no PZX) 20210613":"9535c722e5d0cd322ced9330c96837586dff5aee68fcd2337c115e2729ecdd55"
             },
             "ZX TBBlue": {
                 "latest": ["azesmbog 13.05.2020", "https://zxuno.com/forum/download/file.php?id=2501"],
