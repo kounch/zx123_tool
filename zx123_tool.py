@@ -2261,6 +2261,10 @@ def get_data_version(str_hash, hash_dict):
     :return: List with version string and hash string
     """
     str_version = 'Unknown'
+
+    if 'versions' in hash_dict:
+        hash_dict = hash_dict['versions']
+
     for hash_elem in hash_dict:
         if str_hash == hash_dict[hash_elem]:
             str_version = hash_elem

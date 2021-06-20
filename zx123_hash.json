@@ -16,694 +16,976 @@
         "BIOS": {
             "latest": ["0.83", "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE.ZX1"],
             "vertical": ["0.82 Vertical", "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE_vertical.ZX1"],
-            "0.64 Vertical": "f062066550fcc5ac6176796152f0b4ec65ab898e78ed3611cddcfa43259cafc0",
-            "0.72": "fa51e6e7d656925453ffc4c57a08a6a0f35c3fa93ba823cdd72a3c6e8fd477ec",
-            "0.75": "753a6f68a15353e3ce46f41640065de19b480dbef9ac8884dddca6fce134acf9",
-            "0.76": "7ee5c7cce34da79b64ae3aa615e1454a98d5ba428bc1488d964c3937acc7f9d8",
-            "0.82": "d7fdf9b997b9514a642382f8e28472eed4ac217b5e2279b1d0897cff95cf1622",
-            "0.82 Vertical": "645f275502eb862258dc23f6436c7992d5b1623d3b21228dd61c7b1d027975f6",
-            "0.83": "8d086c0ef440abc89f5edf37c8d482d69619065f4d27f573d7d57a83942ea91f"
+            "versions": {
+                "0.64 Vertical": "f062066550fcc5ac6176796152f0b4ec65ab898e78ed3611cddcfa43259cafc0",
+                "0.72": "fa51e6e7d656925453ffc4c57a08a6a0f35c3fa93ba823cdd72a3c6e8fd477ec",
+                "0.75": "753a6f68a15353e3ce46f41640065de19b480dbef9ac8884dddca6fce134acf9",
+                "0.76": "7ee5c7cce34da79b64ae3aa615e1454a98d5ba428bc1488d964c3937acc7f9d8",
+                "0.82": "d7fdf9b997b9514a642382f8e28472eed4ac217b5e2279b1d0897cff95cf1622",
+                "0.82 Vertical": "645f275502eb862258dc23f6436c7992d5b1623d3b21228dd61c7b1d027975f6",
+                "0.83": "8d086c0ef440abc89f5edf37c8d482d69619065f4d27f573d7d57a83942ea91f"
+            }
         },
         "esxdos": {
             "latest": ["0.8.9"],
-            "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
-            "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
-            "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
-            "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8",
-            "0.8.9": "89706de560d66432fe19ddb895e7cde49e252e932687dcb57fb92259a0259339"
+            "versions": {
+                "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
+                "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
+                "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
+                "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8",
+                "0.8.9": "89706de560d66432fe19ddb895e7cde49e252e932687dcb57fb92259a0259339"
+            }
         },
         "Spectrum": {
             "latest": ["EXP27_160820", "https://github.com/mcleod-ideafix/zxuno_spectrum_core/raw/master/zxuno_v4/SPECTRUM.ZX1"],
-            "T24-08012017": "dab20b355cd4c63691ca8e5016e7df98894f4fac11a7da86e8b1b65f4700ab3f",
-            "EXP26_190218": "85624005e8256600bca5fac953a29720e4a5a4ee68c0e25d9a47ffc153fb8668",
-            "EXP26-19022018": "8c677536500eee76873d9a2462ff44adbf3a57477157e275930304fc981a4604",
-            "EXP26 040418": "85023e5c7941f56f74c1badc37f295e08b4c2955b67723851c1c5763891b236a",
-            "EXP27_160820": "140fe5400fb3aee7dae99c540020d36d14d3c0be7ec3b9dd737a2b198525d618",
-            "EXP27 azesmbog 240320 (no UART+SAA1099)": "5a07296d1a2ec159e3ce2e56482120c3a2d6b67714dc350a46ff3a27739962e6",
-            "EXP27 spark2k06 20210606 Ext RAM": "d2e435b69d324a9aa26d2df0b4403bc38ede62cc184f0532c330e3598e27f3a1",
-            "EXP27 spark2k06 20210613 Ext RAM": "d0ce23fceb4b559eac7898c06861f485ce46d5a227d0ae91886bb1ed6ec7eb56",
-            "EXP27 spark2k06 20210613 PZX (no SAA1099)": "af97f6e9bcda69db8e21dcbe07965dbc47b9c242cd407acef97fba474d653393",
-            "EXP27 spark2k06 20210613 SAA1099 (no PZX)": "a07b36e6b559ea434de2ec84fcf0fa7b6e5ce53b8b9bff98ed7d3ce769d24a1c"
+            "versions": {
+                "T24-08012017": "dab20b355cd4c63691ca8e5016e7df98894f4fac11a7da86e8b1b65f4700ab3f",
+                "EXP26_190218": "85624005e8256600bca5fac953a29720e4a5a4ee68c0e25d9a47ffc153fb8668",
+                "EXP26-19022018": "8c677536500eee76873d9a2462ff44adbf3a57477157e275930304fc981a4604",
+                "EXP26 040418": "85023e5c7941f56f74c1badc37f295e08b4c2955b67723851c1c5763891b236a",
+                "EXP27_160820": "140fe5400fb3aee7dae99c540020d36d14d3c0be7ec3b9dd737a2b198525d618",
+                "EXP27 azesmbog 240320 (no UART+SAA1099)": "5a07296d1a2ec159e3ce2e56482120c3a2d6b67714dc350a46ff3a27739962e6",
+                "EXP27 spark2k06 20210606 Ext RAM": "d2e435b69d324a9aa26d2df0b4403bc38ede62cc184f0532c330e3598e27f3a1",
+                "EXP27 spark2k06 20210613 Ext RAM": "d0ce23fceb4b559eac7898c06861f485ce46d5a227d0ae91886bb1ed6ec7eb56",
+                "EXP27 spark2k06 20210613 PZX (no SAA1099)": "af97f6e9bcda69db8e21dcbe07965dbc47b9c242cd407acef97fba474d653393",
+                "EXP27 spark2k06 20210613 SAA1099 (no PZX)": "a07b36e6b559ea434de2ec84fcf0fa7b6e5ce53b8b9bff98ed7d3ce769d24a1c"
+            }
+        },
+        "Special": {
+            "versions": {}
         },
         "Cores": {
             "Acorn Atom": {
                 "latest": ["TEST1 - 20150817", "https://github.com/zxdos/zxuno/raw/master/cores/AcornAtom/CORE21.ZX1"],
-                "TEST1 - 20150817": "a11b505d89a90371461307a8bd4148e6cbec42435032055400c233f019daff26",
-                "carmeloco 11.05.2020": "622640413b76a842065ab127c1fecd813016382760e272e97278d5f34f76829b"
+                "versions": {
+                    "TEST1 - 20150817": "a11b505d89a90371461307a8bd4148e6cbec42435032055400c233f019daff26",
+                    "carmeloco 11.05.2020": "622640413b76a842065ab127c1fecd813016382760e272e97278d5f34f76829b"
+                }
             },
             "Acorn Electron": {
                 "latest": ["4 TEST2", "https://github.com/zxdos/zxuno/raw/master/cores/AcornElectron/CORE11.ZX1"],
-                "4 TEST2": "198a15023991053b4d9891180bbadb2f2f200914d4a0370cf5e08ec4e869d3e8"
+                "versions": {
+                    "4 TEST2": "198a15023991053b4d9891180bbadb2f2f200914d4a0370cf5e08ec4e869d3e8"
+                }
             },
             "Amstrad CPC464": {
                 "latest": ["Test 3a", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/CPC464.ZX1"],
-                "Test 2 - 20170408": "6341fb122713725ebe758cfbf8ea357cf9ce6f0dd410cc1de715719cd77d17ed",
-                "Test 3a": "5a2363e9ef1f10320cc2ed5309c2ab5331db4b4ca8dbab9e39737a02c9186c36",
-                "Test External 512Kb": "25fdd4422da297aa6fc925c120751daf288b999bf0e3a0bf039ce08dee6467e9"
+                "versions": {
+                    "Test 2 - 20170408": "6341fb122713725ebe758cfbf8ea357cf9ce6f0dd410cc1de715719cd77d17ed",
+                    "Test 3a": "5a2363e9ef1f10320cc2ed5309c2ab5331db4b4ca8dbab9e39737a02c9186c36",
+                    "Test External 512Kb": "25fdd4422da297aa6fc925c120751daf288b999bf0e3a0bf039ce08dee6467e9"
+                }
             },
             "Amstrad CPC6128": {
                 "latest": ["Test 3", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/CPC6128.ZX1"],
-                "Test 3": "00c62d213755c76feb8a27f3e98a0cafd212206bf10912b9ebf2c2e34c4a2db1",
-                "no SD support": "18b620669521a7649d78fa0c2fd057bb792ec238ab9cb9801063759a3439ac00",
-                "SD support Renaul Helias": "c3d2f7b1c37ff08c67affba3baa9cc9e0de895cd8035782ad366d402499b54e3"
+                "versions": {
+                    "Test 3": "00c62d213755c76feb8a27f3e98a0cafd212206bf10912b9ebf2c2e34c4a2db1",
+                    "no SD support": "18b620669521a7649d78fa0c2fd057bb792ec238ab9cb9801063759a3439ac00",
+                    "SD support Renaul Helias": "c3d2f7b1c37ff08c67affba3baa9cc9e0de895cd8035782ad366d402499b54e3"
+                }
             },
             "Apple I": {
                 "latest": ["0.1", "https://www.zxuno.com/forum/download/file.php?id=2227"],
-                "0.1": "7501a4296a039c44f129ebc861bd7af11340a146ce536e84706f1bc87e21ab92"
+                "versions": {
+                    "0.1": "7501a4296a039c44f129ebc861bd7af11340a146ce536e84706f1bc87e21ab92"
+                }
             },
             "Apple II": {
                 "latest": ["1.13", "https://github.com/zxdos/zxuno/raw/master/cores/Apple2/CORE18.ZX1"],
-                "TEST3": "1e5cd4c7df4d3ae1dae325c6e0bd546bcaf8be15a63a9e7c670948a29be9011a",
-                "1.13": "06ff87a84a8a7566de427b0a485735edb826fadefeae872a730ef7f9716bb9fb"
+                "versions": {
+                    "TEST3": "1e5cd4c7df4d3ae1dae325c6e0bd546bcaf8be15a63a9e7c670948a29be9011a",
+                    "1.13": "06ff87a84a8a7566de427b0a485735edb826fadefeae872a730ef7f9716bb9fb"
+                }
             },
             "Atari 800 XL": {
                 "latest": ["1.1 (512K)", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Atari800XL.ZX1"],
                 "2m": ["1.2 2MB Int", "https://www.zxuno.com/forum/download/file.php?id=1056"],
-                "1.1 (512K)": "760746ae75c7cf9b80752078145328dd29ba9dbff158287c503c966a41581481",
-                "1.2 2MB Int": "58abded410ca401efc93c70fe940815f6aebc28dd52d771f480fc28678ca34a0"
+                "versions": {
+                    "1.1 (512K)": "760746ae75c7cf9b80752078145328dd29ba9dbff158287c503c966a41581481",
+                    "1.2 2MB Int": "58abded410ca401efc93c70fe940815f6aebc28dd52d771f480fc28678ca34a0"
+                }
             },
             "Atari 2600": {
                 "latest": ["1.227", "https://github.com/zxdos/zxuno/raw/master/cores/Atari2600/CORE20.ZX1"],
-                "1.227": "e0ce080c35a8d9f8020635112a1794c9b69ff01127be4bc3a0a81ea645163c08",
-                "VGA Spark2k06": "6f03454880ca2e1477430d3a48a5c1755dd9b639ef5121ca6bd04674a6bbc7db"
+                "versions": {
+                    "1.227": "e0ce080c35a8d9f8020635112a1794c9b69ff01127be4bc3a0a81ea645163c08",
+                    "VGA Spark2k06": "6f03454880ca2e1477430d3a48a5c1755dd9b639ef5121ca6bd04674a6bbc7db"
+                }
             },
             "BBC Micro": {
                 "latest": ["1.3", "https://www.zxuno.com/forum/download/file.php?id=1552"],
                 "base": ["1.227", "https://github.com/zxdos/zxuno/raw/master/cores/BBCMicro/CORE8.ZX1"],
-                "1.2": "c35ed68b865139001bde7a8cb1e9fc12e0ab1e40f6d805a174f25dc94b6be73e",
-                "1.227": "aea03129db713abe793f83754f4fff3381d3f1acd4d8bd02b183dae08bff3769",
-                "1.2 (azesmbog)": "fe0eec22bd05063a725ca7e7e5cbeb3436931007048a810d49a1f4ab3bc5692b",
-                "1.3": "4bbc3c71e4bfc755e2fa315336bf77c9115a977381949b801cc75e7a087ac53e"
+                "versions": {
+                    "1.2": "c35ed68b865139001bde7a8cb1e9fc12e0ab1e40f6d805a174f25dc94b6be73e",
+                    "1.227": "aea03129db713abe793f83754f4fff3381d3f1acd4d8bd02b183dae08bff3769",
+                    "1.2 (azesmbog)": "fe0eec22bd05063a725ca7e7e5cbeb3436931007048a810d49a1f4ab3bc5692b",
+                    "1.3": "4bbc3c71e4bfc755e2fa315336bf77c9115a977381949b801cc75e7a087ac53e"
+                }
             },
             "CHIP-8": {
                 "latest": ["2021.05.23", "https://github.com/zxdos/zxuno/raw/master/cores/chip-8/chip8_zxunolx9_20210523.ZX1"],
-                "2021.04.24": "3b84ba7ce4024b66b04662b58ccf08a0b367d408fef98a75e557f85c1e0e1761",
-                "2021.05.16": "5b247eba0b69dcf4c24a1955eabbb00d9983eecd4b15568d53a012dca49d630b",
-                "2021.05.22": "92203f30c8474b1b5fc0b2edfdb6752059be18a658ff28f45b814b9e9608bb1c",
-                "2021.05.23": "7bc478a57f24bdc465b630a24ab132e44e1eab5e1ee9f976894ee64f23cb159a"
+                "versions": {
+                    "2021.04.24": "3b84ba7ce4024b66b04662b58ccf08a0b367d408fef98a75e557f85c1e0e1761",
+                    "2021.05.16": "5b247eba0b69dcf4c24a1955eabbb00d9983eecd4b15568d53a012dca49d630b",
+                    "2021.05.22": "92203f30c8474b1b5fc0b2edfdb6752059be18a658ff28f45b814b9e9608bb1c",
+                    "2021.05.23": "7bc478a57f24bdc465b630a24ab132e44e1eab5e1ee9f976894ee64f23cb159a"
+                }
             },
             "Camputers Lynx": {
                 "latest": ["96K (2021.03.25)"],
                 "base": ["96K (2020.09.09)", "https://www.zxuno.com/forum/download/file.php?id=2573"],
-                "96K (2020.09.09)": "ead77977e33230931a82b25436feab2ca21fc101de3baab7a8ae6904656d255b",
-                "96K (2021.03.25)": "55e0ec5ab386b75d6f6583531d4feb563d38d01908af93ffdb9851e17523e3c5"
+                "versions": {
+                    "96K (2020.09.09)": "ead77977e33230931a82b25436feab2ca21fc101de3baab7a8ae6904656d255b",
+                    "96K (2021.03.25)": "55e0ec5ab386b75d6f6583531d4feb563d38d01908af93ffdb9851e17523e3c5"
+                }
             },
             "ColecoVision" : {
                 "latest": ["512K", ""],
                 "base": ["1.2 (VGA+HDMI)", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Coleco.ZX1"],
                 "2m": ["1.2 VGA 2M"],
-                "512K": "42a1c25f0c8f767677f6e3c5ebbd0bbc70eed07fc321e4d19770f348436f0c9d",
-                "1.1": "45926ae8763802ae8ed23e1904321618262e5bc2edc2fa0854aa3db4c84f96c0",
-                "1.2 (VGA+HDMI)": "e2cb44f744be56592412c0a9478c9d15ec447f8cd773d9da81219fc05619310a",
-                "1.2 VGA 2M": "500c94aec1d196497196592dab8098cc2a5076b95fd338df1bd0349bdd9a01b0"
+                "versions": {
+                    "512K": "42a1c25f0c8f767677f6e3c5ebbd0bbc70eed07fc321e4d19770f348436f0c9d",
+                    "1.1": "45926ae8763802ae8ed23e1904321618262e5bc2edc2fa0854aa3db4c84f96c0",
+                    "1.2 (VGA+HDMI)": "e2cb44f744be56592412c0a9478c9d15ec447f8cd773d9da81219fc05619310a",
+                    "1.2 VGA 2M": "500c94aec1d196497196592dab8098cc2a5076b95fd338df1bd0349bdd9a01b0"
+                }
             },
             "Commodore 16 - 116 - Plus4": {
                 "latest": ["Release 1", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/C16.ZX1"],
-                "Release 1": "981403fad352ef8c54c1cc7f57f6cbfd3ce9d50a8e4b29b079ba02192610d799"
+                "versions": {
+                    "Release 1": "981403fad352ef8c54c1cc7f57f6cbfd3ce9d50a8e4b29b079ba02192610d799"
+                }
             },
             "Commodore 64" : {
                 "latest": ["Beta 7b", "https://github.com/zxdos/zxuno/raw/master/cores/C64/CORE_beta7b.ZX1"],
-                "Beta 6": "4c8c757ba1224b9156afb39b6d3157ebabcde601241c601f79df44cbe76211ac",
-                "Beta 7b": "66a25e6a2ba2f492baf673961efe660ec9568ff83d1edd5199aa61b26579c64e"
+                "versions": {
+                    "Beta 6": "4c8c757ba1224b9156afb39b6d3157ebabcde601241c601f79df44cbe76211ac",
+                    "Beta 7b": "66a25e6a2ba2f492baf673961efe660ec9568ff83d1edd5199aa61b26579c64e"
+                }
             },
             "Commodore PET": {
                 "latest": ["VGA jepalza", "https://github.com/zxdos/zxuno/raw/master/cores/PET/CORE17.ZX1"],
-                "VGA jepalza": "92571c0edcee44ea3da4fe3835babb2d8985d7e65f04d1c5f2d2164c2081ab34"
+                "versions": {
+                    "VGA jepalza": "92571c0edcee44ea3da4fe3835babb2d8985d7e65f04d1c5f2d2164c2081ab34"
+                }
             },
             "Commodore VIC20": {
                 "latest": ["1.227", "https://github.com/zxdos/zxuno/raw/master/cores/VIC20/CORE10.ZX1"],
-                "1.227": "35638cdc8937fcfbd39b7042c0bd5598421dd9d1831ace662b94502a144a7cd3",
-                "TEST3 - 20170701": "ccefd756a91ed65afe38f70c03905a2fc839ebb3ddb8c259b18d6c51145aa5a6"
+                "versions": {
+                    "1.227": "35638cdc8937fcfbd39b7042c0bd5598421dd9d1831ace662b94502a144a7cd3",
+                    "TEST3 - 20170701": "ccefd756a91ed65afe38f70c03905a2fc839ebb3ddb8c259b18d6c51145aa5a6"
+                }
             },
             "Colour Genie": {
                 "latest": ["1.0", "https://github.com/Kyp069/eg2000/releases/download/1.0/COREnn.eg2000.ZX1"],
-                "1.0": "7631f04ddc02f204cd32e28782f3c79d390e0590e659a3d07eedc91893c8ae83"
+                "versions": {
+                    "1.0": "7631f04ddc02f204cd32e28782f3c79d390e0590e659a3d07eedc91893c8ae83"
+                }
             },
             "Flappy Bird": {
                 "latest": ["0.1 VGA", "https://www.zxuno.com/forum/download/file.php?id=1721"],
-                "0.1 VGA": "a2e6428546643687fb233c1030b5069cfff0a058001121a3f3e69819e7f9bb3a"
+                "versions": {
+                    "0.1 VGA": "a2e6428546643687fb233c1030b5069cfff0a058001121a3f3e69819e7f9bb3a"
+                }
             },
             "Galaksija": {
                 "latest": ["0.2 SDOS8.1", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Galaksija.zx1"],
-                "0.2 SDOS8.1": "cc23b953fc5eb7914f1d5fb1b9140aacce997a61277a14fb9b8b1e3ca40a092f"
+                "versions": {
+                    "0.2 SDOS8.1": "cc23b953fc5eb7914f1d5fb1b9140aacce997a61277a14fb9b8b1e3ca40a092f"
+                }
             },
             "HT-1080Z - TRS80 M1L2": {
                 "latest": ["512K", "https://www.zxuno.com/forum/download/file.php?id=1766"],
                 "2m": ["2MB Int Keyb Fix","https://www.zxuno.com/forum/download/file.php?id=2237"],
-                "512K": "8f1d098f17c5839824f1f998dd2a43765e2cde47af8dd9b340f438b1218f271a",
-                "2MB Int": "474627471a17b4dc3220dde0dfef5d0aeb4ee4eb89e2b3313b266c3184fc2387",
-                "2MB Int Keyb Fix": "c9f5cc94fda19f5bc7434c4483b12ec513ce4fba4690ec13d86de0be1672d070"
+                "versions": {
+                    "512K": "8f1d098f17c5839824f1f998dd2a43765e2cde47af8dd9b340f438b1218f271a",
+                    "2MB Int": "474627471a17b4dc3220dde0dfef5d0aeb4ee4eb89e2b3313b266c3184fc2387",
+                    "2MB Int Keyb Fix": "c9f5cc94fda19f5bc7434c4483b12ec513ce4fba4690ec13d86de0be1672d070"
+                }
             },
             "Jupiter Ace": {
                 "latest": ["2019.06.19 azesmbog", "https://www.zxuno.com/forum/download/file.php?id=2261"],
                 "base": ["1.142", "https://github.com/zxdos/zxuno/raw/master/cores/JupiterAce/CORE3.ZX1"],
-                "1-142": "34443281df7d65c7a4a1bec2053980374955cceed9dbd88dd7b9820bee0adf2b",
-                "1.142": "bc7e6c7f7afdc4465245a77dcf8c426ec246d7737477d0eb65a73c217dd57c92",
-                "19.06.2018 dos8d": "6e782598fa050c76dabac986bb481dc844e96a0e0a94b9ca84b6fe27b2d6603",
-                "2019.05.25 azesmbog": "3bbe89cbb4fc797584e33865c87bc5f64530a29ad3e856e93d3d4e526a740bec",
-                "2019.06.19 azesmbog": "86e782598fa050c76dabac986bb481dc844e96a0e0a94b9ca84b6fe27b2d6603"
+                "versions": {
+                    "1-142": "34443281df7d65c7a4a1bec2053980374955cceed9dbd88dd7b9820bee0adf2b",
+                    "1.142": "bc7e6c7f7afdc4465245a77dcf8c426ec246d7737477d0eb65a73c217dd57c92",
+                    "19.06.2018 dos8d": "6e782598fa050c76dabac986bb481dc844e96a0e0a94b9ca84b6fe27b2d6603",
+                    "2019.05.25 azesmbog": "3bbe89cbb4fc797584e33865c87bc5f64530a29ad3e856e93d3d4e526a740bec",
+                    "2019.06.19 azesmbog": "86e782598fa050c76dabac986bb481dc844e96a0e0a94b9ca84b6fe27b2d6603"
+                }
             },
             "MSX1": {
                 "latest": ["1.3 512K", ""],
                 "base": ["1.227", "https://github.com/zxdos/zxuno/raw/master/cores/MSX/CORE14.ZX1"],
                 "2m": ["1.3 VGA2M"],
-                "Unknown Version": "875bb4433587b607d0a67c953c467058022c4a2dbef77408cba5467fa51d232a",
-                "1.227": "93cd6f516dec75fbd48f6ca5b5e344f7fee4391974f478979302426e2730eaa9",
-                "1.3 512K": "994e7b1aac5457ca624b9d4f47db3b6997ecd321031f204c03025ee505674ee6",
-                "1.3 VGA2M": "5b1218ca4f62cceb14ca842ff111aa3e9bd12af61b309ddce70a0b0546ea2ece",
-                "Prueba VGA 2M": "a96c6b1736852a490c85cd913cf28264851fa86960dcf37efa12e5ec95a5b18a",
-                "Prueba 2M Int": "2a0a16735d3e31f9eb2559739c3b9d1889ba5616d78f418c722afa6ffd89c6ef"
+                "versions": {
+                    "Unknown Version": "875bb4433587b607d0a67c953c467058022c4a2dbef77408cba5467fa51d232a",
+                    "1.227": "93cd6f516dec75fbd48f6ca5b5e344f7fee4391974f478979302426e2730eaa9",
+                    "1.3 512K": "994e7b1aac5457ca624b9d4f47db3b6997ecd321031f204c03025ee505674ee6",
+                    "1.3 VGA2M": "5b1218ca4f62cceb14ca842ff111aa3e9bd12af61b309ddce70a0b0546ea2ece",
+                    "Prueba VGA 2M": "a96c6b1736852a490c85cd913cf28264851fa86960dcf37efa12e5ec95a5b18a",
+                    "Prueba 2M Int": "2a0a16735d3e31f9eb2559739c3b9d1889ba5616d78f418c722afa6ffd89c6ef"
+                }
             },
             "Multicomp": {
                 "latest": ["TEST1"],
-                "TEST1": "9d7739ac873a60aed8a43d59c697b29de34003f2a098e5b7beff7263fb8d6293"
+                "versions": {
+                    "TEST1": "9d7739ac873a60aed8a43d59c697b29de34003f2a098e5b7beff7263fb8d6293"
+                }
             },
             "MZ700": {
                 "latest": ["20161218", "https://github.com/zxdos/zxuno/raw/master/cores/MZ700/CORE22.ZX1"],
-                "20161218": "15bd4192d04f523e14108c4fce2f90775b38c821d963e11da9fb36ea63eee39a"
+                "versions": {
+                    "20161218": "15bd4192d04f523e14108c4fce2f90775b38c821d963e11da9fb36ea63eee39a"
+                }
             },
             "NES": {
                 "latest": ["512K", "https://www.zxuno.com/forum/download/file.php?id=1857"],
                 "base": ["TEST2 - 20160910", "https://github.com/zxdos/zxuno/raw/master/cores/NES/CORE19.ZX1"],
                 "2m": ["TEST4 VGA 2MB INT", "https://www.zxuno.com/forum/download/file.php?id=1860"],
-                "TEST2 - 20160910": "50c057349a7e9e993c841ad72b652caef060110348ce1e91b6033fb9e4bfafda",
-                "512K": "89968ae4d58d91238ee48fc301ed268ce28b79a30b28d934b3769b8adecab56b",
-                "TEST4 VGA 2MB INT": "ed807d4ed1cfa36059919f01307c6a701d2d0835075f725c8aada88ae3f63eff"
+                "versions": {
+                    "TEST2 - 20160910": "50c057349a7e9e993c841ad72b652caef060110348ce1e91b6033fb9e4bfafda",
+                    "512K": "89968ae4d58d91238ee48fc301ed268ce28b79a30b28d934b3769b8adecab56b",
+                    "TEST4 VGA 2MB INT": "ed807d4ed1cfa36059919f01307c6a701d2d0835075f725c8aada88ae3f63eff"
+                }
             },
             "Oric Atmos": {
                 "latest": ["27.12.2018 dos8d", "https://github.com/zxdos/zxuno/raw/master/cores/Oric/CORE16.ZX1"],
-                "TEST1 - 20170701": "0fbd7f0195ab840e655ffd5946478e34ee8b1b953bae4609c855912f9ce05be4",
-                "27.12.2018 dos8d": "0e3597b079c65e8f57a24aba7eae69008a21b4537fff490dd1c93e1f915b9977"
+                "versions": {
+                    "TEST1 - 20170701": "0fbd7f0195ab840e655ffd5946478e34ee8b1b953bae4609c855912f9ce05be4",
+                    "27.12.2018 dos8d": "0e3597b079c65e8f57a24aba7eae69008a21b4537fff490dd1c93e1f915b9977"
+                }
             },
             "PC XT": {
                 "latest": ["512k 70 MHz 2017.02.18", "https://github.com/zxdos/zxuno/raw/master/cores/PC/CORE23.ZX1"],
                 "2m": ["2MB Int 70 MHz 2017.02.18"],
-                "512k 70 MHz 2017.02.18": "81e89e258fb00fd46f37c8d06055c23821290e265433cd24e8cd1cd0a5993202",
-                "2MB Ext Beta 75 MHz 2017.01.20":"69ec81d182134eb095a9d111966ee0e780a0410da48bdf69e6f918c5b528bfa6",
-                "2MB Ext 70 MHz 2017.02.18": "b560afa672db76b3e0476c20130e14e07f9569761cc20315a83cf6cfa8bf167a",
-                "2MB Int Beta 75 MHz 2017.01.20": "de55a3817acacc55ae90fef0db6c4137ed3c13e84d927a4d7862a7ce1bf178ab",
-                "2MB Int 70 MHz 2017.02.18": "652be2ab706d2835309b84c6e52c026dea07d8d8f42e4d8b13791df14af55163",
-                "2MB Int 70 MHz": "29a26b485e4180245a43dda65650f29331fe3f0a7952993e7834ea9c680c9557"
+                "versions": {
+                    "512k 70 MHz 2017.02.18": "81e89e258fb00fd46f37c8d06055c23821290e265433cd24e8cd1cd0a5993202",
+                    "2MB Ext Beta 75 MHz 2017.01.20":"69ec81d182134eb095a9d111966ee0e780a0410da48bdf69e6f918c5b528bfa6",
+                    "2MB Ext 70 MHz 2017.02.18": "b560afa672db76b3e0476c20130e14e07f9569761cc20315a83cf6cfa8bf167a",
+                    "2MB Int Beta 75 MHz 2017.01.20": "de55a3817acacc55ae90fef0db6c4137ed3c13e84d927a4d7862a7ce1bf178ab",
+                    "2MB Int 70 MHz 2017.02.18": "652be2ab706d2835309b84c6e52c026dea07d8d8f42e4d8b13791df14af55163",
+                    "2MB Int 70 MHz": "29a26b485e4180245a43dda65650f29331fe3f0a7952993e7834ea9c680c9557"
+                }
             },
             "Sam Coupe": {
                 "latest": ["TEST5", "https://github.com/zxdos/zxuno/raw/master/cores/SamCoupe/CORE2.ZX1"],
-                "TEST5": "32fd2069f416ada27c7a6556b18ebd0b3813817aa6c419cc12dde046a25236f1"
+                "versions": {
+                    "TEST5": "32fd2069f416ada27c7a6556b18ebd0b3813817aa6c419cc12dde046a25236f1"
+                }
             },
             "smartROM": {
                 "latest": ["2021.01.31", "https://github.com/Utodev/smartROM/raw/master/binaries/COREnnSmartROM.ZX1"],
-                "2021.01.31": "68772a698cd0316a92ee37c50ad6dc93b6b5764d1b745ce454a10ce7d4781bdc"
+                "versions": {
+                    "2021.01.31": "68772a698cd0316a92ee37c50ad6dc93b6b5764d1b745ce454a10ce7d4781bdc"
+                }
             },
             "Sega Master System": {
                 "latest": ["TEST 4.3 (512K)", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/SMS.ZX1"],
                 "2m": ["TEST 4.3 2MB Int", "https://www.zxuno.com/forum/download/file.php?id=1241"],
-                "Unknown Version": "9b486e5ebd8e25fbc500c6369a96190522b3dc1227a732d4e7aeb811eef4956b",
-                "TEST 4.1": "26fc9a021465430b27d4adea4d2478b51a96f19354f5e6e1c07e9dd49515d474",
-                "TEST 4.2 - 20170214": "b99a952e0aa433263fab620ff5f283cf6be2265103fc17f232791ee33c26e425",
-                "TEST 4.3 (512K)": "c385c9c8b68245ab9a3135e5514fc4e85a0bccc17432226aa1e23ac61c2979c3",
-                "TEST 4.3 2MB Int": "8a60c85e94c1819251ac07d2fc3296809542408531b10968d0c6bdce2f7f8e65"
+                "versions": {
+                    "Unknown Version": "9b486e5ebd8e25fbc500c6369a96190522b3dc1227a732d4e7aeb811eef4956b",
+                    "TEST 4.1": "26fc9a021465430b27d4adea4d2478b51a96f19354f5e6e1c07e9dd49515d474",
+                    "TEST 4.2 - 20170214": "b99a952e0aa433263fab620ff5f283cf6be2265103fc17f232791ee33c26e425",
+                    "TEST 4.3 (512K)": "c385c9c8b68245ab9a3135e5514fc4e85a0bccc17432226aa1e23ac61c2979c3",
+                    "TEST 4.3 2MB Int": "8a60c85e94c1819251ac07d2fc3296809542408531b10968d0c6bdce2f7f8e65"
+                }
             },
             "Test": {
                 "latest": ["2", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Test.ZX1"],
-                "1": "18ebf52a9f33e6f7af40d832d7b9d512d08964c3c8f9355234126b1662ec9d36",
-                "2": "9addac6bed7be862fc06e538b6a8455651e4bbf9dec9bd7554333a5eb6ac6226"
+                "versions": {
+                    "1": "18ebf52a9f33e6f7af40d832d7b9d512d08964c3c8f9355234126b1662ec9d36",
+                    "2": "9addac6bed7be862fc06e538b6a8455651e4bbf9dec9bd7554333a5eb6ac6226"
+                }
             },
             "HT-1080Z": {
-              "latest": ["0.1","https://www.zxuno.com/forum/download/file.php?id=1766"],
-              "0.1": "8f1d098f17c5839824f1f998dd2a43765e2cde47af8dd9b340f438b1218f271a"  
+                "latest": ["0.1","https://www.zxuno.com/forum/download/file.php?id=1766"],
+                "versions": {
+                "0.1": "8f1d098f17c5839824f1f998dd2a43765e2cde47af8dd9b340f438b1218f271a"  
+                }
             },
             "Videopac": {
                 "latest": ["2021.05.15", "https://github.com/zxdos/zxuno/raw/master/cores/Videopac/videopac_zxuno_lx9_20210515.ZX1"],
-                "2021.04.27": "27af0a695648c22bca912e5ae2e4703a06d448f1fe00cc22811dab7cd8074230",
-                "2021.05.01": "3fbfaa07c9dc14abdeccbf135424d03822371178f52c6ab17f68f2ba889b0e0c",
-                "2021.05.15": "a23ab8954f6083ee089dcc5baacca10238292b0ec9eb75a67167487830eb1730"
+                "versions": {
+                    "2021.04.27": "27af0a695648c22bca912e5ae2e4703a06d448f1fe00cc22811dab7cd8074230",
+                    "2021.05.01": "3fbfaa07c9dc14abdeccbf135424d03822371178f52c6ab17f68f2ba889b0e0c",
+                    "2021.05.15": "a23ab8954f6083ee089dcc5baacca10238292b0ec9eb75a67167487830eb1730"
+                }
             },
             "Vectrex": {
                 "latest": ["TEST1", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Vectrex.ZX1"],
-                "TEST1": "c60e36dc22f25c6d79aea3d733f9accd8b496910c817437b78bc5d68b99b0128"
+                "versions": {
+                    "TEST1": "c60e36dc22f25c6d79aea3d733f9accd8b496910c817437b78bc5d68b99b0128"
+                }
             },
             "ZX81": {
                 "latest": ["20161105", "https://github.com/zxdos/zxuno/raw/master/cores/ZX81/CORE15.ZX1"],
-                "20161105": "926198a4a6ba89748209e0d25ed34d35d8d51149c6ced0e9452a93440117eec4",
-                "VGA jepalza": "0a2469f0b57dab9055dec1de3c68468f4f9df6d32e6b317343df6d1fd8d6c915"
+                "versions": {
+                    "20161105": "926198a4a6ba89748209e0d25ed34d35d8d51149c6ced0e9452a93440117eec4",
+                    "VGA jepalza": "0a2469f0b57dab9055dec1de3c68468f4f9df6d32e6b317343df6d1fd8d6c915"
+                }
             },
             "ZX Spectrum": {
                 "latest": ["EXP27 160820", "https://github.com/mcleod-ideafix/zxuno_spectrum_core/raw/master/zxuno_v4/COREx.ZX1"],
-                "Unknown Version": "eff15961241c3bd360261af20bb1823c8b798c54e47129f681aad8e54b4e2496",
-                "EXP26 040418": "31a1373cf3d99f66a00c76cb96bebd4b8db0b3782ac55c0423a3373d7a083a29",
-                "VGA 60Hz": "3bc28ff2692f038f3938e6b38d0980a567460a06657aa5e4327ba93b36d98261",
-                "EXP27 160820": "613902acb29e3926142a721493c593c0746969261fe7d5cce207194a1fc30a03"
+                "versions": {
+                    "Unknown Version": "eff15961241c3bd360261af20bb1823c8b798c54e47129f681aad8e54b4e2496",
+                    "EXP26 040418": "31a1373cf3d99f66a00c76cb96bebd4b8db0b3782ac55c0423a3373d7a083a29",
+                    "VGA 60Hz": "3bc28ff2692f038f3938e6b38d0980a567460a06657aa5e4327ba93b36d98261",
+                    "EXP27 160820": "613902acb29e3926142a721493c593c0746969261fe7d5cce207194a1fc30a03"
+                }
             },
             "ZX Spectrum 48K (Kyp)": {
                 "latest": ["zx48 2021.04.20"],
                 "base": ["zx48 v2.0", "https://github.com/Kyp069/zx48/releases/download/2.0/COREnn.zx48.ZX1"],
-                "2017.01.08": "575286b932f45cb48d498cbce197b04ef51379f7dc77745b39d10340e10209d5",
-                "2016.12.03": "1cccd9fc02173775b62fee44daa663a1b2127268630fcbd26875883f60a0fc8d",
-                "zx48 1.0": "3d9ae01086f46be013d09656b1efff6109ca426ee6ee593ec0069f8c1fad1d7c",
-                "zx48 2020.08.13": "7998866f2bcdd566f19e8c73ea53eff575bbd8f3e0f8a7be5716fb274c0d36bc",
-                "zx48 2020.09.06": "db39811185a8fcfc371226353f7d6527373372cf3b25981d208c64a0707df507",
-                "zx48 v2.0": "b9082eb6a4056c468f67c141c26a4887477b563b5a371dfc9125b3616def8576",
-                "zx48 Beta": "ec83637db79fcbca50d925dd0a53107c4461a0abb53c476899d517b07e548d95",
-                "zx48 2021.04.02": "430ef2522473b958c299c53d9981993d9f83424df446dc1db2d2f53cdbb63bcd",
-                "zx48 2021.04.20": "0c79338aa33a5abeb8390b02835b6e88b949a8f02d037c364ab5628edede1d17"
+                "versions": {
+                    "2017.01.08": "575286b932f45cb48d498cbce197b04ef51379f7dc77745b39d10340e10209d5",
+                    "2016.12.03": "1cccd9fc02173775b62fee44daa663a1b2127268630fcbd26875883f60a0fc8d",
+                    "zx48 1.0": "3d9ae01086f46be013d09656b1efff6109ca426ee6ee593ec0069f8c1fad1d7c",
+                    "zx48 2020.08.13": "7998866f2bcdd566f19e8c73ea53eff575bbd8f3e0f8a7be5716fb274c0d36bc",
+                    "zx48 2020.09.06": "db39811185a8fcfc371226353f7d6527373372cf3b25981d208c64a0707df507",
+                    "zx48 v2.0": "b9082eb6a4056c468f67c141c26a4887477b563b5a371dfc9125b3616def8576",
+                    "zx48 Beta": "ec83637db79fcbca50d925dd0a53107c4461a0abb53c476899d517b07e548d95",
+                    "zx48 2021.04.02": "430ef2522473b958c299c53d9981993d9f83424df446dc1db2d2f53cdbb63bcd",
+                    "zx48 2021.04.20": "0c79338aa33a5abeb8390b02835b6e88b949a8f02d037c364ab5628edede1d17"
+                }
             },
             "ZX Spectrum 128K (Kyp)": {
                 "latest": ["zx128 2021.04.20", "https://www.zxuno.com/forum/download/file.php?id=2668"],
                 "base": ["zx128 v1.0", "https://github.com/Kyp069/zx128.zxuno/releases/download/1.0/COREnn.zx128.ZX1"],
-                "2017.01.08": "49ec4c96aaaa7e783abd9f2fba2ad4437a4c70f92f53c466b9cc2d4c6fe2de2e",
-                "2020.10.09": "e8f535ea695d405df2fd5eaeb2bfa449ab08657a52062da8abc5fe4261d7ab30",
-                "zx128 v1.0": "2b2db414eaf8986af99e899f6fb28f5743be36d41e85a5a7302729bb12812d3d",
-                "zx128 2021.04.20": "e4b418bd632d9ef56dbd6c5aef289a43ca5d4166014e0caf10d304d4ef529822"
+                "versions": {
+                    "2017.01.08": "49ec4c96aaaa7e783abd9f2fba2ad4437a4c70f92f53c466b9cc2d4c6fe2de2e",
+                    "2020.10.09": "e8f535ea695d405df2fd5eaeb2bfa449ab08657a52062da8abc5fe4261d7ab30",
+                    "zx128 v1.0": "2b2db414eaf8986af99e899f6fb28f5743be36d41e85a5a7302729bb12812d3d",
+                    "zx128 2021.04.20": "e4b418bd632d9ef56dbd6c5aef289a43ca5d4166014e0caf10d304d4ef529822"
+                }
             },
             "ZX Spectrum (azesmbog)": {
                 "latest": ["azesmbog DMA 24.05.30"],
-                "EXP27 azesmbog 240320": "85ff342c1a2fe0cc3a962221f37847907a5666e46183b13934b99fae4306fe69",
-                "azesmbog TS-FM 24.03.20": "4fb1f0d47f55039905a10b5fe46f6932ad6dd9728dd976753afd2408dfcc5f09",
-                "azesmbog DMA 24.05.30": "6a0cd7879a98182aeec5b92c36523cf11a1ed5be9f128341609d5a4246e94ec9",
-                "kyp 2021.04.23": "b65153e392e3c045ae0e50ede3ff570aa38af1e9861c7e762c1b60a553b7f4fd"
+                "versions": {
+                    "EXP27 azesmbog 240320": "85ff342c1a2fe0cc3a962221f37847907a5666e46183b13934b99fae4306fe69",
+                    "azesmbog TS-FM 24.03.20": "4fb1f0d47f55039905a10b5fe46f6932ad6dd9728dd976753afd2408dfcc5f09",
+                    "azesmbog DMA 24.05.30": "6a0cd7879a98182aeec5b92c36523cf11a1ed5be9f128341609d5a4246e94ec9",
+                    "kyp 2021.04.23": "b65153e392e3c045ae0e50ede3ff570aa38af1e9861c7e762c1b60a553b7f4fd"
+                }
             },
             "ZX Spectrum (spark2k06)": {
                 "latest": ["EXP27 Monocromo 20210530"],
-                "EXP27 Monocromo 20210522": "9fff67427bf174f0bd9627662eb77e00161275729b02584eaf4e5e915aef94a5",
-                "EXP27 Monocromo 20210530": "6c6c2ad9065a6b1433b585d03c8f11fe608030ffd82216911ffe3944ee6805c4",
-                "EXP27 Ext RAM 20210606": "7b59c0295840ad65c55e642873e22e094f93b5562ceb728d27f5d0c892b21acc",
-                "EXP27 20210613": "f795fab8f9effbf79f5f39cc8dfaac76941c98d3b5cc171f4ff68968445b90d0",
-                "EXP27 Ext RAM 20210613": "dc9ca57bfa51894e45c1692c6b2caffb2c588111330fa87039921bdd48fc2f97",
-                "EXP27 PZX (no SAA1099) 20210613": "fec6cb6a2bc4b4b07cd1dd897dc9299052d7e08bb484ed29afabdfdf8bac8724",
-                "EXP27 SAA1099 (no PZX) 20210613":"9535c722e5d0cd322ced9330c96837586dff5aee68fcd2337c115e2729ecdd55"
+                "versions": {
+                    "EXP27 Monocromo 20210522": "9fff67427bf174f0bd9627662eb77e00161275729b02584eaf4e5e915aef94a5",
+                    "EXP27 Monocromo 20210530": "6c6c2ad9065a6b1433b585d03c8f11fe608030ffd82216911ffe3944ee6805c4",
+                    "EXP27 Ext RAM 20210606": "7b59c0295840ad65c55e642873e22e094f93b5562ceb728d27f5d0c892b21acc",
+                    "EXP27 20210613": "f795fab8f9effbf79f5f39cc8dfaac76941c98d3b5cc171f4ff68968445b90d0",
+                    "EXP27 Ext RAM 20210613": "dc9ca57bfa51894e45c1692c6b2caffb2c588111330fa87039921bdd48fc2f97",
+                    "EXP27 PZX (no SAA1099) 20210613": "fec6cb6a2bc4b4b07cd1dd897dc9299052d7e08bb484ed29afabdfdf8bac8724",
+                    "EXP27 SAA1099 (no PZX) 20210613":"9535c722e5d0cd322ced9330c96837586dff5aee68fcd2337c115e2729ecdd55"
+                }
             },
             "ZX TBBlue": {
                 "latest": ["azesmbog 13.05.2020", "https://zxuno.com/forum/download/file.php?id=2501"],
                 "base": ["20161207", "https://github.com/zxdos/zxuno/raw/master/cores/TBBlue/CORE12.ZX1"],
-                "1.06": "64a0ba1a226466c561e4aaa8ed366562b29e24bb12fa99bdc599a91e86dd7e8b",
-                "1.08": "425f843f6cd268a10295edc7c663921fb26bec16770e5465fa260dd6a01800b0",
-                "azesmbog 13.05.2020": "b2cfa5f151f0b91d5d1d20546ee55da51c1a17d0c2f753d55456176de7352efd"
+                "versions": {
+                    "1.06": "64a0ba1a226466c561e4aaa8ed366562b29e24bb12fa99bdc599a91e86dd7e8b",
+                    "1.08": "425f843f6cd268a10295edc7c663921fb26bec16770e5465fa260dd6a01800b0",
+                    "azesmbog 13.05.2020": "b2cfa5f151f0b91d5d1d20546ee55da51c1a17d0c2f753d55456176de7352efd"
+                }
             },
             "ArcadeV Pac-Man": {
                 "latest": ["1.1", ""],
                 "base": ["1.0", "https://github.com/zxdos/zxuno/raw/master/cores/Arcade/Pacman/CORE30.ZX1"],
-                "1.0": "60b7d859be6ced09bbb0709eb2bdfcb23606e6d9915eca60c7252ea0ca64754b",
-                "1.1": "d9c37122ea0e345131dafb70c10575928b2661c1a6333bc134c0492b55c089e0"
+                "versions": {
+                    "1.0": "60b7d859be6ced09bbb0709eb2bdfcb23606e6d9915eca60c7252ea0ca64754b",
+                    "1.1": "d9c37122ea0e345131dafb70c10575928b2661c1a6333bc134c0492b55c089e0"
+                }
             },
             "ArcadeV Phoenix": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/phoenix.ZX1"],
-                "1.0": "5df41ad9f51498a48c9778ec1a77bda294cf003ae7d38d2045cd7292b59cf1b5"
+                "versions": {
+                    "1.0": "5df41ad9f51498a48c9778ec1a77bda294cf003ae7d38d2045cd7292b59cf1b5"
+                }
             },
             "Arcade Rally X": {
                 "latest": ["1.0"],
-                "1.0": "5dc7afb8ac88ccff49aa8559c4f5400a0f48caa67dac13c94bc52a8ea2c4a26d"
+                "versions": {
+                    "1.0": "5dc7afb8ac88ccff49aa8559c4f5400a0f48caa67dac13c94bc52a8ea2c4a26d"
+                }
             },
             "Arcade New Rally X": {
                 "latest": ["1.0"],
-                "1.0": "6905d2ca5168cb18e1609f2b15b69c4a9c52a757d50f2920b0803322a9d8d094"
+                "versions": {
+                    "1.0": "6905d2ca5168cb18e1609f2b15b69c4a9c52a757d50f2920b0803322a9d8d094"
+                }
             },
             "ArcadeV Frogger": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/frogger.ZX1"],
-                "1.0": "2fd9279822e0c9a97e0e63feb1cb5b58d853d3939a9c7c39532d58d24955aa17"
+                "versions": {
+                    "1.0": "2fd9279822e0c9a97e0e63feb1cb5b58d853d3939a9c7c39532d58d24955aa17"
+                }
             },
             "ArcadeV Galaga": {
                 "latest": ["1.1", ""],
                 "base": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/galaga.ZX1"],
-                "1.0": "3a634c76eed84364c32c09a0c6a3910d0e7c484ce3568f39c60c5f35749ca00d",
-                "1.1": "93bcf95bed9ba75e112ec261c44bd935c9262332b97bf73be97c4d6f37cd64ed"
+                "versions": {
+                    "1.0": "3a634c76eed84364c32c09a0c6a3910d0e7c484ce3568f39c60c5f35749ca00d",
+                    "1.1": "93bcf95bed9ba75e112ec261c44bd935c9262332b97bf73be97c4d6f37cd64ed"
+                }
             },
             "ArcadeV Galaxian": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/galaxian.ZX1"],
-                "1.0": "0f59941d576db46a5c259b7af0656a1ab9598b950829d9db1adcc65d021a3994"
+                "versions": {
+                    "1.0": "0f59941d576db46a5c259b7af0656a1ab9598b950829d9db1adcc65d021a3994"
+                }
             },
             "ArcadeV Moon Cresta": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/mooncresta.ZX1"],
-                "1.0": "0e2302451a4214b15b700633e29cdf940e8f81cf3dcf295d6c8a6956915cbaa6"
+                "versions": {
+                    "1.0": "0e2302451a4214b15b700633e29cdf940e8f81cf3dcf295d6c8a6956915cbaa6"
+                }
             },
             "ArcadeV Scramble": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/scramble.ZX1"],
-                "1.0": "9e91cff965d92b480d63fdb786c9b8dc57405fb320b075c962fe724574067287"
+                "versions": {
+                    "1.0": "9e91cff965d92b480d63fdb786c9b8dc57405fb320b075c962fe724574067287"
+                }
             },
             "Arcade Centipede": {
                 "latest": ["1.1", ""],
-                "1.0": "d057dbf7c7bae89a1ce2ea201b78c3f6b300c4f31f0748b8e33d72eac0a82bd4",
-                "1.1": "35a136b04efe1e74625cc2b309343499dc2a053d26564a04d7ca9b2ad5e1d1ce"
+                "versions": {
+                    "1.0": "d057dbf7c7bae89a1ce2ea201b78c3f6b300c4f31f0748b8e33d72eac0a82bd4",
+                     "1.1": "35a136b04efe1e74625cc2b309343499dc2a053d26564a04d7ca9b2ad5e1d1ce"
+                }
             },
             "ArcadeV Ms. Pac-Man": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/mspacman.ZX1"],
-                "1.0": "c4f3df77ac71cebc3e2c90e56c850dec4ce3aec63a1198e4a460b5a1ccaa2329"
+                "versions": {
+                    "1.0": "c4f3df77ac71cebc3e2c90e56c850dec4ce3aec63a1198e4a460b5a1ccaa2329"
+                }
             },
             "Arcade Asteroids": {
                 "latest": ["1.1"],
-                "1.0": "5ecf9ad99902fbc621f412a2b5b635ebb3cd4211bb0167fee48c1ab3f594a4a1",
-                "1.1": "fff0f29e0ef4ca3b97090657461a2658fe4f6794e78eb5fed2eb9a0565c5fd42"
+                "versions": {
+                    "1.0": "5ecf9ad99902fbc621f412a2b5b635ebb3cd4211bb0167fee48c1ab3f594a4a1",
+                     "1.1": "fff0f29e0ef4ca3b97090657461a2658fe4f6794e78eb5fed2eb9a0565c5fd42"
+                }
             },
             "ArcadeV Dig Dug": {
                 "latest": ["1.0", ""],
-                "1.0": "228748589b025ad858f3ca928f99c880159a6e1fbf7ae3e57ae49fce15c5c16d"
+                "versions": {
+                    "1.0": "228748589b025ad858f3ca928f99c880159a6e1fbf7ae3e57ae49fce15c5c16d"
+                }
             },
             "ArcadeV Mr. Do": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/mrdo.ZX1"],
-                "Unknown Version": "6bfa0cfabb371eec73f5e06cff4f2abf57c18ed306797c377f79b7a4d5d62506",
-                "1.0": "108ea6e848839f18dd86f4ac6cf365e436d6cd78f3b0225db7376a717991a823"
+                "versions": {
+                    "Unknown Version": "6bfa0cfabb371eec73f5e06cff4f2abf57c18ed306797c377f79b7a4d5d62506",
+                    "1.0": "108ea6e848839f18dd86f4ac6cf365e436d6cd78f3b0225db7376a717991a823"
+                }
             },
             "ArcadeV Atlantic City Action": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/acitya.ZX1"],
-                "1.0": "daa21b061756b0df381a27eac9efa7bd3014935758b44c9b4dbbc138df560f19"
+                "versions": {
+                    "1.0": "daa21b061756b0df381a27eac9efa7bd3014935758b44c9b4dbbc138df560f19"
+                }
             },
             "ArcadeV Alibaba": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/alibaba.ZX1"],
-                "1.0": "cfe8f0ecb614d18639e2ef06c077184d9730df447d8c5e0ed3d694eef7f358af"
+                "versions": {
+                    "1.0": "cfe8f0ecb614d18639e2ef06c077184d9730df447d8c5e0ed3d694eef7f358af"
+                }
             },
             "ArcadeV Amidar": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/amidar.ZX1"],
-                "1.0": "6a71bc31b1e847f9d1cc4d444a0c944a676b656574884a69f5f667483b582e24"
+                "versions": {
+                    "1.0": "6a71bc31b1e847f9d1cc4d444a0c944a676b656574884a69f5f667483b582e24"
+                }
             },
             "Arcade Asteroids Deluxe": {
                 "latest": ["1.0", ""],
-                "1.0": "bd23582a99cc91366a037702d651b2700828be8d3f1e8ad0324442fa8a07aa74"
+                "versions": {
+                    "1.0": "bd23582a99cc91366a037702d651b2700828be8d3f1e8ad0324442fa8a07aa74"
+                }
             },
             "ArcadeV Azurian Attack": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/azurian.ZX1"],
-                "2018.02.03": "952d5fadfc49361374ac1b135342b9a326a682bd465c5ddda259daf0de8ecada",
-                "1.0": "1a1d2b30410dec0afb24a238e6eba49cbfd1755545f5b9a463c401714e7a9836"
+                "versions": {
+                    "2018.02.03": "952d5fadfc49361374ac1b135342b9a326a682bd465c5ddda259daf0de8ecada",
+                    "1.0": "1a1d2b30410dec0afb24a238e6eba49cbfd1755545f5b9a463c401714e7a9836"
+                }
             },
             "ArcadeV Bagman": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/bagman.ZX1"],
-                "2019.01.27": "ef164c847d3528ce95e8888168de2bb1ff0a12764aba89da7693d649b9b018fd",
-                "1.0": "94347df61f4779f7faf4ad7e49226e12fa1f7a8386d7a2755ae1189ff73414e3"
+                "versions": {
+                    "2019.01.27": "ef164c847d3528ce95e8888168de2bb1ff0a12764aba89da7693d649b9b018fd",
+                    "1.0": "94347df61f4779f7faf4ad7e49226e12fa1f7a8386d7a2755ae1189ff73414e3"
+                }
             },
             "Arcade Berzek": {
                 "latest": ["1.0"],
-                "1.0": "8cf69d262bcd5d836602de0bfa415b337ee1a04050a2d587e1d31baaffad8172"
+                "versions": {
+                    "1.0": "8cf69d262bcd5d836602de0bfa415b337ee1a04050a2d587e1d31baaffad8172"
+                }
             },
             "ArcadeV Black Hole": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/blackhole.ZX1"],
-                "1.0": "128c2b21fcbb96290a361d19d4643f3ab4527dc193f1e145221e5602081dbe00"
+                "versions": {
+                    "1.0": "128c2b21fcbb96290a361d19d4643f3ab4527dc193f1e145221e5602081dbe00"
+                }
             },
             "ArcadeV Burnin' Rubber": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/brubber.ZX1"],
-                "1.0": "f9b0eadf7f07cbff5bad7b236365074d3b2f2581e28ceeb08e718d52b271f0e4"
+                "versions": {
+                    "1.0": "f9b0eadf7f07cbff5bad7b236365074d3b2f2581e28ceeb08e718d52b271f0e4"
+                }
             },
             "ArcadeV Burger Time": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/btime.ZX1"],
-                "1.0": "fa065b31e31c68586dcfd4353c86c849e9ade846a6063976bdae81da697a1f55"
+                "versions": {
+                    "1.0": "fa065b31e31c68586dcfd4353c86c849e9ade846a6063976bdae81da697a1f55"
+                }
             },
             "ArcadeV Catacomb": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/catacomb.ZX1"],
-                "1.0": "f19995c1f312c1e3dd66cef3095fa21d9a7f7e8091d04f43deaa27330d0e4df4"
+                "versions": {
+                    "1.0": "f19995c1f312c1e3dd66cef3095fa21d9a7f7e8091d04f43deaa27330d0e4df4"
+                }
             },
             "Arcade Cosmic Avenger": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/cavenger.ZX1"],
-                "1.0": "9bd6476cd287e141d95c5de15ddda221a57140170f02b26897e97ff89735b68d"
+                "versions": {
+                    "1.0": "9bd6476cd287e141d95c5de15ddda221a57140170f02b26897e97ff89735b68d"
+                }
             },
             "ArcadeV Crazy Kong": {
                 "latest": ["1.1", ""],
                 "base": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/ckong.ZX1"],
-                "2018.01.27": "c82f0275b30a6f611c04745e83dde23ce02c3c3454a9d1698899b62fee1a2ce6",
-                "1.0": "ee8aece35647d71d062237c80578c4257e75c878484ee29d27dfc8cc4cf63550",
-                "1.1": "8567d482eeb2d130b620650ac4578925ba2f49c5f3e6d2f1f06b8b7bdb2912a3"
+                "versions": {
+                    "2018.01.27": "c82f0275b30a6f611c04745e83dde23ce02c3c3454a9d1698899b62fee1a2ce6",
+                    "1.0": "ee8aece35647d71d062237c80578c4257e75c878484ee29d27dfc8cc4cf63550",
+                    "1.1": "8567d482eeb2d130b620650ac4578925ba2f49c5f3e6d2f1f06b8b7bdb2912a3"
+                }
             },
             "ArcadeV Pac-Man Club": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/clubpacm.ZX1"],
-                "1.0": "76cfde81d12a03dffd70b28dc6e77f5fd07ee26d35e8c9ba725d74579d80488b"
+                "versions": {
+                    "1.0": "76cfde81d12a03dffd70b28dc6e77f5fd07ee26d35e8c9ba725d74579d80488b"
+                }
             },
             "Arcade Computer Space": {
                 "latest": ["1.0"],
-                "1.0": "eebedf1a88f35d6e8dd981e1eff93fecc90f99350c0482042b39f62a294dc321"
+                "versions": {
+                    "1.0": "eebedf1a88f35d6e8dd981e1eff93fecc90f99350c0482042b39f62a294dc321"
+                }
             },
             "ArcadeV Crush Roller2": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/crush2.ZX1"],
-                "1.0": "6347151b9f3269bcba718ec1be0c7f33779dbe1f90792d19e994702ff806352e"
+                "versions": {
+                    "1.0": "6347151b9f3269bcba718ec1be0c7f33779dbe1f90792d19e994702ff806352e"
+                }
             },
             "Arcade Defender": {
                 "latest": ["1.0"],
-                "1.0": "fdd1268443a548f9450e0cadb9b326e0633301004c847fe9aa3ff8dcaf62dfe0"
+                "versions": {
+                    "1.0": "fdd1268443a548f9450e0cadb9b326e0633301004c847fe9aa3ff8dcaf62dfe0"
+                }
             },
             "ArcadeV Donkey Kong": {
                 "latest": ["1.1", ""],
-                "1.0": "eaa663294c2bcd19095f837d6e2a193d210dbbef1e94dfb87fb849b29e1a8494",
-                "1.1": "681031899927729be44666aa692f0ff75f5040a8020f84c61d9c13fa298de147"
+                "versions": {
+                    "1.0": "eaa663294c2bcd19095f837d6e2a193d210dbbef1e94dfb87fb849b29e1a8494",
+                    "1.1": "681031899927729be44666aa692f0ff75f5040a8020f84c61d9c13fa298de147"
+                }
             },
             "ArcadeV Donkey Kong Jr.": {
                 "latest": ["1.0", ""],
-                "1.0": "70a6eac77973ce7b5d59947f48f41deffd01bb46033c02efc58007ea159268e1"
+                "versions": {
+                    "1.0": "70a6eac77973ce7b5d59947f48f41deffd01bb46033c02efc58007ea159268e1"
+                }
             },
             "Arcade Dorodon": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/dorodon.ZX1"],
-                "1.0": "ccac98158fabe08ae92a548ab18a773b3ed2a04accbe168cbb4b7bb83e319d21"
+                "versions": {
+                    "1.0": "ccac98158fabe08ae92a548ab18a773b3ed2a04accbe168cbb4b7bb83e319d21"
+                }
             },
             "ArcadeV Dream Shopper": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/dreamshp.ZX1"],
-                "1.0": "bdf055cf863d6805e975ebb699fab1d49c99f42235e8930fd918e7657300ed6a"
+                "versions": {
+                    "1.0": "bdf055cf863d6805e975ebb699fab1d49c99f42235e8930fd918e7657300ed6a"
+                }
             },
             "ArcadeV EEEKK!": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/eeekk.ZX1"],
-                "1.0": "7fdddaa4723a797218baeccf04b3a76d65ead79fb98b2f0cee5365d143b1fb81"
+                "versions": {
+                    "1.0": "7fdddaa4723a797218baeccf04b3a76d65ead79fb98b2f0cee5365d143b1fb81"
+                }
             },
             "ArcadeV Eyes": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/eyes.ZX1"],
-                "1.0": "ecef9ff5bfe42340375289f740b6e9dbd47f71512d503524ea6433a6eea2e76c"
+                "versions": {
+                    "1.0": "ecef9ff5bfe42340375289f740b6e9dbd47f71512d503524ea6433a6eea2e76c"
+                }
             },
             "Arcade Galaxy Wars": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/galxwars.ZX1"],
-                "1.0": "7ebe431736cc9b4be1dd8b6165e62d75cfd0d5ed4d06625d932d373a3fc888d1"
+                "versions": {
+                    "1.0": "7ebe431736cc9b4be1dd8b6165e62d75cfd0d5ed4d06625d932d373a3fc888d1"
+                }
             },
             "ArcadeV Gorkans": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/gorkans.ZX1"],
-                "1.0": "0be18230c9b2a9b670c6da71b227afc707eed85a065705e34b71e8a059ad6ad5"
+                "versions": {
+                    "1.0": "0be18230c9b2a9b670c6da71b227afc707eed85a065705e34b71e8a059ad6ad5"
+                }
             },
             "ArcadeV Invaders": {
                 "latest": ["1.1", "https://github.com/zxdos/zxuno/raw/master/cores/Arcade/Invaders/CORE29.ZX1"],
-                "1.0": "8565b9ecbdd6f13ce8f70b6f7c8f28ba72df3e20e61df645af3d41b63d377e3b",
+                "versions": {
+                    "1.0": "8565b9ecbdd6f13ce8f70b6f7c8f28ba72df3e20e61df645af3d41b63d377e3b",
                 "1.1": "84a7531ed31ea2a7109fe2948cd52fea06430a7348c15f6489181d72040185f2"
+                }
             },
             "ArcadeV Invaders Mod1": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/invadersmod1.ZX1"],
-                "1.0": "a8daba56bf8488fc516bb7736ff9b6933a45d2ab25f03e1c794f4f43f2c18691"
+                "versions": {
+                    "1.0": "a8daba56bf8488fc516bb7736ff9b6933a45d2ab25f03e1c794f4f43f2c18691"
+                }
             },
             "ArcadeV Invaders Mod2": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/invadersmod2.ZX1"],
-                "1.0": "8e7aa76552ac91e3e1861328e96bc9eb1962449e71bbe5770fd5c1dd6b56456b"
+                "versions": {
+                    "1.0": "8e7aa76552ac91e3e1861328e96bc9eb1962449e71bbe5770fd5c1dd6b56456b"
+                }
             },
             "Arcade Invaders Pt2": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/invadpt2.ZX1"],
-                "1.0": "c54adfa3ef3bb18dc5d24ca75e907b8de91f0ce9174c4efcb902f9d9ac342235"
+                "versions": {
+                    "1.0": "c54adfa3ef3bb18dc5d24ca75e907b8de91f0ce9174c4efcb902f9d9ac342235"
+                }
             },
             "ArcadeV Jump Shot": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/jumpshot.ZX1"],
-                "1.0": "5f3bb886fe7944b538f68dd87eda64f5d1e5647b1bbc6fb621a803b53118301d"
+                "versions": {
+                    "1.0": "5f3bb886fe7944b538f68dd87eda64f5d1e5647b1bbc6fb621a803b53118301d"
+                }
             },
             "Arcade Lady Bug": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/ladybug.ZX1"],
-                "1.0": "93ed62d2333a608356b1ce943c676d14795d9b51609f12987dcbf5724562e177"
+                "versions": {
+                    "1.0": "93ed62d2333a608356b1ce943c676d14795d9b51609f12987dcbf5724562e177"
+                }
             },
             "ArcadeV Lizar Wizard": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/lizwiz.ZX1"],
-                "1.0": "38ccb246821f6e4b727545327f85d18aa23f1a59f9aca9e7ae17d2ba73b24c56"
+                "versions": {
+                    "1.0": "38ccb246821f6e4b727545327f85d18aa23f1a59f9aca9e7ae17d2ba73b24c56"
+                }
             },
             "Arcade Lunar Lander": {
                 "latest": ["1.1"],
-                "1.0": "e8c121d9897c16d326c577c1b45501e53812026c87d203a3b71a5163d722f38b",
-                "1.1": "9b2a6fcecc92c0615d73ad0d1a4047d2aa298ba9159de3406275638b68d65ee2"
+                "versions": {
+                    "1.0": "e8c121d9897c16d326c577c1b45501e53812026c87d203a3b71a5163d722f38b",
+                    "1.1": "9b2a6fcecc92c0615d73ad0d1a4047d2aa298ba9159de3406275638b68d65ee2"
+                }
             },
             "Arcade Lunar Rescue": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/lrescue.ZX1"],
-                "1.0": "4ff6abf4f80153f3ffbc558e0bc514622b20a7120cfa98c52edbda265a5891e3"
+                "versions": {
+                    "1.0": "4ff6abf4f80153f3ffbc558e0bc514622b20a7120cfa98c52edbda265a5891e3"
+                }
             },
             "ArcadeV Lucky Today": {
                 "latest": ["1.1", ""],
                 "base": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/luctoday.ZX1"],
-                "1.0": "2f476fc94cca7c3807c45b1ee066ffb7549d39933c87bb8d492ee5cd4c831490",
-                "0.2": "674764da89942d845d1874596729454f6ba0188086643c5ad4535009b4f4530c"
+                "versions": {
+                    "1.0": "2f476fc94cca7c3807c45b1ee066ffb7549d39933c87bb8d492ee5cd4c831490",
+                    "0.2": "674764da89942d845d1874596729454f6ba0188086643c5ad4535009b4f4530c"
+                }
             },
             "Arcade Mayday!!": {
                 "latest": ["1.1"],
-                "1.0": "eebedf1a88f35d6e8dd981e1eff93fecc90f99350c0482042b39f62a294dc321",
-                "1.1": "1a8e1441b5cba8036fe9bb7a5f72a6e20fe5629507ba1d49c80d282c48c220c1"
+                "versions": {
+                    "1.0": "eebedf1a88f35d6e8dd981e1eff93fecc90f99350c0482042b39f62a294dc321",
+                    "1.1": "1a8e1441b5cba8036fe9bb7a5f72a6e20fe5629507ba1d49c80d282c48c220c1"
+                }
             },
             "ArcadeV Moon Alien Pt2": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/moonal2.ZX1"],
-                "1.0": "b4db92e4bc4437567d7371fdf23b3cdb34333c94280900adcd0f5e5c2cfbbdcb"
+                "versions": {
+                    "1.0": "b4db92e4bc4437567d7371fdf23b3cdb34333c94280900adcd0f5e5c2cfbbdcb"
+                }
             },
             "ArcadeV Mr. TNT": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/mrtnt.ZX1"],
-                "1.0": "154b16c85f2fa5be6976dfbab0a5d464bb287b172a6e838dc17103012fea9247"
+                "versions": {
+                    "1.0": "154b16c85f2fa5be6976dfbab0a5d464bb287b172a6e838dc17103012fea9247"
+                }
             },
             "Arcade Omega": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/omega.ZX1"],
-                "1.0": "9cae15b80ca2703fd3932b204e043a0fa2cfaf820c78be36e84558588bcaadd5"
+                "versions": {
+                    "1.0": "9cae15b80ca2703fd3932b204e043a0fa2cfaf820c78be36e84558588bcaadd5"
+                }
             },
             "ArcadeV Orbitron": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/orbitron.ZX1"],
-                "1.0": "e0e34d79a13c7345d4b9fd0c6ca439d830543c3f440654dc27d3ca2cf21f39d0"
+                "versions": {
+                    "1.0": "e0e34d79a13c7345d4b9fd0c6ca439d830543c3f440654dc27d3ca2cf21f39d0"
+                }
             },
             "ArcadeV Pac-Manic-Miner": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/pacminer.ZX1"],
-                "1.0": "d58546710c03de95326d4bac2cb228445a990877f418bf8a9e0806f0d6aaceec"
+                "versions": {
+                    "1.0": "d58546710c03de95326d4bac2cb228445a990877f418bf8a9e0806f0d6aaceec"
+                }
             },
             "ArcadeV Pac-Man Plus": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/pacplus.ZX1"],
-                "1.0": "d259f1bfed68283ad571106f4f4d5aea58ae68c2700472dec64b4fdafed83a25"
+                "versions": {
+                    "1.0": "d259f1bfed68283ad571106f4f4d5aea58ae68c2700472dec64b4fdafed83a25"
+                }
             },
             "ArcadeV Pengo": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/pengo.ZX1"],
-                "1.0": "63f843019f3cd84c957fcbc26a244cbd0b5f20510e92dbf4932347699dfc9abb"
+                "versions": {
+                    "1.0": "63f843019f3cd84c957fcbc26a244cbd0b5f20510e92dbf4932347699dfc9abb"
+                }
             },
             "ArcadeV Pisces": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/pisces.ZX1"],
-                "1.0": "b272ffc8dc0eb88c89fe424dc5cd9ea19b36b8165cb9f95cec14fcba51a1b0bb"
+                "versions": {
+                    "1.0": "b272ffc8dc0eb88c89fe424dc5cd9ea19b36b8165cb9f95cec14fcba51a1b0bb"
+                }
             },
             "Arcade Pong": {
                 "latest": ["1.0", ""],
-                "1.0": "fb0045c03221b1bfa16fc7cae3b5f349c2eb45bccd0a0f22639f0eb698238345"
+                "versions": {
+                    "1.0": "fb0045c03221b1bfa16fc7cae3b5f349c2eb45bccd0a0f22639f0eb698238345"
+                }
             },
             "Arcade Ponpoko": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/ponpoko.ZX1"],
-                "1.0": "c49cd99eb61945f575980a4ed7d3edb7e0f7154133844545dffbc3b9834b7859"
+                "versions": {
+                    "1.0": "c49cd99eb61945f575980a4ed7d3edb7e0f7154133844545dffbc3b9834b7859"
+                }
             },
             "ArcadeV Pooyan": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/pooyan.ZX1"],
-                "1.0": "86cb6677516cde8d26451c7e24c5b7e8bc69f3586710af73ff1a93385bea7e1e"
+                "versions": {
+                    "1.0": "86cb6677516cde8d26451c7e24c5b7e8bc69f3586710af73ff1a93385bea7e1e"
+                }
             },
             "Arcade Red UFO": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/redufo.ZX1"],
-                "1.0": "667ef94f5060bab59d4a1a2da0a7cc7ce8fa762cb2d920e50dbdf0f3fe488d3e"
+                "versions": {
+                    "1.0": "667ef94f5060bab59d4a1a2da0a7cc7ce8fa762cb2d920e50dbdf0f3fe488d3e"
+                }
             },
             "Arcade Super Glob": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/sglob.ZX1"],
-                "1.0": "52be8037942ba9032d7c07d1e4f9e05e2607ea73447ceaa47993076d23e7cffa"
+                "versions": {
+                    "1.0": "52be8037942ba9032d7c07d1e4f9e05e2607ea73447ceaa47993076d23e7cffa"
+                }
             },
             "Arcade Shoot The Bull": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/shootbul.ZX1"],
-                "1.0": "c20c2df89fac9b09e48dacc660a0050e0d037ce37eea25949244364bb426d7b4"
+                "versions": {
+                    "1.0": "c20c2df89fac9b09e48dacc660a0050e0d037ce37eea25949244364bb426d7b4"
+                }
             },
             "Arcade Snap Jack": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/snapjack.ZX1"],
-                "1.0": "4b8987c1a0fda0b3cd9d17d23e5642ff209377fb34468f0bcc24d61fdf1922e8"
+                "versions": {
+                    "1.0": "4b8987c1a0fda0b3cd9d17d23e5642ff209377fb34468f0bcc24d61fdf1922e8"
+                }
             },
             "Arcade Space Laser": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/spclaser.ZX1"],
-                "1.0": "063026865e9f4b7fdf5397b372c27563662cd230c13bed2448b5af0ad3e60b89"
+                "versions": {
+                    "1.0": "063026865e9f4b7fdf5397b372c27563662cd230c13bed2448b5af0ad3e60b89"
+                }
             },
             "Arcade Sprint 1": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/sprint1.ZX1"],
-                "1.0": "aaa7022e75870b3547e7dccbb423ef71e47709df39335229d0b5c44eac6ef5d6"
+                "versions": {
+                    "1.0": "aaa7022e75870b3547e7dccbb423ef71e47709df39335229d0b5c44eac6ef5d6"
+                }
             },
             "Arcade Sprint 1 (J)": {
                 "latest": ["1.1", ""],
                 "base": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/sprint1j.ZX1"],
-                "1.0": "29ab2e44293ed3a93297055c09358fadbc4ca95d2efe0651da4b4b4709ed5c80",
-                "1.1": "f32a966de73f6c871508515128e60bced91e19270a73e935bed395458c7a6402"
+                "versions": {
+                    "1.0": "29ab2e44293ed3a93297055c09358fadbc4ca95d2efe0651da4b4b4709ed5c80",
+                    "1.1": "f32a966de73f6c871508515128e60bced91e19270a73e935bed395458c7a6402"
+                }
             },
             "Arcade Sprint 2": {
                 "latest": ["1.1", ""],
                 "base": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/sprint2.ZX1"],
-                "1.0": "ef6fe1528e987354cbb9cf20fd7a7d8a6ddfed59fb7b5debd0657ad65d055518",
-                "1.1": "b728882a669c7c4480d84b1f326597de24adb15e0bdc89fa5797745dac9e6389"
+                "versions": {
+                    "1.0": "ef6fe1528e987354cbb9cf20fd7a7d8a6ddfed59fb7b5debd0657ad65d055518",
+                     "1.1": "b728882a669c7c4480d84b1f326597de24adb15e0bdc89fa5797745dac9e6389"
+                }
             },
             "Arcade Sprint 2 (J)": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/sprint2j.ZX1"],
-                "1.0": "d996883dd4412d40feff8ce8cf80fc4961e2e88aaa86a39d238e29fdf8f1c13e"
+                "versions": {
+                    "1.0": "d996883dd4412d40feff8ce8cf80fc4961e2e88aaa86a39d238e29fdf8f1c13e"
+                }
             },
             "Arcade Super Break Out": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/superbreakout.ZX1"],
-                "1.0": "5c2c023c5a9f1fc257a1f70f51a8131dc79d81838f9b0505873eda6de894dc1f"
+                "versions": {
+                    "1.0": "5c2c023c5a9f1fc257a1f70f51a8131dc79d81838f9b0505873eda6de894dc1f"
+                }
             },
             "Arcade Super Break Out (J)": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/superbreakoutj.ZX1"],
-                "1.0": "f73b3982554f0184c66239f1552367e9194857fd8e6829de1fb3bd383356a237"
+                "versions": {
+                    "1.0": "f73b3982554f0184c66239f1552367e9194857fd8e6829de1fb3bd383356a237"
+                }
             },
             "ArcadeV Triple Draw Poker": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/tdpgal.ZX1"],
-                "1.0": "6bf779589264255b59f001a0f809f8c861ce5f689dc362b5ba2f88a95327fd6e"
+                "versions": {
+                    "1.0": "6bf779589264255b59f001a0f809f8c861ce5f689dc362b5ba2f88a95327fd6e"
+                }
             },
             "ArcadeV The End": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/theend.ZX1"],
-                "1.0": "b8b0a20d679890c34a3950eff93c27dc99f78ef2c360864d9df7eccd62ffe0f6"
+                "versions": {
+                    "1.0": "b8b0a20d679890c34a3950eff93c27dc99f78ef2c360864d9df7eccd62ffe0f6"
+                }
             },
             "ArcadeV The Glob": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/theblob.ZX1"],
-                "1.0": "5f07da17253f90cc0a9e12126e47ddefc6fc46eb1423f9b7c5cdd246e6b2c2ef"
+                "versions": {
+                    "1.0": "5f07da17253f90cc0a9e12126e47ddefc6fc46eb1423f9b7c5cdd246e6b2c2ef"
+                }
             },
             "ArcadeV Time Pilot": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/timepilot.ZX1"],
-                "1.0": "ba45e0d0760013c645f341aaea780035060d4c28fee43fff03009615c8049411"
+                "versions": {
+                    "1.0": "ba45e0d0760013c645f341aaea780035060d4c28fee43fff03009615c8049411"
+                }
             },
             "Arcade Ultra Tank": {
                 "latest": ["1.1", ""],
-                "base": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/ultratank.ZX1"],
-                "1.0": "2c0e86880acaa4684d985788c57502b1b254d7e409689db9e43d4f8badcf1e55",
-                "1.1": "e730ddcbcb9a19f79a13e343223f39f886c530ce53d60c517f4b866c80c7028a"
+                 "base": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/ultratank.ZX1"],
+                "versions": {
+                    "1.0": "2c0e86880acaa4684d985788c57502b1b254d7e409689db9e43d4f8badcf1e55",
+                    "1.1": "e730ddcbcb9a19f79a13e343223f39f886c530ce53d60c517f4b866c80c7028a"
+                }
             },
             "Arcade Ultra Tank (J)": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/ultratankj.ZX1"],
-                "1.0": "8de85904b21400c3824ec1872d16d401e9e43afe1a0a038dc72163049cb1fc8e"
+                "versions": {
+                    "1.0": "8de85904b21400c3824ec1872d16d401e9e43afe1a0a038dc72163049cb1fc8e"
+                }
             },
             "ArcadeV UniWar S": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/uniwars.ZX1"],
-                "1.0": "39a89ba84e8cdd47a42782099655c9d9568a8f521f9154ecd171924fd2fe41ce"
+                "versions": {
+                    "1.0": "39a89ba84e8cdd47a42782099655c9d9568a8f521f9154ecd171924fd2fe41ce"
+                }
             },
             "ArcadeV Van Van Car": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/vanvan.ZX1"],
-                "1.0": "8523f9b0fc6fe8a81aeec925e3db593fd25febf2642363e04e72390ba8b4c17e"
+                "versions": {
+                    "1.0": "8523f9b0fc6fe8a81aeec925e3db593fd25febf2642363e04e72390ba8b4c17e"
+                }
             },
             "Arcade Victory": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/victoryc.ZX1"],
-                "1.0": "7e5ab1d6fe24935fb1994840f314a72b46001bbacd73558a1c991c6f4d30714d"
+                "versions": {
+                    "1.0": "7e5ab1d6fe24935fb1994840f314a72b46001bbacd73558a1c991c6f4d30714d"
+                }
             },
             "ArcadeV War Of Bugs": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/warofbug.ZX1"],
-                "1.0": "9abe93abfecdfcf6aa03624da43c6d2aae852eedf11362b49d48bace3a7de165"
+                "versions": {
+                    "1.0": "9abe93abfecdfcf6aa03624da43c6d2aae852eedf11362b49d48bace3a7de165"
+                }
             },
             "ArcadeV Woodpecker": {
                 "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/woodpeck.ZX1"],
-                "1.0": "40575d83f2d6243d80d44735db615816da303de11984ba0c3536f44f60614287"
+                "versions": {
+                    "1.0": "40575d83f2d6243d80d44735db615816da303de11984ba0c3536f44f60614287"
+                }
             },
             "Arcade Frenzy": {
                 "latest": ["1.0", ""],
-                "1.0": "c15c70ea1e42f0a5e2ec4ef57357e40c353183d5e93f1d65a9b649af9a373151"
+                "versions": {
+                    "1.0": "c15c70ea1e42f0a5e2ec4ef57357e40c353183d5e93f1d65a9b649af9a373151"
+                }
             },
             "Arcade Squash": {
                 "latest": ["1.0", ""],
-                "1.0": "6148abf8d3da6bcea2dc58bc9397b31e9be75d78503a0fd89a9a52f3dbd2ca3d"
+                "versions": {
+                    "1.0": "6148abf8d3da6bcea2dc58bc9397b31e9be75d78503a0fd89a9a52f3dbd2ca3d"
+                }
             },
             "Arcade Capitol": {
                 "latest": ["1.0", ""],
-                "1.0": "735514c905948db3bbc4fcc410fd2d87ea084d9a26b414b5aab5ebd1bba2afeb"
+                "versions": {
+                    "1.0": "735514c905948db3bbc4fcc410fd2d87ea084d9a26b414b5aab5ebd1bba2afeb"
+                }
             },
             "Arcade King & Balloon": {
                 "latest": ["1.0", ""],
-                "1.0": "d8f84baf4640fc654fe57e7dd4560732539d779ad5762393443dcdba2ce859de"
+                "versions": {
+                    "1.0": "d8f84baf4640fc654fe57e7dd4560732539d779ad5762393443dcdba2ce859de"
+                }
             },
             "Arcade Colony 7": {
                 "latest": ["1.0", ""],
-                "1.0": "a37084e9d3ba398cd01882a2ab80e1000587dc9c098fd368f1a624349795ed22"
+                "versions": {
+                    "1.0": "a37084e9d3ba398cd01882a2ab80e1000587dc9c098fd368f1a624349795ed22"
+                }
             },
             "Arcade Jin": {
                 "latest": ["1.0", ""],
-                "1.0": "f84f5acedc4b2f5ed3d0b0abfa26e1d25313e73fc82340952da98b6b7dc4072a"
+                "versions": {
+                    "1.0": "f84f5acedc4b2f5ed3d0b0abfa26e1d25313e73fc82340952da98b6b7dc4072a"
+                }
             },
             "ArcadeV Eggor": {
                 "latest": ["1.0", ""],
-                "1.0": "a80c1f47986f167ab11b77d37bd2b36dd0a6f6fc45bb7a55823c86a322061b92"
+                "versions": {
+                    "1.0": "a80c1f47986f167ab11b77d37bd2b36dd0a6f6fc45bb7a55823c86a322061b92"
+                }
             },
             "Arcade Birdiy": {
                 "latest": ["1.0", ""],
-                "1.0": "3eed79b9509e2c177c3532269e029a4cf9560a2776c49fcffb2392d14ea1dd36"
+                "versions": {
+                    "1.0": "3eed79b9509e2c177c3532269e029a4cf9560a2776c49fcffb2392d14ea1dd36"
+                }
             },
             "ArcadeV Zig Zag": {
                 "latest": ["1.0", ""],
-                "1.0": "cbf02b6b9ec19f29cd423719aaf8dafeab890aa977e94ba3fa0e6d74ca94ed6b"
+                "versions": {
+                    "1.0": "cbf02b6b9ec19f29cd423719aaf8dafeab890aa977e94ba3fa0e6d74ca94ed6b"
+                }
             },
             "ArcadeV Traverse USA": {
                 "latest": ["1.0", ""],
-                "1.0": "f78fc3b6fcff553c8979de29cfc444c7866c61a81ea4b158a51b8706f14284ce"
+                "versions": {
+                    "1.0": "f78fc3b6fcff553c8979de29cfc444c7866c61a81ea4b158a51b8706f14284ce"
+                }
             },
             "Arcade Super Bagman": {
                 "latest": ["1.0", ""],
-                "1.0": "6f072cb27a94ddaaca7b52fd2b6d8d7cdc99cade13069c559b7c00e054364081"
+                "versions": {
+                    "1.0": "6f072cb27a94ddaaca7b52fd2b6d8d7cdc99cade13069c559b7c00e054364081"
+                }
             },
             "Arcade Black Widow": {
                 "latest": ["1.0", ""],
-                "1.0": "9803832a7756fa1c1b572dd8af13edd3329cebff087d8ce10a7fc03fe88b7d5a"
+                "versions": {
+                    "1.0": "9803832a7756fa1c1b572dd8af13edd3329cebff087d8ce10a7fc03fe88b7d5a"
             }
         }
-     },
+
+        }
+    },
     "ZX2": {
         "description": "ZXDOS",
         "hashtype": "sha256sum",
@@ -721,104 +1003,143 @@
         "BIOS": {
             "latest": ["0.83", "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE.ZX2"],
             "vertical": ["0.82 Vertical", "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE_vertical.ZX2"],
-            "0.77": "de8953d614777da03f4cc9fd8bba01d35331c6e16a25df85f9ab7d8e8677a323",
-            "0.80": "4a4af0ea9583add1d4d3e5d965d72192e30bcda12abf30d35d16b27d232c068f",
-            "0.82": "d3482a48486e421aecf5f794fb7618554840956c19fa4c708aa72905fb8f151d",
-            "0.82 Vertical": "35c890bf625d88796a68f48fc71485075030cb09217671cccf7aaf914fa7522d",
-            "0.83b1": "33f7da03849ace04f07fe0bc38575749759ce13ad601e1d8f13c7789d058f708",
-            "0.83b2": "637a3d58577491f4a81615b7291062529cae62958f763163fc1e5cf02895bff6",
-            "0.83": "7e086501f0a07dbef8aba4d8d177131e2e2217bfbd95a039449c3471a83eb703"
+            "versions": {
+                "0.77": "de8953d614777da03f4cc9fd8bba01d35331c6e16a25df85f9ab7d8e8677a323",
+                "0.80": "4a4af0ea9583add1d4d3e5d965d72192e30bcda12abf30d35d16b27d232c068f",
+                "0.82": "d3482a48486e421aecf5f794fb7618554840956c19fa4c708aa72905fb8f151d",
+                "0.82 Vertical": "35c890bf625d88796a68f48fc71485075030cb09217671cccf7aaf914fa7522d",
+                "0.83b1": "33f7da03849ace04f07fe0bc38575749759ce13ad601e1d8f13c7789d058f708",
+                "0.83b2": "637a3d58577491f4a81615b7291062529cae62958f763163fc1e5cf02895bff6",
+                "0.83": "7e086501f0a07dbef8aba4d8d177131e2e2217bfbd95a039449c3471a83eb703"
+            }
         },
         "esxdos": {
             "latest": ["0.8.9"],
-            "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
-            "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
-            "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
-            "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8",
-            "0.8.9": "89706de560d66432fe19ddb895e7cde49e252e932687dcb57fb92259a0259339"
+            "versions": {
+                "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
+                "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
+                "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
+                "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8",
+                "0.8.9": "89706de560d66432fe19ddb895e7cde49e252e932687dcb57fb92259a0259339"
+            }
         },
         "Spectrum": {
             "latest": ["EXP27_SVN"],
-            "EXP27_SVN": "33dcfc9263be150a825f77ffbbab5fc3c9ddac5cc5c733ff189c722c9384478c",
-            "EXP27_140819": "9984c095772d29192563b33855c106c58d75026719a847f325d7dc7ddcf8d078"
+            "versions": {
+                "EXP27_SVN": "33dcfc9263be150a825f77ffbbab5fc3c9ddac5cc5c733ff189c722c9384478c",
+                "EXP27_140819": "9984c095772d29192563b33855c106c58d75026719a847f325d7dc7ddcf8d078"
+            }
+        },
+        "Special": {
+            "versions": {}
         },
         "Cores": {
             "Amstrad CPC": {
                 "latest":["1.0", "https://github.com/zxdos/binaries/raw/master/AmstradCPC.ZX2"],
-                "1.0": "3d87c1b4f02aea41645e9ff82505a44dc30f09e040d6eb08461d648b400854b2"
+                "versions": {
+                    "1.0": "3d87c1b4f02aea41645e9ff82505a44dc30f09e040d6eb08461d648b400854b2"
+                }
             },
             "Atari 2600": {
                 "latest": ["2.1", "https://github.com/zxdos/binaries/raw/master/COREN_A2600_zxdos_lx16_v2_1.ZX2"],
-                "2.0": "1d626327a8fda918676b2c3c2cd6c173c5d97c8be79b3808b842202398157ccf",
-                "2.1": "b18e337c48e007ff8272624934bcc87a2173a5c06aecd8e3a493f3dff8120961"
+                "versions": {
+                    "2.0": "1d626327a8fda918676b2c3c2cd6c173c5d97c8be79b3808b842202398157ccf",
+                    "2.1": "b18e337c48e007ff8272624934bcc87a2173a5c06aecd8e3a493f3dff8120961"
+                }
             },
             "CHIP-8": {
                 "latest": ["2021.05.23", "https://github.com/zxdos/binaries/raw/master/chip8_zxdoslx16_20210523.ZX2"],
-                "2021.04.24": "c5c491c1e0d40150717303f8412758d19360301386ac53c42faafe5cab90f063",
-                "2021.05.16": "023e1be7b51b453bd81699cd1131286b625888791975e0f16dd3a51a6f5d87e7",
-                "2021.05.23": "057440de05fd1209ad42994c1ea685a0b93a2ac6f9754f68ac5148e918aa603b"
+                "versions": {
+                    "2021.04.24": "c5c491c1e0d40150717303f8412758d19360301386ac53c42faafe5cab90f063",
+                    "2021.05.16": "023e1be7b51b453bd81699cd1131286b625888791975e0f16dd3a51a6f5d87e7",
+                    "2021.05.23": "057440de05fd1209ad42994c1ea685a0b93a2ac6f9754f68ac5148e918aa603b"
+                }
             },
             "ColecoVision": {
                 "latest": ["1.0 VGA"],
-                "1.0 RGB": "44eb8e83e0bb6d273f194974ac270d94f5738978a779fd37f5624b19ff31a750",
-                "1.0 VGA": "af1962514d1bb73d7ac9d83b6dcf670776ae9e2cb6c818df83b23b03042852b3"
+                "versions": {
+                    "1.0 RGB": "44eb8e83e0bb6d273f194974ac270d94f5738978a779fd37f5624b19ff31a750",
+                    "1.0 VGA": "af1962514d1bb73d7ac9d83b6dcf670776ae9e2cb6c818df83b23b03042852b3"
+                }
             },
             "Jupiter ACE": {
                 "latest": ["4.0", "https://github.com/zxdos/binaries/raw/master/tld_jace_v4.ZX2"],
-                "4.0": "01152abf42f4cca0fc4accb4d054e3ec18381c239524aa0559d0d6485b6206da"
+                "versions": {
+                    "4.0": "01152abf42f4cca0fc4accb4d054e3ec18381c239524aa0559d0d6485b6206da"
+                }
             },
             "MSX": {
                 "latest": ["1.3", "https://github.com/zxdos/binaries/raw/master/MSX1FPGA.ZX2"],
-                "1.3": "f2c9748dd988e894ccf9278702e1a6c290e74ab4ff22fd79eaba8b085b91d4ee"
+                "versions": {
+                    "1.3": "f2c9748dd988e894ccf9278702e1a6c290e74ab4ff22fd79eaba8b085b91d4ee"
+                }
             },
             "PC XT": {
                 "latest": ["Next186 DDR3 v1", "https://github.com/zxdos/binaries/raw/master/next186_zxdos_ddr3_lx16_v1_COREXX.ZX2"],
-                "Next186 DDR3 v1": "66beafd187d6cce0e5b4a945b2348154bda300961eb2b9f27393c86a1ef7cffe"
+                "versions": {
+                    "Next186 DDR3 v1": "66beafd187d6cce0e5b4a945b2348154bda300961eb2b9f27393c86a1ef7cffe"
+                }
             },
             "Phoenix": {
                 "latest": ["1.0", "https://github.com/zxdos/binaries/raw/master/COREN_phoenix_zxdoslx16.ZX2"],
-                "1.0": "48eb3dd20c23b99fba5800181aca4bc08ea111e601ddbe1cdd6d795db931beb3"
+                "versions": {
+                    "1.0": "48eb3dd20c23b99fba5800181aca4bc08ea111e601ddbe1cdd6d795db931beb3"
+                }
             },
             "Pong": {
                 "latest": ["2.2", "https://github.com/zxdos/binaries/raw/master/COREN_pong_ay38500_zxdoslx16_v2_2.ZX2"],
-                "1.0": "828e2feb5dc09b921497573d7e154c73dbe7f0c5a00f19fdf4085d14b88241ac", 
-                "2.0": "e776b5b4f31b33798d2238c77969c248a85a99035b70f9b3ce65c0fd3f4a1345",
-                "2.1": "1ea35d5068347520d6a61b2f1d24823681eade2b0dd48882d89b57f74ec69951",
-                "2.2": "dc902e126c56369e79203c31a90ac77fb0c2d6bc42c7891e3c0788d571d775e2"
+                "versions": {
+                    "1.0": "828e2feb5dc09b921497573d7e154c73dbe7f0c5a00f19fdf4085d14b88241ac", 
+                    "2.0": "e776b5b4f31b33798d2238c77969c248a85a99035b70f9b3ce65c0fd3f4a1345",
+                    "2.1": "1ea35d5068347520d6a61b2f1d24823681eade2b0dd48882d89b57f74ec69951",
+                    "2.2": "dc902e126c56369e79203c31a90ac77fb0c2d6bc42c7891e3c0788d571d775e2"
+                }
             },
             "Sega Master System": {
                 "latest": ["2.0 Memorias_ISSI"],
-                "2.0 Memorias_ISSI": "661f0b4f3b703e906ced8548f1514cc4c889c646e87e897c2b11584ef137a02d"
+                "versions": {
+                    "2.0 Memorias_ISSI": "661f0b4f3b703e906ced8548f1514cc4c889c646e87e897c2b11584ef137a02d"
+                }
             },
             "Videopac": {
                 "latest": ["20210515", "https://github.com/zxdos/binaries/raw/master/videopac_zxdos_lx16_20210515.ZX2"],
-                "Beta 1": "fe9f9b7e75c9ef3ed3ebcca0985b0086626e8eeb1c43c0cb7237b98a183cf0b5",
-                "Beta 4": "182c1d1ae6fc52007ae6ccff4abbbcc7980608d8074e66db59de972d4bee3ac1",
-                "20210129": "58acba0846b14dcb5b8ddab8764e2cb8591033d528be7f799ab08093309eebe3",
-                "20210131": "8c5de11a0bd34ede3b55589adcc4f8d2fe9d62da173afe38712e16e6935b495c",
-                "20210501": "5d164337d4a8f780ce625d5c5ab9b012bb6f3edb2691cb929766069f7340489d",
-                "20210515": "870fc383dd1e7742cbb7df2df11dd7ccb62f14f84569f011563d662a878cdbd0"
+                "versions": {
+                    "Beta 1": "fe9f9b7e75c9ef3ed3ebcca0985b0086626e8eeb1c43c0cb7237b98a183cf0b5",
+                    "Beta 4": "182c1d1ae6fc52007ae6ccff4abbbcc7980608d8074e66db59de972d4bee3ac1",
+                    "20210129": "58acba0846b14dcb5b8ddab8764e2cb8591033d528be7f799ab08093309eebe3",
+                    "20210131": "8c5de11a0bd34ede3b55589adcc4f8d2fe9d62da173afe38712e16e6935b495c",
+                    "20210501": "5d164337d4a8f780ce625d5c5ab9b012bb6f3edb2691cb929766069f7340489d",
+                    "20210515": "870fc383dd1e7742cbb7df2df11dd7ccb62f14f84569f011563d662a878cdbd0"
+                }
             },
             "ZX80yUno": {
                 "latest": ["3.0", "https://github.com/zxdos/binaries/raw/master/COREn_zx80yunoV3.ZX2"],
-                "1.0": "ad070a0695c33d7c54b65895c07b60c03e3ebdc9bedc275ae491c16bdd60e982",
-                "2.0 Beta Tape": "ed6b291fc0e54e84aa9db379a352396200562874ae079355e210854d16b69aa4",
-                "3.0": "504f9b44494daede44072dec653e7b9d5fd39c7279e6bf67a3dac2cb68c518c6"
+                "versions": {
+                    "1.0": "ad070a0695c33d7c54b65895c07b60c03e3ebdc9bedc275ae491c16bdd60e982",
+                    "2.0 Beta Tape": "ed6b291fc0e54e84aa9db379a352396200562874ae079355e210854d16b69aa4",
+                    "3.0": "504f9b44494daede44072dec653e7b9d5fd39c7279e6bf67a3dac2cb68c518c6"
+                }
             },
             "ZX Spectrum": {
                 "latest": ["EXP27_SVN"],
-                "EXP27_SVN": "9f10eb6605c428e17db607a7141036a218164eeea02ac4c087e447dce5e5ced4"
+                "versions": {
+                    "EXP27_SVN": "9f10eb6605c428e17db607a7141036a218164eeea02ac4c087e447dce5e5ced4"
+                }
             },
             "ZX Spectrum 48K (Kyp)": {
                 "latest": ["zx48 Beta", ""],
-                "zx48 Beta": "e3fdf4e30ccdd0303eebc931b6aa5c7c0b7d49d8e84cfe4853e8b8f328663b61"
+                "versions": {
+                    "zx48 Beta": "e3fdf4e30ccdd0303eebc931b6aa5c7c0b7d49d8e84cfe4853e8b8f328663b61"
+                }
             },
             "ZX Spectrum Next": {
                 "latest": ["3.01.06 v11", "https://github.com/zxdos/binaries/raw/master/zxnext_top_issue2_zxdos_1M_lx16_v11.ZX2"],
-                "3.01.05 Issue2": "86a0f9ee8405c787209ded1b2a1035e47fd461c4b435f4e75ab53ede8c320531",
-                "3.01.05 Issue2 DDR3 Black": "55fa0ba05d0fdd49e35c89abc62e2f3d43f0e398b59575396d75f582231c1745",
-                "3.01.06 v11": "a7ab1245134151b5da4245c053dea2c19b200aedf4cbc1542b892007829753d3",
-                "3.01.09 Beta": "0b9a4bc393fe1160f15e6b9960199f34835ba3867449571839202a750908f8df"
+                "versions": {
+                    "3.01.05 Issue2": "86a0f9ee8405c787209ded1b2a1035e47fd461c4b435f4e75ab53ede8c320531",
+                    "3.01.05 Issue2 DDR3 Black": "55fa0ba05d0fdd49e35c89abc62e2f3d43f0e398b59575396d75f582231c1745",
+                    "3.01.06 v11": "a7ab1245134151b5da4245c053dea2c19b200aedf4cbc1542b892007829753d3",
+                    "3.01.09 Beta": "0b9a4bc393fe1160f15e6b9960199f34835ba3867449571839202a750908f8df"
+                }
             }
         }
     },
@@ -840,205 +1161,255 @@
         "BIOS": {
             "latest": ["0.84", "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE.ZXD"],
             "vertical": ["0.82 Vertical", "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE_vertical.ZXD"],
-            "0.78": "76dae34e09a1e586536e9503b2dbdb67482b661d797521d2cc1ca708cf360736",
-            "0.79": "34d775223d29adc2c793ac11d609c8af58b6834746ea03c5175d38c8dd02a828",
-            "0.80": "7dcb6be6a06502b1c3515f26ff040ac518e9a3826abf15107f8f514d44e3f6b2",
-            "0.81": "b9b4d6074bf69d811f769f7f0eeefcb1471bf4894bb1a03539354a7bdffed3e9",
-            "0.82": "76b1216fffcf262dd5e677e7da4bf08086512978db5c3c84c2f1bbe52354b13b",
-            "0.82 Vertical": "b1420767f4cc8d6d77afb8759eeb2e159a805f3f2a9938f81da01e1eaaa230c9",
-            "0.83b1": "795c9ad56ecd0efdbeb4da8efe3e1b5fdc74e64dbf69d2274ff808e20827b2eb",
-            "0.83": "f480e9f81623191306b45f1cc1e5636cd6f4c4e51e1c5bdcea12e87de4cd8cc0",
-            "0.83b2": "96bee60894081dacb2a4cfaffd54493c5e173a454c305a357371f785f044a1dc",
-            "0.84b1": "1ba5207016cb452cc0560e98f2e3f4e8d70a0ad4e5bbbb8be0edb35c85eadc79",
-            "0.84b2": "ffeb0f96a0293f351a11662901e9207d52604ce0783068b4d5a4c5d1166ad517",
-            "0.84b3": "9bb23ad02947c9b378dd2a4d9d35f994fd2407affdc5952d1470f51bc0cd94e7",
-            "0.84b4": "227e9e716bbffb0d0b69efda88d09c9ab66c45dc3a90f581e23d6438cedb233c",
-            "0.84b5": "200a81f06e3f7a0c350ac620cac25ec842e362d81b619f138f2cfa77b1a66f00",
-            "0.84b6": "dddf08a468e83ffeb51da7db33e004c0cc613a50e4477842105efd6127b5ebd7",
-            "0.84": "9473e55d9136435a5cf064fba27a72a085d6ec6c32d2c9a0adf9c234eb0b0cea"
+            "versions": {
+                "0.78": "76dae34e09a1e586536e9503b2dbdb67482b661d797521d2cc1ca708cf360736",
+                "0.79": "34d775223d29adc2c793ac11d609c8af58b6834746ea03c5175d38c8dd02a828",
+                "0.80": "7dcb6be6a06502b1c3515f26ff040ac518e9a3826abf15107f8f514d44e3f6b2",
+                "0.81": "b9b4d6074bf69d811f769f7f0eeefcb1471bf4894bb1a03539354a7bdffed3e9",
+                "0.82": "76b1216fffcf262dd5e677e7da4bf08086512978db5c3c84c2f1bbe52354b13b",
+                "0.82 Vertical": "b1420767f4cc8d6d77afb8759eeb2e159a805f3f2a9938f81da01e1eaaa230c9",
+                "0.83b1": "795c9ad56ecd0efdbeb4da8efe3e1b5fdc74e64dbf69d2274ff808e20827b2eb",
+                "0.83": "f480e9f81623191306b45f1cc1e5636cd6f4c4e51e1c5bdcea12e87de4cd8cc0",
+                "0.83b2": "96bee60894081dacb2a4cfaffd54493c5e173a454c305a357371f785f044a1dc",
+                "0.84b1": "1ba5207016cb452cc0560e98f2e3f4e8d70a0ad4e5bbbb8be0edb35c85eadc79",
+                "0.84b2": "ffeb0f96a0293f351a11662901e9207d52604ce0783068b4d5a4c5d1166ad517",
+                "0.84b3": "9bb23ad02947c9b378dd2a4d9d35f994fd2407affdc5952d1470f51bc0cd94e7",
+                "0.84b4": "227e9e716bbffb0d0b69efda88d09c9ab66c45dc3a90f581e23d6438cedb233c",
+                "0.84b5": "200a81f06e3f7a0c350ac620cac25ec842e362d81b619f138f2cfa77b1a66f00",
+                "0.84b6": "dddf08a468e83ffeb51da7db33e004c0cc613a50e4477842105efd6127b5ebd7",
+                "0.84": "9473e55d9136435a5cf064fba27a72a085d6ec6c32d2c9a0adf9c234eb0b0cea"
+            }
         },
         "esxdos": {
             "latest": ["0.8.9"],
-            "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
-            "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
-            "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
-            "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8",
-            "0.8.9": "89706de560d66432fe19ddb895e7cde49e252e932687dcb57fb92259a0259339"
+            "versions": {
+                "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
+                "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
+                "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
+                "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8",
+                "0.8.9": "89706de560d66432fe19ddb895e7cde49e252e932687dcb57fb92259a0259339"
+            }
         },
         "Spectrum": {
             "latest": ["EXP27_20210530 (Avlixa)", "https://github.com/zxdos/zxdos-plus/raw/master/cores/SPECTRUM_EXP27_lx25_20210530.ZXD"],
-            "EXP26_060818": "4ca484870c4173085ca181a92fadea6fd9e5e2928ee4fd0caa08f07052c9e286",
-            "EXP27_unknown": "6ea083833edae73b9d78f8c227dd230bef55711eca676a410fcf097ca1d6dc41",
-            "EXP27_100820": "a30ed2c99f65cff88a3d1d898f32d4618753f65c4ee22883b78ab09d037f800d",
-            "EXP27_160820": "18bb827d1d10671d914830e6af31dd33818ee8145c735590de0bdb45c7585305",
-            "EXP27_150820_monocromo (Avlixa)": "5d752fc11e79de3993b3d78d155ac79b19e50f4bff0e22ef9fe205ae801a33d6",
-            "EXP27_190920_test_BnW (Avlixa)": "4a6cc59602873fa6cea5942a57d378e0413606b3f20079573f19939679fc986c",
-            "EXP27_20210525_test": "366582a5f4a6c054565f216f512b062589b7abc3aeb2bce122fab56da6a4e444",
-            "EXP27_20210530 (Avlixa)": "f5e6790a2ed4cf8702eba3168b9ff337563d03204e5eb21f6004d941d2a9fa5e"
+            "versions": {
+                "EXP26_060818": "4ca484870c4173085ca181a92fadea6fd9e5e2928ee4fd0caa08f07052c9e286",
+                "EXP27_unknown": "6ea083833edae73b9d78f8c227dd230bef55711eca676a410fcf097ca1d6dc41",
+                "EXP27_100820": "a30ed2c99f65cff88a3d1d898f32d4618753f65c4ee22883b78ab09d037f800d",
+                "EXP27_160820": "18bb827d1d10671d914830e6af31dd33818ee8145c735590de0bdb45c7585305",
+                "EXP27_150820_monocromo (Avlixa)": "5d752fc11e79de3993b3d78d155ac79b19e50f4bff0e22ef9fe205ae801a33d6",
+                "EXP27_190920_test_BnW (Avlixa)": "4a6cc59602873fa6cea5942a57d378e0413606b3f20079573f19939679fc986c",
+                "EXP27_20210525_test": "366582a5f4a6c054565f216f512b062589b7abc3aeb2bce122fab56da6a4e444",
+                "EXP27_20210530 (Avlixa)": "f5e6790a2ed4cf8702eba3168b9ff337563d03204e5eb21f6004d941d2a9fa5e"
+            }
         },
         "Special": {
             "latest": ["1.0", "https://github.com/zxdos/zxuno/raw/master/firmware/CORE21_special.ZXD"],
-            "1.0": "c59b2db95cd7250b1588550a9bdb8bd552537992e3bf78b535ba6722c3aa837d"
+            "versions": {
+                "1.0": "c59b2db95cd7250b1588550a9bdb8bd552537992e3bf78b535ba6722c3aa837d"
+            }
         },
         "Cores": {
             "Acorn Atom":
             {
                 "latest": ["0.1"],
-                "0.1": "ed1ca1ad15ccb73d46259131e363f70fc0cfe8f7dc42654ae87c3dc7f8d573ac"
+                "versions": {
+                    "0.1": "ed1ca1ad15ccb73d46259131e363f70fc0cfe8f7dc42654ae87c3dc7f8d573ac"
+                }
             },
             "Amstrad CPC":
             {
                 "latest": ["4", "https://github.com/zxdos/zxdos-plus/raw/master/cores/amstradCPC_gomadoslx25_v4.ZXD"],
-                "1": "8c0f0b9be6861cbae947ca5d412ec824c9c989a97c2d6a4056dbf3fe8cde3aac",
-                "4": "e88544a8acd89802d96e307fd1bd2ad52386e7a7240a6e045eaf0033a1b494c1"
+                "versions": {
+                    "1": "8c0f0b9be6861cbae947ca5d412ec824c9c989a97c2d6a4056dbf3fe8cde3aac",
+                    "4": "e88544a8acd89802d96e307fd1bd2ad52386e7a7240a6e045eaf0033a1b494c1"
+                }
             },
             "Atari 2600": {
                 "latest": ["2.1", "https://github.com/zxdos/zxdos-plus/raw/master/cores/A2600_zxdos_lx25_v2_1.ZXD"],
-                "2.1": "cc1df50d02ddc1ac48a5064afbf6e6a6a03f007516b1fc6544922bf67e261e81"
+                "versions": {
+                    "2.1": "cc1df50d02ddc1ac48a5064afbf6e6a6a03f007516b1fc6544922bf67e261e81"
+                }
             },
             "Camputers Lynx": {
                 "latest": ["2021.04.03", "https://github.com/zxdos/zxdos-plus/raw/master/cores/camputers_lynx_lx25_2021-04-03.ZXD"],
-                "2021.04.01": "289aa2a08403d9fb5e497b1992986072f468172e961b649489eb3ca20297dcd2",
-                "2021.04.02": "e426499ee91411bbbec0a8edec59d8d843e3352c5e508a0c574cb3b9979f7d33",
-                "2021.04.03": "c23bf294fba796180f5891d93190eeb764cf00cccbb3aad991d753adc6efe05c"
+                "versions": {
+                    "2021.04.01": "289aa2a08403d9fb5e497b1992986072f468172e961b649489eb3ca20297dcd2",
+                    "2021.04.02": "e426499ee91411bbbec0a8edec59d8d843e3352c5e508a0c574cb3b9979f7d33",
+                    "2021.04.03": "c23bf294fba796180f5891d93190eeb764cf00cccbb3aad991d753adc6efe05c"
+                }
             },
             "CHIP-8": {
                 "latest": ["2021.05.23", "https://github.com/zxdos/zxdos-plus/raw/master/cores/chip8_zxdoslx25_20210523.ZXD"],
-                "2021.04.11": "7a0c29281b3a92a02e11707b1adb7b8c58ed3aad2c8f598fde67f4e098ce0ab0",
-                "2021.04.24": "03f81eed4916c4de2d034c97eaea3aa2153de24a4be412b4bbc9db90ce5441ad",
-                "2021.05.16": "c5165afc7c49f67aa6e298e3ba27d1857bfb9286ed9587d2748bd34f0924859a",
-                "2021.05.23": "989bd104db344396aa9bc204e34ab70d7ae7024f4abe6c3405f599af27caf35a"
+                "versions": {
+                    "2021.04.11": "7a0c29281b3a92a02e11707b1adb7b8c58ed3aad2c8f598fde67f4e098ce0ab0",
+                    "2021.04.24": "03f81eed4916c4de2d034c97eaea3aa2153de24a4be412b4bbc9db90ce5441ad",
+                    "2021.05.16": "c5165afc7c49f67aa6e298e3ba27d1857bfb9286ed9587d2748bd34f0924859a",
+                    "2021.05.23": "989bd104db344396aa9bc204e34ab70d7ae7024f4abe6c3405f599af27caf35a"
+                }
             },
             "ColecoVision": {
                 "latest": ["0.1"],
-                "0.1": "1b640cb200434f735f749e18e34ed37ccba487f5c84ba3d4e2d321363f9aff4f"
+                "versions": {
+                    "0.1": "1b640cb200434f735f749e18e34ed37ccba487f5c84ba3d4e2d321363f9aff4f"
+                }
             },
             "Commodore 64": {
                 "latest": ["1.0"],
-                "1.0": "c917efa18740920da86700ab58dd1dbf4911597faa0a4b6b532727059dd9a975"
+                "versions": {
+                    "1.0": "c917efa18740920da86700ab58dd1dbf4911597faa0a4b6b532727059dd9a975"
+                }
             },
             "MSX":
             {
                 "latest": ["1.3 20210606 (Avlixa)", "https://github.com/zxdos/zxdos-plus/raw/master/cores/msx1-3_zxdoslx25_20210606.ZXD"],
                 "base": ["1.3", "https://github.com/zxdos/zxdos-plus/raw/master/cores/msx1-3_zxdoslx25.ZXD"],
-                "Beta": "a2eb1b6cdaecf67e0a07e9cfe593a247d46e85119c9b5936c57edc5ec88782f8",
-                "1.0": "a64e415a5277d92ea5441cfe02dcc8dfbbe396911d20f732f34f7bb6040ef0fe",
-                "1.2": "bf420194449675258c39fe62a789d09629f7f90cc1d27d2cc25b5cc6500395c9",
-                "1.3 v1 (Benitoss)": "035694d34eb709e6f9b726ad2c819b95b1fbdb5b8464ab7595a1628c3d7d48c2",
-                "1.3 v2 (Benitoss)": "03524268d7007a68a570e422f3cc36b4e2fdb041066e3f0ed6cb1c6fd1d9936a",
-                "1.3 v3 (Benitoss)": "899150df22c98bb8edde878f39febb04e15f4b0c1a31f834c1a8001e838a644d",
-                "1.3 v4 (Benitoss)": "f10bd0977139653fcb2bcdf879dd5c60db9f300cd2cad884323cc1c542a64277",
-                "1.3 v5 (Benitoss)": "a1d60559481198235a59cf192851b920a7460661156f4f8bd97d135cf1d77a46",
-                "1.3 v6 (Benitoss)": "1a390b1663472ec4656347f10bdca4d200b3abd20cae4488d41754f3ea993902",
-                "1.3": "06e922c18daaa3e2b8388836d96e4f80a8505daa82de0914b2ffb8f696a68aec",
-                "1.3 20210606 (Avlixa)": "d41f2bd943f3b8f5e186064f2df6da8926d4c741de2cd59a9c127a2f35f23244"
+                "versions": {
+                    "Beta": "a2eb1b6cdaecf67e0a07e9cfe593a247d46e85119c9b5936c57edc5ec88782f8",
+                    "1.0": "a64e415a5277d92ea5441cfe02dcc8dfbbe396911d20f732f34f7bb6040ef0fe",
+                    "1.2": "bf420194449675258c39fe62a789d09629f7f90cc1d27d2cc25b5cc6500395c9",
+                    "1.3 v1 (Benitoss)": "035694d34eb709e6f9b726ad2c819b95b1fbdb5b8464ab7595a1628c3d7d48c2",
+                    "1.3 v2 (Benitoss)": "03524268d7007a68a570e422f3cc36b4e2fdb041066e3f0ed6cb1c6fd1d9936a",
+                    "1.3 v3 (Benitoss)": "899150df22c98bb8edde878f39febb04e15f4b0c1a31f834c1a8001e838a644d",
+                    "1.3 v4 (Benitoss)": "f10bd0977139653fcb2bcdf879dd5c60db9f300cd2cad884323cc1c542a64277",
+                    "1.3 v5 (Benitoss)": "a1d60559481198235a59cf192851b920a7460661156f4f8bd97d135cf1d77a46",
+                    "1.3 v6 (Benitoss)": "1a390b1663472ec4656347f10bdca4d200b3abd20cae4488d41754f3ea993902",
+                    "1.3": "06e922c18daaa3e2b8388836d96e4f80a8505daa82de0914b2ffb8f696a68aec",
+                    "1.3 20210606 (Avlixa)": "d41f2bd943f3b8f5e186064f2df6da8926d4c741de2cd59a9c127a2f35f23244"
+                }
             },
             "NES": {
                 "latest": ["20200923", "https://github.com/zxdos/zxdos-plus/raw/master/cores/COREn_NES_VGA_lx25.zxd"],
-                "20200920": "35bd42259ab47099d4151c0ff687d3c3355e591ea4fb941e00aed709ab375d3e",
-                "20200923": "a22d70b0faaaf7e6759ee8b90986fd2da4f97b89f37aa5798af805fd363941c7"
+                "versions": {
+                    "20200920": "35bd42259ab47099d4151c0ff687d3c3355e591ea4fb941e00aed709ab375d3e",
+                    "20200923": "a22d70b0faaaf7e6759ee8b90986fd2da4f97b89f37aa5798af805fd363941c7"
+                }
             },
             "PC XT": {
                 "latest": ["Next186 DDR3 v1", "https://github.com/zxdos/binaries/raw/master/next186_zxdos_ddr3_lx25_v1_COREXX.ZXD"],
-                "Next186 DDR3 Test1": "b01f7b892fcedafa9f067cc3449a9d7142f4e2d7e8a5ee53ecbe1d8be96725a9",
-                "Next186 DDR3 v1": "3468f9ccc441828e16243edaabfd9fe30b5125a0e1dc5591f9e0137ad9402e63"
+                "versions": {
+                    "Next186 DDR3 Test1": "b01f7b892fcedafa9f067cc3449a9d7142f4e2d7e8a5ee53ecbe1d8be96725a9",
+                    "Next186 DDR3 v1": "3468f9ccc441828e16243edaabfd9fe30b5125a0e1dc5591f9e0137ad9402e63"
+                }
             },
             "Phoenix": {
                 "latest": ["1.0"],
-                "0.1": "c881cf7c7e8b383deec958113aa6f6dfe28e9f55544386b4a5e7d67dcc206fd5",
-                "0.2": "ace00fedd5ebb8afab7925c04012d3d9519975c85104e35b2589fb388c67923b",
-                "1.0": "6806637a3eaf51802e4a0e6622a91917adaafae4379a4e1d6cba8e0a750007b9"
+                "versions": {
+                    "0.1": "c881cf7c7e8b383deec958113aa6f6dfe28e9f55544386b4a5e7d67dcc206fd5",
+                    "0.2": "ace00fedd5ebb8afab7925c04012d3d9519975c85104e35b2589fb388c67923b",
+                    "1.0": "6806637a3eaf51802e4a0e6622a91917adaafae4379a4e1d6cba8e0a750007b9"
+                }
             },
             "Pong": {
                 "latest": ["2.2", "https://github.com/zxdos/zxdos-plus/raw/master/cores/pong_ay38500_zxdoslx25_v2_2.ZXD"],
-                "1.0": "f944e49710e30e3de0c89e71b25ac580d90a1d1a6d7a6f4a0279fd452a030c41",
-                "2.1": "9b64a0b0f610db602b00862109c74c77696c68cf4c7b3e54f4b2727547be8b24",
-                "2.2": "3aaf863d3941cc681939064a36a380cc795717909dabf1fbd7021a8628bfeab3"
+                "versions": {
+                    "1.0": "f944e49710e30e3de0c89e71b25ac580d90a1d1a6d7a6f4a0279fd452a030c41",
+                    "2.1": "9b64a0b0f610db602b00862109c74c77696c68cf4c7b3e54f4b2727547be8b24",
+                    "2.2": "3aaf863d3941cc681939064a36a380cc795717909dabf1fbd7021a8628bfeab3"
+                }
             },
             "Test": {
                 "latest": ["1.1", "https://github.com/zxdos/zxdos-plus/raw/master/cores/COREN_test_placa_lx25.ZXD"],
-                "1.0": "25034b43ad11a6f93ec5075d761a8c31cc47e08edc3abd4b85115f50a6993926",
-                "1.1": "7ac3895c796f1d65ba73498b8799d161713487750c3fd4b56ac8943d871fcc9a",
-                "1.1 Test": "ce737020ed78f5b90aa772447b149a8fb18c73540c4750861e8f7db1d4aaff67"
+                "versions": {
+                    "1.0": "25034b43ad11a6f93ec5075d761a8c31cc47e08edc3abd4b85115f50a6993926",
+                    "1.1": "7ac3895c796f1d65ba73498b8799d161713487750c3fd4b56ac8943d871fcc9a",
+                    "1.1 Test": "ce737020ed78f5b90aa772447b149a8fb18c73540c4750861e8f7db1d4aaff67"
+                }
             },
             "Videopac": {
                 "latest": ["20210515", "https://github.com/zxdos/zxdos-plus/raw/master/cores/videopac_zxdos_lx25_20210515.ZXD"],
-                "Beta 1": "e9842c20136c3d232e8521a033e3fbca1b1a8eafb8244795589eaa9ad5e7cb36",
-                "Beta 4": "182c1d1ae6fc52007ae6ccff4abbbcc7980608d8074e66db59de972d4bee3ac1",
-                "20210130_beta": "a394b556e6b7864b2f5f2ae8b8ba18865442df89fd3809faf79c5696d0be093c",
-                "20210130": "f69d6076e200c84a6189f69126445c91876d31a01587f50400648c89853b39e1",
-                "20210515": "dae9084601ffa788cfcf6bf95a873aaac492224cad1552befcd34c7f5ddfb51b"
+                "versions": {
+                    "Beta 1": "e9842c20136c3d232e8521a033e3fbca1b1a8eafb8244795589eaa9ad5e7cb36",
+                    "Beta 4": "182c1d1ae6fc52007ae6ccff4abbbcc7980608d8074e66db59de972d4bee3ac1",
+                    "20210130_beta": "a394b556e6b7864b2f5f2ae8b8ba18865442df89fd3809faf79c5696d0be093c",
+                    "20210130": "f69d6076e200c84a6189f69126445c91876d31a01587f50400648c89853b39e1",
+                    "20210515": "dae9084601ffa788cfcf6bf95a873aaac492224cad1552befcd34c7f5ddfb51b"
+                }
             },
             "ZX81": {
                 "latest": ["Beta 0", ""],
-            	"Beta 0": "a6e7c35054fbfa95e3de2d2a62d2aec92db2b65e87086438aac5faa2c30d9c8c"
+                "versions": {
+            	    "Beta 0": "a6e7c35054fbfa95e3de2d2a62d2aec92db2b65e87086438aac5faa2c30d9c8c"
+                }
             },
             "ZX Spectrum": {
                 "latest": ["EXP27_100820", "https://github.com/mcleod-ideafix/zxuno_spectrum_core/raw/master/zxdos_lx25/COREx.ZXD"],
-                "EXP26_060818": "5806919127973f3297b3b97e05ddc8c4790495cf2a065f31fad0a8cabad11840",
-                "EXP27_unknown": "b73e37eeeb8ed984a98a7c2633716087876195dcd7642e5df9fc901e8a378f21",
-                "EXP27_100820": "4eaa9f8080035185b1f7b5905f06bd63e7c4dc8645c2a79c32accc5154b4f7fb",
-                "EXP27 (I2S MIDI)": "6c0bc134858328564c817e1bdf10307bdf7a4a9ebdf40c582739255aa283ed9d"
+                "versions": {
+                    "EXP26_060818": "5806919127973f3297b3b97e05ddc8c4790495cf2a065f31fad0a8cabad11840",
+                    "EXP27_unknown": "b73e37eeeb8ed984a98a7c2633716087876195dcd7642e5df9fc901e8a378f21",
+                    "EXP27_100820": "4eaa9f8080035185b1f7b5905f06bd63e7c4dc8645c2a79c32accc5154b4f7fb",
+                    "EXP27 (I2S MIDI)": "6c0bc134858328564c817e1bdf10307bdf7a4a9ebdf40c582739255aa283ed9d"
+                }
             },
             "ZX Spectrum (Avlixa)":
             {
                 "latest": ["EXP27_20210530", "https://github.com/zxdos/zxdos-plus/raw/master/cores/CORENN_SPECTRUM_EXP27_lx25_20210530.ZXD"],
-                "EXP27_150820_monocromo": "89ccd7c10b91668a9940193dc55e6f30bc0f138dee9b3f671ac440acf8c484e3",
-                "EXP27_190920_test_BnW": "710eb8ac196b0b38ff84761c727e8b4ed8a2f9433db9b4d76899209aed3f757f",
-                "EXP27_190920_BnW": "a4be8ef45afb08aa3f5aec99772beec6ffff1058e478b4b55df8360275a193b0",
-                "EXP27_20210525_test": "a2643327f4e7fc07ded7b1f3f5c74cf3136fd353770b85d19609c611d7fddee0",
-                "EXP27_20210530": "2f4aa6a4d92b9d198201feb32c54df8e6eff14737918d4c43b9f3b424d11d159"
+                "versions": {
+                    "EXP27_150820_monocromo": "89ccd7c10b91668a9940193dc55e6f30bc0f138dee9b3f671ac440acf8c484e3",
+                    "EXP27_190920_test_BnW": "710eb8ac196b0b38ff84761c727e8b4ed8a2f9433db9b4d76899209aed3f757f",
+                    "EXP27_190920_BnW": "a4be8ef45afb08aa3f5aec99772beec6ffff1058e478b4b55df8360275a193b0",
+                    "EXP27_20210525_test": "a2643327f4e7fc07ded7b1f3f5c74cf3136fd353770b85d19609c611d7fddee0",
+                    "EXP27_20210530": "2f4aa6a4d92b9d198201feb32c54df8e6eff14737918d4c43b9f3b424d11d159"
+                }
             },
             "ZX Spectrum 48K (Kyp)": {
                 "latest": ["2021.04.03", "https://github.com/zxdos/zxdos-plus/raw/master/cores/zx48_2021-04-03.ZXD"],
                 "base": ["1.0", "https://github.com/Kyp069/zx48.zxdosplus/releases/download/1.0/COREnn.zx48.by.Kyp.v1.0.ZXD"],
-                "1.0": "3f57104e7af35ec0b06f5c22322fd535962dcf850969592c070e786888f0433e",
-                "Beta": "aca4d1a11805c3badd832cdc7b53ea1592313b6c272a5a8fa68695b0b46e35a1",
-                "2021.04.01 (RGB)": "552af7753a6ca2c940dccc5398e38951902f8b69653f726322ed3d3d0ad190c2",
-                "2021.04.01": "ef5faf702638387f6fa5bf31b0452bd4e1e2a7a1d54cf33c12b396fe65b6fdde",
-                "2021.04.02": "80c544e3b506a4362e79b4bd1c890d40047f22ee3aae70d5034372b63d27dc93",
-                "2021.04.03": "20199ca1737b44ba18b146da969e5f3faca42a013dcf118ed804872d28cb4f4c"
+                "versions": {
+                    "1.0": "3f57104e7af35ec0b06f5c22322fd535962dcf850969592c070e786888f0433e",
+                    "Beta": "aca4d1a11805c3badd832cdc7b53ea1592313b6c272a5a8fa68695b0b46e35a1",
+                    "2021.04.01 (RGB)": "552af7753a6ca2c940dccc5398e38951902f8b69653f726322ed3d3d0ad190c2",
+                    "2021.04.01": "ef5faf702638387f6fa5bf31b0452bd4e1e2a7a1d54cf33c12b396fe65b6fdde",
+                    "2021.04.02": "80c544e3b506a4362e79b4bd1c890d40047f22ee3aae70d5034372b63d27dc93",
+                    "2021.04.03": "20199ca1737b44ba18b146da969e5f3faca42a013dcf118ed804872d28cb4f4c"
+                }
             },
             "ZX Spectrum 128K (Kyp)": {
                 "latest": ["2021.04.17"],
-                "2021.04.16": "1ae16087e16588b0fffc069440364a11d11103a73d0f160d638b4cad066a24b4",
-                "2021.04.17": "0c756d7a53a727184876023303480bca8e5aa4efef953b31817e078c3e169673"
+                "versions": {
+                    "2021.04.16": "1ae16087e16588b0fffc069440364a11d11103a73d0f160d638b4cad066a24b4",
+                    "2021.04.17": "0c756d7a53a727184876023303480bca8e5aa4efef953b31817e078c3e169673"
+                }
             },
             "ZX Spectrum Next": {
                 "latest": ["3.01.10 1x16", "https://github.com/zxdos/zxdos-plus/raw/master/cores/zxnext_top_issue2_zxdos_lx25_2M_3_1_10_1x16.ZXD"],
-                "Unknown Version": "a1a4de5df87cfce34129dfd33ba7b0372469344bad53d9a6b2665da89e93e56f",
-                "1": "5f26c4ada12166d6b2cc34664a7c3ddc281c226eb86bc39e9f6c6e465a9225a8",
-                "3": "5dd20bd9a77aa4d3bbe5d60b3d0f75b9524d84071123623748dcf1fb45163bb7",
-                "5": "256c0df300125ab0f5daeaab131f9600cda2aad0d1be04da4799fed5f05b4f6a",
-                "7": "33946f15f8b20a46a8828fe9c84cb5f210899e182b491f18938615be30ffa433",
-                "8": "60a4ec832e69b597f2ccdca6c2d5fbf7d30db6685ff71db8c79efa18dffbcc8c",
-                "9": "4f6b7c5038bf4d06719ad4e6170f66775aec980be33f0ac009ac0dcd8e2c6991",
-                "10": "6d945ecc5b21bb556ab73588dc74dbfbb8b14d217eeaf822891db8d81cb9837e",
-                "11 Beta": "830e08517e343c2b8ddcd805a02d9d986dce01687bbc1b9ac08f04e591e4330e",
-                "11 Beta (Edge)": "d63bd85037007346977345c19fad1f963dcad7c576e1d186ce78c1fd02752afb",
-                "11": "98c7ce7f1a778a24dbebd5d935c42f434c0a38e0e775776f046e44b9b02874c9",
-                "3.01.06b (Pi Zero)": "ec5eede4ebd1233b1cfc70f7dbcd507787f904a86ee2be15a46dac40efaa10c0",
-                "3.01.09 Beta": "ca92f2fcf2320621c1bd9e28e95c961232871c35585b84d0ee1e7e8cefa7389d",
-                "3.01.09": "348adf724d4d38734ab74b25083445a859ac7569b5b8007bb1f76a1044b90385",
-                "3.01.09 2MB (Benitoss)": "9fe2e6c09caf073dd778ce1552da18f55c16653f2eb40673d917bc4ba4648bb0",
-                "3.01.09b1 (Pi Zero)": "b532cb08990ec43a2a90f91a9dfd26313c8604e61e6262c191a58f0fa4740281",
-                "3.01.09b2 (Pi Zero)": "4ccbabc3bd9d29867bacca6ea333861cd054f0d796ad26a83d7830b62db8e74f",
-                "3.01.08b1 (Pi Zero)": "5de55399bde50edb1064ce013fd30e47cb14389653aa3e710dd2dc077af67261",
-                "3.01.08b2 (Pi Zero)": "9be5a1a27cdf97260666630d762db21778e2e1e8716ad64f943a4250bff659c7",
-                "3.01.08b3 (Pi Zero)": "e0a0b59eb450ed74590b862d4fa5e89cafa82e5a4cb6188a8950bc43e1428799",
-                "3.01.08b4 (Pi Zero)": "caaf0798314d97a7f4a79a91e62af4c111e5239760097f2008c850ec2045955a",
-                "3.01.09 1x16": "f9e47369621315f26fa01d7e896a2258c5a25b80837816f81c1046d105dee3a9",
-                "3.01.09 2x16": "e9178d424df986295e59c6ac69da00a52fbe1dd32d2478556c2ba89bf9ece974",
-                "3.01.10 1x16": "c5f289eb0ad547f4e7b42179e9f7f7de7a53f424de102adb037dc217e880174a",
-                "3.01.10 2x16": "5fbc10cceb57dab41d62944ac42bb61dd2f5aa725c991ac2c9f20b888e81807b",
-                "EDGE Beta01 (1x8_sM1)": "d1fe861f00ba91ff5c0ac213157ccba980b40ca7d5ac0f47357d192c86634009",
-                "EDGE Beta02 (1x8_sM1)": "2cfdb072f26b80d637b09f7b813b4a609a78722f54659a00e949eab7d4ec49be",
-                "EDGE Beta03 (2x16_cM1)": "eab771dcd624d66e0e1924c510bf6333388f00687902cfbf0718579c97274260"
+                "versions": {
+                    "Unknown Version": "a1a4de5df87cfce34129dfd33ba7b0372469344bad53d9a6b2665da89e93e56f",
+                    "1": "5f26c4ada12166d6b2cc34664a7c3ddc281c226eb86bc39e9f6c6e465a9225a8",
+                    "3": "5dd20bd9a77aa4d3bbe5d60b3d0f75b9524d84071123623748dcf1fb45163bb7",
+                    "5": "256c0df300125ab0f5daeaab131f9600cda2aad0d1be04da4799fed5f05b4f6a",
+                    "7": "33946f15f8b20a46a8828fe9c84cb5f210899e182b491f18938615be30ffa433",
+                    "8": "60a4ec832e69b597f2ccdca6c2d5fbf7d30db6685ff71db8c79efa18dffbcc8c",
+                    "9": "4f6b7c5038bf4d06719ad4e6170f66775aec980be33f0ac009ac0dcd8e2c6991",
+                    "10": "6d945ecc5b21bb556ab73588dc74dbfbb8b14d217eeaf822891db8d81cb9837e",
+                    "11 Beta": "830e08517e343c2b8ddcd805a02d9d986dce01687bbc1b9ac08f04e591e4330e",
+                    "11 Beta (Edge)": "d63bd85037007346977345c19fad1f963dcad7c576e1d186ce78c1fd02752afb",
+                    "11": "98c7ce7f1a778a24dbebd5d935c42f434c0a38e0e775776f046e44b9b02874c9",
+                    "3.01.06b (Pi Zero)": "ec5eede4ebd1233b1cfc70f7dbcd507787f904a86ee2be15a46dac40efaa10c0",
+                    "3.01.09 Beta": "ca92f2fcf2320621c1bd9e28e95c961232871c35585b84d0ee1e7e8cefa7389d",
+                    "3.01.09": "348adf724d4d38734ab74b25083445a859ac7569b5b8007bb1f76a1044b90385",
+                    "3.01.09 2MB (Benitoss)": "9fe2e6c09caf073dd778ce1552da18f55c16653f2eb40673d917bc4ba4648bb0",
+                    "3.01.09b1 (Pi Zero)": "b532cb08990ec43a2a90f91a9dfd26313c8604e61e6262c191a58f0fa4740281",
+                    "3.01.09b2 (Pi Zero)": "4ccbabc3bd9d29867bacca6ea333861cd054f0d796ad26a83d7830b62db8e74f",
+                    "3.01.08b1 (Pi Zero)": "5de55399bde50edb1064ce013fd30e47cb14389653aa3e710dd2dc077af67261",
+                    "3.01.08b2 (Pi Zero)": "9be5a1a27cdf97260666630d762db21778e2e1e8716ad64f943a4250bff659c7",
+                    "3.01.08b3 (Pi Zero)": "e0a0b59eb450ed74590b862d4fa5e89cafa82e5a4cb6188a8950bc43e1428799",
+                    "3.01.08b4 (Pi Zero)": "caaf0798314d97a7f4a79a91e62af4c111e5239760097f2008c850ec2045955a",
+                    "3.01.09 1x16": "f9e47369621315f26fa01d7e896a2258c5a25b80837816f81c1046d105dee3a9",
+                    "3.01.09 2x16": "e9178d424df986295e59c6ac69da00a52fbe1dd32d2478556c2ba89bf9ece974",
+                    "3.01.10 1x16": "c5f289eb0ad547f4e7b42179e9f7f7de7a53f424de102adb037dc217e880174a",
+                    "3.01.10 2x16": "5fbc10cceb57dab41d62944ac42bb61dd2f5aa725c991ac2c9f20b888e81807b",
+                    "EDGE Beta01 (1x8_sM1)": "d1fe861f00ba91ff5c0ac213157ccba980b40ca7d5ac0f47357d192c86634009",
+                    "EDGE Beta02 (1x8_sM1)": "2cfdb072f26b80d637b09f7b813b4a609a78722f54659a00e949eab7d4ec49be",
+                    "EDGE Beta03 (2x16_cM1)": "eab771dcd624d66e0e1924c510bf6333388f00687902cfbf0718579c97274260"
+                }
             }
         },
         "recovery.zxd.bit": {
             "latest": ["1.0"],
-            "1.0": "fe077527253fe618452205a945fcdef5eab1c59d72dd0edafd54c09ccd713ba7"
+            "versions": {
+                "1.0": "fe077527253fe618452205a945fcdef5eab1c59d72dd0edafd54c09ccd713ba7"
+            }
         }
     },
     "ROM": {
@@ -1053,107 +1424,115 @@
             "esxdos": ["16384", 8192, "ESXDOS.ZX1", "F331005EC30101FFC3"]
         },
         "esxdos": {
-            "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
-            "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
-            "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
-            "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8",
-            "0.8.9": "89706de560d66432fe19ddb895e7cde49e252e932687dcb57fb92259a0259339"
+            "versions": {
+                "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
+                "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
+                "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
+                "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8",
+                "0.8.9": "89706de560d66432fe19ddb895e7cde49e252e932687dcb57fb92259a0259339"
+            }
         },
         "16K Spectrum ROM": {
             "latest": ["ZX Spectrum", "https://github.com/zxdos/zxuno/raw/master/modflash/roms/48.rom"],
             "arcade": ["Jamma Demo", "https://github.com/zxdos/zxuno/raw/master/firmware/jamma.rom"],
-            "80K Expanded Mod": "88797a584dd4edea9091396ad3c56be04c5a5fa2bdbdc259e9b3367d31d874bb",
-            "Arabic 48K": "34c24c37f78aaceb3a52f17556a1f445e9b145f3c1651c6bafec1410abc2cb2e",
-            "Arcade Game Designer 0.1": "73a61aa52def432b8146bd79f8380cc477c5cf54a16a7753a3e7f24cc5c9e179",
-            "Backgammon": "272f69f52fe62f2a64f8ac30a9b19b3932471b02328fa7df5eab770faa3e5f59",
-            "Beckman Innovation Mod": "a0bba33d21b60509e507a9bd5db5ed0673af45cfd3886234d6349d5f446a10a9",
-            "Busy Soft v1.18 Mod": "29a4bb2503cd3d28b1570d8405624887683b0ec9669d322eae12bd13214a87fb",
-            "Busy Soft v1.40 Mod": "3ba8051d60387d580be91849f02d757d74fdfdc61bf38c590a09ede050920ab9",
-            "Chess": "9a8c3600011acb2c446f7fbc2ba2385f521fa5577a09e0eed1602bbe638dba72",
-            "Cookie": "302949b6b345dbcb2d8cc37a330d687587920f0369c8f30100cde4719d124bf1",
-            "Deathchase": "30a2b27f4e744e21f0b6e8446309511be21eb863183f4024a0eb46c275d473ab",
-            "Gosh Wonderful ROM v1.33": "0127b069644143809310fa73397a540ac0b69d5c0e45b4ce6b424151d740fef4",
-            "Gyruss": "baa8671cd9fc1b90f58ca9ec04c68bd53458207aeae39237613eb92d6e19b9d8",
-            "Henk de Groot Mod": "e0cbd5ecd57ebf6c1c9fd0781c9099c877a6686d735e091ab4e781704b365a81",
-            "Horace & The Spiders": "33183b12e0759c26820b5b598f93f6e66b497dd803ae8b1d0b017eb4ce158224",
-            "Hungry Horace": "d1a759662655bc8da08f2aabb1fde21710e217af1619887f4723d7eedc393733",
-            "Ian Collier Mod": "1868ed27a908eaf5c11ce4810029f5c4df9f8acd37ddab644191277b1e649600",
-            "Inves Spectrum+": "b237d9facdc7ecb1b5e277f79870b1d8cba943b05e1b7fb1769a7e43a71742de",
-            "Jet Pac": "d243478222d58beb4f8fc5b9ef1c1d60efdd636f350fc89ad315256be1c50c75",
-            "Jet Set Willy": "8f11a7690c28c0e11c2a3ba83e4210b9e263a073329b5df4a585d6864889ac56",
-            "Jonathan Harston v0.72 Mod": "c616eb7ecfd6049d10d180885d4bfb5ee0408b3a0fc5b433da1a1a4194989ede",
-            "Lala Prologue": "78ffff5d1bd00fd5c260f80d14b51e4b9173e4ccf072354eb2edcae098720090",
-            "LocoMotion": "bb2b59be50152aa471d09160d677f161f2e9ea7a336ee459d2f428c75de465c2",
-            "Looking Glass 1.07": "20464ec00063a9aa424c5eb1e6fb225cc96de6b73e3badbec8ec31cf1e7cfd5f",
-            "Manic Miner": "3471002449df62f3cddecfcaee16cdf7cffcf9b1b224f6d2a8798e3b86ce8082",
-            "Microdigital Electronica TK90": "f3892b4140901f8289b962f5e097cf330c6997260052baac351026639012beeb",
-            "Microdigital Electronica TK95": "c0f7c0a7b2dd838488189cda052e414cd3474f3a718c1fde0a6cef3e8e0f4776",
-            "Misco Jones": "f3a71b6e996f357f4d22c3d8bcef38672b6c0358e4a0544af2ae97200ca9a500",
-            "Panama Joe": "c01730befb9d7b8577c5c0da18953ed0341420198182657dd43afcc97ffacdc8",
-            "Planetoids": "04d4890b1b4ba05ea034d322cbae870612076e164c6c254fcb3b224c41eca123",
-            "Pokemon": "f71403a3a7f938837e6395c20c2a4eed0949c3e4ae0df0fb4ba670f06ad2f033",
-            "Popeye": "bda08449dea5eca38f44b024bf0cfadccb9298397733ceedd2b03ee77e72d3ff",
-            "Pretty BASIC": "028011105dc47c3abe8b06ccdc9c7713435b67a938989c4edb34439720a0ae12",
-            "Pssst": "4e91f075dc213223a70e8968e12e9a92c4c2ecb3769da9294fce467a7f427b21",
-            "QBert": "8ffc2a5f8e1e26dd05a6361fda82f70c6490162f452adc05b6b27a08146c8015",
-            "RaK 48 Turbo 1991 ": "26e6d7eb1d52acf18e078cf520a1a280721165252905bcd5210d16cb9427e771",
-            "Return Of The Jedi": "2842e65ce73f5983ebe2cecbd5df546ef7609806dc688587e2ce6310b4031bc9",
-            "Sea Change (Geoff Wearmouth)": "b38325340110105da55b002801565640b46ec47b929164b4a5b6c5982028b25d",
-            "Sin Leches": "ef60a214261863fb606879d07103e1e8dd387c62f46a8314b63eeaa08aeb2e40",
-            "Shadow Of The Unicorn": "cf985596b77b9a772b7d61492f99a00e2a23b20e6f5bdc22580210aed69f7343",
-            "SpecEm ROM1": "e42fd497be554625c6ef8a35a76e264d65ce44f4c4f1e59d4780e1f37e985973",
-            "Space Raiders": "2936b57fe5ec28e894deadea30053d7d174c6bee380665455136bd5382ad9019",
-            "Spectrum DE (Andrew Owen)": "bb7d44b75a72d64ceabbc52dcc346ec2456e6621ba23235075a04f36d6654747",
-            "Star Wars": "61c19a488a57ffd2ec002442eade6f95fbdd90015191436ffcbdde0656af54a0",
-            "Test ROM McLeod": "ceff0e3d79e4cf2805e4350d4439cae8f01758b9ba784c799b0f314a85ef02c4",
-            "Timex Computer 2048": "8375dc559f35e3584b1141ed1eb50a87c2aba85e560fc7ff5b467c0520dffaf6",
-            "Tranz Am": "72c4dd3e91239ecb3dd5da7a0d6e5b7a4a475901cdc4ebfbde87125cb2449163",
-            "Unknown Mod": "c59dc57560787ecca25fc990e6c61ff9d58806cfdd4443e098543fd4cbeb6cd2",
-            "ZX82 by Daniel A. Nagy": "b69c8483f209e756265d1cc4b09df4e1961f7fcaa591f167a41214b61783f32f",
-            "ZX 48K Cargando Leches": "93d98ae960fca679a84fe47bf066a4cda963366f90fd6aacabb1f206293cfd2b",
-            "ZX Emulator Mod": "937886a4fd478b86dc022721265e639d8da01b0f3d1325345786283c4865973d",
-            "ZX Spectrum Simulator Mod": "fd877e3e388ae7570c14a232abffe559fef5e5d88b12a06b92c98418a494e3b7",
-            "ZX Spectrum": "d55daa439b673b0e3f5897f99ac37ecb45f974d1862b4dadb85dec34af99cb42",
-            "ZX Spectrum 48K Cargando Leches": "895240ca1059c7f176cd6702c52c82dc2596591bdcbc9f205474db7a3110de31",
-            "ZX Spectrum 48K Cargando Leches (Ant)": "2cfbeef248657810448ec028042520311e9ec572858d71dccf1aec0c64607070",
-            "Jamma Demo": "ee87c52f38c752bd78b44d16ac4da8878ea6b4326ed81f7c2d19944f2ce8a55f"
-            },
+            "versions": {
+                "80K Expanded Mod": "88797a584dd4edea9091396ad3c56be04c5a5fa2bdbdc259e9b3367d31d874bb",
+                "Arabic 48K": "34c24c37f78aaceb3a52f17556a1f445e9b145f3c1651c6bafec1410abc2cb2e",
+                "Arcade Game Designer 0.1": "73a61aa52def432b8146bd79f8380cc477c5cf54a16a7753a3e7f24cc5c9e179",
+                "Backgammon": "272f69f52fe62f2a64f8ac30a9b19b3932471b02328fa7df5eab770faa3e5f59",
+                "Beckman Innovation Mod": "a0bba33d21b60509e507a9bd5db5ed0673af45cfd3886234d6349d5f446a10a9",
+                "Busy Soft v1.18 Mod": "29a4bb2503cd3d28b1570d8405624887683b0ec9669d322eae12bd13214a87fb",
+                "Busy Soft v1.40 Mod": "3ba8051d60387d580be91849f02d757d74fdfdc61bf38c590a09ede050920ab9",
+                "Chess": "9a8c3600011acb2c446f7fbc2ba2385f521fa5577a09e0eed1602bbe638dba72",
+                "Cookie": "302949b6b345dbcb2d8cc37a330d687587920f0369c8f30100cde4719d124bf1",
+                "Deathchase": "30a2b27f4e744e21f0b6e8446309511be21eb863183f4024a0eb46c275d473ab",
+                "Gosh Wonderful ROM v1.33": "0127b069644143809310fa73397a540ac0b69d5c0e45b4ce6b424151d740fef4",
+                "Gyruss": "baa8671cd9fc1b90f58ca9ec04c68bd53458207aeae39237613eb92d6e19b9d8",
+                "Henk de Groot Mod": "e0cbd5ecd57ebf6c1c9fd0781c9099c877a6686d735e091ab4e781704b365a81",
+                "Horace & The Spiders": "33183b12e0759c26820b5b598f93f6e66b497dd803ae8b1d0b017eb4ce158224",
+                "Hungry Horace": "d1a759662655bc8da08f2aabb1fde21710e217af1619887f4723d7eedc393733",
+                "Ian Collier Mod": "1868ed27a908eaf5c11ce4810029f5c4df9f8acd37ddab644191277b1e649600",
+                "Inves Spectrum+": "b237d9facdc7ecb1b5e277f79870b1d8cba943b05e1b7fb1769a7e43a71742de",
+                "Jet Pac": "d243478222d58beb4f8fc5b9ef1c1d60efdd636f350fc89ad315256be1c50c75",
+                "Jet Set Willy": "8f11a7690c28c0e11c2a3ba83e4210b9e263a073329b5df4a585d6864889ac56",
+                "Jonathan Harston v0.72 Mod": "c616eb7ecfd6049d10d180885d4bfb5ee0408b3a0fc5b433da1a1a4194989ede",
+                "Lala Prologue": "78ffff5d1bd00fd5c260f80d14b51e4b9173e4ccf072354eb2edcae098720090",
+                "LocoMotion": "bb2b59be50152aa471d09160d677f161f2e9ea7a336ee459d2f428c75de465c2",
+                "Looking Glass 1.07": "20464ec00063a9aa424c5eb1e6fb225cc96de6b73e3badbec8ec31cf1e7cfd5f",
+                "Manic Miner": "3471002449df62f3cddecfcaee16cdf7cffcf9b1b224f6d2a8798e3b86ce8082",
+                "Microdigital Electronica TK90": "f3892b4140901f8289b962f5e097cf330c6997260052baac351026639012beeb",
+                "Microdigital Electronica TK95": "c0f7c0a7b2dd838488189cda052e414cd3474f3a718c1fde0a6cef3e8e0f4776",
+                "Misco Jones": "f3a71b6e996f357f4d22c3d8bcef38672b6c0358e4a0544af2ae97200ca9a500",
+                "Panama Joe": "c01730befb9d7b8577c5c0da18953ed0341420198182657dd43afcc97ffacdc8",
+                "Planetoids": "04d4890b1b4ba05ea034d322cbae870612076e164c6c254fcb3b224c41eca123",
+                "Pokemon": "f71403a3a7f938837e6395c20c2a4eed0949c3e4ae0df0fb4ba670f06ad2f033",
+                "Popeye": "bda08449dea5eca38f44b024bf0cfadccb9298397733ceedd2b03ee77e72d3ff",
+                "Pretty BASIC": "028011105dc47c3abe8b06ccdc9c7713435b67a938989c4edb34439720a0ae12",
+                "Pssst": "4e91f075dc213223a70e8968e12e9a92c4c2ecb3769da9294fce467a7f427b21",
+                "QBert": "8ffc2a5f8e1e26dd05a6361fda82f70c6490162f452adc05b6b27a08146c8015",
+                "RaK 48 Turbo 1991 ": "26e6d7eb1d52acf18e078cf520a1a280721165252905bcd5210d16cb9427e771",
+                "Return Of The Jedi": "2842e65ce73f5983ebe2cecbd5df546ef7609806dc688587e2ce6310b4031bc9",
+                "Sea Change (Geoff Wearmouth)": "b38325340110105da55b002801565640b46ec47b929164b4a5b6c5982028b25d",
+                "Sin Leches": "ef60a214261863fb606879d07103e1e8dd387c62f46a8314b63eeaa08aeb2e40",
+                "Shadow Of The Unicorn": "cf985596b77b9a772b7d61492f99a00e2a23b20e6f5bdc22580210aed69f7343",
+                "SpecEm ROM1": "e42fd497be554625c6ef8a35a76e264d65ce44f4c4f1e59d4780e1f37e985973",
+                "Space Raiders": "2936b57fe5ec28e894deadea30053d7d174c6bee380665455136bd5382ad9019",
+                "Spectrum DE (Andrew Owen)": "bb7d44b75a72d64ceabbc52dcc346ec2456e6621ba23235075a04f36d6654747",
+                "Star Wars": "61c19a488a57ffd2ec002442eade6f95fbdd90015191436ffcbdde0656af54a0",
+                "Test ROM McLeod": "ceff0e3d79e4cf2805e4350d4439cae8f01758b9ba784c799b0f314a85ef02c4",
+                "Timex Computer 2048": "8375dc559f35e3584b1141ed1eb50a87c2aba85e560fc7ff5b467c0520dffaf6",
+                "Tranz Am": "72c4dd3e91239ecb3dd5da7a0d6e5b7a4a475901cdc4ebfbde87125cb2449163",
+                "Unknown Mod": "c59dc57560787ecca25fc990e6c61ff9d58806cfdd4443e098543fd4cbeb6cd2",
+                "ZX82 by Daniel A. Nagy": "b69c8483f209e756265d1cc4b09df4e1961f7fcaa591f167a41214b61783f32f",
+                "ZX 48K Cargando Leches": "93d98ae960fca679a84fe47bf066a4cda963366f90fd6aacabb1f206293cfd2b",
+                "ZX Emulator Mod": "937886a4fd478b86dc022721265e639d8da01b0f3d1325345786283c4865973d",
+                "ZX Spectrum Simulator Mod": "fd877e3e388ae7570c14a232abffe559fef5e5d88b12a06b92c98418a494e3b7",
+                "ZX Spectrum": "d55daa439b673b0e3f5897f99ac37ecb45f974d1862b4dadb85dec34af99cb42",
+                "ZX Spectrum 48K Cargando Leches": "895240ca1059c7f176cd6702c52c82dc2596591bdcbc9f205474db7a3110de31",
+                "ZX Spectrum 48K Cargando Leches (Ant)": "2cfbeef248657810448ec028042520311e9ec572858d71dccf1aec0c64607070",
+                "Jamma Demo": "ee87c52f38c752bd78b44d16ac4da8878ea6b4326ed81f7c2d19944f2ce8a55f"
+            }
+        },
         "32K Spectrum ROM": {
-            "BBC Micro": "f627698f7dd1193a6cb7023b61f45203e10b184223954516cca68d8e4e4c0a01",
-            "Jupiter Ace": "bfc93f0a367213f2cff5733e0f9fe7d6d3b526765d761fe8582239801c5502ef",
-            "Pentagon 128": "7b88abff5964f0cf38481ac51bf035be2c01b8827569876b3d15eb3ac340fef3",
-            "SE Basic IV 4.0 Anya": "6193b0615732a170566367666081c79f275673f41b83cfdc520dbf5bfaabc39f",
-            "SE Basic IV 4.2  20.07.15 Morton": "5b513e45a7448f00706aaffb8db639fd7a0eda6ae9b3224af0f4d172f4792e3b",
-            "SE Basic IV 4.2  20.09.30 Iggy": "121dcf1571a9be7c83b1e28f6d313495bd89909abe65b227301bc9a4282f72c7",
-            "Timex Computer 2068": "c3df7f1507b2037e38ab1f8866457934bd9aa8ff4d692cd94fcd63949a372e72",
-            "Timex Sinclair 2068": "6fa699524a7e78aa547a375bae58ab32613d8e61a6f16c83be881c41cee0ac53",
-            "Timex Sinclair 2068 (Rikyarg)": "d1d1962565ca5250116a5722533e58221d2f3dbeede80b1d45b5b1f0d5a56fb5",
-            "ZX80 Emulator": "05758f377bee49dbf8fffada1a90f337eaeab3a7e35c6cf4d12ed439ea4620a6",
-            "ZX81 Emulator": "fdfe8b361f52aa1bcdf8fcd9318af87b58b96a44240acaa753736f8790712ee4",
-            "ZX85 by Daniel A. Nagy": "9add1a988fe9d428d26fc39ee5530a3d93df4a991969cc6b1f2e3085f25d75c1",
-            "ZX85 by Daniel A. Nagy  20.10.04": "cb25aa879274143db6d3e734ab7ecaa50ccb34b2a2904cf7f7d0c12cd045b209",
-            "ZX Spectrum +2": "dae0690d8b433ea22b76b62520341f784071dbde0d02f50af0e3fd20fc6bca4a",
-            "ZX Spectrum +2 FR": "6842c2f29d81af85a87b75c77c01330473ae7d903944222d0f910afb8a36e983",
-            "ZX Spectrum +2 Gris ES": "02f9cd74a3f768e60709287999d9c251288afffd796a3985f1cf840045d31f68",
-            "ZX Spectrum 128K Derby+ 32K ROM": "df7181b671ff9fa739bc9f1065e7cb9b04e3f0bd04c4064189dc11f07b761634",
-            "ZX Spectrum 128K EN": "c1ff621d7910105d4ee45c31e9fd8fd0d79a545c78b66c69a562ee1ffbae8d72",
-            "ZX Spectrum 128K ES": "51d291fb08a0d4461b714114ef991e996784ec7ee6be8789382dc0781121e08e"
+            "versions": {
+                "BBC Micro": "f627698f7dd1193a6cb7023b61f45203e10b184223954516cca68d8e4e4c0a01",
+                "Jupiter Ace": "bfc93f0a367213f2cff5733e0f9fe7d6d3b526765d761fe8582239801c5502ef",
+                "Pentagon 128": "7b88abff5964f0cf38481ac51bf035be2c01b8827569876b3d15eb3ac340fef3",
+                "SE Basic IV 4.0 Anya": "6193b0615732a170566367666081c79f275673f41b83cfdc520dbf5bfaabc39f",
+                "SE Basic IV 4.2  20.07.15 Morton": "5b513e45a7448f00706aaffb8db639fd7a0eda6ae9b3224af0f4d172f4792e3b",
+                "SE Basic IV 4.2  20.09.30 Iggy": "121dcf1571a9be7c83b1e28f6d313495bd89909abe65b227301bc9a4282f72c7",
+                "Timex Computer 2068": "c3df7f1507b2037e38ab1f8866457934bd9aa8ff4d692cd94fcd63949a372e72",
+                "Timex Sinclair 2068": "6fa699524a7e78aa547a375bae58ab32613d8e61a6f16c83be881c41cee0ac53",
+                "Timex Sinclair 2068 (Rikyarg)": "d1d1962565ca5250116a5722533e58221d2f3dbeede80b1d45b5b1f0d5a56fb5",
+                "ZX80 Emulator": "05758f377bee49dbf8fffada1a90f337eaeab3a7e35c6cf4d12ed439ea4620a6",
+                "ZX81 Emulator": "fdfe8b361f52aa1bcdf8fcd9318af87b58b96a44240acaa753736f8790712ee4",
+                "ZX85 by Daniel A. Nagy": "9add1a988fe9d428d26fc39ee5530a3d93df4a991969cc6b1f2e3085f25d75c1",
+                "ZX85 by Daniel A. Nagy  20.10.04": "cb25aa879274143db6d3e734ab7ecaa50ccb34b2a2904cf7f7d0c12cd045b209",
+                "ZX Spectrum +2": "dae0690d8b433ea22b76b62520341f784071dbde0d02f50af0e3fd20fc6bca4a",
+                "ZX Spectrum +2 FR": "6842c2f29d81af85a87b75c77c01330473ae7d903944222d0f910afb8a36e983",
+                "ZX Spectrum +2 Gris ES": "02f9cd74a3f768e60709287999d9c251288afffd796a3985f1cf840045d31f68",
+                "ZX Spectrum 128K Derby+ 32K ROM": "df7181b671ff9fa739bc9f1065e7cb9b04e3f0bd04c4064189dc11f07b761634",
+                "ZX Spectrum 128K EN": "c1ff621d7910105d4ee45c31e9fd8fd0d79a545c78b66c69a562ee1ffbae8d72",
+                "ZX Spectrum 128K ES": "51d291fb08a0d4461b714114ef991e996784ec7ee6be8789382dc0781121e08e"
+            }
         },
         "64K Spectrum ROM": {
-            "Shadow Of The Unicorn": "d941b6128aba56744e02953dace076a68e9c2ccce01276f2584206dcf428f997",
-            "Sir Ababol": "4fd94891078dc4e4e4e5315742ee5b2a3c3b061a31b8080da90b0eabbc783fde",
-            "Souls Remaster": "4970e14bef5616995eebbcd7c267836882c1195040294ea8f6a3583bde317473",
-            "ZX Spectrum +2A - +3 EN 4.0": "ee8218fa43ecb672ed45370114294228213a82318c6d1b007ec86bee3293d1f2",
-            "ZX Spectrum +2A - +3 ES 4.0": "c266b543f8170d2402f40ae8ab7015e2cccb428132f88459df3d29c902225de3",
-            "ZX Spectrum +2A - +3 ES 4.1": "3bf9a1741c64a1cff3f1a1c144a34f30345114b01fb2fbccdb9eefa2c884328a",
-            "ZX Spectrum +2A EN": "5e7d9b3355ca76f4a99cbcc0bc1c90118ecda6a1549c2cb0f02e98af17694f3e",
-            "ZX Spectrum +2e ES (DivMMC) 1.43": "5ab12a0864a18f315b25b635a5a0276b7de7a4e88ced43d8581a6d4d52fdc68e",
-            "ZX Spectrum +3e EN 1.43": "2259c1f5e87bde9ddcace4e91f0f0880fd593519f5a0e676e7dc35a80aa75831",
-            "ZX Spectrum +3e EN (DivMMC) 4.0": "18c35440b422535c1af598ce19899450d3dd9fd6d5d8734bd279be55943b58a6",
-            "ZX Spectrum +3e EN (ZXMMC) 4.0": "2d779bac8d4f870b7c33b8f2eb06a66d257822b6811e116e11204cffc7eb159e",
-            "ZX Spectrum +3e ES (ZXMMC) 4.0": "d9be501bac8796b60deaf26cad558ef203539af18ffcbeb108a685ed46499349",
-            "ZX Spectrum 128K Derby++ 64K rom": "5fe5d6bb92b516b5f1696a52679b23cc8a5301badc033e419aedb08e7d6f8fca",
-            "ZX Spectrum Next +3e 1.53": "b9b378221d61c328b6538bbd083786ec142e21eec3f5a53bba5f51ad7790568c"
+            "versions": {
+                "Shadow Of The Unicorn": "d941b6128aba56744e02953dace076a68e9c2ccce01276f2584206dcf428f997",
+                "Sir Ababol": "4fd94891078dc4e4e4e5315742ee5b2a3c3b061a31b8080da90b0eabbc783fde",
+                "Souls Remaster": "4970e14bef5616995eebbcd7c267836882c1195040294ea8f6a3583bde317473",
+                "ZX Spectrum +2A - +3 EN 4.0": "ee8218fa43ecb672ed45370114294228213a82318c6d1b007ec86bee3293d1f2",
+                "ZX Spectrum +2A - +3 ES 4.0": "c266b543f8170d2402f40ae8ab7015e2cccb428132f88459df3d29c902225de3",
+                "ZX Spectrum +2A - +3 ES 4.1": "3bf9a1741c64a1cff3f1a1c144a34f30345114b01fb2fbccdb9eefa2c884328a",
+                "ZX Spectrum +2A EN": "5e7d9b3355ca76f4a99cbcc0bc1c90118ecda6a1549c2cb0f02e98af17694f3e",
+                "ZX Spectrum +2e ES (DivMMC) 1.43": "5ab12a0864a18f315b25b635a5a0276b7de7a4e88ced43d8581a6d4d52fdc68e",
+                "ZX Spectrum +3e EN 1.43": "2259c1f5e87bde9ddcace4e91f0f0880fd593519f5a0e676e7dc35a80aa75831",
+                "ZX Spectrum +3e EN (DivMMC) 4.0": "18c35440b422535c1af598ce19899450d3dd9fd6d5d8734bd279be55943b58a6",
+                "ZX Spectrum +3e EN (ZXMMC) 4.0": "2d779bac8d4f870b7c33b8f2eb06a66d257822b6811e116e11204cffc7eb159e",
+                "ZX Spectrum +3e ES (ZXMMC) 4.0": "d9be501bac8796b60deaf26cad558ef203539af18ffcbeb108a685ed46499349",
+                "ZX Spectrum 128K Derby++ 64K rom": "5fe5d6bb92b516b5f1696a52679b23cc8a5301badc033e419aedb08e7d6f8fca",
+                "ZX Spectrum Next +3e 1.53": "b9b378221d61c328b6538bbd083786ec142e21eec3f5a53bba5f51ad7790568c"
+            }
         }
     },
     "ROMS": {
@@ -1165,7 +1544,9 @@
             "roms_data": ["4160", "1048576", "", "", "0"]
         },
         "latest": ["desUBIKado_20210112", "https://github.com/zxdos/zxuno/raw/master/utils/ROMS.ZX1"],
-        "desUBIKado_20210112": "8ed16c2d63ce6369e56685cabeb048d75e7a2c72a03cf9844c45e3a0f0f59391"
+        "versions": {
+            "desUBIKado_20210112": "8ed16c2d63ce6369e56685cabeb048d75e7a2c72a03cf9844c45e3a0f0f59391"
+        }
     },
     "RPv2": {
         "description": "ZX RomPack v2",
