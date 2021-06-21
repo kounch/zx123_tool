@@ -224,7 +224,8 @@
                     "1.3 512K": "994e7b1aac5457ca624b9d4f47db3b6997ecd321031f204c03025ee505674ee6",
                     "1.3 VGA2M": "5b1218ca4f62cceb14ca842ff111aa3e9bd12af61b309ddce70a0b0546ea2ece",
                     "Prueba VGA 2M": "a96c6b1736852a490c85cd913cf28264851fa86960dcf37efa12e5ec95a5b18a",
-                    "Prueba 2M Int": "2a0a16735d3e31f9eb2559739c3b9d1889ba5616d78f418c722afa6ffd89c6ef"
+                    "Prueba 2M Int": "2a0a16735d3e31f9eb2559739c3b9d1889ba5616d78f418c722afa6ffd89c6ef",
+                    "1.3 512K PAL": "4a735fcbc466e04731350ce4b6570ae0b1c8ba1bc3f5ad4501a4ea59247d677a"
                 }
             },
             "Multicomp": {
@@ -758,7 +759,8 @@
             "Arcade Pong": {
                 "latest": ["1.0", ""],
                 "versions": {
-                    "1.0": "fb0045c03221b1bfa16fc7cae3b5f349c2eb45bccd0a0f22639f0eb698238345"
+                    "1.0": "fb0045c03221b1bfa16fc7cae3b5f349c2eb45bccd0a0f22639f0eb698238345",
+                    "AY-3-8500 2020.11.08": "de20f1763ac947b4bd7b4db243f14a20727beb6d400454c3b5cb673ba23b3e5e"
                 }
             },
             "Arcade Ponpoko": {
