@@ -23,7 +23,8 @@
                 "0.76": "7ee5c7cce34da79b64ae3aa615e1454a98d5ba428bc1488d964c3937acc7f9d8",
                 "0.82": "d7fdf9b997b9514a642382f8e28472eed4ac217b5e2279b1d0897cff95cf1622",
                 "0.82 Vertical": "645f275502eb862258dc23f6436c7992d5b1623d3b21228dd61c7b1d027975f6",
-                "0.83": "8d086c0ef440abc89f5edf37c8d482d69619065f4d27f573d7d57a83942ea91f"
+                "0.83": "8d086c0ef440abc89f5edf37c8d482d69619065f4d27f573d7d57a83942ea91f",
+                "0.84 Vertical": "7752bccb7272783acc7d69cc26856661ef87bface586c649069e5e970d916bb5"
             }
         },
         "esxdos": {
@@ -1329,9 +1330,10 @@
                 }
             },
             "ZX81": {
-                "latest": ["Beta 0", ""],
+                "latest": ["Beta 000", ""],
                 "versions": {
-            	    "Beta 0": "a6e7c35054fbfa95e3de2d2a62d2aec92db2b65e87086438aac5faa2c30d9c8c"
+            	    "Beta 0": "a6e7c35054fbfa95e3de2d2a62d2aec92db2b65e87086438aac5faa2c30d9c8c",
+                    "Beta 000": "ef3d13962a1defac4f85302426479c7b44161c5e5902af066fc04c773aa30c01"
                 }
             },
             "ZX Spectrum": {
