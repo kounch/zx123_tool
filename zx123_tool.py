@@ -920,10 +920,14 @@ def prep_update_zxdata(arr_in_files,
                                                     hash_dict['parts'][block],
                                                     hash_dict[block])
             if block_version:
+                hash_versions = hash_dict[block]
+                if 'versions' in hash_versions:
+                    hash_versions = hash_versions['versions']
+
                 latest = hash_dict[block]['latest']
                 if block == 'BIOS' and b_varcade:
                     latest = hash_dict[block]['vertical']
-                latest_hash = hash_dict[block][latest[0]]
+                latest_hash = hash_versions[latest[0]]
 
                 str_file = '{0}_{1}.{2}'.format(block, latest[0],
                                                 str_extension)
@@ -1017,8 +1021,12 @@ def prep_update_roms(arr_in_files,
     """
 
     if 'ROMS' in fullhash_dict and b_new:
+        hash_versions = fullhash_dict['ROMS']
+        if 'versions' in hash_versions:
+            hash_versions = hash_versions['versions']
+
         latest = fullhash_dict['ROMS']['latest']
-        latest_hash = fullhash_dict['ROMS'][latest[0]]
+        latest_hash = hash_versions[latest[0]]
 
         str_roms = os.path.join(STR_OUTDIR, 'ROMS.ZX1')
         b_append = check_and_update(str_roms, latest_hash, latest[1:], 'ROMS')
