@@ -186,7 +186,8 @@
             "Flappy Bird": {
                 "latest": ["0.1 VGA", "https://www.zxuno.com/forum/download/file.php?id=1721"],
                 "versions": {
-                    "0.1 VGA": "a2e6428546643687fb233c1030b5069cfff0a058001121a3f3e69819e7f9bb3a"
+                    "0.1 VGA": "a2e6428546643687fb233c1030b5069cfff0a058001121a3f3e69819e7f9bb3a",
+                    "0.1 2MB Ext": "c660052e1c945a2f41a8af00f0d89f2f938ba62301b07beae9ff7510e3d5d979"
                 }
             },
             "Galaksija": {
@@ -200,7 +201,7 @@
                 "2m": ["2MB Int Keyb Fix","https://www.zxuno.com/forum/download/file.php?id=2237"],
                 "versions": {
                     "512K": "8f1d098f17c5839824f1f998dd2a43765e2cde47af8dd9b340f438b1218f271a",
-                    "2MB Int": "474627471a17b4dc3220dde0dfef5d0aeb4ee4eb89e2b3313b266c3184fc2387",
+                    "2MB Ext": "474627471a17b4dc3220dde0dfef5d0aeb4ee4eb89e2b3313b266c3184fc2387",
                     "2MB Int Keyb Fix": "c9f5cc94fda19f5bc7434c4483b12ec513ce4fba4690ec13d86de0be1672d070"
                 }
             },
@@ -758,7 +759,7 @@
                 }
             },
             "Arcade Pong": {
-                "latest": ["1.0", ""],
+                "latest": ["AY-3-8500 2020.11.08", ""],
                 "versions": {
                     "1.0": "fb0045c03221b1bfa16fc7cae3b5f349c2eb45bccd0a0f22639f0eb698238345",
                     "AY-3-8500 2020.11.08": "de20f1763ac947b4bd7b4db243f14a20727beb6d400454c3b5cb673ba23b3e5e"
