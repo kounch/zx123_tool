@@ -293,9 +293,18 @@ def main():
                                    arg_data['default_rom'], arg_data['force'])
 
         else:
-            # File header unknown, try to guess only from hash and size
-            find_zxfile(str_file, fulldict_hash, str_extension,
-                        arg_data['show_hashes'])
+            # Convert between Standard and Spectrum Core?
+            if arg_data['convert_core']:
+                if output_file:
+                    print('Trying to convert {0}...'.format(str_file))
+                    convert_core(str_file, dict_hash, output_file,
+                                 arg_data['force'])
+                else:
+                    LOGGER.error('Output file not defined!')
+            else:
+                # File header unknown, try to guess only from hash and size
+                find_zxfile(str_file, fulldict_hash, str_extension,
+                            arg_data['show_hashes'])
 
     print('')
     LOGGER.debug("Finished.")
@@ -365,6 +374,7 @@ def parse_args():
     values['inject'] = []
     values['wipe_flash'] = False
     values['expand_flash'] = False
+    values['convert_core'] = False
     values['2mb'] = False
     values['update'] = ''
     values['check_updated'] = False
@@ -454,6 +464,12 @@ def parse_args():
                         action='store_true',
                         dest='expand_flash',
                         help='Expand, if needed, flash file to 32MiB')
+    parser.add_argument('-t'
+                        '--convert',
+                        required=False,
+                        action='store_true',
+                        dest='convert_core',
+                        help='Convert between Spectrum and standard core')
     parser.add_argument('-2',
                         '--2mb',
                         required=False,
@@ -568,6 +584,9 @@ def parse_args():
 
     if arguments.expand_flash:
         values['expand_flash'] = arguments.expand_flash
+
+    if arguments.convert_core:
+        values['convert_core'] = arguments.convert_core
 
     if arguments.use_2mb:
         values['2mb'] = arguments.use_2mb
@@ -1356,6 +1375,51 @@ def savefrom_zxdata(str_in_file,
         with open(str_outfile, "wb") as out_zxdata:
             out_zxdata.write(bin_data)
             print('{0} created OK.'.format(str_outfile))
+
+
+def convert_core(str_in_file, hash_dict, str_outfile, b_force=False):
+    """
+    Convert between Spectrum core and Standard core
+    :param str_in_file: Path to core file to convert from
+    :param hash_dict: Dictionary with hashes for different blocks
+    :param str_outfile: Path output file to save
+    :param b_force: Force overwriting file
+    """
+    dict_parts = hash_dict['parts']
+
+    # Standard core specs
+    core_bases = dict_parts['core_base']
+    b_corelen = int(core_bases[1])
+    b_corehead = core_bases[3]
+
+    # Spectrum core specs
+    spectrum_bases = dict_parts['Spectrum']
+    b_speclen = int(spectrum_bases[1])
+    b_spechead = spectrum_bases[3]
+
+    b_len = os.stat(str_in_file).st_size
+    with open(str_in_file, "rb") as in_zxdata:
+        b_data = in_zxdata.read(b_len)
+
+    str_hash = get_file_hash(str_in_file)
+
+    # Check header and length and convert data if needed
+    b_convert = True
+    if validate_bin(b_data, b_corehead) and b_len == b_corelen:
+        LOGGER.debug('Looks like a standard core')
+        b_data = b_data[:b_speclen]
+    else:
+        if validate_bin(b_data, b_spechead) and b_len == b_speclen:
+            LOGGER.debug('Looks like a Spectrum core')
+            b_data += b'\x00' * (b_corelen - b_speclen)
+        else:
+            LOGGER.error('Not a valid core file: .{0}'.format(str_in_file))
+            b_convert = False
+    if b_convert:
+        if b_force or check_overwrite(str_outfile):
+            with open(str_outfile, "wb") as out_zxdata:
+                out_zxdata.write(b_data)
+                print('{0} created OK.'.format(str_outfile))
 
 
 def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
