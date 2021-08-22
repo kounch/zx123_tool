@@ -328,7 +328,8 @@
                 "latest": ["20161105", "https://github.com/zxdos/zxuno/raw/master/cores/ZX81/CORE15.ZX1"],
                 "versions": {
                     "20161105": "926198a4a6ba89748209e0d25ed34d35d8d51149c6ced0e9452a93440117eec4",
-                    "VGA jepalza": "0a2469f0b57dab9055dec1de3c68468f4f9df6d32e6b317343df6d1fd8d6c915"
+                    "VGA jepalza": "0a2469f0b57dab9055dec1de3c68468f4f9df6d32e6b317343df6d1fd8d6c915",
+                    "20210804 avlixa": "85f6653ea785273249aefb2f36043bae9a6f8e3cb6d078684f34ceca8ebc68e4"
                 }
             },
             "ZX Spectrum": {
@@ -386,7 +387,10 @@
                     "EXP27 20210613": "f795fab8f9effbf79f5f39cc8dfaac76941c98d3b5cc171f4ff68968445b90d0",
                     "EXP27 Ext RAM 20210613": "dc9ca57bfa51894e45c1692c6b2caffb2c588111330fa87039921bdd48fc2f97",
                     "EXP27 PZX (no SAA1099) 20210613": "fec6cb6a2bc4b4b07cd1dd897dc9299052d7e08bb484ed29afabdfdf8bac8724",
-                    "EXP27 SAA1099 (no PZX) 20210613":"9535c722e5d0cd322ced9330c96837586dff5aee68fcd2337c115e2729ecdd55"
+                    "EXP27 SAA1099 (no PZX) 20210613":"9535c722e5d0cd322ced9330c96837586dff5aee68fcd2337c115e2729ecdd55",
+                    "EXP27 +UNO Spectrum": "cbf0692b011a170e8fb7c97a33dcae913815076617141782e87dab52aba99a13",
+                    "EXP27 +UNO 2021.08.10": "bade45e4c36cda0919a8cd191a5a121a33db41046f084e6e6f57fe48861e06c4",
+                    "EXP27 +UNO 2021.08.11": "9acbb993e42cdaebdebbebfe43b503d1433c3d02d553148cf44cd6c4bfb3f84b"
                 }
             },
             "ZX TBBlue": {
@@ -1296,6 +1300,12 @@
                     "20200923": "a22d70b0faaaf7e6759ee8b90986fd2da4f97b89f37aa5798af805fd363941c7"
                 }
             },
+            "Oric Atmos (Kyp)": {
+                "latest": ["2021.08.12"],
+                "versions": {
+                    "2021.08.12": "014e8ba922e3ee5410c7b8280dfb46157e8a421687592dace05b650179ad095f"
+                }
+            },
             "PC XT": {
                 "latest": ["Next186 DDR3 v1", "https://github.com/zxdos/binaries/raw/master/next186_zxdos_ddr3_lx25_v1_COREXX.ZXD"],
                 "versions": {
@@ -1338,18 +1348,18 @@
                 }
             },
             "ZX81": {
-                "latest": ["Beta 000", ""],
+                "latest": ["2021.07.31", "https://github.com/avlixa/ZX81_MiSTer_zxdos/raw/master/releases/zx81_zxdos_lx25-20210731.ZXD"],
                 "versions": {
             	    "Beta 0": "a6e7c35054fbfa95e3de2d2a62d2aec92db2b65e87086438aac5faa2c30d9c8c",
-                    "Beta 000": "ef3d13962a1defac4f85302426479c7b44161c5e5902af066fc04c773aa30c01"
+                    "Beta 000": "ef3d13962a1defac4f85302426479c7b44161c5e5902af066fc04c773aa30c01",
+                    "2021.07.31": "b06a1f754a2c8f87abc1a70cb0aca94cec423d241ad152336cbd57e59f8e5de3"
                 }
             },
             "ZX Spectrum": {
                 "latest": ["EXP27_160820", "https://github.com/mcleod-ideafix/zxuno_spectrum_core/raw/master/zxdos_lx25/COREx.ZXD"],
                 "versions": {
                     "EXP26_060818": "5806919127973f3297b3b97e05ddc8c4790495cf2a065f31fad0a8cabad11840",
-                    "EXP27_1607020": "0942bfdfdee7e3fdcc8a9bd438527582eb490b433047a6ba9656e7cb91ff9a78",
-
+                    "EXP27_160720": "0942bfdfdee7e3fdcc8a9bd438527582eb490b433047a6ba9656e7cb91ff9a78",
                     "EXP27_100820": "b73e37eeeb8ed984a98a7c2633716087876195dcd7642e5df9fc901e8a378f21",
                     "EXP27_160820": "4eaa9f8080035185b1f7b5905f06bd63e7c4dc8645c2a79c32accc5154b4f7fb",
                     "EXP27 (I2S MIDI)": "6c0bc134858328564c817e1bdf10307bdf7a4a9ebdf40c582739255aa283ed9d"
@@ -1375,14 +1385,28 @@
                     "2021.04.01 (RGB)": "552af7753a6ca2c940dccc5398e38951902f8b69653f726322ed3d3d0ad190c2",
                     "2021.04.01": "ef5faf702638387f6fa5bf31b0452bd4e1e2a7a1d54cf33c12b396fe65b6fdde",
                     "2021.04.02": "80c544e3b506a4362e79b4bd1c890d40047f22ee3aae70d5034372b63d27dc93",
-                    "2021.04.03": "20199ca1737b44ba18b146da969e5f3faca42a013dcf118ed804872d28cb4f4c"
+                    "2021.04.03": "20199ca1737b44ba18b146da969e5f3faca42a013dcf118ed804872d28cb4f4c",
+                    "2021.04.08": "d598bf531a9bca77023e75528047252c97a51ba7882d45bf998906299c84b381"
                 }
             },
             "ZX Spectrum 128K (Kyp)": {
-                "latest": ["2021.04.17"],
+                "latest": ["2021.04.17", ""],
                 "versions": {
                     "2021.04.16": "1ae16087e16588b0fffc069440364a11d11103a73d0f160d638b4cad066a24b4",
                     "2021.04.17": "0c756d7a53a727184876023303480bca8e5aa4efef953b31817e078c3e169673"
+                }
+            },
+            "ZX Spectrum (Kyp)": {
+                "latest": ["2021.08.03 (esxdos 0.8.9)"],
+                "versions": {
+                    "2021.07.23 (esxdos 0.8.8)": "f0e2257cf2afe0738c91445e2a7ed61d48ae2a88c1808485389d963963f32d43",
+                    "2021.07.23 (esxdos 0.8.9)": "1ede34bd7ea46d382c75b0818bab2540aac87fffccd3ec7f4455e49f373531f1",
+                    "2021.07.23 SRAM (esxdos 0.8.9)": "f95a514d46ad56a79998400058d4dca6348e849bf9f34dcb1ff4256976c85190",
+                    "2021.07.24 (esxdos 0.8.9)": "60ee5efe090470d68cbfc4d0fb412e4cb6f96838da8b28f07cdcc08a37ba34ae",
+                    "2021.07.28 (esxdos 0.8.9)": "40a9f15cb0f785a43030effa84fde7a3a2e3fd5ae54146d8763a312901bbeb8e",
+                    "2021.07.29 (esxdos 0.8.9) Test": "ccd50f1f655b5e2f3617bfa7a4d11aeeddf42078a6fdf5b571b3beb940f7d519",
+                    "2021.07.29 (esxdos 0.8.9)": "792b44f109ee21780fa1fd6c92205efcd12d02d6d21aa3c1c95e84c92651794d",
+                    "2021.08.03 (esxdos 0.8.9)": "1615fa59a1b43080ed41fd3d29f0ffcde8909c3040a4520283b062c1eaa5efa8"
                 }
             },
             "ZX Spectrum Next": {

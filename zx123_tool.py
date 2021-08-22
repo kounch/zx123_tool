@@ -52,7 +52,7 @@ import ctypes
 if os.name == 'nt':
     import msvcrt
 
-__MY_VERSION__ = '3.0'
+__MY_VERSION__ = '3.0.0'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
