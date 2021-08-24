@@ -49,6 +49,8 @@
                 "EXP27_160720": "49e13ff7b460f1ec873611de58e6d744ab065f3a95f14b2d42a6583a6a62cb87",
                 "EXP27_160820": "140fe5400fb3aee7dae99c540020d36d14d3c0be7ec3b9dd737a2b198525d618",
                 "EXP27 azesmbog 240320 (no UART+SAA1099)": "5a07296d1a2ec159e3ce2e56482120c3a2d6b67714dc350a46ff3a27739962e6",
+                "EXP27 spark2k06 20210521 PZX (no SAA1099) (RGB666)": "600e60869a466ed4acfcfca7abc6b25d39104d697c498e5eb18d0e6ea2cae22f",
+                "EXP27 spark2k06 20210521 SAA1099 (no PZX) (RGB666)": "b31971458b826410acb580f09b9e6604a765ce948a73ac276daaebcd45044c1d",
                 "EXP27 spark2k06 20210606 Ext RAM": "d2e435b69d324a9aa26d2df0b4403bc38ede62cc184f0532c330e3598e27f3a1",
                 "EXP27 spark2k06 20210613 Ext RAM": "d0ce23fceb4b559eac7898c06861f485ce46d5a227d0ae91886bb1ed6ec7eb56",
                 "EXP27 spark2k06 20210613 PZX (no SAA1099)": "af97f6e9bcda69db8e21dcbe07965dbc47b9c242cd407acef97fba474d653393",
@@ -77,7 +79,8 @@
                 "versions": {
                     "Test 2 - 20170408": "6341fb122713725ebe758cfbf8ea357cf9ce6f0dd410cc1de715719cd77d17ed",
                     "Test 3a": "5a2363e9ef1f10320cc2ed5309c2ab5331db4b4ca8dbab9e39737a02c9186c36",
-                    "Test External 512Kb": "25fdd4422da297aa6fc925c120751daf288b999bf0e3a0bf039ce08dee6467e9"
+                    "Test External 512Kb": "25fdd4422da297aa6fc925c120751daf288b999bf0e3a0bf039ce08dee6467e9",
+                    "spark2k06 (RGB666)": "7aff7e87b273b3bf3404d827740085e44655d05f9cc02eaea5eb5f44703d87cc"
                 }
             },
             "Amstrad CPC6128": {
@@ -271,7 +274,8 @@
                     "2MB Ext 70 MHz 2017.02.18": "b560afa672db76b3e0476c20130e14e07f9569761cc20315a83cf6cfa8bf167a",
                     "2MB Int Beta 75 MHz 2017.01.20": "de55a3817acacc55ae90fef0db6c4137ed3c13e84d927a4d7862a7ce1bf178ab",
                     "2MB Int 70 MHz 2017.02.18": "652be2ab706d2835309b84c6e52c026dea07d8d8f42e4d8b13791df14af55163",
-                    "2MB Int 70 MHz": "29a26b485e4180245a43dda65650f29331fe3f0a7952993e7834ea9c680c9557"
+                    "2MB Int 70 MHz": "29a26b485e4180245a43dda65650f29331fe3f0a7952993e7834ea9c680c9557",
+                    "2MB Int spark2k06 (RGB666)": "e721ef0a33eac142c6ca101218c8e1424c76cbe84815e5a599b4b99815001a7f"
                 }
             },
             "Sam Coupe": {
@@ -375,6 +379,8 @@
                     "EXP27 azesmbog 240320": "85ff342c1a2fe0cc3a962221f37847907a5666e46183b13934b99fae4306fe69",
                     "azesmbog TS-FM 24.03.20": "4fb1f0d47f55039905a10b5fe46f6932ad6dd9728dd976753afd2408dfcc5f09",
                     "azesmbog DMA 24.05.30": "6a0cd7879a98182aeec5b92c36523cf11a1ed5be9f128341609d5a4246e94ec9",
+                    "azesmbog TS-FM Unknown": "c1d1183dc144588dfc3acf921b7c8fd77afaf496e12705f30c7409d8d6790635",
+                    "azesmbog DMA Unknown": "8467969c0475126159e6036d62ba06c65c18045d8b4dc73451e037703eb66b67",
                     "kyp 2021.04.23": "b65153e392e3c045ae0e50ede3ff570aa38af1e9861c7e762c1b60a553b7f4fd"
                 }
             },
@@ -386,6 +392,8 @@
                     "EXP27 Ext RAM 20210606": "7b59c0295840ad65c55e642873e22e094f93b5562ceb728d27f5d0c892b21acc",
                     "EXP27 20210613": "f795fab8f9effbf79f5f39cc8dfaac76941c98d3b5cc171f4ff68968445b90d0",
                     "EXP27 Ext RAM 20210613": "dc9ca57bfa51894e45c1692c6b2caffb2c588111330fa87039921bdd48fc2f97",
+                    "EXP27 SAA1099 (no PZX) 20210521 (RGB666)": "9315a65f5e9696a7e6e90406d44da33d2d7d053fe1a38d0de8e83295fb563dc7",
+                    "EXP27 PZX (no SAA1099) 20210521 (RGB666)": "ab1800ca43fc5940da40f8128d258380e46d016620549fff30e5134adfdcee95",
                     "EXP27 PZX (no SAA1099) 20210613": "fec6cb6a2bc4b4b07cd1dd897dc9299052d7e08bb484ed29afabdfdf8bac8724",
                     "EXP27 SAA1099 (no PZX) 20210613":"9535c722e5d0cd322ced9330c96837586dff5aee68fcd2337c115e2729ecdd55",
                     "EXP27 +UNO Spectrum": "cbf0692b011a170e8fb7c97a33dcae913815076617141782e87dab52aba99a13",

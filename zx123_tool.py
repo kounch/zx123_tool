@@ -52,7 +52,7 @@ import ctypes
 if os.name == 'nt':
     import msvcrt
 
-__MY_VERSION__ = '3.0.0'
+__MY_VERSION__ = '3.0.1'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
@@ -464,7 +464,7 @@ def parse_args():
                         action='store_true',
                         dest='expand_flash',
                         help='Expand, if needed, flash file to 32MiB')
-    parser.add_argument('-t'
+    parser.add_argument('-t',
                         '--convert',
                         required=False,
                         action='store_true',
