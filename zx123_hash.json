@@ -177,12 +177,12 @@
             },
             "Apple II": {
                 "latest": [
-                    "1.13",
-                    "https://github.com/zxdos/zxuno/raw/master/cores/Apple2/CORE18.ZX1"
+                    "TEST3",
+                    "http://www.zxuno.com/forum/download/file.php?id=1344"
                 ],
                 "versions": {
-                    "TEST3": "1e5cd4c7df4d3ae1dae325c6e0bd546bcaf8be15a63a9e7c670948a29be9011a",
-                    "1.13": "06ff87a84a8a7566de427b0a485735edb826fadefeae872a730ef7f9716bb9fb"
+                    "1.13": "06ff87a84a8a7566de427b0a485735edb826fadefeae872a730ef7f9716bb9fb",
+                    "TEST3": "1e5cd4c7df4d3ae1dae325c6e0bd546bcaf8be15a63a9e7c670948a29be9011a"
                 }
             },
             "Atari 800 XL": {
@@ -297,10 +297,10 @@
                     "VGA jepalza": "92571c0edcee44ea3da4fe3835babb2d8985d7e65f04d1c5f2d2164c2081ab34"
                 }
             },
-            "Commodore VIC20": {
+            "Commodore VIC-20": {
                 "latest": [
-                    "1.227",
-                    "https://github.com/zxdos/zxuno/raw/master/cores/VIC20/CORE10.ZX1"
+                    "TEST3 - 20170701",
+                    "http://www.zxuno.com/forum/download/file.php?id=1346"
                 ],
                 "versions": {
                     "1.227": "35638cdc8937fcfbd39b7042c0bd5598421dd9d1831ace662b94502a144a7cd3",
@@ -600,7 +600,7 @@
             },
             "ZX Spectrum (azesmbog)": {
                 "latest": [
-                    "azesmbog DMA 24.05.30"
+                    "kyp 2021.04.23"
                 ],
                 "versions": {
                     "EXP27 azesmbog 240320": "85ff342c1a2fe0cc3a962221f37847907a5666e46183b13934b99fae4306fe69",
