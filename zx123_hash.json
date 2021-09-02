@@ -172,7 +172,8 @@
                     "https://www.zxuno.com/forum/download/file.php?id=2227"
                 ],
                 "versions": {
-                    "0.1": "7501a4296a039c44f129ebc861bd7af11340a146ce536e84706f1bc87e21ab92"
+                    "0.1": "7501a4296a039c44f129ebc861bd7af11340a146ce536e84706f1bc87e21ab92",
+                    "0.1 RGB666": "32cf64d278053d578cc01da80ee7183c8261d35771dd538af9278e3644b4cec9"
                 }
             },
             "Apple II": {
@@ -227,6 +228,9 @@
             },
             "CHIP-8": {
                 "latest": [
+                    "2021.09.02"
+                ],
+                "base": [
                     "2021.05.23",
                     "https://github.com/zxdos/zxuno/raw/master/cores/chip-8/chip8_zxunolx9_20210523.ZX1"
                 ],
@@ -234,7 +238,8 @@
                     "2021.04.24": "3b84ba7ce4024b66b04662b58ccf08a0b367d408fef98a75e557f85c1e0e1761",
                     "2021.05.16": "5b247eba0b69dcf4c24a1955eabbb00d9983eecd4b15568d53a012dca49d630b",
                     "2021.05.22": "92203f30c8474b1b5fc0b2edfdb6752059be18a658ff28f45b814b9e9608bb1c",
-                    "2021.05.23": "7bc478a57f24bdc465b630a24ab132e44e1eab5e1ee9f976894ee64f23cb159a"
+                    "2021.05.23": "7bc478a57f24bdc465b630a24ab132e44e1eab5e1ee9f976894ee64f23cb159a",
+                    "2021.09.02": "3b834fb9bbdf083c865224afbdc5de1bebcb843af8fbbbac1666533f55c6659f"
                 }
             },
             "Camputers Lynx": {
@@ -408,7 +413,7 @@
             },
             "NES": {
                 "latest": [
-                    "512K",
+                    "TEST4 512K",
                     "https://www.zxuno.com/forum/download/file.php?id=1857"
                 ],
                 "base": [
@@ -421,7 +426,9 @@
                 ],
                 "versions": {
                     "TEST2 - 20160910": "50c057349a7e9e993c841ad72b652caef060110348ce1e91b6033fb9e4bfafda",
-                    "512K": "89968ae4d58d91238ee48fc301ed268ce28b79a30b28d934b3769b8adecab56b",
+                    "TEST3 2MB INT": "3c074449d7bb11264c0887f6356e3b34d757f897720e3d6840784f556929822b",
+                    "TEST4 512K": "89968ae4d58d91238ee48fc301ed268ce28b79a30b28d934b3769b8adecab56b",
+                    "TEST4 VGA 2MB Ext": "03841cf00d8e1bd0021ba34815d1f00edd612a8074380a018563c5142d3715a7",
                     "TEST4 VGA 2MB INT": "ed807d4ed1cfa36059919f01307c6a701d2d0835075f725c8aada88ae3f63eff"
                 }
             },
