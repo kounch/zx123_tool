@@ -102,6 +102,10 @@
                 "EXP27_160820",
                 "https://github.com/mcleod-ideafix/zxuno_spectrum_core/raw/master/zxuno_v4/SPECTRUM.ZX1"
             ],
+            "1core": [
+                "EXP27 spark2k06 20210521 PZX (no SAA1099) (RGB666)",
+                "https://github.com/spark2k06/ZXUno4ALL/raw/main/cores/spectrum/pzx_no_saa/SPECTRUM.ZX1"
+            ],
             "versions": {
                 "T24-08012017": "dab20b355cd4c63691ca8e5016e7df98894f4fac11a7da86e8b1b65f4700ab3f",
                 "EXP26_190218": "85624005e8256600bca5fac953a29720e4a5a4ee68c0e25d9a47ffc153fb8668",
@@ -147,6 +151,10 @@
                 "latest": [
                     "Test 3a",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/CPC464.ZX1"
+                ],
+                "1core": [
+                    "spark2k06 (RGB666)",
+                    "https://github.com/spark2k06/ZXUno4ALL/raw/main/cores/amstrad%20cpc/binaries/COREx.ZX1"
                 ],
                 "versions": {
                     "Test 2 - 20170408": "6341fb122713725ebe758cfbf8ea357cf9ce6f0dd410cc1de715719cd77d17ed",
@@ -205,9 +213,13 @@
                     "1.227",
                     "https://github.com/zxdos/zxuno/raw/master/cores/Atari2600/CORE20.ZX1"
                 ],
+                "1core": [
+                    "VGA+teclado Spark2k06",
+                    "https://github.com/spark2k06/zxuno/raw/master/cores/Atari2600/CORE20.ZX1"
+                ],
                 "versions": {
                     "1.227": "e0ce080c35a8d9f8020635112a1794c9b69ff01127be4bc3a0a81ea645163c08",
-                    "VGA Spark2k06": "6f03454880ca2e1477430d3a48a5c1755dd9b639ef5121ca6bd04674a6bbc7db"
+                    "VGA+teclado Spark2k06": "6f03454880ca2e1477430d3a48a5c1755dd9b639ef5121ca6bd04674a6bbc7db"
                 }
             },
             "BBC Micro": {
@@ -420,6 +432,10 @@
                     "TEST2 - 20160910",
                     "https://github.com/zxdos/zxuno/raw/master/cores/NES/CORE19.ZX1"
                 ],
+                "1core": [
+                    "TEST4+teclado spark2k06",
+                    "https://github.com/spark2k06/zxuno/raw/master/cores/NES/CORE19.ZX1"
+                ],
                 "2m": [
                     "TEST4 VGA 2MB INT",
                     "https://www.zxuno.com/forum/download/file.php?id=1860"
@@ -429,6 +445,7 @@
                     "TEST3 2MB INT": "3c074449d7bb11264c0887f6356e3b34d757f897720e3d6840784f556929822b",
                     "TEST4 512K": "89968ae4d58d91238ee48fc301ed268ce28b79a30b28d934b3769b8adecab56b",
                     "TEST4 VGA 2MB Ext": "03841cf00d8e1bd0021ba34815d1f00edd612a8074380a018563c5142d3715a7",
+                    "TEST4+teclado spark2k06": "fed4015c5756e3cb2990f1080819239836518448105aa6ce132ea59930211630",
                     "TEST4 VGA 2MB INT": "ed807d4ed1cfa36059919f01307c6a701d2d0835075f725c8aada88ae3f63eff"
                 }
             },
@@ -455,6 +472,10 @@
                 "latest": [
                     "512k 70 MHz 2017.02.18",
                     "https://github.com/zxdos/zxuno/raw/master/cores/PC/CORE23.ZX1"
+                ],
+                "1core": [
+                    "2MB Int 40 MHz spark2k06 (RGB666)",
+                    "https://github.com/spark2k06/ZXUno4ALL/raw/main/cores/pcxt/binaries/2Mb/SRAM%2040MHz/COREx.ZX1"
                 ],
                 "2m": [
                     "2MB Int 70 MHz 2017.02.18"
@@ -621,6 +642,10 @@
             "ZX Spectrum (spark2k06)": {
                 "latest": [
                     "EXP27 Monocromo 20210530"
+                ],
+                "1core": [
+                    "EXP27 SAA1099 (no PZX) 20210521 (RGB666)",
+                    "https://github.com/spark2k06/ZXUno4ALL/raw/main/cores/spectrum/saa_no_pzx/COREx.ZX1"
                 ],
                 "versions": {
                     "EXP27 Monocromo 20210522": "9fff67427bf174f0bd9627662eb77e00161275729b02584eaf4e5e915aef94a5",

@@ -155,7 +155,8 @@ def main():
         # List main ROMs, Cores and BIOS settings
         if arg_data['list']:
             list_zxdata(str_file, dict_hash, arg_data['show_hashes'],
-                        arg_data['check_updated'], arg_data['2mb'])
+                        arg_data['check_updated'], arg_data['1core'],
+                        arg_data['2mb'])
 
         # List ZX Spectrum ROMs
         if arg_data['roms']:
@@ -188,8 +189,12 @@ def main():
                     prep_update_zxdata(arr_upd, str_file, fulldict_hash,
                                        str_extension, ['BIOS'])
                 if arg_data['update'].lower() in ['all', 'spectrum']:
-                    prep_update_zxdata(arr_upd, str_file, fulldict_hash,
-                                       str_extension, ['Spectrum'])
+                    prep_update_zxdata(arr_upd,
+                                       str_file,
+                                       fulldict_hash,
+                                       str_extension, ['Spectrum'],
+                                       get_1core=arg_data['1core'],
+                                       get_2mb=arg_data['2mb'])
                 if arg_data['update'].lower() in ['all', 'special']:
                     prep_update_zxdata(arr_upd, str_file, fulldict_hash,
                                        str_extension, ['Special'])
@@ -199,6 +204,7 @@ def main():
                                       fulldict_hash,
                                       str_extension,
                                       b_new_img,
+                                      get_1core=arg_data['1core'],
                                       get_2mb=arg_data['2mb'])
                 if b_new_img or arg_data['update'].lower() == 'roms':
                     prep_update_roms(arr_upd, fulldict_hash, str_extension,
@@ -375,6 +381,7 @@ def parse_args():
     values['wipe_flash'] = False
     values['expand_flash'] = False
     values['convert_core'] = False
+    values['1core'] = False
     values['2mb'] = False
     values['update'] = ''
     values['check_updated'] = False
@@ -470,6 +477,12 @@ def parse_args():
                         action='store_true',
                         dest='convert_core',
                         help='Convert between Spectrum and standard core')
+    parser.add_argument('-1',
+                        '--1core',
+                        required=False,
+                        action='store_true',
+                        dest='use_1core',
+                        help='Use, if available, ZXUnCore cores for ZX-Uno')
     parser.add_argument('-2',
                         '--2mb',
                         required=False,
@@ -588,6 +601,9 @@ def parse_args():
     if arguments.convert_core:
         values['convert_core'] = arguments.convert_core
 
+    if arguments.use_1core:
+        values['1core'] = arguments.use_1core
+
     if arguments.use_2mb:
         values['2mb'] = arguments.use_2mb
 
@@ -669,6 +685,7 @@ def list_zxdata(str_in_file,
                 hash_dict,
                 show_hashes,
                 check_updated=False,
+                get_1core=False,
                 get_2mb=False):
     """
     List contents of file
@@ -690,7 +707,8 @@ def list_zxdata(str_in_file,
             if block_version:
                 print('{0}: {1}'.format(block_name, block_version), end='')
                 if check_updated:
-                    update_check(hash_dict[block_name], block_version)
+                    update_check(hash_dict[block_name], block_version,
+                                 get_1core, get_2mb)
                 print('')
                 if (show_hashes):
                     print(block_hash)
@@ -707,7 +725,7 @@ def list_zxdata(str_in_file,
         if check_updated:
             if block_name in hash_dict['Cores']:
                 update_check(hash_dict['Cores'][block_name], block_version,
-                             get_2mb)
+                             get_1core, get_2mb)
         print('')
         if (show_hashes):
             print('Core {0:02d}: {1}'.format(index + 2, block_hash))
@@ -730,15 +748,17 @@ def list_zxdata(str_in_file,
     print('\tVideo Mode -> {0}'.format(video_mode))
 
 
-def update_check(hash_dict, block_version, get_2mb=False):
+def update_check(hash_dict, block_version, get_1core=False, get_2mb=False):
     """
     Check block version against latest entry and print the result
     :param hash_dict: Dictionary for entry (e.g. Spectrum Core)
     :param block_version: Version string to check
     """
     last_version = hash_dict.get('latest', [''])[0]
-    if get_2mb and '2m' in hash_dict:
+    if (get_2mb or get_1core) and '2m' in hash_dict:
         last_version = hash_dict['2m'][0]
+    if get_1core and '1core' in hash_dict:
+        last_version = hash_dict['1core'][0]
 
     if last_version:
         if block_version == last_version:
@@ -920,7 +940,9 @@ def prep_update_zxdata(arr_in_files,
                        fullhash_dict,
                        str_extension,
                        block_list,
-                       b_varcade=''):
+                       b_varcade='',
+                       get_1core=False,
+                       get_2mb=False):
     """
     Try to prepare to update several BIOS
     :param str_spi_file: Input SPI flash file
@@ -944,6 +966,11 @@ def prep_update_zxdata(arr_in_files,
                     hash_versions = hash_versions['versions']
 
                 latest = hash_dict[block]['latest']
+                if (get_2mb or get_1core) and '2m' in hash_dict[block]:
+                    latest = hash_dict[block]['2m']
+                if get_1core and '1core' in hash_dict[block]:
+                    latest = hash_dict[block]['1core']
+
                 if block == 'BIOS' and b_varcade:
                     latest = hash_dict[block]['vertical']
                 latest_hash = hash_versions[latest[0]]
@@ -966,6 +993,7 @@ def prep_update_cores(arr_in_files,
                       str_extension,
                       b_new=False,
                       arcade_type='None',
+                      get_1core=False,
                       get_2mb=False):
     """
     Try to prepare to update cores
@@ -1005,8 +1033,12 @@ def prep_update_cores(arr_in_files,
         index += 2
         if block_name in hash_dict['Cores']:
             latest = hash_dict['Cores'][block_name].get('latest', [''])
-            if get_2mb and '2m' in hash_dict['Cores'][block_name]:
+            if (get_2mb
+                    or get_1core) and '2m' in hash_dict['Cores'][block_name]:
                 latest = hash_dict['Cores'][block_name]['2m']
+            if get_1core and '1core' in hash_dict['Cores'][block_name]:
+                latest = hash_dict['Cores'][block_name]['1core']
+
             latest_hash = hash_dict['Cores'][block_name].get(latest[0], '')
 
             base = hash_dict['Cores'][block_name].get('base', [''])
