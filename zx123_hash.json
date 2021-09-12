@@ -82,7 +82,8 @@
                 "0.82": "d7fdf9b997b9514a642382f8e28472eed4ac217b5e2279b1d0897cff95cf1622",
                 "0.82 Vertical": "645f275502eb862258dc23f6436c7992d5b1623d3b21228dd61c7b1d027975f6",
                 "0.83": "8d086c0ef440abc89f5edf37c8d482d69619065f4d27f573d7d57a83942ea91f",
-                "0.84 Vertical": "7752bccb7272783acc7d69cc26856661ef87bface586c649069e5e970d916bb5"
+                "0.84 Vertical": "7752bccb7272783acc7d69cc26856661ef87bface586c649069e5e970d916bb5",
+                "0.85": "9879458edee76124b99658397902b7a8513edfdcac0582b325298a12d07d8d4f"
             }
         },
         "esxdos": {
@@ -115,13 +116,16 @@
                 "EXP27_300320": "d0a0cb981659be3cd543e54ea1b55f20b7c875b9065c89a20bf06da56509da5a",
                 "EXP27_160720": "49e13ff7b460f1ec873611de58e6d744ab065f3a95f14b2d42a6583a6a62cb87",
                 "EXP27_160820": "140fe5400fb3aee7dae99c540020d36d14d3c0be7ec3b9dd737a2b198525d618",
+                "EXP27 130621": "66d482103a1b12dd8e3154714d7bc237b94ad3a8614f6f179085d97e5dec8a87",
                 "EXP27 azesmbog 240320 (no UART+SAA1099)": "5a07296d1a2ec159e3ce2e56482120c3a2d6b67714dc350a46ff3a27739962e6",
                 "EXP27 spark2k06 20210521 PZX (no SAA1099) (RGB666)": "600e60869a466ed4acfcfca7abc6b25d39104d697c498e5eb18d0e6ea2cae22f",
                 "EXP27 spark2k06 20210521 SAA1099 (no PZX) (RGB666)": "b31971458b826410acb580f09b9e6604a765ce948a73ac276daaebcd45044c1d",
                 "EXP27 spark2k06 20210606 Ext RAM": "d2e435b69d324a9aa26d2df0b4403bc38ede62cc184f0532c330e3598e27f3a1",
                 "EXP27 spark2k06 20210613 Ext RAM": "d0ce23fceb4b559eac7898c06861f485ce46d5a227d0ae91886bb1ed6ec7eb56",
                 "EXP27 spark2k06 20210613 PZX (no SAA1099)": "af97f6e9bcda69db8e21dcbe07965dbc47b9c242cd407acef97fba474d653393",
-                "EXP27 spark2k06 20210613 SAA1099 (no PZX)": "a07b36e6b559ea434de2ec84fcf0fa7b6e5ce53b8b9bff98ed7d3ce769d24a1c"
+                "EXP27 spark2k06 20210613 SAA1099 (no PZX)": "a07b36e6b559ea434de2ec84fcf0fa7b6e5ce53b8b9bff98ed7d3ce769d24a1c",
+                "EXP27 spark2k06 20210613 Unknown": "e81f3029ce17e13e787d3147a7144fd6888685cb11cee088972b18e3297bef58",
+                "EXP27 spark2k06 20210613 Splitter": "18bce66db00387ef11e8832f322f01f4cd9237991f2772fa7116c3ed4d684f63"
             }
         },
         "Special": {
@@ -433,8 +437,8 @@
                     "https://github.com/zxdos/zxuno/raw/master/cores/NES/CORE19.ZX1"
                 ],
                 "1core": [
-                    "TEST4+teclado spark2k06",
-                    "https://github.com/spark2k06/zxuno/raw/master/cores/NES/CORE19.ZX1"
+                    "TEST4+teclado 2MB spark2k06",
+                    "https://github.com/spark2k06/zxuno/raw/master/cores/NES/binaries/Double_Joystick/2MB/COREx.ZX1"
                 ],
                 "2m": [
                     "TEST4 VGA 2MB INT",
@@ -446,7 +450,10 @@
                     "TEST4 512K": "89968ae4d58d91238ee48fc301ed268ce28b79a30b28d934b3769b8adecab56b",
                     "TEST4 VGA 2MB Ext": "03841cf00d8e1bd0021ba34815d1f00edd612a8074380a018563c5142d3715a7",
                     "TEST4+teclado spark2k06": "fed4015c5756e3cb2990f1080819239836518448105aa6ce132ea59930211630",
-                    "TEST4 VGA 2MB INT": "ed807d4ed1cfa36059919f01307c6a701d2d0835075f725c8aada88ae3f63eff"
+                    "TEST4 512K splitter invertido": "ecc420ecf1f67f7ea93927024d2072b24e8f43e54aaa82b1905ec16e8ea9e14c",
+                    "TEST4 VGA 2MB INT": "ed807d4ed1cfa36059919f01307c6a701d2d0835075f725c8aada88ae3f63eff",
+                    "TEST4+teclado 512K splitter spark2k06": "f69fc15965ab90a4281a23b70e2d1b6264f026ed611c4193a8c6b463c4cfb092",
+                    "TEST4+teclado 2MB spark2k06": ""
                 }
             },
             "Oric Atmos": {
@@ -522,17 +529,19 @@
                     "TEST 4.1": "26fc9a021465430b27d4adea4d2478b51a96f19354f5e6e1c07e9dd49515d474",
                     "TEST 4.2 - 20170214": "b99a952e0aa433263fab620ff5f283cf6be2265103fc17f232791ee33c26e425",
                     "TEST 4.3 (512K)": "c385c9c8b68245ab9a3135e5514fc4e85a0bccc17432226aa1e23ac61c2979c3",
+                    "Splitter Invertido": "4e2fde65a87f30cdc30b761f191d3aff2b5148811ccf8cffaf7451951e55962e",
                     "TEST 4.3 2MB Int": "8a60c85e94c1819251ac07d2fc3296809542408531b10968d0c6bdce2f7f8e65"
                 }
             },
             "Test": {
                 "latest": [
-                    "2",
+                    "1",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Test.ZX1"
                 ],
                 "versions": {
-                    "1": "18ebf52a9f33e6f7af40d832d7b9d512d08964c3c8f9355234126b1662ec9d36",
-                    "2": "9addac6bed7be862fc06e538b6a8455651e4bbf9dec9bd7554333a5eb6ac6226"
+                    "0": "18ebf52a9f33e6f7af40d832d7b9d512d08964c3c8f9355234126b1662ec9d36",
+                    "1": "9addac6bed7be862fc06e538b6a8455651e4bbf9dec9bd7554333a5eb6ac6226",
+                    "1.1": "bade45e4c36cda0919a8cd191a5a121a33db41046f084e6e6f57fe48861e06c4"
                 }
             },
             "HT-1080Z": {
@@ -572,7 +581,8 @@
                 "versions": {
                     "20161105": "926198a4a6ba89748209e0d25ed34d35d8d51149c6ced0e9452a93440117eec4",
                     "VGA jepalza": "0a2469f0b57dab9055dec1de3c68468f4f9df6d32e6b317343df6d1fd8d6c915",
-                    "20210804 avlixa": "85f6653ea785273249aefb2f36043bae9a6f8e3cb6d078684f34ceca8ebc68e4"
+                    "20210804 avlixa": "85f6653ea785273249aefb2f36043bae9a6f8e3cb6d078684f34ceca8ebc68e4",
+                    "20210903 avlixa": "54b09e72a79443f804237f42ec625f1b80b3d29da74eebfbaace86e3acb7027d"
                 }
             },
             "ZX Spectrum": {
@@ -584,10 +594,12 @@
                     "Unknown Version": "eff15961241c3bd360261af20bb1823c8b798c54e47129f681aad8e54b4e2496",
                     "EXP26 040418": "31a1373cf3d99f66a00c76cb96bebd4b8db0b3782ac55c0423a3373d7a083a29",
                     "VGA 60Hz": "3bc28ff2692f038f3938e6b38d0980a567460a06657aa5e4327ba93b36d98261",
+                    "VGA 60Hz +UNO": "b4c6bba8d4bb11014c8bc4cbfc0d5c0bb06cbaa079c86dcc9263d6fd18258865",
                     "EXP27_150320": "02bb65ec5ea1c9b0cda62fff1a156038fefe2d1f89e9937b985efbbc34003de6",
                     "EXP27_300320": "5a4f3660a0128ce5b2fe698aabbead42a18dd5b94e59f2d6b34f11a4caac6e33",
                     "EXP27_160720": "02a1a00b53b27e55caa4a3d28f25045c9dd76eaa24dea274ce534d0cd9b417ec",
-                    "EXP27 160820": "613902acb29e3926142a721493c593c0746969261fe7d5cce207194a1fc30a03"
+                    "EXP27 160820": "613902acb29e3926142a721493c593c0746969261fe7d5cce207194a1fc30a03",
+                    "EXP27 130621": "7decf0e9c0a9d25929b9209be62d70676d816997406312128a1af1007b7be1d8"
                 }
             },
             "ZX Spectrum 48K (Kyp)": {
@@ -657,9 +669,7 @@
                     "EXP27 PZX (no SAA1099) 20210521 (RGB666)": "ab1800ca43fc5940da40f8128d258380e46d016620549fff30e5134adfdcee95",
                     "EXP27 PZX (no SAA1099) 20210613": "fec6cb6a2bc4b4b07cd1dd897dc9299052d7e08bb484ed29afabdfdf8bac8724",
                     "EXP27 SAA1099 (no PZX) 20210613": "9535c722e5d0cd322ced9330c96837586dff5aee68fcd2337c115e2729ecdd55",
-                    "EXP27 +UNO Spectrum": "cbf0692b011a170e8fb7c97a33dcae913815076617141782e87dab52aba99a13",
-                    "EXP27 +UNO 2021.08.10": "bade45e4c36cda0919a8cd191a5a121a33db41046f084e6e6f57fe48861e06c4",
-                    "EXP27 +UNO 2021.08.11": "9acbb993e42cdaebdebbebfe43b503d1433c3d02d553148cf44cd6c4bfb3f84b"
+                    "EXP27 spark2k06 20210613 Splitter": "9acbb993e42cdaebdebbebfe43b503d1433c3d02d553148cf44cd6c4bfb3f84b"
                 }
             },
             "ZX TBBlue": {
