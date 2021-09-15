@@ -582,7 +582,9 @@
                     "20161105": "926198a4a6ba89748209e0d25ed34d35d8d51149c6ced0e9452a93440117eec4",
                     "VGA jepalza": "0a2469f0b57dab9055dec1de3c68468f4f9df6d32e6b317343df6d1fd8d6c915",
                     "20210804 avlixa": "85f6653ea785273249aefb2f36043bae9a6f8e3cb6d078684f34ceca8ebc68e4",
-                    "20210903 avlixa": "54b09e72a79443f804237f42ec625f1b80b3d29da74eebfbaace86e3acb7027d"
+                    "20210903 avlixa": "54b09e72a79443f804237f42ec625f1b80b3d29da74eebfbaace86e3acb7027d",
+                    "20210907 avlixa": "38f455a5395b4f57a75d99f6becbfe78f5d80d4f6ef2047e7868a8d9e489a522",
+                    "20210914 avlixa": "b4c08d1e2da4ce8f7ae8971910b46de98f93d2af6fedec0faa0058d98e25116a"
                 }
             },
             "ZX Spectrum": {
@@ -2163,7 +2165,8 @@
                 "versions": {
                     "Beta 0": "a6e7c35054fbfa95e3de2d2a62d2aec92db2b65e87086438aac5faa2c30d9c8c",
                     "Beta 000": "ef3d13962a1defac4f85302426479c7b44161c5e5902af066fc04c773aa30c01",
-                    "2021.07.31": "b06a1f754a2c8f87abc1a70cb0aca94cec423d241ad152336cbd57e59f8e5de3"
+                    "2021.07.31": "b06a1f754a2c8f87abc1a70cb0aca94cec423d241ad152336cbd57e59f8e5de3",
+                    "2021.09.14": "2faa23d9cb1a54fb97bdda94e7a41996b16ac3f02a02092791322dcd6e149d42"
                 }
             },
             "ZX Spectrum": {
