@@ -648,7 +648,8 @@
                     "azesmbog DMA 24.05.30": "6a0cd7879a98182aeec5b92c36523cf11a1ed5be9f128341609d5a4246e94ec9",
                     "azesmbog TS-FM Unknown": "c1d1183dc144588dfc3acf921b7c8fd77afaf496e12705f30c7409d8d6790635",
                     "azesmbog DMA Unknown": "8467969c0475126159e6036d62ba06c65c18045d8b4dc73451e037703eb66b67",
-                    "kyp 2021.04.23": "b65153e392e3c045ae0e50ede3ff570aa38af1e9861c7e762c1b60a553b7f4fd"
+                    "kyp 2021.04.23": "b65153e392e3c045ae0e50ede3ff570aa38af1e9861c7e762c1b60a553b7f4fd",
+                    "azesmbog TS-FM Fix Composite": "53d561b94771c3810ffc90547f8bc63c91c19c5d8e6dd88fb28d5ed3350ce066"
                 }
             },
             "ZX Spectrum (spark2k06)": {
