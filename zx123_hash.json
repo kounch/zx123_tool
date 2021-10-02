@@ -575,8 +575,8 @@
             },
             "ZX81": {
                 "latest": [
-                    "20161105",
-                    "https://github.com/zxdos/zxuno/raw/master/cores/ZX81/CORE15.ZX1"
+                    "20210914 avlixa",
+                    "https://github.com/avlixa/ZX81_MiSTer_zxdos/raw/master/releases/zx81_zxuno_lx9_20210914.ZX1"
                 ],
                 "versions": {
                     "20161105": "926198a4a6ba89748209e0d25ed34d35d8d51149c6ced0e9452a93440117eec4",
@@ -1826,6 +1826,15 @@
                     "3.0": "504f9b44494daede44072dec653e7b9d5fd39c7279e6bf67a3dac2cb68c518c6"
                 }
             },
+            "ZX81": {
+                "latest": [
+                    "20210914 avlixa",
+                    "https://github.com/avlixa/ZX81_MiSTer_zxdos/raw/master/releases/zx81_zxdos_lx16_20210914.ZX2"
+                ],
+                "versions": {
+                    "20210914 avlixa": "6d273af63ea281e08ea4b1b00fbff0d668c837ce58f275149e8e5d5bfabcbd30"
+                }
+            },
             "ZX Spectrum": {
                 "latest": [
                     "EXP27_SVN"
@@ -2064,8 +2073,8 @@
             },
             "MSX": {
                 "latest": [
-                    "1.3 20210606 (Avlixa)",
-                    "https://github.com/zxdos/zxdos-plus/raw/master/cores/msx1-3_zxdoslx25_20210606.ZXD"
+                    "1.3",
+                    "https://github.com/zxdos/zxdos-plus/raw/master/cores/msx1-3_zxdoslx25.ZXD"
                 ],
                 "base": [
                     "1.3",
@@ -2162,8 +2171,8 @@
             },
             "ZX81": {
                 "latest": [
-                    "2021.07.31",
-                    "https://github.com/avlixa/ZX81_MiSTer_zxdos/raw/master/releases/zx81_zxdos_lx25-20210731.ZXD"
+                    "2021.09.14",
+                    "https://github.com/avlixa/ZX81_MiSTer_zxdos/raw/master/releases/zx81_zxdos_lx25_20210914.ZXD"
                 ],
                 "versions": {
                     "Beta 0": "a6e7c35054fbfa95e3de2d2a62d2aec92db2b65e87086438aac5faa2c30d9c8c",
