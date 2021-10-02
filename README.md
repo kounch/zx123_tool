@@ -68,6 +68,8 @@ Requires a [`zx123_hash.json`](##description-of-json-file) file with block struc
       -w, --wipe            Wipe all ROMs and all secondary cores from image
       -e, --32              Expand, if needed, flash file to 32MiB
       -t, --convert   Converts between standard and Spectrum core
+      -1, --1core  Use, if available, ZXUnCore cores for ZX-Uno
+      -2, --2mb  Use, if available, 2MB cores for ZX-Uno
       -c DEFAULT_CORE, --default_core DEFAULT_CORE
                 Default core number: 1 and up
       -z DEFAULT_ROM, --default_rom DEFAULT_ROM
@@ -352,6 +354,8 @@ Necesita un fichero  [`zx123_hash.json`](#descripción-del-arhivo-json) con la e
       -w, --wipe           Borrar todas las ROMs y todos los cores secundarios
       -e, --32             Expandir, si hiciera falta la imagen a 32MiB
       -t, --convert   Convierte entre core estándar y core de Spectrum
+      -1, --1core  Usar, si los hay, cores específicos para ZXUnCore
+      -2, --2mb  Usar, si los hay, cores que utilizan 2MB de memoria (interna)
       -c CORE_D, --default_core CORE_D
                 Número de core por defecto: 1 o superior
       -z ROM_D, --default_rom ROM_D
