@@ -52,7 +52,7 @@ import ctypes
 if os.name == 'nt':
     import msvcrt
 
-__MY_VERSION__ = '3.0.2'
+__MY_VERSION__ = '3.0.3'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
@@ -180,7 +180,7 @@ def main():
 
         # Try to update contents from internet
         if arg_data['update'] != '':
-            if str_extension in ['ZX1', 'ZX2', 'ZXD']:
+            if str_extension in ['ZX1', 'ZX2', 'ZXD', 'ZXT']:
                 print('\nStarting update...')
                 if not output_file:
                     output_file = str_file
@@ -238,7 +238,7 @@ def main():
 
         # Wipe Secondary Cores and all ZX Spectrum ROMs
         if arg_data['wipe_flash']:
-            if str_extension in ['ZX1', 'ZX2', 'ZXD']:
+            if str_extension in ['ZX1', 'ZX2', 'ZXD', 'ZXT']:
                 if not output_file:
                     output_file = str_file
                 wipe_zxdata(str_file, output_file, dict_hash,
@@ -248,7 +248,7 @@ def main():
 
         # Inject Cores and/or ROMs
         if arg_data['inject']:
-            if str_extension in ['ZX1', 'ZX2', 'ZXD']:
+            if str_extension in ['ZX1', 'ZX2', 'ZXD', 'ZXT']:
                 b_force = arg_data['force']
                 if arg_data['wipe_flash']:
                     b_force = True
