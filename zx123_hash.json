@@ -391,15 +391,15 @@
             },
             "MSX1": {
                 "latest": [
-                    "1.3 512K",
-                    ""
+                    "1.3 512K (spark2k06)",
+                    "https://github.com/spark2k06/zxuno/raw/master/cores/MSX/binaries/512KB/COREx.ZX1"
                 ],
                 "base": [
                     "1.227",
                     "https://github.com/zxdos/zxuno/raw/master/cores/MSX/CORE14.ZX1"
                 ],
                 "2m": [
-                    "1.3 VGA2M"
+                    "1.3 2M (spark2k06)", "https://github.com/spark2k06/zxuno/raw/master/cores/MSX/binaries/2MB/COREx.ZX1"
                 ],
                 "versions": {
                     "Unknown Version": "875bb4433587b607d0a67c953c467058022c4a2dbef77408cba5467fa51d232a",
@@ -408,7 +408,12 @@
                     "1.3 VGA2M": "5b1218ca4f62cceb14ca842ff111aa3e9bd12af61b309ddce70a0b0546ea2ece",
                     "Prueba VGA 2M": "a96c6b1736852a490c85cd913cf28264851fa86960dcf37efa12e5ec95a5b18a",
                     "Prueba 2M Int": "2a0a16735d3e31f9eb2559739c3b9d1889ba5616d78f418c722afa6ffd89c6ef",
-                    "1.3 512K PAL": "4a735fcbc466e04731350ce4b6570ae0b1c8ba1bc3f5ad4501a4ea59247d677a"
+                    "1.3 512K PAL": "4a735fcbc466e04731350ce4b6570ae0b1c8ba1bc3f5ad4501a4ea59247d677a",
+                    "1.3 512K (spark2k06)": "bb1b89e190e40d595282ad002129879914391c1a9781fd5a24caeb392dbd0b56",
+                    "1.3 2M (spark2k06)": "c6365f4978f4f1f48fb2129c9d1070022559ef9fff3d87617702912751f6347c",
+                    "1.3 2M EROM (spark2k06)": "01a55adaaea36acd9f124bad13927c1a48eafdc028f6f244a996ce5b60fd4988",
+                    "1.3 2M Ext (spark2k06)": "d983483cce2add42436b46d41cfb6225cd61dcebd5c39231cc100cea65287cec",
+                    "1.3 2M Ext EROM (spark2k06)": "6790900b6b7f5234096add27a0206168e9707e743348eeb070a06a2dee31dbc7"
                 }
             },
             "Multicomp": {
