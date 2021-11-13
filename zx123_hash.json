@@ -1128,7 +1128,8 @@
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/jumpshot.ZX1"
                 ],
                 "versions": {
-                    "1.0": "5f3bb886fe7944b538f68dd87eda64f5d1e5647b1bbc6fb621a803b53118301d"
+                    "1.0": "5f3bb886fe7944b538f68dd87eda64f5d1e5647b1bbc6fb621a803b53118301d",
+                    "Splitter": "3e4b06313f636938580a764f6b11d824da4ee862fde0a625661f2d80a6077ba6"
                 }
             },
             "Arcade Lady Bug": {
@@ -1140,13 +1141,14 @@
                     "1.0": "93ed62d2333a608356b1ce943c676d14795d9b51609f12987dcbf5724562e177"
                 }
             },
-            "ArcadeV Lizar Wizard": {
+            "ArcadeV Lizard Wizard": {
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/lizwiz.ZX1"
                 ],
                 "versions": {
-                    "1.0": "38ccb246821f6e4b727545327f85d18aa23f1a59f9aca9e7ae17d2ba73b24c56"
+                    "1.0": "38ccb246821f6e4b727545327f85d18aa23f1a59f9aca9e7ae17d2ba73b24c56",
+                    "Splitter": "ceb21dbb47d5c16e6e3b8554f57bf669047078fd5698b1e226080fc7049376bd"
                 }
             },
             "Arcade Lunar Lander": {
