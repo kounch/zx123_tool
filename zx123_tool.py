@@ -711,7 +711,7 @@ def list_zxdata(str_in_file,
                                  get_1core, get_2mb)
                 print('')
                 if (show_hashes):
-                    print(block_hash)
+                    print('Hash: {0}'.format(block_hash))
 
     core_list = get_core_list(str_in_file, hash_dict['parts'])
     for index, name in enumerate(core_list):
@@ -812,7 +812,7 @@ def list_romsdata(str_in_file,
             print(str_rominfo)
 
             if (show_hashes):
-                print(block_hash)
+                print('Hash: {0}'.format(block_hash))
 
         return True
     else:
@@ -1471,7 +1471,7 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
     str_file_hash = get_file_hash(str_in_file)
     i_file_size = os.stat(str_in_file).st_size
     if show_hashes:
-        print('{0}'.format(str_file_hash))
+        print('Hash: {0}'.format(str_file_hash))
 
     # Check if it's a known ZX Spectrum ROM
     for block_id in [

@@ -101,32 +101,35 @@
         },
         "Spectrum": {
             "latest": [
-                "EXP27_160820",
+                "EXP27 160820",
                 "https://github.com/mcleod-ideafix/zxuno_spectrum_core/raw/master/zxuno_v4/SPECTRUM.ZX1"
             ],
             "1core": [
-                "EXP27 spark2k06 20210521 PZX (no SAA1099) (RGB666)",
+                "EXP27 spark2k06 131121 PZX (no SAA1099) (RGB666)",
                 "https://github.com/spark2k06/ZXUno4ALL/raw/main/cores/spectrum/pzx_no_saa/SPECTRUM.ZX1"
             ],
             "versions": {
-                "T24-08012017": "dab20b355cd4c63691ca8e5016e7df98894f4fac11a7da86e8b1b65f4700ab3f",
-                "EXP26_190218": "85624005e8256600bca5fac953a29720e4a5a4ee68c0e25d9a47ffc153fb8668",
-                "EXP26-19022018": "8c677536500eee76873d9a2462ff44adbf3a57477157e275930304fc981a4604",
+                "T24 080117": "dab20b355cd4c63691ca8e5016e7df98894f4fac11a7da86e8b1b65f4700ab3f",
+                "EXP26 190218": "85624005e8256600bca5fac953a29720e4a5a4ee68c0e25d9a47ffc153fb8668",
+                "EXP26 19022018": "8c677536500eee76873d9a2462ff44adbf3a57477157e275930304fc981a4604",
                 "EXP26 040418": "85023e5c7941f56f74c1badc37f295e08b4c2955b67723851c1c5763891b236a",
-                "EXP27_150320": "521524a7717028321024f062c327515923235d2fbde68370f833a818e62d3849",
-                "EXP27_300320": "d0a0cb981659be3cd543e54ea1b55f20b7c875b9065c89a20bf06da56509da5a",
-                "EXP27_160720": "49e13ff7b460f1ec873611de58e6d744ab065f3a95f14b2d42a6583a6a62cb87",
-                "EXP27_160820": "140fe5400fb3aee7dae99c540020d36d14d3c0be7ec3b9dd737a2b198525d618",
+                "EXP27 150320": "521524a7717028321024f062c327515923235d2fbde68370f833a818e62d3849",
+                "EXP27 300320": "d0a0cb981659be3cd543e54ea1b55f20b7c875b9065c89a20bf06da56509da5a",
+                "EXP27 160720": "49e13ff7b460f1ec873611de58e6d744ab065f3a95f14b2d42a6583a6a62cb87",
+                "EXP27 160820": "140fe5400fb3aee7dae99c540020d36d14d3c0be7ec3b9dd737a2b198525d618",
                 "EXP27 130621": "66d482103a1b12dd8e3154714d7bc237b94ad3a8614f6f179085d97e5dec8a87",
                 "EXP27 azesmbog 240320 (no UART+SAA1099)": "5a07296d1a2ec159e3ce2e56482120c3a2d6b67714dc350a46ff3a27739962e6",
-                "EXP27 spark2k06 20210521 PZX (no SAA1099) (RGB666)": "600e60869a466ed4acfcfca7abc6b25d39104d697c498e5eb18d0e6ea2cae22f",
-                "EXP27 spark2k06 20210521 SAA1099 (no PZX) (RGB666)": "b31971458b826410acb580f09b9e6604a765ce948a73ac276daaebcd45044c1d",
-                "EXP27 spark2k06 20210606 Ext RAM": "d2e435b69d324a9aa26d2df0b4403bc38ede62cc184f0532c330e3598e27f3a1",
-                "EXP27 spark2k06 20210613 Ext RAM": "d0ce23fceb4b559eac7898c06861f485ce46d5a227d0ae91886bb1ed6ec7eb56",
-                "EXP27 spark2k06 20210613 PZX (no SAA1099)": "af97f6e9bcda69db8e21dcbe07965dbc47b9c242cd407acef97fba474d653393",
-                "EXP27 spark2k06 20210613 SAA1099 (no PZX)": "a07b36e6b559ea434de2ec84fcf0fa7b6e5ce53b8b9bff98ed7d3ce769d24a1c",
-                "EXP27 spark2k06 20210613 Unknown": "e81f3029ce17e13e787d3147a7144fd6888685cb11cee088972b18e3297bef58",
-                "EXP27 spark2k06 20210613 Splitter": "18bce66db00387ef11e8832f322f01f4cd9237991f2772fa7116c3ed4d684f63"
+                "EXP27 spark2k06 210521 PZX (no SAA1099) (RGB666)": "600e60869a466ed4acfcfca7abc6b25d39104d697c498e5eb18d0e6ea2cae22f",
+                "EXP27 spark2k06 210521 SAA1099 (no PZX) (RGB666)": "b31971458b826410acb580f09b9e6604a765ce948a73ac276daaebcd45044c1d",
+                "EXP27 spark2k06 060621 Ext RAM": "d2e435b69d324a9aa26d2df0b4403bc38ede62cc184f0532c330e3598e27f3a1",
+                "EXP27 spark2k06 130621 Ext RAM": "d0ce23fceb4b559eac7898c06861f485ce46d5a227d0ae91886bb1ed6ec7eb56",
+                "EXP27 spark2k06 130621 PZX (no SAA1099)": "af97f6e9bcda69db8e21dcbe07965dbc47b9c242cd407acef97fba474d653393",
+                "EXP27 spark2k06 130621 SAA1099 (no PZX)": "a07b36e6b559ea434de2ec84fcf0fa7b6e5ce53b8b9bff98ed7d3ce769d24a1c",
+                "EXP27 spark2k06 130621 Unknown": "e81f3029ce17e13e787d3147a7144fd6888685cb11cee088972b18e3297bef58",
+                "EXP27 spark2k06 130621 Splitter": "18bce66db00387ef11e8832f322f01f4cd9237991f2772fa7116c3ed4d684f63",
+                "EXP27 spark2k06 131121 PZX (no SAA1099) (RGB666)": "6c24560231d9f5f8beb2025683dcb4b47f844e1d08dbc3c56d7f7c738c2b1aba",
+                "EXP27 spark2k06 131121 PZX (no SAA1099)": "716330403cc5a781f091d24803f4cd3d3be837a5632a2986db00ecb58ce62698",
+                "EXP27 spark2k06 131121 SAA1099 (no PZX)": "a07b36e6b559ea434de2ec84fcf0fa7b6e5ce53b8b9bff98ed7d3ce769d24a1c"
             }
         },
         "Special": {
@@ -459,7 +462,13 @@
                     "TEST4 512K splitter invertido": "ecc420ecf1f67f7ea93927024d2072b24e8f43e54aaa82b1905ec16e8ea9e14c",
                     "TEST4 VGA 2MB INT": "ed807d4ed1cfa36059919f01307c6a701d2d0835075f725c8aada88ae3f63eff",
                     "TEST4+teclado 512K splitter spark2k06": "f69fc15965ab90a4281a23b70e2d1b6264f026ed611c4193a8c6b463c4cfb092",
-                    "TEST4+teclado 2MB spark2k06": ""
+                    "TEST4+teclado 2M Ext splitter spark2k06": "137554d9b3d12adf0e7376d9fc5ecf7baf79db05edb9ef4f520587b5ffbb44bc",
+                    "TEST4+teclado 2M splitter spark2k06": "b3bb26750f39925fc8a2e11843d254b98603774904b269bdf884577280ded4bd",
+                    "TEST4+teclado 512K spark2k06": "8bd415b33e69003ab4c0501b9e4faddb54feb58ee3178ec5f415a4dc556f42c8",
+                    "TEST4+teclado 2M Ext spark2k06": "4140bd91e0a139261d4dac94d0b7dbe052cd620c2d05c6387b75c8922dcba3d8",
+                    "TEST4+teclado 2M spark2k06": "665d5b6f1103ff47a70f7030b71e5637447b921bff4f2c679b80237fc4eeb42b",
+                    "TEST4+teclado 512K Double Joy spark2k06": "aac71e83ca2b94800fd4fbc8a3e3c95b97a447b0a6e7aaf7393866ee87b9255f",
+                    "TEST4+teclado 2M Double Joy spark2k06": "0860dedc22624a8bae4e69d6f9fcfd2a4d0b4928024889a5dabb1d4378ec7c32"
                 }
             },
             "Oric Atmos": {
@@ -671,23 +680,27 @@
             },
             "ZX Spectrum (spark2k06)": {
                 "latest": [
-                    "EXP27 Monocromo 20210530"
+                    "EXP27 SAA1099 (no PZX) 131121"
                 ],
                 "1core": [
-                    "EXP27 SAA1099 (no PZX) 20210521 (RGB666)",
+                    "EXP27 SAA1099 (no PZX) 131121 (RGB666)",
                     "https://github.com/spark2k06/ZXUno4ALL/raw/main/cores/spectrum/saa_no_pzx/COREx.ZX1"
                 ],
                 "versions": {
-                    "EXP27 Monocromo 20210522": "9fff67427bf174f0bd9627662eb77e00161275729b02584eaf4e5e915aef94a5",
-                    "EXP27 Monocromo 20210530": "6c6c2ad9065a6b1433b585d03c8f11fe608030ffd82216911ffe3944ee6805c4",
+                    "EXP27 Monocromo 220521": "9fff67427bf174f0bd9627662eb77e00161275729b02584eaf4e5e915aef94a5",
+                    "EXP27 Monocromo 300521": "6c6c2ad9065a6b1433b585d03c8f11fe608030ffd82216911ffe3944ee6805c4",
                     "EXP27 Ext RAM 20210606": "7b59c0295840ad65c55e642873e22e094f93b5562ceb728d27f5d0c892b21acc",
-                    "EXP27 20210613": "f795fab8f9effbf79f5f39cc8dfaac76941c98d3b5cc171f4ff68968445b90d0",
+                    "EXP27 130621": "f795fab8f9effbf79f5f39cc8dfaac76941c98d3b5cc171f4ff68968445b90d0",
                     "EXP27 Ext RAM 20210613": "dc9ca57bfa51894e45c1692c6b2caffb2c588111330fa87039921bdd48fc2f97",
-                    "EXP27 SAA1099 (no PZX) 20210521 (RGB666)": "9315a65f5e9696a7e6e90406d44da33d2d7d053fe1a38d0de8e83295fb563dc7",
-                    "EXP27 PZX (no SAA1099) 20210521 (RGB666)": "ab1800ca43fc5940da40f8128d258380e46d016620549fff30e5134adfdcee95",
-                    "EXP27 PZX (no SAA1099) 20210613": "fec6cb6a2bc4b4b07cd1dd897dc9299052d7e08bb484ed29afabdfdf8bac8724",
-                    "EXP27 SAA1099 (no PZX) 20210613": "9535c722e5d0cd322ced9330c96837586dff5aee68fcd2337c115e2729ecdd55",
-                    "EXP27 spark2k06 20210613 Splitter": "9acbb993e42cdaebdebbebfe43b503d1433c3d02d553148cf44cd6c4bfb3f84b"
+                    "EXP27 SAA1099 (no PZX) 210521 (RGB666)": "9315a65f5e9696a7e6e90406d44da33d2d7d053fe1a38d0de8e83295fb563dc7",
+                    "EXP27 PZX (no SAA1099) 210521 (RGB666)": "ab1800ca43fc5940da40f8128d258380e46d016620549fff30e5134adfdcee95",
+                    "EXP27 PZX (no SAA1099) 130621": "fec6cb6a2bc4b4b07cd1dd897dc9299052d7e08bb484ed29afabdfdf8bac8724",
+                    "EXP27 SAA1099 (no PZX) 130621": "9535c722e5d0cd322ced9330c96837586dff5aee68fcd2337c115e2729ecdd55",
+                    "EXP27 130621 Splitter": "9acbb993e42cdaebdebbebfe43b503d1433c3d02d553148cf44cd6c4bfb3f84b",
+                    "EXP27 PZX (no SAA1099) 131121 (RGB666)": "11ed3fbdb9cebfc2324942a1196c2545f1a9e87eb0c90e54df6448d03dac19dc",
+                    "EXP27 SAA1099 (no PZX) 131121 (RGB666)": "9315a65f5e9696a7e6e90406d44da33d2d7d053fe1a38d0de8e83295fb563dc7",
+                    "EXP27 PZX (no SAA1099) 131121": "02a074d7089fab86ec6edb7997c9dfce602cf7248df7f201bb16ab0e955757be",
+                    "EXP27 SAA1099 (no PZX) 131121": "9535c722e5d0cd322ced9330c96837586dff5aee68fcd2337c115e2729ecdd55"
                 }
             },
             "ZX TBBlue": {
