@@ -105,7 +105,7 @@
                 "https://github.com/mcleod-ideafix/zxuno_spectrum_core/raw/master/zxuno_v4/SPECTRUM.ZX1"
             ],
             "1core": [
-                "EXP27 spark2k06 131121 PZX (no SAA1099) (RGB666)",
+                "EXP27 spark2k06 141121 PZX (no SAA1099) (RGB666)",
                 "https://github.com/spark2k06/ZXUno4ALL/raw/main/cores/spectrum/pzx_no_saa/SPECTRUM.ZX1"
             ],
             "versions": {
@@ -127,9 +127,11 @@
                 "EXP27 spark2k06 130621 SAA1099 (no PZX)": "a07b36e6b559ea434de2ec84fcf0fa7b6e5ce53b8b9bff98ed7d3ce769d24a1c",
                 "EXP27 spark2k06 130621 Unknown": "e81f3029ce17e13e787d3147a7144fd6888685cb11cee088972b18e3297bef58",
                 "EXP27 spark2k06 130621 Splitter": "18bce66db00387ef11e8832f322f01f4cd9237991f2772fa7116c3ed4d684f63",
+                "EXP27 251021": "c267e0089cf263ca4df731619e33cf070f39b9e4ee9afa48c084df27d3abf90b",
                 "EXP27 spark2k06 131121 PZX (no SAA1099) (RGB666)": "6c24560231d9f5f8beb2025683dcb4b47f844e1d08dbc3c56d7f7c738c2b1aba",
                 "EXP27 spark2k06 131121 PZX (no SAA1099)": "716330403cc5a781f091d24803f4cd3d3be837a5632a2986db00ecb58ce62698",
-                "EXP27 spark2k06 131121 SAA1099 (no PZX)": "a07b36e6b559ea434de2ec84fcf0fa7b6e5ce53b8b9bff98ed7d3ce769d24a1c"
+                "EXP27 spark2k06 141121 PZX (no SAA1099) (RGB666)": "1b52117b5debe893c3fa1e919e186d3b31af791d323d5bfb5fe34357a456e39b",
+                "EXP27 spark2k06 141121 PZX (no SAA1099)": "74c11d072acaf32e9424eeddfe63ff100f5dc4d09aeec57a31bedb23194025f4"
             }
         },
         "Special": {
@@ -549,9 +551,12 @@
                 }
             },
             "Test": {
-                "latest": [
+                "base": [
                     "1",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Test.ZX1"
+                ],
+                "latest": [
+                    "1.1"
                 ],
                 "versions": {
                     "0": "18ebf52a9f33e6f7af40d832d7b9d512d08964c3c8f9355234126b1662ec9d36",
@@ -680,10 +685,10 @@
             },
             "ZX Spectrum (spark2k06)": {
                 "latest": [
-                    "EXP27 SAA1099 (no PZX) 131121"
+                    "EXP27 PZX (no SAA1099) 141121"
                 ],
                 "1core": [
-                    "EXP27 SAA1099 (no PZX) 131121 (RGB666)",
+                    "EXP27 PZX (no SAA1099) 141121 (RGB666)",
                     "https://github.com/spark2k06/ZXUno4ALL/raw/main/cores/spectrum/saa_no_pzx/COREx.ZX1"
                 ],
                 "versions": {
@@ -698,9 +703,9 @@
                     "EXP27 SAA1099 (no PZX) 130621": "9535c722e5d0cd322ced9330c96837586dff5aee68fcd2337c115e2729ecdd55",
                     "EXP27 130621 Splitter": "9acbb993e42cdaebdebbebfe43b503d1433c3d02d553148cf44cd6c4bfb3f84b",
                     "EXP27 PZX (no SAA1099) 131121 (RGB666)": "11ed3fbdb9cebfc2324942a1196c2545f1a9e87eb0c90e54df6448d03dac19dc",
-                    "EXP27 SAA1099 (no PZX) 131121 (RGB666)": "9315a65f5e9696a7e6e90406d44da33d2d7d053fe1a38d0de8e83295fb563dc7",
                     "EXP27 PZX (no SAA1099) 131121": "02a074d7089fab86ec6edb7997c9dfce602cf7248df7f201bb16ab0e955757be",
-                    "EXP27 SAA1099 (no PZX) 131121": "9535c722e5d0cd322ced9330c96837586dff5aee68fcd2337c115e2729ecdd55"
+                    "EXP27 PZX (no SAA1099) 141121 (RGB666)": "d986a338d9ff0db9d2aff3849f9833c6d8e8c3944a05d79761cb83d0e8385826",
+                    "EXP27 PZX (no SAA1099) 141121": "ba7add62b58a68b446eb745d2c6cae57f12992d810383c69557351f6c20e325f"
                 }
             },
             "ZX TBBlue": {
