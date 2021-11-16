@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # -*- mode: Python; tab-width: 4; indent-tabs-mode: nil; -*-
 # Do not modify previous lines. See PEP 8, PEP 263.
+# pylint: disable=too-many-lines
 """
 Copyright (c) 2020-2021, kounch
 All rights reserved.
@@ -50,7 +51,7 @@ import ctypes
 if sys.version_info.major == 3:
     import urllib.request
 if os.name == 'nt':
-    import msvcrt
+    import msvcrt  # pylint: disable=import-error
 
 __MY_VERSION__ = '3.1.0'
 
@@ -68,17 +69,17 @@ LOG_STREAM = logging.StreamHandler(sys.stdout)
 LOG_STREAM.setFormatter(LOG_FORMAT)
 LOGGER.addHandler(LOG_STREAM)
 
-if not sys.version_info.major == 3:
-    LOGGER.error('This software requires Python version 3')
+if sys.version_info < (3, 6, 0):
+    LOGGER.error('This software requires Python version 3.6 or greater')
     sys.exit(1)
 
-ssl._create_default_https_context = ssl._create_unverified_context
+ssl._create_default_https_context = ssl._create_unverified_context  # pylint: disable=protected-access
 
 
 def main():
     """Main routine"""
 
-    global STR_OUTDIR
+    global STR_OUTDIR  # pylint: disable=global-statement
 
     enable_term_col()
 
@@ -107,7 +108,7 @@ def main():
         sys.exit(0)
 
     if not os.path.isfile(str_json):
-        LOGGER.error('Hash database not found: {0}'.format(str_json))
+        LOGGER.error('Hash database not found: %s', str_json)
         sys.exit(2)
     with open(str_json, 'r', encoding='utf-8') as json_handle:
         LOGGER.debug('Loading dictionary with hashes...')
@@ -146,7 +147,7 @@ def main():
                         dict_hash = fulldict_hash[str_extension]
                         break
     if not dict_hash:
-        LOGGER.error('Unknown file extension: .{0}'.format(str_extension))
+        LOGGER.error('Unknown file extension: %s', str_extension)
         sys.exit(4)
 
     # Is the file header known?
@@ -262,8 +263,7 @@ def main():
                     arg_data['keyboard_layout'], arg_data['boot_timer'],
                     arg_data['default_core'], arg_data['default_rom'], b_force)
             else:
-                LOGGER.error(
-                    'Not a valid filetype: .{0}'.format(str_extension))
+                LOGGER.error('Not a valid filetype: %s', str_extension)
 
         # Truncate image
         elif arg_data['output_file'] and not arg_data['wipe_flash']:
@@ -302,7 +302,7 @@ def main():
             # Convert between Standard and Spectrum Core?
             if arg_data['convert_core']:
                 if output_file:
-                    print('Trying to convert {0}...'.format(str_file))
+                    print(f'Trying to convert {str_file}...')
                     convert_core(str_file, dict_hash, output_file,
                                  arg_data['force'])
                 else:
@@ -322,13 +322,13 @@ def enable_term_col():
     https://stackoverflow.com/questions/53574442/how-to-reliably-test-color-capability-of-an-output-terminal-in-python3
     """
 
-    global IS_COL_TERM
+    global IS_COL_TERM  # pylint: disable=global-statement
 
     if os.name == 'nt':
         enable_virtual_terminal_processing = 4
         kernel32 = ctypes.WinDLL('kernel32', use_last_error=True)
         hstdout = msvcrt.get_osfhandle(sys.stdout.fileno())
-        mode = ctypes.c_ulong()
+        mode = ctypes.c_ulong()  # pylint: disable = no-value-for-parameter
         IS_COL_TERM = kernel32.GetConsoleMode(
             hstdout, ctypes.byref(mode)) and (
                 mode.value & enable_virtual_terminal_processing != 0)
@@ -355,7 +355,7 @@ class Colours:
 def printcol(str_col, str_txt, end=''):
     """Print with TERM colour"""
     if IS_COL_TERM:
-        print('{0}{1}{2}'.format(str_col, str_txt, Colours.ENDC), end=end)
+        print(f'{str_col}{str_txt}{Colours.ENDC}', end=end)
     else:
         print(str_txt, end=end)
 
@@ -365,8 +365,8 @@ def parse_args():
     Parses command line
     :return: Dictionary with different options
     """
-    global LOGGER
-    global IS_COL_TERM
+    global LOGGER  # pylint: disable=global-statement
+    global IS_COL_TERM  # pylint: disable=global-statement
 
     values = {}
     values['input_file'] = ''
@@ -398,7 +398,7 @@ def parse_args():
     parser.add_argument('-v',
                         '--version',
                         action='version',
-                        version='%(prog)s {0}'.format(__MY_VERSION__))
+                        version=f'%(prog)s {__MY_VERSION__}')
     parser.add_argument('-i',
                         '--input_file',
                         required=False,
@@ -649,11 +649,11 @@ def unzip_image(str_path, str_output, hash_dict, b_force):
     str_extension = str_extension[1:].upper()
 
     if str_extension in hash_dict:
-        str_image = 'FLASH16_empty.{0}'.format(str_extension)
-        str_zip = '{0}.zip'.format(str_image)
+        str_image = f'FLASH16_empty.{str_extension}'
+        str_zip = f'{str_image}.zip'
         str_zipfile = os.path.join(str_path, str_zip)
         if not os.path.isfile(str_zipfile):
-            dl_url = MAIN_URL + '/{0}'.format(str_zip)
+            dl_url = f'{MAIN_URL}/{str_zip}'
             print('\nDownloading ZIP file...', end='')
             urllib.request.urlretrieve(dl_url, str_zipfile)
             print('OK')
@@ -678,7 +678,7 @@ def unzip_image(str_path, str_output, hash_dict, b_force):
         else:
             LOGGER.error('Could not get base image file')
     else:
-        LOGGER.error('Unknown extension: .{0}'.format(str_extension))
+        LOGGER.error('Unknown extension: %s', str_extension)
 
     return str_file
 
@@ -696,10 +696,9 @@ def list_zxdata(str_in_file,
     :param show_hashes: If True, print also block hashes
     :param check_updated: If True, check with 'latest' or '2m' entries in JSON
     """
-    LOGGER.debug('Listing contents of file: {0}'.format(str_in_file))
+    LOGGER.debug('Listing contents of file: %s', str_in_file)
     str_name = os.path.basename(str_in_file)
-    print('\nContents of {0} (possibly {1})\n'.format(
-        str_name, hash_dict['description']))
+    print(f'\nContents of {str_name} (possibly {hash_dict["description"]})\n')
     block_list = ['BIOS', 'esxdos', 'Spectrum', 'Special']
     for block_name in block_list:
         if block_name in hash_dict['parts']:
@@ -707,47 +706,46 @@ def list_zxdata(str_in_file,
                 str_in_file, hash_dict['parts'][block_name],
                 hash_dict[block_name])
             if block_version:
-                print('{0}: {1}'.format(block_name, block_version), end='')
+                print(f'{block_name}: {block_version}', end='')
                 if check_updated:
                     update_check(hash_dict[block_name], block_version,
                                  get_1core, get_2mb)
                 print('')
                 if show_hashes:
-                    print('Hash: {0}'.format(block_hash))
+                    print(f'Hash: {block_hash}')
 
     core_list = get_core_list(str_in_file, hash_dict['parts'])
     for index, name in enumerate(core_list):
         block_name, block_version, block_hash = get_core_version(
             str_in_file, index, hash_dict['parts'], hash_dict['Cores'])
 
-        print('Core {0:02d} "{1}" -> {2}: {3}'.format(index + 2, name,
-                                                      block_name,
-                                                      block_version),
-              end='')
+        print(
+            f'Core {index + 2:02d} "{name}" -> {block_name}: {block_version}',
+            end='')
         if check_updated:
             if block_name in hash_dict['Cores']:
                 update_check(hash_dict['Cores'][block_name], block_version,
                              get_1core, get_2mb)
         print('')
         if show_hashes:
-            print('Core {0:02d}: {1}'.format(index + 2, block_hash))
+            print(f'Core {index + 2:02d}: {block_hash}')
 
     print('\nBIOS Defaults:')
 
     default_rom = get_peek(str_in_file, 28736)
-    print('\tDefault ROM -> {0:02}'.format(default_rom))
+    print(f'\tDefault ROM -> {default_rom:02}')
 
     default_core = get_peek(str_in_file, 28737) + 1
-    print('\tDefault Core -> {0:02}'.format(default_core))
+    print(f'\tDefault Core -> {default_core:02}')
 
     boot_timer = get_peek(str_in_file, 28738)
-    print('\tBoot Timer -> {0}'.format(boot_timer))
+    print(f'\tBoot Timer -> {boot_timer}')
 
     keyb_layout = get_peek(str_in_file, 28746)
-    print('\tKeyboard Layout -> {0}'.format(keyb_layout))
+    print(f'\tKeyboard Layout -> {keyb_layout}')
 
     video_mode = get_peek(str_in_file, 28749)
-    print('\tVideo Mode -> {0}'.format(video_mode))
+    print(f'\tVideo Mode -> {video_mode}')
 
 
 def update_check(hash_dict, block_version, get_1core=False, get_2mb=False):
@@ -764,12 +762,11 @@ def update_check(hash_dict, block_version, get_1core=False, get_2mb=False):
 
     if last_version:
         if block_version == last_version:
-            printcol(Colours.GREEN, '    >> Up to date', end='')
+            printcol(Colours.GREEN, '  >> Up to date', end='')
         else:
-            printcol(
-                Colours.YELLOW,
-                '    >> Outdated!. Latest version: {0}'.format(last_version),
-                end='')
+            printcol(Colours.YELLOW,
+                     f'  >> Outdated!. Latest version: {last_version}',
+                     end='')
     else:
         LOGGER.debug('Latest entry not found in JSON')
 
@@ -788,8 +785,7 @@ def list_romsdata(str_in_file,
     :param roms_file: If True, add extra offset as in ROMS.ZX1 file
     :return: True if there are ROMs to list
     """
-    LOGGER.debug('Listing ROMs of file: {0}'.format(str_in_file))
-    str_name = os.path.basename(str_in_file)
+    LOGGER.debug('Listing ROMs of file: %s', str_in_file)
     roms_list = get_rom_list(str_in_file, hash_dict[in_file_ext]['parts'])
 
     if roms_list:
@@ -800,7 +796,7 @@ def list_romsdata(str_in_file,
                 print('ZX1 ROMPack File')
             def_addr = int(hash_dict[in_file_ext]['parts']['roms_data'][0])
             default_rom = get_peek(str_in_file, def_addr)
-            print('\tDefault ROM -> {0:02}'.format(default_rom))
+            print(f'\tDefault ROM -> {default_rom:02}')
 
         print('\nZX Spectrum ROMs:')
         for rom in roms_list:
@@ -808,14 +804,12 @@ def list_romsdata(str_in_file,
             block_version, block_hash, _ = get_rom(str_in_file, rom[1], rom[3],
                                                    hash_dict, in_file_ext,
                                                    roms_file)
-            str_rominfo = ' {0:02d} (Slot {1:02d}) {2:>10} ({3:>16}) '.format(
-                rom[0], rom[1], rom[4], rom[5])
-            str_rominfo += '"{0}" {1}K -> {2}'.format(rom_name, rom[3] * 16,
-                                                      block_version)
+            str_rominfo = f' {rom[0]:02d} (Slot {rom[1]:02d}) {rom[4]:>10} ({rom[5]:>16}) '
+            str_rominfo += f'"{rom_name}" {rom[3] * 16}K -> {block_version}'
             print(str_rominfo)
 
             if show_hashes:
-                print('Hash: {0}'.format(block_hash))
+                print(f'Hash: {block_hash}')
 
         return True
     else:
@@ -849,7 +843,7 @@ def extractfrom_zxdata(str_in_file,
         if block_name in hash_dict['parts']:
             # Extract main ROMs
             if extract_item.upper() == block_name.upper():
-                print('Extracting {0}...'.format(block_name))
+                print(f'Extracting {block_name}...')
                 block_info = hash_dict['parts'][block_name]
                 str_bin = block_info[2]
                 str_bin = os.path.join(str_dir, str_bin)
@@ -864,7 +858,7 @@ def extractfrom_zxdata(str_in_file,
             core_number = int(extract_item)
             core_list = get_core_list(str_in_file, hash_dict['parts'])
             if core_number > 1 and core_number < (len(core_list) + 2):
-                print('Extracting Core {0}...'.format(core_number))
+                print(f'Extracting Core {core_number}...')
                 core_number -= 2
                 core_name = core_list[core_number].strip()
                 block_name, block_version, _ = get_core_version(
@@ -876,22 +870,22 @@ def extractfrom_zxdata(str_in_file,
                 core_bases = hash_dict['parts']['core_base']
                 block_data = get_core_blockdata(core_number, splitcore_index,
                                                 core_bases)
-                str_bin = 'CORE{0:02d}_{1}_v{2}.{3}'.format(
-                    core_number + 2, block_name.replace(' ', '_'),
-                    block_version, str_extension)
+                str_bin = f'CORE{core_number + 2:02d}'
+                str_bin += f'_{block_name.replace(" ", "_")}_v{block_version}'
+                str_bin += f'.{str_extension}'
                 str_bin = os.path.join(str_dir, str_bin)
                 core_magic = core_bases[3]
                 validate_and_export_bin(str_in_file, block_data, str_bin,
                                         b_force, core_magic)
             else:
-                LOGGER.error('Invalid core number: {0}'.format(core_number))
+                LOGGER.error('Invalid core number: %i', core_number)
     else:
         # Extract individual ZX Spectrum ROMs
         if extract_item.isdigit():
             rom_number = int(extract_item)
             rom_list = get_rom_list(str_in_file, hash_dict['parts'])
             if rom_number > -1 and rom_number < len(rom_list):
-                print('Extracting ZX Spectrum ROM {0}...'.format(rom_number))
+                print(f'Extracting ZX Spectrum ROM {rom_number}...')
                 for rom in rom_list:
                     if rom[0] == rom_number:
                         rom_version, _, rom_data = get_rom(
@@ -900,12 +894,12 @@ def extractfrom_zxdata(str_in_file,
                         rom_name = rom[2].strip()
                         if rom_version != 'Unknown':
                             rom_name = rom_version.strip()
-                        str_bin = '{0:02d}_{1}.rom'.format(rom[0], rom_name)
+                        str_bin = f'{rom[0]:02d}_{rom_name}.rom'
                         str_bin = os.path.join(str_dir, str_bin)
                         export_bindata(rom_data, str_bin, b_force)
                         break
             else:
-                LOGGER.error('Invalid ROM index: {0}'.format(rom_number))
+                LOGGER.error('Invalid ROM index: %i', rom_number)
 
     if extract_item.upper() == 'ROMS':
         # Extract all ZX Spectrum ROMs to RomPack file
@@ -977,8 +971,7 @@ def prep_update_zxdata(arr_in_files,
                     latest = hash_dict[block]['vertical']
                 latest_hash = hash_versions[latest[0]]
 
-                str_file = '{0}_{1}.{2}'.format(block, latest[0],
-                                                str_extension)
+                str_file = f'{block}_{latest[0]}.{str_extension}'
                 str_file = os.path.join(STR_OUTDIR, str_file)
 
                 if block_hash != latest_hash:
@@ -986,7 +979,7 @@ def prep_update_zxdata(arr_in_files,
                                                 latest[1:], block)
 
                     if b_append:
-                        arr_in_files.append('{0},{1}'.format(block, str_file))
+                        arr_in_files.append(f'{block},{str_file}')
 
 
 def prep_update_cores(arr_in_files,
@@ -1048,8 +1041,7 @@ def prep_update_cores(arr_in_files,
             base_hash = hash_dict['Cores'][block_name]['versions'].get(
                 base[0], '')
 
-            str_file = 'CORE{0:0>2}_{1}_{2}.{3}'.format(
-                index, block_name, latest[0], str_extension)
+            str_file = f'CORE{index:0>2}_{block_name}_{latest[0]}.{str_extension}'
             str_file = os.path.join(STR_OUTDIR, str_file)
 
             if block_hash != latest_hash:
@@ -1058,8 +1050,7 @@ def prep_update_cores(arr_in_files,
                                             base[1:])
 
                 if b_append:
-                    new_in_file = 'CORE,{0},{1},{2}'.format(
-                        index, name, str_file)
+                    new_in_file = f'CORE,{index},{name},{str_file}'
                     arr_in_files.append(new_in_file)
 
 
@@ -1087,7 +1078,7 @@ def prep_update_roms(arr_in_files,
         b_append = check_and_update(str_roms, latest_hash, latest[1:], 'ROMS')
 
         if b_append:
-            new_in_file = 'ROMS,{0}'.format(str_roms)
+            new_in_file = f'ROMS,{str_roms}'
             arr_in_files.append(new_in_file)
 
         if b_arcade:
@@ -1100,7 +1091,7 @@ def prep_update_roms(arr_in_files,
             if b_append:
                 roms_info = fullhash_dict[str_extension]['parts']['roms_dir']
                 i_slot = roms_info[5] + roms_info[6] - 1
-                new_in_file = 'ROM,{0},hl17x,Jamma,{1}'.format(i_slot, str_rom)
+                new_in_file = f'ROM,{i_slot},hl17x,Jamma,{str_rom}'
                 arr_in_files.append(new_in_file)
 
 
@@ -1132,7 +1123,7 @@ def check_and_update(update_file,
     if os.path.isfile(update_file):
         file_hash = get_file_hash(update_file)
         if file_hash == upd_hash:
-            LOGGER.debug('Not downloading, already available...')
+            LOGGER.debug('Not downloading, already available: %s', update_file)
             dl_result = True
 
     if upd_urls:
@@ -1140,12 +1131,12 @@ def check_and_update(update_file,
 
     if not update_url and bs_urls and uchk == 'Para Sara':
         if file_hash == bs_hash:
-            LOGGER.debug('Not downloading base...')
+            LOGGER.debug('Not downloading base, available: %s', update_file)
             dl_result = True
         update_url = bs_urls[0]
 
     if not dl_result and update_url:
-        print('Downloading {0}...'.format(upd_name), end='')
+        print(f'Downloading {upd_name}...', end='')
         try:
             urllib.request.urlretrieve(update_url, update_file)
             if is_zipfile(update_file):
@@ -1166,7 +1157,7 @@ def check_and_update(update_file,
                             b_found = True
                             break
                 if not b_found:
-                    LOGGER.warn('Not a valid ZIP file')
+                    LOGGER.warning('Not a valid ZIP file')
                 os.remove(str_zipfile)
             print('OK')
             dl_result = True
@@ -1198,7 +1189,7 @@ def expand_image(str_spi_file, str_outfile, flash_len, b_force=False):
 
             with open(str_outfile, "wb") as out_zxdata:
                 out_zxdata.write(b_data)
-                print('{0} created OK.'.format(str_outfile))
+                print(f'{str_outfile} created OK.')
                 b_force = True
 
     return b_force
@@ -1282,7 +1273,7 @@ def wipe_zxdata(str_spi_file,
     if b_force or check_overwrite(str_outfile):
         with open(str_outfile, "wb") as out_zxdata:
             out_zxdata.write(br_data)
-            print('{0} created OK.'.format(str_outfile))
+            print(f'{str_outfile} created OK.')
 
 
 def inject_zxfiles(str_spi_file,
@@ -1354,7 +1345,7 @@ def inject_zxfiles(str_spi_file,
             b_force = True
             with open(str_outfile, "wb") as out_zxdata:
                 out_zxdata.write(b_data)
-                print('{0} created OK.'.format(str_outfile))
+                print(f'{str_outfile} created OK.')
 
     return b_force
 
@@ -1411,7 +1402,7 @@ def savefrom_zxdata(str_in_file,
     if b_force or check_overwrite(str_outfile):
         with open(str_outfile, "wb") as out_zxdata:
             out_zxdata.write(bin_data)
-            print('{0} created OK.'.format(str_outfile))
+            print(f'{str_outfile} created OK.')
 
 
 def convert_core(str_in_file, hash_dict, str_outfile, b_force=False):
@@ -1448,13 +1439,13 @@ def convert_core(str_in_file, hash_dict, str_outfile, b_force=False):
             LOGGER.debug('Looks like a Spectrum core')
             b_data += b'\x00' * (b_corelen - b_speclen)
         else:
-            LOGGER.error('Not a valid core file: .{0}'.format(str_in_file))
+            LOGGER.error('Not a valid core file: %s', str_in_file)
             b_convert = False
     if b_convert:
         if b_force or check_overwrite(str_outfile):
             with open(str_outfile, "wb") as out_zxdata:
                 out_zxdata.write(b_data)
-                print('{0} created OK.'.format(str_outfile))
+                print(f'{str_outfile} created OK.')
 
 
 def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
@@ -1469,12 +1460,12 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
     d_parts = hash_dict['parts']
 
     str_name = os.path.basename(str_in_file)
-    print('\nAnalyzing {0} (possibly {1})...\n '.format(
-        str_name, hash_dict['description']))
+    print(
+        f'\nAnalyzing {str_name} (possibly {hash_dict["description"]})...\n ')
     str_file_hash = get_file_hash(str_in_file)
     i_file_size = os.stat(str_in_file).st_size
     if show_hashes:
-        print('Hash: {0}'.format(str_file_hash))
+        print(f'Hash: {str_file_hash}')
 
     # Check if it's a known ZX Spectrum ROM
     for block_id in [
@@ -1482,12 +1473,11 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
     ]:
         if block_id in d_parts:
             if i_file_size == int(d_parts[block_id][1]):
-                LOGGER.debug('Looks like {0}'.format(block_id))
+                LOGGER.debug('Looks like %s', block_id)
                 block_version = get_data_version(str_file_hash,
                                                  hash_dict[block_id])
                 if block_version != 'Unknown':
-                    print('{0} -  Version: {1}'.format(block_id,
-                                                       block_version))
+                    print(f'{block_id} -  Version: {block_version}')
                     found = True
 
     # Check if it's a main ROM
@@ -1495,12 +1485,11 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
         if not found and block_id in d_parts:
             if i_file_size == int(d_parts[block_id][1]) and validate_file(
                     str_in_file, d_parts[block_id][3]):
-                LOGGER.debug('Looks like {0}'.format(block_id))
+                LOGGER.debug('Looks like %s', block_id)
                 block_version = get_data_version(str_file_hash,
                                                  hash_dict[block_id])
                 if block_version != 'Unknown':
-                    print('{0} -  Version: {1}'.format(block_id,
-                                                       block_version))
+                    print(f'{block_id} -  Version: {block_version}')
                     found = True
 
     # Check if it's a Core
@@ -1513,8 +1502,7 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
                 block_version = get_data_version(str_file_hash,
                                                  hash_dict['Cores'][core_item])
                 if block_version != 'Unknown':
-                    print('Core: {0} - Version: {1}'.format(
-                        core_item, block_version))
+                    print(f'Core: {core_item} - Version: {block_version}')
                     found = True
                     break
 
@@ -1549,15 +1537,15 @@ def get_core_version(str_in_file, core_index, dict_parts, dict_cores):
     if len(block_info) > 5:
         max_cores += int(block_info[5])
     if core_index > max_cores:
-        LOGGER.error('Invalid core index: {}'.format(core_index))
+        LOGGER.error('Invalid core index: %i', core_index)
 
     core_bases = dict_parts['core_base']
 
     block_name = block_version = 'Unknown'
     block_hash = ''
     block_data = get_core_blockdata(core_index, splitcore_index, core_bases)
-    LOGGER.debug('Index {0}: {1:X}({1})'.format(core_index + 2,
-                                                int(block_data[0])))
+    LOGGER.debug('Index %i: %X(%i)', core_index + 2, block_data[0],
+                 block_data[0])
 
     for core_name in dict_cores:
         block_version, block_hash = get_version(str_in_file, block_data,
@@ -1729,7 +1717,7 @@ def get_rom_list(str_in_file, dict_parts, b_data=None):
                 for j in range(0, 16):
                     byte = rom_data[8 + j]
                     if byte:
-                        rom_crc += '{0:02X}'.format(byte)
+                        rom_crc += f'{byte:02X}'
                 rom_name = rom_data[32:]
                 if rom_name[0] >= 32:
                     try:
@@ -1766,7 +1754,7 @@ def get_rom_bin(str_in_file,
     rom_data = b''
     for rom_blk in range(rom_slot, rom_slot + rom_blocks):
         rom_offset = get_romb_offset(rom_blk, rom_split, rom_bases, roms_file)
-        LOGGER.debug('Slot {0}: {1:X} ({1})'.format(rom_blk, rom_offset))
+        LOGGER.debug('Slot %i: %X (%i)', rom_blk, rom_offset, rom_offset)
 
         with open(str_in_file, "rb") as in_zxrom:
             in_zxrom.seek(rom_offset)
@@ -1830,7 +1818,7 @@ def get_rom_crc(rom_data):
     str_crc = ''
     for rom_block in range(0, rom_blocks):
         block_crc = get_crc16(rom_data, rom_block * 16384, 16384)
-        str_crc = '{0:04X}'.format(block_crc) + str_crc
+        str_crc = f'{block_crc:04X}{str_crc}'
 
     return str_crc
 
@@ -1849,7 +1837,7 @@ def get_crc16(data, offset, length):
     crc = 0xFFFF
     for i in range(0, length):
         crc ^= data[offset + i] << 8
-        for j in range(0, 8):
+        for _ in range(0, 8):
             if (crc & 0x8000) > 0:
                 crc = (crc << 1) ^ 0x1021
             else:
@@ -1911,7 +1899,7 @@ def inject_bindata(str_in_params, hash_dict, b_data):
         hash_parts = hash_dict['parts'].get(bl_id, [])
         if arr_params[0].upper() == bl_id.upper():
             if len(arr_params) != 2:  # Filename
-                LOGGER.error('Invalid data: {0}'.format(str_in_params))
+                LOGGER.error('Invalid data: %s', str_in_params)
             else:
                 str_in_file = arr_params[1]
                 str_hash = get_file_hash(str_in_file)
@@ -1921,9 +1909,9 @@ def inject_bindata(str_in_params, hash_dict, b_data):
                 if validate_file(
                         str_in_file,
                         b_head) and os.stat(str_in_file).st_size == b_len:
-                    LOGGER.debug('Looks like {0}'.format(bl_id))
+                    LOGGER.debug('Looks like %s', bl_id)
                     bl_version = get_data_version(str_hash, hash_dict[bl_id])
-                    print('Adding {0}: {1}...'.format(bl_id, bl_version))
+                    print(f'Adding {bl_id}: {bl_version}...')
 
                     with open(str_in_file, "rb") as in_zxdata:
                         in_data = in_zxdata.read(b_len)
@@ -1965,10 +1953,10 @@ def inject_coredata(str_in_params, hash_dict, b_data):
         core_list = get_core_list_bindata(bl_data, dict_parts)
 
         if len(arr_params) != 4:
-            LOGGER.error('Invalid argument: {0}'.format(str_in_params))
+            LOGGER.error('Invalid argument: %s', str_in_params)
         else:
             core_index = int(arr_params[1])
-            str_name = '{0:<32}'.format(arr_params[2][:32])
+            str_name = f'{arr_params[2][:32]:<32}'
             str_in_file = arr_params[3]
             str_hash = get_file_hash(str_in_file)
             # Check header and length
@@ -1988,16 +1976,17 @@ def inject_coredata(str_in_params, hash_dict, b_data):
                     core_index = len(core_list) + 2
 
                 if core_index < 2 or core_index > max_cores:
-                    LOGGER.error('Invalid core index: {}'.format(core_index))
+                    LOGGER.error('Invalid core index: %i', core_index)
                 else:
-                    print('Adding core {0}: {1} ({2})...'.format(
-                        core_index, core_name, block_version))
+                    print(
+                        f'Adding core {core_index}: {core_name} ({block_version})...'
+                    )
                     core_index -= 2
                     block_data = get_core_blockdata(core_index,
                                                     splitcore_index,
                                                     core_bases)
                     b_offset, b_len = block_data
-                    LOGGER.debug("Offset: {0:X} ({0})".format(b_offset))
+                    LOGGER.debug('Offset: %X (%i)', b_offset, b_offset)
 
                     if b_offset + b_len > len(b_data):
                         LOGGER.error('Flash image too small for data')
@@ -2051,7 +2040,7 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
 
     if arr_params[0].upper() == 'ROM':  # Slot, Params, Name, Filename
         if len(arr_params) != 5:
-            LOGGER.error('Invalid argument: {0}'.format(str_in_params))
+            LOGGER.error('Invalid argument: %s', str_in_params)
         else:
             roms_list = get_rom_list(str_in_file, dict_parts, br_data)
             slot_use = []
@@ -2072,11 +2061,11 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
                 b_len = int(b_len / 16384)
 
                 if rom_slt in slot_use or rom_slt < 0 or rom_slt > max_slots:
-                    LOGGER.error('Invalid slot number: {0}'.format(rom_slt))
+                    LOGGER.error('Invalid slot number: %i', rom_slt)
                     rom_slt = -1
 
                 if rom_slt + b_len > max_slots:
-                    LOGGER.error('Slot number too high ({0})'.format(rom_slt))
+                    LOGGER.error('Slot number too high (%i)', rom_slt)
                     rom_slt = -1
 
                 rom_index = len(roms_list)
@@ -2084,9 +2073,8 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
                     if rom_slt == rom_entry[1]:
                         rom_index = rom_entry[0]
                         if b_len != rom_entry[3]:
-                            LOGGER.error(
-                                'Invalid ROM size for slot {0}'.format(
-                                    rom_slt))
+                            LOGGER.error('Invalid ROM size for slot %i',
+                                         rom_slt)
                             rom_slt = -1
                         break
 
@@ -2095,7 +2083,7 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
                         rom_data = in_zxdata.read()
 
                     r_v = get_romdata_version(rom_data, fullhash_dict['ROM'])
-                    print('Injecting ROM {0} ({1})...'.format(rom_slt, r_v[0]))
+                    print(f'Injecting ROM {rom_slt} ({r_v[0]})...')
 
                     br_data, b_changed = inject_rom_tobin(b_data,
                                                           block_info,
@@ -2151,7 +2139,7 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
 
     if arr_params[0].upper() == 'ROMS':  # Filename
         if len(arr_params) != 2:
-            LOGGER.error('Invalid argument: {0}'.format(str_in_params))
+            LOGGER.error('Invalid argument: %s', str_in_params)
         else:
             str_name = arr_params[1]
             roms_list = get_rom_list(str_name, rom_dict_parts)
@@ -2162,7 +2150,7 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
                 br_data = b_data[:int(block_info[4])] + roms_use
                 br_data += b_data[int(block_info[4]) + len(roms_use):]
 
-                print('Injecting ROMs from {0}...'.format(str_name))
+                print(f'Injecting ROMs from {str_name}...')
                 for rom_item in roms_list:
                     rom_index = rom_item[0]
                     rom_slt = rom_item[1]
@@ -2175,8 +2163,8 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
 
                     rom_len = int(len(rom_data) / 16384)
                     if rom_slt + rom_len - 1 < max_slots:
-                        LOGGER.debug('Injecting ROM {0} ({1})...'.format(
-                            rom_slt, rom_name))
+                        LOGGER.debug('Injecting ROM %i (%s)...', rom_slt,
+                                     rom_name)
 
                         br_data, b_chg = inject_rom_tobin(
                             br_data, block_info, block_bases, rom_index,
@@ -2184,8 +2172,7 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
                             b_roms)
                         b_changed |= b_chg
                     else:
-                        LOGGER.error(
-                            'Slot number too high: {0}'.format(rom_slt))
+                        LOGGER.error('Slot number too high: %i', rom_slt)
 
                 if b_changed:
                     br_data, b_chg = inject_biossettings(br_data,
@@ -2222,7 +2209,7 @@ def inject_rom_tobin(b_data,
     b_changed = False
     rom_split = int(block_info[5])
 
-    rom_name = '{0:<32}'.format(rom_name[:32])
+    rom_name = f'{rom_name[:32]:<32}'
     rom_len = int(len(rom_data) / 16384)
     if not rom_crc:
         rom_crc = get_rom_crc(rom_data)
@@ -2250,7 +2237,7 @@ def inject_rom_tobin(b_data,
                 br_data += b_data[cur_pos:rom_offset]
                 b_changed = True
             else:
-                LOGGER.error('Flash image too small for: {0}'.format(rom_name))
+                LOGGER.error('Flash image too small for: %s', rom_name)
                 b_changed = False
                 break
 
@@ -2300,7 +2287,7 @@ def inject_biossettings(b_data,
     # 28738 0-4 Boot Timer
     if boot_timer > -1:
         if boot_timer > 4:
-            LOGGER.error('Wrong Boot Timer: {0}'.format(boot_timer))
+            LOGGER.error('Wrong Boot Timer: %i', boot_timer)
         else:
             br_data = br_data[:28738] + struct.pack(
                 '<B', boot_timer) + br_data[28739:]
@@ -2309,7 +2296,7 @@ def inject_biossettings(b_data,
     # 28746 0-3 Keyboard Layout: Auto-ES-EN-ZX
     if keyboard_layout > -1:
         if keyboard_layout > 3:
-            LOGGER.error('Wrong Keyboard Layout: {0}'.format(keyboard_layout))
+            LOGGER.error('Wrong Keyboard Layout: %i', keyboard_layout)
         else:
             br_data = br_data[:28746] + struct.pack(
                 '<B', keyboard_layout) + br_data[28747:]
@@ -2318,7 +2305,7 @@ def inject_biossettings(b_data,
     # 28749 0-2 Video: PAL-NTSC-VGA
     if video_mode > -1:
         if video_mode > 3:
-            LOGGER.error('Wrong Video Mode: {0}'.format(video_mode))
+            LOGGER.error('Wrong Video Mode: %i', video_mode)
         else:
             br_data = br_data[:28749] + struct.pack(
                 '<B', video_mode) + br_data[28750:]
@@ -2500,7 +2487,7 @@ def export_bindata(bin_data, str_out_bin, b_force=False):
     if b_force or check_overwrite(str_out_bin):
         with open(str_out_bin, "wb") as out_zxdata:
             out_zxdata.write(bin_data)
-            print('{0} created OK.'.format(str_out_bin))
+            print(f'{str_out_bin} created OK.')
 
 
 def check_overwrite(str_file):
@@ -2514,8 +2501,7 @@ def check_overwrite(str_file):
         str_name = os.path.basename(str_file)
         b_ask = True
         while b_ask:
-            chk_overwrite = input(
-                '{0} exists. Overwrite? (Y/N): '.format(str_name))
+            chk_overwrite = input(f'{str_name} exists. Overwrite? (Y/N): ')
             if chk_overwrite.upper() == 'N' or chk_overwrite == '':
                 b_writefile = False
                 b_ask = False
