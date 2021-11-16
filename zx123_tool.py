@@ -42,17 +42,17 @@ import json
 import hashlib
 from binascii import unhexlify
 import struct
-if sys.version_info.major == 3:
-    import urllib.request
 import ssl
 from zipfile import ZipFile, is_zipfile
 import tempfile
 import shutil
 import ctypes
+if sys.version_info.major == 3:
+    import urllib.request
 if os.name == 'nt':
     import msvcrt
 
-__MY_VERSION__ = '3.0.3'
+__MY_VERSION__ = '3.1.0'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
@@ -109,16 +109,16 @@ def main():
     if not os.path.isfile(str_json):
         LOGGER.error('Hash database not found: {0}'.format(str_json))
         sys.exit(2)
-    with open(str_json, 'r') as jsonHandle:
+    with open(str_json, 'r', encoding='utf-8') as json_handle:
         LOGGER.debug('Loading dictionary with hashes...')
-        fulldict_hash = json.load(jsonHandle)
+        fulldict_hash = json.load(json_handle)
 
     # Analyze/initialize input file and output dir location and extension
     b_new_img = False
     if not str_file:
         if arg_data['output_file']:
             str_file = unzip_image(MY_DIRPATH, arg_data['output_file'],
-                                   fulldict_hash)
+                                   fulldict_hash, arg_data['force'])
             b_new_img = True
             arg_data['force'] = True
             if not str_file:
@@ -325,23 +325,24 @@ def enable_term_col():
     global IS_COL_TERM
 
     if os.name == 'nt':
-        ENABLE_VIRTUAL_TERMINAL_PROCESSING = 4
+        enable_virtual_terminal_processing = 4
         kernel32 = ctypes.WinDLL('kernel32', use_last_error=True)
         hstdout = msvcrt.get_osfhandle(sys.stdout.fileno())
         mode = ctypes.c_ulong()
         IS_COL_TERM = kernel32.GetConsoleMode(
             hstdout, ctypes.byref(mode)) and (
-                mode.value & ENABLE_VIRTUAL_TERMINAL_PROCESSING != 0)
+                mode.value & enable_virtual_terminal_processing != 0)
 
         if not IS_COL_TERM:
             IS_COL_TERM = kernel32.SetConsoleMode(
-                hstdout, mode.value | ENABLE_VIRTUAL_TERMINAL_PROCESSING) > 0
+                hstdout, mode.value | enable_virtual_terminal_processing) > 0
     else:
         IS_COL_TERM = True
 
 
 # https://ozzmaker.com/add-colour-to-text-in-python/
-class colours:
+class Colours:
+    """Colour handling for terminal"""
     RED = '\033[1;31m'
     GREEN = '\033[1;32m'
     YELLOW = '\033[1;33m'
@@ -354,7 +355,7 @@ class colours:
 def printcol(str_col, str_txt, end=''):
     """Print with TERM colour"""
     if IS_COL_TERM:
-        print('{0}{1}{2}'.format(str_col, str_txt, colours.ENDC), end=end)
+        print('{0}{1}{2}'.format(str_col, str_txt, Colours.ENDC), end=end)
     else:
         print(str_txt, end=end)
 
@@ -548,7 +549,7 @@ def parse_args():
                         required=False,
                         action='store_true',
                         dest='nocol',
-                        help='Do not use termina colours')
+                        help='Do not use terminal colours')
     parser.add_argument('--debug', action='store_true', dest='debug')
 
     arguments = parser.parse_args()
@@ -557,7 +558,7 @@ def parse_args():
         IS_COL_TERM = False
 
     if arguments.debug:
-        printcol(colours.PURPLE, 'Debugging Enabled!!', end='\n')
+        printcol(Colours.PURPLE, 'Debugging Enabled!!', end='\n')
         LOGGER.setLevel(logging.DEBUG)
 
     LOGGER.debug(sys.argv)
@@ -634,12 +635,13 @@ def parse_args():
 # Main Functions
 
 
-def unzip_image(str_path, str_output, hash_dict):
+def unzip_image(str_path, str_output, hash_dict, b_force):
     """
     Extract base image file from ZIP. Download ZIP from repository if needed.
     :param str_path: Directory where ZIP files are
     :param str_output: Path to image file to create
     :param hash_dict: Full dictionary of hashes
+    :param b_force: Force overwriting file
     :return: New image file path if created or else an empty string
     """
     str_file = ''
@@ -657,16 +659,16 @@ def unzip_image(str_path, str_output, hash_dict):
             print('OK')
 
         if is_zipfile(str_zipfile):
-            with ZipFile(str_zipfile, 'r') as zipObj:
-                arr_files = zipObj.namelist()
+            with ZipFile(str_zipfile, 'r') as zip_obj:
+                arr_files = zip_obj.namelist()
                 for str_name in arr_files:
                     if str_name == str_image:
                         with tempfile.TemporaryDirectory() as str_tmpdir:
                             print('\nExtracting image...', end='')
-                            zipObj.extract(str_name, str_tmpdir)
+                            zip_obj.extract(str_name, str_tmpdir)
                             print('OK')
                             str_file = os.path.join(str_tmpdir, str_name)
-                            if check_overwrite(str_output):
+                            if b_force or check_overwrite(str_output):
                                 shutil.move(str_file, str_output)
                                 str_file = str_output
                             else:
@@ -710,7 +712,7 @@ def list_zxdata(str_in_file,
                     update_check(hash_dict[block_name], block_version,
                                  get_1core, get_2mb)
                 print('')
-                if (show_hashes):
+                if show_hashes:
                     print('Hash: {0}'.format(block_hash))
 
     core_list = get_core_list(str_in_file, hash_dict['parts'])
@@ -727,7 +729,7 @@ def list_zxdata(str_in_file,
                 update_check(hash_dict['Cores'][block_name], block_version,
                              get_1core, get_2mb)
         print('')
-        if (show_hashes):
+        if show_hashes:
             print('Core {0:02d}: {1}'.format(index + 2, block_hash))
 
     print('\nBIOS Defaults:')
@@ -762,10 +764,10 @@ def update_check(hash_dict, block_version, get_1core=False, get_2mb=False):
 
     if last_version:
         if block_version == last_version:
-            printcol(colours.GREEN, '    >> Up to date', end='')
+            printcol(Colours.GREEN, '    >> Up to date', end='')
         else:
             printcol(
-                colours.YELLOW,
+                Colours.YELLOW,
                 '    >> Outdated!. Latest version: {0}'.format(last_version),
                 end='')
     else:
@@ -803,15 +805,16 @@ def list_romsdata(str_in_file,
         print('\nZX Spectrum ROMs:')
         for rom in roms_list:
             rom_name = rom[2]
-            block_version, block_hash, block_data = get_rom(
-                str_in_file, rom[1], rom[3], hash_dict, in_file_ext, roms_file)
+            block_version, block_hash, _ = get_rom(str_in_file, rom[1], rom[3],
+                                                   hash_dict, in_file_ext,
+                                                   roms_file)
             str_rominfo = ' {0:02d} (Slot {1:02d}) {2:>10} ({3:>16}) '.format(
                 rom[0], rom[1], rom[4], rom[5])
             str_rominfo += '"{0}" {1}K -> {2}'.format(rom_name, rom[3] * 16,
                                                       block_version)
             print(str_rominfo)
 
-            if (show_hashes):
+            if show_hashes:
                 print('Hash: {0}'.format(block_hash))
 
         return True
@@ -864,7 +867,7 @@ def extractfrom_zxdata(str_in_file,
                 print('Extracting Core {0}...'.format(core_number))
                 core_number -= 2
                 core_name = core_list[core_number].strip()
-                block_name, block_version, block_hash = get_core_version(
+                block_name, block_version, _ = get_core_version(
                     str_in_file, core_number, hash_dict['parts'],
                     hash_dict['Cores'])
                 if block_name == 'Unknown':
@@ -891,7 +894,7 @@ def extractfrom_zxdata(str_in_file,
                 print('Extracting ZX Spectrum ROM {0}...'.format(rom_number))
                 for rom in rom_list:
                     if rom[0] == rom_number:
-                        rom_version, rom_hash, rom_data = get_rom(
+                        rom_version, _, rom_data = get_rom(
                             str_in_file, rom[1], rom[3], fullhash_dict,
                             str_extension, b_romfile)
                         rom_name = rom[2].strip()
@@ -920,15 +923,14 @@ def extractfrom_zxdata(str_in_file,
             rom_params = rom_item[4]
             rom_crc = rom_item[5]
 
-            rom_version, rom_hash, rom_data = get_rom(str_in_file, rom_slt,
-                                                      rom_item[3],
-                                                      fullhash_dict,
-                                                      str_extension)
+            rom_version, _, rom_data = get_rom(str_in_file, rom_slt,
+                                               rom_item[3], fullhash_dict,
+                                               str_extension)
 
-            roms_data, b_chg = inject_rom_tobin(roms_data, blk_info, blk_bases,
-                                                rom_index, rom_slt, rom_name,
-                                                rom_params, rom_data, rom_crc,
-                                                True)
+            roms_data, _ = inject_rom_tobin(roms_data, blk_info, blk_bases,
+                                            rom_index, rom_slt, rom_name,
+                                            rom_params, rom_data, rom_crc,
+                                            True)
 
         str_bin = 'ROMS.ZX1'
         str_bin = os.path.join(str_dir, str_bin)
@@ -1029,7 +1031,7 @@ def prep_update_cores(arr_in_files,
                 core_list.append(
                     [index, block_name, block_name, '0', 'Para Sara'])
 
-    for index, name, block_name, block_version, block_hash in core_list:
+    for index, name, block_name, _, block_hash in core_list:
         index += 2
         if block_name in hash_dict['Cores']:
             latest = hash_dict['Cores'][block_name].get('latest', [''])
@@ -1039,10 +1041,12 @@ def prep_update_cores(arr_in_files,
             if get_1core and '1core' in hash_dict['Cores'][block_name]:
                 latest = hash_dict['Cores'][block_name]['1core']
 
-            latest_hash = hash_dict['Cores'][block_name].get(latest[0], '')
+            latest_hash = hash_dict['Cores'][block_name]['versions'].get(
+                latest[0], '')
 
             base = hash_dict['Cores'][block_name].get('base', [''])
-            base_hash = hash_dict['Cores'][block_name].get(base[0], '')
+            base_hash = hash_dict['Cores'][block_name]['versions'].get(
+                base[0], '')
 
             str_file = 'CORE{0:0>2}_{1}_{2}.{3}'.format(
                 index, block_name, latest[0], str_extension)
@@ -1106,7 +1110,7 @@ def check_and_update(update_file,
                      upd_name,
                      uchk='',
                      bs_hash='',
-                     bs_urls=[]):
+                     bs_urls=None):
     """
     Checks if a file with the desired hashexists. If not, download from the URL
     :param update_file: Path to the file
@@ -1114,11 +1118,13 @@ def check_and_update(update_file,
     :param upd_urls: array of URLs to download if not found or wrong hash
     :param upd_name: Text to show while downloading
     :param uchk: Control text to download older versions
-    :param bs_hash:
-    :param bs_urls:
+    :param bs_hash: Base hash (fallbak if there's not latest)
+    :param bs_urls: Base download URIs
     :returns: True if a new file was needed, found and downloaded
     """
 
+    if not bs_urls:
+        bs_urls = []
     update_url = ''
     file_hash = ''
     update_extension = os.path.splitext(update_file)[1].upper()
@@ -1147,14 +1153,14 @@ def check_and_update(update_file,
                 b_found = False
                 str_zipfile = update_file + '.zip'
                 os.rename(update_file, str_zipfile)
-                with ZipFile(str_zipfile, 'r') as zipObj:
-                    arr_files = zipObj.namelist()
+                with ZipFile(str_zipfile, 'r') as zip_obj:
+                    arr_files = zip_obj.namelist()
                     b_found = False
                     for str_name in arr_files:
                         str_extension = os.path.splitext(str_name)[1].upper()
                         if update_extension == str_extension:
                             with tempfile.TemporaryDirectory() as str_tmpdir:
-                                zipObj.extract(str_name, str_tmpdir)
+                                zip_obj.extract(str_name, str_tmpdir)
                                 str_file = os.path.join(str_tmpdir, str_name)
                                 shutil.move(str_file, update_file)
                             b_found = True
@@ -1219,7 +1225,7 @@ def wipe_zxdata(str_spi_file,
     :param default_rom: :Default boot Spectrum ROM (0 or greater)
     :param b_force: Force overwriting file
     """
-    b_changed = False
+
     dict_parts = hash_dict['parts']
 
     LOGGER.debug('Reading Flash...')
@@ -1269,8 +1275,8 @@ def wipe_zxdata(str_spi_file,
     br_data += b_data[cur_pos:core_end]
     br_data += b'\x00' * (len(b_data) - core_end)
 
-    br_data, b_chg = inject_biossettings(br_data, vid_mode, keyb_layout,
-                                         boot_timer, 0, 0)
+    br_data, _ = inject_biossettings(br_data, vid_mode, keyb_layout,
+                                     boot_timer, 0, 0)
 
     # Write Data
     if b_force or check_overwrite(str_outfile):
@@ -1379,7 +1385,7 @@ def savefrom_zxdata(str_in_file,
 
     dict_parts = hash_dict['parts']
     block_info = dict_parts['cores_dir']
-    max_cores = splitcore_index = int(block_info[4])
+    max_cores = int(block_info[4])
 
     flash_len = bin_len = os.stat(str_in_file).st_size
     if n_cores > -1:
@@ -1393,9 +1399,8 @@ def savefrom_zxdata(str_in_file,
     with open(str_in_file, "rb") as in_zxdata:
         bin_data = in_zxdata.read(bin_len)
 
-    bin_data, b_chg = inject_biossettings(bin_data, video_mode,
-                                          keyboard_layout, boot_timer,
-                                          default_core, default_rom)
+    bin_data, _ = inject_biossettings(bin_data, video_mode, keyboard_layout,
+                                      boot_timer, default_core, default_rom)
 
     if n_cores > -1:
         core_offset = 0x7100 + (n_cores * 0x20)
@@ -1432,8 +1437,6 @@ def convert_core(str_in_file, hash_dict, str_outfile, b_force=False):
     b_len = os.stat(str_in_file).st_size
     with open(str_in_file, "rb") as in_zxdata:
         b_data = in_zxdata.read(b_len)
-
-    str_hash = get_file_hash(str_in_file)
 
     # Check header and length and convert data if needed
     b_convert = True
@@ -1706,8 +1709,8 @@ def get_rom_list(str_in_file, dict_parts, b_data=None):
                 in_zxdata.seek(b_start)
                 roms_use = in_zxdata.read(b_len)
 
-        for i in range(0, len(roms_use)):
-            if roms_use[i] != 0xff:
+        for i, rom_index in enumerate(roms_use):
+            if rom_index != 0xff:
                 b_start = int(block_info[0]) + i * 64
                 b_len = 64
                 if b_data:
@@ -1717,7 +1720,6 @@ def get_rom_list(str_in_file, dict_parts, b_data=None):
                         in_zxdata.seek(b_start)
                         rom_data = in_zxdata.read(b_len)
 
-                rom_index = roms_use[i]
                 rom_slot = rom_data[0]
                 rom_size = rom_data[1]
                 rom_flags = bit_to_flag(rom_data[2] ^ 0b00110000, '* icdnpt')
@@ -1879,7 +1881,6 @@ def flag_to_bits(str_input, str_flags, i_mask=0):
     :return: Bytes with bits enabled according to flags
     """
 
-    str_result = ''
     i_result = 0
     for i in range(8):
         if str_flags[7 - i] in str_input:
@@ -2056,7 +2057,7 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
             slot_use = []
             for rom_entry in roms_list:
                 i_slot = rom_entry[1] + 1
-                for i in range(1, rom_entry[3]):
+                for _ in range(1, rom_entry[3]):
                     slot_use.append(i_slot)
                     i_slot += 1
 
@@ -2482,9 +2483,9 @@ def get_file_hash(str_in_file):
     :return: String with hash data
     """
     sha256_hash = hashlib.sha256()
-    with open(str_in_file, "rb") as f:
+    with open(str_in_file, "rb") as f_data:
         # Read and update hash string value in blocks of 4K
-        for byte_block in iter(lambda: f.read(4096), b""):
+        for byte_block in iter(lambda: f_data.read(4096), b""):
             sha256_hash.update(byte_block)
 
     return sha256_hash.hexdigest()
@@ -2512,7 +2513,7 @@ def check_overwrite(str_file):
     if os.path.isfile(str_file):
         str_name = os.path.basename(str_file)
         b_ask = True
-        while (b_ask):
+        while b_ask:
             chk_overwrite = input(
                 '{0} exists. Overwrite? (Y/N): '.format(str_name))
             if chk_overwrite.upper() == 'N' or chk_overwrite == '':
