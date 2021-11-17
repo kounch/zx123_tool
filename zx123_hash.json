@@ -106,7 +106,7 @@
             ],
             "1core": [
                 "EXP27 spark2k06 141121 PZX (no SAA1099) (RGB666)",
-                "https://github.com/spark2k06/ZXUno4ALL/raw/main/cores/spectrum/pzx_no_saa/SPECTRUM.ZX1"
+                "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/zxuncore/pzx_no_saa/SPECTRUM.ZX1"
             ],
             "versions": {
                 "T24 080117": "dab20b355cd4c63691ca8e5016e7df98894f4fac11a7da86e8b1b65f4700ab3f",
@@ -140,6 +140,10 @@
         "Cores": {
             "Acorn Atom": {
                 "latest": [
+                    "carmeloco 11.05.2020",
+                    "https://www.zxuno.com/forum/download/file.php?id=2498"
+                ],
+                "base": [
                     "TEST1 - 20150817",
                     "https://github.com/zxdos/zxuno/raw/master/cores/AcornAtom/CORE21.ZX1"
                 ],
@@ -170,7 +174,8 @@
                     "Test 2 - 20170408": "6341fb122713725ebe758cfbf8ea357cf9ce6f0dd410cc1de715719cd77d17ed",
                     "Test 3a": "5a2363e9ef1f10320cc2ed5309c2ab5331db4b4ca8dbab9e39737a02c9186c36",
                     "Test External 512Kb": "25fdd4422da297aa6fc925c120751daf288b999bf0e3a0bf039ce08dee6467e9",
-                    "spark2k06 (RGB666)": "7aff7e87b273b3bf3404d827740085e44655d05f9cc02eaea5eb5f44703d87cc"
+                    "Test spark2k06 (RGB666)": "7aff7e87b273b3bf3404d827740085e44655d05f9cc02eaea5eb5f44703d87cc",
+                    "spark2k06 (RGB666)":"b7ad58febf29b2357ae45dab7cfffc5f973089015a4c768ef4d8ec9fb77e08c4"
                 }
             },
             "Amstrad CPC6128": {
@@ -220,6 +225,10 @@
             },
             "Atari 2600": {
                 "latest": [
+                    "VGA+teclado Spark2k06",
+                    "https://github.com/spark2k06/zxuno/raw/master/cores/Atari2600/CORE20.ZX1"
+                ],
+                "base": [
                     "1.227",
                     "https://github.com/zxdos/zxuno/raw/master/cores/Atari2600/CORE20.ZX1"
                 ],
@@ -279,15 +288,15 @@
             },
             "ColecoVision": {
                 "latest": [
-                    "512K",
-                    ""
+                    "1.2 (VGA+HDMI)"
                 ],
                 "base": [
                     "1.2 (VGA+HDMI)",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Coleco.ZX1"
                 ],
                 "2m": [
-                    "1.2 VGA 2M"
+                    "1.2 VGA 2M",
+                    "https://www.zxuno.com/forum/download/file.php?id=2491"
                 ],
                 "versions": {
                     "512K": "42a1c25f0c8f767677f6e3c5ebbd0bbc70eed07fc321e4d19770f348436f0c9d",
@@ -326,12 +335,16 @@
             },
             "Commodore VIC-20": {
                 "latest": [
-                    "TEST3 - 20170701",
+                    "TEST3b",
+                    "https://www.zxuno.com/forum/download/file.php?id=946"
+                ],
+                "1core": [
+                    "TEST2 con PullUp",
                     "http://www.zxuno.com/forum/download/file.php?id=1346"
                 ],
                 "versions": {
-                    "1.227": "35638cdc8937fcfbd39b7042c0bd5598421dd9d1831ace662b94502a144a7cd3",
-                    "TEST3 - 20170701": "ccefd756a91ed65afe38f70c03905a2fc839ebb3ddb8c259b18d6c51145aa5a6"
+                    "TEST2 con PullUp": "ccefd756a91ed65afe38f70c03905a2fc839ebb3ddb8c259b18d6c51145aa5a6",
+                    "TEST3b": "35638cdc8937fcfbd39b7042c0bd5598421dd9d1831ace662b94502a144a7cd3"
                 }
             },
             "Colour Genie": {
@@ -349,8 +362,8 @@
                     "https://www.zxuno.com/forum/download/file.php?id=1721"
                 ],
                 "versions": {
-                    "0.1 VGA": "a2e6428546643687fb233c1030b5069cfff0a058001121a3f3e69819e7f9bb3a",
-                    "0.1 2MB Ext": "c660052e1c945a2f41a8af00f0d89f2f938ba62301b07beae9ff7510e3d5d979"
+                    "0.1 2MB Ext": "a2e6428546643687fb233c1030b5069cfff0a058001121a3f3e69819e7f9bb3a",
+                    "0.1 VGA": "c660052e1c945a2f41a8af00f0d89f2f938ba62301b07beae9ff7510e3d5d979"
                 }
             },
             "Galaksija": {
@@ -440,20 +453,20 @@
             },
             "NES": {
                 "latest": [
-                    "TEST4 512K",
-                    "https://www.zxuno.com/forum/download/file.php?id=1857"
+                    "TEST4+teclado 512K spark2k06",
+                    "https://github.com/spark2k06/zxuno/raw/master/cores/NES/binaries/Simple_Joystick/512KB/COREx.ZX1"
                 ],
                 "base": [
                     "TEST2 - 20160910",
                     "https://github.com/zxdos/zxuno/raw/master/cores/NES/CORE19.ZX1"
                 ],
                 "1core": [
-                    "TEST4+teclado 2MB spark2k06",
-                    "https://github.com/spark2k06/zxuno/raw/master/cores/NES/binaries/Double_Joystick/2MB/COREx.ZX1"
+                    "TEST4+teclado 2M spark2k06",
+                    "https://github.com/spark2k06/zxuno/raw/master/cores/NES/binaries/Simple_Joystick/2MB/COREx.ZX1"
                 ],
                 "2m": [
-                    "TEST4 VGA 2MB INT",
-                    "https://www.zxuno.com/forum/download/file.php?id=1860"
+                    "TEST4+teclado 2M spark2k06",
+                    "https://github.com/spark2k06/zxuno/raw/master/cores/NES/binaries/Simple_Joystick/2MB/COREx.ZX1"
                 ],
                 "versions": {
                     "TEST2 - 20160910": "50c057349a7e9e993c841ad72b652caef060110348ce1e91b6033fb9e4bfafda",
@@ -502,7 +515,8 @@
                     "https://github.com/spark2k06/ZXUno4ALL/raw/main/cores/pcxt/binaries/2Mb/SRAM%2040MHz/COREx.ZX1"
                 ],
                 "2m": [
-                    "2MB Int 70 MHz 2017.02.18"
+                    "2MB Int 50 MHz",
+                    "https://www.dropbox.com//s/dl/8ypednhdqodewtf/2MB_INT_TEST.zip?dl=1"
                 ],
                 "versions": {
                     "512k 70 MHz 2017.02.18": "81e89e258fb00fd46f37c8d06055c23821290e265433cd24e8cd1cd0a5993202",
@@ -510,8 +524,20 @@
                     "2MB Ext 70 MHz 2017.02.18": "b560afa672db76b3e0476c20130e14e07f9569761cc20315a83cf6cfa8bf167a",
                     "2MB Int Beta 75 MHz 2017.01.20": "de55a3817acacc55ae90fef0db6c4137ed3c13e84d927a4d7862a7ce1bf178ab",
                     "2MB Int 70 MHz 2017.02.18": "652be2ab706d2835309b84c6e52c026dea07d8d8f42e4d8b13791df14af55163",
+                    "2MB Int 50 MHz": "7d9b2f72c810c5b5ad82e7401527564e3157c4902638f6fced145fa06d004de5",
+                    "2MB Int 55 MHz": "a4d089fa441274e97e24742535807e2e598709dfd9f74aa190ca7b57b6ed6cfe",
+                    "2MB Int 60 MHz": "6c9eada27cce9093e2f1a56f4dcb038948ddf9842e8d37e7735e412843bfeac0",
+                    "2MB Int 65 MHz": "68e7cc038ff769efd9223513b430b1f30be241a262952ecc6fbf0e0cbedcc737",
                     "2MB Int 70 MHz": "29a26b485e4180245a43dda65650f29331fe3f0a7952993e7834ea9c680c9557",
-                    "2MB Int 40 MHz spark2k06 (RGB666)": "e721ef0a33eac142c6ca101218c8e1424c76cbe84815e5a599b4b99815001a7f"
+                    "2MB Int 30 MHz spark2k06 (RGB666)": "7418d5beb686aabdc7504bae02b7524392a07349bdc98f931fc1631ac2a2bc65",
+                    "2MB Int 35 MHz spark2k06 (RGB666)": "0d568dba8e65e5997866a542157ef402d19933210c28d64589043a30e2b6ca6c",
+                    "2MB Int 40 MHz spark2k06 (RGB666)": "e721ef0a33eac142c6ca101218c8e1424c76cbe84815e5a599b4b99815001a7f",
+                    "2MB Int 45 MHz spark2k06 (RGB666)": "f418402dd77e828d8f313f5cb7fe903cc16a924f136f3a1cb34cda8e242c60c0",
+                    "2MB Int 50 MHz spark2k06 (RGB666)": "30cf97f6ec4a5d8c9620ba4709def52b1a02d5388cb88b5bff2da7a19a6d868a",
+                    "2MB Int 55 MHz spark2k06 (RGB666)": "4dadaa6744175bfa8ca9f978f9d4bb120d57138ef11fdfc98607c0166ec63d9d",
+                    "2MB Int 60 MHz spark2k06 (RGB666)": "da742c25d598559715625acdee16b38a80343b3909323d94cd1d721a862e4bce",
+                    "2MB Int 65 MHz spark2k06 (RGB666)": "46a8aa9c381e11720ade26b5fbd3e7a6decd77116361d08125fff587ba26f63e",
+                    "2MB Int 70 MHz spark2k06 (RGB666)": "9324d2d9ca0a6da887caf3e2bdbf8637d108c8376b8ae9ae58aeaad3946fcf9c"
                 }
             },
             "Sam Coupe": {
@@ -562,15 +588,6 @@
                     "0": "18ebf52a9f33e6f7af40d832d7b9d512d08964c3c8f9355234126b1662ec9d36",
                     "1": "9addac6bed7be862fc06e538b6a8455651e4bbf9dec9bd7554333a5eb6ac6226",
                     "1.1": "bade45e4c36cda0919a8cd191a5a121a33db41046f084e6e6f57fe48861e06c4"
-                }
-            },
-            "HT-1080Z": {
-                "latest": [
-                    "0.1",
-                    "https://www.zxuno.com/forum/download/file.php?id=1766"
-                ],
-                "versions": {
-                    "0.1": "8f1d098f17c5839824f1f998dd2a43765e2cde47af8dd9b340f438b1218f271a"
                 }
             },
             "Videopac": {
@@ -635,7 +652,8 @@
             },
             "ZX Spectrum 48K (Kyp)": {
                 "latest": [
-                    "zx48 2021.04.20"
+                    "zx48 v2.1",
+                    "https://github.com/Kyp069/zx48/releases/download/2.1/COREnn.zx48_2021-05-02.ZX1"
                 ],
                 "base": [
                     "zx48 v2.0",
@@ -650,13 +668,14 @@
                     "zx48 v2.0": "b9082eb6a4056c468f67c141c26a4887477b563b5a371dfc9125b3616def8576",
                     "zx48 Beta": "ec83637db79fcbca50d925dd0a53107c4461a0abb53c476899d517b07e548d95",
                     "zx48 2021.04.02": "430ef2522473b958c299c53d9981993d9f83424df446dc1db2d2f53cdbb63bcd",
-                    "zx48 2021.04.20": "0c79338aa33a5abeb8390b02835b6e88b949a8f02d037c364ab5628edede1d17"
+                    "zx48 2021.04.20": "0c79338aa33a5abeb8390b02835b6e88b949a8f02d037c364ab5628edede1d17",
+                    "zx48 v2.1": "70a0c3b9518a7a2224deb87b7e292f86d9c7cd0f4f6241db14fbabc562dd2ed8"
                 }
             },
             "ZX Spectrum 128K (Kyp)": {
                 "latest": [
-                    "zx128 2021.04.20",
-                    "https://www.zxuno.com/forum/download/file.php?id=2668"
+                    "zx128 v2.1",
+                    "https://github.com/Kyp069/zx128/releases/download/2.1/COREnn.zx128_2021-05-02.ZX1"
                 ],
                 "base": [
                     "zx128 v1.0",
@@ -666,7 +685,8 @@
                     "2017.01.08": "49ec4c96aaaa7e783abd9f2fba2ad4437a4c70f92f53c466b9cc2d4c6fe2de2e",
                     "2020.10.09": "e8f535ea695d405df2fd5eaeb2bfa449ab08657a52062da8abc5fe4261d7ab30",
                     "zx128 v1.0": "2b2db414eaf8986af99e899f6fb28f5743be36d41e85a5a7302729bb12812d3d",
-                    "zx128 2021.04.20": "e4b418bd632d9ef56dbd6c5aef289a43ca5d4166014e0caf10d304d4ef529822"
+                    "zx128 2021.04.20": "e4b418bd632d9ef56dbd6c5aef289a43ca5d4166014e0caf10d304d4ef529822",
+                    "zx128 v2.1": "3f5c32930e358da11da3213db85b6e4483bc30fdb1f0a7150360890a92685cb4"
                 }
             },
             "ZX Spectrum (azesmbog)": {
@@ -685,11 +705,12 @@
             },
             "ZX Spectrum (spark2k06)": {
                 "latest": [
-                    "EXP27 PZX (no SAA1099) 141121"
+                    "EXP27 SAA1099 (no PZX) 130621",
+                    "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/sram_internal/saa_no_pzx/COREx.ZX1"
                 ],
                 "1core": [
-                    "EXP27 PZX (no SAA1099) 141121 (RGB666)",
-                    "https://github.com/spark2k06/ZXUno4ALL/raw/main/cores/spectrum/saa_no_pzx/COREx.ZX1"
+                    "EXP27 SAA1099 (no PZX) 210521 (RGB666)",
+                    "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/zxuncore/saa_no_pzx/COREx.ZX1"
                 ],
                 "versions": {
                     "EXP27 Monocromo 220521": "9fff67427bf174f0bd9627662eb77e00161275729b02584eaf4e5e915aef94a5",

@@ -114,6 +114,10 @@ def main():
         LOGGER.debug('Loading dictionary with hashes...')
         fulldict_hash = json.load(json_handle)
 
+    if arg_data['stats']:
+        print_stats(fulldict_hash)
+        sys.exit(3)
+
     # Analyze/initialize input file and output dir location and extension
     b_new_img = False
     if not str_file:
@@ -152,6 +156,7 @@ def main():
 
     # Is the file header known?
     if validate_file(str_file, dict_hash['parts']['header'][3]):
+        supported_exts = ['ZX1', 'ZX2', 'ZXD', 'ZXT']
 
         # List main ROMs, Cores and BIOS settings
         if arg_data['list']:
@@ -181,7 +186,7 @@ def main():
 
         # Try to update contents from internet
         if arg_data['update'] != '':
-            if str_extension in ['ZX1', 'ZX2', 'ZXD', 'ZXT']:
+            if str_extension in supported_exts:
                 print('\nStarting update...')
                 if not output_file:
                     output_file = str_file
@@ -239,7 +244,7 @@ def main():
 
         # Wipe Secondary Cores and all ZX Spectrum ROMs
         if arg_data['wipe_flash']:
-            if str_extension in ['ZX1', 'ZX2', 'ZXD', 'ZXT']:
+            if str_extension in supported_exts:
                 if not output_file:
                     output_file = str_file
                 wipe_zxdata(str_file, output_file, dict_hash,
@@ -249,7 +254,7 @@ def main():
 
         # Inject Cores and/or ROMs
         if arg_data['inject']:
-            if str_extension in ['ZX1', 'ZX2', 'ZXD', 'ZXT']:
+            if str_extension in supported_exts:
                 b_force = arg_data['force']
                 if arg_data['wipe_flash']:
                     b_force = True
@@ -374,6 +379,7 @@ def parse_args():
     values['output_file'] = ''
     values['force'] = False
     values['list'] = False
+    values['stats'] = False
     values['roms'] = False
     values['show_hashes'] = False
     values['extract'] = []
@@ -429,6 +435,7 @@ def parse_args():
                         action='store_true',
                         dest='list_contents',
                         help='List file contents')
+    parser.add_argument('--stats', action='store_true', dest='stats')
     parser.add_argument('-r',
                         '--roms',
                         required=False,
@@ -578,6 +585,9 @@ def parse_args():
     if arguments.list_contents:
         values['list'] = arguments.list_contents
 
+    if arguments.stats:
+        values['stats'] = arguments.stats
+
     if arguments.parse_roms:
         values['roms'] = arguments.parse_roms
 
@@ -654,7 +664,7 @@ def unzip_image(str_path, str_output, hash_dict, b_force):
         str_zipfile = os.path.join(str_path, str_zip)
         if not os.path.isfile(str_zipfile):
             dl_url = f'{MAIN_URL}/{str_zip}'
-            print('\nDownloading ZIP file...', end='')
+            print('\nDownloading base image ZIP file...', end='')
             urllib.request.urlretrieve(dl_url, str_zipfile)
             print('OK')
 
@@ -681,6 +691,68 @@ def unzip_image(str_path, str_output, hash_dict, b_force):
         LOGGER.error('Unknown extension: %s', str_extension)
 
     return str_file
+
+
+def print_stats(fulldict_hash):
+    """Show Stats"""
+
+    print('')
+    printcol(Colours.CYAN, 'JSON Database Stats', end='\n')
+    print('')
+
+    total = 0
+    total_cores = 0
+    total_hashes = 0
+    total_hashes_cores = 0
+    for str_kind in fulldict_hash:
+        printcol(Colours.BLUE,
+                 fulldict_hash[str_kind]['description'],
+                 end='\n')
+
+        subtotal = 0
+        subtotal_hashes = 0
+        for chld in fulldict_hash[str_kind]:
+            if isinstance(fulldict_hash[str_kind][chld], dict):
+                count, part = count_hashes(fulldict_hash[str_kind][chld])
+                if count:
+                    print(f'{chld}: {len(part):>4} ({count:03} hashes)')
+                    subtotal += len(part)
+                    subtotal_hashes += count
+
+        total += subtotal
+        total_cores += subtotal
+        total_hashes += subtotal_hashes
+        total_hashes_cores += subtotal_hashes
+
+        count, part = count_hashes(fulldict_hash[str_kind])
+        if count:
+            print(f'Other: {len(part):>4} ({count:03} hashes)')
+            total += len(part)
+            subtotal += len(part)
+            subtotal_hashes += count
+            total_hashes += count
+
+        if subtotal:
+            print(f'Total: {subtotal:>4} ({subtotal_hashes:03} hashes)')
+            print('')
+
+    print('')
+    print(f'Total Cores: {total_cores:>4} ({total_hashes_cores:03} hashes)')
+    print(f'      Total: {total:>4} ({total_hashes:03} hashes)')
+    print('')
+
+
+def count_hashes(subdict_hash):
+    """Used by print_stats to count elements and hashes"""
+
+    i_cnt = 0
+    dict_cnt = {}
+    for chld in subdict_hash:
+        if 'versions' in subdict_hash[chld]:
+            i_cnt += len(subdict_hash[chld]['versions'])
+            dict_cnt[chld] = i_cnt
+
+    return i_cnt, dict_cnt
 
 
 def list_zxdata(str_in_file,
@@ -1138,6 +1210,7 @@ def check_and_update(update_file,
     if not dl_result and update_url:
         print(f'Downloading {upd_name}...', end='')
         try:
+            LOGGER.debug(update_url)
             urllib.request.urlretrieve(update_url, update_file)
             if is_zipfile(update_file):
                 print('Extracting...', end='')
