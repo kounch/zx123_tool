@@ -286,6 +286,14 @@
                     "96K (2021.03.25)": "55e0ec5ab386b75d6f6583531d4feb563d38d01908af93ffdb9851e17523e3c5"
                 }
             },
+            "CGA Demo": {
+                "latest": [
+                    "2021.11.19"
+                ],
+                "versions": {
+                    "2021.11.19": "8da6e076c6741938e88638e79fc047ae02b0ec17afd8abe06726d3c127bba14f"
+                }
+            },
             "ColecoVision": {
                 "latest": [
                     "1.2 (VGA+HDMI)"
@@ -647,7 +655,10 @@
                     "EXP27 Splitter Support Beta 2": "00c925a27b378dd3e0f6dffcedbe755c1f38a8b59ae5cf8e3da2dd923137da3a",
                     "EXP27 Splitter Support Beta 3": "6ba76e302648b43867ae0968503c33e0d222da4a4d0ae6df6962d7ebfed11068",
                     "EXP27 Splitter Support Beta 4": "401962e6f1ccae325bee83f47d89ae791fa80b8fe1ac4965eb86e50e1c4c555b",
-                    "EXP27 251021": "5cbda41b2de188057a03226bc6d80e08b395e1ad38d2d86cc90e88638f7ff184"
+                    "EXP27 251021": "5cbda41b2de188057a03226bc6d80e08b395e1ad38d2d86cc90e88638f7ff184",
+                    "EXP27 Test WiFi 1 Mbps": "5554de2361bff1d34c351f0ba69cac2009acd8f8f2b14b8c0b419052f139c257",
+                    "EXP27 Test WiFi 1.5 Mbps": "a4544e753e287270f096d32f71f28ba519d299847908f4ea3c9f806b4a58e757",
+                    "EXP27 Test WiFi 2 Mbps": "4e6b167f39f2a41f30105c59b7347f2171c21b36ab29c26aaf055c4412eab061"
                 }
             },
             "ZX Spectrum 48K (Kyp)": {
@@ -726,7 +737,10 @@
                     "EXP27 PZX (no SAA1099) 131121 (RGB666)": "11ed3fbdb9cebfc2324942a1196c2545f1a9e87eb0c90e54df6448d03dac19dc",
                     "EXP27 PZX (no SAA1099) 131121": "02a074d7089fab86ec6edb7997c9dfce602cf7248df7f201bb16ab0e955757be",
                     "EXP27 PZX (no SAA1099) 141121 (RGB666)": "d986a338d9ff0db9d2aff3849f9833c6d8e8c3944a05d79761cb83d0e8385826",
-                    "EXP27 PZX (no SAA1099) 141121": "ba7add62b58a68b446eb745d2c6cae57f12992d810383c69557351f6c20e325f"
+                    "EXP27 PZX (no SAA1099) 141121": "ba7add62b58a68b446eb745d2c6cae57f12992d810383c69557351f6c20e325f",
+                    "EXP27 PZX (200KB Test)": "a8a6781dd0dee754cff2b94bbd6b72c230a7ebc85890767a6f0c539e4321769d",
+                    "EXP27 PZX (216KB Test)": "6ca31411968b20e7630bd3760e053e647d2b138a6abe4ecc7cabdb723a9aaf07",
+                    "EXP27 PZX (224KB Test)": "02a074d7089fab86ec6edb7997c9dfce602cf7248df7f201bb16ab0e955757be"
                 }
             },
             "ZX TBBlue": {
