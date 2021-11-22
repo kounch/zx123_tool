@@ -46,6 +46,7 @@ Requires a [`zx123_hash.json`](##description-of-json-file) file with block struc
                             Output flash file to copy
       -f, --force           Force overwrite of existing files
       -l, --list_contents List file contents
+      -D, --details       Show Known Core Features
       -r, --roms          Process ZX Spectrum ROMs (list or, in extract mode,
                           extract instead of Cores)
       -q, --check_updated For each Core or non Spectrum ROM, check version
@@ -226,20 +227,37 @@ The JSON file is an object where the main name are file extensions (like `ZXD` o
                             - "core_base" -> Extra cores starting offset and size
         },
         "BIOS": {   -> Dictionary of hashes for different firmware versions in the format:
-                       "(Version Description)": "(Hash)"
+                       latest" -> Name of the latest version and (optionally) download URL
+                       "versions":  {   -> Hash Dictionary
+                                           "(Version Description)": "(Hash)",
+                       }
         },
         "esxdos": {  -> Dictionary of hashes for different esxdos ROM versions in the format:
-                        "(Version Description)": "(Hash)"
+                        "latest" -> Name of the latest version
+                        "versions":  {   -> Hash Dictionary
+                                            "(Version Description)": "(Hash)",
+                        }
         },
         "Spectrum": {   -> Dictionary of hashes for different Spectrum core versions in the format:
-                           "(Version Description)": "(Hash)"
+                           "latest" -> Name of the latest version and (optionally) download URL
+                           "versions":  {   -> Hash Dictionary
+                                               "(Version Description)": "(Hash)",
+                           }
         "Special": {   -> Dictionary of hashes for different Special core versions in the format:
-                           "(Version Description)": "(Hash)"
+                          "latest" -> Name of the latest version and (optionally) download URL
+                          "versions":  {   -> Hash Dictionary
+                                              "(Version Description)": "(Hash)",
+                          }
         "Cores": {   -> Dictionary for different FPGA cores       
             "(Core name)": {   -> Dictionary of hashes for different core versions in the format:
-                                "(Version Description)": "(Hash)",
                                 "latest" -> Name of the latest version and (optionally) download URL
                                 "base"   -> Name of another version with download URL if there's no URL for the latest
+                                "versions":  {   -> Hash Dictionary
+                                                    "(Version Description)": "(Hash)",
+                                },
+                                "features":  {   -> Feature info Dictionary
+                                                    "Category": [["Feature", "Feature", ...], "Note"]
+                                } 
             },
             (...)
         }
@@ -332,6 +350,7 @@ Necesita un fichero  [`zx123_hash.json`](#descripción-del-arhivo-json) con la e
                             Fichero donde guardar copia de la imagen flash
       -f, --force           Forzar sobreescribir archivos existentes
       -l, --list_contents Mostrar contenido del fichero de origen
+      -D, --details       Mostrar características conocidas de los cores
       -r, --roms          Procesar ROMs de ZX Spectrum (listar o, en modo de 
                           extracción, extraer en vez de Core)
       -q, --check_updated Para cada Core o ROM que no sea de Spectrum, comparar
@@ -512,20 +531,37 @@ El archivo JSON es un objeto donde los nombres principales son extensiones de ar
                             - "core_base" -> Desplazamiento y tamaño del primer core Extra
         },
         "BIOS": {   -> Diccionario con hashes para distintas versiones del firmware, con el formato:
-                       "(Descripción de versión)": "(Hash)"
+                       "latest" -> Nombre de la última versión y (opcionalmente) URL de descarga
+                       "versions":  {   -> Diccionario con hashes
+                                           "(Descripción de versión)": "(Hash)"
+                       }
         },
         "esxdos": {  -> Diccionario con hashes para distintas versiones de ROMS de esxdos, con el formato:
-                        "(Descripción de versión)": "(Hash)"
+                        "latest" -> Nombre de la última versión
+                        "versions":  {   -> Diccionario con hashes
+                                            "(Descripción de versión)": "(Hash)"
+                        }
         },
         "Spectrum": {   -> Diccionario con hashes para distintas versiones del core principal de Spectrum, con el formato:
-                           "(Descripción de versión)": "(Hash)"
+                           "latest" -> Nombre de la última versión y (opcionalmente) URL de descarga
+                           "versions":  {   -> Diccionario con hashes
+                                               "(Descripción de versión)": "(Hash)"
+                           }
         "Special": {   -> Diccionario con hashes para distintas versiones del core espcial (si existe), con el formato:
-                           "(Descripción de versión)": "(Hash)"
+                          "latest" -> Nombre de la última versión y (opcionalmente) URL de descarga
+                          "versions":  {   -> Diccionario con hashes
+                                              "(Descripción de versión)": "(Hash)"
+                          }
         "Cores": {   -> Diccionario para distintos cores extra para la FPGA      
             "(Nombre de core)": {   -> Diccionario con hashes para distintas versiones del core, con el formato:
-                                       "(Descripción de versión)": "(Hash)"
                                        "latest" -> Nombre de la última versión y (opcionalmente) URL de descarga
                                        "base"   -> Nombre de otra versión descargable si la última no la tiene
+                                       "versions":  {   -> Diccionario con hashes
+                                                           "(Descripción de versión)": "(Hash)"
+                                       },
+                                        "features":  {   -> Diccionario con información de características
+                                                           "Categoría": [["Característica", "Caractetrística", ...], "Nota"]
+                                       }                              
             },
             (...)
         }

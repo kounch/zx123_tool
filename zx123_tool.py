@@ -53,7 +53,7 @@ if sys.version_info.major == 3:
 if os.name == 'nt':
     import msvcrt  # pylint: disable=import-error
 
-__MY_VERSION__ = '3.1.0'
+__MY_VERSION__ = '3.2.0'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
@@ -115,7 +115,7 @@ def main():
         fulldict_hash = json.load(json_handle)
 
     if arg_data['stats']:
-        print_stats(fulldict_hash)
+        print_stats(fulldict_hash, arg_data['detail'])
         sys.exit(3)
 
     # Analyze/initialize input file and output dir location and extension
@@ -162,7 +162,7 @@ def main():
         if arg_data['list']:
             list_zxdata(str_file, dict_hash, arg_data['show_hashes'],
                         arg_data['check_updated'], arg_data['1core'],
-                        arg_data['2mb'])
+                        arg_data['2mb'], arg_data['detail'])
 
         # List ZX Spectrum ROMs
         if arg_data['roms']:
@@ -315,7 +315,7 @@ def main():
             else:
                 # File header unknown, try to guess only from hash and size
                 find_zxfile(str_file, fulldict_hash, str_extension,
-                            arg_data['show_hashes'])
+                            arg_data['show_hashes'], arg_data['detail'])
 
     print('')
     LOGGER.debug("Finished.")
@@ -379,6 +379,7 @@ def parse_args():
     values['output_file'] = ''
     values['force'] = False
     values['list'] = False
+    values['detail'] = False
     values['stats'] = False
     values['roms'] = False
     values['show_hashes'] = False
@@ -435,6 +436,12 @@ def parse_args():
                         action='store_true',
                         dest='list_contents',
                         help='List file contents')
+    parser.add_argument('-D',
+                        '--details',
+                        required=False,
+                        action='store_true',
+                        dest='detail',
+                        help='Show Core Features')
     parser.add_argument('--stats', action='store_true', dest='stats')
     parser.add_argument('-r',
                         '--roms',
@@ -585,6 +592,9 @@ def parse_args():
     if arguments.list_contents:
         values['list'] = arguments.list_contents
 
+    if arguments.detail:
+        values['detail'] = arguments.detail
+
     if arguments.stats:
         values['stats'] = arguments.stats
 
@@ -693,7 +703,7 @@ def unzip_image(str_path, str_output, hash_dict, b_force):
     return str_file
 
 
-def print_stats(fulldict_hash):
+def print_stats(fulldict_hash, b_detail=False):
     """Show Stats"""
 
     print('')
@@ -715,6 +725,17 @@ def print_stats(fulldict_hash):
             if isinstance(fulldict_hash[str_kind][chld], dict):
                 count, part = count_hashes(fulldict_hash[str_kind][chld])
                 if count:
+                    if b_detail:
+                        print('')
+                        for str_name, h_count in part.items():
+                            printcol(Colours.BLUE, f'{str_name} ({h_count}')
+                            printcol(Colours.BLUE, ' hash')
+                            if h_count > 1:
+                                printcol(Colours.BLUE, 'es')
+                            printcol(Colours.BLUE, ')', end='\n')
+                            dict_det = fulldict_hash[str_kind][chld][str_name]
+                            feat_det = dict_det.get('features', {})
+                            print_detail(str_name, feat_det)
                     print(f'{chld}: {len(part):>4} ({count:03} hashes)')
                     subtotal += len(part)
                     subtotal_hashes += count
@@ -742,6 +763,25 @@ def print_stats(fulldict_hash):
     print('')
 
 
+def print_detail(str_name, dict_det):
+    """Print detailed info"""
+
+    if dict_det:
+        for str_feature in dict_det:
+            arr_feat, str_note = dict_det[str_feature]
+            if arr_feat[0]:
+                printcol(Colours.BLUE, f'   {str_feature}: ', end='')
+                print(f'{", ".join(arr_feat)}', end='')
+                if str_note:
+                    print(f' ({str_note})', end='')
+                print('')
+        print('')
+    else:
+        printcol(Colours.RED,
+                 f' No details available for {str_name}',
+                 end='\n')
+
+
 def count_hashes(subdict_hash):
     """Used by print_stats to count elements and hashes"""
 
@@ -749,8 +789,9 @@ def count_hashes(subdict_hash):
     dict_cnt = {}
     for chld in subdict_hash:
         if 'versions' in subdict_hash[chld]:
-            i_cnt += len(subdict_hash[chld]['versions'])
-            dict_cnt[chld] = i_cnt
+            i_hashes = len(subdict_hash[chld]['versions'])
+            i_cnt += i_hashes
+            dict_cnt[chld] = i_hashes
 
     return i_cnt, dict_cnt
 
@@ -760,13 +801,14 @@ def list_zxdata(str_in_file,
                 show_hashes,
                 check_updated=False,
                 get_1core=False,
-                get_2mb=False):
+                get_2mb=False,
+                b_detail=False):
     """
     List contents of file
     :param str_in_file: Path to file
     :param hash_dict: Dictionary with hashes for different blocks
     :param show_hashes: If True, print also block hashes
-    :param check_updated: If True, check with 'latest' or '2m' entries in JSON
+    :param check_updated: If True, check with 'latest', '1core' or '2m'
     """
     LOGGER.debug('Listing contents of file: %s', str_in_file)
     str_name = os.path.basename(str_in_file)
@@ -788,7 +830,7 @@ def list_zxdata(str_in_file,
 
     core_list = get_core_list(str_in_file, hash_dict['parts'])
     for index, name in enumerate(core_list):
-        block_name, block_version, block_hash = get_core_version(
+        block_name, block_version, block_hash, dict_det = get_core_version(
             str_in_file, index, hash_dict['parts'], hash_dict['Cores'])
 
         print(
@@ -799,6 +841,11 @@ def list_zxdata(str_in_file,
                 update_check(hash_dict['Cores'][block_name], block_version,
                              get_1core, get_2mb)
         print('')
+        if b_detail:
+            printcol(Colours.BLUE,
+                     f' Features of Cores "{block_name}":',
+                     end='\n')
+            print_detail(block_name, dict_det)
         if show_hashes:
             print(f'Core {index + 2:02d}: {block_hash}')
 
@@ -933,7 +980,7 @@ def extractfrom_zxdata(str_in_file,
                 print(f'Extracting Core {core_number}...')
                 core_number -= 2
                 core_name = core_list[core_number].strip()
-                block_name, block_version, _ = get_core_version(
+                block_name, block_version, _, _ = get_core_version(
                     str_in_file, core_number, hash_dict['parts'],
                     hash_dict['Cores'])
                 if block_name == 'Unknown':
@@ -1079,7 +1126,8 @@ def prep_update_cores(arr_in_files,
         for index, name in enumerate(tmp_list):
             core_list.append([index, name.strip()] + list(
                 get_core_version(str_spi_file, index, hash_dict['parts'],
-                                 hash_dict['Cores'])))
+                                 hash_dict['Cores']))[:-1])
+            print(core_list)
 
     if b_new:
         for index, block_name in enumerate(hash_dict['Cores']):
@@ -1521,12 +1569,17 @@ def convert_core(str_in_file, hash_dict, str_outfile, b_force=False):
                 print(f'{str_outfile} created OK.')
 
 
-def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
+def find_zxfile(str_in_file,
+                fulldict_hash,
+                str_extension,
+                show_hashes,
+                b_detail=False):
     """
     Try to guess ZX... file from hash
     :param str_in_file: Path to file
     :param hash_dict: Dictionary with hashes for different blocks
     :param show_hashes: If True, print also found block hashes
+    :param b_detail: If True, show extra info
     """
     found = False
     hash_dict = fulldict_hash[str_extension]
@@ -1577,6 +1630,13 @@ def find_zxfile(str_in_file, fulldict_hash, str_extension, show_hashes):
                 if block_version != 'Unknown':
                     print(f'Core: {core_item} - Version: {block_version}')
                     found = True
+                    if b_detail:
+                        printcol(Colours.BLUE,
+                                 f' Features of Cores "{core_item}":',
+                                 end='\n')
+                        dict_det = hash_dict['Cores'][core_item].get(
+                            'features', {})
+                        print_detail(core_item, dict_det)
                     break
 
     # Check if it's a RomPack ROMs file
@@ -1616,6 +1676,7 @@ def get_core_version(str_in_file, core_index, dict_parts, dict_cores):
 
     block_name = block_version = 'Unknown'
     block_hash = ''
+    dict_details = {}
     block_data = get_core_blockdata(core_index, splitcore_index, core_bases)
     LOGGER.debug('Index %i: %X(%i)', core_index + 2, block_data[0],
                  block_data[0])
@@ -1625,9 +1686,10 @@ def get_core_version(str_in_file, core_index, dict_parts, dict_cores):
                                                 dict_cores[core_name])
         if block_version != 'Unknown':
             block_name = core_name
+            dict_details = dict_cores[core_name].get('features', {})
             break
 
-    return block_name, block_version, block_hash
+    return block_name, block_version, block_hash, dict_details
 
 
 def get_core_blockdata(core_index, spltcore_index, core_bases):
