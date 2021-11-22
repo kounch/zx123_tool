@@ -139,6 +139,11 @@
         },
         "Cores": {
             "Acorn Atom": {
+                "features": {
+                    "SD": [["FAT16"], "Atom Software Archive"],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
                 "latest": [
                     "carmeloco 11.05.2020",
                     "https://www.zxuno.com/forum/download/file.php?id=2498"
@@ -153,6 +158,12 @@
                 }
             },
             "Acorn Electron": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], "MMB File"],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "4 TEST2",
                     "https://github.com/zxdos/zxuno/raw/master/cores/AcornElectron/CORE11.ZX1"
@@ -162,6 +173,12 @@
                 }
             },
             "Amstrad CPC464": {
+                "features": {
+                    "Video": [[ "VGA", "RGB", "Composite"], "VGA Optional Scanlines"],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "Test 3a",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/CPC464.ZX1"
@@ -179,6 +196,12 @@
                 }
             },
             "Amstrad CPC6128": {
+                "features": {
+                    "SD": [["FAT32"], "0x0B Win95 FAT-32 4096 bytes per cluster"],
+                    "Video": [[ "VGA"], "640x480 VGA centered at 60Hz"],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "Test 3",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/CPC6128.ZX1"
@@ -190,6 +213,10 @@
                 }
             },
             "Apple I": {
+                "features": {
+                    "Video": [[ "VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
                 "latest": [
                     "0.1",
                     "https://www.zxuno.com/forum/download/file.php?id=2227"
@@ -200,6 +227,14 @@
                 }
             },
             "Apple II": {
+                "features": {
+                    "SD": [["RAW"], "Exclusive NIB"],
+                    "Video": [["VGA"], "Optional Scanlines"],
+                    "Graphic Modes": [["Monochrome", "Colour"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9"],
+                    "Other": [["SD Disk Image Load"], ""]
+                },
                 "latest": [
                     "TEST3",
                     "http://www.zxuno.com/forum/download/file.php?id=1344"
@@ -210,6 +245,14 @@
                 }
             },
             "Atari 800 XL": {
+                "features": {
+                    "SD": [["FAT32"], ""],
+                    "Video": [["VGA", "RGB", "Composite"], "VGA Optional Scanlines"],
+                    "Graphic Modes": [["PAL", "NTSC"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9"],
+                    "Other": [["SD Disk Image Load"], ""]
+                },
                 "latest": [
                     "1.1 (512K)",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Atari800XL.ZX1"
@@ -224,6 +267,14 @@
                 }
             },
             "Atari 2600": {
+                "features": {
+                    "SD": [["FAT16"], ""],
+                    "Video": [["VGA", "RGB", "Composite"], "VGA Optional Scanlines"],
+                    "Graphic Modes": [["PAL", "NTSC"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
+                    "Other": [["SD ROM Image Load", "Rotary Encoder"], ""]
+                },
                 "latest": [
                     "VGA+teclado Spark2k06",
                     "https://github.com/spark2k06/zxuno/raw/master/cores/Atari2600/CORE20.ZX1"
@@ -242,6 +293,13 @@
                 }
             },
             "BBC Micro": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], "MMB File"],
+                    "Video": [["VGA", "RGB", "Composite"], "VGA Optional Scanlines"],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ],
+                    "Other": [["SD Disk Image Load from MMB"], ""]
+                },
                 "latest": [
                     "1.3",
                     "https://www.zxuno.com/forum/download/file.php?id=1552"
@@ -257,7 +315,32 @@
                     "1.3": "4bbc3c71e4bfc755e2fa315336bf77c9115a977381949b801cc75e7a087ac53e"
                 }
             },
+            "Camputers Lynx": {
+                "features": {
+                    "Video": [["RGB", "Composite"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
+                "latest": [
+                    "96K (2021.03.25)"
+                ],
+                "base": [
+                    "96K (2020.09.09)",
+                    "https://www.zxuno.com/forum/download/file.php?id=2573"
+                ],
+                "versions": {
+                    "96K (2020.09.09)": "ead77977e33230931a82b25436feab2ca21fc101de3baab7a8ae6904656d255b",
+                    "96K (2021.03.25)": "55e0ec5ab386b75d6f6583531d4feb563d38d01908af93ffdb9851e17523e3c5"
+                }
+            },
             "CHIP-8": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], ""],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["SD ROM Image Load"], ""]
+                },
                 "latest": [
                     "2021.09.02"
                 ],
@@ -273,19 +356,6 @@
                     "2021.09.02": "3b834fb9bbdf083c865224afbdc5de1bebcb843af8fbbbac1666533f55c6659f"
                 }
             },
-            "Camputers Lynx": {
-                "latest": [
-                    "96K (2021.03.25)"
-                ],
-                "base": [
-                    "96K (2020.09.09)",
-                    "https://www.zxuno.com/forum/download/file.php?id=2573"
-                ],
-                "versions": {
-                    "96K (2020.09.09)": "ead77977e33230931a82b25436feab2ca21fc101de3baab7a8ae6904656d255b",
-                    "96K (2021.03.25)": "55e0ec5ab386b75d6f6583531d4feb563d38d01908af93ffdb9851e17523e3c5"
-                }
-            },
             "CGA Demo": {
                 "latest": [
                     "2021.11.19"
@@ -295,6 +365,13 @@
                 }
             },
             "ColecoVision": {
+                "features": {
+                    "SD": [["FAT16"], ""],
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ],
+                    "Other": [["SD ROM Image Load"], ""]
+                },
                 "latest": [
                     "1.2 (VGA+HDMI)"
                 ],
@@ -313,7 +390,29 @@
                     "1.2 VGA 2M": "500c94aec1d196497196592dab8098cc2a5076b95fd338df1bd0349bdd9a01b0"
                 }
             },
+            "Colour Genie": {
+                "features": {
+                    "Video": [["RGB", "Composite"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
+                "latest": [
+                    "1.0",
+                    "https://github.com/Kyp069/eg2000/releases/download/1.0/COREnn.eg2000.ZX1"
+                ],
+                "versions": {
+                    "1.0": "7631f04ddc02f204cd32e28782f3c79d390e0590e659a3d07eedc91893c8ae83"
+                }
+            },
             "Commodore 16 - 116 - Plus4": {
+                "features": {
+                    "SD": [["RAW"], "D64 concatenated images"],
+                    "Video": [["VGA", "RGB", "Composite"], "VGA Optional Scanlines"],
+                    "Audio": [["TED"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
+                    "Other": [["Audio In Tape Load", "SD Disk Image Load"], ""]
+                },
                 "latest": [
                     "Release 1",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/C16.ZX1"
@@ -323,6 +422,14 @@
                 }
             },
             "Commodore 64": {
+                "features": {
+                    "SD": [["RAW"], "D64 concatenated images"],
+                    "Video": [["VGA", "RGB", "Composite"], "VGA Optional Scanlines"],
+                    "Audio": [["SID"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
+                    "Other": [["Audio In Tape Load", "SD Disk Image Load"], ""]
+                },
                 "latest": [
                     "Beta 7b",
                     "https://github.com/zxdos/zxuno/raw/master/cores/C64/CORE_beta7b.ZX1"
@@ -333,6 +440,11 @@
                 }
             },
             "Commodore PET": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "VGA jepalza",
                     "https://github.com/zxdos/zxuno/raw/master/cores/PET/CORE17.ZX1"
@@ -342,6 +454,12 @@
                 }
             },
             "Commodore VIC-20": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9"],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "TEST3b",
                     "https://www.zxuno.com/forum/download/file.php?id=946"
@@ -355,16 +473,11 @@
                     "TEST3b": "35638cdc8937fcfbd39b7042c0bd5598421dd9d1831ace662b94502a144a7cd3"
                 }
             },
-            "Colour Genie": {
-                "latest": [
-                    "1.0",
-                    "https://github.com/Kyp069/eg2000/releases/download/1.0/COREnn.eg2000.ZX1"
-                ],
-                "versions": {
-                    "1.0": "7631f04ddc02f204cd32e28782f3c79d390e0590e659a3d07eedc91893c8ae83"
-                }
-            },
             "Flappy Bird": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9"]
+                },
                 "latest": [
                     "0.1 VGA",
                     "https://www.zxuno.com/forum/download/file.php?id=1721"
@@ -375,6 +488,11 @@
                 }
             },
             "Galaksija": {
+                "features": {
+                    "SD": [["FAT16"], ""],
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
                 "latest": [
                     "0.2 SDOS8.1",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Galaksija.zx1"
@@ -384,6 +502,12 @@
                 }
             },
             "HT-1080Z - TRS80 M1L2": {
+                "features": {
+                    "SD": [["FAT16"], ""],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["SD CAS Image Load"], ""]
+                },
                 "latest": [
                     "512K",
                     "https://www.zxuno.com/forum/download/file.php?id=1766"
@@ -399,6 +523,11 @@
                 }
             },
             "Jupiter Ace": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "2019.06.19 azesmbog",
                     "https://www.zxuno.com/forum/download/file.php?id=2261"
@@ -416,6 +545,12 @@
                 }
             },
             "MSX1": {
+                "features": {
+                    "SD": [["FAT16"], "0x06 16-bit FAT"],
+                    "Video": [["VGA", "RGB", "Composite"], "VGA Optional Scanlines"],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9"]
+                },
                 "latest": [
                     "1.3 512K (spark2k06)",
                     "https://github.com/spark2k06/zxuno/raw/master/cores/MSX/binaries/512KB/COREx.ZX1"
@@ -451,6 +586,11 @@
                 }
             },
             "MZ700": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["Audio In Tape Load"], "Requires expansion port P58 and P51 to GND"]
+                },
                 "latest": [
                     "20161218",
                     "https://github.com/zxdos/zxuno/raw/master/cores/MZ700/CORE22.ZX1"
@@ -460,6 +600,13 @@
                 }
             },
             "NES": {
+                "features": {
+                    "SD": [["FAT16"],""],
+                    "Video": [["VGA"], "Optional Scanlines"],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
+                    "Other": [["SD ROM Load"], "ROM support depends on board model memory"]
+                },
                 "latest": [
                     "TEST4+teclado 512K spark2k06",
                     "https://github.com/spark2k06/zxuno/raw/master/cores/NES/binaries/Simple_Joystick/512KB/COREx.ZX1"
@@ -495,6 +642,12 @@
                 }
             },
             "Oric Atmos": {
+                "features": {
+                    "SD": [["RAW"], "Exclusive NIB"],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["SD Disk Image Load"], ""]
+                },
                 "latest": [
                     "27.12.2018 dos8d",
                     "https://github.com/zxdos/zxuno/raw/master/cores/Oric/CORE16.ZX1"
@@ -505,6 +658,13 @@
                 }
             },
             "Oric Atmos (Kyp)": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["SID"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["PS/2 Keyboard"], ""],
+                    "Other": [["Audio In Tape Load", "Audio Out Tape Save"], ""]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/Kyp069/atmos/releases/download/v1.0/COREnn.Atmos.v1.0.ZX1"
@@ -514,6 +674,14 @@
                 }
             },
             "PC XT": {
+                "features": {
+                    "SD": [["FAT16"], "FAT with MS-DOS installed"],
+                    "Video": [["VGA"], ""],
+                    "Audio": [["Beeper", "Tandy 3 voice"], ""],
+                    "Graphic Modes": [["Text 80x25", "EGA 320x200x16", "MCGA 320x200x256"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["Next186 core"], "286 equivalent in real mode"]
+                },
                 "latest": [
                     "512k 70 MHz 2017.02.18",
                     "https://github.com/zxdos/zxuno/raw/master/cores/PC/CORE23.ZX1"
@@ -549,6 +717,12 @@
                 }
             },
             "Sam Coupe": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], "VGA Optional Scanlines"],
+                    "Audio": [["SAA1099"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "TEST5",
                     "https://github.com/zxdos/zxuno/raw/master/cores/SamCoupe/CORE2.ZX1"
@@ -557,16 +731,14 @@
                     "TEST5": "32fd2069f416ada27c7a6556b18ebd0b3813817aa6c419cc12dde046a25236f1"
                 }
             },
-            "smartROM": {
-                "latest": [
-                    "2021.01.31",
-                    "https://github.com/Utodev/smartROM/raw/master/binaries/COREnnSmartROM.ZX1"
-                ],
-                "versions": {
-                    "2021.01.31": "68772a698cd0316a92ee37c50ad6dc93b6b5764d1b745ce454a10ce7d4781bdc"
-                }
-            },
             "Sega Master System": {
+                "features": {
+                    "SD": [["FAT16"],""],
+                    "Video": [["VGA", "RGB", "Composite"], "RGB with PAL sync (50Hz)"],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
+                    "Other": [["SD BIN and SMD Load"], ""]
+                },
                 "latest": [
                     "TEST 4.3 (512K)",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/SMS.ZX1"
@@ -584,6 +756,15 @@
                     "TEST 4.3 2MB Int": "8a60c85e94c1819251ac07d2fc3296809542408531b10968d0c6bdce2f7f8e65"
                 }
             },
+            "smartROM": {
+                "latest": [
+                    "2021.01.31",
+                    "https://github.com/Utodev/smartROM/raw/master/binaries/COREnnSmartROM.ZX1"
+                ],
+                "versions": {
+                    "2021.01.31": "68772a698cd0316a92ee37c50ad6dc93b6b5764d1b745ce454a10ce7d4781bdc"
+                }
+            },
             "Test": {
                 "base": [
                     "1",
@@ -598,7 +779,30 @@
                     "1.1": "bade45e4c36cda0919a8cd191a5a121a33db41046f084e6e6f57fe48861e06c4"
                 }
             },
+            "Vectrex": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"],""],
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
+                    "Other": [["SD BIN and VEC Load"], ""]
+                },
+                "latest": [
+                    "TEST1",
+                    "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Vectrex.ZX1"
+                ],
+                "versions": {
+                    "TEST1": "c60e36dc22f25c6d79aea3d733f9accd8b496910c817437b78bc5d68b99b0128"
+                }
+            },
             "Videopac": {
+                "features": {
+                    "SD": [["FAT16"],""],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
+                    "Other": [["SD ROM Load"], ""]
+                },
                 "latest": [
                     "2021.05.15",
                     "https://github.com/zxdos/zxuno/raw/master/cores/Videopac/videopac_zxuno_lx9_20210515.ZX1"
@@ -609,16 +813,16 @@
                     "2021.05.15": "a23ab8954f6083ee089dcc5baacca10238292b0ec9eb75a67167487830eb1730"
                 }
             },
-            "Vectrex": {
-                "latest": [
-                    "TEST1",
-                    "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Vectrex.ZX1"
-                ],
-                "versions": {
-                    "TEST1": "c60e36dc22f25c6d79aea3d733f9accd8b496910c817437b78bc5d68b99b0128"
-                }
-            },
             "ZX81": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"],""],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["YM2149"], ""],
+                    "Graphic Modes": [["Black and White", "CHROMA81"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9"],
+                    "Other": [["SD ROM and Tape Load"], ""]
+                },
                 "latest": [
                     "20210914 avlixa",
                     "https://github.com/avlixa/ZX81_MiSTer_zxdos/raw/master/releases/zx81_zxuno_lx9_20210914.ZX1"
@@ -636,6 +840,16 @@
                 }
             },
             "ZX Spectrum": {
+                "features": {
+                    "SD": [["FAT16", "FAT32", "+3e"], ""],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["Turbosound", "Specdrum", "Covox", "I2S", "MIDI"], "I2S and MIDI require AddOn"],
+                    "Graphic Modes": [["ULAplus", "Timex", "Radastan"], ""],
+                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
+                    "Mouse": [["PS/2"], "Kempston Protocol Emulation"],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
+                    "Other": [["Audio In Tape Load", "PZX", "WiFi"], ""]
+                },
                 "latest": [
                     "EXP27 160820",
                     "https://github.com/mcleod-ideafix/zxuno_spectrum_core/raw/master/zxuno_v4/COREx.ZX1"
@@ -662,6 +876,13 @@
                 }
             },
             "ZX Spectrum 48K (Kyp)": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], "esxdos depends on core version"],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["Turbosound", "Specdrum"], ""],
+                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "zx48 v2.1",
                     "https://github.com/Kyp069/zx48/releases/download/2.1/COREnn.zx48_2021-05-02.ZX1"
@@ -684,6 +905,13 @@
                 }
             },
             "ZX Spectrum 128K (Kyp)": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], "esxdos depends on core version"],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["Turbosound", "Specdrum"], ""],
+                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "zx128 v2.1",
                     "https://github.com/Kyp069/zx128/releases/download/2.1/COREnn.zx128_2021-05-02.ZX1"
@@ -701,6 +929,14 @@
                 }
             },
             "ZX Spectrum (azesmbog)": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], ""],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["Turbosound", "Specdrum", "SAA1099"], ""],
+                    "Graphic Modes": [["ULAplus", "Timex", "Radastan"], ""],
+                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "kyp 2021.04.23"
                 ],
@@ -715,6 +951,16 @@
                 }
             },
             "ZX Spectrum (spark2k06)": {
+                "features": {
+                    "SD": [["FAT16", "FAT32", "+3e"], ""],
+                    "Video": [["VGA", "RGB", "Composite", "RGB666"], "RGB666 requires special DAC"],
+                    "Audio": [["Turbosound", "Specdrum", "Covox", "SAA1099"], "SA1099 Support implies no PZX"],
+                    "Graphic Modes": [["ULAplus", "Timex", "Radastan"], ""],
+                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
+                    "Mouse": [["PS/2"], "Kempston Protocol Emulation"],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
+                    "Other": [["Audio In Tape Load", "PZX"], "PZX up to 224Kb on 512K boards"]
+                },
                 "latest": [
                     "EXP27 SAA1099 (no PZX) 130621",
                     "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/sram_internal/saa_no_pzx/COREx.ZX1"
@@ -744,6 +990,15 @@
                 }
             },
             "ZX TBBlue": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], ""],
+                    "Video": [["VGA", "RGB", "Composite", "RGB666"], "RGB666 requires special DAC"],
+                    "Audio": [["Turbosound", "SID"], ""],
+                    "Graphic Modes": [["ULAplus", "Timex"], ""],
+                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9"],
+                    "Other": [["Multiface"], ""]
+                },
                 "latest": [
                     "azesmbog 13.05.2020",
                     "https://zxuno.com/forum/download/file.php?id=2501"
@@ -759,6 +1014,11 @@
                 }
             },
             "ArcadeV Pac-Man": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.1",
                     ""
@@ -773,6 +1033,11 @@
                 }
             },
             "ArcadeV Phoenix": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/phoenix.ZX1"
@@ -782,6 +1047,11 @@
                 }
             },
             "Arcade Rally X": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0"
                 ],
@@ -790,6 +1060,11 @@
                 }
             },
             "Arcade New Rally X": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0"
                 ],
@@ -798,6 +1073,11 @@
                 }
             },
             "ArcadeV Frogger": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/frogger.ZX1"
@@ -807,6 +1087,11 @@
                 }
             },
             "ArcadeV Galaga": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.1",
                     ""
@@ -821,6 +1106,11 @@
                 }
             },
             "ArcadeV Galaxian": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/galaxian.ZX1"
@@ -830,6 +1120,11 @@
                 }
             },
             "ArcadeV Moon Cresta": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/mooncresta.ZX1"
@@ -839,6 +1134,11 @@
                 }
             },
             "ArcadeV Scramble": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/scramble.ZX1"
@@ -848,6 +1148,11 @@
                 }
             },
             "Arcade Centipede": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.1",
                     ""
@@ -858,6 +1163,11 @@
                 }
             },
             "ArcadeV Ms. Pac-Man": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/mspacman.ZX1"
@@ -867,6 +1177,11 @@
                 }
             },
             "Arcade Asteroids": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.1"
                 ],
@@ -876,6 +1191,11 @@
                 }
             },
             "ArcadeV Dig Dug": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     ""
@@ -885,6 +1205,11 @@
                 }
             },
             "ArcadeV Mr. Do": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/mrdo.ZX1"
@@ -895,6 +1220,11 @@
                 }
             },
             "ArcadeV Atlantic City Action": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/acitya.ZX1"
@@ -904,6 +1234,11 @@
                 }
             },
             "ArcadeV Alibaba": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/alibaba.ZX1"
@@ -913,6 +1248,11 @@
                 }
             },
             "ArcadeV Amidar": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/amidar.ZX1"
@@ -922,6 +1262,11 @@
                 }
             },
             "Arcade Asteroids Deluxe": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     ""
@@ -931,6 +1276,11 @@
                 }
             },
             "ArcadeV Azurian Attack": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/azurian.ZX1"
@@ -941,6 +1291,11 @@
                 }
             },
             "ArcadeV Bagman": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/bagman.ZX1"
@@ -951,6 +1306,11 @@
                 }
             },
             "Arcade Berzek": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0"
                 ],
@@ -959,6 +1319,11 @@
                 }
             },
             "ArcadeV Black Hole": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/blackhole.ZX1"
@@ -968,6 +1333,11 @@
                 }
             },
             "ArcadeV Burnin' Rubber": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/brubber.ZX1"
@@ -977,6 +1347,11 @@
                 }
             },
             "ArcadeV Burger Time": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/btime.ZX1"
@@ -986,6 +1361,11 @@
                 }
             },
             "ArcadeV Catacomb": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/catacomb.ZX1"
@@ -995,6 +1375,11 @@
                 }
             },
             "Arcade Cosmic Avenger": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/cavenger.ZX1"
@@ -1004,6 +1389,11 @@
                 }
             },
             "ArcadeV Crazy Kong": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.1",
                     ""
@@ -1019,6 +1409,11 @@
                 }
             },
             "ArcadeV Pac-Man Club": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/clubpacm.ZX1"
@@ -1028,6 +1423,11 @@
                 }
             },
             "Arcade Computer Space": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0"
                 ],
@@ -1036,6 +1436,11 @@
                 }
             },
             "ArcadeV Crush Roller2": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/crush2.ZX1"
@@ -1045,6 +1450,11 @@
                 }
             },
             "Arcade Defender": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0"
                 ],
@@ -1053,6 +1463,11 @@
                 }
             },
             "ArcadeV Donkey Kong": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.1",
                     ""
@@ -1063,6 +1478,11 @@
                 }
             },
             "ArcadeV Donkey Kong Jr.": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     ""
@@ -1072,6 +1492,11 @@
                 }
             },
             "Arcade Dorodon": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/dorodon.ZX1"
@@ -1081,6 +1506,11 @@
                 }
             },
             "ArcadeV Dream Shopper": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/dreamshp.ZX1"
@@ -1090,6 +1520,11 @@
                 }
             },
             "ArcadeV EEEKK!": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/eeekk.ZX1"
@@ -1099,6 +1534,11 @@
                 }
             },
             "ArcadeV Eyes": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/eyes.ZX1"
@@ -1108,6 +1548,11 @@
                 }
             },
             "Arcade Galaxy Wars": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/galxwars.ZX1"
@@ -1117,6 +1562,11 @@
                 }
             },
             "ArcadeV Gorkans": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/gorkans.ZX1"
@@ -1126,6 +1576,11 @@
                 }
             },
             "ArcadeV Invaders": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.1",
                     "https://github.com/zxdos/zxuno/raw/master/cores/Arcade/Invaders/CORE29.ZX1"
@@ -1136,6 +1591,11 @@
                 }
             },
             "ArcadeV Invaders Mod1": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/invadersmod1.ZX1"
@@ -1145,6 +1605,11 @@
                 }
             },
             "ArcadeV Invaders Mod2": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/invadersmod2.ZX1"
@@ -1154,6 +1619,11 @@
                 }
             },
             "Arcade Invaders Pt2": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/invadpt2.ZX1"
@@ -1163,6 +1633,11 @@
                 }
             },
             "ArcadeV Jump Shot": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/jumpshot.ZX1"
@@ -1173,6 +1648,11 @@
                 }
             },
             "Arcade Lady Bug": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/ladybug.ZX1"
@@ -1182,6 +1662,11 @@
                 }
             },
             "ArcadeV Lizard Wizard": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/lizwiz.ZX1"
@@ -1192,6 +1677,11 @@
                 }
             },
             "Arcade Lunar Lander": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.1"
                 ],
@@ -1201,6 +1691,11 @@
                 }
             },
             "Arcade Lunar Rescue": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/lrescue.ZX1"
@@ -1210,6 +1705,11 @@
                 }
             },
             "ArcadeV Lucky Today": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.1",
                     ""
@@ -1224,6 +1724,11 @@
                 }
             },
             "Arcade Mayday!!": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.1"
                 ],
@@ -1233,6 +1738,11 @@
                 }
             },
             "ArcadeV Moon Alien Pt2": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/moonal2.ZX1"
@@ -1242,6 +1752,11 @@
                 }
             },
             "ArcadeV Mr. TNT": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/mrtnt.ZX1"
@@ -1251,6 +1766,11 @@
                 }
             },
             "Arcade Omega": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/omega.ZX1"
@@ -1260,6 +1780,11 @@
                 }
             },
             "ArcadeV Orbitron": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/orbitron.ZX1"
@@ -1269,6 +1794,11 @@
                 }
             },
             "ArcadeV Pac-Manic-Miner": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/pacminer.ZX1"
@@ -1278,6 +1808,11 @@
                 }
             },
             "ArcadeV Pac-Man Plus": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/pacplus.ZX1"
@@ -1287,6 +1822,11 @@
                 }
             },
             "ArcadeV Pengo": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/pengo.ZX1"
@@ -1296,6 +1836,11 @@
                 }
             },
             "ArcadeV Pisces": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/pisces.ZX1"
@@ -1305,6 +1850,13 @@
                 }
             },
             "Arcade Pong": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],  
+                    "Graphic Modes": [["Monochrome", "Colour"], ""], 
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9", "PS/2 Keyboard", "PS/2 Mouse"], "May require an AddOn with DB9"],
+                    "Other": [["Rotary Encoder"], ""]
+                },
                 "latest": [
                     "AY-3-8500 2020.11.08",
                     ""
@@ -1315,6 +1867,11 @@
                 }
             },
             "Arcade Ponpoko": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/ponpoko.ZX1"
@@ -1324,6 +1881,11 @@
                 }
             },
             "ArcadeV Pooyan": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/pooyan.ZX1"
@@ -1333,6 +1895,11 @@
                 }
             },
             "Arcade Red UFO": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/redufo.ZX1"
@@ -1342,6 +1909,11 @@
                 }
             },
             "Arcade Super Glob": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/sglob.ZX1"
@@ -1351,6 +1923,11 @@
                 }
             },
             "Arcade Shoot The Bull": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/shootbul.ZX1"
@@ -1360,6 +1937,11 @@
                 }
             },
             "Arcade Snap Jack": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/snapjack.ZX1"
@@ -1369,6 +1951,11 @@
                 }
             },
             "Arcade Space Laser": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/spclaser.ZX1"
@@ -1378,6 +1965,11 @@
                 }
             },
             "Arcade Sprint 1": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/sprint1.ZX1"
@@ -1387,6 +1979,11 @@
                 }
             },
             "Arcade Sprint 1 (J)": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.1",
                     ""
@@ -1401,6 +1998,11 @@
                 }
             },
             "Arcade Sprint 2": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.1",
                     ""
@@ -1415,6 +2017,11 @@
                 }
             },
             "Arcade Sprint 2 (J)": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/sprint2j.ZX1"
@@ -1424,6 +2031,11 @@
                 }
             },
             "Arcade Super Break Out": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/superbreakout.ZX1"
@@ -1433,6 +2045,11 @@
                 }
             },
             "Arcade Super Break Out (J)": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/superbreakoutj.ZX1"
@@ -1442,6 +2059,11 @@
                 }
             },
             "ArcadeV Triple Draw Poker": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/tdpgal.ZX1"
@@ -1451,6 +2073,11 @@
                 }
             },
             "ArcadeV The End": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/theend.ZX1"
@@ -1460,6 +2087,11 @@
                 }
             },
             "ArcadeV The Glob": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/theblob.ZX1"
@@ -1469,6 +2101,11 @@
                 }
             },
             "ArcadeV Time Pilot": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/timepilot.ZX1"
@@ -1478,6 +2115,11 @@
                 }
             },
             "Arcade Ultra Tank": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.1",
                     ""
@@ -1492,6 +2134,11 @@
                 }
             },
             "Arcade Ultra Tank (J)": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/ultratankj.ZX1"
@@ -1501,6 +2148,11 @@
                 }
             },
             "ArcadeV UniWar S": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/uniwars.ZX1"
@@ -1510,6 +2162,11 @@
                 }
             },
             "ArcadeV Van Van Car": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/vanvan.ZX1"
@@ -1519,6 +2176,11 @@
                 }
             },
             "Arcade Victory": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/victoryc.ZX1"
@@ -1528,6 +2190,11 @@
                 }
             },
             "ArcadeV War Of Bugs": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/warofbug.ZX1"
@@ -1537,6 +2204,11 @@
                 }
             },
             "ArcadeV Woodpecker": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/woodpeck.ZX1"
@@ -1546,6 +2218,11 @@
                 }
             },
             "Arcade Frenzy": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     ""
@@ -1555,6 +2232,11 @@
                 }
             },
             "Arcade Squash": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     ""
@@ -1564,6 +2246,11 @@
                 }
             },
             "Arcade Capitol": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     ""
@@ -1573,6 +2260,11 @@
                 }
             },
             "Arcade King & Balloon": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     ""
@@ -1582,6 +2274,11 @@
                 }
             },
             "Arcade Colony 7": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     ""
@@ -1591,6 +2288,11 @@
                 }
             },
             "Arcade Jin": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     ""
@@ -1600,6 +2302,11 @@
                 }
             },
             "ArcadeV Eggor": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     ""
@@ -1609,6 +2316,11 @@
                 }
             },
             "Arcade Birdiy": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     ""
@@ -1618,6 +2330,11 @@
                 }
             },
             "ArcadeV Zig Zag": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     ""
@@ -1627,6 +2344,11 @@
                 }
             },
             "ArcadeV Traverse USA": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     ""
@@ -1636,6 +2358,11 @@
                 }
             },
             "Arcade Super Bagman": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     ""
@@ -1645,6 +2372,11 @@
                 }
             },
             "Arcade Black Widow": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
                 "latest": [
                     "1.0",
                     ""
@@ -1903,6 +2635,16 @@
                 }
             },
             "ZX Spectrum": {
+                "features": {
+                    "SD": [["FAT16", "FAT32", "+3e"], ""],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["Turbosound", "Specdrum", "Covox"], ""],
+                    "Graphic Modes": [["ULAplus", "Timex", "Radastan"], ""],
+                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
+                    "Mouse": [["PS/2"], "Kempston Protocol Emulation"],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
+                    "Other": [["Audio In Tape Load", "PZX"], ""]
+                },
                 "latest": [
                     "EXP27_SVN"
                 ],
@@ -1911,6 +2653,13 @@
                 }
             },
             "ZX Spectrum 48K (Kyp)": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], "esxdos depends on core version"],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["Turbosound", "Specdrum"], ""],
+                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "zx48 Beta",
                     ""
@@ -1920,6 +2669,16 @@
                 }
             },
             "ZX Spectrum Next": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], ""],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["Turbosound", "Specdrum", "Covox"], ""],
+                    "Graphic Modes": [["ULAplus", "Timex", "Radastan", "Next"], ""],
+                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
+                    "Mouse": [["PS/2"], "Kempston Protocol Emulation"],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], "Two DB9 Ports Supported"],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "3.01.06 v11",
                     "https://github.com/zxdos/binaries/raw/master/zxnext_top_issue2_zxdos_1M_lx16_v11.ZX2"
@@ -2257,6 +3016,16 @@
                 }
             },
             "ZX Spectrum": {
+                "features": {
+                    "SD": [["FAT16", "FAT32", "+3e"], ""],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["Turbosound", "Specdrum", "Covox", "I2S", "MIDI"], "I2S and MIDI require AddOn"],
+                    "Graphic Modes": [["ULAplus", "Timex", "Radastan"], ""],
+                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
+                    "Mouse": [["PS/2"], "Kempston Protocol Emulation"],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
+                    "Other": [["Audio In Tape Load", "PZX"], ""]
+                },
                 "latest": [
                     "EXP27_160820",
                     "https://github.com/mcleod-ideafix/zxuno_spectrum_core/raw/master/zxdos_lx25/COREx.ZXD"
@@ -2270,6 +3039,16 @@
                 }
             },
             "ZX Spectrum (Avlixa)": {
+                "features": {
+                    "SD": [["FAT16", "FAT32", "+3e"], ""],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["Turbosound", "Specdrum", "Covox"], ""],
+                    "Graphic Modes": [["ULAplus", "Timex", "Radastan"], ""],
+                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
+                    "Mouse": [["PS/2"], "Kempston Protocol Emulation"],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
+                    "Other": [["Audio In Tape Load", "PZX"], ""]
+                },
                 "latest": [
                     "EXP27_20210530",
                     "https://github.com/zxdos/zxdos-plus/raw/master/cores/CORENN_SPECTRUM_EXP27_lx25_20210530.ZXD"
@@ -2283,6 +3062,13 @@
                 }
             },
             "ZX Spectrum 48K (Kyp)": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], "esxdos depends on core version"],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["Turbosound", "Specdrum", "I2S"], ""],
+                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "2021.04.03",
                     "https://github.com/zxdos/zxdos-plus/raw/master/cores/zx48_2021-04-03.ZXD"
@@ -2302,6 +3088,13 @@
                 }
             },
             "ZX Spectrum 128K (Kyp)": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], "esxdos depends on core version"],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["Turbosound", "Specdrum", "I2S"], ""],
+                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "2021.04.17",
                     ""
@@ -2312,6 +3105,13 @@
                 }
             },
             "ZX Spectrum (Kyp)": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], "esxdos depends on core version"],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["Turbosound", "Specdrum", "I2S"], ""],
+                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "2021.08.03 (esxdos 0.8.9)"
                 ],
@@ -2327,6 +3127,16 @@
                 }
             },
             "ZX Spectrum Next": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], ""],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["Turbosound", "Specdrum", "Covox", "I2S"], "I2S requires AddOn"],
+                    "Graphic Modes": [["ULAplus", "Timex", "Radastan", "Next", "MonoChrome"], ""],
+                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
+                    "Mouse": [["PS/2"], "Kempston Protocol Emulation"],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], "Two DB9 Ports Supported"],
+                    "Other": [["Audio In Tape Load", "TZX"], "TZX load requires Raspberry Pi and AddOn"]
+                },
                 "latest": [
                     "3.01.10 1x16",
                     "https://github.com/zxdos/zxdos-plus/raw/master/cores/zxnext_top_issue2_zxdos_lx25_2M_3_1_10_1x16.ZXD"

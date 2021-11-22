@@ -843,7 +843,7 @@ def list_zxdata(str_in_file,
         print('')
         if b_detail:
             printcol(Colours.BLUE,
-                     f' Features of Cores "{block_name}":',
+                     f' Features of "{block_name}" Cores:',
                      end='\n')
             print_detail(block_name, dict_det)
         if show_hashes:
@@ -1632,7 +1632,7 @@ def find_zxfile(str_in_file,
                     found = True
                     if b_detail:
                         printcol(Colours.BLUE,
-                                 f' Features of Cores "{core_item}":',
+                                 f' Features of "{core_item}" Cores:',
                                  end='\n')
                         dict_det = hash_dict['Cores'][core_item].get(
                             'features', {})
