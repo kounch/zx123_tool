@@ -30,6 +30,7 @@ These are the main features:
 - Wipe with  0s all Cores an ZX Spectrum ROMs data
 - If supplied a different kind of file (like a core or BIOS installation file) it will also try to identify its contents
 - List, add or extract ROMs from a ROMPack v2 ROms file
+- For secondary cores, show information about some of the features that they may have (e.g. VGA video out, joystick support, supported SD or microSD formats, etc.)
 
 Requires a [`zx123_hash.json`](##description-of-json-file) file with block structure for the kind of SPI flash file (e.g.: ZXD) and, optionally, hashes to identify the blocks inside. If not found, it tries to download it from the GitHub repository.
 
@@ -130,9 +131,13 @@ Show contents of file:
 
     python3 zx123_tool.py -i FLASH.ZXD -l
 
-Show contents of file, including ZX Spectrum ROMs data:
+Show contents of file, including the installed cores and ZX Spectrum ROMs data:
 
     python3 zx123_tool.py -i FLASH.ZXD -l -r
+
+Show the installed cores, and list known features of them:
+
+    python3 zx123_tool.py -i FLASH.ZXD -l -D
 
 Extract `FIRMWARE.ZXD` file from `FLASH32.ZXD` file (on Windows):
 
@@ -334,6 +339,7 @@ Estas son sus funciones principales:
 - Borrar con 0s todos los datos de los Cores y las ROMs de ZX Spectrum
 - Si se tratase de un tipo distinto de fichero (como un archivo de instalación de core o BIOS), también puede intentar identificar su versión
 - Mostrar, añadir o extraer ROMs de un fichero ROMPack v2
+- Para Cores secundarios, mostrar información sobre algunas de las características que podrían tener (Ej: Salida por VGA, uso de joystick, formato soportado de tarjeta SD o MicroSD, etc.)
 
 Necesita un fichero  [`zx123_hash.json`](#descripción-del-arhivo-json) con la estructura de bloques del archivo de imagen y, opcionalmente, datos para identificar dichos bloques. Si no se encuentra, intentará descargarlo desde el repositorio en GitHub.
 
@@ -436,9 +442,13 @@ Mostrar contenido de una imagen:
 
     python3 zx123_tool.py -i FLASH.ZXD -l
 
-Mostrar contenido de una imagen, incluyendo datos de ROMs de ZX Spectrum:
+Mostrar contenido de una imagen, incluyendo datos de cores instalados y de ROMs de ZX Spectrum:
 
     python3 zx123_tool.py -i FLASH.ZXD -l -r
+
+Listar los cores instalados en una imagen, incluyendo información de características que podrían tener:
+
+    python3 zx123_tool.py -i FLASH.ZXD -l -D
 
 Extraer un fichero `FIRMWARE.ZXD` del archivo de imagen `FLASH32.ZXD` (en Windows):
 
