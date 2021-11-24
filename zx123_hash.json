@@ -174,7 +174,7 @@
             },
             "Amstrad CPC464": {
                 "features": {
-                    "Video": [[ "VGA", "RGB", "Composite"], "VGA Optional Scanlines"],
+                    "Video": [["VGA", "RGB", "Composite"], "VGA Optional Scanlines"],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ],
                     "Other": [["Audio In Tape Load"], ""]
@@ -198,7 +198,7 @@
             "Amstrad CPC6128": {
                 "features": {
                     "SD": [["FAT32"], "0x0B Win95 FAT-32 4096 bytes per cluster"],
-                    "Video": [[ "VGA"], "640x480 VGA centered at 60Hz"],
+                    "Video": [["VGA"], "640x480 VGA centered at 60Hz"],
                     "Keyboard": [["PS/2"], ""],
                     "Other": [["Audio In Tape Load"], ""]
                 },
@@ -214,7 +214,7 @@
             },
             "Apple I": {
                 "features": {
-                    "Video": [[ "VGA"], ""],
+                    "Video": [["VGA"], ""],
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
@@ -680,6 +680,7 @@
                     "Audio": [["Beeper", "Tandy 3 voice"], ""],
                     "Graphic Modes": [["Text 80x25", "EGA 320x200x16", "MCGA 320x200x256"], ""],
                     "Keyboard": [["PS/2"], ""],
+                    "Mouse": [["PS/2"], ""],
                     "Other": [["Next186 core"], "286 equivalent in real mode"]
                 },
                 "latest": [
@@ -1015,7 +1016,7 @@
             },
             "ArcadeV Pac-Man": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1034,7 +1035,7 @@
             },
             "ArcadeV Phoenix": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1048,7 +1049,7 @@
             },
             "Arcade Rally X": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1061,7 +1062,7 @@
             },
             "Arcade New Rally X": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1074,7 +1075,7 @@
             },
             "ArcadeV Frogger": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1088,7 +1089,7 @@
             },
             "ArcadeV Galaga": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1107,7 +1108,7 @@
             },
             "ArcadeV Galaxian": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1121,7 +1122,7 @@
             },
             "ArcadeV Moon Cresta": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1135,7 +1136,7 @@
             },
             "ArcadeV Scramble": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1149,7 +1150,7 @@
             },
             "Arcade Centipede": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1164,7 +1165,7 @@
             },
             "ArcadeV Ms. Pac-Man": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1178,7 +1179,7 @@
             },
             "Arcade Asteroids": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1192,7 +1193,7 @@
             },
             "ArcadeV Dig Dug": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1206,7 +1207,7 @@
             },
             "ArcadeV Mr. Do": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1221,7 +1222,7 @@
             },
             "ArcadeV Atlantic City Action": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1235,7 +1236,7 @@
             },
             "ArcadeV Alibaba": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1249,7 +1250,7 @@
             },
             "ArcadeV Amidar": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1263,7 +1264,7 @@
             },
             "Arcade Asteroids Deluxe": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1277,7 +1278,7 @@
             },
             "ArcadeV Azurian Attack": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1292,7 +1293,7 @@
             },
             "ArcadeV Bagman": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1307,7 +1308,7 @@
             },
             "Arcade Berzek": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1320,7 +1321,7 @@
             },
             "ArcadeV Black Hole": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1334,7 +1335,7 @@
             },
             "ArcadeV Burnin' Rubber": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1348,7 +1349,7 @@
             },
             "ArcadeV Burger Time": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1362,7 +1363,7 @@
             },
             "ArcadeV Catacomb": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1376,7 +1377,7 @@
             },
             "Arcade Cosmic Avenger": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1390,7 +1391,7 @@
             },
             "ArcadeV Crazy Kong": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1410,7 +1411,7 @@
             },
             "ArcadeV Pac-Man Club": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1424,7 +1425,7 @@
             },
             "Arcade Computer Space": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1437,7 +1438,7 @@
             },
             "ArcadeV Crush Roller2": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1451,7 +1452,7 @@
             },
             "Arcade Defender": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1464,7 +1465,7 @@
             },
             "ArcadeV Donkey Kong": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1479,7 +1480,7 @@
             },
             "ArcadeV Donkey Kong Jr.": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1493,7 +1494,7 @@
             },
             "Arcade Dorodon": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1507,7 +1508,7 @@
             },
             "ArcadeV Dream Shopper": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1521,7 +1522,7 @@
             },
             "ArcadeV EEEKK!": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1535,7 +1536,7 @@
             },
             "ArcadeV Eyes": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1549,7 +1550,7 @@
             },
             "Arcade Galaxy Wars": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1563,7 +1564,7 @@
             },
             "ArcadeV Gorkans": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1577,7 +1578,7 @@
             },
             "ArcadeV Invaders": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1592,7 +1593,7 @@
             },
             "ArcadeV Invaders Mod1": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1606,7 +1607,7 @@
             },
             "ArcadeV Invaders Mod2": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1620,7 +1621,7 @@
             },
             "Arcade Invaders Pt2": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1634,7 +1635,7 @@
             },
             "ArcadeV Jump Shot": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1649,7 +1650,7 @@
             },
             "Arcade Lady Bug": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1663,7 +1664,7 @@
             },
             "ArcadeV Lizard Wizard": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1678,7 +1679,7 @@
             },
             "Arcade Lunar Lander": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1692,7 +1693,7 @@
             },
             "Arcade Lunar Rescue": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1706,7 +1707,7 @@
             },
             "ArcadeV Lucky Today": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1725,7 +1726,7 @@
             },
             "Arcade Mayday!!": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1739,7 +1740,7 @@
             },
             "ArcadeV Moon Alien Pt2": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1753,7 +1754,7 @@
             },
             "ArcadeV Mr. TNT": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1767,7 +1768,7 @@
             },
             "Arcade Omega": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1781,7 +1782,7 @@
             },
             "ArcadeV Orbitron": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1795,7 +1796,7 @@
             },
             "ArcadeV Pac-Manic-Miner": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1809,7 +1810,7 @@
             },
             "ArcadeV Pac-Man Plus": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1823,7 +1824,7 @@
             },
             "ArcadeV Pengo": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1837,7 +1838,7 @@
             },
             "ArcadeV Pisces": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1851,8 +1852,8 @@
             },
             "Arcade Pong": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],  
-                    "Graphic Modes": [["Monochrome", "Colour"], ""], 
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Graphic Modes": [["Monochrome", "Colour"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9", "PS/2 Keyboard", "PS/2 Mouse"], "May require an AddOn with DB9"],
                     "Other": [["Rotary Encoder"], ""]
@@ -1868,7 +1869,7 @@
             },
             "Arcade Ponpoko": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1882,7 +1883,7 @@
             },
             "ArcadeV Pooyan": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1896,7 +1897,7 @@
             },
             "Arcade Red UFO": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1910,7 +1911,7 @@
             },
             "Arcade Super Glob": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1924,7 +1925,7 @@
             },
             "Arcade Shoot The Bull": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1938,7 +1939,7 @@
             },
             "Arcade Snap Jack": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1952,7 +1953,7 @@
             },
             "Arcade Space Laser": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1966,7 +1967,7 @@
             },
             "Arcade Sprint 1": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1980,7 +1981,7 @@
             },
             "Arcade Sprint 1 (J)": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -1999,7 +2000,7 @@
             },
             "Arcade Sprint 2": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2018,7 +2019,7 @@
             },
             "Arcade Sprint 2 (J)": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2032,7 +2033,7 @@
             },
             "Arcade Super Break Out": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2046,7 +2047,7 @@
             },
             "Arcade Super Break Out (J)": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2060,7 +2061,7 @@
             },
             "ArcadeV Triple Draw Poker": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2074,7 +2075,7 @@
             },
             "ArcadeV The End": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2088,7 +2089,7 @@
             },
             "ArcadeV The Glob": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2102,7 +2103,7 @@
             },
             "ArcadeV Time Pilot": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2116,7 +2117,7 @@
             },
             "Arcade Ultra Tank": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2135,7 +2136,7 @@
             },
             "Arcade Ultra Tank (J)": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2149,7 +2150,7 @@
             },
             "ArcadeV UniWar S": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2163,7 +2164,7 @@
             },
             "ArcadeV Van Van Car": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2177,7 +2178,7 @@
             },
             "Arcade Victory": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2191,7 +2192,7 @@
             },
             "ArcadeV War Of Bugs": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2205,7 +2206,7 @@
             },
             "ArcadeV Woodpecker": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2219,7 +2220,7 @@
             },
             "Arcade Frenzy": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2233,7 +2234,7 @@
             },
             "Arcade Squash": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2247,7 +2248,7 @@
             },
             "Arcade Capitol": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2261,7 +2262,7 @@
             },
             "Arcade King & Balloon": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2275,7 +2276,7 @@
             },
             "Arcade Colony 7": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2289,7 +2290,7 @@
             },
             "Arcade Jin": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2303,7 +2304,7 @@
             },
             "ArcadeV Eggor": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2317,7 +2318,7 @@
             },
             "Arcade Birdiy": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2331,7 +2332,7 @@
             },
             "ArcadeV Zig Zag": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2345,7 +2346,7 @@
             },
             "ArcadeV Traverse USA": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2359,7 +2360,7 @@
             },
             "Arcade Super Bagman": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2373,7 +2374,7 @@
             },
             "Arcade Black Widow": {
                 "features": {
-                    "Video": [["VGA", "RGB", "Composite"], ""],   
+                    "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
@@ -2832,6 +2833,12 @@
         },
         "Cores": {
             "Acorn Atom": {
+                "features": {
+                    "microSD": [["FAT16"], "Atom Software Archive"],
+                    "Video": [["VGA", "RGB", ""], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["microSD Software Load"], ""]
+                },
                 "latest": [
                     "0.1"
                 ],
@@ -2839,7 +2846,13 @@
                     "0.1": "ed1ca1ad15ccb73d46259131e363f70fc0cfe8f7dc42654ae87c3dc7f8d573ac"
                 }
             },
-            "Amstrad CPC": {
+            "Amstrad CPC6128": {
+                "features": {
+                    "microSD": [["FAT32"], "0x0B Win95 FAT-32 4096 bytes per cluster"],
+                    "Video": [["VGA"], "640x480 VGA centered at 60Hz"],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["microSD DSK Image Load"], ""]
+                },
                 "latest": [
                     "4",
                     "https://github.com/zxdos/zxdos-plus/raw/master/cores/amstradCPC_gomadoslx25_v4.ZXD"
@@ -2850,6 +2863,14 @@
                 }
             },
             "Atari 2600": {
+                "features": {
+                    "microSD": [["FAT16"], ""],
+                    "Video": [["VGA", "RGB"], "VGA Optional Scanlines"],
+                    "Graphic Modes": [["PAL", "NTSC"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], ""],
+                    "Other": [["microSD ROM Image Load", "Rotary Encoder"], ""]
+                },
                 "latest": [
                     "2.1",
                     "https://github.com/zxdos/zxdos-plus/raw/master/cores/A2600_zxdos_lx25_v2_1.ZXD"
@@ -2859,6 +2880,11 @@
                 }
             },
             "Camputers Lynx": {
+                "features": {
+                    "Video": [["VGA", "RGB"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "2021.04.03",
                     "https://github.com/zxdos/zxdos-plus/raw/master/cores/camputers_lynx_lx25_2021-04-03.ZXD"
@@ -2870,6 +2896,12 @@
                 }
             },
             "CHIP-8": {
+                "features": {
+                    "microSD": [["FAT16", "FAT32"], ""],
+                    "Video": [["VGA", "RGB"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["microSD ROM Image Load"], ""]
+                },
                 "latest": [
                     "2021.05.23",
                     "https://github.com/zxdos/zxdos-plus/raw/master/cores/chip8_zxdoslx25_20210523.ZXD"
@@ -2882,6 +2914,13 @@
                 }
             },
             "ColecoVision": {
+                "features": {
+                    "microSD": [["FAT16"], ""],
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], ""],
+                    "Other": [["microSD ROM Image Load"], ""]
+                },
                 "latest": [
                     "0.1"
                 ],
@@ -2890,6 +2929,13 @@
                 }
             },
             "Commodore 64": {
+                "features": {
+                    "microSD": [["FAT16", "FAT32"], ""],
+                    "Video": [["VGA", "RGB"], ""],
+                    "Audio": [["SID"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["microSD D64 Image Load", "microSD TAP Image Load"], ""]
+                },
                 "latest": [
                     "1.0"
                 ],
@@ -2898,6 +2944,13 @@
                 }
             },
             "MSX": {
+                "features": {
+                    "microSD": [["FAT16"], "0x06 16-bit FAT"],
+                    "Video": [["VGA", "RGB"], "VGA Optional Scanlines"],
+                    "Audio": [["I2S"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], ""]
+                },
                 "latest": [
                     "1.3",
                     "https://github.com/zxdos/zxdos-plus/raw/master/cores/msx1-3_zxdoslx25.ZXD"
@@ -2921,6 +2974,13 @@
                 }
             },
             "NES": {
+                "features": {
+                    "microSD": [["FAT16"],""],
+                    "Video": [["VGA"], "Optional Scanlines"],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], ""],
+                    "Other": [["microSD ROM Load"], ""]
+                },
                 "latest": [
                     "20200923",
                     "https://github.com/zxdos/zxdos-plus/raw/master/cores/COREn_NES_VGA_lx25.zxd"
@@ -2931,6 +2991,13 @@
                 }
             },
             "Oric Atmos (Kyp)": {
+                "features": {
+                    "Video": [["VGA", "RGB"], ""],
+                    "Audio": [["SID"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["PS/2 Keyboard"], ""],
+                    "Other": [["Audio In Tape Load", "Audio Out Tape Save"], ""]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/Kyp069/atmos/releases/download/v1.0/COREnn.Atmos.v1.0.ZXD"
@@ -2941,6 +3008,15 @@
                 }
             },
             "PC XT": {
+                "features": {
+                    "microSD": [["FAT16"], "FAT with MS-DOS installed"],
+                    "Video": [["VGA"], ""],
+                    "Audio": [["OPL3"], ""],
+                    "Graphic Modes": [["Text 80x25", "EGA 320x200x16", "MCGA 320x200x256"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Mouse": [["PS/2"], ""],
+                    "Other": [["Next186 core"], ""]
+                },
                 "latest": [
                     "Next186 DDR3 v1",
                     "https://github.com/zxdos/binaries/raw/master/next186_zxdos_ddr3_lx25_v1_COREXX.ZXD"
@@ -2951,6 +3027,11 @@
                 }
             },
             "Phoenix": {
+                "features": {
+                    "Video": [["VGA", "RGB"], "VGA Optional Scanlines"],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
                 "latest": [
                     "1.0"
                 ],
@@ -2961,6 +3042,13 @@
                 }
             },
             "Pong": {
+                "features": {
+                    "Video": [["VGA", "RGB"], ""],
+                    "Graphic Modes": [["Monochrome", "Colour"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9", "PS/2 Keyboard", "PS/2 Mouse"], ""],
+                    "Other": [["Rotary Encoder"], ""]
+                },
                 "latest": [
                     "2.2",
                     "https://github.com/zxdos/zxdos-plus/raw/master/cores/pong_ay38500_zxdoslx25_v2_2.ZXD"
@@ -2983,6 +3071,13 @@
                 }
             },
             "Videopac": {
+                "features": {
+                    "microSD": [["FAT16"],""],
+                    "Video": [["VGA", "RGB"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], ""],
+                    "Other": [["SD ROM Load"], ""]
+                },
                 "latest": [
                     "20210515",
                     "https://github.com/zxdos/zxdos-plus/raw/master/cores/videopac_zxdos_lx25_20210515.ZXD"
@@ -3004,6 +3099,15 @@
                 }
             },
             "ZX81": {
+                "features": {
+                    "microSD": [["FAT16", "FAT32"],""],
+                    "Video": [["VGA", "RGB"], ""],
+                    "Graphic Modes": [["PAL", "NTSC"], ""],
+                    "Audio": [["YM2149"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], ""],
+                    "Other": [["microSD ROM and Tape Load", "Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "2021.09.14",
                     "https://github.com/avlixa/ZX81_MiSTer_zxdos/raw/master/releases/zx81_zxdos_lx25_20210914.ZXD"
