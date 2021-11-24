@@ -2498,7 +2498,13 @@
             "versions": {}
         },
         "Cores": {
-            "Amstrad CPC": {
+            "Amstrad CPC464": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], "VGA Optional Scanlines"],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/binaries/raw/master/AmstradCPC.ZX2"
@@ -2508,6 +2514,14 @@
                 }
             },
             "Atari 2600": {
+                "features": {
+                    "microSD": [["FAT16"], ""],
+                    "Video": [["VGA", "RGB"], "VGA Optional Scanlines"],
+                    "Graphic Modes": [["PAL", "NTSC"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], ""],
+                    "Other": [["microSD ROM Image Load", "Rotary Encoder"], ""]
+                },
                 "latest": [
                     "2.1",
                     "https://github.com/zxdos/binaries/raw/master/COREN_A2600_zxdos_lx16_v2_1.ZX2"
@@ -2518,6 +2532,12 @@
                 }
             },
             "CHIP-8": {
+                "features": {
+                    "microSD": [["FAT16", "FAT32"], ""],
+                    "Video": [["VGA", "RGB"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["microSD ROM Image Load"], ""]
+                },
                 "latest": [
                     "2021.05.23",
                     "https://github.com/zxdos/binaries/raw/master/chip8_zxdoslx16_20210523.ZX2"
@@ -2529,6 +2549,13 @@
                 }
             },
             "ColecoVision": {
+                "features": {
+                    "microSD": [["FAT16"], ""],
+                    "Video": [["VGA", "RGB"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
+                    "Other": [["microSD ROM Image Load"], ""]
+                },
                 "latest": [
                     "1.0 VGA"
                 ],
@@ -2547,6 +2574,12 @@
                 }
             },
             "MSX": {
+                "features": {
+                    "microSD": [["FAT16"], "0x06 16-bit FAT"],
+                    "Video": [["VGA", "RGB"], "VGA Optional Scanlines"],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9"]
+                },
                 "latest": [
                     "1.3",
                     "https://github.com/zxdos/binaries/raw/master/MSX1FPGA.ZX2"
@@ -2556,6 +2589,13 @@
                 }
             },
             "Oric Atmos (Kyp)": {
+                "features": {
+                    "Video": [["VGA", "RGB"], ""],
+                    "Audio": [["SID"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["PS/2 Keyboard"], ""],
+                    "Other": [["Audio In Tape Load", "Audio Out Tape Save"], ""]
+                },
                 "latest": [
                     "1.0"
                 ],
@@ -2564,6 +2604,15 @@
                 }
             },
             "PC XT": {
+                "features": {
+                    "microSD": [["FAT16"], "FAT with MS-DOS installed"],
+                    "Video": [["VGA"], ""],
+                    "Audio": [["Adlib"], ""],
+                    "Graphic Modes": [["Text 80x25", "EGA 320x200x16", "MCGA 320x200x256"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Mouse": [["PS/2"], ""],
+                    "Other": [["Next186 core"], ""]
+                },
                 "latest": [
                     "Next186 DDR3 v1",
                     "https://github.com/zxdos/binaries/raw/master/next186_zxdos_ddr3_lx16_v1_COREXX.ZX2"
@@ -2573,6 +2622,11 @@
                 }
             },
             "Phoenix": {
+                "features": {
+                    "Video": [["VGA", "RGB"], "VGA Optional Scanlines"],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
                 "latest": [
                     "1.0",
                     "https://github.com/zxdos/binaries/raw/master/COREN_phoenix_zxdoslx16.ZX2"
@@ -2582,6 +2636,13 @@
                 }
             },
             "Pong": {
+                "features": {
+                    "Video": [["VGA", "RGB"], ""],
+                    "Graphic Modes": [["Monochrome", "Colour"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9", "PS/2 Keyboard", "PS/2 Mouse"], ""],
+                    "Other": [["Rotary Encoder"], ""]
+                },
                 "latest": [
                     "2.2",
                     "https://github.com/zxdos/binaries/raw/master/COREN_pong_ay38500_zxdoslx16_v2_2.ZX2"
@@ -2594,6 +2655,13 @@
                 }
             },
             "Sega Master System": {
+                "features": {
+                    "microSD": [["FAT16"],""],
+                    "Video": [["VGA", "RGB", "Composite"], "RGB with PAL sync (50Hz)"],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
+                    "Other": [["microSD BIN and SMD Load"], ""]
+                },
                 "latest": [
                     "2.0 Memorias_ISSI"
                 ],
@@ -2602,6 +2670,13 @@
                 }
             },
             "Videopac": {
+                "features": {
+                    "microSD": [["RAW"],""],
+                    "Video": [["VGA", "RGB"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], ""],
+                    "Other": [["SD ROM Load"], ""]
+                },
                 "latest": [
                     "20210515",
                     "https://github.com/zxdos/binaries/raw/master/videopac_zxdos_lx16_20210515.ZX2"
@@ -2616,6 +2691,10 @@
                 }
             },
             "ZX80yUno": {
+                "features": {
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["microSD Tape Load", "Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "3.0",
                     "https://github.com/zxdos/binaries/raw/master/COREn_zx80yunoV3.ZX2"
@@ -2627,6 +2706,15 @@
                 }
             },
             "ZX81": {
+                "features": {
+                    "microSD": [["FAT16", "FAT32"],""],
+                    "Video": [["VGA", "RGB"], ""],
+                    "Graphic Modes": [["PAL", "NTSC"], ""],
+                    "Audio": [["YM2149"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], ""],
+                    "Other": [["microSD ROM and Tape Load", "Audio In Tape Load"], ""]
+                },
                 "latest": [
                     "20210914 avlixa",
                     "https://github.com/avlixa/ZX81_MiSTer_zxdos/raw/master/releases/zx81_zxdos_lx16_20210914.ZX2"
@@ -2637,7 +2725,7 @@
             },
             "ZX Spectrum": {
                 "features": {
-                    "SD": [["FAT16", "FAT32", "+3e"], ""],
+                    "microSD": [["FAT16", "FAT32", "+3e"], ""],
                     "Video": [["VGA", "RGB", "Composite"], ""],
                     "Audio": [["Turbosound", "Specdrum", "Covox"], ""],
                     "Graphic Modes": [["ULAplus", "Timex", "Radastan"], ""],
@@ -2655,7 +2743,7 @@
             },
             "ZX Spectrum 48K (Kyp)": {
                 "features": {
-                    "SD": [["FAT16", "FAT32"], "esxdos depends on core version"],
+                    "microSD": [["FAT16", "FAT32"], "esxdos depends on core version"],
                     "Video": [["VGA", "RGB", "Composite"], ""],
                     "Audio": [["Turbosound", "Specdrum"], ""],
                     "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
@@ -2671,7 +2759,7 @@
             },
             "ZX Spectrum Next": {
                 "features": {
-                    "SD": [["FAT16", "FAT32"], ""],
+                    "microSD": [["FAT16", "FAT32"], ""],
                     "Video": [["VGA", "RGB", "Composite"], ""],
                     "Audio": [["Turbosound", "Specdrum", "Covox"], ""],
                     "Graphic Modes": [["ULAplus", "Timex", "Radastan", "Next"], ""],
