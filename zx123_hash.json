@@ -684,7 +684,7 @@
                     "Other": [["Next186 core"], "286 equivalent in real mode"]
                 },
                 "latest": [
-                    "512k 70 MHz 2017.02.18",
+                    "512KB 70 MHz 2017.02.18",
                     "https://github.com/zxdos/zxuno/raw/master/cores/PC/CORE23.ZX1"
                 ],
                 "1core": [
@@ -696,7 +696,7 @@
                     "https://www.dropbox.com//s/dl/8ypednhdqodewtf/2MB_INT_TEST.zip?dl=1"
                 ],
                 "versions": {
-                    "512k 70 MHz 2017.02.18": "81e89e258fb00fd46f37c8d06055c23821290e265433cd24e8cd1cd0a5993202",
+                    "512KB 70 MHz 2017.02.18": "81e89e258fb00fd46f37c8d06055c23821290e265433cd24e8cd1cd0a5993202",
                     "2MB Ext Beta 75 MHz 2017.01.20": "69ec81d182134eb095a9d111966ee0e780a0410da48bdf69e6f918c5b528bfa6",
                     "2MB Ext 70 MHz 2017.02.18": "b560afa672db76b3e0476c20130e14e07f9569761cc20315a83cf6cfa8bf167a",
                     "2MB Int Beta 75 MHz 2017.01.20": "de55a3817acacc55ae90fef0db6c4137ed3c13e84d927a4d7862a7ce1bf178ab",
@@ -715,6 +715,33 @@
                     "2MB Int 60 MHz spark2k06 (RGB666)": "da742c25d598559715625acdee16b38a80343b3909323d94cd1d721a862e4bce",
                     "2MB Int 65 MHz spark2k06 (RGB666)": "46a8aa9c381e11720ade26b5fbd3e7a6decd77116361d08125fff587ba26f63e",
                     "2MB Int 70 MHz spark2k06 (RGB666)": "9324d2d9ca0a6da887caf3e2bdbf8637d108c8376b8ae9ae58aeaad3946fcf9c"
+                }
+            },
+            "PC XT CGA Tandy": {
+                "features": {
+                    "SD": [["FAT16"], "FAT with MS-DOS installed"],
+                    "Video": [["VGA"], ""],
+                    "Audio": [["Beeper", "Tandy 3 voice"], ""],
+                    "Graphic Modes": [["Text 80x25", "CGA", "CGA Monochrome"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Mouse": [["PS/2"], ""],
+                    "Other": [["Next186 core 4.77Mhz"], "286 equivalent in real mode"]
+                },
+                "latest": [
+                    "512KB"
+                ],
+                "1core": [
+                    "2MB Int (RGB666)"
+                ],
+                "2m": [
+                    "2MB Int"
+                ],
+                "versions": {
+                    "Test 1 512KB (RGB666)": "01c879efd1b515d83cd167271027216cb4f226de3e6739573f50da9dab2b169e",
+                    "Test 1 2MB Int (RGB666)": "2706506cfedfd1448649c66644eb1c9b2ac29b6d53670efee22e4a0d1173537a",
+                    "Test 1 512KB": "330221d731aad890b2571a73c658e2006aa49034106002402980cd37dbb62122",
+                    "Test 1 2MB Ext": "12a71a08089c57a32442075fa48150634d8615c93113cb1d842fe1d61984bf1b",
+                    "Test 1 2MB Int": "23c1ccc2ae4d4f2bae4d42641fbcc5ca313db3f92659b8acbd3f4c13ca8fec50"
                 }
             },
             "Sam Coupe": {
