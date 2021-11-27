@@ -728,13 +728,13 @@
                     "Other": [["Next186 core 4.77Mhz"], "286 equivalent in real mode"]
                 },
                 "latest": [
-                    "512KB"
+                    "Test 1 512KB"
                 ],
                 "1core": [
-                    "2MB Int (RGB666)"
+                    "Test 1 2MB Int (RGB666)"
                 ],
                 "2m": [
-                    "2MB Int"
+                    "Test 1 2MB Int"
                 ],
                 "versions": {
                     "Test 1 512KB (RGB666)": "01c879efd1b515d83cd167271027216cb4f226de3e6739573f50da9dab2b169e",
@@ -851,10 +851,13 @@
                     "Joystick": [["DB9"], "May require an AddOn with DB9"],
                     "Other": [["SD ROM and Tape Load"], ""]
                 },
-                "latest": [
+                "base": [
                     "20210914 avlixa",
                     "https://github.com/avlixa/ZX81_MiSTer_zxdos/raw/master/releases/zx81_zxuno_lx9_20210914.ZX1"
                 ],
+                "latest": [
+                    "20211024 avlixa"
+                ],              
                 "versions": {
                     "20161105": "926198a4a6ba89748209e0d25ed34d35d8d51149c6ced0e9452a93440117eec4",
                     "VGA jepalza": "0a2469f0b57dab9055dec1de3c68468f4f9df6d32e6b317343df6d1fd8d6c915",
