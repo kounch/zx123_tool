@@ -717,24 +717,27 @@
                     "2MB Int 70 MHz spark2k06 (RGB666)": "9324d2d9ca0a6da887caf3e2bdbf8637d108c8376b8ae9ae58aeaad3946fcf9c"
                 }
             },
-            "PC XT CGA Tandy": {
+            "": {
                 "features": {
                     "SD": [["FAT16"], "FAT with MS-DOS installed"],
                     "Video": [["VGA"], ""],
-                    "Audio": [["Beeper", "Tandy 3 voice"], ""],
-                    "Graphic Modes": [["Text 80x25", "CGA", "CGA Monochrome"], ""],
+                    "Audio": [["Beeper"], ""],
+                    "Graphic Modes": [["Text 80x25", "CGA", "CGA Monochrome", "Tandy"], "Partial Tandy Support"],
                     "Keyboard": [["PS/2"], ""],
                     "Mouse": [["PS/2"], ""],
-                    "Other": [["Next186 core 4.77Mhz"], "286 equivalent in real mode"]
+                    "Other": [["Next186 core 4.77Mhz"], ""]
                 },
                 "latest": [
-                    "Test 1 512KB"
+                    "Test 1 512KB",
+                    "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUno/512KB/COREx.ZX1"
                 ],
                 "1core": [
-                    "Test 1 2MB Int (RGB666)"
+                    "Test 1 2MB Int (RGB666)",
+                    "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUnCore/2MB/COREx.ZX1"
                 ],
                 "2m": [
-                    "Test 1 2MB Int"
+                    "Test 1 2MB Int",
+                    "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUno/2MB/COREx.ZX1"
                 ],
                 "versions": {
                     "Test 1 512KB (RGB666)": "01c879efd1b515d83cd167271027216cb4f226de3e6739573f50da9dab2b169e",
