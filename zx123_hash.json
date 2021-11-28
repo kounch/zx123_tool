@@ -717,7 +717,7 @@
                     "2MB Int 70 MHz spark2k06 (RGB666)": "9324d2d9ca0a6da887caf3e2bdbf8637d108c8376b8ae9ae58aeaad3946fcf9c"
                 }
             },
-            "": {
+            "PC XT CGA Tandy": {
                 "features": {
                     "SD": [["FAT16"], "FAT with MS-DOS installed"],
                     "Video": [["VGA"], ""],
