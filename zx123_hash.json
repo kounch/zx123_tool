@@ -728,15 +728,15 @@
                     "Other": [["Next186 core 4.77Mhz"], ""]
                 },
                 "latest": [
-                    "Test 1 512KB",
+                    "Test 2 512KB",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUno/512KB/COREx.ZX1"
                 ],
                 "1core": [
-                    "Test 1 2MB Int (RGB666)",
+                    "Test 2 2MB Int (RGB666)",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUnCore/2MB/COREx.ZX1"
                 ],
                 "2m": [
-                    "Test 1 2MB Int",
+                    "Test 2 2MB Int",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUno/2MB/COREx.ZX1"
                 ],
                 "versions": {
@@ -744,7 +744,12 @@
                     "Test 1 2MB Int (RGB666)": "2706506cfedfd1448649c66644eb1c9b2ac29b6d53670efee22e4a0d1173537a",
                     "Test 1 512KB": "330221d731aad890b2571a73c658e2006aa49034106002402980cd37dbb62122",
                     "Test 1 2MB Ext": "12a71a08089c57a32442075fa48150634d8615c93113cb1d842fe1d61984bf1b",
-                    "Test 1 2MB Int": "23c1ccc2ae4d4f2bae4d42641fbcc5ca313db3f92659b8acbd3f4c13ca8fec50"
+                    "Test 1 2MB Int": "23c1ccc2ae4d4f2bae4d42641fbcc5ca313db3f92659b8acbd3f4c13ca8fec50",
+                    "Test 2 512KB (RGB666)": "d9bffb4ecf143e279175ccf057617cb7e0af1d6c86c4fff4f8c9b56fb282920c",
+                    "Test 2 2MB Int (RGB666)": "619c807e87cd52026e4354fe152359499e8c121df95ee8b83a9c4ddba7553d03",
+                    "Test 2 512KB": "30d63c2981d6a768a94f4a2f97bfb39d7188e0f2c1cf89c1b688f5b734872efe",
+                    "Test 2 2MB Ext": "c7a21eb993e6a013587687cadc1d2bb44da6021216deea099debcd8e3881cefb",
+                    "Test 2 2MB Int": "be2b03ae0775a3ebe9175a352e02b093ac804dc4f888516aaac6e349bf4f93e3"
                 }
             },
             "Sam Coupe": {
