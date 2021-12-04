@@ -2759,11 +2759,12 @@
                     "Other": [["microSD ROM and Tape Load", "Audio In Tape Load"], ""]
                 },
                 "latest": [
-                    "20210914 avlixa",
-                    "https://github.com/avlixa/ZX81_MiSTer_zxdos/raw/master/releases/zx81_zxdos_lx16_20210914.ZX2"
+                    "20211031 avlixa",
+                    "https://github.com/zxdos/binaries/raw/master/zx81_zxdos_lx16_20211031.ZX2"
                 ],
                 "versions": {
-                    "20210914 avlixa": "6d273af63ea281e08ea4b1b00fbff0d668c837ce58f275149e8e5d5bfabcbd30"
+                    "20210914 avlixa": "6d273af63ea281e08ea4b1b00fbff0d668c837ce58f275149e8e5d5bfabcbd30",
+                    "20211031 avlixa": "a8ce05644f1b4fc5ecaaba1f8a3af04803bdc01b02221c192a40af850e28ec5e"
                 }
             },
             "ZX Spectrum": {
@@ -2793,11 +2794,12 @@
                     "Other": [["Audio In Tape Load"], ""]
                 },
                 "latest": [
-                    "zx48 Beta",
-                    ""
+                    "2021-04-04",
+                    "https://github.com/zxdos/binaries/raw/master/zx48_kypp_2021-04-04%20.ZX2"
                 ],
                 "versions": {
-                    "zx48 Beta": "e3fdf4e30ccdd0303eebc931b6aa5c7c0b7d49d8e84cfe4853e8b8f328663b61"
+                    "zx48 Beta": "e3fdf4e30ccdd0303eebc931b6aa5c7c0b7d49d8e84cfe4853e8b8f328663b61",
+                    "2021-04-04": "25ce66fa425f82b188271a50a4b738d8d559a15c8a78a8f547c7c8b78712cbba"
                 }
             },
             "ZX Spectrum Next": {
@@ -2820,6 +2822,500 @@
                     "3.01.05 Issue2 DDR3 Black": "55fa0ba05d0fdd49e35c89abc62e2f3d43f0e398b59575396d75f582231c1745",
                     "3.01.06 v11": "a7ab1245134151b5da4245c053dea2c19b200aedf4cbc1542b892007829753d3",
                     "3.01.09 Beta": "0b9a4bc393fe1160f15e6b9960199f34835ba3867449571839202a750908f8df"
+                }
+            },
+            "ArcadeV Alibaba": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "b89c898504796d45c647f5912453788fc35cf8bc14327983ceb8336b3784b6a9"
+                }
+            },
+            "ArcadeV Atlantic City Action": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "6b45d385f6574efa0b123709276c36d45ef1083e9b55743c51ec12a80b58ab43"
+                }
+            },
+            "ArcadeV Azurian Attack": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "ef6afc18ec40eed5945dde41cc747886d2930ff2796b046e86e8332cae304351"
+                }
+            },
+            "ArcadeV Black Hole": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "85ef05dcb152a9808dcd46811d0d774820b3c8cbc7201944e8a55f57e5a08b4c"
+                }
+            },
+            "ArcadeV Catacomb": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "ae05a7adb693bd5e915f5328803a7113bd19af7c9b7d33039fe0875aaed128d0"
+                }
+            },
+            "ArcadeV Crush Roller": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "1feceedc62ec9aa9ba64e13c796e73d206247aa347c395d4eb26409655e7c093"
+                }
+            },
+            "ArcadeV Dream Shopper": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "72916f40b05def085d76f2553c87ae0e7c3d5bfafb17b4061d803a378e6ba39e"
+                }
+            },
+            "ArcadeV Eeekk": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "9ec1591b8925e0595812397d6dd78e790ff30164c1a63c3e3e005a812e301111"
+                }
+            },
+            "ArcadeV Eyes": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "59090f37eea0ef47179daca19d570261882db8fdb7edc3874a5e3a18a8ccf2f8"
+                }
+            },
+            "ArcadeV Galaxian": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "c76969001d58df2cc56eda29e6610ac15c5c2372e9b76d3a676dca1999776059"
+                }
+            },
+            "ArcadeV Gorkans": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "3ef4c4cb2624702172137182cf72f1495829d7ecf3b836fb7d16e74bb34c395b"
+                }
+            },
+            "ArcadeV Jumpshot": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "8e3870cd3934a7708d5f657a313653e6f6ef9d3598fb0b05b019fa31b355ff6d"
+                }
+            },
+            "ArcadeV Lizard Wizard": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "51ec6971271563cbe0c85a54dc329308b98a187b7ea186e4f201ef4fd5175ab0"
+                }
+            },
+            "ArcadeV Lucky Today": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "5107d119c16f6bd639ab8be8c8631e73ccc6f25e7ce3f289a2ac37b2da06855c"
+                }
+            },
+            "ArcadeV Moon Alien 2": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "4d7551ce626e206e4d24224eb29067d90b84cce623fdd42a57bbf223524f5d77"
+                }
+            },
+            "ArcadeV Moon Cresta": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "34f7e0b54d42501366acfec8d92a770b6bd0b79104b9e3e6f7c8b220c93375b4"
+                }
+            },
+            "ArcadeV MrDO Nightmare": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "a544319dccc59f9f689ef82bd8bcc8770b61d48590c3580df7a0221a084e1589"
+                }
+            },
+            "ArcadeV Mr TNT": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "8724a350cf4b28f510c2eafa3afd23f64a5fbfb540566b341d98ca393adaab30"
+                }
+            },
+            "ArcadeV Ms PacMan": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "aae45f2badf8c73e0a0d778598b9654dded2244dc58a1cab85b3d1e862992ef9"
+                }
+            },
+            "ArcadeV Omega": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "74dec95557ba556ebadf9bb51ed3caf64d306cebb3412aba96343588242c536d"
+                }
+            },
+            "ArcadeV Orbitron": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "291ccdcd236383ef8739b5f63959deff9f043309c463d9d3c9e397a25fbdeb6c"
+                }
+            },
+            "ArcadeV Pac Miner": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "23edd72ec407fe819a9eb241537ffdbfd596ae6debdf5a7938a02834159a2f27"
+                }
+            },
+            "ArcadeV PacMan": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "124e81da2aca02510efe32bad988dcc155d95687b258a1f10dcf0909e249d4fd"
+                }
+            },
+            "ArcadeV PacMan Club": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "1436bc0e5dd8d998e6382dede42e61d011e5be2abb8d2ad603c957a9bcaea8f9"
+                }
+            },
+            "ArcadeV PacMan Plus": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "ab411e4bbafbf25567194107d17e0020203b4ddbe1aaa8a85e887e676d88278b"
+                }
+            },
+            "ArcadeV Pengo": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "c75320f5236028377c5b638d7f84d8b200f6171622bbe3f52e57903ee169bac8"
+                }
+            },
+            "ArcadeV Pisces": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "792a0012289d622422de138a095c9567031d5902ba39b8b4ec78bf74f00f9818"
+                }
+            },
+            "Arcade Ponpoko": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "ca9c2f1f97983b91537ba270ef12b57ad4e5096c9d442443f91489b54bf7ad82"
+                }
+            },
+            "ArcadeV Red Ufo": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "5bf594ecde289252519c6cad905ad37baee66f08ada743d63e291c4086ad76fb"
+                }
+            },
+            "ArcadeV Shoot the Bull": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "9979fd0d84349203348930a7e9dc6f3ff12063076c1f6bb97d5b0e4d79979b4b"
+                }
+            },
+            "ArcadeV Super Glob": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "1c8ce7ba8ae65bf048f1a10b5733a992ff25e934bd6582b3b34436ac8c856072"
+                }
+            },
+            "ArcadeV The Glob": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "e122fbb5db788306c1ba87cd676366e4e13e9a3d898582edc55f0646efb05daf"
+                }
+            },
+            "ArcadeV Triple Draw Poker": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "63c079dcceff84b98a6c6c9eac12b6d903454c6257097185f8fa0d4a75d41b69"
+                }
+            },
+            "ArcadeV Uniwar S": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "6caa4900b3be7a709ac4e6cf30247e14520533e4a40c5f9a50f43c7ea1b036b1"
+                }
+            },
+            "ArcadeV Van Van Car": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "5da141f030befd1f7806e316ae0c2fda80b343fb0ec780ec7834cd8ab2190bb4"
+                }
+            },
+            "ArcadeV Victory": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "16eb2cee69cd9762ea8dda1d48e6248db35ce0b69869f082e4754634b3f7e94c"
+                }
+            },
+            "ArcadeV War of Bugs": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "d89185aeb8e51617ccffe10437ce1f7bf0c87b8dfbf5182f87d499b0655eb057"
+                }
+            },
+            "ArcadeV Woodpecker": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "bee700c045c8b4a15c07f7851170f850b0a10b7b5c308c01017d8e3898d6835c"
                 }
             }
         }
