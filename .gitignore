@@ -3,3 +3,4 @@
 *.zx2
 *.zxd
 .vscode/*
+build/
