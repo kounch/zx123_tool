@@ -36,6 +36,8 @@ Requires a [`zx123_hash.json`](##description-of-json-file) file with block struc
 
 ### Use
 
+The script needs Python 3.6 or later. Alternatively, if your system does not have Python 3, you can try the experimental builds for Windows and MacOS, available with the [latest release](https://github.com/kounch/zx123_tool/releases/latest). For the Windows binary release, you will need to have installed Microsoft Visual C++ Redistributable 2015 on your system.
+
     Arguments:
       -h, --help          show help and exit
       -v, --version       show program's version number and exit
@@ -126,6 +128,8 @@ When adding individual ROM data to a file, you can specify any of the following 
 -`u`: Disable ULAPlus
 
 ### Examples
+
+When using the binary release, invoke the corresponding executable file instead of using Python and the script (e.g. `zx123_tool.exe` or `zx123_tool` instead of `python3 zx123_tool.py`).
 
 Show contents of file:
 
@@ -345,6 +349,8 @@ Necesita un fichero  [`zx123_hash.json`](#descripción-del-arhivo-json) con la e
 
 ### Uso
 
+El script necesita Python 3.6 o posterior para funcionar. Alternativamente, si no se dispone de Python 3, se puede probar alguna de las versiones experimentales para Windows y MacOS, disponibles con la [última distribución](https://github.com/kounch/zx123_tool/releases/latest). Además, en el caso de la versión para Windows, se ha de tener instalado Microsoft Visual C++ Redistributable 2015 en el sistema.
+
     Argumentos:
       -h, --help          Mostrar ayuda y salir
       -v, --version       Mostras versión del programa y salir
@@ -437,6 +443,8 @@ Al añadir datos de una ROM individual a un fichero, se pueden especificar los s
 - `u`: Deshabilitar ULAPlus
 
 ### Ejemplos
+
+En el caso de usar la versión binaria, se ha de invocar al ejecutable correspondiente en vez de Python y el script (ej: `zx123_tool.exe` o `zx123_tool` en vez de `python3 zx123_tool.py`).
 
 Mostrar contenido de una imagen:
 
