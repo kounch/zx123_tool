@@ -280,7 +280,10 @@ def main():
     else:
         # Check if it's ROMPack v2
         rpk_header = fulldict_hash['RPv2']['parts']['header']
-        f_size = os.stat(str_file).st_size
+        try:
+            f_size = os.stat(str_file).st_size
+        except FileNotFoundError:
+            f_size = -1
         if validate_file(str_file, rpk_header[3]) and int(
                 rpk_header[1]) == f_size:
             if str_extension == 'ZX1':
@@ -314,8 +317,11 @@ def main():
                     LOGGER.error('Output file not defined!')
             else:
                 # File header unknown, try to guess only from hash and size
-                find_zxfile(str_file, fulldict_hash, str_extension,
-                            arg_data['show_hashes'], arg_data['detail'])
+                try:
+                    find_zxfile(str_file, fulldict_hash, str_extension,
+                                arg_data['show_hashes'], arg_data['detail'])
+                except FileNotFoundError:
+                    LOGGER.error('Input file not found!')
 
     print('')
     LOGGER.debug("Finished.")
@@ -689,12 +695,15 @@ def unzip_image(str_path, str_output, hash_dict, b_force):
                             print('OK')
                             str_file = os.path.join(str_tmpdir, str_name)
                             if b_force or check_overwrite(str_output):
-                                shutil.move(str_file, str_output)
-                                str_file = str_output
+                                try:
+                                    shutil.move(str_file, str_output)
+                                    str_file = str_output
+                                except FileNotFoundError:
+                                    str_file = ''
                             else:
                                 str_file = ''
             if not str_file:
-                LOGGER.error('Image file not extracted')
+                LOGGER.error('Image file not extracted. Bad destination path?')
         else:
             LOGGER.error('Could not get base image file')
     else:
@@ -2571,9 +2580,12 @@ def validate_file(str_in_file, str_magic):
     """
     magic_bin = unhexlify(str_magic)
     if str_magic:
-        with open(str_in_file, "rb") as bin_file:
-            bin_data = bin_file.read(len(magic_bin))
-            b_validate = validate_bin(bin_data, str_magic)
+        try:
+            with open(str_in_file, "rb") as bin_file:
+                bin_data = bin_file.read(len(magic_bin))
+                b_validate = validate_bin(bin_data, str_magic)
+        except FileNotFoundError:
+            b_validate = False
 
         return b_validate
     else:
