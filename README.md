@@ -36,7 +36,7 @@ Requires a [`zx123_hash.json`](##description-of-json-file) file with block struc
 
 ### Use
 
-The script needs Python 3.6 or later. Alternatively, if your system does not have Python 3, you can try the experimental builds for Windows and MacOS, available with the [latest release](https://github.com/kounch/zx123_tool/releases/latest). For the Windows binary release, you need to have installed Microsoft Visual C++ Redistributable 2015 on your system and, for Windows 7, also Microsoft Quality Rollup KB4457144 or later.
+The script needs Python 3.6 or later. Alternatively, if your system does not have Python 3, you can try the experimental builds for Windows and MacOS, available with the [latest release](https://github.com/kounch/zx123_tool/releases/latest). For the Windows binary release, you need to have installed Microsoft Visual C++ Redistributable 2015 on your system and, for Windows 7, also Microsoft Quality Rollup KB4457144 or later. The MacOS binary isn't signed, so you will have to remove the quarantine attribute with `xattr -d com.apple.quarantine zx123_tool`.
 
     Arguments:
       -h, --help          show help and exit
@@ -349,7 +349,7 @@ Necesita un fichero  [`zx123_hash.json`](#descripción-del-arhivo-json) con la e
 
 ### Uso
 
-El script necesita Python 3.6 o posterior para funcionar. Alternativamente, si no se dispone de Python 3, se puede probar alguna de las versiones experimentales para Windows y MacOS, disponibles con la [última distribución](https://github.com/kounch/zx123_tool/releases/latest). Además, en el caso de la versión para Windows, se ha de tener instalado Microsoft Visual C++ Redistributable 2015 en el sistema, y para Windows 7, además, las actualizaciones del paquete acumulativo KB4457144 o una versión superior.
+El script necesita Python 3.6 o posterior para funcionar. Alternativamente, si no se dispone de Python 3, se puede probar alguna de las versiones experimentales para Windows y MacOS, disponibles con la [última distribución](https://github.com/kounch/zx123_tool/releases/latest). Además, en el caso de la versión para Windows, se ha de tener instalado Microsoft Visual C++ Redistributable 2015 en el sistema, y para Windows 7, además, las actualizaciones del paquete acumulativo KB4457144 o una versión superior. El binario para MacOS no está firmado digitalmente, así que es necesario eliminar el atributo de cuarentena con `xattr -d com.apple.quarantine zx123_tool`.
 
     Argumentos:
       -h, --help          Mostrar ayuda y salir
