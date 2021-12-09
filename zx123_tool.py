@@ -90,29 +90,9 @@ def main():
     STR_OUTDIR = arg_data['output_dir']
     output_file = arg_data['output_file']
 
-    # Hash Database
-    str_json = os.path.join(MY_DIRPATH, 'zx123_hash.json')
-
-    # Update JSON
-    if arg_data['update'] != '':
-        if arg_data['update'] == 'json' or (not str_file and not STR_OUTDIR
-                                            and not output_file):
-            if os.path.isfile(str_json):
-                os.remove(str_json)
-
-    if not os.path.isfile(str_json):
-        dl_url = MAIN_URL + '/zx123_hash.json'
-        print('\nDownloading JSON database...', end='')
-        urllib.request.urlretrieve(dl_url, str_json)
-        print('OK')
-        sys.exit(0)
-
-    if not os.path.isfile(str_json):
-        LOGGER.error('Hash database not found: %s', str_json)
+    fulldict_hash = load_json_bd(str_file, output_file, arg_data['update'])
+    if not fulldict_hash:
         sys.exit(2)
-    with open(str_json, 'r', encoding='utf-8') as json_handle:
-        LOGGER.debug('Loading dictionary with hashes...')
-        fulldict_hash = json.load(json_handle)
 
     if arg_data['stats']:
         print_stats(fulldict_hash, arg_data['detail'])
@@ -135,27 +115,9 @@ def main():
         if not STR_OUTDIR:
             STR_OUTDIR = os.path.dirname(str_file)
 
-    str_extension = os.path.splitext(str_file)[1]
-    str_extension = str_extension[1:].upper()
+    str_extension, dict_hash, filetype = detect_file(str_file, fulldict_hash)
 
-    # Check that file extension is available in Hash Database
-    dict_hash = {}
-    if str_extension in fulldict_hash:
-        dict_hash = fulldict_hash[str_extension]
-    else:
-        for str_kind in fulldict_hash:
-            if "extensions" in fulldict_hash[str_kind]:
-                for str_tmp in fulldict_hash[str_kind]['extensions']:
-                    if str_tmp == str_extension:
-                        str_extension = str_kind
-                        dict_hash = fulldict_hash[str_extension]
-                        break
-    if not dict_hash:
-        LOGGER.error('Unknown file extension: %s', str_extension)
-        sys.exit(4)
-
-    # Is the file header known?
-    if validate_file(str_file, dict_hash['parts']['header'][3]):
+    if filetype == 'FlashImage':
         supported_exts = ['ZX1', 'ZX2', 'ZXD', 'ZXT']
 
         # List main ROMs, Cores and BIOS settings
@@ -277,51 +239,41 @@ def main():
                             arg_data['keyboard_layout'],
                             arg_data['boot_timer'], arg_data['default_core'],
                             arg_data['default_rom'], arg_data['force'])
+    elif filetype == 'ROMPack v2':
+        # List ZX Spectrum ROMs
+        if not arg_data['extract'] and not arg_data['inject']:
+            list_romsdata(str_file, fulldict_hash, 'RPv2',
+                          arg_data['show_hashes'], True)
+
+        # Extract ROMs
+        for x_item in arg_data['extract']:
+            extractfrom_zxdata(str_file, x_item, fulldict_hash, STR_OUTDIR,
+                               'RPv2', arg_data['force'], False)
+
+        # Inject  ROMs
+        if arg_data['inject']:
+            if not output_file:
+                output_file = str_file
+            inject_zxfiles(str_file, arg_data['inject'], output_file,
+                           fulldict_hash, 'RPv2', -1, -1, -1, -1,
+                           arg_data['default_rom'], arg_data['force'])
+
     else:
-        # Check if it's ROMPack v2
-        rpk_header = fulldict_hash['RPv2']['parts']['header']
-        try:
-            f_size = os.stat(str_file).st_size
-        except FileNotFoundError:
-            f_size = -1
-        if validate_file(str_file, rpk_header[3]) and int(
-                rpk_header[1]) == f_size:
-            if str_extension == 'ZX1':
-                # List ZX Spectrum ROMs
-                if not arg_data['extract'] and not arg_data['inject']:
-                    list_romsdata(str_file, fulldict_hash, 'RPv2',
-                                  arg_data['show_hashes'], True)
-
-                # Extract ROMs
-                for x_item in arg_data['extract']:
-                    extractfrom_zxdata(str_file, x_item, fulldict_hash,
-                                       STR_OUTDIR, 'RPv2', arg_data['force'],
-                                       False)
-
-                # Inject  ROMs
-                if arg_data['inject']:
-                    if not output_file:
-                        output_file = str_file
-                    inject_zxfiles(str_file, arg_data['inject'], output_file,
-                                   fulldict_hash, 'RPv2', -1, -1, -1, -1,
-                                   arg_data['default_rom'], arg_data['force'])
-
-        else:
-            # Convert between Standard and Spectrum Core?
-            if arg_data['convert_core']:
-                if output_file:
-                    print(f'Trying to convert {str_file}...')
-                    convert_core(str_file, dict_hash, output_file,
-                                 arg_data['force'])
-                else:
-                    LOGGER.error('Output file not defined!')
+        # Convert between Standard and Spectrum Core?
+        if arg_data['convert_core']:
+            if output_file:
+                print(f'Trying to convert {str_file}...')
+                convert_core(str_file, dict_hash, output_file,
+                             arg_data['force'])
             else:
-                # File header unknown, try to guess only from hash and size
-                try:
-                    find_zxfile(str_file, fulldict_hash, str_extension,
-                                arg_data['show_hashes'], arg_data['detail'])
-                except FileNotFoundError:
-                    LOGGER.error('Input file not found!')
+                LOGGER.error('Output file not defined!')
+        else:
+            # File header unknown, try to guess only from hash and size
+            try:
+                find_zxfile(str_file, fulldict_hash, str_extension,
+                            arg_data['show_hashes'], arg_data['detail'])
+            except FileNotFoundError:
+                LOGGER.error('Input file not found!')
 
     print('')
     LOGGER.debug("Finished.")
@@ -661,6 +613,42 @@ def parse_args():
 # Main Functions
 
 
+def load_json_bd(str_file='', output_file='', str_update=''):
+    """
+    Loads the Hash Database
+    :param str_file: Input file (to determine if update)
+    :param output_file: Output file (to determine if update)
+    :param str_update: Update parameter from options
+    :return: Dictionary with Hashes from database
+    """
+
+    str_json = os.path.join(MY_DIRPATH, 'zx123_hash.json')
+
+    fulldict_hash = {}
+    # Update JSON
+    if str_update != '':
+        if str_update == 'json' or (not str_file and not STR_OUTDIR
+                                    and not output_file):
+            if os.path.isfile(str_json):
+                os.remove(str_json)
+
+    if not os.path.isfile(str_json):
+        dl_url = MAIN_URL + '/zx123_hash.json'
+        print('\nDownloading JSON database...', end='')
+        urllib.request.urlretrieve(dl_url, str_json)
+        print('OK')
+        #sys.exit(0)
+
+    if not os.path.isfile(str_json):
+        LOGGER.error('Hash database not found: %s', str_json)
+        #sys.exit(2)
+    with open(str_json, 'r', encoding='utf-8') as json_handle:
+        LOGGER.debug('Loading dictionary with hashes...')
+        fulldict_hash = json.load(json_handle)
+
+    return fulldict_hash
+
+
 def unzip_image(str_path, str_output, hash_dict, b_force):
     """
     Extract base image file from ZIP. Download ZIP from repository if needed.
@@ -710,6 +698,53 @@ def unzip_image(str_path, str_output, hash_dict, b_force):
         LOGGER.error('Unknown extension: %s', str_extension)
 
     return str_file
+
+
+def detect_file(str_file, fulldict_hash):
+    """
+    Analyzes a file and tries to determine it's kind (Flash Image, etc.)
+    :param str_file: Input file to analyze
+    :param fulldict_hash: Dictionary with hash database
+    :return: Normalized extension, subDictionary of hashes and filetype
+    """
+
+    str_extension = os.path.splitext(str_file)[1]
+    str_extension = str_extension[1:].upper()
+
+    # Check that file extension is available in Hash Database
+    dict_hash = {}
+    if str_extension in fulldict_hash:
+        dict_hash = fulldict_hash[str_extension]
+    else:
+        for str_kind in fulldict_hash:
+            if "extensions" in fulldict_hash[str_kind]:
+                for str_tmp in fulldict_hash[str_kind]['extensions']:
+                    if str_tmp == str_extension:
+                        str_extension = str_kind
+                        dict_hash = fulldict_hash[str_extension]
+                        break
+
+    filetype = 'Unknown'
+    if not dict_hash:
+        LOGGER.error('Unknown file extension: %s', str_extension)
+        #sys.exit(4)
+    else:
+        # Is the file header known?
+        if validate_file(str_file, dict_hash['parts']['header'][3]):
+            filetype = 'FlashImage'
+        else:
+            # Check if it's ROMPack v2
+            rpk_header = fulldict_hash['RPv2']['parts']['header']
+            try:
+                f_size = os.stat(str_file).st_size
+            except FileNotFoundError:
+                f_size = -1
+            if validate_file(str_file, rpk_header[3]) and int(
+                    rpk_header[1]) == f_size:
+                if str_extension == 'ZX1':
+                    filetype = 'ROMPack v2'
+
+    return str_extension, dict_hash, filetype
 
 
 def print_stats(fulldict_hash, b_detail=False):
@@ -821,14 +856,22 @@ def list_zxdata(str_in_file,
     """
     LOGGER.debug('Listing contents of file: %s', str_in_file)
     str_name = os.path.basename(str_in_file)
-    print(f'\nContents of {str_name} (possibly {hash_dict["description"]})\n')
+    str_description = hash_dict['description']
+
+    dict_res = {}
+    dict_res['description'] = str_description
+    print(f'\nContents of {str_name} (possibly {str_description})\n')
+
+    dict_blocks = {}
     block_list = ['BIOS', 'esxdos', 'Spectrum', 'Special']
     for block_name in block_list:
         if block_name in hash_dict['parts']:
-            block_version, block_hash = get_version(
-                str_in_file, hash_dict['parts'][block_name],
-                hash_dict[block_name])
+            arr_block = get_version(str_in_file,
+                                    hash_dict['parts'][block_name],
+                                    hash_dict[block_name])
+            block_version, block_hash = arr_block
             if block_version:
+                dict_blocks[block_name] = arr_block
                 print(f'{block_name}: {block_version}', end='')
                 if check_updated:
                     update_check(hash_dict[block_name], block_version,
@@ -837,11 +880,14 @@ def list_zxdata(str_in_file,
                 if show_hashes:
                     print(f'Hash: {block_hash}')
 
+    dict_cores = {}
     core_list = get_core_list(str_in_file, hash_dict['parts'])
     for index, name in enumerate(core_list):
-        block_name, block_version, block_hash, dict_det = get_core_version(
-            str_in_file, index, hash_dict['parts'], hash_dict['Cores'])
+        arr_core = get_core_version(str_in_file, index, hash_dict['parts'],
+                                    hash_dict['Cores'])
+        block_name, block_version, block_hash, dict_det = arr_core
 
+        dict_cores[index + 2] = [name] + list(arr_core)
         print(
             f'Core {index + 2:02d} "{name}" -> {block_name}: {block_version}',
             end='')
@@ -858,22 +904,33 @@ def list_zxdata(str_in_file,
         if show_hashes:
             print(f'Core {index + 2:02d}: {block_hash}')
 
+    dict_defaults = {}
     print('\nBIOS Defaults:')
 
     default_rom = get_peek(str_in_file, 28736)
     print(f'\tDefault ROM -> {default_rom:02}')
+    dict_defaults['default_rom'] = default_rom
 
     default_core = get_peek(str_in_file, 28737) + 1
     print(f'\tDefault Core -> {default_core:02}')
+    dict_defaults['default_core'] = default_core
 
     boot_timer = get_peek(str_in_file, 28738)
     print(f'\tBoot Timer -> {boot_timer}')
+    dict_defaults['boot_timer'] = boot_timer
 
     keyb_layout = get_peek(str_in_file, 28746)
     print(f'\tKeyboard Layout -> {keyb_layout}')
+    dict_defaults['keyb_layout'] = keyb_layout
 
     video_mode = get_peek(str_in_file, 28749)
     print(f'\tVideo Mode -> {video_mode}')
+    dict_defaults['video_mode'] = video_mode
+
+    dict_res['blocks'] = dict_blocks
+    dict_res['cores'] = dict_cores
+    dict_res['defaults'] = dict_defaults
+    return dict_res
 
 
 def update_check(hash_dict, block_version, get_1core=False, get_2mb=False):
@@ -916,6 +973,7 @@ def list_romsdata(str_in_file,
     LOGGER.debug('Listing ROMs of file: %s', str_in_file)
     roms_list = get_rom_list(str_in_file, hash_dict[in_file_ext]['parts'])
 
+    dict_res = {}
     if roms_list:
         if roms_file:
             if in_file_ext == 'RPv2':
@@ -932,6 +990,10 @@ def list_romsdata(str_in_file,
             block_version, block_hash, _ = get_rom(str_in_file, rom[1], rom[3],
                                                    hash_dict, in_file_ext,
                                                    roms_file)
+            dict_res[rom[0]] = [
+                rom[1], rom[4], rom[5], rom_name, rom[3] * 16, block_version,
+                block_hash
+            ]
             str_rominfo = f' {rom[0]:02d} (Slot {rom[1]:02d}) {rom[4]:>10} ({rom[5]:>16}) '
             str_rominfo += f'"{rom_name}" {rom[3] * 16}K -> {block_version}'
             print(str_rominfo)
@@ -939,9 +1001,7 @@ def list_romsdata(str_in_file,
             if show_hashes:
                 print(f'Hash: {block_hash}')
 
-        return True
-    else:
-        return False
+    return dict_res
 
 
 def extractfrom_zxdata(str_in_file,
@@ -955,7 +1015,8 @@ def extractfrom_zxdata(str_in_file,
     Parse and extract data block to file
     :param str_in_file: Path to file
     :param extract_item: Block ID string  or Core Number
-    :param hash_dict: Dictionary with hashes for different blocks
+    :param fullhash_dict: Dictionary with hashes for different blocks
+    :str_dir: Destination dir
     :param str_extension: Extension for Core files
     :param b_force: Force overwriting file
     :param cores: If True, export Core, if False, export ROM
