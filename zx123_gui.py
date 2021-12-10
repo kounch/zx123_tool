@@ -50,11 +50,13 @@ class App(tk.Tk):
         filemenu.add_command(label="Open Image File...",
                              command=self.load_file,
                              accelerator="Command+o")
-        self.bind_all("<Command-o>", lambda event: self.load_file())
         filemenu.add_command(label="Close Image File",
                              command=self.clear_image)
         menubar.add_cascade(label="File", menu=filemenu)
         self.config(menu=menubar)
+
+        # Key Bindings
+        self.bind_keys()
 
         # Main Window
         self.title('ZX123 Tool')
@@ -73,17 +75,24 @@ class App(tk.Tk):
         self.cores_frame.grid(column=0, row=2, sticky='nsew')
         self.roms_frame.grid(column=0, row=3, sticky='nsew')
 
-        self.update()
+        self.tk.eval(f'tk::PlaceWindow {self._w} center')
+        self.update_idletasks()
+        self.bind_keys()
 
         # Load files from command line args
         if len(sys.argv) > 1:
             self.load_file(sys.argv[1:])
 
+    def bind_keys(self):
+        """Bind Menu Keys"""
+        self.bind_all("<Command-o>", lambda event: self.load_file())
+        self.bind_all("<Command-q>", lambda event: self.destroy())
+
     def create_labels(self):
         "Create Main Window Labels"
 
         image_label = ttk.Label(self.blocks_frame, text='No Image File')
-        image_label.grid(row=0, column=0, columnspan=6, sticky='n')
+        image_label.grid(row=0, column=0, columnspan=8, sticky='n')
 
         bios_label = ttk.Label(self.blocks_frame, text='BIOS:', padding=10)
         bios_label.grid(row=1, column=0, sticky='e')
@@ -413,7 +422,8 @@ class App(tk.Tk):
                 self.esxdos_export_button.state(["!disabled"])
                 self.spectrum_import_button.state(["!disabled"])
                 self.spectrum_export_button.state(["!disabled"])
-                #self.core_import_button.state(["!disabled"])
+                self.core_import_button.state(["!disabled"])
+                self.rom_import_button.state(["!disabled"])
                 self.rompack_button.state(["!disabled"])
             elif filetype == 'ROMPack v2':
                 print('ROMPack V2')
@@ -460,32 +470,30 @@ class App(tk.Tk):
                                   text='',
                                   values=[index] + list(dict_roms[index])[:6])
 
+    def process_selected(self, treeview, button, str_text):
+        """Configure buttons on selections"""
+
+        t_selection = treeview.selection()
+        if t_selection:
+            button.state(["!disabled"])
+        else:
+            button.state(["disabled"])  # Disable the button.
+        if len(t_selection) > 1:
+            button['text'] = f'Export {str_text}s'
+        else:
+            button['text'] = f'Export {str_text}'
+
     def coretable_selected(self, event):  # pylint: disable=unused-argument
         """Configure buttons depending on selected cores"""
-        t_selection = self.core_table.selection()
-        if t_selection:
-            self.core_export_button.state(["!disabled"])
-        else:
-            self.core_export_button.state(["disabled"])  # Disable the button.
-        if len(t_selection) > 1:
-            self.core_export_button['text'] = 'Export Cores'
-        else:
-            self.core_export_button['text'] = 'Export Core'
+        self.process_selected(self.core_table, self.core_export_button, 'Core')
 
     def romtable_selected(self, event):  # pylint: disable=unused-argument
         """Configure buttons depending on selected ROMs"""
-        t_selection = self.rom_table.selection()
-        if t_selection:
-            self.rom_export_button.state(["!disabled"])
-        else:
-            self.rom_export_button.state(["disabled"])  # Disable the button.
-        if len(t_selection) > 1:
-            self.rom_export_button['text'] = 'Export ROMs'
-        else:
-            self.rom_export_button['text'] = 'Export ROM'
+        self.process_selected(self.rom_table, self.rom_export_button, 'ROM')
 
     def block_import(self, str_block):
         """Generic block import method"""
+
         filetypes = [(f'{str_block} files', f'.{self.zxextension}')]
         str_file = fd.askopenfilename(parent=self,
                                       title=f'Open {str_block} file',
@@ -501,6 +509,7 @@ class App(tk.Tk):
 
     def block_export(self, str_block):
         """Generic block export method"""
+
         str_directory = os.path.dirname(self.zxfilepath)
         str_directory = fd.askdirectory(
             parent=self,
@@ -548,25 +557,61 @@ class App(tk.Tk):
                                          self.fulldict_hash, str_directory,
                                          self.zxextension, True, b_is_core)
 
+    def multi_import(self, str_name, treeview, b_is_core=False):
+        """Generic core or ROM import"""
+        str_extension = "ROM"
+        if b_is_core:
+            str_extension = self.zxextension
+        t_selection = treeview.selection()
+        item_index = 99
+        str_title = f'Add {str_name}'
+        str_message = f'Do you want to add a new {str_name}?'
+        if t_selection:
+            item_index = int(t_selection[0])
+            str_title = f'Replace {str_name}'
+            str_message = f'Do you want to replace {str_name} {item_index}?'
+        response = messagebox.askquestion(parent=self,
+                                          icon='question',
+                                          title=str_title,
+                                          message=str_message)
+
+        if response == 'yes':
+            filetypes = [(f'{self.zxextension} {str_name} files',
+                          f'.{str_extension}')]
+            str_file = fd.askopenfilename(parent=self,
+                                          title=f'Open a {str_name} file',
+                                          filetypes=filetypes)
+
+            if str_file:
+                dialog = NewEntryDialog(self, str_name, b_is_core)
+                self.focus_force()
+                self.bind_keys()
+                slot_name = dialog.result_name
+                slot_param = f'{str_name},{item_index},{slot_name},{str_file}'
+                if not b_is_core:
+                    slot_number = treeview.item(item_index)['values'][1]
+                    slot_extra = dialog.extra
+                    slot_param = f'{str_name},{slot_number},{slot_extra}'
+                    slot_param += f',{slot_name},{str_file}'
+                if slot_name:
+                    zx123.inject_zxfiles(self.zxfilepath, [slot_param],
+                                         self.zxfilepath,
+                                         self.fulldict_hash,
+                                         self.zxextension,
+                                         b_force=True)
+                    self.load_file(self.zxfilepath)
+
+    def core_import(self):
+        """Proxy for secondary Core import action"""
+        self.multi_import('Core', self.core_table, True)
+
     def core_export(self):
         """Proxy for secondary Core export action"""
         self.multi_export('Core', self.core_table, True)
 
-    def core_import(self):
-        """Core import action"""
-        filetypes = [("ZX1, ZX2 or ZXD files", ".zx1 .zx2 .zxd")]
-        str_file = fd.askopenfilename(parent=self,
-                                      title='Open a ZX1, ZX2, ZXD file',
-                                      filetypes=filetypes)
-
-        if str_file:
-            messagebox.showinfo("Core", f"Import {str_file}", parent=self)
-
     def rom_import(self):
-        """ROM import action"""
-        messagebox.showinfo("ROM",
-                            "Import ROM (Not implemented)",
-                            parent=self)
+        """Proxy for ROM import action"""
+        self.multi_import('ROM', self.rom_table, False)
 
     def rom_export(self):
         """Proxy for ROM export action"""
@@ -586,6 +631,93 @@ class App(tk.Tk):
                                  self.zxextension,
                                  b_force=True)
             self.load_file(self.zxfilepath)
+
+
+class NewEntryDialog:
+    """Custom Window to Enter Core or ROM info"""
+    dict_rom_params = {
+        'i': 'Keyboard issue 3 enabled (instead of issue 2)',
+        'c': 'Disable memory contention',
+        'd': 'Enable DivMMC',
+        'n': 'Enable NMI DivMMC (esxdos Menu)',
+        'p': 'Use Pentagon Timings',
+        't': 'Use 128K timings',
+        's': 'Disable DivMMC and ZXMMC ports',
+        'm': 'Enable Timex Horizontal MMU',
+        'h': 'Disable ROM high bit (1FFD bit 2)',
+        'l': 'Disable ROM low bit (7FFD bit 4)',
+        '1': 'Disable 1FFD port (+2A/3 paging)',
+        '7': 'Disable 7FFD port (128K paging)',
+        '2': 'Disable TurboSound (secondary AY chip)',
+        'a': 'Disable AY chip',
+        'r': 'Disable Radastanian mode',
+        'x': 'Disable Timex mode',
+        'u': 'Disable ULAPlus'
+    }
+
+    def __init__(self, parent, str_name, b_core=False):
+        self.result_name = ''
+        self.extra = ''
+        self.b_rom = not b_core
+
+        self.top = tk.Toplevel(parent)
+        self.top.transient(parent)
+        self.top.grab_set()
+
+        self.top.title(f'New {str_name} Entry')
+        self.top.bind("<Return>", self.do_ok)
+
+        self.main_frame = ttk.Frame(self.top, padding=10)
+        self.main_frame.grid(column=0, row=0, sticky='nsew')
+
+        name_label = ttk.Label(self.main_frame, text=f'{str_name} Name:')
+        name_label.grid(column=0, row=0, sticky='e')
+
+        self.name_entry = ttk.Entry(self.main_frame, width=40)
+        self.name_entry.bind("<Return>", self.do_ok)
+        self.name_entry.bind("<Escape>", self.do_cancel)
+        self.name_entry.grid(column=1, row=0, sticky='we')
+        self.name_entry.focus_set()
+
+        if self.b_rom:
+            extra_frame = ttk.Frame(self.main_frame, padding=10)
+            extra_frame.grid(column=0, row=1, columnspan=3, sticky='nsew')
+            extra_label = ttk.Label(extra_frame, text='ROM Settings:')
+            extra_label.grid(column=0, row=0, sticky='w')
+            self.extra_vars = []
+            for index, key in enumerate(self.dict_rom_params):
+                self.extra_vars.append(tk.IntVar())
+                check_1 = ttk.Checkbutton(extra_frame,
+                                          text=self.dict_rom_params[key],
+                                          variable=self.extra_vars[index],
+                                          onvalue=1,
+                                          offvalue=0)
+                check_1.grid(column=index % 3,
+                             row=int(index / 3) + 1,
+                             sticky='w')
+
+        ok_button = ttk.Button(self.main_frame, text="OK", command=self.do_ok)
+        ok_button.grid(column=0, row=2, sticky='w')
+        cancel_button = ttk.Button(self.main_frame,
+                                   text="Cancel",
+                                   command=self.do_cancel)
+        cancel_button.grid(column=1, row=2, sticky='e')
+
+        self.top.tk.eval(f'tk::PlaceWindow {self.top._w} center')
+        self.top.wait_window()
+
+    def do_ok(self, event=None):  # pylint: disable=unused-argument
+        """Process OK Button"""
+        self.result_name = self.name_entry.get()
+        if self.b_rom:
+            for index, key in enumerate(self.dict_rom_params):
+                if self.extra_vars[index].get():
+                    self.extra += key
+        self.top.destroy()
+
+    def do_cancel(self, event=None):  # pylint: disable=unused-argument
+        """Process Cancel Button"""
+        self.top.destroy()
 
 
 if __name__ == "__main__":
