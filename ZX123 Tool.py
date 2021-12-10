@@ -676,7 +676,7 @@ class NewEntryDialog:
         self.name_entry = ttk.Entry(self.main_frame, width=40)
         self.name_entry.bind("<Return>", self.do_ok)
         self.name_entry.bind("<Escape>", self.do_cancel)
-        self.name_entry.grid(column=1, row=0, sticky='we')
+        self.name_entry.grid(column=1, row=0, columnspan=2, sticky='we')
         self.name_entry.focus_set()
 
         if self.b_rom:
@@ -696,12 +696,15 @@ class NewEntryDialog:
                              row=int(index / 3) + 1,
                              sticky='w')
 
-        ok_button = ttk.Button(self.main_frame, text="OK", command=self.do_ok)
+        ok_button = ttk.Button(self.main_frame,
+                               text="OK",
+                               default="active",
+                               command=self.do_ok)
         ok_button.grid(column=0, row=2, sticky='w')
         cancel_button = ttk.Button(self.main_frame,
                                    text="Cancel",
                                    command=self.do_cancel)
-        cancel_button.grid(column=1, row=2, sticky='e')
+        cancel_button.grid(column=2, row=2, sticky='e')
 
         self.top.tk.eval(f'tk::PlaceWindow {self.top._w} center')
         self.top.wait_window()
