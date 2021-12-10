@@ -1032,9 +1032,12 @@ def extractfrom_zxdata(str_in_file,
         if block_name in hash_dict['parts']:
             # Extract main ROMs
             if extract_item.upper() == block_name.upper():
+                block_version, _ = get_version(str_in_file,
+                                               hash_dict['parts'][block_name],
+                                               hash_dict[block_name])
                 print(f'Extracting {block_name}...')
                 block_info = hash_dict['parts'][block_name]
-                str_bin = block_info[2]
+                str_bin = f'{block_name}_{block_version}.{str_extension}'
                 str_bin = os.path.join(str_dir, str_bin)
                 block_magic = block_info[3]
                 validate_and_export_bin(str_in_file, block_info, str_bin,
