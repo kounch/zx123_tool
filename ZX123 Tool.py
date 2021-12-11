@@ -84,6 +84,8 @@ class App(tk.Tk):
         if sys.platform == 'win32':
             menubar = tk.Menu(self)
             filemenu = tk.Menu(menubar, tearoff=0)
+            filemenu.add_command(label="New Image File...",
+                                 accelerator="Ctrl+n")
             filemenu.add_command(label="Open Image File...",
                                  command=self.load_file,
                                  accelerator="Ctrl+O")
@@ -96,6 +98,8 @@ class App(tk.Tk):
             # MacOS Menu Bar
             menubar = tk.Menu(self)
             filemenu = tk.Menu(menubar, tearoff=0)
+            filemenu.add_command(label="New Image File...",
+                                 accelerator="Command+n")
             filemenu.add_command(label="Open Image File...",
                                  command=self.load_file,
                                  accelerator="Command+o")
@@ -109,7 +113,8 @@ class App(tk.Tk):
             #Not implemented
             pass
 
-        self.filemenu.entryconfig(1, state='disabled')
+        self.filemenu.entryconfig(0, state='disabled')
+        self.filemenu.entryconfig(2, state='disabled')
 
     def bind_keys(self):
         """Bind Menu Keys"""
@@ -123,54 +128,54 @@ class App(tk.Tk):
         "Create Main Window Labels"
 
         image_label = ttk.Label(self.blocks_frame, text='No Image File')
-        image_label.grid(row=0, column=0, columnspan=8, sticky='n')
+        image_label.grid(column=0, row=0, columnspan=8, sticky='n')
 
         bios_label = ttk.Label(self.blocks_frame, text='BIOS:', padding=10)
-        bios_label.grid(row=1, column=0, sticky='e')
+        bios_label.grid(column=0, row=1, sticky='e')
 
         esxdos_label = ttk.Label(self.blocks_frame, text='esxdos:', padding=10)
-        esxdos_label.grid(row=1, column=4, sticky='e')
+        esxdos_label.grid(column=4, row=1, sticky='e')
 
         spectrum_label = ttk.Label(self.blocks_frame,
                                    text='ZX Spectrum Core:',
                                    padding=10)
-        spectrum_label.grid(row=2, column=0, sticky='e')
+        spectrum_label.grid(column=0, row=2, sticky='e')
 
         cores_label = ttk.Label(self.cores_frame, text='Cores')
-        cores_label.grid(row=0, column=0, sticky='w')
+        cores_label.grid(column=0, row=0, sticky='w')
 
         core_label = ttk.Label(self.cores_frame,
                                text='Default Core:',
                                padding=10,
                                width=12)
-        core_label.grid(row=1, column=3, sticky='e')
+        core_label.grid(column=3, row=1, sticky='e')
 
         boot_label = ttk.Label(self.cores_frame,
                                text='Boot Timer:',
                                padding=10,
                                width=12)
-        boot_label.grid(row=2, column=3, sticky='e')
+        boot_label.grid(column=3, row=2, sticky='e')
 
         keyboard_label = ttk.Label(self.cores_frame,
                                    text='Keyboard Layout:',
                                    padding=10,
                                    width=12)
-        keyboard_label.grid(row=3, column=3, sticky='e')
+        keyboard_label.grid(column=3, row=3, sticky='e')
 
         video_label = ttk.Label(self.cores_frame,
                                 text='Video Mode:',
                                 padding=10,
                                 width=12)
-        video_label.grid(row=4, column=3, sticky='e')
+        video_label.grid(column=3, row=4, sticky='e')
 
         rom_label = ttk.Label(self.cores_frame,
                               text='Default ROM:',
                               padding=10,
                               width=12)
-        rom_label.grid(row=8, column=3, sticky='e')
+        rom_label.grid(column=3, row=8, sticky='e')
 
         roms_label = ttk.Label(self.roms_frame, text='ROMs')
-        roms_label.grid(row=0, column=0, sticky='w')
+        roms_label.grid(column=0, row=0, sticky='w')
 
         return image_label
 
@@ -182,20 +187,20 @@ class App(tk.Tk):
                                width=10,
                                state='disabled',
                                textvariable=self.bios)
-        bios_entry.grid(row=1, column=1, sticky='w')
+        bios_entry.grid(column=1, row=1, sticky='w')
 
         self.esxdos = tk.StringVar()
         esxdos_entry = ttk.Entry(self.blocks_frame,
                                  width=8,
                                  state='disabled',
                                  textvariable=self.esxdos)
-        esxdos_entry.grid(row=1, column=5, sticky='w')
+        esxdos_entry.grid(column=5, row=1, sticky='w')
 
         self.spectrum = tk.StringVar()
         spectrum_entry = ttk.Entry(self.blocks_frame,
                                    state='disabled',
                                    textvariable=self.spectrum)
-        spectrum_entry.grid(row=2, column=1, columnspan=5, sticky='we')
+        spectrum_entry.grid(column=1, row=2, columnspan=5, sticky='we')
         self.spectrum_entry = spectrum_entry
 
         self.default_core = tk.StringVar()
@@ -206,7 +211,7 @@ class App(tk.Tk):
                                     width=4,
                                     state='disabled',
                                     textvariable=self.default_core)
-        core_spin_box.grid(row=1, column=4, sticky='e')
+        core_spin_box.grid(column=4, row=1, sticky='e')
 
         self.default_timer = tk.StringVar()
         timer_spin_box = ttk.Spinbox(self.cores_frame,
@@ -216,7 +221,7 @@ class App(tk.Tk):
                                      width=4,
                                      state='disabled',
                                      textvariable=self.default_timer)
-        timer_spin_box.grid(row=2, column=4, sticky='e')
+        timer_spin_box.grid(column=4, row=2, sticky='e')
 
         self.default_keyboard = tk.StringVar()
         keyboard_spin_box = ttk.Spinbox(self.cores_frame,
@@ -226,7 +231,7 @@ class App(tk.Tk):
                                         width=4,
                                         state='disabled',
                                         textvariable=self.default_keyboard)
-        keyboard_spin_box.grid(row=3, column=4, sticky='e')
+        keyboard_spin_box.grid(column=4, row=3, sticky='e')
 
         self.default_video = tk.StringVar()
         video_spin_box = ttk.Spinbox(self.cores_frame,
@@ -236,7 +241,7 @@ class App(tk.Tk):
                                      width=4,
                                      state='disabled',
                                      textvariable=self.default_video)
-        video_spin_box.grid(row=4, column=4, sticky='e')
+        video_spin_box.grid(column=4, row=4, sticky='e')
 
         self.default_rom = tk.StringVar()
         rom_spin_box = ttk.Spinbox(self.cores_frame,
@@ -246,7 +251,7 @@ class App(tk.Tk):
                                    width=4,
                                    state='disabled',
                                    textvariable=self.default_rom)
-        rom_spin_box.grid(row=8, column=4, sticky='e')
+        rom_spin_box.grid(column=4, row=8, sticky='e')
 
     def create_tables(self):
         """Create Main Window Tables"""
@@ -254,7 +259,7 @@ class App(tk.Tk):
         style.configure("Treeview.Cell", borderwidth=1)
 
         core_table = ttk.Treeview(self.cores_frame, height=15)
-        core_table.grid(row=1, column=0, rowspan=8, columnspan=3, sticky='nsw')
+        core_table.grid(column=0, row=1, columnspan=3, rowspan=8, sticky='nsw')
         core_table['columns'] = ('id', 'name', 'core', 'version')
         core_table.column("#0", width=0, stretch=tk.NO)
         core_table.heading("#0", text="", anchor=tk.CENTER)
@@ -270,10 +275,10 @@ class App(tk.Tk):
                                        orient=tk.VERTICAL,
                                        command=core_table.yview)
         core_table.configure(yscroll=core_scrollbar.set)
-        core_scrollbar.grid(row=1, column=2, rowspan=8, sticky='nse')
+        core_scrollbar.grid(column=2, row=1, rowspan=8, sticky='nse')
 
         rom_table = ttk.Treeview(self.roms_frame, height=15)
-        rom_table.grid(row=1, column=0, columnspan=4, sticky='nsew')
+        rom_table.grid(column=0, row=1, columnspan=4, sticky='nsew')
         rom_table['columns'] = ('id', 'slot', 'flags', 'crc', 'name', 'size',
                                 'version')
         rom_table.column("#0", width=0, stretch=tk.NO)
@@ -290,7 +295,7 @@ class App(tk.Tk):
                                       orient=tk.VERTICAL,
                                       command=rom_table.yview)
         rom_table.configure(yscroll=rom_scrollbar.set)
-        rom_scrollbar.grid(row=1, column=3, sticky='nse')
+        rom_scrollbar.grid(column=3, row=1, sticky='nse')
 
         return core_table, rom_table
 
@@ -300,21 +305,21 @@ class App(tk.Tk):
                                         text='Import BIOS',
                                         state='disabled',
                                         command=self.bios_import)
-        bios_import_button.grid(row=1, column=2, sticky='we')
+        bios_import_button.grid(column=2, row=1, sticky='we')
         self.bios_import_button = bios_import_button
 
         bios_export_button = ttk.Button(self.blocks_frame,
                                         text='Export BIOS',
                                         state='disabled',
                                         command=self.bios_export)
-        bios_export_button.grid(row=1, column=3, sticky='we')
+        bios_export_button.grid(column=3, row=1, sticky='we')
         self.bios_export_button = bios_export_button
 
         esxdos_import_button = ttk.Button(self.blocks_frame,
                                           text='Import esxdos',
                                           state='disabled',
                                           command=self.esxdos_import)
-        esxdos_import_button.grid(row=1, column=6, sticky='we')
+        esxdos_import_button.grid(column=6, row=1, sticky='we')
         self.esxdos_import_button = esxdos_import_button
 
         esxdos_export_button = ttk.Button(self.blocks_frame,
@@ -322,21 +327,21 @@ class App(tk.Tk):
                                           width=13,
                                           state='disabled',
                                           command=self.esxdos_export)
-        esxdos_export_button.grid(row=1, column=7, sticky='we')
+        esxdos_export_button.grid(column=7, row=1, sticky='we')
         self.esxdos_export_button = esxdos_export_button
 
         spectrum_import_button = ttk.Button(self.blocks_frame,
                                             text='Import Spectrum',
                                             state='disabled',
                                             command=self.spectrum_import)
-        spectrum_import_button.grid(row=2, column=6, sticky='we')
+        spectrum_import_button.grid(column=6, row=2, sticky='we')
         self.spectrum_import_button = spectrum_import_button
 
         spectrum_export_button = ttk.Button(self.blocks_frame,
                                             text='Export Spectrum',
                                             state='disabled',
                                             command=self.spectrum_export)
-        spectrum_export_button.grid(row=2, column=7, columnspan=2, sticky='we')
+        spectrum_export_button.grid(column=7, row=2, columnspan=2, sticky='we')
         self.spectrum_export_button = spectrum_export_button
 
         core_import_button = ttk.Button(self.cores_frame,
@@ -344,7 +349,7 @@ class App(tk.Tk):
                                         state='disabled',
                                         width=17,
                                         command=self.core_import)
-        core_import_button.grid(row=5, column=3, columnspan=2, sticky='e')
+        core_import_button.grid(column=3, row=5, columnspan=2, sticky='e')
         self.core_import_button = core_import_button
 
         core_export_button = ttk.Button(self.cores_frame,
@@ -352,49 +357,53 @@ class App(tk.Tk):
                                         state='disabled',
                                         width=17,
                                         command=self.core_export)
-        core_export_button.grid(row=6, column=3, columnspan=2, sticky='e')
+        core_export_button.grid(column=3, row=6, columnspan=2, sticky='e')
         self.core_export_button = core_export_button
 
-        rename_core_button = ttk.Button(self.cores_frame,
-                                        text='Rename Core',
-                                        state='disabled',
-                                        width=17,
-                                        command=self.load_file)
-        rename_core_button.grid(row=7, column=3, columnspan=2, sticky='e')
-        self.rename_core_button = rename_core_button
+        #rename_core_button = ttk.Button(self.cores_frame,
+        #                                text='Rename Core',
+        #                                state='disabled',
+        #                                width=17)
+        #rename_core_button.grid(column=3, row=7, columnspan=2, sticky='e')
+        #self.rename_core_button = rename_core_button
 
         rom_import_button = ttk.Button(self.roms_frame,
                                        text='Import ROM',
                                        state='disabled',
+                                       width=17,
                                        command=self.rom_import)
-        rom_import_button.grid(row=3, column=0, sticky='w', pady=10)
+        rom_import_button.grid(column=0, row=2, sticky='w', pady=10)
         self.rom_import_button = rom_import_button
 
         rom_export_button = ttk.Button(self.roms_frame,
                                        text='Export ROM',
                                        state='disabled',
+                                       width=17,
                                        command=self.rom_export)
-        rom_export_button.grid(row=3, column=1, sticky='w', pady=10)
+        rom_export_button.grid(column=1, row=2, sticky='w', pady=10)
         self.rom_export_button = rom_export_button
+
+        #rom_rename_button = ttk.Button(self.roms_frame,
+        #                               text='Rename ROM',
+        #                               state='disabled',
+        #                               width=17)
+        #rom_rename_button.grid(column=2, row=2, sticky='w', pady=10)
+        #self.rom_rename_button = rom_rename_button
 
         rompack_button = ttk.Button(self.roms_frame,
                                     text='Import ROMPack...',
                                     state='disabled',
+                                    width=17,
                                     command=self.rompack_import)
-        rompack_button.grid(row=3, column=2, sticky='sw', pady=10)
+        rompack_button.grid(column=3, row=2, sticky='e', pady=10)
         self.rompack_button = rompack_button
-
-        clear_button = ttk.Button(self.roms_frame,
-                                  text='Close Image File',
-                                  command=self.clear_image)
-        clear_button.grid(row=3, column=3, sticky='se', pady=10)
 
     def clear_image(self):
         """Empty all fields of Main Window"""
 
         self.zxfilepath = ''
 
-        self.filemenu.entryconfig(1, state='disabled')
+        self.filemenu.entryconfig(2, state='disabled')
 
         self.image_label.config(text='No Image')
         self.bios.set('')
@@ -445,7 +454,7 @@ class App(tk.Tk):
                                                 str_extension, False)
                 str_filename = f'{str_filename} ({dict_flash["description"]})'
 
-                self.filemenu.entryconfig(1, state='normal')
+                self.filemenu.entryconfig(2, state='normal')
 
                 self.image_label.config(text=str_filename)
                 self.populate_blocks(dict_flash['blocks'])
@@ -594,39 +603,41 @@ class App(tk.Tk):
                                          self.fulldict_hash, str_directory,
                                          self.zxextension, True, b_is_core)
 
-    def multi_import(self, str_name, treeview, b_is_core=False):
+    def multi_import(self, str_name, treeview, b_core=False):
         """Generic core or ROM import"""
         str_extension = "ROM"
-        if b_is_core:
+        if b_core:
             str_extension = self.zxextension
-        t_selection = treeview.selection()
-        item_index = 99
-        str_title = f'Add {str_name}'
-        str_message = f'Do you want to add a new {str_name}?'
-        if t_selection:
-            item_index = int(t_selection[0])
-            str_title = f'Replace {str_name}'
-            str_message = f'Do you want to replace {str_name} {item_index}?'
-        response = messagebox.askquestion(parent=self,
-                                          icon='question',
-                                          title=str_title,
-                                          message=str_message)
+        filetypes = [(f'{self.zxextension} {str_name} files',
+                      f'.{str_extension}')]
+        str_file = fd.askopenfilename(parent=self,
+                                      title=f'Open a {str_name} file',
+                                      filetypes=filetypes)
+        if str_file:
+            t_selection = treeview.selection()
+            itm_indx = 99
+            str_title = f'Add {str_name}'
+            str_message = f'Do you want to add a new {str_name}?'
+            if t_selection:
+                itm_indx = int(t_selection[0])
+                str_title = f'Replace {str_name}'
+                str_message = f'Do you want to replace {str_name} {itm_indx}?'
+            response = messagebox.askyesno(parent=self,
+                                           icon='question',
+                                           title=str_title,
+                                           message=str_message)
 
-        if response == 'yes':
-            filetypes = [(f'{self.zxextension} {str_name} files',
-                          f'.{str_extension}')]
-            str_file = fd.askopenfilename(parent=self,
-                                          title=f'Open a {str_name} file',
-                                          filetypes=filetypes)
-
-            if str_file:
-                dialog = NewEntryDialog(self, str_name, b_is_core)
+            if response:
+                str_dialog_name = f'{str_name}'
+                if itm_indx < 99:
+                    str_dialog_name += f' {itm_indx}'
+                dialog = NewEntryDialog(self, str_dialog_name, b_core)
                 self.focus_force()
                 self.bind_keys()
                 slot_name = dialog.result_name
-                slot_param = f'{str_name},{item_index},{slot_name},{str_file}'
-                if not b_is_core:
-                    slot_number = treeview.item(item_index)['values'][1]
+                slot_param = f'{str_name},{itm_indx},{slot_name},{str_file}'
+                if not b_core:
+                    slot_number = treeview.item(itm_indx)['values'][1]
                     slot_extra = dialog.extra
                     slot_param = f'{str_name},{slot_number},{slot_extra}'
                     slot_param += f',{slot_name},{str_file}'
@@ -704,23 +715,28 @@ class NewEntryDialog:
         self.top.title(f'New {str_name} Entry')
         self.top.bind("<Return>", self.do_ok)
 
-        self.main_frame = ttk.Frame(self.top, padding=10)
-        self.main_frame.grid(column=0, row=0, sticky='nsew')
+        main_frame = ttk.Frame(self.top, padding=10)
+        main_frame.pack(fill='both')
 
-        name_label = ttk.Label(self.main_frame, text=f'{str_name} Name:')
-        name_label.grid(column=0, row=0, sticky='e')
+        top_frame = ttk.Frame(main_frame, padding=10)
+        top_frame.pack()
+        extra_frame = ttk.Frame(main_frame, padding=10)
+        extra_frame.pack(fill='x')
+        bottom_frame = ttk.Frame(main_frame, padding=10)
+        bottom_frame.pack(fill='x')
 
-        self.name_entry = ttk.Entry(self.main_frame, width=40)
+        name_label = ttk.Label(top_frame, text=f'{str_name} Name:')
+        name_label.pack(side='left')
+
+        self.name_entry = ttk.Entry(top_frame, width='32')
         self.name_entry.bind("<Return>", self.do_ok)
         self.name_entry.bind("<Escape>", self.do_cancel)
-        self.name_entry.grid(column=1, row=0, columnspan=2, sticky='we')
+        self.name_entry.pack(side='right')
         self.name_entry.focus_set()
 
         if self.b_rom:
-            extra_frame = ttk.Frame(self.main_frame, padding=10)
-            extra_frame.grid(column=0, row=1, columnspan=3, sticky='nsew')
             extra_label = ttk.Label(extra_frame, text='ROM Settings:')
-            extra_label.grid(column=0, row=0, sticky='w')
+            extra_label.grid(column=0, row=1, sticky='w')
             self.extra_vars = []
             for index, key in enumerate(self.dict_rom_params):
                 self.extra_vars.append(tk.IntVar())
@@ -729,19 +745,19 @@ class NewEntryDialog:
                                           variable=self.extra_vars[index],
                                           onvalue=1,
                                           offvalue=0)
-                check_1.grid(column=index % 3,
-                             row=int(index / 3) + 1,
+                check_1.grid(column=index % 2,
+                             row=int(index / 2) + 2,
                              sticky='w')
 
-        ok_button = ttk.Button(self.main_frame,
+        ok_button = ttk.Button(bottom_frame,
                                text="OK",
                                default="active",
                                command=self.do_ok)
-        ok_button.grid(column=0, row=2, sticky='w')
-        cancel_button = ttk.Button(self.main_frame,
+        ok_button.pack(fill='x', side='right')
+        cancel_button = ttk.Button(bottom_frame,
                                    text="Cancel",
                                    command=self.do_cancel)
-        cancel_button.grid(column=2, row=2, sticky='e')
+        cancel_button.pack(fill='x', side='right')
 
         self.top.tk.eval(f'tk::PlaceWindow {self.top._w} center')
         self.top.wait_window()
