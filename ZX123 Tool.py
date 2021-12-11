@@ -57,18 +57,19 @@ class App(tk.Tk):
         self.title('ZX123 Tool')
         self.resizable(False, False)
 
-        self.blocks_frame = ttk.Frame(self, padding=10)
-        self.cores_frame = ttk.Frame(self, padding=10)
-        self.roms_frame = ttk.Frame(self, padding=10)
+        self.main_frame = ttk.Frame(self, padding=10)
+        self.main_frame.pack(fill='both')
+        self.blocks_frame = ttk.Frame(self.main_frame, padding=10)
+        self.blocks_frame.pack()
+        self.cores_frame = ttk.Frame(self.main_frame, padding=10)
+        self.cores_frame.pack()
+        self.roms_frame = ttk.Frame(self.main_frame, padding=10)
+        self.roms_frame.pack()
 
         self.image_label = self.create_labels()
         self.create_entries()
         self.core_table, self.rom_table = self.create_tables()
         self.create_buttons()
-
-        self.blocks_frame.grid(column=0, row=1, sticky='nsew')
-        self.cores_frame.grid(column=0, row=2, sticky='nsew')
-        self.roms_frame.grid(column=0, row=3, sticky='nsew')
 
         self.tk.eval(f'tk::PlaceWindow {self._w} center')
         self.update_idletasks()
@@ -92,6 +93,7 @@ class App(tk.Tk):
             filemenu.add_command(label="Close Image File",
                                  command=self.clear_image)
             filemenu.add_command(label="Exit", command=self.destroy)
+            self.filemenu = filemenu
             menubar.add_cascade(label="File", menu=filemenu)
             self.config(menu=menubar)
         elif sys.platform == 'darwin':
@@ -191,7 +193,7 @@ class App(tk.Tk):
 
         self.esxdos = tk.StringVar()
         esxdos_entry = ttk.Entry(self.blocks_frame,
-                                 width=8,
+                                 width=5,
                                  state='disabled',
                                  textvariable=self.esxdos)
         esxdos_entry.grid(column=5, row=1, sticky='w')
@@ -372,7 +374,7 @@ class App(tk.Tk):
                                        state='disabled',
                                        width=17,
                                        command=self.rom_import)
-        rom_import_button.grid(column=0, row=2, sticky='w', pady=10)
+        rom_import_button.grid(column=0, row=2, sticky='we', pady=10)
         self.rom_import_button = rom_import_button
 
         rom_export_button = ttk.Button(self.roms_frame,
@@ -380,7 +382,7 @@ class App(tk.Tk):
                                        state='disabled',
                                        width=17,
                                        command=self.rom_export)
-        rom_export_button.grid(column=1, row=2, sticky='w', pady=10)
+        rom_export_button.grid(column=1, row=2, sticky='we', pady=10)
         self.rom_export_button = rom_export_button
 
         #rom_rename_button = ttk.Button(self.roms_frame,
@@ -395,7 +397,7 @@ class App(tk.Tk):
                                     state='disabled',
                                     width=17,
                                     command=self.rompack_import)
-        rompack_button.grid(column=3, row=2, sticky='e', pady=10)
+        rompack_button.grid(column=3, row=2, sticky='we', pady=10)
         self.rompack_button = rompack_button
 
     def clear_image(self):
