@@ -26,6 +26,12 @@ MY_DIRPATH = os.path.abspath(MY_DIRPATH)
 def main():
     """Principal"""
     app = App()
+    if sys.platform == 'win32':
+        str_icon_path = os.path.join(MY_DIRPATH, 'ZX123 Tool.ico')
+        app.iconbitmap(str_icon_path)
+    elif sys.platform == 'darwin':
+        # MacOS Open File Events
+        app.createcommand("::tk::mac::OpenDocument", app.load_file)
     app.mainloop()
 
 
@@ -41,19 +47,8 @@ class App(tk.Tk):
         self.fulldict_hash = zx123.load_json_bd()
         self.zxfilepath = ''
 
-        # MacOS Open File Events
-        self.createcommand("::tk::mac::OpenDocument", self.load_file)
-
-        # MacOS Menu Bar
-        menubar = tk.Menu(self)
-        filemenu = tk.Menu(menubar, tearoff=0)
-        filemenu.add_command(label="Open Image File...",
-                             command=self.load_file,
-                             accelerator="Command+o")
-        filemenu.add_command(label="Close Image File",
-                             command=self.clear_image)
-        menubar.add_cascade(label="File", menu=filemenu)
-        self.config(menu=menubar)
+        # Menu
+        self.build_menubar()
 
         # Key Bindings
         self.bind_keys()
@@ -83,10 +78,46 @@ class App(tk.Tk):
         if len(sys.argv) > 1:
             self.load_file(sys.argv[1:])
 
+    def build_menubar(self):
+        """Add Menu Bar"""
+
+        if sys.platform == 'win32':
+            menubar = tk.Menu(self)
+            filemenu = tk.Menu(menubar, tearoff=0)
+            filemenu.add_command(label="Open Image File...",
+                                 command=self.load_file,
+                                 accelerator="Ctrl+O")
+            filemenu.add_command(label="Close Image File",
+                                 command=self.clear_image)
+            filemenu.add_command(label="Exit", command=self.destroy)
+            menubar.add_cascade(label="File", menu=filemenu)
+            self.config(menu=menubar)
+        elif sys.platform == 'darwin':
+            # MacOS Menu Bar
+            menubar = tk.Menu(self)
+            filemenu = tk.Menu(menubar, tearoff=0)
+            filemenu.add_command(label="Open Image File...",
+                                 command=self.load_file,
+                                 accelerator="Command+o")
+            filemenu.add_command(label="Close Image File",
+                                 command=self.clear_image)
+            self.filemenu = filemenu
+            menubar.add_cascade(label="File", menu=self.filemenu)
+            self.menubar = menubar
+            self.config(menu=self.menubar)
+        else:
+            #Not implemented
+            pass
+
+        self.filemenu.entryconfig(1, state='disabled')
+
     def bind_keys(self):
         """Bind Menu Keys"""
-        self.bind_all("<Command-o>", lambda event: self.load_file())
-        self.bind_all("<Command-q>", lambda event: self.destroy())
+        if sys.platform == 'win32':
+            self.bind_all("<Control-o>", lambda event: self.load_file())
+        elif sys.platform == 'darwin':
+            self.bind_all("<Command-o>", lambda event: self.load_file())
+            self.bind_all("<Command-q>", lambda event: self.destroy())
 
     def create_labels(self):
         "Create Main Window Labels"
@@ -362,6 +393,9 @@ class App(tk.Tk):
         """Empty all fields of Main Window"""
 
         self.zxfilepath = ''
+
+        self.filemenu.entryconfig(1, state='disabled')
+
         self.image_label.config(text='No Image')
         self.bios.set('')
         self.esxdos.set('')
@@ -410,6 +444,9 @@ class App(tk.Tk):
                 dict_roms = zx123.list_romsdata(str_file, self.fulldict_hash,
                                                 str_extension, False)
                 str_filename = f'{str_filename} ({dict_flash["description"]})'
+
+                self.filemenu.entryconfig(1, state='normal')
+
                 self.image_label.config(text=str_filename)
                 self.populate_blocks(dict_flash['blocks'])
                 self.populate_defaults(dict_flash['defaults'])
