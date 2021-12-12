@@ -24,7 +24,7 @@ These are the main features:
 - Change some BIOS default options (video mode, keyboard layout, default core,
   default ROM, etc.)
 - Add or replace FPGA cores and/or Spectrum ROM images (from individual ROM
-  files or RomPack files)
+  files or ROMPack files)
 - Wipe with 0s all Cores and ZX Spectrum ROMs data
 - List, add or extract ROM files from a ZX1 ROMPack v2 file
 - If supplied a different kind of file (like a core or BIOS installation file)
@@ -1094,7 +1094,7 @@ def extractfrom_zxdata(str_in_file,
                 LOGGER.error('Invalid ROM index: %i', rom_number)
 
     if extract_item.upper() == 'ROMS':
-        # Extract all ZX Spectrum ROMs to RomPack file
+        # Extract all ZX Spectrum ROMs to ROMPack file
         default_rom = get_peek(str_in_file, 28736).to_bytes(1, 'little')
         rom_dict_parts = fullhash_dict['ROM']['parts']
         blk_info = rom_dict_parts['roms_dir']
@@ -1518,7 +1518,7 @@ def inject_zxfiles(str_spi_file,
         b_data, b_chg = inject_romdata(str_spi_file, str_in_params,
                                        fullhash_dict, str_extension, b_data)
         b_changed |= b_chg
-        # Inject ZX Spectrum ROMs from RomPack
+        # Inject ZX Spectrum ROMs from ROMPack
         b_data, b_chg = inject_romszx1data(str_in_params, fullhash_dict,
                                            str_extension, b_data)
         b_changed |= b_chg
@@ -1657,10 +1657,14 @@ def find_zxfile(str_in_file,
     hash_dict = fulldict_hash[str_extension]
     d_parts = hash_dict['parts']
 
+    dict_res = {}
+    dict_res['detail'] = {}
+
     str_name = os.path.basename(str_in_file)
     print(
         f'\nAnalyzing {str_name} (possibly {hash_dict["description"]})...\n ')
     str_file_hash = get_file_hash(str_in_file)
+    dict_res['hash'] = str_file_hash
     i_file_size = os.stat(str_in_file).st_size
     if show_hashes:
         print(f'Hash: {str_file_hash}')
@@ -1676,6 +1680,8 @@ def find_zxfile(str_in_file,
                                                  hash_dict[block_id])
                 if block_version != 'Unknown':
                     print(f'{block_id} -  Version: {block_version}')
+                    dict_res['kind'] = block_id
+                    dict_res['version'] = f'{block_version}'
                     found = True
 
     # Check if it's a main ROM
@@ -1688,6 +1694,8 @@ def find_zxfile(str_in_file,
                                                  hash_dict[block_id])
                 if block_version != 'Unknown':
                     print(f'{block_id} -  Version: {block_version}')
+                    dict_res['kind'] = block_id
+                    dict_res['version'] = block_version
                     found = True
 
     # Check if it's a Core
@@ -1701,6 +1709,8 @@ def find_zxfile(str_in_file,
                                                  hash_dict['Cores'][core_item])
                 if block_version != 'Unknown':
                     print(f'Core: {core_item} - Version: {block_version}')
+                    dict_res['kind'] = 'Core'
+                    dict_res['version'] = f'{core_item}: {block_version}'
                     found = True
                     if b_detail:
                         printcol(Colours.BLUE,
@@ -1709,18 +1719,23 @@ def find_zxfile(str_in_file,
                         dict_det = hash_dict['Cores'][core_item].get(
                             'features', {})
                         print_detail(core_item, dict_det)
+                        dict_res['detail'] = dict_det
                     break
 
-    # Check if it's a RomPack ROMs file
+    # Check if it's a ROMPack ROMs file
     if not found and str_extension == 'ZX1':
         rompack = fulldict_hash['ROMS']['parts']
         i_rpck_size = int(rompack['header'][1])
         if i_rpck_size == i_file_size:
             found = list_romsdata(str_in_file, fulldict_hash, 'ROMS',
                                   show_hashes, True)
+            dict_res['kind'] = 'ROMPack'
+            dict_res['version'] = ''
 
     if not found:
         print('Unknown file')
+
+    return dict_res
 
 
 # Core Data Functions
