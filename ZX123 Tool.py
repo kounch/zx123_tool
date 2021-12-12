@@ -91,9 +91,29 @@ class App(tk.Tk):
                                  command=self.load_file,
                                  accelerator="Ctrl+O")
             filemenu.add_command(label="Close Image File",
+                                 accelerator="Ctrl+w",
                                  command=self.clear_image)
+            filemenu.add_separator()
+            filemenu.add_command(label="Get Info",
+                                 accelerator="Ctrl+i")
+            filemenu.add_separator()
             filemenu.add_command(label="Exit", command=self.destroy)
             self.filemenu = filemenu
+
+            editmenu = tk.Menu(menubar, tearoff=0)
+            editmenu.add_command(
+                label="Cut",
+                accelerator="Control+X",
+                command=lambda: self.focus_get().event_generate('<<Cut>>'))
+            editmenu.add_command(
+                label="Copy",
+                accelerator="Control+C",
+                command=lambda: self.focus_get().event_generate('<<Copy>>'))
+            editmenu.add_command(
+                label="Paste",
+                accelerator="Control+V",
+                command=lambda: self.focus_get().event_generate('<<Paste>>'))
+
             menubar.add_cascade(label="File", menu=filemenu)
             self.config(menu=menubar)
         elif sys.platform == 'darwin':
@@ -106,9 +126,29 @@ class App(tk.Tk):
                                  command=self.load_file,
                                  accelerator="Command+o")
             filemenu.add_command(label="Close Image File",
+                                 accelerator="Command+w",
                                  command=self.clear_image)
+            filemenu.add_separator()
+            filemenu.add_command(label="Get Info",
+                                 accelerator="Command+i")
             self.filemenu = filemenu
+
+            editmenu = tk.Menu(menubar, tearoff=0)
+            editmenu.add_command(
+                label="Cut",
+                accelerator="Command+X",
+                command=lambda: self.focus_get().event_generate('<<Cut>>'))
+            editmenu.add_command(
+                label="Copy",
+                accelerator="Command+C",
+                command=lambda: self.focus_get().event_generate('<<Copy>>'))
+            editmenu.add_command(
+                label="Paste",
+                accelerator="Command+V",
+                command=lambda: self.focus_get().event_generate('<<Paste>>'))
+
             menubar.add_cascade(label="File", menu=self.filemenu)
+            menubar.add_cascade(label="Edit", menu=editmenu)
             self.menubar = menubar
             self.config(menu=self.menubar)
         else:
@@ -117,13 +157,16 @@ class App(tk.Tk):
 
         self.filemenu.entryconfig(0, state='disabled')
         self.filemenu.entryconfig(2, state='disabled')
+        self.filemenu.entryconfig(4, state='disabled')
 
     def bind_keys(self):
         """Bind Menu Keys"""
         if sys.platform == 'win32':
             self.bind_all("<Control-o>", lambda event: self.load_file())
+            self.bind_all("<Control-w>", lambda event: self.clear_image())
         elif sys.platform == 'darwin':
             self.bind_all("<Command-o>", lambda event: self.load_file())
+            self.bind_all("<Command-w>", lambda event: self.clear_image())
             self.bind_all("<Command-q>", lambda event: self.destroy())
 
     def create_labels(self):
@@ -433,6 +476,9 @@ class App(tk.Tk):
 
     def load_file(self, *args):
         """Open only first file"""
+
+        self.menubar.entryconfig(0, state='disabled')
+
         if args:
             str_file = args[0]
         else:
@@ -479,6 +525,8 @@ class App(tk.Tk):
             else:
                 print('Undetermined')
                 messagebox.showinfo("Another File", str_filename, parent=self)
+
+        self.menubar.entryconfig(0, state='normal')
 
     def populate_blocks(self, dict_blocks):
         """Populate Blocks Data in Main Window"""
@@ -542,6 +590,8 @@ class App(tk.Tk):
     def block_import(self, str_block):
         """Generic block import method"""
 
+        self.menubar.entryconfig(0, state='disabled')
+
         filetypes = [(f'{str_block} files', f'.{self.zxextension}')]
         str_file = fd.askopenfilename(parent=self,
                                       title=f'Open {str_block} file',
@@ -555,8 +605,12 @@ class App(tk.Tk):
                                  b_force=True)
             self.load_file(self.zxfilepath)
 
+        self.menubar.entryconfig(0, state='normal')
+
     def block_export(self, str_block):
         """Generic block export method"""
+
+        self.menubar.entryconfig(0, state='disabled')
 
         str_directory = os.path.dirname(self.zxfilepath)
         str_directory = fd.askdirectory(
@@ -567,6 +621,8 @@ class App(tk.Tk):
             zx123.extractfrom_zxdata(self.zxfilepath, str_block,
                                      self.fulldict_hash, str_directory,
                                      self.zxextension, True)
+
+        self.menubar.entryconfig(0, state='normal')
 
     def bios_import(self):
         """Proxy for BIOS import action"""
@@ -594,6 +650,8 @@ class App(tk.Tk):
 
     def multi_export(self, str_name, treeview, b_is_core=False):
         """Generic cores or ROMs export method"""
+        self.menubar.entryconfig(0, state='disabled')
+
         str_directory = os.path.dirname(self.zxfilepath)
         str_directory = fd.askdirectory(parent=self,
                                         initialdir=str_directory,
@@ -605,8 +663,13 @@ class App(tk.Tk):
                                          self.fulldict_hash, str_directory,
                                          self.zxextension, True, b_is_core)
 
+        self.menubar.entryconfig(0, state='normal')
+
     def multi_import(self, str_name, treeview, b_core=False):
         """Generic core or ROM import"""
+
+        self.menubar.entryconfig(0, state='disabled')
+
         str_extension = "ROM"
         if b_core:
             str_extension = self.zxextension
@@ -651,6 +714,8 @@ class App(tk.Tk):
                                          b_force=True)
                     self.load_file(self.zxfilepath)
 
+        self.menubar.entryconfig(0, state='normal')
+
     def core_import(self):
         """Proxy for secondary Core import action"""
         self.multi_import('Core', self.core_table, True)
@@ -669,6 +734,8 @@ class App(tk.Tk):
 
     def rompack_import(self):
         """"ROMPack v1 imort action"""
+        self.menubar.entryconfig(0, state='disabled')
+
         filetypes = [("ROMPack v1 files", ".zx1")]
         str_file = fd.askopenfilename(parent=self,
                                       title='Open ROMPack v1 file',
@@ -681,6 +748,8 @@ class App(tk.Tk):
                                  self.zxextension,
                                  b_force=True)
             self.load_file(self.zxfilepath)
+
+        self.menubar.entryconfig(0, state='normal')
 
 
 class NewEntryDialog:
