@@ -18,10 +18,14 @@
 			<string>ZX-Uno Document</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.kounch.ZX1213Tool.editing.zx1</string>
+				<string>com.kounch.ZX1213Tool.zx1</string>
 			</array>
+			<key>NSDocumentClass</key>
+			<string>FileDataDocument</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
@@ -35,10 +39,14 @@
 			<string>ZXDOS SPI Flash Image</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.kounch.ZX1213Tool.editing.zx2</string>
+				<string>com.kounch.ZX1213Tool.zx2</string>
 			</array>
+			<key>NSDocumentClass</key>
+			<string>FileDataDocument</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
@@ -52,10 +60,14 @@
 			<string>ZXDOS+ SPI Flash Image</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.kounch.ZX1213Tool.editing.zxd</string>
+				<string>com.kounch.ZX1213Tool.zxd</string>
 			</array>
+			<key>NSDocumentClass</key>
+			<string>FileDataDocument</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
@@ -69,10 +81,14 @@
 			<string>ZX ROM Image</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.kounch.ZX1213Tool.editing.rom</string>
+				<string>com.kounch.ZX1213Tool.rom</string>
 			</array>
+			<key>NSDocumentClass</key>
+			<string>FileDataDocument</string>
 		</dict>
     </array>
 	<key>CFBundleExecutable</key>
@@ -100,7 +116,7 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>com.kounch.ZX1213Tool.SPIFlashImage</string>
+				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>ZX-Uno Document</string>
@@ -119,7 +135,7 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>com.kounch.ZX1213Tool.SPIFlashImage</string>
+				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>ZXDOS SPI Flash Image</string>
@@ -138,7 +154,7 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>com.kounch.ZX1213Tool.SPIFlashImage</string>
+				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>ZXDOS+ SPI Flash Image</string>
@@ -157,7 +173,7 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>com.kounch.ZX1213Tool.ROMImage</string>
+				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>ZX ROM Image</string>
