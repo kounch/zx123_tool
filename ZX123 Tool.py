@@ -32,10 +32,10 @@ def main():
         app.iconbitmap(str_icon_path)
     elif sys.platform == 'darwin':
         # MacOS Open File Events
-        app.createcommand("::tk::mac::OpenDocument", app.load_file)
+        app.createcommand("::tk::mac::OpenDocument", app.open_file)
     else:
         # Not implemented
-        pas
+        pass
 
     app.mainloop()
 
@@ -54,9 +54,6 @@ class App(tk.Tk):
 
         # Menu
         self.build_menubar()
-
-        # Key Bindings
-        self.bind_keys()
 
         # Main Window
         self.title('ZX123 Tool')
@@ -82,7 +79,7 @@ class App(tk.Tk):
 
         # Load files from command line args
         if len(sys.argv) > 1:
-            self.load_file(sys.argv[1:])
+            self.open_file(sys.argv[1:])
 
     def build_menubar(self):
         """Add Menu Bar"""
@@ -94,14 +91,13 @@ class App(tk.Tk):
             filemenu.add_command(label="New Image File...",
                                  accelerator="Ctrl+n")
             filemenu.add_command(label="Open Image File...",
-                                 command=self.load_file,
+                                 command=self.open_file,
                                  accelerator="Ctrl+O")
             filemenu.add_command(label="Close Image File",
                                  accelerator="Ctrl+w",
-                                 command=self.clear_image)
+                                 command=self.close_image)
             filemenu.add_separator()
-            filemenu.add_command(label="Get Info",
-                                 accelerator="Ctrl+i")
+            filemenu.add_command(label="Get Info", accelerator="Ctrl+i")
             filemenu.add_separator()
             filemenu.add_command(label="Exit", command=self.destroy)
             self.filemenu = filemenu
@@ -109,15 +105,15 @@ class App(tk.Tk):
             editmenu = tk.Menu(menubar, tearoff=0)
             editmenu.add_command(
                 label="Cut",
-                accelerator="Control+X",
+                accelerator="Ctrl+X",
                 command=lambda: self.focus_get().event_generate('<<Cut>>'))
             editmenu.add_command(
                 label="Copy",
-                accelerator="Control+C",
+                accelerator="Ctrl+C",
                 command=lambda: self.focus_get().event_generate('<<Copy>>'))
             editmenu.add_command(
                 label="Paste",
-                accelerator="Control+V",
+                accelerator="Ctrl+V",
                 command=lambda: self.focus_get().event_generate('<<Paste>>'))
 
             menubar.add_cascade(label="File", menu=filemenu)
@@ -129,14 +125,13 @@ class App(tk.Tk):
             filemenu.add_command(label="New Image File...",
                                  accelerator="Command+n")
             filemenu.add_command(label="Open Image File...",
-                                 command=self.load_file,
+                                 command=self.open_file,
                                  accelerator="Command+o")
             filemenu.add_command(label="Close Image File",
                                  accelerator="Command+w",
-                                 command=self.clear_image)
+                                 command=self.close_image)
             filemenu.add_separator()
-            filemenu.add_command(label="Get Info",
-                                 accelerator="Command+i")
+            filemenu.add_command(label="Get Info", accelerator="Command+i")
             self.filemenu = filemenu
 
             editmenu = tk.Menu(menubar, tearoff=0)
@@ -163,9 +158,9 @@ class App(tk.Tk):
             filemenu = tk.Menu(menubar, tearoff=0)
             filemenu.add_command(label="New Image File...")
             filemenu.add_command(label="Open Image File...",
-                                 command=self.load_file)
+                                 command=self.open_file)
             filemenu.add_command(label="Close Image File",
-                                 command=self.clear_image)
+                                 command=self.close_image)
             filemenu.add_separator()
             filemenu.add_command(label="Get Info")
 
@@ -180,12 +175,25 @@ class App(tk.Tk):
     def bind_keys(self):
         """Bind Menu Keys"""
         if sys.platform == 'win32':
-            self.bind_all("<Control-o>", lambda event: self.load_file())
-            self.bind_all("<Control-w>", lambda event: self.clear_image())
+            self.bind_all("<Control-o>", lambda event: self.open_file())
+            self.bind_all("<Control-w>", lambda event: self.close_image())
         elif sys.platform == 'darwin':
-            self.bind_all("<Command-o>", lambda event: self.load_file())
-            self.bind_all("<Command-w>", lambda event: self.clear_image())
+            self.bind_all("<Command-o>", lambda event: self.open_file())
+            self.bind_all("<Command-w>", lambda event: self.close_image())
             self.bind_all("<Command-q>", lambda event: self.destroy())
+        else:
+            # Not Implemented
+            pass
+
+    def unbind_keys(self):
+        """Bind Menu Keys"""
+        if sys.platform == 'win32':
+            self.unbind_all("<Control-o>")
+            self.unbind_all("<Control-w>")
+        elif sys.platform == 'darwin':
+            self.unbind_all("<Command-o>")
+            self.unbind_all("<Command-w>")
+            self.unbind_all("<Command-q>")
         else:
             # Not Implemented
             pass
@@ -464,7 +472,7 @@ class App(tk.Tk):
         rompack_button.grid(column=3, row=2, sticky='we', pady=10)
         self.rompack_button = rompack_button
 
-    def clear_image(self):
+    def close_image(self):
         """Empty all fields of Main Window"""
 
         self.zxfilepath = ''
@@ -495,7 +503,7 @@ class App(tk.Tk):
         self.rom_export_button.state(["disabled"])
         self.rompack_button.state(["disabled"])
 
-    def load_file(self, *args):
+    def open_file(self, *args):
         """Open only first file"""
 
         self.menubar.entryconfig(0, state='disabled')
@@ -503,9 +511,9 @@ class App(tk.Tk):
         if args:
             str_file = args[0]
         else:
-            filetypes = [("ZX1, ZX2 or ZXD files", ".zx1 .zx2 .zxd")]
+            filetypes = [("ZX1, ZX2, ZXD or ROM files", ".zx1 .zx2 .zxd .rom")]
             str_file = fd.askopenfilename(parent=self,
-                                          title='Open a ZX1, ZX2, ZXD file',
+                                          title='Select a file to open',
                                           filetypes=filetypes)
 
         if str_file:
@@ -514,7 +522,7 @@ class App(tk.Tk):
                 str_file, self.fulldict_hash)
 
             if filetype == 'FlashImage':
-                self.clear_image()
+                self.close_image()
                 self.zxfilepath = str_file
                 self.zxextension = str_extension
 
@@ -544,8 +552,12 @@ class App(tk.Tk):
                 print('ROMPack V2')
                 messagebox.showinfo("ROMPackv2", str_filename, parent=self)
             else:
-                print('Undetermined')
-                messagebox.showinfo("Another File", str_filename, parent=self)
+                dict_file = zx123.find_zxfile(str_file, self.fulldict_hash,
+                                              str_extension, False, True)
+                self.unbind_keys()
+                InfoWindow(self, str_filename, dict_file)
+                self.focus_force()
+                self.bind_keys()
 
         self.menubar.entryconfig(0, state='normal')
 
@@ -624,7 +636,7 @@ class App(tk.Tk):
                                  self.fulldict_hash,
                                  self.zxextension,
                                  b_force=True)
-            self.load_file(self.zxfilepath)
+            self.open_file(self.zxfilepath)
 
         self.menubar.entryconfig(0, state='normal')
 
@@ -717,6 +729,7 @@ class App(tk.Tk):
                 str_dialog_name = f'{str_name}'
                 if itm_indx < 99:
                     str_dialog_name += f' {itm_indx}'
+                self.unbind_keys()
                 dialog = NewEntryDialog(self, str_dialog_name, b_core)
                 self.focus_force()
                 self.bind_keys()
@@ -733,7 +746,7 @@ class App(tk.Tk):
                                          self.fulldict_hash,
                                          self.zxextension,
                                          b_force=True)
-                    self.load_file(self.zxfilepath)
+                    self.open_file(self.zxfilepath)
 
         self.menubar.entryconfig(0, state='normal')
 
@@ -768,7 +781,7 @@ class App(tk.Tk):
                                  self.fulldict_hash,
                                  self.zxextension,
                                  b_force=True)
-            self.load_file(self.zxfilepath)
+            self.open_file(self.zxfilepath)
 
         self.menubar.entryconfig(0, state='normal')
 
@@ -803,6 +816,7 @@ class NewEntryDialog:
         self.top = tk.Toplevel(parent)
         self.top.transient(parent)
         self.top.grab_set()
+        self.top.resizable(False, False)
 
         self.top.title(f'New {str_name} Entry')
         self.top.bind("<Return>", self.do_ok)
@@ -865,6 +879,73 @@ class NewEntryDialog:
 
     def do_cancel(self, event=None):  # pylint: disable=unused-argument
         """Process Cancel Button"""
+        self.top.destroy()
+
+
+class InfoWindow:
+    """Custom Window to Show Core or ROM info"""
+    def __init__(self, parent, str_name, dict_data):
+        self.top = tk.Toplevel(parent)
+        self.top.transient(parent)
+        self.top.grab_set()
+        self.top.resizable(False, False)
+
+        self.top.title('Information')
+        self.top.bind("<Return>", self.do_ok)
+
+        main_frame = ttk.Frame(self.top, padding=10)
+        main_frame.pack(fill='both')
+
+        name_frame = ttk.Frame(main_frame, padding=5)
+        name_frame.pack(fill='x')
+        name_label = ttk.Label(name_frame, text=f'File: {str_name}')
+        name_label.pack(side='left')
+
+        kind_frame = ttk.Frame(main_frame, padding=5)
+        kind_frame.pack(fill='x')
+        kind_label = ttk.Label(kind_frame, text=f'Kind: {dict_data["kind"]}')
+        kind_label.pack(side='left')
+
+        if dict_data['version']:
+            version_frame = ttk.Frame(main_frame, padding=5)
+            version_frame.pack(fill='x')
+            version_label = ttk.Label(version_frame,
+                                      text=f'Version: {dict_data["version"]}')
+            version_label.pack(side='left')
+
+        dict_det = dict_data['detail']
+        if dict_det:
+            detail_frame = ttk.Frame(main_frame, padding=5)
+            detail_frame.pack()
+            detail_str = f'{dict_data["kind"]} family features:'
+            detail_label = ttk.Label(detail_frame, text=detail_str)
+            detail_label.grid(column=0, row=0, sticky='w')
+            for index, key in enumerate(dict_det):
+                detail_str = ', '.join(dict_det[key][0])
+                if dict_det[key][1]:
+                    detail_str += f' ({dict_det[key][1]})'
+                detail_label = ttk.Label(detail_frame,
+                                         text=f'  - {key}: {detail_str}')
+                detail_label.grid(column=0, row=index + 1, sticky='w')
+
+        #hash_frame = ttk.Frame(main_frame, padding=10)
+        #hash_frame.pack(fill='x')
+        #hash_label = ttk.Label(hash_frame, text=f'Hash: {dict_data["hash"]}')
+        #hash_label.pack(side='left')
+
+        button_frame = ttk.Frame(main_frame, padding=10)
+        button_frame.pack(fill='x')
+        ok_button = ttk.Button(button_frame,
+                               text="OK",
+                               default="active",
+                               command=self.do_ok)
+        ok_button.pack()
+
+        self.top.tk.eval(f'tk::PlaceWindow {self.top._w} center')
+        self.top.wait_window()
+
+    def do_ok(self, event=None):  # pylint: disable=unused-argument
+        """Process OK Button"""
         self.top.destroy()
 
 
