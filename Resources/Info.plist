@@ -89,9 +89,90 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>0.0.2</string>
+	<key>CFBundleSignature</key>
+	<string>Z123</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2021, kounch All rights reserved.</string>
 	<key>NSHighResolutionCapable</key>
 	<true/>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.kounch.ZX1213Tool.SPIFlashImage</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>ZX-Uno Document</string>
+			<key>UTTypeIconFile</key>
+			<string>zx1</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.kounch.ZX1213Tool.zx1</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>zx1</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.kounch.ZX1213Tool.SPIFlashImage</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>ZXDOS SPI Flash Image</string>
+			<key>UTTypeIconFile</key>
+			<string>zx2</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.kounch.ZX1213Tool.zx2</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>zx2</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.kounch.ZX1213Tool.SPIFlashImage</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>ZXDOS+ SPI Flash Image</string>
+			<key>UTTypeIconFile</key>
+			<string>zxd</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.kounch.ZX1213Tool.zxd</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>zxd</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.kounch.ZX1213Tool.ROMImage</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>ZX ROM Image</string>
+			<key>UTTypeIconFile</key>
+			<string>rom</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.kounch.ZX1213Tool.rom</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>rom</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>
