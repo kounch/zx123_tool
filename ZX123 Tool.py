@@ -27,11 +27,16 @@ def main():
     """Principal"""
     app = App()
     if sys.platform == 'win32':
+        # Windows config
         str_icon_path = os.path.join(MY_DIRPATH, 'ZX123 Tool.ico')
         app.iconbitmap(str_icon_path)
     elif sys.platform == 'darwin':
         # MacOS Open File Events
         app.createcommand("::tk::mac::OpenDocument", app.load_file)
+    else:
+        # Not implemented
+        pas
+
     app.mainloop()
 
 
@@ -83,6 +88,7 @@ class App(tk.Tk):
         """Add Menu Bar"""
 
         if sys.platform == 'win32':
+            # Windows Menu Bar
             menubar = tk.Menu(self)
             filemenu = tk.Menu(menubar, tearoff=0)
             filemenu.add_command(label="New Image File...",
@@ -152,8 +158,20 @@ class App(tk.Tk):
             self.menubar = menubar
             self.config(menu=self.menubar)
         else:
-            #Not implemented
-            pass
+            # Generic Menu Bar for other platforms
+            menubar = tk.Menu(self)
+            filemenu = tk.Menu(menubar, tearoff=0)
+            filemenu.add_command(label="New Image File...")
+            filemenu.add_command(label="Open Image File...",
+                                 command=self.load_file)
+            filemenu.add_command(label="Close Image File",
+                                 command=self.clear_image)
+            filemenu.add_separator()
+            filemenu.add_command(label="Get Info")
+
+            menubar.add_cascade(label="File", menu=self.filemenu)
+            self.menubar = menubar
+            self.config(menu=self.menubar)
 
         self.filemenu.entryconfig(0, state='disabled')
         self.filemenu.entryconfig(2, state='disabled')
@@ -168,6 +186,9 @@ class App(tk.Tk):
             self.bind_all("<Command-o>", lambda event: self.load_file())
             self.bind_all("<Command-w>", lambda event: self.clear_image())
             self.bind_all("<Command-q>", lambda event: self.destroy())
+        else:
+            # Not Implemented
+            pass
 
     def create_labels(self):
         "Create Main Window Labels"
