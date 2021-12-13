@@ -613,7 +613,7 @@ def parse_args():
 # Main Functions
 
 
-def load_json_bd(str_file='', output_file='', str_update=''):
+def load_json_bd(str_file='', output_file='', str_update='', base_dir=None):
     """
     Loads the Hash Database
     :param str_file: Input file (to determine if update)
@@ -623,6 +623,8 @@ def load_json_bd(str_file='', output_file='', str_update=''):
     """
 
     str_json = os.path.join(MY_DIRPATH, 'zx123_hash.json')
+    if base_dir:
+        str_json = os.path.join(base_dir, 'zx123_hash.json')
 
     fulldict_hash = {}
     # Update JSON
@@ -752,6 +754,8 @@ def print_stats(fulldict_hash, b_detail=False):
 
     print('')
     printcol(Colours.CYAN, 'JSON Database Stats', end='\n')
+    if 'version' in fulldict_hash:
+        print(f'Version: {fulldict_hash["version"]}')
     print('')
 
     total = 0
@@ -759,47 +763,50 @@ def print_stats(fulldict_hash, b_detail=False):
     total_hashes = 0
     total_hashes_cores = 0
     for str_kind in fulldict_hash:
-        printcol(Colours.BLUE,
-                 fulldict_hash[str_kind]['description'],
-                 end='\n')
+        if str_kind != 'version':
+            printcol(Colours.BLUE,
+                     fulldict_hash[str_kind]['description'],
+                     end='\n')
 
-        subtotal = 0
-        subtotal_hashes = 0
-        for chld in fulldict_hash[str_kind]:
-            if isinstance(fulldict_hash[str_kind][chld], dict):
-                count, part = count_hashes(fulldict_hash[str_kind][chld])
-                if count:
-                    if b_detail:
-                        print('')
-                        for str_name, h_count in part.items():
-                            printcol(Colours.BLUE, f'{str_name} ({h_count}')
-                            printcol(Colours.BLUE, ' hash')
-                            if h_count > 1:
-                                printcol(Colours.BLUE, 'es')
-                            printcol(Colours.BLUE, ')', end='\n')
-                            dict_det = fulldict_hash[str_kind][chld][str_name]
-                            feat_det = dict_det.get('features', {})
-                            print_detail(str_name, feat_det)
-                    print(f'{chld}: {len(part):>4} ({count:03} hashes)')
-                    subtotal += len(part)
-                    subtotal_hashes += count
+            subtotal = 0
+            subtotal_hashes = 0
+            for chld in fulldict_hash[str_kind]:
+                if isinstance(fulldict_hash[str_kind][chld], dict):
+                    count, part = count_hashes(fulldict_hash[str_kind][chld])
+                    if count:
+                        if b_detail:
+                            print('')
+                            for str_name, h_count in part.items():
+                                printcol(Colours.BLUE,
+                                         f'{str_name} ({h_count}')
+                                printcol(Colours.BLUE, ' hash')
+                                if h_count > 1:
+                                    printcol(Colours.BLUE, 'es')
+                                printcol(Colours.BLUE, ')', end='\n')
+                                dict_det = fulldict_hash[str_kind][chld][
+                                    str_name]
+                                feat_det = dict_det.get('features', {})
+                                print_detail(str_name, feat_det)
+                        print(f'{chld}: {len(part):>4} ({count:03} hashes)')
+                        subtotal += len(part)
+                        subtotal_hashes += count
 
-        total += subtotal
-        total_cores += subtotal
-        total_hashes += subtotal_hashes
-        total_hashes_cores += subtotal_hashes
+            total += subtotal
+            total_cores += subtotal
+            total_hashes += subtotal_hashes
+            total_hashes_cores += subtotal_hashes
 
-        count, part = count_hashes(fulldict_hash[str_kind])
-        if count:
-            print(f'Other: {len(part):>4} ({count:03} hashes)')
-            total += len(part)
-            subtotal += len(part)
-            subtotal_hashes += count
-            total_hashes += count
+            count, part = count_hashes(fulldict_hash[str_kind])
+            if count:
+                print(f'Other: {len(part):>4} ({count:03} hashes)')
+                total += len(part)
+                subtotal += len(part)
+                subtotal_hashes += count
+                total_hashes += count
 
-        if subtotal:
-            print(f'Total: {subtotal:>4} ({subtotal_hashes:03} hashes)')
-            print('')
+            if subtotal:
+                print(f'Total: {subtotal:>4} ({subtotal_hashes:03} hashes)')
+                print('')
 
     print('')
     print(f'Total Cores: {total_cores:>4} ({total_hashes_cores:03} hashes)')
