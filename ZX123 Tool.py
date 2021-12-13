@@ -12,6 +12,8 @@ SPDX-License-Identifier: BSD-2-Clause
 
 import os
 import sys
+import pathlib
+from shutil import copy
 import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog as fd
@@ -26,18 +28,8 @@ MY_DIRPATH = os.path.abspath(MY_DIRPATH)
 def main():
     """Principal"""
     app = App()
-    if sys.platform == 'win32':
-        # Windows config
-        str_icon_path = os.path.join(MY_DIRPATH, 'ZX123 Tool.ico')
-        app.iconbitmap(str_icon_path)
-    elif sys.platform == 'darwin':
-        # MacOS Open File Events
-        app.createcommand("::tk::mac::OpenDocument", app.open_file)
-    else:
-        # Not implemented
-        pass
-
     app.mainloop()
+    app.destroy()
 
 
 class App(tk.Tk):
@@ -48,8 +40,18 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        # Initialize JSON Database
-        self.fulldict_hash = zx123.load_json_bd()
+        if sys.platform == 'win32':
+            # Windows config
+            str_icon_path = os.path.join(MY_DIRPATH, 'ZX123 Tool.ico')
+            self.iconbitmap(str_icon_path)
+        elif sys.platform == 'darwin':
+            # MacOS Open File Events
+            self.createcommand("::tk::mac::OpenDocument", self.open_file)
+        else:
+            # Other
+            pass
+
+        self.load_json()
         self.zxfilepath = ''
 
         # Menu
@@ -80,6 +82,38 @@ class App(tk.Tk):
         # Load files from command line args
         if len(sys.argv) > 1:
             self.open_file(sys.argv[1:])
+
+    def load_json(self):
+        """Initialize JSON Database"""
+        json_dir = MY_DIRPATH
+        app_resdir = ''
+        if sys.platform == 'darwin':
+            json_dir = os.path.join(os.environ.get('HOME'), 'Library',
+                                    'Application Support', 'ZX123 Tool')
+            app_resdir = os.path.abspath(
+                os.path.join(MY_DIRPATH, '..', 'Resources'))
+
+        if not os.path.isdir(json_dir):
+            print('Initializing Resources...')
+            pathlib.Path(json_dir).mkdir(parents=True, exist_ok=True)
+            copy(os.path.join(app_resdir, 'zx123_hash.json'), json_dir)
+            for str_ext in ['ZX1', 'ZX2', 'ZXD']:
+                copy(os.path.join(app_resdir, f'FLASH16_empty.{str_ext}.zip'),
+                     json_dir)
+
+        fulldict_hash = zx123.load_json_bd(base_dir=json_dir)
+        if os.path.isdir(app_resdir):
+            tmp_hash = zx123.load_json_bd(base_dir=app_resdir)
+            if 'version' in tmp_hash:
+                old_version = '20211201.001'
+                my_version = tmp_hash['version']
+                if 'version' in fulldict_hash:
+                    old_version = fulldict_hash['version']
+                if old_version < my_version:
+                    print('Updating database file...')
+                    copy(os.path.join(app_resdir, 'zx123_hash.json'), json_dir)
+
+        self.fulldict_hash = zx123.load_json_bd(base_dir=json_dir)
 
     def build_menubar(self):
         """Add Menu Bar"""
@@ -202,7 +236,14 @@ class App(tk.Tk):
         "Create Main Window Labels"
 
         image_label = ttk.Label(self.blocks_frame, text='No Image File')
-        image_label.grid(column=0, row=0, columnspan=8, sticky='n')
+        image_label.grid(column=0, row=0, columnspan=7, sticky='n')
+
+        if 'version' in self.fulldict_hash:
+            version_label = ttk.Label(
+                self.blocks_frame,
+                font=("TkDefaultFont", 9),
+                text=f'Database: {self.fulldict_hash["version"]}')
+            version_label.grid(column=7, row=0, columnspan=8, sticky='ne')
 
         bios_label = ttk.Label(self.blocks_frame, text='BIOS:', padding=10)
         bios_label.grid(column=0, row=1, sticky='e')
@@ -454,7 +495,7 @@ class App(tk.Tk):
                                        state='disabled',
                                        width=17,
                                        command=self.rom_export)
-        rom_export_button.grid(column=1, row=2, sticky='we', pady=10)
+        rom_export_button.grid(column=1, row=2, sticky='we', padx=10, pady=10)
         self.rom_export_button = rom_export_button
 
         #rom_rename_button = ttk.Button(self.roms_frame,
@@ -504,8 +545,9 @@ class App(tk.Tk):
         self.rompack_button.state(["disabled"])
 
     def open_file(self, *args):
-        """Open only first file"""
+        """Open only one file"""
 
+        # Disable File Menu
         self.menubar.entryconfig(0, state='disabled')
 
         if args:
@@ -554,11 +596,17 @@ class App(tk.Tk):
             else:
                 dict_file = zx123.find_zxfile(str_file, self.fulldict_hash,
                                               str_extension, False, True)
-                self.unbind_keys()
-                InfoWindow(self, str_filename, dict_file)
-                self.focus_force()
-                self.bind_keys()
+                if 'kind' in dict_file:
+                    self.unbind_keys()
+                    InfoWindow(self, str_filename, dict_file)
+                    self.focus_force()
+                    self.bind_keys()
+                else:
+                    str_error = 'ERROR\nUnknown file\nFormat Unknown'
+                    str_error += ' or uncataloged content.'
+                    messagebox.showerror('Error', str_error, parent=self)
 
+        # Enable File Menu
         self.menubar.entryconfig(0, state='normal')
 
     def populate_blocks(self, dict_blocks):
@@ -863,7 +911,7 @@ class NewEntryDialog:
         cancel_button = ttk.Button(bottom_frame,
                                    text="Cancel",
                                    command=self.do_cancel)
-        cancel_button.pack(fill='x', side='right')
+        cancel_button.pack(fill='x', side='right', padx=10)
 
         self.top.tk.eval(f'tk::PlaceWindow {self.top._w} center')
         self.top.wait_window()
@@ -896,18 +944,18 @@ class InfoWindow:
         main_frame = ttk.Frame(self.top, padding=10)
         main_frame.pack(fill='both')
 
-        name_frame = ttk.Frame(main_frame, padding=5)
+        name_frame = ttk.Frame(main_frame, padding=2)
         name_frame.pack(fill='x')
         name_label = ttk.Label(name_frame, text=f'File: {str_name}')
         name_label.pack(side='left')
 
-        kind_frame = ttk.Frame(main_frame, padding=5)
+        kind_frame = ttk.Frame(main_frame, padding=2)
         kind_frame.pack(fill='x')
         kind_label = ttk.Label(kind_frame, text=f'Kind: {dict_data["kind"]}')
         kind_label.pack(side='left')
 
         if dict_data['version']:
-            version_frame = ttk.Frame(main_frame, padding=5)
+            version_frame = ttk.Frame(main_frame, padding=2)
             version_frame.pack(fill='x')
             version_label = ttk.Label(version_frame,
                                       text=f'Version: {dict_data["version"]}')
@@ -915,11 +963,11 @@ class InfoWindow:
 
         dict_det = dict_data['detail']
         if dict_det:
-            detail_frame = ttk.Frame(main_frame, padding=5)
+            detail_frame = ttk.Frame(main_frame, padding=2)
             detail_frame.pack()
             detail_str = f'{dict_data["kind"]} family features:'
             detail_label = ttk.Label(detail_frame, text=detail_str)
-            detail_label.grid(column=0, row=0, sticky='w')
+            detail_label.grid(column=0, row=0, sticky='w', pady=1)
             for index, key in enumerate(dict_det):
                 detail_str = ', '.join(dict_det[key][0])
                 if dict_det[key][1]:
