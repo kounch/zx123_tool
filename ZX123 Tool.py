@@ -26,10 +26,10 @@ MY_DIRPATH = os.path.abspath(MY_DIRPATH)
 
 
 def main():
-    """Principal"""
+    """Main Routine"""
+
     app = App()
     app.mainloop()
-    app.destroy()
 
 
 class App(tk.Tk):
@@ -124,7 +124,7 @@ class App(tk.Tk):
             filemenu = tk.Menu(menubar, tearoff=0)
             filemenu.add_command(label="New Image File...",
                                  accelerator="Ctrl+n")
-            filemenu.add_command(label="Open Image File...",
+            filemenu.add_command(label="Open File...",
                                  command=self.open_file,
                                  accelerator="Ctrl+O")
             filemenu.add_command(label="Close Image File",
@@ -150,7 +150,9 @@ class App(tk.Tk):
                 accelerator="Ctrl+V",
                 command=lambda: self.focus_get().event_generate('<<Paste>>'))
 
-            menubar.add_cascade(label="File", menu=filemenu)
+            menubar.add_cascade(label="File", menu=self.filemenu)
+            menubar.add_cascade(label="Edit", menu=editmenu)
+            self.menubar = menubar
             self.config(menu=menubar)
         elif sys.platform == 'darwin':
             # MacOS Menu Bar
@@ -158,7 +160,7 @@ class App(tk.Tk):
             filemenu = tk.Menu(menubar, tearoff=0)
             filemenu.add_command(label="New Image File...",
                                  accelerator="Command+n")
-            filemenu.add_command(label="Open Image File...",
+            filemenu.add_command(label="Open File...",
                                  command=self.open_file,
                                  accelerator="Command+o")
             filemenu.add_command(label="Close Image File",
@@ -191,14 +193,28 @@ class App(tk.Tk):
             menubar = tk.Menu(self)
             filemenu = tk.Menu(menubar, tearoff=0)
             filemenu.add_command(label="New Image File...")
-            filemenu.add_command(label="Open Image File...",
-                                 command=self.open_file)
+            filemenu.add_command(label="Open File...", command=self.open_file)
             filemenu.add_command(label="Close Image File",
                                  command=self.close_image)
             filemenu.add_separator()
             filemenu.add_command(label="Get Info")
 
+            editmenu = tk.Menu(menubar, tearoff=0)
+            editmenu.add_command(
+                label="Cut",
+                accelerator="Ctrl+X",
+                command=lambda: self.focus_get().event_generate('<<Cut>>'))
+            editmenu.add_command(
+                label="Copy",
+                accelerator="Ctrl+C",
+                command=lambda: self.focus_get().event_generate('<<Copy>>'))
+            editmenu.add_command(
+                label="Paste",
+                accelerator="Ctrl+V",
+                command=lambda: self.focus_get().event_generate('<<Paste>>'))
+
             menubar.add_cascade(label="File", menu=self.filemenu)
+            menubar.add_cascade(label="Edit", menu=editmenu)
             self.menubar = menubar
             self.config(menu=self.menubar)
 
@@ -558,7 +574,7 @@ class App(tk.Tk):
                                           title='Select a file to open',
                                           filetypes=filetypes)
 
-        if str_file:
+        if isinstance(str_file, str):  # To avoid MacOS quarantine events
             str_filename = os.path.split(str_file)[1]
             str_extension, dict_hash, filetype = zx123.detect_file(
                 str_file, self.fulldict_hash)
@@ -594,17 +610,18 @@ class App(tk.Tk):
                 print('ROMPack V2')
                 messagebox.showinfo("ROMPackv2", str_filename, parent=self)
             else:
-                dict_file = zx123.find_zxfile(str_file, self.fulldict_hash,
-                                              str_extension, False, True)
-                if 'kind' in dict_file:
-                    self.unbind_keys()
-                    InfoWindow(self, str_filename, dict_file)
-                    self.focus_force()
-                    self.bind_keys()
-                else:
-                    str_error = 'ERROR\nUnknown file\nFormat Unknown'
-                    str_error += ' or uncataloged content.'
-                    messagebox.showerror('Error', str_error, parent=self)
+                if str_file:
+                    dict_file = zx123.find_zxfile(str_file, self.fulldict_hash,
+                                                  str_extension, False, True)
+                    if 'kind' in dict_file:
+                        self.unbind_keys()
+                        InfoWindow(self, str_filename, dict_file)
+                        self.focus_force()
+                        self.bind_keys()
+                    else:
+                        str_error = 'ERROR\nUnknown file\nFormat Unknown'
+                        str_error += ' or uncataloged content.'
+                        messagebox.showerror('Error', str_error, parent=self)
 
         # Enable File Menu
         self.menubar.entryconfig(0, state='normal')
