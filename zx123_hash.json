@@ -1,4 +1,5 @@
 {
+    "version": "20211213.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -872,7 +873,8 @@
                     "https://github.com/avlixa/ZX81_MiSTer_zxdos/raw/master/releases/zx81_zxuno_lx9_20210914.ZX1"
                 ],
                 "latest": [
-                    "20211024 avlixa"
+                    "20211031 avlixa",
+                    "https://github.com/zxdos/zxuno/raw/master/cores/ZX81/zx81_zxuno_lx9_20211031.ZX1"
                 ],              
                 "versions": {
                     "20161105": "926198a4a6ba89748209e0d25ed34d35d8d51149c6ced0e9452a93440117eec4",
@@ -883,7 +885,8 @@
                     "20210914 avlixa": "b4c08d1e2da4ce8f7ae8971910b46de98f93d2af6fedec0faa0058d98e25116a",
                     "20211010 avlixa": "48ea8f1090f82b9cb164988f2a8fe2ecf734378565f57592274e770644857f7b",
                     "20211012 avlixa": "ec6d4da0842e1bcbcad7fa7934e8ccc832f869539446784e559055d5fe9578e0",
-                    "20211024 avlixa": "79d07b87c651645dbafd07dc3beddec92cc9fea7e838636bbb38e64c6c821ccf"
+                    "20211024 avlixa": "79d07b87c651645dbafd07dc3beddec92cc9fea7e838636bbb38e64c6c821ccf",
+                    "20211031 avlixa": "1e4e5b9b89344f4eb515a941fbe3f726b0096c03504cca4c44417a26ade74740"
                 }
             },
             "ZX Spectrum": {
@@ -3739,14 +3742,15 @@
                     "Other": [["microSD ROM and Tape Load", "Audio In Tape Load"], ""]
                 },
                 "latest": [
-                    "2021.09.14",
-                    "https://github.com/avlixa/ZX81_MiSTer_zxdos/raw/master/releases/zx81_zxdos_lx25_20210914.ZXD"
+                    "2021.10.31",
+                    "https://github.com/zxdos/zxdos-plus/raw/master/cores/zx81_zxdos_lx25_20211031.ZXD"
                 ],
                 "versions": {
                     "Beta 0": "a6e7c35054fbfa95e3de2d2a62d2aec92db2b65e87086438aac5faa2c30d9c8c",
                     "Beta 000": "ef3d13962a1defac4f85302426479c7b44161c5e5902af066fc04c773aa30c01",
                     "2021.07.31": "b06a1f754a2c8f87abc1a70cb0aca94cec423d241ad152336cbd57e59f8e5de3",
-                    "2021.09.14": "2faa23d9cb1a54fb97bdda94e7a41996b16ac3f02a02092791322dcd6e149d42"
+                    "2021.09.14": "2faa23d9cb1a54fb97bdda94e7a41996b16ac3f02a02092791322dcd6e149d42",
+                    "2021.10.31": "cd6420913ba086abca798e463dc65e5d7d2a4679548ef92f447be9ba579871da"
                 }
             },
             "ZX Spectrum": {
