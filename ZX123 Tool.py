@@ -8,6 +8,24 @@ Copyright (c) 2020-2021, kounch
 All rights reserved.
 
 SPDX-License-Identifier: BSD-2-Clause
+
+This is a tool that analyzes, extracts and injects data in SPI flash image
+files for ZX-Uno, ZXDOS and similar devices.
+
+These are the main features:
+
+- List the contents of a ZX-Uno, etc. SPI flash image, showing, if possible,
+  the version of BIOS, esxdos, main Spectrum core and optional cores, Spectrum
+  ROMs and several BIOS settings
+- Extract BIOS, esxdos ROM, Spectrum core and/or other cores, Spectrum ROMs to
+  individual files
+- Add or replace FPGA cores and/or Spectrum ROM images (from individual ROM
+  files or ROMPack files)
+- If supplied a different kind of file (like a core or BIOS installation file)
+  it will also try to identify its contents
+
+Requires a zx123_hash.json file with block structure for a kind of SPI flash
+file (e.g.: ZXD) and, optionally, hashes to identify the blocks inside.
 """
 
 import os
@@ -23,6 +41,12 @@ import zx123_tool as zx123
 
 MY_DIRPATH = os.path.dirname(sys.argv[0])
 MY_DIRPATH = os.path.abspath(MY_DIRPATH)
+JSON_DIR = MY_DIRPATH
+APP_RESDIR = ''
+if sys.platform == 'darwin':
+    JSON_DIR = os.path.join(os.environ.get('HOME'), 'Library',
+                            'Application Support', 'ZX123 Tool')
+    APP_RESDIR = os.path.abspath(os.path.join(MY_DIRPATH, '..', 'Resources'))
 
 
 def main():
@@ -46,7 +70,7 @@ class App(tk.Tk):
             self.iconbitmap(str_icon_path)
         elif sys.platform == 'darwin':
             # MacOS Open File Events
-            self.createcommand("::tk::mac::OpenDocument", self.open_file)
+            self.createcommand('::tk::mac::OpenDocument', self.open_file)
         else:
             # Other
             pass
@@ -85,25 +109,18 @@ class App(tk.Tk):
 
     def load_json(self):
         """Initialize JSON Database"""
-        json_dir = MY_DIRPATH
-        app_resdir = ''
-        if sys.platform == 'darwin':
-            json_dir = os.path.join(os.environ.get('HOME'), 'Library',
-                                    'Application Support', 'ZX123 Tool')
-            app_resdir = os.path.abspath(
-                os.path.join(MY_DIRPATH, '..', 'Resources'))
 
-        if not os.path.isdir(json_dir):
+        if not os.path.isdir(JSON_DIR):
             print('Initializing Resources...')
-            pathlib.Path(json_dir).mkdir(parents=True, exist_ok=True)
-            copy(os.path.join(app_resdir, 'zx123_hash.json'), json_dir)
+            pathlib.Path(JSON_DIR).mkdir(parents=True, exist_ok=True)
+            copy(os.path.join(APP_RESDIR, 'zx123_hash.json'), JSON_DIR)
             for str_ext in ['ZX1', 'ZX2', 'ZXD']:
-                copy(os.path.join(app_resdir, f'FLASH16_empty.{str_ext}.zip'),
-                     json_dir)
+                copy(os.path.join(APP_RESDIR, f'FLASH16_empty.{str_ext}.zip'),
+                     JSON_DIR)
 
-        fulldict_hash = zx123.load_json_bd(base_dir=json_dir)
-        if os.path.isdir(app_resdir):
-            tmp_hash = zx123.load_json_bd(base_dir=app_resdir)
+        fulldict_hash = zx123.load_json_bd(base_dir=JSON_DIR)
+        if os.path.isdir(APP_RESDIR):
+            tmp_hash = zx123.load_json_bd(base_dir=APP_RESDIR)
             if 'version' in tmp_hash:
                 old_version = '20211201.001'
                 my_version = tmp_hash['version']
@@ -111,112 +128,56 @@ class App(tk.Tk):
                     old_version = fulldict_hash['version']
                 if old_version < my_version:
                     print('Updating database file...')
-                    copy(os.path.join(app_resdir, 'zx123_hash.json'), json_dir)
+                    copy(os.path.join(APP_RESDIR, 'zx123_hash.json'), JSON_DIR)
 
-        self.fulldict_hash = zx123.load_json_bd(base_dir=json_dir)
+        self.fulldict_hash = zx123.load_json_bd(base_dir=JSON_DIR)
 
     def build_menubar(self):
         """Add Menu Bar"""
 
+        str_accl = 'Ctrl+'
         if sys.platform == 'win32':
             # Windows Menu Bar
-            menubar = tk.Menu(self)
-            filemenu = tk.Menu(menubar, tearoff=0)
-            filemenu.add_command(label="New Image File...",
-                                 accelerator="Ctrl+n")
-            filemenu.add_command(label="Open File...",
-                                 command=self.open_file,
-                                 accelerator="Ctrl+O")
-            filemenu.add_command(label="Close Image File",
-                                 accelerator="Ctrl+w",
-                                 command=self.close_image)
-            filemenu.add_separator()
-            filemenu.add_command(label="Get Info", accelerator="Ctrl+i")
-            filemenu.add_separator()
-            filemenu.add_command(label="Exit", command=self.destroy)
-            self.filemenu = filemenu
-
-            editmenu = tk.Menu(menubar, tearoff=0)
-            editmenu.add_command(
-                label="Cut",
-                accelerator="Ctrl+X",
-                command=lambda: self.focus_get().event_generate('<<Cut>>'))
-            editmenu.add_command(
-                label="Copy",
-                accelerator="Ctrl+C",
-                command=lambda: self.focus_get().event_generate('<<Copy>>'))
-            editmenu.add_command(
-                label="Paste",
-                accelerator="Ctrl+V",
-                command=lambda: self.focus_get().event_generate('<<Paste>>'))
-
-            menubar.add_cascade(label="File", menu=self.filemenu)
-            menubar.add_cascade(label="Edit", menu=editmenu)
-            self.menubar = menubar
-            self.config(menu=menubar)
+            str_accl = 'Ctrl+'
         elif sys.platform == 'darwin':
             # MacOS Menu Bar
-            menubar = tk.Menu(self)
-            filemenu = tk.Menu(menubar, tearoff=0)
-            filemenu.add_command(label="New Image File...",
-                                 accelerator="Command+n")
-            filemenu.add_command(label="Open File...",
-                                 command=self.open_file,
-                                 accelerator="Command+o")
-            filemenu.add_command(label="Close Image File",
-                                 accelerator="Command+w",
-                                 command=self.close_image)
+            str_accl = 'Command+'
+
+        menubar = tk.Menu(self)
+        filemenu = tk.Menu(menubar, tearoff=0)
+        filemenu.add_command(label='New Image File...',
+                             accelerator=f'{str_accl}n')
+        filemenu.add_command(label='Open File...',
+                             command=self.open_file,
+                             accelerator=f'{str_accl}O')
+        filemenu.add_command(label='Close Image File',
+                             accelerator=f'{str_accl}w',
+                             command=self.full_close_image)
+        filemenu.add_separator()
+        filemenu.add_command(label='Get Info', accelerator=f'{str_accl}i')
+        if sys.platform == 'win32':
             filemenu.add_separator()
-            filemenu.add_command(label="Get Info", accelerator="Command+i")
-            self.filemenu = filemenu
+            filemenu.add_command(label='Exit', command=self.destroy)
+        self.filemenu = filemenu
 
-            editmenu = tk.Menu(menubar, tearoff=0)
-            editmenu.add_command(
-                label="Cut",
-                accelerator="Command+X",
-                command=lambda: self.focus_get().event_generate('<<Cut>>'))
-            editmenu.add_command(
-                label="Copy",
-                accelerator="Command+C",
-                command=lambda: self.focus_get().event_generate('<<Copy>>'))
-            editmenu.add_command(
-                label="Paste",
-                accelerator="Command+V",
-                command=lambda: self.focus_get().event_generate('<<Paste>>'))
+        editmenu = tk.Menu(menubar, tearoff=0)
+        editmenu.add_command(
+            label='Cut',
+            accelerator=f'{str_accl}X',
+            command=lambda: self.focus_get().event_generate('<<Cut>>'))
+        editmenu.add_command(
+            label='Copy',
+            accelerator=f'{str_accl}C',
+            command=lambda: self.focus_get().event_generate('<<Copy>>'))
+        editmenu.add_command(
+            label='Paste',
+            accelerator=f'{str_accl}V',
+            command=lambda: self.focus_get().event_generate('<<Paste>>'))
 
-            menubar.add_cascade(label="File", menu=self.filemenu)
-            menubar.add_cascade(label="Edit", menu=editmenu)
-            self.menubar = menubar
-            self.config(menu=self.menubar)
-        else:
-            # Generic Menu Bar for other platforms
-            menubar = tk.Menu(self)
-            filemenu = tk.Menu(menubar, tearoff=0)
-            filemenu.add_command(label="New Image File...")
-            filemenu.add_command(label="Open File...", command=self.open_file)
-            filemenu.add_command(label="Close Image File",
-                                 command=self.close_image)
-            filemenu.add_separator()
-            filemenu.add_command(label="Get Info")
-
-            editmenu = tk.Menu(menubar, tearoff=0)
-            editmenu.add_command(
-                label="Cut",
-                accelerator="Ctrl+X",
-                command=lambda: self.focus_get().event_generate('<<Cut>>'))
-            editmenu.add_command(
-                label="Copy",
-                accelerator="Ctrl+C",
-                command=lambda: self.focus_get().event_generate('<<Copy>>'))
-            editmenu.add_command(
-                label="Paste",
-                accelerator="Ctrl+V",
-                command=lambda: self.focus_get().event_generate('<<Paste>>'))
-
-            menubar.add_cascade(label="File", menu=self.filemenu)
-            menubar.add_cascade(label="Edit", menu=editmenu)
-            self.menubar = menubar
-            self.config(menu=self.menubar)
+        menubar.add_cascade(label='File', menu=self.filemenu)
+        menubar.add_cascade(label='Edit', menu=editmenu)
+        self.menubar = menubar
+        self.config(menu=menubar)
 
         self.filemenu.entryconfig(0, state='disabled')
         self.filemenu.entryconfig(2, state='disabled')
@@ -224,29 +185,33 @@ class App(tk.Tk):
 
     def bind_keys(self):
         """Bind Menu Keys"""
+
+        str_bind = 'Control-'
         if sys.platform == 'win32':
-            self.bind_all("<Control-o>", lambda event: self.open_file())
-            self.bind_all("<Control-w>", lambda event: self.close_image())
+            str_bind = 'Control-'
         elif sys.platform == 'darwin':
-            self.bind_all("<Command-o>", lambda event: self.open_file())
-            self.bind_all("<Command-w>", lambda event: self.close_image())
-            self.bind_all("<Command-q>", lambda event: self.destroy())
-        else:
-            # Not Implemented
-            pass
+            str_bind = 'Command-'
+
+        self.bind_all(f'<{str_bind}o>', lambda event: self.open_file())
+        self.bind_all(f'<{str_bind}w>', lambda event: self.full_close_image())
+
+        if sys.platform == 'darwin':
+            self.bind_all(f'<{str_bind}q>', lambda event: self.destroy())
 
     def unbind_keys(self):
-        """Bind Menu Keys"""
+        """Unbind Menu Keys"""
+
+        str_bind = 'Control-'
         if sys.platform == 'win32':
-            self.unbind_all("<Control-o>")
-            self.unbind_all("<Control-w>")
+            str_bind = 'Control-'
         elif sys.platform == 'darwin':
-            self.unbind_all("<Command-o>")
-            self.unbind_all("<Command-w>")
-            self.unbind_all("<Command-q>")
-        else:
-            # Not Implemented
-            pass
+            str_bind = 'Command-'
+
+        self.unbind_all(f'<{str_bind}o>')
+        self.unbind_all(f'<{str_bind}w>')
+
+        if sys.platform == 'darwin':
+            self.unbind_all(f'<{str_bind}q>')
 
     def create_labels(self):
         "Create Main Window Labels"
@@ -257,7 +222,7 @@ class App(tk.Tk):
         if 'version' in self.fulldict_hash:
             version_label = ttk.Label(
                 self.blocks_frame,
-                font=("TkDefaultFont", 9),
+                font=('TkDefaultFont', 9),
                 text=f'Database: {self.fulldict_hash["version"]}')
             version_label.grid(column=7, row=0, columnspan=8, sticky='ne')
 
@@ -387,13 +352,13 @@ class App(tk.Tk):
     def create_tables(self):
         """Create Main Window Tables"""
         style = ttk.Style()
-        style.configure("Treeview.Cell", borderwidth=1)
+        style.configure('Treeview.Cell', borderwidth=1)
 
         core_table = ttk.Treeview(self.cores_frame, height=15)
         core_table.grid(column=0, row=1, columnspan=3, rowspan=8, sticky='nsw')
         core_table['columns'] = ('id', 'name', 'core', 'version')
-        core_table.column("#0", width=0, stretch=tk.NO)
-        core_table.heading("#0", text="", anchor=tk.CENTER)
+        core_table.column('#0', width=0, stretch=tk.NO)
+        core_table.heading('#0', text='', anchor=tk.CENTER)
         col_sizes = [30, 240, 200, 250]
         for index, col_name in enumerate(core_table['columns']):
             core_table.column(col_name, anchor=tk.W, width=col_sizes[index])
@@ -412,8 +377,8 @@ class App(tk.Tk):
         rom_table.grid(column=0, row=1, columnspan=4, sticky='nsew')
         rom_table['columns'] = ('id', 'slot', 'flags', 'crc', 'name', 'size',
                                 'version')
-        rom_table.column("#0", width=0, stretch=tk.NO)
-        rom_table.heading("#0", text="", anchor=tk.CENTER)
+        rom_table.column('#0', width=0, stretch=tk.NO)
+        rom_table.heading('#0', text='', anchor=tk.CENTER)
         col_sizes = [30, 30, 80, 155, 280, 40, 300]
         for index, col_name in enumerate(rom_table['columns']):
             rom_table.column(col_name, anchor=tk.W, width=col_sizes[index])
@@ -476,7 +441,7 @@ class App(tk.Tk):
         self.spectrum_export_button = spectrum_export_button
 
         core_import_button = ttk.Button(self.cores_frame,
-                                        text='Import Core',
+                                        text='Add New Core',
                                         state='disabled',
                                         width=17,
                                         command=self.core_import)
@@ -499,7 +464,7 @@ class App(tk.Tk):
         #self.rename_core_button = rename_core_button
 
         rom_import_button = ttk.Button(self.roms_frame,
-                                       text='Import ROM',
+                                       text='Add New ROM',
                                        state='disabled',
                                        width=17,
                                        command=self.rom_import)
@@ -521,13 +486,29 @@ class App(tk.Tk):
         #rom_rename_button.grid(column=2, row=2, sticky='w', pady=10)
         #self.rom_rename_button = rom_rename_button
 
-        rompack_button = ttk.Button(self.roms_frame,
-                                    text='Import ROMPack...',
-                                    state='disabled',
-                                    width=17,
-                                    command=self.rompack_import)
-        rompack_button.grid(column=3, row=2, sticky='we', pady=10)
-        self.rompack_button = rompack_button
+        rompack_import_button = ttk.Button(self.roms_frame,
+                                           text='Import ROMPack...',
+                                           state='disabled',
+                                           width=17,
+                                           command=self.rompack_import)
+        rompack_import_button.grid(column=2, row=2, sticky='we', pady=10)
+        self.rompack_import_button = rompack_import_button
+
+        rompack_export_button = ttk.Button(self.roms_frame,
+                                           text='Export ROMPack...',
+                                           state='disabled',
+                                           width=17,
+                                           command=self.rompack_export)
+        rompack_export_button.grid(column=3, row=2, sticky='we', pady=10)
+        self.rompack_export_button = rompack_export_button
+
+    def full_close_image(self):
+        """Restore button text and empty all fields of Main Window """
+        self.core_import_button['text'] = 'Add New Core'
+        self.core_export_button['text'] = 'Export Core'
+        self.rom_import_button['text'] = 'Add New ROM'
+        self.rom_export_button['text'] = 'Export ROM'
+        self.close_image()
 
     def close_image(self):
         """Empty all fields of Main Window"""
@@ -548,17 +529,18 @@ class App(tk.Tk):
         self.core_table.delete(*self.core_table.get_children())
         self.rom_table.delete(*self.rom_table.get_children())
 
-        self.bios_import_button.state(["disabled"])
-        self.bios_export_button.state(["disabled"])
-        self.esxdos_import_button.state(["disabled"])
-        self.esxdos_export_button.state(["disabled"])
-        self.spectrum_import_button.state(["disabled"])
-        self.spectrum_export_button.state(["disabled"])
-        self.core_import_button.state(["disabled"])
-        self.core_export_button.state(["disabled"])
-        self.rom_import_button.state(["disabled"])
-        self.rom_export_button.state(["disabled"])
-        self.rompack_button.state(["disabled"])
+        self.bios_import_button.state(['disabled'])
+        self.bios_export_button.state(['disabled'])
+        self.esxdos_import_button.state(['disabled'])
+        self.esxdos_export_button.state(['disabled'])
+        self.spectrum_import_button.state(['disabled'])
+        self.spectrum_export_button.state(['disabled'])
+        self.core_import_button.state(['disabled'])
+        self.core_export_button.state(['disabled'])
+        self.rom_import_button.state(['disabled'])
+        self.rom_export_button.state(['disabled'])
+        self.rompack_import_button.state(['disabled'])
+        self.rompack_export_button.state(['disabled'])
 
     def open_file(self, *args):
         """Open only one file"""
@@ -569,7 +551,7 @@ class App(tk.Tk):
         if args:
             str_file = args[0]
         else:
-            filetypes = [("ZX1, ZX2, ZXD or ROM files", ".zx1 .zx2 .zxd .rom")]
+            filetypes = [('ZX1, ZX2, ZXD or ROM files', '.zx1 .zx2 .zxd .rom')]
             str_file = fd.askopenfilename(parent=self,
                                           title='Select a file to open',
                                           filetypes=filetypes)
@@ -580,7 +562,7 @@ class App(tk.Tk):
                 str_file, self.fulldict_hash)
 
             if filetype == 'FlashImage':
-                self.close_image()
+                self.full_close_image()
                 self.zxfilepath = str_file
                 self.zxextension = str_extension
 
@@ -597,18 +579,20 @@ class App(tk.Tk):
                 self.populate_cores(dict_flash['cores'])
                 self.populate_roms(dict_roms)
 
-                self.bios_import_button.state(["!disabled"])
-                self.bios_export_button.state(["!disabled"])
-                self.esxdos_import_button.state(["!disabled"])
-                self.esxdos_export_button.state(["!disabled"])
-                self.spectrum_import_button.state(["!disabled"])
-                self.spectrum_export_button.state(["!disabled"])
-                self.core_import_button.state(["!disabled"])
-                self.rom_import_button.state(["!disabled"])
-                self.rompack_button.state(["!disabled"])
+                self.bios_import_button.state(['!disabled'])
+                self.bios_export_button.state(['!disabled'])
+                self.esxdos_import_button.state(['!disabled'])
+                self.esxdos_export_button.state(['!disabled'])
+                self.spectrum_import_button.state(['!disabled'])
+                self.spectrum_export_button.state(['!disabled'])
+                self.core_import_button.state(['!disabled'])
+                self.rom_import_button.state(['!disabled'])
+                self.rompack_import_button.state(['!disabled'])
+                if self.rom_table.get_children():
+                    self.rompack_export_button.state(['!disabled'])
             elif filetype == 'ROMPack v2':
                 print('ROMPack V2')
-                messagebox.showinfo("ROMPackv2", str_filename, parent=self)
+                messagebox.showinfo('ROMPackv2', str_filename, parent=self)
             else:
                 if str_file:
                     dict_file = zx123.find_zxfile(str_file, self.fulldict_hash,
@@ -664,26 +648,44 @@ class App(tk.Tk):
                                   text='',
                                   values=[index] + list(dict_roms[index])[:6])
 
-    def process_selected(self, treeview, button, str_text):
+    def process_selected(self, treeview, import_bttn, export_bttn, str_text):
         """Configure buttons on selections"""
 
         t_selection = treeview.selection()
         if t_selection:
-            button.state(["!disabled"])
+            import_bttn['text'] = f'Replace {str_text} {t_selection[0]}'
+            export_bttn.state(['!disabled'])
         else:
-            button.state(["disabled"])  # Disable the button.
+            import_bttn['text'] = f'Add New {str_text}'
+            export_bttn['text'] = f'Export {str_text}'
+            export_bttn.state(['disabled'])  # Disable the button.
+
         if len(t_selection) > 1:
-            button['text'] = f'Export {str_text}s'
+            export_bttn['text'] = f'Export {str_text}s'
         else:
-            button['text'] = f'Export {str_text}'
+            export_bttn['text'] = f'Export {str_text} {t_selection[0]}'
 
-    def coretable_selected(self, event):  # pylint: disable=unused-argument
+    def coretable_selected(self, *_):
         """Configure buttons depending on selected cores"""
-        self.process_selected(self.core_table, self.core_export_button, 'Core')
+        self.process_selected(self.core_table, self.core_import_button,
+                              self.core_export_button, 'Core')
 
-    def romtable_selected(self, event):  # pylint: disable=unused-argument
+    def romtable_selected(self, *_):
         """Configure buttons depending on selected ROMs"""
-        self.process_selected(self.rom_table, self.rom_export_button, 'ROM')
+        self.process_selected(self.rom_table, self.rom_import_button,
+                              self.rom_export_button, 'ROM')
+
+    def validate_file(self, str_file, arr_format):
+        """Checks the format of a file"""
+        str_extension, _, filetype = zx123.detect_file(str_file,
+                                                       self.fulldict_hash)
+        if filetype == 'Unknown':
+            dict_file = zx123.find_zxfile(str_file, self.fulldict_hash,
+                                          str_extension, False, True)
+            if 'kind' in dict_file:
+                filetype = dict_file['kind']
+
+        return bool(filetype in arr_format), filetype
 
     def block_import(self, str_block):
         """Generic block import method"""
@@ -696,12 +698,24 @@ class App(tk.Tk):
                                       filetypes=filetypes)
 
         if str_file:
-            zx123.inject_zxfiles(self.zxfilepath, [f'{str_block},{str_file}'],
-                                 self.zxfilepath,
-                                 self.fulldict_hash,
-                                 self.zxextension,
-                                 b_force=True)
-            self.open_file(self.zxfilepath)
+            b_block_ok, filetype = self.validate_file(str_file, [str_block])
+            if b_block_ok:
+                _, arr_err = zx123.inject_zxfiles(self.zxfilepath,
+                                                  [f'{str_block},{str_file}'],
+                                                  self.zxfilepath,
+                                                  self.fulldict_hash,
+                                                  self.zxextension,
+                                                  b_force=True)
+                if arr_err:
+                    str_error = f'ERROR\nCannot insert {str_block}.\n'
+                    str_error += '\n'.join(arr_err)
+                    messagebox.showerror('Error', str_error, parent=self)
+                else:
+                    self.open_file(self.zxfilepath)
+            else:
+                str_error = f'ERROR\nFile Format not valid.\n"{filetype}"'
+                str_error += f' detected, and it should be "{str_block}".'
+                messagebox.showerror('Error', str_error, parent=self)
 
         self.menubar.entryconfig(0, state='normal')
 
@@ -768,18 +782,31 @@ class App(tk.Tk):
 
         self.menubar.entryconfig(0, state='disabled')
 
-        str_extension = "ROM"
+        str_extension = 'ROM'
+        arr_format = [
+            '16K Spectrum ROM', '32K Spectrum ROM', '64K Spectrum ROM'
+        ]
         if b_core:
             str_extension = self.zxextension
+            arr_format = [str_name]
         filetypes = [(f'{self.zxextension} {str_name} files',
                       f'.{str_extension}')]
         str_file = fd.askopenfilename(parent=self,
                                       title=f'Open a {str_name} file',
                                       filetypes=filetypes)
+
+        if str_file:
+            b_block_ok, filetype = self.validate_file(str_file, arr_format)
+            if not b_block_ok:
+                str_file = ''
+                str_error = f'ERROR\nFile Format not valid.\n"{filetype}"'
+                str_error += f' detected, and it should be "{str_name}".'
+                messagebox.showerror('Error', str_error, parent=self)
+
         if str_file:
             t_selection = treeview.selection()
             itm_indx = 99
-            str_title = f'Add {str_name}'
+            str_title = f'Add New {str_name}'
             str_message = f'Do you want to add a new {str_name}?'
             if t_selection:
                 itm_indx = int(t_selection[0])
@@ -801,17 +828,26 @@ class App(tk.Tk):
                 slot_name = dialog.result_name
                 slot_param = f'{str_name},{itm_indx},{slot_name},{str_file}'
                 if not b_core:
-                    slot_number = treeview.item(itm_indx)['values'][1]
+                    if itm_indx == 99:
+                        slot_number = 99
+                    else:
+                        slot_number = treeview.item(itm_indx)['values'][1]
                     slot_extra = dialog.extra
                     slot_param = f'{str_name},{slot_number},{slot_extra}'
                     slot_param += f',{slot_name},{str_file}'
                 if slot_name:
-                    zx123.inject_zxfiles(self.zxfilepath, [slot_param],
-                                         self.zxfilepath,
-                                         self.fulldict_hash,
-                                         self.zxextension,
-                                         b_force=True)
-                    self.open_file(self.zxfilepath)
+                    _, arr_err = zx123.inject_zxfiles(self.zxfilepath,
+                                                      [slot_param],
+                                                      self.zxfilepath,
+                                                      self.fulldict_hash,
+                                                      self.zxextension,
+                                                      b_force=True)
+                    if arr_err:
+                        str_error = f'ERROR\nCannot insert {str_extension}.\n'
+                        str_error += '\n'.join(arr_err)
+                        messagebox.showerror('Error', str_error, parent=self)
+                    else:
+                        self.open_file(self.zxfilepath)
 
         self.menubar.entryconfig(0, state='normal')
 
@@ -832,27 +868,43 @@ class App(tk.Tk):
         self.multi_export('ROM', self.rom_table, False)
 
     def rompack_import(self):
-        """"ROMPack v1 imort action"""
+        """"ROMPack v1 import action"""
         self.menubar.entryconfig(0, state='disabled')
 
-        filetypes = [("ROMPack v1 files", ".zx1")]
+        filetypes = [('ROMPack v1 files', '.zx1')]
         str_file = fd.askopenfilename(parent=self,
                                       title='Open ROMPack v1 file',
                                       filetypes=filetypes)
 
         if str_file:
-            zx123.inject_zxfiles(self.zxfilepath, [f'ROMS,{str_file}'],
-                                 self.zxfilepath,
-                                 self.fulldict_hash,
-                                 self.zxextension,
-                                 b_force=True)
-            self.open_file(self.zxfilepath)
+            b_block_ok, filetype = self.validate_file(str_file, ['ROMPack'])
+            if b_block_ok:
+                _, arr_err = zx123.inject_zxfiles(self.zxfilepath,
+                                                  [f'ROMS,{str_file}'],
+                                                  self.zxfilepath,
+                                                  self.fulldict_hash,
+                                                  self.zxextension,
+                                                  b_force=True)
+                if arr_err:
+                    str_error = 'ERROR\nCannot insert ROMPack.\n'
+                    str_error += '\n'.join(arr_err)
+                    messagebox.showerror('Error', str_error, parent=self)
+                else:
+                    self.open_file(self.zxfilepath)
+            else:
+                str_error = f'ERROR\nFile Format not valid.\n"{filetype}"'
+                str_error += ' detected, and it should be "ROMPack".'
+                messagebox.showerror('Error', str_error, parent=self)
 
         self.menubar.entryconfig(0, state='normal')
 
+    def rompack_export(self):
+        """"Proxy for ROMPack v1 export action"""
+        self.block_export('ROMS')
+
 
 class NewEntryDialog:
-    """Custom Window to Enter Core or ROM info"""
+    """Custom Window to Add Core or ROM info"""
     dict_rom_params = {
         'i': 'Keyboard issue 3 enabled (instead of issue 2)',
         'c': 'Disable memory contention',
@@ -884,7 +936,7 @@ class NewEntryDialog:
         self.top.resizable(False, False)
 
         self.top.title(f'New {str_name} Entry')
-        self.top.bind("<Return>", self.do_ok)
+        self.top.bind('<Return>', self.do_ok)
 
         main_frame = ttk.Frame(self.top, padding=10)
         main_frame.pack(fill='both')
@@ -900,8 +952,8 @@ class NewEntryDialog:
         name_label.pack(side='left')
 
         self.name_entry = ttk.Entry(top_frame, width='32')
-        self.name_entry.bind("<Return>", self.do_ok)
-        self.name_entry.bind("<Escape>", self.do_cancel)
+        self.name_entry.bind('<Return>', self.do_ok)
+        self.name_entry.bind('<Escape>', self.do_cancel)
         self.name_entry.pack(side='right')
         self.name_entry.focus_set()
 
@@ -921,19 +973,19 @@ class NewEntryDialog:
                              sticky='w')
 
         ok_button = ttk.Button(bottom_frame,
-                               text="OK",
-                               default="active",
+                               text='OK',
+                               default='active',
                                command=self.do_ok)
         ok_button.pack(fill='x', side='right')
         cancel_button = ttk.Button(bottom_frame,
-                                   text="Cancel",
+                                   text='Cancel',
                                    command=self.do_cancel)
         cancel_button.pack(fill='x', side='right', padx=10)
 
         self.top.tk.eval(f'tk::PlaceWindow {self.top._w} center')
         self.top.wait_window()
 
-    def do_ok(self, event=None):  # pylint: disable=unused-argument
+    def do_ok(self, *_):
         """Process OK Button"""
         self.result_name = self.name_entry.get()
         if self.b_rom:
@@ -942,7 +994,7 @@ class NewEntryDialog:
                     self.extra += key
         self.top.destroy()
 
-    def do_cancel(self, event=None):  # pylint: disable=unused-argument
+    def do_cancel(self, *_):
         """Process Cancel Button"""
         self.top.destroy()
 
@@ -956,7 +1008,7 @@ class InfoWindow:
         self.top.resizable(False, False)
 
         self.top.title('Information')
-        self.top.bind("<Return>", self.do_ok)
+        self.top.bind('<Return>', self.do_ok)
 
         main_frame = ttk.Frame(self.top, padding=10)
         main_frame.pack(fill='both')
@@ -995,24 +1047,24 @@ class InfoWindow:
 
         #hash_frame = ttk.Frame(main_frame, padding=10)
         #hash_frame.pack(fill='x')
-        #hash_label = ttk.Label(hash_frame, text=f'Hash: {dict_data["hash"]}')
+        #hash_label = ttk.Label(hash_frame, text=f'Hash: {dict_data['hash']}')
         #hash_label.pack(side='left')
 
         button_frame = ttk.Frame(main_frame, padding=10)
         button_frame.pack(fill='x')
         ok_button = ttk.Button(button_frame,
-                               text="OK",
-                               default="active",
+                               text='OK',
+                               default='active',
                                command=self.do_ok)
         ok_button.pack()
 
         self.top.tk.eval(f'tk::PlaceWindow {self.top._w} center')
         self.top.wait_window()
 
-    def do_ok(self, event=None):  # pylint: disable=unused-argument
+    def do_ok(self, *_):
         """Process OK Button"""
         self.top.destroy()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
