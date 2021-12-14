@@ -102,8 +102,8 @@ def main():
     b_new_img = False
     if not str_file:
         if arg_data['output_file']:
-            str_file = unzip_image(MY_DIRPATH, arg_data['output_file'],
-                                   fulldict_hash, arg_data['force'])
+            str_file, _ = unzip_image(MY_DIRPATH, arg_data['output_file'],
+                                      fulldict_hash, arg_data['force'])
             b_new_img = True
             arg_data['force'] = True
             if not str_file:
@@ -661,6 +661,7 @@ def unzip_image(str_path, str_output, hash_dict, b_force):
     :return: New image file path if created or else an empty string
     """
     str_file = ''
+    str_err = ''
     str_extension = os.path.splitext(str_output)[1]
     str_extension = str_extension[1:].upper()
 
@@ -693,13 +694,15 @@ def unzip_image(str_path, str_output, hash_dict, b_force):
                             else:
                                 str_file = ''
             if not str_file:
-                LOGGER.error('Image file not extracted. Bad destination path?')
+                str_err = 'Image file not extracted. Bad destination path?'
         else:
-            LOGGER.error('Could not get base image file')
+            str_err = 'Could not get base image file'
     else:
-        LOGGER.error('Unknown extension: %s', str_extension)
+        str_err = f'Unknown extension: {str_extension}'
 
-    return str_file
+    if str_err:
+        LOGGER.error(str_err)
+    return str_file, str_err
 
 
 def detect_file(str_file, fulldict_hash):
