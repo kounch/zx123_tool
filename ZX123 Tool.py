@@ -146,6 +146,7 @@ class App(tk.Tk):
         menubar = tk.Menu(self)
         filemenu = tk.Menu(menubar, tearoff=0)
         filemenu.add_command(label='New Image File...',
+                             command=self.new_image,
                              accelerator=f'{str_accl}n')
         filemenu.add_command(label='Open File...',
                              command=self.open_file,
@@ -179,7 +180,7 @@ class App(tk.Tk):
         self.menubar = menubar
         self.config(menu=menubar)
 
-        self.filemenu.entryconfig(0, state='disabled')
+        #self.filemenu.entryconfig(0, state='disabled')
         self.filemenu.entryconfig(2, state='disabled')
         self.filemenu.entryconfig(4, state='disabled')
 
@@ -192,6 +193,7 @@ class App(tk.Tk):
         elif sys.platform == 'darwin':
             str_bind = 'Command-'
 
+        self.bind_all(f'<{str_bind}n>', lambda event: self.new_image())
         self.bind_all(f'<{str_bind}o>', lambda event: self.open_file())
         self.bind_all(f'<{str_bind}w>', lambda event: self.full_close_image())
 
@@ -207,6 +209,7 @@ class App(tk.Tk):
         elif sys.platform == 'darwin':
             str_bind = 'Command-'
 
+        self.unbind_all(f'<{str_bind}n>')
         self.unbind_all(f'<{str_bind}o>')
         self.unbind_all(f'<{str_bind}w>')
 
@@ -502,6 +505,24 @@ class App(tk.Tk):
         rompack_export_button.grid(column=3, row=2, sticky='we', pady=10)
         self.rompack_export_button = rompack_export_button
 
+    def new_image(self):
+        """Create a new image file from one of the included templates"""
+        filetypes = [('ZX1 Flash Image', '.zx1'),
+                     ('ZXDOS Flash Image', '.zx2'),
+                     ('ZXDOS+ Flash Image', '.zxd')]
+        str_file = fd.asksaveasfilename(parent=self,
+                                        title='New file to create',
+                                        filetypes=filetypes)
+        if str_file:
+            _, str_err = zx123.unzip_image(JSON_DIR, str_file,
+                                           self.fulldict_hash, True)
+            if str_err:
+                str_error = 'ERROR\nCannot create new image file.\n'
+                str_error += f'{str_err}\n'
+                messagebox.showerror('Error', str_error, parent=self)
+            else:
+                self.open_file(str_file)
+
     def full_close_image(self):
         """Restore button text and empty all fields of Main Window """
         self.core_import_button['text'] = 'Add New Core'
@@ -655,15 +676,14 @@ class App(tk.Tk):
         if t_selection:
             import_bttn['text'] = f'Replace {str_text} {t_selection[0]}'
             export_bttn.state(['!disabled'])
+            if len(t_selection) > 1:
+                export_bttn['text'] = f'Export {str_text}s'
+            else:
+                export_bttn['text'] = f'Export {str_text} {t_selection[0]}'
         else:
             import_bttn['text'] = f'Add New {str_text}'
             export_bttn['text'] = f'Export {str_text}'
             export_bttn.state(['disabled'])  # Disable the button.
-
-        if len(t_selection) > 1:
-            export_bttn['text'] = f'Export {str_text}s'
-        else:
-            export_bttn['text'] = f'Export {str_text} {t_selection[0]}'
 
     def coretable_selected(self, *_):
         """Configure buttons depending on selected cores"""
