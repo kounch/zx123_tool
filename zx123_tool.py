@@ -198,7 +198,7 @@ def main():
                                       output_file,
                                       fulldict_hash,
                                       str_extension,
-                                      b_force=arg_data['force']):
+                                      b_force=arg_data['force'])[0]:
                         arg_data['force'] = True
                         str_file = output_file
                 else:
@@ -1101,9 +1101,9 @@ def extractfrom_zxdata(str_in_file,
                 LOGGER.error('Invalid ROM index: %i', rom_number)
 
     if extract_item.upper() == 'ROMS':
-        # Extract all ZX Spectrum ROMs to ROMPack file
+        # Extract all ZX Spectrum ROMs to ROMPack v1 file
         default_rom = get_peek(str_in_file, 28736).to_bytes(1, 'little')
-        rom_dict_parts = fullhash_dict['ROM']['parts']
+        rom_dict_parts = fullhash_dict['ROMS']['parts']
         blk_info = rom_dict_parts['roms_dir']
         blk_bases = rom_dict_parts['roms_data']
         roms_data = 0x1000 * b'\x00' + 0x40 * b'\xff' + default_rom
@@ -1500,8 +1500,9 @@ def inject_zxfiles(str_spi_file,
     :param default_core: Default boot core (0 and up)
     :param default_rom: :Default boot Spectrum ROM (0 or greater)
     :param b_force: Force overwriting file
-    :return: Updated b_force
+    :return: Updated b_force and string array with errors (if any)
     """
+    arr_err = []
     b_changed = False
     hash_dict = fullhash_dict[str_extension]
 
@@ -1516,19 +1517,31 @@ def inject_zxfiles(str_spi_file,
 
     for str_in_params in arr_in_files:
         # Inject main ROMs
-        b_data, b_chg = inject_bindata(str_in_params, hash_dict, b_data)
+        b_data, b_chg, str_err = inject_bindata(str_in_params, hash_dict,
+                                                b_data)
         b_changed |= b_chg
+        if str_err:
+            arr_err.append(str_err)
         # Inject Cores
-        b_data, b_chg = inject_coredata(str_in_params, hash_dict, b_data)
+        b_data, b_chg, str_err = inject_coredata(str_in_params, hash_dict,
+                                                 b_data)
         b_changed |= b_chg
+        if str_err:
+            arr_err.append(str_err)
         # Inject ZX Spectrum ROMs from individual files
-        b_data, b_chg = inject_romdata(str_spi_file, str_in_params,
-                                       fullhash_dict, str_extension, b_data)
+        b_data, b_chg, str_err = inject_romdata(str_spi_file, str_in_params,
+                                                fullhash_dict, str_extension,
+                                                b_data)
         b_changed |= b_chg
+        if str_err:
+            arr_err.append(str_err)
         # Inject ZX Spectrum ROMs from ROMPack
-        b_data, b_chg = inject_romszx1data(str_in_params, fullhash_dict,
-                                           str_extension, b_data)
+        b_data, b_chg, str_err = inject_romszx1data(str_in_params,
+                                                    fullhash_dict,
+                                                    str_extension, b_data)
         b_changed |= b_chg
+        if str_err:
+            arr_err.append(str_err)
 
     # Modify BIOS settings
     b_data, b_chg = inject_biossettings(b_data,
@@ -1547,7 +1560,7 @@ def inject_zxfiles(str_spi_file,
                 out_zxdata.write(b_data)
                 print(f'{str_outfile} created OK.')
 
-    return b_force
+    return b_force, arr_err
 
 
 def savefrom_zxdata(str_in_file,
@@ -2118,9 +2131,10 @@ def inject_bindata(str_in_params, hash_dict, b_data):
      separated with ',', file path to the binary file
     :param hash_dict: Dictionary with hashes for different blocks
     :param b_data: SPI flash data
-    :return: Altered binary data and boolean indicating if it changed
+    :return: Altered binary data, boolean indicating changes and error string
     """
     b_changed = False
+    str_err = ''
     arr_params = str_in_params.split(',')
     br_data = b_data
 
@@ -2128,7 +2142,7 @@ def inject_bindata(str_in_params, hash_dict, b_data):
         hash_parts = hash_dict['parts'].get(bl_id, [])
         if arr_params[0].upper() == bl_id.upper():
             if len(arr_params) != 2:  # Filename
-                LOGGER.error('Invalid data: %s', str_in_params)
+                str_err = f'Invalid data: {str_in_params}'
             else:
                 str_in_file = arr_params[1]
                 str_hash = get_file_hash(str_in_file)
@@ -2150,7 +2164,9 @@ def inject_bindata(str_in_params, hash_dict, b_data):
                         br_data += b_data[b_offset + b_len:]
                         b_changed = True
 
-    return br_data, b_changed
+    if str_err:
+        LOGGER.error(str_err)
+    return br_data, b_changed, str_err
 
 
 def inject_coredata(str_in_params, hash_dict, b_data):
@@ -2160,8 +2176,9 @@ def inject_coredata(str_in_params, hash_dict, b_data):
      number, core name and file path to the core file
     :param hash_dict: Dictionary with hashes for different blocks
     :param b_data: SPI flash data
-    :return: Altered binary data and boolean indicating if it changed
+    :return: Altered binary data, boolean indicating changed and error string
     """
+    str_err = ''
     b_changed = False
     dict_parts = hash_dict['parts']
 
@@ -2182,7 +2199,7 @@ def inject_coredata(str_in_params, hash_dict, b_data):
         core_list = get_core_list_bindata(bl_data, dict_parts)
 
         if len(arr_params) != 4:
-            LOGGER.error('Invalid argument: %s', str_in_params)
+            str_err = f'Invalid argument: {str_in_params}'
         else:
             core_index = int(arr_params[1])
             str_name = f'{arr_params[2][:32]:<32}'
@@ -2205,7 +2222,7 @@ def inject_coredata(str_in_params, hash_dict, b_data):
                     core_index = len(core_list) + 2
 
                 if core_index < 2 or core_index > max_cores:
-                    LOGGER.error('Invalid core index: %i', core_index)
+                    str_err = f'Invalid core index: {core_index}'
                 else:
                     print(
                         f'Adding core {core_index}: {core_name} ({block_version})...'
@@ -2218,7 +2235,7 @@ def inject_coredata(str_in_params, hash_dict, b_data):
                     LOGGER.debug('Offset: %X (%i)', b_offset, b_offset)
 
                     if b_offset + b_len > len(b_data):
-                        LOGGER.error('Flash image too small for data')
+                        str_err = 'Flash image too small for data'
                     else:
                         core_index = 0x100 + core_index * 32
                         bl_data = bl_data[:core_index] + bytes(
@@ -2235,7 +2252,9 @@ def inject_coredata(str_in_params, hash_dict, b_data):
                         br_data += b_data[b_offset + b_len:]
                         b_changed = True
 
-    return br_data, b_changed
+    if str_err:
+        LOGGER.error(str_err)
+    return br_data, b_changed, str_err
 
 
 def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
@@ -2249,9 +2268,10 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
     :param fullhash_dict: Dictionary with hashes data
     :param str_extension: SPI Flash extension
     :param b_data: SPI flash data obtained from str_in_file
-    :return: Altered binary data and boolean indicating if it changed
+    :return: Altered binary data,boolean indicating changes, and error string
     """
     b_changed = False
+    str_err = ''
     b_roms = False
     if str_extension == 'RPv2':
         b_roms = True
@@ -2262,6 +2282,7 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
     arr_params = str_in_params.split(',')
     br_data = b_data
 
+    free_slot = 0
     block_info = dict_parts['roms_dir']
     max_slots = int(block_info[5])
     max_slots += int(block_info[6])
@@ -2269,20 +2290,27 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
 
     if arr_params[0].upper() == 'ROM':  # Slot, Params, Name, Filename
         if len(arr_params) != 5:
-            LOGGER.error('Invalid argument: %s', str_in_params)
+            str_err = f'Invalid argument: {str_in_params}'
         else:
             roms_list = get_rom_list(str_in_file, dict_parts, br_data)
             slot_use = []
             for rom_entry in roms_list:
+                if rom_entry[1] + 1 > free_slot:
+                    free_slot = rom_entry[1] + 1
                 i_slot = rom_entry[1] + 1
                 for _ in range(1, rom_entry[3]):
                     slot_use.append(i_slot)
                     i_slot += 1
+                    if i_slot > free_slot:
+                        free_slot = i_slot
 
             rom_slt = int(arr_params[1])
             rom_params = arr_params[2]
             str_name = arr_params[3]
             str_rom_file = arr_params[4]
+
+            if rom_slt == 99:
+                rom_slt = free_slot
 
             b_len = os.stat(str_rom_file).st_size
             if b_len != 0 and b_len % 16384 == 0:
@@ -2290,11 +2318,11 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
                 b_len = int(b_len / 16384)
 
                 if rom_slt in slot_use or rom_slt < 0 or rom_slt > max_slots:
-                    LOGGER.error('Invalid slot number: %i', rom_slt)
+                    str_err = f'Invalid slot number: {rom_slt}'
                     rom_slt = -1
 
                 if rom_slt + b_len > max_slots:
-                    LOGGER.error('Slot number too high (%i)', rom_slt)
+                    str_err = f'Slot number too high ({rom_slt})'
                     rom_slt = -1
 
                 rom_index = len(roms_list)
@@ -2302,8 +2330,7 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
                     if rom_slt == rom_entry[1]:
                         rom_index = rom_entry[0]
                         if b_len != rom_entry[3]:
-                            LOGGER.error('Invalid ROM size for slot %i',
-                                         rom_slt)
+                            str_err = f'Invalid ROM size for slot {rom_slt}'
                             rom_slt = -1
                         break
 
@@ -2324,7 +2351,9 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
                                                           rom_data,
                                                           roms_file=b_roms)
 
-    return br_data, b_changed
+    if str_err:
+        LOGGER.error(str_err)
+    return br_data, b_changed, str_err
 
 
 def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
@@ -2336,8 +2365,9 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
     :param fullhash_dict: Dictionary with hashes data
     :param str_extension: SPI Flash extension
     :param b_data: SPI flash data obtained from str_in_file
-    :return: Altered binary data and boolean indicating if it changed
+    :return: Altered binary data, indicating if it changed and error string
     """
+    str_err = ''
     b_changed = False
 
     # SPI flash ROMs
@@ -2368,7 +2398,7 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
 
     if arr_params[0].upper() == 'ROMS':  # Filename
         if len(arr_params) != 2:
-            LOGGER.error('Invalid argument: %s', str_in_params)
+            str_err = f'Invalid argument: {str_in_params}'
         else:
             str_name = arr_params[1]
             roms_list = get_rom_list(str_name, rom_dict_parts)
@@ -2401,14 +2431,16 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
                             b_roms)
                         b_changed |= b_chg
                     else:
-                        LOGGER.error('Slot number too high: %i', rom_slt)
+                        str_err = f'Slot number too high: {rom_slt}'
 
                 if b_changed:
                     br_data, b_chg = inject_biossettings(br_data,
                                                          default_rom=def_rom,
                                                          d_rom_addr=def_r_addr)
 
-    return br_data, b_changed
+    if str_err:
+        LOGGER.error(str_err)
+    return br_data, b_changed, str_err
 
 
 def inject_rom_tobin(b_data,
