@@ -1469,8 +1469,8 @@ def wipe_zxdata(str_spi_file,
     br_data += b_data[cur_pos:core_end]
     br_data += b'\x00' * (len(b_data) - core_end)
 
-    br_data, _ = inject_biossettings(br_data, vid_mode, keyb_layout,
-                                     boot_timer, 0, 0)
+    br_data, _, _ = inject_biossettings(br_data, vid_mode, keyb_layout,
+                                        boot_timer, 0, 0)
 
     # Write Data
     if b_force or check_overwrite(str_outfile):
@@ -1547,14 +1547,16 @@ def inject_zxfiles(str_spi_file,
             arr_err.append(str_err)
 
     # Modify BIOS settings
-    b_data, b_chg = inject_biossettings(b_data,
-                                        video_mode,
-                                        keyboard_layout,
-                                        boot_timer,
-                                        default_core,
-                                        default_rom,
-                                        d_rom_addr=def_rom_addr)
+    b_data, b_chg, arr_bios_err = inject_biossettings(b_data,
+                                                      video_mode,
+                                                      keyboard_layout,
+                                                      boot_timer,
+                                                      default_core,
+                                                      default_rom,
+                                                      d_rom_addr=def_rom_addr)
     b_changed |= b_chg
+    if arr_bios_err:
+        arr_err += arr_bios_err
 
     if b_changed:
         if b_force or check_overwrite(str_outfile):
@@ -1606,8 +1608,8 @@ def savefrom_zxdata(str_in_file,
     with open(str_in_file, "rb") as in_zxdata:
         bin_data = in_zxdata.read(bin_len)
 
-    bin_data, _ = inject_biossettings(bin_data, video_mode, keyboard_layout,
-                                      boot_timer, default_core, default_rom)
+    bin_data, _, _ = inject_biossettings(bin_data, video_mode, keyboard_layout,
+                                         boot_timer, default_core, default_rom)
 
     if n_cores > -1:
         core_offset = 0x7100 + (n_cores * 0x20)
@@ -2368,9 +2370,9 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
     :param fullhash_dict: Dictionary with hashes data
     :param str_extension: SPI Flash extension
     :param b_data: SPI flash data obtained from str_in_file
-    :return: Altered binary data, indicating if it changed and error string
+    :return: Altered binary data, boolean with change state and error strings
     """
-    str_err = ''
+    arr_err = []
     b_changed = False
 
     # SPI flash ROMs
@@ -2402,6 +2404,8 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
     if arr_params[0].upper() == 'ROMS':  # Filename
         if len(arr_params) != 2:
             str_err = f'Invalid argument: {str_in_params}'
+            LOGGER.error(str_err)
+            arr_err.append(str_err)
         else:
             str_name = arr_params[1]
             roms_list = get_rom_list(str_name, rom_dict_parts)
@@ -2435,15 +2439,16 @@ def inject_romszx1data(str_in_params, fullhash_dict, str_extension, b_data):
                         b_changed |= b_chg
                     else:
                         str_err = f'Slot number too high: {rom_slt}'
+                        LOGGER.error(str_err)
+                        arr_err.append(str_err)
 
                 if b_changed:
-                    br_data, b_chg = inject_biossettings(br_data,
-                                                         default_rom=def_rom,
-                                                         d_rom_addr=def_r_addr)
+                    br_data, b_chg, arr_b_err = inject_biossettings(
+                        br_data, default_rom=def_rom, d_rom_addr=def_r_addr)
+                    if arr_b_err:
+                        arr_err += arr_b_err
 
-    if str_err:
-        LOGGER.error(str_err)
-    return br_data, b_changed, str_err
+    return br_data, b_changed, arr_err
 
 
 def inject_rom_tobin(b_data,
@@ -2531,10 +2536,11 @@ def inject_biossettings(b_data,
     :param boot_timer: 0 (No timer), 1, 2 (2x), 3 (4x), 4 (8x)
     :param default_core: Default boot core (0 and up)
     :param default_rom: :Default boot Spectrum ROM (0 or greater)
-    :return: Altered SPI flash data
+    :return: Altered SPI flash data, alter state and error strings array
     """
     b_changed = False
     br_data = b_data
+    arr_err = []
 
     # 28736 Default ROM: 00-xx
     if default_rom > -1:
@@ -2551,7 +2557,9 @@ def inject_biossettings(b_data,
     # 28738 0-4 Boot Timer
     if boot_timer > -1:
         if boot_timer > 4:
-            LOGGER.error('Wrong Boot Timer: %i', boot_timer)
+            str_err = f'Wrong Boot Timer: {boot_timer}'
+            LOGGER.error(str_err)
+            arr_err.append(str_err)
         else:
             br_data = br_data[:28738] + struct.pack(
                 '<B', boot_timer) + br_data[28739:]
@@ -2560,7 +2568,9 @@ def inject_biossettings(b_data,
     # 28746 0-3 Keyboard Layout: Auto-ES-EN-ZX
     if keyboard_layout > -1:
         if keyboard_layout > 3:
-            LOGGER.error('Wrong Keyboard Layout: %i', keyboard_layout)
+            str_err = f'Wrong Keyboard Layout: {keyboard_layout}'
+            LOGGER.error(str_err)
+            arr_err.append(str_err)
         else:
             br_data = br_data[:28746] + struct.pack(
                 '<B', keyboard_layout) + br_data[28747:]
@@ -2569,13 +2579,15 @@ def inject_biossettings(b_data,
     # 28749 0-2 Video: PAL-NTSC-VGA
     if video_mode > -1:
         if video_mode > 3:
-            LOGGER.error('Wrong Video Mode: %i', video_mode)
+            str_err = f'Wrong Video Mode: {video_mode}'
+            LOGGER.error(str_err)
+            arr_err.append(str_err)
         else:
             br_data = br_data[:28749] + struct.pack(
                 '<B', video_mode) + br_data[28750:]
             b_changed = True
 
-    return br_data, b_changed
+    return br_data, b_changed, arr_err
 
 
 # SPI/ROM file generic functions
