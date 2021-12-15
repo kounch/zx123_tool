@@ -4,7 +4,7 @@
 # Do not modify previous lines. See PEP 8, PEP 263.
 # pylint: disable=too-many-lines
 """
-Copyright (c) 2020-2021, kounch
+Copyright (c) 2021, kounch
 All rights reserved.
 
 SPDX-License-Identifier: BSD-2-Clause
@@ -19,6 +19,8 @@ These are the main features:
   ROMs and several BIOS settings
 - Extract BIOS, esxdos ROM, Spectrum core and/or other cores, Spectrum ROMs to
   individual files
+- Change some BIOS default options (video mode, keyboard layout, default core,
+  default ROM, etc.)
 - Add or replace FPGA cores and/or Spectrum ROM images (from individual ROM
   files or ROMPack files)
 - If supplied a different kind of file (like a core or BIOS installation file)
@@ -47,6 +49,9 @@ if sys.platform == 'darwin':
     JSON_DIR = os.path.join(os.environ.get('HOME'), 'Library',
                             'Application Support', 'ZX123 Tool')
     APP_RESDIR = os.path.abspath(os.path.join(MY_DIRPATH, '..', 'Resources'))
+elif sys.platform == 'win32':
+    JSON_DIR = os.path.join(os.path.expandvars('%LOCALAPPDATA%'), 'ZX123 Tool')
+    APP_RESDIR = MY_DIRPATH
 
 
 def main():
@@ -75,8 +80,17 @@ class App(tk.Tk):
             # Other
             pass
 
+        if sys.version_info < (3, 8, 0):
+            str_error = 'ERROR\n'
+            str_error += 'This software requires at least Python version 3.8'
+            messagebox.showerror('Error', str_error, parent=self)
+            self.destroy()
+            return
+
         self.load_json()
         self.zxfilepath = ''
+        self.old_core = self.old_timer = self.old_keyboard = None
+        self.old_video = self.old_rom = None
 
         # Menu
         self.build_menubar()
@@ -217,7 +231,10 @@ class App(tk.Tk):
             self.unbind_all(f'<{str_bind}q>')
 
     def create_labels(self):
-        "Create Main Window Labels"
+        """
+        Create Main Window Labels
+        :return: reference to image_label
+        """
 
         image_label = ttk.Label(self.blocks_frame, text='No Image File')
         image_label.grid(column=0, row=0, columnspan=7, sticky='n')
@@ -303,57 +320,80 @@ class App(tk.Tk):
         self.spectrum_entry = spectrum_entry
 
         self.default_core = tk.StringVar()
-        core_spin_box = ttk.Spinbox(self.cores_frame,
-                                    from_=2,
-                                    to=39,
-                                    wrap=False,
-                                    width=4,
-                                    state='disabled',
-                                    textvariable=self.default_core)
-        core_spin_box.grid(column=4, row=1, sticky='e')
-
-        self.default_timer = tk.StringVar()
-        timer_spin_box = ttk.Spinbox(self.cores_frame,
-                                     from_=0,
-                                     to=3,
-                                     wrap=False,
-                                     width=4,
-                                     state='disabled',
-                                     textvariable=self.default_timer)
-        timer_spin_box.grid(column=4, row=2, sticky='e')
-
-        self.default_keyboard = tk.StringVar()
-        keyboard_spin_box = ttk.Spinbox(self.cores_frame,
-                                        from_=0,
-                                        to=3,
-                                        wrap=False,
-                                        width=4,
-                                        state='disabled',
-                                        textvariable=self.default_keyboard)
-        keyboard_spin_box.grid(column=4, row=3, sticky='e')
-
-        self.default_video = tk.StringVar()
-        video_spin_box = ttk.Spinbox(self.cores_frame,
-                                     from_=0,
-                                     to=2,
-                                     wrap=False,
-                                     width=4,
-                                     state='disabled',
-                                     textvariable=self.default_video)
-        video_spin_box.grid(column=4, row=4, sticky='e')
-
-        self.default_rom = tk.StringVar()
-        rom_spin_box = ttk.Spinbox(self.cores_frame,
-                                   from_=0,
-                                   to=2,
+        core_spinbox = ttk.Spinbox(self.cores_frame,
+                                   from_=1,
+                                   to=1,
                                    wrap=False,
                                    width=4,
                                    state='disabled',
-                                   textvariable=self.default_rom)
-        rom_spin_box.grid(column=4, row=8, sticky='e')
+                                   command=self.changed_core_spinbox,
+                                   textvariable=self.default_core)
+        core_spinbox.grid(column=4, row=1, sticky='e')
+        core_spinbox.bind('<Return>', self.set_default_core)
+        core_spinbox.bind('<FocusOut>', self.set_default_core)
+        self.core_spinbox = core_spinbox
+
+        self.default_timer = tk.StringVar()
+        timer_spinbox = ttk.Spinbox(self.cores_frame,
+                                    from_=0,
+                                    to=4,
+                                    wrap=False,
+                                    width=4,
+                                    state='disabled',
+                                    command=self.changed_timer_spinbox,
+                                    textvariable=self.default_timer)
+        timer_spinbox.grid(column=4, row=2, sticky='e')
+        timer_spinbox.bind('<Return>', self.set_default_timer)
+        timer_spinbox.bind('<FocusOut>', self.set_default_timer)
+        self.timer_spinbox = timer_spinbox
+
+        self.default_keyboard = tk.StringVar()
+        keyboard_spinbox = ttk.Spinbox(self.cores_frame,
+                                       from_=0,
+                                       to=3,
+                                       wrap=False,
+                                       width=4,
+                                       state='disabled',
+                                       command=self.changed_keyboard_spinbox,
+                                       textvariable=self.default_keyboard)
+        keyboard_spinbox.grid(column=4, row=3, sticky='e')
+        keyboard_spinbox.bind('<Return>', self.set_default_keyboard)
+        keyboard_spinbox.bind('<FocusOut>', self.set_default_keyboard)
+        self.keyboard_spinbox = keyboard_spinbox
+
+        self.default_video = tk.StringVar()
+        video_spinbox = ttk.Spinbox(self.cores_frame,
+                                    from_=0,
+                                    to=2,
+                                    wrap=False,
+                                    width=4,
+                                    state='disabled',
+                                    command=self.changed_video_spinbox,
+                                    textvariable=self.default_video)
+        video_spinbox.grid(column=4, row=4, sticky='e')
+        video_spinbox.bind('<Return>', self.set_default_video)
+        video_spinbox.bind('<FocusOut>', self.set_default_video)
+        self.video_spinbox = video_spinbox
+
+        self.default_rom = tk.StringVar()
+        rom_spinbox = ttk.Spinbox(self.cores_frame,
+                                  from_=0,
+                                  to=0,
+                                  wrap=False,
+                                  width=4,
+                                  state='disabled',
+                                  command=self.changed_rom_spinbox,
+                                  textvariable=self.default_rom)
+        rom_spinbox.grid(column=4, row=8, sticky='e')
+        rom_spinbox.bind('<Return>', self.set_default_rom)
+        rom_spinbox.bind('<FocusOut>', self.set_default_rom)
+        self.rom_spinbox = rom_spinbox
 
     def create_tables(self):
-        """Create Main Window Tables"""
+        """
+        Create Main Window Tables
+        :return: References to core_table and rom_table
+        """
         style = ttk.Style()
         style.configure('Treeview.Cell', borderwidth=1)
 
@@ -459,13 +499,6 @@ class App(tk.Tk):
         core_export_button.grid(column=3, row=6, columnspan=2, sticky='e')
         self.core_export_button = core_export_button
 
-        #rename_core_button = ttk.Button(self.cores_frame,
-        #                                text='Rename Core',
-        #                                state='disabled',
-        #                                width=17)
-        #rename_core_button.grid(column=3, row=7, columnspan=2, sticky='e')
-        #self.rename_core_button = rename_core_button
-
         rom_import_button = ttk.Button(self.roms_frame,
                                        text='Add New ROM',
                                        state='disabled',
@@ -481,13 +514,6 @@ class App(tk.Tk):
                                        command=self.rom_export)
         rom_export_button.grid(column=1, row=2, sticky='we', padx=10, pady=10)
         self.rom_export_button = rom_export_button
-
-        #rom_rename_button = ttk.Button(self.roms_frame,
-        #                               text='Rename ROM',
-        #                               state='disabled',
-        #                               width=17)
-        #rom_rename_button.grid(column=2, row=2, sticky='w', pady=10)
-        #self.rom_rename_button = rom_rename_button
 
         rompack_import_button = ttk.Button(self.roms_frame,
                                            text='Import ROMPack...',
@@ -562,9 +588,17 @@ class App(tk.Tk):
         self.rom_export_button.state(['disabled'])
         self.rompack_import_button.state(['disabled'])
         self.rompack_export_button.state(['disabled'])
+        self.core_spinbox.state(['disabled'])
+        self.timer_spinbox.state(['disabled'])
+        self.keyboard_spinbox.state(['disabled'])
+        self.video_spinbox.state(['disabled'])
+        self.rom_spinbox.state(['disabled'])
 
     def open_file(self, *args):
-        """Open only one file"""
+        """
+        Open the first file received. If there's no file, ask for it
+        :param args: Array of file paths. Only the first element is analyzed
+        """
 
         # Disable File Menu
         self.menubar.entryconfig(0, state='disabled')
@@ -608,8 +642,21 @@ class App(tk.Tk):
                 self.spectrum_export_button.state(['!disabled'])
                 self.core_import_button.state(['!disabled'])
                 self.rom_import_button.state(['!disabled'])
+
+                core_number = len(self.core_table.get_children())
+                self.core_spinbox.config(from_=1)
+                self.core_spinbox.config(to=core_number + 1)
+                self.core_spinbox.state(['!disabled'])
+                self.timer_spinbox.state(['!disabled'])
+                self.keyboard_spinbox.state(['!disabled'])
+                self.video_spinbox.state(['!disabled'])
+                rom_number = len(self.rom_table.get_children())
+                self.rom_spinbox.config(from_=0)
+                self.rom_spinbox.config(to=rom_number - 1)
+                self.rom_spinbox.state(['!disabled'])
+
                 self.rompack_import_button.state(['!disabled'])
-                if self.rom_table.get_children():
+                if rom_number:
                     self.rompack_export_button.state(['!disabled'])
             elif filetype == 'ROMPack v2':
                 print('ROMPack V2')
@@ -632,7 +679,10 @@ class App(tk.Tk):
         self.menubar.entryconfig(0, state='normal')
 
     def populate_blocks(self, dict_blocks):
-        """Populate Blocks Data in Main Window"""
+        """
+        Populate Blocks Data Entries texts in Main Window
+        :param dict_blocks: Array with different blocks data
+        """
 
         if 'BIOS' in dict_blocks:
             self.bios.set(dict_blocks['BIOS'][0])
@@ -642,16 +692,27 @@ class App(tk.Tk):
             self.spectrum.set(dict_blocks['Spectrum'][0])
 
     def populate_defaults(self, dict_defaults):
-        """Populate Defaults Data in Main Window"""
+        """
+        Populate Defaults Data texts in Main Window and old_... properties
+        :param dict_defaults: Dictionary with values for defaults
+        """
 
-        self.default_core.set(dict_defaults['default_core'])
-        self.default_timer.set(dict_defaults['boot_timer'])
-        self.default_keyboard.set(dict_defaults['keyb_layout'])
-        self.default_video.set(dict_defaults['video_mode'])
-        self.default_rom.set(dict_defaults['default_rom'])
+        self.old_core = dict_defaults['default_core']
+        self.default_core.set(self.old_core)
+        self.old_timer = dict_defaults['boot_timer']
+        self.default_timer.set(self.old_timer)
+        self.old_keyboard = dict_defaults['keyb_layout']
+        self.default_keyboard.set(self.old_keyboard)
+        self.old_video = dict_defaults['video_mode']
+        self.default_video.set(self.old_video)
+        self.old_rom = dict_defaults['default_rom']
+        self.default_rom.set(self.old_rom)
 
     def populate_cores(self, dict_cores):
-        """Populate Cores Data in Main Window"""
+        """
+        Populate Cores Data Table (TreeView) in Main Window
+        :param dict_cores: Dictionary with cores data
+        """
         for index in dict_cores:
             self.core_table.insert(parent='',
                                    index='end',
@@ -661,7 +722,10 @@ class App(tk.Tk):
                                    list(dict_cores[index])[:3])
 
     def populate_roms(self, dict_roms):
-        """Populate ROMs Data in Main Window"""
+        """
+        Populate ROMs Data Table (TreeView) in Main Window
+        :param dict_roms: Dictionary with ROMs data
+        """
         for index in dict_roms:
             self.rom_table.insert(parent='',
                                   index='end',
@@ -670,7 +734,13 @@ class App(tk.Tk):
                                   values=[index] + list(dict_roms[index])[:6])
 
     def process_selected(self, treeview, import_bttn, export_bttn, str_text):
-        """Configure buttons on selections"""
+        """
+        Configure buttons according to the selections sent by ..._selected...
+        :param treeview: Origin of the selection event
+        :param import_bttn: Associated import button
+        :param export_bttn: Associated export button
+        :param str_text: Associated text to compose the buttons content
+        """
 
         t_selection = treeview.selection()
         if t_selection:
@@ -686,17 +756,26 @@ class App(tk.Tk):
             export_bttn.state(['disabled'])  # Disable the button.
 
     def coretable_selected(self, *_):
-        """Configure buttons depending on selected cores"""
+        """
+        Configure Cores Data Table buttons depending on selected cores
+        """
         self.process_selected(self.core_table, self.core_import_button,
                               self.core_export_button, 'Core')
 
     def romtable_selected(self, *_):
-        """Configure buttons depending on selected ROMs"""
+        """
+        Configure ROMs Data Table buttons depending on selected ROMs
+        """
         self.process_selected(self.rom_table, self.rom_import_button,
                               self.rom_export_button, 'ROM')
 
     def validate_file(self, str_file, arr_format):
-        """Checks the format of a file"""
+        """
+        Checks if a file matches the selected format list
+        :param str_file: File to analyze
+        :arr_format: List of formats considered valid (e.g. ['ROMPack'])
+        :return: True if valid
+        """
         str_extension, _, filetype = zx123.detect_file(str_file,
                                                        self.fulldict_hash)
         if filetype == 'Unknown':
@@ -707,8 +786,109 @@ class App(tk.Tk):
 
         return bool(filetype in arr_format), filetype
 
+    def set_default_bios(self, bios_value, old_val, min_val, max_val, str_val):
+        """
+        Changes BIOS settings of flash image if the value is different
+        :param bios_value: Variable associated to spinbox content
+        :param old_val: Previous value to check against
+        :param min_val: Minimum valid value
+        :param max_val: Maximum valid value
+        :param str_val: Param name according to 'video', 'keyboard', etc.
+        :return: The final value evaluated, either the old or the new
+        """
+        self.changed_bios_spinbox(bios_value, min_val, max_val)
+        new_val = bios_value.get()
+        if new_val.isnumeric():
+            new_val = int(new_val)
+            if new_val != old_val:
+                arr_val = ['video', 'keyboard', 'timer', 'core', 'rom']
+                for elem in enumerate(arr_val):
+                    if str_val == elem[1]:
+                        arr_val[elem[0]] = new_val
+                    else:
+                        arr_val[elem[0]] = -1
+                zx123.inject_zxfiles(self.zxfilepath, [], self.zxfilepath,
+                                     self.fulldict_hash, self.zxextension,
+                                     arr_val[0], arr_val[1], arr_val[2],
+                                     arr_val[3], arr_val[4], True)
+                return new_val
+
+        return old_val
+
+    def set_default_core(self, *_):
+        """Proxy to set_default_bios for default Core set action"""
+        self.old_core = self.set_default_bios(
+            self.default_core, self.old_core, 1,
+            len(self.core_table.get_children()) + 1, 'core')
+
+    def set_default_timer(self, *_):
+        """Proxy to set_default_bios for default timer set action"""
+        self.old_timer = self.set_default_bios(self.default_timer,
+                                               self.old_timer, 0, 4, 'timer')
+
+    def set_default_keyboard(self, *_):
+        """Proxy to set_default_bios for default keyboard set action"""
+        self.old_keyboard = self.set_default_bios(self.default_keyboard,
+                                                  self.old_keyboard, 0, 3,
+                                                  'keyboard')
+
+    def set_default_video(self, *_):
+        """Proxy to set_default_bios for default video set action"""
+        self.old_video = self.set_default_bios(self.default_video,
+                                               self.old_video, 0, 2, 'video')
+
+    def set_default_rom(self, *_):
+        """Proxy to set_default_bios for default ROM set action"""
+        self.old_rom = self.set_default_bios(
+            self.default_rom, 0, self.old_rom,
+            len(self.rom_table.get_children()) - 1, 'rom')
+
+    def changed_bios_spinbox(self, bios_value, min_val, max_val):
+        """
+        Process default bios setting change event, and enforce limits if needed
+        :param bios_value: Variable associated to spinbox content
+        :param min_val: Minimum valid value
+        :param max_val: Maximum valid value
+        """
+        new_val = bios_value.get()
+        if new_val.isnumeric():
+            new_val = int(new_val)
+            if new_val < min_val:
+                new_val = min_val
+            if new_val > max_val:
+                new_val = max_val
+        else:
+            new_val = min_val
+
+        bios_value.set(new_val)
+
+    def changed_core_spinbox(self, *_):
+        """Proxy to changed_bios_spinbox for default Core changed action"""
+        self.changed_bios_spinbox(self.default_core, 1,
+                                  len(self.core_table.get_children()) + 1)
+
+    def changed_timer_spinbox(self, *_):
+        """Proxy to changed_bios_spinbox for default timer changed action"""
+        self.changed_bios_spinbox(self.default_timer, 0, 4)
+
+    def changed_keyboard_spinbox(self, *_):
+        """Proxy to changed_bios_spinbox for default keyboard changed action"""
+        self.changed_bios_spinbox(self.default_keyboard, 0, 3)
+
+    def changed_video_spinbox(self, *_):
+        """Proxy to changed_bios_spinbox for default video changed action"""
+        self.changed_bios_spinbox(self.default_video, 0, 2)
+
+    def changed_rom_spinbox(self, *_):
+        """Proxy to changed_bios_spinbox for default ROM changed action"""
+        self.changed_bios_spinbox(self.default_rom, 0,
+                                  len(self.rom_table.get_children()) - 1)
+
     def block_import(self, str_block):
-        """Generic block import method"""
+        """
+        Generic block import to SPI flash image file
+        :param str_block: Name of the kind of block (e.g. 'BIOS')
+        """
 
         self.menubar.entryconfig(0, state='disabled')
 
@@ -720,18 +900,25 @@ class App(tk.Tk):
         if str_file:
             b_block_ok, filetype = self.validate_file(str_file, [str_block])
             if b_block_ok:
-                _, arr_err = zx123.inject_zxfiles(self.zxfilepath,
-                                                  [f'{str_block},{str_file}'],
-                                                  self.zxfilepath,
-                                                  self.fulldict_hash,
-                                                  self.zxextension,
-                                                  b_force=True)
-                if arr_err:
-                    str_error = f'ERROR\nCannot insert {str_block}.\n'
-                    str_error += '\n'.join(arr_err)
-                    messagebox.showerror('Error', str_error, parent=self)
-                else:
-                    self.open_file(self.zxfilepath)
+                str_title = f'Replace {str_block}'
+                str_message = f'Do you want to replace {str_block}?'
+                response = messagebox.askyesno(parent=self,
+                                               icon='question',
+                                               title=str_title,
+                                               message=str_message)
+                if response:
+                    _, arr_err = zx123.inject_zxfiles(
+                        self.zxfilepath, [f'{str_block},{str_file}'],
+                        self.zxfilepath,
+                        self.fulldict_hash,
+                        self.zxextension,
+                        b_force=True)
+                    if arr_err:
+                        str_error = f'ERROR\nCannot insert {str_block}.\n'
+                        str_error += '\n'.join(arr_err)
+                        messagebox.showerror('Error', str_error, parent=self)
+                    else:
+                        self.open_file(self.zxfilepath)
             else:
                 str_error = f'ERROR\nFile Format not valid.\n"{filetype}"'
                 str_error += f' detected, and it should be "{str_block}".'
@@ -740,7 +927,10 @@ class App(tk.Tk):
         self.menubar.entryconfig(0, state='normal')
 
     def block_export(self, str_block):
-        """Generic block export method"""
+        """
+        Generic block export from SPI flash image file
+        :param str_block: Name of the kind of block (e.g. 'BIOS')
+        """
 
         self.menubar.entryconfig(0, state='disabled')
 
@@ -757,48 +947,36 @@ class App(tk.Tk):
         self.menubar.entryconfig(0, state='normal')
 
     def bios_import(self):
-        """Proxy for BIOS import action"""
+        """Proxy to block_import for BIOS import action"""
         self.block_import('BIOS')
 
     def bios_export(self):
-        """Proxy for BIOS export action"""
+        """Proxy to block_import for BIOS export action"""
         self.block_export('BIOS')
 
     def esxdos_import(self):
-        """Proxy for esxdos import action"""
+        """Proxy to block_import for esxdos import action"""
         self.block_import('esxdos')
 
     def esxdos_export(self):
-        """Proxy for esxdos export action"""
+        """Proxy to block_import for esxdos export action"""
         self.block_export('esxdos')
 
     def spectrum_import(self):
-        """Proxy for Spectrum Core import action"""
+        """Proxy to block_import for Spectrum Core import action"""
         self.block_import('Spectrum')
 
     def spectrum_export(self):
-        """Proxy for Spectrum Core export action"""
+        """Proxy to block_import for Spectrum Core export action"""
         self.block_export('spectrum')
 
-    def multi_export(self, str_name, treeview, b_is_core=False):
-        """Generic cores or ROMs export method"""
-        self.menubar.entryconfig(0, state='disabled')
-
-        str_directory = os.path.dirname(self.zxfilepath)
-        str_directory = fd.askdirectory(parent=self,
-                                        initialdir=str_directory,
-                                        title=f'Select {str_name} Export Path')
-        if str_directory:
-            t_selection = treeview.selection()
-            for x_item in t_selection:
-                zx123.extractfrom_zxdata(self.zxfilepath, x_item,
-                                         self.fulldict_hash, str_directory,
-                                         self.zxextension, True, b_is_core)
-
-        self.menubar.entryconfig(0, state='normal')
-
     def multi_import(self, str_name, treeview, b_core=False):
-        """Generic core or ROM import"""
+        """
+        Generic core or ROM import to SPI flash Image
+        :param str_name: Text to compose dialogs
+        :param treeview: Reference to the table with (maybe) a selection
+        :param b_core: If True, the selection is a Core, or else a ROM
+        """
 
         self.menubar.entryconfig(0, state='disabled')
 
@@ -824,18 +1002,17 @@ class App(tk.Tk):
                 messagebox.showerror('Error', str_error, parent=self)
 
         if str_file:
-            t_selection = treeview.selection()
             itm_indx = 99
-            str_title = f'Add New {str_name}'
-            str_message = f'Do you want to add a new {str_name}?'
+            t_selection = treeview.selection()
+            response = True
             if t_selection:
                 itm_indx = int(t_selection[0])
                 str_title = f'Replace {str_name}'
                 str_message = f'Do you want to replace {str_name} {itm_indx}?'
-            response = messagebox.askyesno(parent=self,
-                                           icon='question',
-                                           title=str_title,
-                                           message=str_message)
+                response = messagebox.askyesno(parent=self,
+                                               icon='question',
+                                               title=str_title,
+                                               message=str_message)
 
             if response:
                 str_dialog_name = f'{str_name}'
@@ -871,24 +1048,46 @@ class App(tk.Tk):
 
         self.menubar.entryconfig(0, state='normal')
 
+    def multi_export(self, str_name, treeview, b_core=False):
+        """
+        Generic core(s) or ROM(s) export from SPI flash Image
+        :param str_name: Text to compose dialogs
+        :param treeview: Reference to the table (TreeView) with a selection
+        :param b_is_core: If True, the selection are Cores, or else ROMs
+        """
+        self.menubar.entryconfig(0, state='disabled')
+
+        str_directory = os.path.dirname(self.zxfilepath)
+        str_directory = fd.askdirectory(parent=self,
+                                        initialdir=str_directory,
+                                        title=f'Select {str_name} Export Path')
+        if str_directory:
+            t_selection = treeview.selection()
+            for x_item in t_selection:
+                zx123.extractfrom_zxdata(self.zxfilepath, x_item,
+                                         self.fulldict_hash, str_directory,
+                                         self.zxextension, True, b_core)
+
+        self.menubar.entryconfig(0, state='normal')
+
     def core_import(self):
-        """Proxy for secondary Core import action"""
+        """Proxy to multi_import for secondary Core import action"""
         self.multi_import('Core', self.core_table, True)
 
     def core_export(self):
-        """Proxy for secondary Core export action"""
+        """Proxy to multi_import for secondary Core export action"""
         self.multi_export('Core', self.core_table, True)
 
     def rom_import(self):
-        """Proxy for ROM import action"""
+        """Proxy to multi_import for ROM import action"""
         self.multi_import('ROM', self.rom_table, False)
 
     def rom_export(self):
-        """Proxy for ROM export action"""
+        """Proxy to multi_import for ROM export action"""
         self.multi_export('ROM', self.rom_table, False)
 
     def rompack_import(self):
-        """"ROMPack v1 import action"""
+        """"ROMPack v1 import to SPI flash Image"""
         self.menubar.entryconfig(0, state='disabled')
 
         filetypes = [('ROMPack v1 files', '.zx1')]
@@ -899,18 +1098,25 @@ class App(tk.Tk):
         if str_file:
             b_block_ok, filetype = self.validate_file(str_file, ['ROMPack'])
             if b_block_ok:
-                _, arr_err = zx123.inject_zxfiles(self.zxfilepath,
-                                                  [f'ROMS,{str_file}'],
-                                                  self.zxfilepath,
-                                                  self.fulldict_hash,
-                                                  self.zxextension,
-                                                  b_force=True)
-                if arr_err:
-                    str_error = 'ERROR\nCannot insert ROMPack.\n'
-                    str_error += '\n'.join(arr_err)
-                    messagebox.showerror('Error', str_error, parent=self)
-                else:
-                    self.open_file(self.zxfilepath)
+                str_title = 'Replace ROMs'
+                str_message = 'Do you want to replace all ROMs?'
+                response = messagebox.askyesno(parent=self,
+                                               icon='question',
+                                               title=str_title,
+                                               message=str_message)
+                if response:
+                    _, arr_err = zx123.inject_zxfiles(self.zxfilepath,
+                                                      [f'ROMS,{str_file}'],
+                                                      self.zxfilepath,
+                                                      self.fulldict_hash,
+                                                      self.zxextension,
+                                                      b_force=True)
+                    if arr_err:
+                        str_error = 'ERROR\nCannot insert ROMPack.\n'
+                        str_error += '\n'.join(arr_err)
+                        messagebox.showerror('Error', str_error, parent=self)
+                    else:
+                        self.open_file(self.zxfilepath)
             else:
                 str_error = f'ERROR\nFile Format not valid.\n"{filetype}"'
                 str_error += ' detected, and it should be "ROMPack".'
@@ -919,7 +1125,7 @@ class App(tk.Tk):
         self.menubar.entryconfig(0, state='normal')
 
     def rompack_export(self):
-        """"Proxy for ROMPack v1 export action"""
+        """Proxy to block_export for ROMPack v1 file"""
         self.block_export('ROMS')
 
 
@@ -1064,11 +1270,6 @@ class InfoWindow:
                 detail_label = ttk.Label(detail_frame,
                                          text=f'  - {key}: {detail_str}')
                 detail_label.grid(column=0, row=index + 1, sticky='w')
-
-        #hash_frame = ttk.Frame(main_frame, padding=10)
-        #hash_frame.pack(fill='x')
-        #hash_label = ttk.Label(hash_frame, text=f'Hash: {dict_data['hash']}')
-        #hash_label.pack(side='left')
 
         button_frame = ttk.Frame(main_frame, padding=10)
         button_frame.pack(fill='x')
