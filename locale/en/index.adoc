@@ -3,7 +3,7 @@
 :revnumber: 1.0.0
 :doctype: book
 :notitle:
-:front-cover-image: image:img/Portada.jpg[]
+:front-cover-image: image:../img/Portada.jpg[]
 :email: kounch@users.noreply.github.com
 :Revision: 1.0
 :description: English ZX123 Tool Manual
@@ -18,7 +18,344 @@
 
 == Introduction
 
-ZX123 Tool is
-
 [.text-center]
-image:../img/Portada.jpg[pdfwidth=75%]
+image:../img/Logo.jpg[pdfwidth=50%]
+
+ZX123 Tool is a tool that analyzes, extracts and injects data in SPI flash image files for ZX-Uno, ZXDOS and similar devices.
+
+These are the main features:
+
+- List the contents of a ZX-Uno, etc. SPI flash image, showing, if possible, the version of BIOS, esxdos, main Spectrum core and optional cores, Spectrum ROMs and several BIOS settings
+- Extract BIOS, esxdos ROM, Spectrum core and/or other cores, Spectrum ROMs to individual files
+- Change some BIOS default options (video mode, keyboard layout, default core, default ROM, etc.)
+- Add or replace FPGA cores and/or Spectrum ROM images (from individual ROM files or RomPack files)
+- If supplied a different kind of file (like a core or BIOS installation file) it will also try to identify its contents
+- For secondary cores, show information about some of the features that they may have (e.g. VGA video out, joystick support, supported SD or microSD formats, etc.)
+- Create a copy of the flash image and, optionally, and/or truncate some (or all) of the optional cores (command line only)
+- Wipe with  0s all Cores an ZX Spectrum ROMs data  (command line only)
+- List, add or extract ROMs from a ROMPack v2 ROms file  (command line only)
+
+== Installation
+
+There are different versions of the tool, one that works in a lot of platforms, but that may need to install Python 3, and other versions that doesn't need it, but aren't available for all systems.
+
+=== All platforms
+
+To use the tool this way, you need https://www.python.org/[Python 3] to use it. Depending on the operating system you may have to https://www.python.org/downloads/[install it]. It has to be version 3.8 or later.
+
+Having Python 3, you only need to download the latest version of the tool from the official repository, following https://github.com/kounch/zx123_tool/releases/latest[this link].
+
+Once extracted, you have to run from a shell the main script using Python 3. This may change depending on the operating system.
+
+For example, on Windows, it's usually:
+
+[source,shell]
+----
+py -3 "ZX123 Tool.py"
+----
+
+With other operating systems it normally is like:
+
+[source,shell]
+----
+python3 "ZX123 Tool.py"
+----
+
+=== MacOS
+
+The MacOS binary isn't signed, so you will have to remove the quarantine attribute with `xattr -d com.apple.quarantine "ZX123 Tool.app"`.
+
+=== Windows
+
+The Windows binary release requires Microsoft Visual C++ Redistributable 2015 installed on your system and, for Windows 7, also Microsoft Quality Rollup KB4457144 or later. 
+
+== Use
+
+=== Command Line Interface
+
+==== All Platforms
+
+The CLI can be invoked directly using the script `zx123_tool.py` and Python (version 3.6 or later), (e.g. `python3 zx123_tool.py -l -i FLASH.ZX1`)
+
+==== MacOS
+
+Alternatively, if your system does not have Python 3, you can call the MacOS binary from Terminal, addíng the parameter `--command` (e.g. `"/Applications/ZX123 Tool.app/Contents/MacOS/ZX123 Tool" --command -l -i flash.ZX1``)
+
+==== Arguments
+
+[source]
+----
+-h, --help          show help and exit
+-v, --version       show program's version number and exit
+-i INPUT_FILE, --input_file INPUT_FILE
+                    ZX-Uno, ZXDOS, etc. File
+-d OUTPUT_DIR, --output_dir OUTPUT_DIR
+                      Output directory for extracted files
+-o OUTPUT_FILE, --output_file OUTPUT_FILE
+                      Output flash file to copy
+-f, --force           Force overwrite of existing files
+-l, --list_contents List file contents
+-D, --details       Show Known Core Features
+-r, --roms          Process ZX Spectrum ROMs (list or, in extract mode,
+                    extract instead of Cores)
+-q, --check_updated For each Core or non Spectrum ROM, check version
+                    against 'latest' entry in the JSON database
+-s, --show_hashes   Show computed hashes
+-x EXTRACT, --extract EXTRACT
+          Item(s) to extract, split using ",": BIOS, Spectrum, Special, 
+          ROMS, esxdos and/or core/ROM Number(s)
+-n N_CORES, --number_of_cores N_CORES
+          Number of cores to keep on output file
+-a INJECT_DATA, --add INJECT_DATA
+          Data of item to inject with one of these formats:
+              BIOS,Path to BIOS binary
+              esxdos,Path to esxdos ROM binary
+              Spectrum,Path to Spectrum core binary
+              Special,Path to Special core binary (for 32Mb SPI flash)
+              CORE,Core Number,Name to use,Path to core binary
+              ROM,Slot,Parameters,Name to use,Path to Spectrum ROM binary
+              ROMS,Path to RomPack file with some ROMs inside
+-w, --wipe            Wipe all ROMs and all secondary cores from image
+-e, --32              Expand, if needed, flash file to 32MiB
+-t, --convert   Converts between standard and Spectrum core
+-1, --1core  Use, if available, ZXUnCore cores for ZX-Uno
+-2, --2mb  Use, if available, 2MB cores for ZX-Uno
+-c DEFAULT_CORE, --default_core DEFAULT_CORE
+          Default core number: 1 and up
+-z DEFAULT_ROM, --default_rom DEFAULT_ROM
+          Index of default Spectrum ROM: 0 and up
+-m VIDEO_MODE, --video_mode VIDEO_MODE
+              Default BIOS video mode: 0 (PAL), 1 (NTSC) or 2 (VGA)
+-k KEYBOARD_LAYOUT, --keyboard_layout KEYBOARD_LAYOUT
+              Default BIOS Keyboard Layout:
+                              0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
+-b BOOT_TIMER, --boot_timer BOOT_TIMER
+                              Boot Timer: 0 (No Timer), 1, 2, 3 or 4
+-u, --update   If it's the only argument, download JSON from repository
+                If there's an SPI flash image file, update BIOS and Cores to the latest version according to JSON file contents
+-N, --nocolours Disable the use of colours in terminal text output
+----
+
+==== Examples
+
+
+When using the binary release, invoke the corresponding executable file instead of using Python and the script (e.g. `zx123_tool.exe` or `zx123_tool` instead of `python3 zx123_tool.py`).
+
+Show contents of file:
+
+    python3 zx123_tool.py -i FLASH.ZXD -l
+
+Show contents of file, including the installed cores and ZX Spectrum ROMs data:
+
+    python3 zx123_tool.py -i FLASH.ZXD -l -r
+
+Show the installed cores, and list known features of them:
+
+    python3 zx123_tool.py -i FLASH.ZXD -l -D
+
+Extract `FIRMWARE.ZXD` file from `FLASH32.ZXD` file (on Windows):
+
+    py -3 zx123_tool.py -i FLASH32.ZXD -x BIOS
+
+Extract the third ZX Spectrum ROM to a file:
+
+    ...zx123_tool.py -i FLASH32.ZXD -r -x 3
+
+Extract all Spectrum ROMs to `ROMS.ZX1` RomPack file from `FLASH32.ZXD` file:
+
+    ...zx123_tool.py -i FLASH32.ZXD -x ROMS
+
+Show contents of file and extract `SPECTRUM.ZXD`, `ESXDOS.ZXD` and `.ZXD` files for cores 1 and 3:
+
+    ...zx123_tool.py -l -i FLASH32.ZXD -x Spectrum,3,1,esxdos
+
+Add core `NEXT.ZXD` as number `3`, with name `SpecNext`:
+
+    ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a CORE,3,SpecNext,NEXT.ZXD
+
+Add core `NEXT.ZXD` as number `3`, with name `SpecNext`, and set as the default boot core:
+
+    ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a CORE,3,SpecNext,NEXT.ZXD -c 3
+
+Add file `48.rom` (Spectrum ROM) in slot `5`, with name `Spec48`:
+
+    ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a ROM,5,xdnlh17,Spec48,48.rom
+
+Set ROM with index 2 (do not mistake with slot index) as the default Spectrum ROM:
+
+    ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -z 2
+
+Add BIOS and esxdos ROMs:
+
+    ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a BIOS,FIRMWARE.ZXD -a esxdos,ESXMMC.BIN
+
+Replace all Spectrum ROMs with the contents of `MyROMS.ZX1` RomPack file:
+
+    ...zx123_tool.py -i FLASH.ZXD -o FLASHnew.ZXD -a ROMS,MyROMS.ZX1
+
+Wipe all ROMs data and all secondary cores data:
+
+    ...zx123_tool.py -i FLASH.ZXD -w -o FLASHempty.ZXD
+
+Wipe all ROMs data and all secondary cores data, and then add file `48.rom` (Spectrum ROM) in slot `0`, with name `ZX Spectrum`:
+
+    ...zx123_tool.py -i FLASH.ZXD -w -o FLASHnew.ZXD -a "ROM,0,xdnlh17,ZX Spectrum,48.rom"
+
+Create a copy of `FLASH32.ZXD`, but removing all cores and setting BIOS default to VGA and Spectrum keyboard layout:
+
+    ...zx123_tool.py -i FLASH32.ZXD -o FlashGDOSPlus.ZXD -n 0 -m 2 -k 3
+
+Find out the version of a BIOS installation file:
+
+    ...zx123_tool.py -i FIRMWARE.ZXD -l
+
+Convert the contents of a classic ROMPack file to a ROMPack v2 file:
+
+    ...zx123_tool.py -i ROMS_255_orig.ZX1 -o ROMS_255.ZX1 -a ROMS,MyROMS.ZX1
+
+Add a ROM to a ROMPack v2 file:
+
+    ...zx123_tool.py -i ROMS_255_orig.ZX1 -o ROMS_255.ZX1 -a "ROM,0,xdnlh17,ZX Spectrum,48.rom"
+
+    ...zx123_tool.py -i ROMS_255_orig.ZX1 -o ROMS_255.ZX1 -a ROMS,MyROMS.ZX1
+
+Extract ROMs with indexes 3, 5 and 6 from a ROMPack v2 file:
+
+    ...zx123_tool.py -i ROMS_255.ZX1 -x 3,5,6
+
+== Annex
+
+=== JSON file
+
+The JSON file is an object where the main name are file extensions (like `ZXD` or `ZX1`). All the data in the JSON is stored as a string. For each of the possible extensions, there is another object with the following structure:
+
+[source]
+----
+(...)
+"(Extension)": {
+    "description" -> Short Description of the platform asssociated (e.g. "ZXDOS+")
+    "hashtype"    -> "sha256sum" at this moment
+    "parts": {    -> Description of SPI Flash Main Blocks
+                      For each of these, an array is provided with this data:
+                            [offset, size, <output name>, <magic bytes>]
+                      The blocks are:
+                        - "header"    -> File header and descriptors
+                        - "esxdos"    -> esxdos binary ROM
+                        - "roms_dir"  -> Description of installed Spectrum ROMs
+                        - "cores_dir" -> Description of installed extra FPGA cores
+                        - "BIOS"      -> Binary image of firmware
+                        - "roms_data" -> Spectrum ROMs binary data
+                        - "Spectrum"  -> Main FPGA core
+                        - "Special"   -> Special core (if it exists) for 32Mb SPI flash
+                        - "core_base" -> Extra cores starting offset and size
+    },
+    "BIOS": {   -> Dictionary of hashes for different firmware versions in the format:
+                    latest" -> Name of the latest version and (optionally) download URL
+                    "versions":  {   -> Hash Dictionary
+                                        "(Version Description)": "(Hash)",
+                    }
+    },
+    "esxdos": {  -> Dictionary of hashes for different esxdos ROM versions in the format:
+                    "latest" -> Name of the latest version
+                    "versions":  {   -> Hash Dictionary
+                                        "(Version Description)": "(Hash)",
+                    }
+    },
+    "Spectrum": {   -> Dictionary of hashes for different Spectrum core versions in the format:
+                        "latest" -> Name of the latest version and (optionally) download URL
+                        "versions":  {   -> Hash Dictionary
+                                            "(Version Description)": "(Hash)",
+                        }
+    "Special": {   -> Dictionary of hashes for different Special core versions in the format:
+                      "latest" -> Name of the latest version and (optionally) download URL
+                      "versions":  {   -> Hash Dictionary
+                                          "(Version Description)": "(Hash)",
+                      }
+    "Cores": {   -> Dictionary for different FPGA cores       
+        "(Core name)": {   -> Dictionary of hashes for different core versions in the format:
+                            "latest" -> Name of the latest version and (optionally) download URL
+                            "base"   -> Name of another version with download URL if there's no URL for the latest
+                            "versions":  {   -> Hash Dictionary
+                                                "(Version Description)": "(Hash)",
+                            },
+                            "features":  {   -> Feature info Dictionary
+                                                "Category": [["Feature", "Feature", ...], "Note"]
+                            } 
+        },
+        (...)
+    }
+}.
+(...)
+----
+
+`roms_dir` format:
+
+[source]
+----
+[roms directory offset, directory block size, "", "", enabled entries offset, first ROMs block length, second ROMs block length]
+----
+
+`cores_dir` format:
+
+[source]
+----
+[cores directory offset, directory block size, "", "", first cores block length, second cores block length]
+----
+
+`roms_data` format:
+
+[source]
+----
+[first slot offset, first ROMs block size, "", "", second ROMs block offset],
+----
+
+`core_base` format:
+
+[source]
+----
+[first core offset, core length, "", First bytes of a binary core data, second cores block offset]
+----
+
+=== ROMPack v2 file
+
+ROMPack v2 files are based on classic ROMPack files, used to extract and insert all the ROM files in a ZX-Uno, ZXDOS SPI flash. Classic ROMpack files have 64 ROM slots while ROMPack v2 files have 255 ROM slots. The file structure of a ROMPAck file is as follows:
+
+[source]
+----
+ Start     | End        | Description
+ -----     | ---        | -----------
+`0x000000` | `0x000003` | Signature 'RPv2'
+`0x000004` | `0x00003F` | Reserved. Unused (pad with `0x00`)
+`0x000040` | `0x003FFF` | Up to 255 64 bytes blocks (ROM Entries) (pad with `0x00`)
+`0x004000` | `0x0040FE` | Up to 255 1 byte blocks with ROM Index Entries (pad with `0xFF`)
+`0x0040FF` | `0x0040FF` | Default ROM Index (1 byte)
+`0x004100` | `0x4000FF` | Up to 255 16384 bytes ROM slots (pad with `0x00`)
+----
+
+==== ROM entry detail
+
+[source]
+----
+ Start              | End      | Description
+ -----              | ---      | -----------
+`0x00`              | `0x00`   | Slot offset
+`0x01`              | `0x01`   | Slot size
+`0x02`              | `0x02`   | Flags 1:
+`0x02`:Bit `0`      |  Bit `1` | Machine timings: `00`=48K `01`=128K, `10`=Pentagon
+`0x02`:Bit `2`      | Bit `2`  | NMI DivMMC: `0`=disabled, `1`=enabled
+`0x02`:Bit `3`      | Bit `3`  | DivMMC: `0`=disabled, `1`=enabled
+`0x02`:Bit `4`      | Bit `4`  | Contention: `0`=disabled, `1`=enabled
+`0x02`:Bit `5`      | Bit `5`  | Keyboard issue: `0`=issue 2, `1`=issue 3
+`0x03`              | `0x03`   | Flags 2:
+`0x03`:Bit `0`      | Bit `0`  | AY chip: `0`=enabled, `1`=disabled
+`0x03`:Bit `1`      | Bit `1`  | 2nd AY chip (TurboSound): `0`=enabled, `1`=disabled
+`0x03`:Bit `2`      | Bit `2`  | `7ffd` port: `0`=enabled, `1`=disabled
+`0x03`:Bit `3`      | Bit `3`  | `1ffd` port: `0`=enabled, `1`=disabled
+`0x03`:Bit `4`      | Bit `4`  | ROM low bit: `0`=enabled, `1`=disabled
+`0x03`:Bit `5`      | Bit `5`  | ROM high bit: `0`=enabled, `1`=disabled
+`0x03`:Bit `6`      | Bit `6`  | horizontal MMU in Timex: `0`=disabled, `1`=enabled
+`0x03`:Bit `7`      | Bit `7`  | DivMMC and ZXMMC ports: `0`=enabled, `1`=disabled
+`0x08`              | `0x0F`   | crc16-ccitt values. Up to 4 16-bit values in reverse order
+`0x10`              | `0x1F`   | unused
+`0x20`              | `0x3F`   |Name of ROM in ASCII, space padded
+----

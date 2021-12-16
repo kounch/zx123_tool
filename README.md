@@ -331,7 +331,7 @@ ROMPack v2 files are based on classic ROMPack files, used to extract and insert 
 
 ### Características
 
-Esta es una herramienta que analiza, extrae o añade datos en ficheros de imagen de SPI flash de ZX-Uno, ZXDOS y otros dispostivos similares.
+Esta es una herramienta que analiza, extrae o añade datos en ficheros de imagen de SPI flash de ZX-Uno, ZXDOS y otros dispositivos similares.
 
 Estas son sus funciones principales:
 
@@ -345,7 +345,7 @@ Estas son sus funciones principales:
 - Mostrar, añadir o extraer ROMs de un fichero ROMPack v2
 - Para Cores secundarios, mostrar información sobre algunas de las características que podrían tener (Ej: Salida por VGA, uso de joystick, formato soportado de tarjeta SD o MicroSD, etc.)
 
-Necesita un fichero  [`zx123_hash.json`](#descripción-del-arhivo-json) con la estructura de bloques del archivo de imagen y, opcionalmente, datos para identificar dichos bloques. Si no se encuentra, intentará descargarlo desde el repositorio en GitHub.
+Necesita un fichero  [`zx123_hash.json`](#descripción-del-archivo-json) con la estructura de bloques del archivo de imagen y, opcionalmente, datos para identificar dichos bloques. Si no se encuentra, intentará descargarlo desde el repositorio en GitHub.
 
 ### Uso
 
@@ -526,7 +526,7 @@ Extraer las ROMs con índices 3, 5 y 6 de un fichero ROMPack v2:
 
     ...zx123_tool.py -i ROMS_255.ZX1 -x 3,5,6
 
-### Descripción del arhivo JSON
+### Descripción del archivo JSON
 
 El archivo JSON es un objeto donde los nombres principales son extensiones de archivo (como `ZXD` o `ZX1`). Todos los datos del fichero JSON se almacenan como cadenas de texto. Para cada exension, se define otro objeto con la siguiente estructura:
 
