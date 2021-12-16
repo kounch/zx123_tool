@@ -45,10 +45,16 @@
 			z-index: 901;
 			/* background: #fff; */
 		}
+
+		.copyright {
+			bottom: 0%;
+			width: 100%;
+			position: fixed;
+		}
 	</style>
 </head>
 
-<body>
+<body style="margin:5%">
 	<div class="language">
 		<p style="margin-left: 80%;">
 			<img src="../img/gb.png" alt="EN">
@@ -63,15 +69,24 @@
 	</p>
 
 	<p style="text-align:center">
-		A tool that analyzes, extracts and injects data in SPI flash image files for <a href="https://zxuno.speccy.org">ZX-Uno</a>, <a href="https://www.forofpga.es/viewforum.php?f=4">ZXDOS</a> and similar devices.
+		A tool that analyzes, extracts and injects data in SPI flash image files for <a
+			href="https://zxuno.speccy.org">ZX-Uno</a>, <a href="https://www.forofpga.es/viewforum.php?f=4">ZXDOS</a>
+		and similar devices.
 	</p>
 
 	<p style="text-align:center">
-		<button class="button" onclick="location.href='https://github.com/kounch/zx123_tool/releases/latest'">Download</button>
+		<button class="button"
+			onclick="location.href='https://github.com/kounch/zx123_tool/releases/latest'">Download</button>
 		<button class="button" onclick="location.href='./manual.html'">User Manual</button>
 		<button class="button" onclick="location.href='https://github.com/kounch/zx123_tool'">Source Code</button>
 	</p>
 
+	<div class="copyright">
+		<p style="text-align:left; font-size:x-small">
+			&copy; 2021 <a href="https://github.com/kounch">kounch</a><br />
+			Flag icons by: <a href="https://www.iconfinder.com/iconsets/stripe-flag-set">Iconfinder</a>
+		</p>
+	</div>
 </body>
 
 </html>
