@@ -5,16 +5,73 @@
     Free under the Creative Commons Attribution-NonCommercial 3.0 Unported (http://creativecommons.org/licenses/by-nc/3.0/es/)
 -->
 <html>
-	<head>
-		<title>ZX123 Tool</title>
-		<meta charset="utf-8" />
-	</head>
 
-	<body>
-		<p style="text-align:center">ZX123 Tool English</p>
-        <p style="text-align:center">
-			<img style="text-align:center" src="../img/Portada.jpg" alt="Main GUI" />
+<head>
+	<title>ZX123 Tool</title>
+	<meta charset="utf-8" />
+
+	<style>
+		.button {
+			background-color: #eeeeee;
+			/* Green */
+			border: none;
+			color: black;
+			padding: 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			cursor: pointer;
+			border-radius: 12px;
+			transition-duration: 0.4s;
+		}
+
+		.button:hover {
+			background-color: #cccccc;
+			/* Green */
+			color: black;
+		}
+
+		.button:active {
+			background-color: #777777;
+		}
+
+		.language {
+			position: fixed;
+			top: 0;
+			width: 100%;
+			height: 25px;
+			z-index: 901;
+			/* background: #fff; */
+		}
+	</style>
+</head>
+
+<body>
+	<div class="language">
+		<p style="margin-left: 80%;">
+			<img src="../img/gb.png" alt="EN">
+			<a href="../es/index.html"><img src="../img/es.png" alt="ES"></a>
 		</p>
-	</body>
+	</div>
+
+	<h1 style="text-align:center">ZX123 Tool</h1>
+
+	<p style="text-align:center">
+		<img style="text-align:center" src="../img/Logo.jpg" alt="ZX123 Tool" />
+	</p>
+
+	<p style="text-align:center">
+		A tool that analyzes, extracts and injects data in SPI flash image files for <a href="https://zxuno.speccy.org">ZX-Uno</a>, <a href="https://www.forofpga.es/viewforum.php?f=4">ZXDOS</a> and similar devices.
+	</p>
+
+	<p style="text-align:center">
+		<button class="button" onclick="location.href='https://github.com/kounch/zx123_tool/releases/latest'">Download</button>
+		<button class="button" onclick="location.href='./manual.html'">User Manual</button>
+		<button class="button" onclick="location.href='https://github.com/kounch/zx123_tool'">Source Code</button>
+	</p>
+
+</body>
 
 </html>
