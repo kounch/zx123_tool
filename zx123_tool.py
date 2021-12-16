@@ -92,11 +92,12 @@ def main():
 
     fulldict_hash = load_json_bd(str_file, output_file, arg_data['update'])
     if not fulldict_hash:
+        LOGGER.error("There's no JSON data")
         sys.exit(2)
 
     if arg_data['stats']:
         print_stats(fulldict_hash, arg_data['detail'])
-        sys.exit(3)
+        sys.exit(0)
 
     # Analyze/initialize input file and output dir location and extension
     b_new_img = False
@@ -107,6 +108,7 @@ def main():
             b_new_img = True
             arg_data['force'] = True
             if not str_file:
+                LOGGER.error("There's no output file")
                 sys.exit(3)
         else:
             LOGGER.error("There's no input file")
@@ -639,14 +641,13 @@ def load_json_bd(str_file='', output_file='', str_update='', base_dir=None):
         print('\nDownloading JSON database...', end='')
         urllib.request.urlretrieve(dl_url, str_json)
         print('OK')
-        #sys.exit(0)
 
     if not os.path.isfile(str_json):
         LOGGER.error('Hash database not found: %s', str_json)
-        #sys.exit(2)
     with open(str_json, 'r', encoding='utf-8') as json_handle:
         LOGGER.debug('Loading dictionary with hashes...')
         fulldict_hash = json.load(json_handle)
+        LOGGER.debug('%s loaded OK', str_json)
 
     return fulldict_hash
 
@@ -732,7 +733,6 @@ def detect_file(str_file, fulldict_hash):
     filetype = 'Unknown'
     if not dict_hash:
         LOGGER.error('Unknown file extension: %s', str_extension)
-        #sys.exit(4)
     else:
         # Is the file header known?
         if validate_file(str_file, dict_hash['parts']['header'][3]):
