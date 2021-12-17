@@ -669,13 +669,22 @@ pre.rouge {
 <li><a href="#_introducción">Introducción</a></li>
 <li><a href="#_instalación">Instalación</a>
 <ul class="sectlevel2">
-<li><a href="#_todas_las_plataformas">Todas las plataformas</a></li>
 <li><a href="#_macos">MacOS</a></li>
 <li><a href="#_windows">Windows</a></li>
+<li><a href="#_todas_las_plataformas">Todas las plataformas</a></li>
 </ul>
 </li>
 <li><a href="#_uso">Uso</a>
 <ul class="sectlevel2">
+<li><a href="#_interfaz_gráfica">Interfaz gráfica</a>
+<ul class="sectlevel3">
+<li><a href="#_bios">BIOS</a></li>
+<li><a href="#_esxdos">esxdos</a></li>
+<li><a href="#_core_de_spectrum">Core de Spectrum</a></li>
+<li><a href="#_cores_secundarios">Cores Secundarios</a></li>
+<li><a href="#_roms_de_spectrum">ROMs de Spectrum</a></li>
+</ul>
+</li>
 <li><a href="#_interfaz_de_línea_de_comandos">Interfaz de línea de comandos</a>
 <ul class="sectlevel3">
 <li><a href="#_todas_las_plataformas_2">Todas las plataformas</a></li>
@@ -686,14 +695,11 @@ pre.rouge {
 </li>
 </ul>
 </li>
-<li><a href="#_anexos">Anexos</a>
+<li><a href="#_apéndices">Apéndices</a>
 <ul class="sectlevel2">
+<li><a href="#_indicadores_de_rom">Indicadores de ROM</a></li>
 <li><a href="#_archivo_json">Archivo JSON</a></li>
-<li><a href="#_rompack_v2">ROMPack v2</a>
-<ul class="sectlevel3">
-<li><a href="#_detalle_de_rom_entry">Detalle de ROM Entry</a></li>
-</ul>
-</li>
+<li><a href="#_rompack_v2">ROMPack v2</a></li>
 </ul>
 </li>
 </ul>
@@ -748,6 +754,9 @@ pre.rouge {
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Utiliza internamente un fichero  <a href="#_archivo_json"><code>zx123_hash.json</code></a> con la estructura de bloques del archivo de imagen y, opcionalmente, datos para identificar dichos bloques. Si no se encuentra, intentará descargarlo desde el repositorio en GitHub.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -755,6 +764,28 @@ pre.rouge {
 <div class="sectionbody">
 <div class="paragraph">
 <p>Existen varias versiones de la utilidad, una que funciona en muchas plataformas y sistemas operativos, pero que podría necesitar instalar Python 3, y otras que no lo necesitan, pero no están disponibles para todos los sistemas.</p>
+</div>
+<div class="sect2">
+<h3 id="_macos">MacOS</h3>
+<div class="paragraph">
+<p>El binario para MacOS no está firmado digitalmente, así que es necesario autorizar al sistema operativo para que abra la aplicación, usando el menú contextual del Finder y eligiendo "Abrir".</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/MacOpenES.jpg" alt="MacOpenES"></span></p>
+</div>
+<div class="paragraph">
+<p>Alternativamente, se puede eliminar el atributo de cuarentena desde la Terminal con un comando como <code>xattr -d com.apple.quarantine "ZX123 Tool.app"</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_windows">Windows</h3>
+<div class="paragraph">
+<p>La versión de Windows requiere tener instalado Microsoft Visual C++ Redistributable 2015 en el sistema, y para Windows 7, además, las actualizaciones del paquete acumulativo KB4457144 o una versión superior.</p>
+</div>
+<div class="paragraph">
+<p>Una vez descomprimido el fichero descargado, se debe ejecutar el programa (<code>ZX123 Tool.exe</code>).</p>
+</div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
 <h3 id="_todas_las_plataformas">Todas las plataformas</h3>
@@ -765,7 +796,7 @@ pre.rouge {
 <p>Teniendo Python 3, basta con descargar la última versión de los scripts la herramienta desde su repositorio oficial, <a href="https://github.com/kounch/zx123_tool/releases/latest">en este enlace</a> (elegir la descarga ).</p>
 </div>
 <div class="paragraph">
-<p>Una vez descomprimido el fichero descargado, se debe invocar desde una consola el script principal usando Python 3. Esto puede variar según el sistema operativo.</p>
+<p>Una vez descomprimido el fichero descargado, se debe invocar desde una consola el script principal (<code>ZX123 Tool.py</code>) usando Python 3. Esto puede variar según el sistema operativo.</p>
 </div>
 <div class="paragraph">
 <p>Por ejemplo, en Windows, suele ser:</p>
@@ -784,23 +815,137 @@ pre.rouge {
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_macos">MacOS</h3>
-<div class="paragraph">
-<p>El binario para MacOS no está firmado digitalmente, así que es necesario eliminar el atributo de cuarentena con <code>xattr -d com.apple.quarantine "ZX123 Tool.app"</code>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_windows">Windows</h3>
-<div class="paragraph">
-<p>La versión de Windows requiere tener instalado Microsoft Visual C++ Redistributable 2015 en el sistema, y para Windows 7, además, las actualizaciones del paquete acumulativo KB4457144 o una versión superior.</p>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_uso">Uso</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_interfaz_gráfica">Interfaz gráfica</h3>
+<div class="paragraph">
+<p>La interfaz de la utilidad es una única ventana con una configuración como la siguiente:</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/MainWindow.jpg" alt="MainWindow"></span></p>
+</div>
+<div class="paragraph">
+<p>Además, existe un menú desde el que se accede a opciones que permiten crear un nuevo archivo de imagen SPI flash, abrir un fichero existente (de imagen o de otro tipo) para analizarlo o modificarlo (sólo si es de imagen flash), o cerrar la edición.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/FileMenu.jpg" alt="FileMenu"></span></p>
+</div>
+<div class="paragraph">
+<p>Al abrir un fichero que no sea de imagen, la herramienta intentará catalogarlo y mostrar la información conocida del mismo:</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/InfoWindow.jpg" alt="InfoWindow"></span></p>
+</div>
+<div class="paragraph">
+<p>Por otro lado, una vez cargado un archivo de imagen para editar, es posible realizar las modificaciones que se explican a continuación.</p>
+</div>
+<div class="sect3">
+<h4 id="_bios">BIOS</h4>
+<div class="paragraph">
+<p>Usando los botones correspondientes, es posible exportar un fichero con la BIOS (firmware) actual de la imagen, o bien sustituirla (Import) por otra.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/BIOS.jpg" alt="BIOS"></span></p>
+</div>
+<div class="paragraph">
+<p>Además, también es posible modificar algunos de los valores de arranque por defecto.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/DefaultBIOS.jpg" alt="DefaultBIOS"></span></p>
+</div>
+<div class="paragraph">
+<p>Como referencia, estos son los significados de algunos de los valores.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 85%;">
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Ajuste</th>
+<th class="tableblock halign-left valign-top">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Retraso en el arranque (Timer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0 (Sin retraso), 1, 2, 3 ó 4 segundos</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Teclado (Keyboard)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0 (Auto), 1 (ES), 2 (EN) ó 3 (Spectrum)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Modo de vídeo por defecto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0 (PAL), 1 (NTSC) ó 2 (VGA)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_esxdos">esxdos</h4>
+<div class="paragraph">
+<p>Usando los botones correspondientes, es posible exportar un fichero con la versión actual de esxdos de la imagen, o bien sustituirla (Import) por otra.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/esxdos.jpg" alt="esxdos"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_core_de_spectrum">Core de Spectrum</h4>
+<div class="paragraph">
+<p>Usando los botones correspondientes, es posible exportar un fichero con la versión actual del core principal de Spectrum de la imagen, o bien sustituirla (Import) por otra.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/Spectrum.jpg" alt="Spectrum"></span></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect3">
+<h4 id="_cores_secundarios">Cores Secundarios</h4>
+<div class="paragraph">
+<p>Si no está seleccionado ningún core secundario de la lista, es posible utilizar el botón para añadir (Add) uno nuevo.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/Cores.jpg" alt="Cores"></span></p>
+</div>
+<div class="paragraph">
+<p>Por otra parte, cuando está seleccionado uno o más cores, es posible sustituir el primero de ellos por otro (Import) o bien exportar cada uno de los seleccionados a un fichero independiente.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/CoresSelect.jpg" alt="CoresSelect"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_roms_de_spectrum">ROMs de Spectrum</h4>
+<div class="paragraph">
+<p>Si no está seleccionada ninguna ROM de la lista correspondiente, es posible utilizar el botón para añadir (Add) una nueva. También es posible reemplazar o exportar todas las ROMs de la imagen usando un único un fichero ROMPack (v1).</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/ROMs.jpg" alt="ROMs"></span></p>
+</div>
+<div class="paragraph">
+<p>Por otra parte, cuando está seleccionado una o más ROMs, es posible sustituir la primer de ellas por otra del mismo tamaño (Import) o bien exportar cada una de los seleccionadas a un fichero independiente.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/ROMsSelect.jpg" alt="ROMsSelect"></span></p>
+</div>
+<div class="paragraph">
+<p>Al cargar un fichero de ROM, se pueden especificar los indicadores para usar al utilizar la ROM, como la contención de memoria, DivMMC, timings de distintos modelos de Spectrum, etc.:</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/ROM.jpg" alt="ROM"></span></p>
+</div>
+<div class="paragraph">
+<p>Los indicadores de cada ROM se muestran en la lista con un código de letras que se explica en el <a href="#_indicadores_de_rom">apéndice al final de este manual</a>.</p>
+</div>
+</div>
+</div>
 <div class="sect2">
 <h3 id="_interfaz_de_línea_de_comandos">Interfaz de línea de comandos</h3>
 <div class="sect3">
@@ -1040,8 +1185,94 @@ pre.rouge {
 </div>
 </div>
 <div class="sect1">
-<h2 id="_anexos">Anexos</h2>
+<h2 id="_apéndices">Apéndices</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_indicadores_de_rom">Indicadores de ROM</h3>
+<table class="tableblock frame-all grid-all" style="width: 60%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Indicador</th>
+<th class="tableblock halign-left valign-top">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>i</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Habilitar teclado issue 3 (en vez de issue 2)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>c</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deshabilitar la contención de memoria</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>d</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Habilitar DivMMC</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>n</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Habilitar NMI DivMMC (menú de esxdos)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>p</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usar timings de Pentagon</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>t</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usar timings de 128K</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>s</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deshabilitar puertos de DivMMC y ZXMMC</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>m</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Habilitar MMU horizontal de Timex</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deshabilitar bit alto de ROM (bitd 2 de 1FFD)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>l</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deshabilitar bit bajo de ROM (bit 4 de 7FFD)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deshabilitar puerto 1FFD (paginado de +2A/3)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>7</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deshabilitar puerto 7FFD (paginado de 128K)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deshabilitar TurboSound (chip AY secundario)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>a</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deshabilitar chip AY</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deshabilitar modo Radastaniano</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>x</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deshabilitar modo Timex</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>u</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deshabilitar ULAPlus</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
 <div class="sect2">
 <h3 id="_archivo_json">Archivo JSON</h3>
 <div class="paragraph">
@@ -1106,6 +1337,7 @@ pre.rouge {
 (...)</code></pre>
 </div>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p>Para <code>roms_dir</code>, el formato es el siguiente:</p>
 </div>
@@ -1138,11 +1370,12 @@ pre.rouge {
 <pre class="rouge highlight"><code>    [offset del primer core, longitud de un core, "", Primeros bytes de un fichero binario de core, offset del segundo bloque de cores]</code></pre>
 </div>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
 <h3 id="_rompack_v2">ROMPack v2</h3>
 <div class="paragraph">
-<p>ROMPack v2 files are based on classic ROMPack files, used to extract and insert all the ROM files in a ZX-Uno, ZXDOS SPI flash. Classic ROMpack files have 64 ROM slots while ROMPack v2 files have 255 ROM slots. The file structure of a ROMPAck file is as follows:</p>
+<p>Los ficheros ROMPack v2 se basan en los ficheros ROMPack clásicos, que se utilizan para extraer e insertar todas las ROM en la flash SPI de un ZX-Uno, ZXDOS, etc. Los fiheros ROMpack clásicos tienen 64 ranuras de 16K (slots) de espacio de almacenamiento, mientras que los ficheros ROMPack v2 disponen de 255 espacios. La estructura de un archivo ROMPAck es la siguiente:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1156,8 +1389,9 @@ pre.rouge {
 `0x004100` | `0x4000FF` | Hasta 255 slots de 16384 bytes (rellenar con `0x00` hasta el final)</code></pre>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_detalle_de_rom_entry">Detalle de ROM Entry</h4>
+<div class="paragraph">
+<p>Cada bloque (ROM Entry), a su vez, tiene esta estructura:</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code> Start              | End     | Description
@@ -1188,11 +1422,10 @@ pre.rouge {
 </div>
 </div>
 </div>
-</div>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2021-12-16 22:49:22 +0100
+Last updated 2021-12-17 14:52:09 +0100
 </div>
 </div>
 </body>

@@ -19,7 +19,7 @@
 == Introducción
 
 [.text-center]
-image:../img/Logo.jpg[pdfwidth=50%]
+image:../img/Logo.jpg[pdfwidth=20%]
 
 ZX123 Tool es una herramienta que analiza, extrae o añade datos en ficheros de imagen de SPI flash de ZX-Uno, ZXDOS y otros dispositivos similares.
 
@@ -35,9 +35,28 @@ Estas son sus funciones principales:
 - Borrar con 0s todos los datos de los Cores y las ROMs de ZX Spectrum (sólo desde la línea de comandos)
 - Mostrar, añadir o extraer ROMs de un fichero ROMPack v2 (sólo desde la línea de comandos)
 
+Utiliza internamente un fichero  <<#_archivo_json,`zx123_hash.json`>> con la estructura de bloques del archivo de imagen y, opcionalmente, datos para identificar dichos bloques. Si no se encuentra, intentará descargarlo desde el repositorio en GitHub.
+
 == Instalación
 
 Existen varias versiones de la utilidad, una que funciona en muchas plataformas y sistemas operativos, pero que podría necesitar instalar Python 3, y otras que no lo necesitan, pero no están disponibles para todos los sistemas.
+
+=== MacOS
+
+El binario para MacOS no está firmado digitalmente, así que es necesario autorizar al sistema operativo para que abra la aplicación, usando el menú contextual del Finder y eligiendo "Abrir".
+
+[.text-center]
+image:../img/MacOpenES.jpg[pdfwidth=50%]
+
+Alternativamente, se puede eliminar el atributo de cuarentena desde la Terminal con un comando como `xattr -d com.apple.quarantine "ZX123 Tool.app"`.
+
+=== Windows
+
+La versión de Windows requiere tener instalado Microsoft Visual C++ Redistributable 2015 en el sistema, y para Windows 7, además, las actualizaciones del paquete acumulativo KB4457144 o una versión superior.
+
+Una vez descomprimido el fichero descargado, se debe ejecutar el programa (`ZX123 Tool.exe`).
+
+<<<
 
 === Todas las plataformas
 
@@ -45,7 +64,7 @@ Para poder usar la herramienta así, se necesita https://www.python.org/[Python 
 
 Teniendo Python 3, basta con descargar la última versión de los scripts la herramienta desde su repositorio oficial, https://github.com/kounch/zx123_tool/releases/latest[en este enlace] (elegir la descarga ).
 
-Una vez descomprimido el fichero descargado, se debe invocar desde una consola el script principal usando Python 3. Esto puede variar según el sistema operativo.
+Una vez descomprimido el fichero descargado, se debe invocar desde una consola el script principal (`ZX123 Tool.py`) usando Python 3. Esto puede variar según el sistema operativo.
 
 Por ejemplo, en Windows, suele ser:
 
@@ -61,15 +80,99 @@ Mientras que en otros sistemas operativos debería bastar con algo parecido a:
 python3 "./ZX123 Tool.py"
 ----
 
-=== MacOS
-
-El binario para MacOS no está firmado digitalmente, así que es necesario eliminar el atributo de cuarentena con `xattr -d com.apple.quarantine "ZX123 Tool.app"`.
-
-=== Windows
-
-La versión de Windows requiere tener instalado Microsoft Visual C++ Redistributable 2015 en el sistema, y para Windows 7, además, las actualizaciones del paquete acumulativo KB4457144 o una versión superior.
-
 == Uso
+
+=== Interfaz gráfica
+
+La interfaz de la utilidad es una única ventana con una configuración como la siguiente:
+
+[.text-center]
+image:../img/MainWindow.jpg[pdfwidth=70%]
+
+Además, existe un menú desde el que se accede a opciones que permiten crear un nuevo archivo de imagen SPI flash, abrir un fichero existente (de imagen o de otro tipo) para analizarlo o modificarlo (sólo si es de imagen flash), o cerrar la edición.
+
+[.text-center]
+image:../img/FileMenu.jpg[pdfwidth=20%]
+
+Al abrir un fichero que no sea de imagen, la herramienta intentará catalogarlo y mostrar la información conocida del mismo:
+
+[.text-center]
+image:../img/InfoWindow.jpg[pdfwidth=40%]
+
+Por otro lado, una vez cargado un archivo de imagen para editar, es posible realizar las modificaciones que se explican a continuación.
+
+==== BIOS
+
+Usando los botones correspondientes, es posible exportar un fichero con la BIOS (firmware) actual de la imagen, o bien sustituirla (Import) por otra.
+
+[.text-center]
+image:../img/BIOS.jpg[pdfwidth=60%]
+
+Además, también es posible modificar algunos de los valores de arranque por defecto.
+
+[.text-center]
+image:../img/DefaultBIOS.jpg[pdfwidth=25%]
+
+Como referencia, estos son los significados de algunos de los valores.
+
+[align="center",width="85%",%header,cols="2,3",options="header"]
+|===
+|Ajuste
+|Descripción
+|Retraso en el arranque (Timer)
+|0 (Sin retraso), 1, 2, 3 ó 4 segundos
+|Teclado (Keyboard)
+|0 (Auto), 1 (ES), 2 (EN) ó 3 (Spectrum)
+|Modo de vídeo por defecto
+|0 (PAL), 1 (NTSC) ó 2 (VGA)
+|===
+
+==== esxdos
+
+Usando los botones correspondientes, es posible exportar un fichero con la versión actual de esxdos de la imagen, o bien sustituirla (Import) por otra.
+
+[.text-center]
+image:../img/esxdos.jpg[pdfwidth=60%]
+
+==== Core de Spectrum
+
+Usando los botones correspondientes, es posible exportar un fichero con la versión actual del core principal de Spectrum de la imagen, o bien sustituirla (Import) por otra.
+
+[.text-center]
+image:../img/Spectrum.jpg[pdfwidth=100%]
+
+<<<
+
+==== Cores Secundarios
+
+Si no está seleccionado ningún core secundario de la lista, es posible utilizar el botón para añadir (Add) uno nuevo.
+
+[.text-center]
+image:../img/Cores.jpg[pdfwidth=25%]
+
+Por otra parte, cuando está seleccionado uno o más cores, es posible sustituir el primero de ellos por otro (Import) o bien exportar cada uno de los seleccionados a un fichero independiente.
+
+[.text-center]
+image:../img/CoresSelect.jpg[pdfwidth=25%]
+
+==== ROMs de Spectrum
+
+Si no está seleccionada ninguna ROM de la lista correspondiente, es posible utilizar el botón para añadir (Add) una nueva. También es posible reemplazar o exportar todas las ROMs de la imagen usando un único un fichero ROMPack (v1).
+
+[.text-center]
+image:../img/ROMs.jpg[pdfwidth=100%]
+
+Por otra parte, cuando está seleccionado una o más ROMs, es posible sustituir la primer de ellas por otra del mismo tamaño (Import) o bien exportar cada una de los seleccionadas a un fichero independiente.
+
+[.text-center]
+image:../img/ROMsSelect.jpg[pdfwidth=100%]
+
+Al cargar un fichero de ROM, se pueden especificar los indicadores para usar al utilizar la ROM, como la contención de memoria, DivMMC, timings de distintos modelos de Spectrum, etc.:
+
+[.text-center]
+image:../img/ROM.jpg[pdfwidth=70%]
+
+Los indicadores de cada ROM se muestran en la lista con un código de letras que se explica en el <<#_indicadores_de_rom,apéndice al final de este manual>>.
 
 === Interfaz de línea de comandos
 
@@ -220,7 +323,51 @@ Extraer las ROMs con índices 3, 5 y 6 de un fichero ROMPack v2:
 
     ...zx123_tool.py -i ROMS_255.ZX1 -x 3,5,6
 
-== Anexos
+== Apéndices
+
+=== Indicadores de ROM
+
+[align="center",width="60%",%header,cols="1,4",options="header"]
+|===
+|Indicador
+|Descripción
+ |`i`
+|Habilitar teclado issue 3 (en vez de issue 2)
+|`c`
+|Deshabilitar la contención de memoria
+|`d`
+|Habilitar DivMMC
+|`n`
+|Habilitar NMI DivMMC (menú de esxdos)
+|`p`
+|Usar timings de Pentagon
+|`t`
+|Usar timings de 128K
+|`s`
+|Deshabilitar puertos de DivMMC y ZXMMC
+|`m`
+|Habilitar MMU horizontal de Timex
+|`h`
+|Deshabilitar bit alto de ROM (bitd 2 de 1FFD)
+|`l`
+|Deshabilitar bit bajo de ROM (bit 4 de 7FFD)
+|`1`
+|Deshabilitar puerto 1FFD (paginado de +2A/3)
+|`7`
+|Deshabilitar puerto 7FFD (paginado de 128K)
+|`2`
+|Deshabilitar TurboSound (chip AY secundario)
+|`a`
+|Deshabilitar chip AY
+|`r`
+|Deshabilitar modo Radastaniano
+|`x`
+|Deshabilitar modo Timex
+|`u`
+|Deshabilitar ULAPlus
+|===
+
+<<<
 
 === Archivo JSON
 
@@ -285,6 +432,8 @@ El archivo JSON es un objeto donde los nombres principales son extensiones de ar
 (...)
 ----
 
+<<<
+
 Para `roms_dir`, el formato es el siguiente:
 
 [source]
@@ -313,9 +462,11 @@ Para `core_base`, el formato es el siguiente:
     [offset del primer core, longitud de un core, "", Primeros bytes de un fichero binario de core, offset del segundo bloque de cores]
 ----
 
+<<<
+
 === ROMPack v2
 
-ROMPack v2 files are based on classic ROMPack files, used to extract and insert all the ROM files in a ZX-Uno, ZXDOS SPI flash. Classic ROMpack files have 64 ROM slots while ROMPack v2 files have 255 ROM slots. The file structure of a ROMPAck file is as follows:
+Los ficheros ROMPack v2 se basan en los ficheros ROMPack clásicos, que se utilizan para extraer e insertar todas las ROM en la flash SPI de un ZX-Uno, ZXDOS, etc. Los fiheros ROMpack clásicos tienen 64 ranuras de 16K (slots) de espacio de almacenamiento, mientras que los ficheros ROMPack v2 disponen de 255 espacios. La estructura de un archivo ROMPAck es la siguiente:
 
 [source]
 ----
@@ -329,7 +480,7 @@ ROMPack v2 files are based on classic ROMPack files, used to extract and insert 
 `0x004100` | `0x4000FF` | Hasta 255 slots de 16384 bytes (rellenar con `0x00` hasta el final)
 ----
 
-==== Detalle de ROM Entry
+Cada bloque (ROM Entry), a su vez, tiene esta estructura:
 
 [source]
 ----
