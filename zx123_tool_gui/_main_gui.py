@@ -13,10 +13,13 @@ Main Window Class Creation Methods
 import sys
 import tkinter as tk
 from tkinter import ttk
+import webbrowser
 
 
 def build_menubar(self):
     """Add Menu Bar"""
+
+    help_url = 'https://kounch.github.io/zx123_tool/manual.html'
 
     str_accl = 'Ctrl+'
     if sys.platform == 'win32':
@@ -58,10 +61,20 @@ def build_menubar(self):
         accelerator=f'{str_accl}V',
         command=lambda: self.focus_get().event_generate('<<Paste>>'))
 
+    helpmenu = tk.Menu(menubar, tearoff=0)
+    helpmenu.add_command(label="ZX123 Tool Help",
+                         command=lambda: webbrowser.open(help_url))
+
     menubar.add_cascade(label='File', menu=self.filemenu)
     menubar.add_cascade(label='Edit', menu=editmenu)
+    menubar.add_cascade(label='Help', menu=helpmenu)
     self.menubar = menubar
     self.config(menu=menubar)
+
+    if sys.platform == 'darwin':
+        #self.createcommand('tk::mac::ShowPreferences', showPreferences)
+        self.createcommand('::tk::mac::ShowHelp',
+                           lambda: webbrowser.open(help_url))
 
     #self.filemenu.entryconfig(0, state='disabled')
     self.filemenu.entryconfig(2, state='disabled')
@@ -118,40 +131,40 @@ def create_labels(self):
             text=f'Database: {self.fulldict_hash["version"]}')
         version_label.grid(column=7, row=0, columnspan=8, sticky='ne')
 
-    bios_label = ttk.Label(self.blocks_frame, text='BIOS:', padding=10)
+    bios_label = ttk.Label(self.blocks_frame, text='BIOS:', padding=5)
     bios_label.grid(column=0, row=1, sticky='e')
 
-    esxdos_label = ttk.Label(self.blocks_frame, text='esxdos:', padding=10)
+    esxdos_label = ttk.Label(self.blocks_frame, text='esxdos:', padding=5)
     esxdos_label.grid(column=4, row=1, sticky='e')
 
     spectrum_label = ttk.Label(self.blocks_frame,
                                text='ZX Spectrum Core:',
-                               padding=10)
+                               padding=5)
     spectrum_label.grid(column=0, row=2, sticky='e')
 
     cores_label = ttk.Label(self.cores_frame, text='Cores')
     cores_label.grid(column=0, row=0, sticky='w')
 
-    core_label = ttk.Label(self.cores_frame, text='Default Core:', padding=10)
+    core_label = ttk.Label(self.cores_frame, text='Default Core:', padding=5)
     core_label.grid(column=3, row=1, sticky='e')
 
-    boot_label = ttk.Label(self.cores_frame, text='Boot Timer:', padding=10)
+    boot_label = ttk.Label(self.cores_frame, text='Boot Timer:', padding=5)
     boot_label.grid(column=3, row=2, sticky='e')
 
     keyboard_label = ttk.Label(self.cores_frame,
                                text='Keyboard Layout:',
-                               padding=10)
+                               padding=5)
     keyboard_label.grid(column=3, row=3, sticky='e')
 
     video_label = ttk.Label(
         self.cores_frame,
         text='Video Mode:',
-        padding=10,
+        padding=5,
     )
     video_label.grid(column=3, row=4, sticky='e')
 
-    rom_label = ttk.Label(self.cores_frame, text='Default ROM:', padding=10)
-    rom_label.grid(column=3, row=8, sticky='e')
+    rom_label = ttk.Label(self.cores_frame, text='Default ROM:', padding=5)
+    rom_label.grid(column=3, row=5, sticky='e')
 
     roms_label = ttk.Label(self.roms_frame, text='ROMs')
     roms_label.grid(column=0, row=0, sticky='w')
@@ -248,7 +261,7 @@ def create_entries(self):
                               state='disabled',
                               command=self.changed_rom_spinbox,
                               textvariable=self.default_rom)
-    rom_spinbox.grid(column=4, row=8, sticky='e')
+    rom_spinbox.grid(column=4, row=5, sticky='e')
     rom_spinbox.bind('<Return>', self.set_default_rom)
     rom_spinbox.bind('<FocusOut>', self.set_default_rom)
     self.rom_spinbox = rom_spinbox
@@ -349,7 +362,7 @@ def create_buttons(self):
                                     state='disabled',
                                     command=self.core_import)
     core_import_button.grid(column=3,
-                            row=5,
+                            row=7,
                             columnspan=2,
                             sticky='we',
                             padx=10)
@@ -360,7 +373,7 @@ def create_buttons(self):
                                     state='disabled',
                                     command=self.core_export)
     core_export_button.grid(column=3,
-                            row=6,
+                            row=8,
                             columnspan=2,
                             sticky='we',
                             padx=10)

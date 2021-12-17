@@ -74,13 +74,13 @@ class App(tk.Tk):
         self.title('ZX123 Tool')
         self.resizable(False, False)
 
-        self.main_frame = ttk.Frame(self, padding=10)
+        self.main_frame = ttk.Frame(self, padding=5)
         self.main_frame.pack(fill='both')
-        self.blocks_frame = ttk.Frame(self.main_frame, padding=10)
+        self.blocks_frame = ttk.Frame(self.main_frame, padding=5)
         self.blocks_frame.pack()
-        self.cores_frame = ttk.Frame(self.main_frame, padding=10)
+        self.cores_frame = ttk.Frame(self.main_frame, padding=5)
         self.cores_frame.pack()
-        self.roms_frame = ttk.Frame(self.main_frame, padding=10)
+        self.roms_frame = ttk.Frame(self.main_frame, padding=5)
         self.roms_frame.pack()
 
         self.image_label = self.create_labels()
