@@ -1,4 +1,4 @@
-# zx123_tool
+# ZX123 Tool
 
 Copyright (c) 2020-2021, kounch
 
