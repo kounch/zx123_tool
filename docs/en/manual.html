@@ -669,16 +669,25 @@ pre.rouge {
 <li><a href="#_introduction">Introduction</a></li>
 <li><a href="#_installation">Installation</a>
 <ul class="sectlevel2">
-<li><a href="#_all_platforms">All platforms</a></li>
 <li><a href="#_macos">MacOS</a></li>
 <li><a href="#_windows">Windows</a></li>
+<li><a href="#_all_platforms">All platforms</a></li>
 </ul>
 </li>
 <li><a href="#_use">Use</a>
 <ul class="sectlevel2">
-<li><a href="#_command_line_interface">Command Line Interface</a>
+<li><a href="#_graphical_user_interface">Graphical user interface</a>
 <ul class="sectlevel3">
-<li><a href="#_all_platforms_2">All Platforms</a></li>
+<li><a href="#_bios">BIOS</a></li>
+<li><a href="#_esxdos">esxdos</a></li>
+<li><a href="#_spectrum_core">Spectrum Core</a></li>
+<li><a href="#_secondary_cores">Secondary cores</a></li>
+<li><a href="#_spectrum_roms">Spectrum ROMs</a></li>
+</ul>
+</li>
+<li><a href="#_command_line_interface">Command line interface</a>
+<ul class="sectlevel3">
+<li><a href="#_all_platforms_2">All platforms</a></li>
 <li><a href="#_macos_2">MacOS</a></li>
 <li><a href="#_arguments">Arguments</a></li>
 <li><a href="#_examples">Examples</a></li>
@@ -686,14 +695,11 @@ pre.rouge {
 </li>
 </ul>
 </li>
-<li><a href="#_annex">Annex</a>
+<li><a href="#_appendix">Appendix</a>
 <ul class="sectlevel2">
+<li><a href="#_rom_parameters">ROM parameters</a></li>
 <li><a href="#_json_file">JSON file</a></li>
-<li><a href="#_rompack_v2_file">ROMPack v2 file</a>
-<ul class="sectlevel3">
-<li><a href="#_rom_entry_detail">ROM entry detail</a></li>
-</ul>
-</li>
+<li><a href="#_rompack_v2">ROMPack v2</a></li>
 </ul>
 </li>
 </ul>
@@ -748,6 +754,9 @@ pre.rouge {
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>It uses internally a file <a href="#_json_file"><code>zx123_hash.json</code></a> with the block structure of image files and, optionally, data to identify those blocks. If it is not found, it will try to download it from the repository on GitHub.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -755,6 +764,28 @@ pre.rouge {
 <div class="sectionbody">
 <div class="paragraph">
 <p>There are different versions of the tool, one that works in a lot of platforms, but that may need to install Python 3, and other versions that doesn&#8217;t need it, but aren&#8217;t available for all systems.</p>
+</div>
+<div class="sect2">
+<h3 id="_macos">MacOS</h3>
+<div class="paragraph">
+<p>The MacOS binary isn&#8217;t digitally signed, so you have to authorize the operating system to open de app, using the Finder contextual menu and choosing "Open".</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/MacOpenEN.jpg" alt="MacOpenEN"></span></p>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can remove the quarantine attribute from the Terminal with a command like <code>xattr -d com.apple.quarantine "ZX123 Tool.app"</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_windows">Windows</h3>
+<div class="paragraph">
+<p>The Windows binary release requires Microsoft Visual C++ Redistributable 2015 installed on your system and, for Windows 7, also Microsoft Quality Rollup KB4457144 or later.</p>
+</div>
+<div class="paragraph">
+<p>Once extracted, you have to run from the program (<code>ZX123 Tool.exe</code>) using Python 3.</p>
+</div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
 <h3 id="_all_platforms">All platforms</h3>
@@ -765,7 +796,7 @@ pre.rouge {
 <p>Having Python 3, you only need to download the latest version of the tool from the official repository, following <a href="https://github.com/kounch/zx123_tool/releases/latest">this link</a>.</p>
 </div>
 <div class="paragraph">
-<p>Once extracted, you have to run from a shell the main script using Python 3. This may change depending on the operating system.</p>
+<p>Once extracted, you have to run from a shell the main script (<code>ZX123 Tool.py</code>) using Python 3. This may change depending on the operating system.</p>
 </div>
 <div class="paragraph">
 <p>For example, on Windows, it&#8217;s usually:</p>
@@ -776,24 +807,12 @@ pre.rouge {
 </div>
 </div>
 <div class="paragraph">
-<p>With other operating systems it normally is like:</p>
+<p>With other operating systems it is normally like:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="shell">python3 <span class="s2">"ZX123 Tool.py"</span></code></pre>
+<pre class="rouge highlight"><code data-lang="shell">python3 <span class="s2">"./ZX123 Tool.py"</span></code></pre>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_macos">MacOS</h3>
-<div class="paragraph">
-<p>The MacOS binary isn&#8217;t signed, so you will have to remove the quarantine attribute with <code>xattr -d com.apple.quarantine "ZX123 Tool.app"</code>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_windows">Windows</h3>
-<div class="paragraph">
-<p>The Windows binary release requires Microsoft Visual C++ Redistributable 2015 installed on your system and, for Windows 7, also Microsoft Quality Rollup KB4457144 or later.</p>
 </div>
 </div>
 </div>
@@ -802,9 +821,139 @@ pre.rouge {
 <h2 id="_use">Use</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_command_line_interface">Command Line Interface</h3>
+<h3 id="_graphical_user_interface">Graphical user interface</h3>
+<div class="paragraph">
+<p>The interface is based on a single window configured like this:</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/MainWindow.jpg" alt="MainWindow"></span></p>
+</div>
+<div class="paragraph">
+<p>There&#8217;s also a menu wher you can access options to create a new SPI flash image file, open an existing file (either image or other kind) to anlyze or edit (only if it&#8217;s a flash image), or stop editing.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/FileMenu.jpg" alt="FileMenu"></span></p>
+</div>
+<div class="paragraph">
+<p>When opening a non-image file, the tool will try to analyze and catalog it&#8217;s contents and show the information found:</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/InfoWindow.jpg" alt="InfoWindow"></span></p>
+</div>
+<div class="paragraph">
+<p>Once an image file is open to edit, it&#8217;s possible to make the following modifications.</p>
+</div>
+<div style="page-break-after: always;"></div>
 <div class="sect3">
-<h4 id="_all_platforms_2">All Platforms</h4>
+<h4 id="_bios">BIOS</h4>
+<div class="paragraph">
+<p>Using the corresponding buttons, it is possible to export a file with the current BIOS (firmware) of the image, or to replace it (Import) with another one.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/BIOS.jpg" alt="BIOS"></span></p>
+</div>
+<div class="paragraph">
+<p>In addition, you can modify some of the default startup values.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/DefaultBIOS.jpg" alt="DefaultBIOS"></span></p>
+</div>
+<div class="paragraph">
+<p>For reference, these are the meanings of some of the values.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Setting</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description
+Boot Timer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0 (No Timer), 1, 2, 3 or 4</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keyboard Layout</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Video mode</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0 (PAL), 1 (NTSC) or 2 (VGA)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_esxdos">esxdos</h4>
+<div class="paragraph">
+<p>Using the corresponding buttons, it is possible to export a file with the current version of esxdos in the image, or to replace it (Import) with another one.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/esxdos.jpg" alt="esxdos"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_spectrum_core">Spectrum Core</h4>
+<div class="paragraph">
+<p>Using the corresponding buttons, it is possible to export a file with the current version of the Spectrum main core in the image, or to replace it (Import) with another one.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/Spectrum.jpg" alt="Spectrum"></span></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect3">
+<h4 id="_secondary_cores">Secondary cores</h4>
+<div class="paragraph">
+<p>If no secondary core is selected in the list, it is possible to use the button to add a new one.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/Cores.jpg" alt="Cores"></span></p>
+</div>
+<div class="paragraph">
+<p>When one or more cores are selected, it is possible to replace the first one with another one (Import) or to export each of the selected cores to separate files.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/CoresSelect.jpg" alt="CoresSelect"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_spectrum_roms">Spectrum ROMs</h4>
+<div class="paragraph">
+<p>If no ROM is selected from the corresponding list, it is possible to use the Add button to add a new one. You can also replace or export all ROMs in the image using a single ROMPack file (v1).</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/ROMs.jpg" alt="ROMs"></span></p>
+</div>
+<div class="paragraph">
+<p>When one or more ROMs are selected, it is possible to replace the first one with another one of the same size (Import) or to export each of the selected ROMs to separate files.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/ROMsSelect.jpg" alt="ROMsSelect"></span></p>
+</div>
+<div class="paragraph">
+<p>When loading a ROM file, you can specify the flags to use when using the ROM, such as memory contention, DivMMC, timings of different Spectrum models, etc.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/ROM.jpg" alt="ROM"></span></p>
+</div>
+<div class="paragraph">
+<p>The settings for each ROM are listed with a letter code that is explained in the <a href="#_rom_parameters">appendix at the end of this manual</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_command_line_interface">Command line interface</h3>
+<div class="sect3">
+<h4 id="_all_platforms_2">All platforms</h4>
 <div class="paragraph">
 <p>The CLI can be invoked directly using the script <code>zx123_tool.py</code> and Python (version 3.6 or later), (e.g. <code>python3 zx123_tool.py -l -i FLASH.ZX1</code>)</p>
 </div>
@@ -873,9 +1022,6 @@ pre.rouge {
 </div>
 <div class="sect3">
 <h4 id="_examples">Examples</h4>
-<div class="paragraph">
-<p>When using the binary release, invoke the corresponding executable file instead of using Python and the script (e.g. <code>zx123_tool.exe</code> or <code>zx123_tool</code> instead of <code>python3 zx123_tool.py</code>).</p>
-</div>
 <div class="paragraph">
 <p>Show contents of file:</p>
 </div>
@@ -1046,8 +1192,94 @@ pre.rouge {
 </div>
 </div>
 <div class="sect1">
-<h2 id="_annex">Annex</h2>
+<h2 id="_appendix">Appendix</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_rom_parameters">ROM parameters</h3>
+<table class="tableblock frame-all grid-all" style="width: 60%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>i</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keyboard issue 3 enabled (instead of issue 2)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>c</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Disable memory contention</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>d</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable DivMMC</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>n</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable NMI DivMMC (esxdos Menu)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>p</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use Pentagon Timings</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>t</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use 128K timings</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>s</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Disable DivMMC and ZXMMC ports</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>m</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable Timex Horizontal MMU</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>h</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Disable ROM high bit (1FFD bit 2)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>l</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Disable ROM low bit (7FFD bit 4)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Disable 1FFD port (+2A/3 paging)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>7</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Disable 7FFD port (128K paging)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Disable TurboSound (secondary AY chip)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>a</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Disable AY chip</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Disable Radastanian mode</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>x</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Disable Timex mode</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>u</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Disable ULAPlus</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
 <div class="sect2">
 <h3 id="_json_file">JSON file</h3>
 <div class="paragraph">
@@ -1144,9 +1376,10 @@ pre.rouge {
 <pre class="rouge highlight"><code>[first core offset, core length, "", First bytes of a binary core data, second cores block offset]</code></pre>
 </div>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
-<h3 id="_rompack_v2_file">ROMPack v2 file</h3>
+<h3 id="_rompack_v2">ROMPack v2</h3>
 <div class="paragraph">
 <p>ROMPack v2 files are based on classic ROMPack files, used to extract and insert all the ROM files in a ZX-Uno, ZXDOS SPI flash. Classic ROMpack files have 64 ROM slots while ROMPack v2 files have 255 ROM slots. The file structure of a ROMPAck file is as follows:</p>
 </div>
@@ -1162,8 +1395,9 @@ pre.rouge {
 `0x004100` | `0x4000FF` | Up to 255 16384 bytes ROM slots (pad with `0x00`)</code></pre>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_rom_entry_detail">ROM entry detail</h4>
+<div class="paragraph">
+<p>Each ROM Entry block has this internal structure:</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code> Start              | End      | Description
@@ -1194,11 +1428,10 @@ pre.rouge {
 </div>
 </div>
 </div>
-</div>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2021-12-16 22:49:37 +0100
+Last updated 2021-12-17 16:42:07 +0100
 </div>
 </div>
 </body>

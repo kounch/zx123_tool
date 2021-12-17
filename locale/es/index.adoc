@@ -167,7 +167,7 @@ Por otra parte, cuando está seleccionado una o más ROMs, es posible sustituir 
 [.text-center]
 image:../img/ROMsSelect.jpg[pdfwidth=100%]
 
-Al cargar un fichero de ROM, se pueden especificar los indicadores para usar al utilizar la ROM, como la contención de memoria, DivMMC, timings de distintos modelos de Spectrum, etc.:
+Al cargar un fichero de ROM, se pueden especificar los indicadores para usar al utilizar la ROM, como la contención de memoria, DivMMC, timings de distintos modelos de Spectrum, etc.
 
 [.text-center]
 image:../img/ROM.jpg[pdfwidth=70%]

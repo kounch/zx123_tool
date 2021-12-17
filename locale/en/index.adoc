@@ -19,7 +19,7 @@
 == Introduction
 
 [.text-center]
-image:../img/Logo.jpg[pdfwidth=50%]
+image:../img/Logo.jpg[pdfwidth=20%]
 
 ZX123 Tool is a tool that analyzes, extracts and injects data in SPI flash image files for ZX-Uno, ZXDOS and similar devices.
 
@@ -35,9 +35,28 @@ These are the main features:
 - Wipe with  0s all Cores an ZX Spectrum ROMs data  (command line only)
 - List, add or extract ROMs from a ROMPack v2 ROms file  (command line only)
 
+It uses internally a file <<#_json_file,`zx123_hash.json`>> with the block structure of image files and, optionally, data to identify those blocks. If it is not found, it will try to download it from the repository on GitHub.
+
 == Installation
 
 There are different versions of the tool, one that works in a lot of platforms, but that may need to install Python 3, and other versions that doesn't need it, but aren't available for all systems.
+
+=== MacOS
+
+The MacOS binary isn't digitally signed, so you have to authorize the operating system to open de app, using the Finder contextual menu and choosing "Open".
+
+[.text-center]
+image:../img/MacOpenEN.jpg[pdfwidth=50%]
+
+Alternatively, you can remove the quarantine attribute from the Terminal with a command like `xattr -d com.apple.quarantine "ZX123 Tool.app"`.
+
+=== Windows
+
+The Windows binary release requires Microsoft Visual C++ Redistributable 2015 installed on your system and, for Windows 7, also Microsoft Quality Rollup KB4457144 or later. 
+
+Once extracted, you have to run from the program (`ZX123 Tool.exe`) using Python 3.
+
+<<<
 
 === All platforms
 
@@ -45,7 +64,7 @@ To use the tool this way, you need https://www.python.org/[Python 3] to use it. 
 
 Having Python 3, you only need to download the latest version of the tool from the official repository, following https://github.com/kounch/zx123_tool/releases/latest[this link].
 
-Once extracted, you have to run from a shell the main script using Python 3. This may change depending on the operating system.
+Once extracted, you have to run from a shell the main script (`ZX123 Tool.py`) using Python 3. This may change depending on the operating system.
 
 For example, on Windows, it's usually:
 
@@ -54,26 +73,111 @@ For example, on Windows, it's usually:
 py -3 "ZX123 Tool.py"
 ----
 
-With other operating systems it normally is like:
+With other operating systems it is normally like:
 
 [source,shell]
 ----
-python3 "ZX123 Tool.py"
+python3 "./ZX123 Tool.py"
 ----
-
-=== MacOS
-
-The MacOS binary isn't signed, so you will have to remove the quarantine attribute with `xattr -d com.apple.quarantine "ZX123 Tool.app"`.
-
-=== Windows
-
-The Windows binary release requires Microsoft Visual C++ Redistributable 2015 installed on your system and, for Windows 7, also Microsoft Quality Rollup KB4457144 or later. 
 
 == Use
 
-=== Command Line Interface
+=== Graphical user interface
 
-==== All Platforms
+The interface is based on a single window configured like this:
+
+[.text-center]
+image:../img/MainWindow.jpg[pdfwidth=70%]
+
+There's also a menu wher you can access options to create a new SPI flash image file, open an existing file (either image or other kind) to anlyze or edit (only if it's a flash image), or stop editing.
+
+[.text-center]
+image:../img/FileMenu.jpg[pdfwidth=20%]
+
+When opening a non-image file, the tool will try to analyze and catalog it's contents and show the information found:
+
+[.text-center]
+image:../img/InfoWindow.jpg[pdfwidth=40%]
+
+Once an image file is open to edit, it's possible to make the following modifications.
+
+<<<
+
+==== BIOS
+
+Using the corresponding buttons, it is possible to export a file with the current BIOS (firmware) of the image, or to replace it (Import) with another one.
+
+[.text-center]
+image:../img/BIOS.jpg[pdfwidth=60%]
+
+In addition, you can modify some of the default startup values.
+
+[.text-center]
+image:../img/DefaultBIOS.jpg[pdfwidth=25%]
+
+For reference, these are the meanings of some of the values.
+
+|===
+|Setting
+|Description
+Boot Timer
+|0 (No Timer), 1, 2, 3 or 4
+|Keyboard Layout
+|0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
+|Video mode
+|0 (PAL), 1 (NTSC) or 2 (VGA)
+|===
+
+==== esxdos
+
+Using the corresponding buttons, it is possible to export a file with the current version of esxdos in the image, or to replace it (Import) with another one.
+
+[.text-center]
+image:../img/esxdos.jpg[pdfwidth=60%]
+
+==== Spectrum Core
+
+Using the corresponding buttons, it is possible to export a file with the current version of the Spectrum main core in the image, or to replace it (Import) with another one.
+
+[.text-center]
+image:../img/Spectrum.jpg[pdfwidth=100%]
+
+<<<
+
+==== Secondary cores
+
+If no secondary core is selected in the list, it is possible to use the button to add a new one.
+
+[.text-center]
+image:../img/Cores.jpg[pdfwidth=25%]
+
+When one or more cores are selected, it is possible to replace the first one with another one (Import) or to export each of the selected cores to separate files.
+
+[.text-center]
+image:../img/CoresSelect.jpg[pdfwidth=25%]
+
+==== Spectrum ROMs
+
+If no ROM is selected from the corresponding list, it is possible to use the Add button to add a new one. You can also replace or export all ROMs in the image using a single ROMPack file (v1).
+
+[.text-center]
+image:../img/ROMs.jpg[pdfwidth=100%]
+
+When one or more ROMs are selected, it is possible to replace the first one with another one of the same size (Import) or to export each of the selected ROMs to separate files.
+
+[.text-center]
+image:../img/ROMsSelect.jpg[pdfwidth=100%]
+
+When loading a ROM file, you can specify the flags to use when using the ROM, such as memory contention, DivMMC, timings of different Spectrum models, etc.
+
+[.text-center]
+image:../img/ROM.jpg[pdfwidth=70%]
+
+The settings for each ROM are listed with a letter code that is explained in the <<#_rom_parameters,appendix at the end of this manual>>.
+
+=== Command line interface
+
+==== All platforms
 
 The CLI can be invoked directly using the script `zx123_tool.py` and Python (version 3.6 or later), (e.g. `python3 zx123_tool.py -l -i FLASH.ZX1`)
 
@@ -137,9 +241,6 @@ Alternatively, if your system does not have Python 3, you can call the MacOS bin
 ----
 
 ==== Examples
-
-
-When using the binary release, invoke the corresponding executable file instead of using Python and the script (e.g. `zx123_tool.exe` or `zx123_tool` instead of `python3 zx123_tool.py`).
 
 Show contents of file:
 
@@ -223,7 +324,51 @@ Extract ROMs with indexes 3, 5 and 6 from a ROMPack v2 file:
 
     ...zx123_tool.py -i ROMS_255.ZX1 -x 3,5,6
 
-== Annex
+== Appendix
+
+=== ROM parameters
+
+[align="center",width="60%",%header,cols="1,4",options="header"]
+|===
+|Parameter
+|Description
+|`i`
+|Keyboard issue 3 enabled (instead of issue 2)
+|`c`
+|Disable memory contention
+|`d`
+|Enable DivMMC
+|`n`
+|Enable NMI DivMMC (esxdos Menu)
+|`p`
+|Use Pentagon Timings
+|`t`
+|Use 128K timings
+|`s`
+|Disable DivMMC and ZXMMC ports
+|`m`
+|Enable Timex Horizontal MMU
+|`h`
+|Disable ROM high bit (1FFD bit 2)
+|`l`
+|Disable ROM low bit (7FFD bit 4)
+|`1`
+|Disable 1FFD port (+2A/3 paging)
+|`7`
+|Disable 7FFD port (128K paging)
+|`2`
+|Disable TurboSound (secondary AY chip)
+|`a`
+|Disable AY chip
+|`r`
+|Disable Radastanian mode
+|`x`
+|Disable Timex mode
+|`u`
+|Disable ULAPlus
+|===
+
+<<<
 
 === JSON file
 
@@ -316,7 +461,9 @@ The JSON file is an object where the main name are file extensions (like `ZXD` o
 [first core offset, core length, "", First bytes of a binary core data, second cores block offset]
 ----
 
-=== ROMPack v2 file
+<<<
+
+=== ROMPack v2
 
 ROMPack v2 files are based on classic ROMPack files, used to extract and insert all the ROM files in a ZX-Uno, ZXDOS SPI flash. Classic ROMpack files have 64 ROM slots while ROMPack v2 files have 255 ROM slots. The file structure of a ROMPAck file is as follows:
 
@@ -332,7 +479,7 @@ ROMPack v2 files are based on classic ROMPack files, used to extract and insert 
 `0x004100` | `0x4000FF` | Up to 255 16384 bytes ROM slots (pad with `0x00`)
 ----
 
-==== ROM entry detail
+Each ROM Entry block has this internal structure:
 
 [source]
 ----
