@@ -162,7 +162,7 @@ Si no está seleccionada ninguna ROM de la lista correspondiente, es posible uti
 [.text-center]
 image:../img/ROMs.jpg[pdfwidth=100%]
 
-Por otra parte, cuando está seleccionado una o más ROMs, es posible sustituir la primer de ellas por otra del mismo tamaño (Import) o bien exportar cada una de los seleccionadas a un fichero independiente.
+Por otra parte, cuando está seleccionado una o más ROMs, es posible sustituir la primera de ellas por otra del mismo tamaño (Import) o bien exportar cada una de las seleccionadas a un fichero independiente.
 
 [.text-center]
 image:../img/ROMsSelect.jpg[pdfwidth=100%]
