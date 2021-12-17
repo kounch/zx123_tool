@@ -931,7 +931,7 @@ pre.rouge {
 <p><span class="image"><img src="../img/ROMs.jpg" alt="ROMs"></span></p>
 </div>
 <div class="paragraph">
-<p>Por otra parte, cuando está seleccionado una o más ROMs, es posible sustituir la primera de ellas por otra del mismo tamaño (Import) o bien exportar cada una de las seleccionadas a un fichero independiente.</p>
+<p>Por otra parte, cuando está seleccionada una o más ROMs, es posible sustituir la primera de ellas por otra del mismo tamaño (Import) o bien exportar cada una de las seleccionadas a un fichero independiente.</p>
 </div>
 <div class="paragraph text-center">
 <p><span class="image"><img src="../img/ROMsSelect.jpg" alt="ROMsSelect"></span></p>
@@ -1378,47 +1378,171 @@ pre.rouge {
 <div class="paragraph">
 <p>Los ficheros ROMPack v2 se basan en los ficheros ROMPack clásicos, que se utilizan para extraer e insertar todas las ROM en la flash SPI de un ZX-Uno, ZXDOS, etc. Los fiheros ROMpack clásicos tienen 64 ranuras de 16K (slots) de espacio de almacenamiento, mientras que los ficheros ROMPack v2 disponen de 255 espacios. La estructura de un archivo ROMPAck es la siguiente:</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code> Inicio    | Fin        | Descripción
- ------    | ----       | -----------
-`0x000000` | `0x000003` | Firma 'RPv2'
-`0x000004` | `0x00003F` | Reservado. Sin usar (rellenar con `0x00` hasta el final)
-`0x000040` | `0x003FFF` | Hasta 255 bloques de 64 bytes (ROM Entry) (rellenar con 0x00 hasta el final)
-`0x004000` | `0x0040FE` | Hasta 255 bloques de 1 byte con índice de ROM Entry (rellenar con `0xFF` hasta el final)
-`0x0040FF` | `0x0040FF` | Índice de ROM por defecto (1 byte)
-`0x004100` | `0x4000FF` | Hasta 255 slots de 16384 bytes (rellenar con `0x00` hasta el final)</code></pre>
-</div>
-</div>
+<table class="tableblock frame-all grid-all" style="width: 85%;">
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 77.7778%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Inicio</th>
+<th class="tableblock halign-left valign-top">Fin</th>
+<th class="tableblock halign-left valign-top">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x000000</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x000003</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Firma 'RPv2'</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x000004</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x00003F</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reservado. Sin usar (rellenar con <code>0x00</code> hasta el final)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x000040</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x003FFF</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hasta 255 bloques de 64 bytes (ROM Entry) (rellenar con 0x00 hasta el final)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x004000</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x0040FE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hasta 255 bloques de 1 byte con índice de ROM Entry (rellenar con <code>0xFF</code> hasta el final)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x0040FF</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x0040FF</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Índice de ROM por defecto (1 byte)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x004100</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x4000FF</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hasta 255 slots de 16384 bytes (rellenar con <code>0x00</code> hasta el final)</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p>Cada bloque (ROM Entry), a su vez, tiene esta estructura:</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code> Start              | End     | Description
- -----              | ---     | -----------
-`0x00`              | `0x00`  | Offset de primer Slot utilizado
-`0x01`              | `0x01`  | Tamaño en slots
-`0x02`              | `0x02`  | Flags 1:
-`0x02`:Bit `0`      | Bit `1` | Machine timings: `00`=48K `01`=128K, `10`=Pentagon
-`0x02`:Bit `2`      | Bit `2` | NMI DivMMC: `0`=deshabilitado, `1`=habilitado
-`0x02`:Bit `3`      | Bit `3` | DivMMC: `0`=deshabilitado, `1`=habilitado
-`0x02`:Bit `4`      | Bit `4` | Contención: `0`=deshabilitada, `1`=habilitada
-`0x02`:Bit `5`      | Bit `5` | Keyboard issue: `0`=issue 2, `1`=issue 3
-`0x03`              | `0x03`  | Flags 2
-`0x03`:Bit `0`      | Bit `0` | Chip AY: `0`=habilitado, `1`=deshabilitado
-`0x03`:Bit `1`      | Bit `1` | Segundo Chip AY (TurboSound): `0`=habilitado, `1`=deshabilitado
-`0x03`:Bit `2`      | Bit `2` | Puerto 7ffd: `0`=habilitado, `1`=deshabilitado
-`0x03`:Bit `3`      | Bit `3` | Puerto 1ffd: `0`=habilitado, `1`=deshabilitado
-`0x03`:Bit `4`      | Bit `4` | ROM low bit: `0`=habilitado, `1`=deshabilitado
-`0x03`:Bit `5`      | Bit `5` | ROM high bit: `0`=habilitado, `1`=deshabilitado
-`0x03`:Bit `6`      | Bit `6` | MMU horizontal en Timex: `0`=deshabilitado, `1`=habilitado
-`0x03`:Bit `7`      | Bit `7` | Puertos DivMMC y ZXMMC: `0`=habilitado, `1`=deshabilitado
-`0x08`              | `0x0F`  | Valores de crc16-ccitt. Hata 4 valores de 16-bit en orden inverso
-`0x10`              | `0x1F`  | Sin usar
-`0x20`              | `0x3F`  | Nombre de la ROM en ASCII (rellenar con espacios hasta el final)</code></pre>
-</div>
-</div>
+<table class="tableblock frame-all grid-all" style="width: 80%;">
+<colgroup>
+<col style="width: 18.1818%;">
+<col style="width: 9.0909%;">
+<col style="width: 72.7273%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Start</th>
+<th class="tableblock halign-left valign-top">End</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x00</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x00</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Offset de primer Slot utilizado</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x01</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x01</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tamaño en slots</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x02</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x02</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Flags 1:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x02</code>:Bit <code>0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bit <code>1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Machine timings: <code>00</code>=48K <code>01</code>=128K, <code>10</code>=Pentagon</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x02</code>:Bit <code>2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bit <code>2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NMI DivMMC: <code>0</code>=deshabilitado, <code>1</code>=habilitado</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x02</code>:Bit <code>3</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bit <code>3</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DivMMC: <code>0</code>=deshabilitado, <code>1</code>=habilitado</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x02</code>:Bit <code>4</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bit <code>4</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contención: <code>0</code>=deshabilitada, <code>1</code>=habilitada</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x02</code>:Bit <code>5</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bit <code>5</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keyboard issue: <code>0</code>=issue 2, <code>1</code>=issue 3</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x03</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x03</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Flags 2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x03</code>:Bit <code>0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bit <code>0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Chip AY: <code>0</code>=habilitado, <code>1</code>=deshabilitado</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x03</code>:Bit <code>1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bit <code>1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Segundo Chip AY (TurboSound): <code>0</code>=habilitado, <code>1</code>=deshabilitado</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x03</code>:Bit <code>2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bit <code>2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Puerto 7ffd: <code>0</code>=habilitado, <code>1</code>=deshabilitado</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x03</code>:Bit <code>3</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bit <code>3</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Puerto 1ffd: <code>0</code>=habilitado, <code>1</code>=deshabilitado</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x03</code>:Bit <code>4</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bit <code>4</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ROM low bit: <code>0</code>=habilitado, <code>1</code>=deshabilitado</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x03</code>:Bit <code>5</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bit <code>5</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ROM high bit: <code>0</code>=habilitado, <code>1</code>=deshabilitado</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x03</code>:Bit <code>6</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bit <code>6</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MMU horizontal en Timex: <code>0</code>=deshabilitado, <code>1</code>=habilitado</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x03</code>:Bit <code>7</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bit <code>7</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Puertos DivMMC y ZXMMC: <code>0</code>=habilitado, <code>1</code>=deshabilitado</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x08</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x0F</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Valores de crc16-ccitt. Hata 4 valores de 16-bit en orden inverso</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x10</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x1F</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sin usar</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x20</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x3F</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nombre de la ROM en ASCII (rellenar con espacios hasta el final)</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>

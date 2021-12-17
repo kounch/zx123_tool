@@ -52,7 +52,7 @@ Alternatively, you can remove the quarantine attribute from the Terminal with a 
 
 === Windows
 
-The Windows binary release requires Microsoft Visual C++ Redistributable 2015 installed on your system and, for Windows 7, also Microsoft Quality Rollup KB4457144 or later. 
+The Windows binary release requires Microsoft Visual C++ Redistributable 2015 installed on your system and, for Windows 7, also Microsoft Quality Rollup KB4457144 or later.
 
 Once extracted, you have to run from the program (`ZX123 Tool.exe`) using Python 3.
 
@@ -206,7 +206,7 @@ Alternatively, if your system does not have Python 3, you can call the MacOS bin
                     against 'latest' entry in the JSON database
 -s, --show_hashes   Show computed hashes
 -x EXTRACT, --extract EXTRACT
-          Item(s) to extract, split using ",": BIOS, Spectrum, Special, 
+          Item(s) to extract, split using ",": BIOS, Spectrum, Special,
           ROMS, esxdos and/or core/ROM Number(s)
 -n N_CORES, --number_of_cores N_CORES
           Number of cores to keep on output file
@@ -416,7 +416,7 @@ The JSON file is an object where the main name are file extensions (like `ZXD` o
                       "versions":  {   -> Hash Dictionary
                                           "(Version Description)": "(Hash)",
                       }
-    "Cores": {   -> Dictionary for different FPGA cores       
+    "Cores": {   -> Dictionary for different FPGA cores
         "(Core name)": {   -> Dictionary of hashes for different core versions in the format:
                             "latest" -> Name of the latest version and (optionally) download URL
                             "base"   -> Name of another version with download URL if there's no URL for the latest
@@ -425,7 +425,7 @@ The JSON file is an object where the main name are file extensions (like `ZXD` o
                             },
                             "features":  {   -> Feature info Dictionary
                                                 "Category": [["Feature", "Feature", ...], "Note"]
-                            } 
+                            }
         },
         (...)
     }
@@ -467,45 +467,97 @@ The JSON file is an object where the main name are file extensions (like `ZXD` o
 
 ROMPack v2 files are based on classic ROMPack files, used to extract and insert all the ROM files in a ZX-Uno, ZXDOS SPI flash. Classic ROMpack files have 64 ROM slots while ROMPack v2 files have 255 ROM slots. The file structure of a ROMPAck file is as follows:
 
-[source]
-----
- Start     | End        | Description
- -----     | ---        | -----------
-`0x000000` | `0x000003` | Signature 'RPv2'
-`0x000004` | `0x00003F` | Reserved. Unused (pad with `0x00`)
-`0x000040` | `0x003FFF` | Up to 255 64 bytes blocks (ROM Entries) (pad with `0x00`)
-`0x004000` | `0x0040FE` | Up to 255 1 byte blocks with ROM Index Entries (pad with `0xFF`)
-`0x0040FF` | `0x0040FF` | Default ROM Index (1 byte)
-`0x004100` | `0x4000FF` | Up to 255 16384 bytes ROM slots (pad with `0x00`)
-----
+[align="center",width="75%",%header,cols="1,1,6",options="header"]
+|===
+|Start     | End        | Description
+|`0x000000`
+|`0x000003`
+|Signature 'RPv2'
+|`0x000004`
+|`0x00003F`
+|Reserved. Unused (pad with `0x00`)
+|`0x000040`
+|`0x003FFF`
+|Up to 255 64 bytes blocks (ROM Entries) (pad with `0x00`)
+|`0x004000`
+|`0x0040FE`
+|Up to 255 1 byte blocks with ROM Index Entries (pad with `0xFF`)
+|`0x0040FF`
+|`0x0040FF`
+|Default ROM Index (1 byte)
+|`0x004100`
+|`0x4000FF`
+|Up to 255 16384 bytes ROM slots (pad with `0x00`)
+|===
 
 Each ROM Entry block has this internal structure:
 
-[source]
-----
- Start              | End      | Description
- -----              | ---      | -----------
-`0x00`              | `0x00`   | Slot offset
-`0x01`              | `0x01`   | Slot size
-`0x02`              | `0x02`   | Flags 1:
-`0x02`:Bit `0`      |  Bit `1` | Machine timings: `00`=48K `01`=128K, `10`=Pentagon
-`0x02`:Bit `2`      | Bit `2`  | NMI DivMMC: `0`=disabled, `1`=enabled
-`0x02`:Bit `3`      | Bit `3`  | DivMMC: `0`=disabled, `1`=enabled
-`0x02`:Bit `4`      | Bit `4`  | Contention: `0`=disabled, `1`=enabled
-`0x02`:Bit `5`      | Bit `5`  | Keyboard issue: `0`=issue 2, `1`=issue 3
-`0x03`              | `0x03`   | Flags 2:
-`0x03`:Bit `0`      | Bit `0`  | AY chip: `0`=enabled, `1`=disabled
-`0x03`:Bit `1`      | Bit `1`  | 2nd AY chip (TurboSound): `0`=enabled, `1`=disabled
-`0x03`:Bit `2`      | Bit `2`  | `7ffd` port: `0`=enabled, `1`=disabled
-`0x03`:Bit `3`      | Bit `3`  | `1ffd` port: `0`=enabled, `1`=disabled
-`0x03`:Bit `4`      | Bit `4`  | ROM low bit: `0`=enabled, `1`=disabled
-`0x03`:Bit `5`      | Bit `5`  | ROM high bit: `0`=enabled, `1`=disabled
-`0x03`:Bit `6`      | Bit `6`  | horizontal MMU in Timex: `0`=disabled, `1`=enabled
-`0x03`:Bit `7`      | Bit `7`  | DivMMC and ZXMMC ports: `0`=enabled, `1`=disabled
-`0x08`              | `0x0F`   | crc16-ccitt values. Up to 4 16-bit values in reverse order
-`0x10`              | `0x1F`   | unused
-`0x20`              | `0x3F`   |Name of ROM in ASCII, space padded
-----
+[align="center",width="70%",%header,cols="2,1,7",options="header"]
+|===
+|Start
+|End
+|Description
+|`0x00`
+|`0x00`
+|Slot offset
+|`0x01`
+|`0x01`
+|Slot size
+|`0x02`
+|`0x02`
+|Flags 1:
+|`0x02`:Bit `0`
+| Bit `1`
+|Machine timings: `00`=48K `01`=128K, `10`=Pentagon
+|`0x02`:Bit `2`
+|Bit `2`
+|NMI DivMMC: `0`=disabled, `1`=enabled
+|`0x02`:Bit `3`
+|Bit `3`
+|DivMMC: `0`=disabled, `1`=enabled
+|`0x02`:Bit `4`
+|Bit `4`
+|Contention: `0`=disabled, `1`=enabled
+|`0x02`:Bit `5`
+|Bit `5`
+|Keyboard issue: `0`=issue 2, `1`=issue 3
+|`0x03`
+|`0x03`
+|Flags 2:
+|`0x03`:Bit `0`
+|Bit `0`
+|AY chip: `0`=enabled, `1`=disabled
+|`0x03`:Bit `1`
+|Bit `1`
+|2nd AY chip (TurboSound): `0`=enabled, `1`=disabled
+|`0x03`:Bit `2`
+|Bit `2`
+|`7ffd` port: `0`=enabled, `1`=disabled
+|`0x03`:Bit `3`
+|Bit `3`
+|`1ffd` port: `0`=enabled, `1`=disabled
+|`0x03`:Bit `4`
+|Bit `4`
+|ROM low bit: `0`=enabled, `1`=disabled
+|`0x03`:Bit `5`
+|Bit `5`
+|ROM high bit: `0`=enabled, `1`=disabled
+|`0x03`:Bit `6`
+|Bit `6`
+|horizontal MMU in Timex: `0`=disabled, `1`=enabled
+|`0x03`:Bit `7`
+|Bit `7`
+|DivMMC and ZXMMC ports: `0`=enabled, `1`=disabled
+|`0x08`
+|`0x0F`
+|crc16-ccitt values. Up to 4 16-bit values in reverse order
+|`0x10`
+|`0x1F`
+|unused
+|`0x20`
+|`0x3F`
+|Name of ROM in ASCII, space padded
+|===
 
 == Copyright
 
