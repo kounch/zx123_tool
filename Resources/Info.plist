@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDisplayName</key>
+	<string>ZX123 Tool</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>zx1</string>
+				<string>ZX1</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>zx1</string>
+			<key>CFBundleTypeName</key>
+			<string>ZX-Uno Document</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.kounch.ZX1213Tool.zx1</string>
+			</array>
+			<key>NSDocumentClass</key>
+			<string>FileDataDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>zx2</string>
+				<string>ZX2</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>zx2</string>
+			<key>CFBundleTypeName</key>
+			<string>ZXDOS SPI Flash Image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.kounch.ZX1213Tool.zx2</string>
+			</array>
+			<key>NSDocumentClass</key>
+			<string>FileDataDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>zxd</string>
+				<string>ZXD</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>zxd</string>
+			<key>CFBundleTypeName</key>
+			<string>ZXDOS+ SPI Flash Image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.kounch.ZX1213Tool.zxd</string>
+			</array>
+			<key>NSDocumentClass</key>
+			<string>FileDataDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>rom</string>
+				<string>ROM</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>zxd</string>
+			<key>CFBundleTypeName</key>
+			<string>ZX ROM Image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.kounch.ZX1213Tool.rom</string>
+			</array>
+			<key>NSDocumentClass</key>
+			<string>FileDataDocument</string>
+		</dict>
+    </array>
+	<key>CFBundleExecutable</key>
+	<string>ZX123 Tool</string>
+	<key>CFBundleIconFile</key>
+	<string>ZX123 Tool.icns</string>
+	<key>CFBundleIdentifier</key>
+	<string>ZX123 Tool</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>ZX123 Tool</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.0.2</string>
+	<key>CFBundleSignature</key>
+	<string>Z123</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2021, kounch All rights reserved.</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>ZX-Uno Document</string>
+			<key>UTTypeIconFile</key>
+			<string>zx1</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.kounch.ZX1213Tool.zx1</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>zx1</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>ZXDOS SPI Flash Image</string>
+			<key>UTTypeIconFile</key>
+			<string>zx2</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.kounch.ZX1213Tool.zx2</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>zx2</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>ZXDOS+ SPI Flash Image</string>
+			<key>UTTypeIconFile</key>
+			<string>zxd</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.kounch.ZX1213Tool.zxd</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>zxd</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>ZX ROM Image</string>
+			<key>UTTypeIconFile</key>
+			<string>rom</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.kounch.ZX1213Tool.rom</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>rom</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
