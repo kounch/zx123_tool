@@ -22,7 +22,7 @@ from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter import messagebox
 import zx123_tool as zx123
-from ._extra_gui import NewEntryDialog, InfoWindow
+from ._extra_gui import NewEntryDialog, InfoWindow, ProgressWindow
 
 MY_DIRPATH = os.path.dirname(sys.argv[0])
 MY_DIRPATH = os.path.abspath(MY_DIRPATH)
@@ -62,7 +62,7 @@ class App(tk.Tk):
             self.destroy()
             return
 
-        self.load_json()
+        self.fulldict_hash = self.load_json()
         self.zxfilepath = ''
         self.old_core = self.old_timer = self.old_keyboard = None
         self.old_video = self.old_rom = None
@@ -83,7 +83,7 @@ class App(tk.Tk):
         self.roms_frame = ttk.Frame(self.main_frame, padding=5)
         self.roms_frame.pack()
 
-        self.image_label = self.create_labels()
+        self.image_label, self.version_label = self.create_labels()
         self.create_entries()
         self.core_table, self.rom_table = self.create_tables()
         self.create_buttons()
@@ -111,7 +111,28 @@ class App(tk.Tk):
                     print('Updating database file...')
                     copy(os.path.join(APP_RESDIR, 'zx123_hash.json'), JSON_DIR)
 
-        self.fulldict_hash = zx123.load_json_bd(base_dir=JSON_DIR)
+        fulldict_hash = zx123.load_json_bd(base_dir=JSON_DIR)
+        return fulldict_hash
+
+    def json_menu_popup(self, event):
+        """Contextual Menu Handling for JSON Version Label"""
+        try:
+            self.json_menu.tk_popup(event.x_root, event.y_root, 0)
+        finally:
+            self.json_menu.grab_release()
+
+    def update_json(self):
+        """Update JSON Database and show in GUI"""
+        fulldict_hash = zx123.load_json_bd(base_dir=JSON_DIR,
+                                           str_update='json')
+        if 'version' in fulldict_hash:
+            str_text = f'Database: {fulldict_hash["version"]}'
+            self.version_label.config(text=str_text)
+
+        self.fulldict_hash = fulldict_hash
+
+    def show_stats(self):
+        pass
 
     def new_image(self):
         """Create a new image file from one of the included templates"""
@@ -145,6 +166,7 @@ class App(tk.Tk):
         self.zxfilepath = ''
 
         self.filemenu.entryconfig(2, state='disabled')
+        self.filemenu.entryconfig(4, state='disabled')
 
         self.image_label.config(text='No Image')
         self.bios.set('')
@@ -176,6 +198,24 @@ class App(tk.Tk):
         self.video_spinbox.state(['disabled'])
         self.rom_spinbox.state(['disabled'])
 
+    def update_image(self, str_update, get_1core=False, get_2mb=False):
+        """
+        Tries to update BIOS and or Core(s) of image file
+        :param str_update: Description of the udpdate ("all", "bios", etc.)
+        :param get_1core: Use "1core" entries of JSON
+        :param get_2mb: Use "2m" entries of JSON
+        """
+        self.unbind_keys()
+        w_progress = ProgressWindow(self, f'Update {str_update}')
+        w_progress.show()
+        zx123.update_image(self.zxfilepath, self.zxfilepath,
+                           self.fulldict_hash, self.zxextension, str_update,
+                           False, True, get_1core, get_2mb, w_progress)
+        self.open_file(self.zxfilepath)
+        w_progress.close()
+        self.focus_force()
+        self.bind_keys()
+
     def open_file(self, *args):
         """
         Open the first file received. If there's no file, ask for it
@@ -202,6 +242,7 @@ class App(tk.Tk):
                 self.full_close_image()
                 self.zxfilepath = str_file
                 self.zxextension = str_extension
+                zx123.STR_OUTDIR = os.path.dirname(str_file)
 
                 dict_flash = zx123.list_zxdata(str_file, dict_hash, False)
                 dict_roms = zx123.list_romsdata(str_file, self.fulldict_hash,
@@ -209,6 +250,7 @@ class App(tk.Tk):
                 str_filename = f'{str_filename} ({dict_flash["description"]})'
 
                 self.filemenu.entryconfig(2, state='normal')
+                self.filemenu.entryconfig(4, state='normal')
 
                 self.image_label.config(text=str_filename)
                 self.populate_blocks(dict_flash['blocks'])

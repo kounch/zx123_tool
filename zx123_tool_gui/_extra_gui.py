@@ -171,3 +171,41 @@ class InfoWindow:
     def do_ok(self, *_):
         """Process OK Button"""
         self.top.destroy()
+
+
+class ProgressWindow:
+    """Custom Window to Show Progress"""
+    def __init__(self, parent, str_title):
+        self.top = tk.Toplevel(parent)
+        self.top.transient(parent)
+        self.top.grab_set()
+        self.top.resizable(False, False)
+
+        self.top.title(str_title)
+
+        main_frame = ttk.Frame(self.top)
+        main_frame.pack(fill='both')
+
+        progress_frame = ttk.Frame(main_frame, padding=(25, 30))
+        progress_frame.pack()
+        progress_label = ttk.Label(progress_frame, text='Updating...')
+        progress_label.configure(width=60, anchor="center")
+        progress_label.grid(column=0, row=0, columnspan=4, sticky='n')
+        self.progress_label = progress_label
+
+        self.top.tk.eval(f'tk::PlaceWindow {self.top._w} center')
+        self.top.update()
+
+    def update(self, str_message):
+        """Update the text of progress_label"""
+        self.progress_label.config(text=str_message)
+        self.progress_label.update()
+
+    def show(self):
+        """Show the window"""
+        self.top.lift()
+        self.top.update()
+
+    def close(self):
+        """Close and destroy window"""
+        self.top.destroy()

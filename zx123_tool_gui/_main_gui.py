@@ -41,7 +41,34 @@ def build_menubar(self):
                          accelerator=f'{str_accl}w',
                          command=self.full_close_image)
     filemenu.add_separator()
+
+    updatemenu = tk.Menu(menubar, tearoff=0)
+    updatemenu.add_command(label='Update All (Standard)',
+                           command=lambda: self.update_image('all'))
+    updatemenu.add_command(
+        label='Update All (ZXUnCore)',
+        command=lambda: self.update_image('all', get_1core=True))
+    updatemenu.add_command(
+        label='Update All (2MB)',
+        command=lambda: self.update_image('all', get_2mb=True))
+    updatemenu.add_separator()
+    updatemenu.add_command(label='Update BIOS',
+                           command=lambda: self.update_image('BIOS'))
+    updatemenu.add_command(label='Update Spectrum',
+                           command=lambda: self.update_image('Spectrum'))
+    updatemenu.add_command(label='Update Cores (Standard)',
+                           command=lambda: self.update_image('Cores'))
+    updatemenu.add_command(
+        label='Update Cores (ZXUnCore)',
+        command=lambda: self.update_image('Cores', get_1core=True))
+    updatemenu.add_command(
+        label='Update Cores (2MB)',
+        command=lambda: self.update_image('Cores', get_1core=True))
+    filemenu.add_cascade(label='Update Image File', menu=updatemenu)
+
+    filemenu.add_separator()
     filemenu.add_command(label='Get Info', accelerator=f'{str_accl}i')
+
     if sys.platform == 'win32':
         filemenu.add_separator()
         filemenu.add_command(label='Exit', command=self.destroy)
@@ -71,12 +98,17 @@ def build_menubar(self):
     self.menubar = menubar
     self.config(menu=menubar)
 
+    json_menu = tk.Menu(self, tearoff=0)
+    json_menu.add_command(label="Update Database", command=self.update_json)
+    json_menu.add_separator()
+    json_menu.add_command(label="Show statistics", command=self.show_stats)
+    self.json_menu = json_menu
+
     if sys.platform == 'darwin':
         #self.createcommand('tk::mac::ShowPreferences', showPreferences)
         self.createcommand('::tk::mac::ShowHelp',
                            lambda: webbrowser.open(help_url))
 
-    #self.filemenu.entryconfig(0, state='disabled')
     self.filemenu.entryconfig(2, state='disabled')
     self.filemenu.entryconfig(4, state='disabled')
 
@@ -124,12 +156,14 @@ def create_labels(self):
     image_label = ttk.Label(self.blocks_frame, text='No Image File')
     image_label.grid(column=0, row=0, columnspan=7, sticky='n')
 
+    version_label = None
     if 'version' in self.fulldict_hash:
         version_label = ttk.Label(
             self.blocks_frame,
             font=('TkDefaultFont', 9),
             text=f'Database: {self.fulldict_hash["version"]}')
         version_label.grid(column=7, row=0, columnspan=8, sticky='ne')
+        version_label.bind('<Button-2>', self.json_menu_popup)
 
     bios_label = ttk.Label(self.blocks_frame, text='BIOS:', padding=5)
     bios_label.grid(column=0, row=1, sticky='e')
@@ -169,7 +203,7 @@ def create_labels(self):
     roms_label = ttk.Label(self.roms_frame, text='ROMs')
     roms_label.grid(column=0, row=0, sticky='w')
 
-    return image_label
+    return image_label, version_label
 
 
 def create_entries(self):
@@ -293,7 +327,7 @@ def create_tables(self):
     core_scrollbar.grid(column=2, row=1, rowspan=8, sticky='nse')
 
     rom_table = ttk.Treeview(self.roms_frame, height=11)
-    rom_table.grid(column=0, row=1, columnspan=4, sticky='nsew')
+    rom_table.grid(column=0, row=1, columnspan=4, sticky='nswe')
     rom_table['columns'] = ('id', 'slot', 'flags', 'crc', 'name', 'size',
                             'version')
     rom_table.column('#0', width=0, stretch=tk.NO)
