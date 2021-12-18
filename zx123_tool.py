@@ -149,62 +149,23 @@ def main():
                 str_file = output_file
 
         # Try to update contents from internet
+
         if arg_data['update'] != '':
             if str_extension in supported_exts:
                 print('\nStarting update...')
                 if not output_file:
                     output_file = str_file
-                arr_upd = []
-                if arg_data['update'].lower() in ['all', 'bios']:
-                    prep_update_zxdata(arr_upd, str_file, fulldict_hash,
-                                       str_extension, ['BIOS'])
-                if arg_data['update'].lower() in ['all', 'spectrum']:
-                    prep_update_zxdata(arr_upd,
-                                       str_file,
-                                       fulldict_hash,
-                                       str_extension, ['Spectrum'],
-                                       get_1core=arg_data['1core'],
-                                       get_2mb=arg_data['2mb'])
-                if arg_data['update'].lower() in ['all', 'special']:
-                    prep_update_zxdata(arr_upd, str_file, fulldict_hash,
-                                       str_extension, ['Special'])
-                if arg_data['update'].lower() in ['all', 'cores']:
-                    prep_update_cores(arr_upd,
-                                      str_file,
-                                      fulldict_hash,
-                                      str_extension,
-                                      b_new_img,
-                                      get_1core=arg_data['1core'],
-                                      get_2mb=arg_data['2mb'])
-                if b_new_img or arg_data['update'].lower() == 'roms':
-                    prep_update_roms(arr_upd, fulldict_hash, str_extension,
-                                     b_new_img)
-                if arg_data['update'].lower() == 'arcade':
-                    prep_update_zxdata(arr_upd, str_file, fulldict_hash,
-                                       str_extension, ['BIOS'])
-                    prep_update_cores(arr_upd, str_file, fulldict_hash,
-                                      str_extension, b_new_img, 'arcade')
-                    prep_update_roms(arr_upd, fulldict_hash, str_extension,
-                                     b_new_img, True)
-                if arg_data['update'].lower() == 'varcade':
-                    prep_update_zxdata(arr_upd, str_file, fulldict_hash,
-                                       str_extension, ['BIOS'], True)
-                    prep_update_cores(arr_upd, str_file, fulldict_hash,
-                                      str_extension, b_new_img, 'varcade')
-                    prep_update_roms(arr_upd, fulldict_hash, str_extension,
-                                     b_new_img, True)
 
-                if arr_upd:
-                    if inject_zxfiles(str_file,
-                                      arr_upd,
-                                      output_file,
-                                      fulldict_hash,
-                                      str_extension,
-                                      b_force=arg_data['force'])[0]:
-                        arg_data['force'] = True
-                        str_file = output_file
-                else:
-                    print('Nothing to update')
+                str_file, arg_data['force'] = update_image(
+                    str_file,
+                    output_file,
+                    fulldict_hash,
+                    str_extension,
+                    arg_data['update'],
+                    b_new_img,
+                    arg_data['force'],
+                    get_1core=arg_data['1core'],
+                    get_2mb=arg_data['2mb'])
 
         # Wipe Secondary Cores and all ZX Spectrum ROMs
         if arg_data['wipe_flash']:
@@ -1140,7 +1101,8 @@ def prep_update_zxdata(arr_in_files,
                        block_list,
                        b_varcade='',
                        get_1core=False,
-                       get_2mb=False):
+                       get_2mb=False,
+                       w_progress=None):
     """
     Try to prepare to update several BIOS
     :param str_spi_file: Input SPI flash file
@@ -1177,8 +1139,11 @@ def prep_update_zxdata(arr_in_files,
                 str_file = os.path.join(STR_OUTDIR, str_file)
 
                 if block_hash != latest_hash:
-                    b_append = check_and_update(str_file, latest_hash,
-                                                latest[1:], block)
+                    b_append = check_and_update(str_file,
+                                                latest_hash,
+                                                latest[1:],
+                                                block,
+                                                w_progress=w_progress)
 
                     if b_append:
                         arr_in_files.append(f'{block},{str_file}')
@@ -1191,7 +1156,8 @@ def prep_update_cores(arr_in_files,
                       b_new=False,
                       arcade_type='None',
                       get_1core=False,
-                      get_2mb=False):
+                      get_2mb=False,
+                      w_progress=None):
     """
     Try to prepare to update cores
     :param arr_in_files: Array for inject_zxfiles, updated if needed
@@ -1247,9 +1213,14 @@ def prep_update_cores(arr_in_files,
             str_file = os.path.join(STR_OUTDIR, str_file)
 
             if block_hash != latest_hash:
-                b_append = check_and_update(str_file, latest_hash, latest[1:],
-                                            block_name, block_hash, base_hash,
-                                            base[1:])
+                b_append = check_and_update(str_file,
+                                            latest_hash,
+                                            latest[1:],
+                                            block_name,
+                                            block_hash,
+                                            base_hash,
+                                            base[1:],
+                                            w_progress=w_progress)
 
                 if b_append:
                     new_in_file = f'CORE,{index},{name},{str_file}'
@@ -1303,7 +1274,8 @@ def check_and_update(update_file,
                      upd_name,
                      uchk='',
                      bs_hash='',
-                     bs_urls=None):
+                     bs_urls=None,
+                     w_progress=None):
     """
     Checks if a file with the desired hashexists. If not, download from the URL
     :param update_file: Path to the file
@@ -1338,12 +1310,20 @@ def check_and_update(update_file,
         update_url = bs_urls[0]
 
     if not dl_result and update_url:
-        print(f'Downloading {upd_name}...', end='')
+        str_message = f'Downloading {upd_name}...'
+        if w_progress:
+            w_progress.update(str_message)
+        else:
+            print(str_message, end='')
         try:
             LOGGER.debug(update_url)
             urllib.request.urlretrieve(update_url, update_file)
             if is_zipfile(update_file):
-                print('Extracting...', end='')
+                str_message = 'Extracting...'
+                if w_progress:
+                    w_progress.update(str_message)
+                else:
+                    print(str_message, end='')
                 b_found = False
                 str_zipfile = update_file + '.zip'
                 os.rename(update_file, str_zipfile)
@@ -1368,6 +1348,109 @@ def check_and_update(update_file,
             print('Error! Is the JSON file up to date?')
 
     return dl_result
+
+
+def update_image(str_file,
+                 str_output_file,
+                 fullhash_dict,
+                 str_extension,
+                 str_update,
+                 b_new_img,
+                 b_force,
+                 get_1core,
+                 get_2mb,
+                 w_progress=None):
+    """
+    Update Image File
+    :param str_file: Input SPI flash file
+    :param str_outfile: New SPI flash file to create
+    :param fullhash_dict: Dictionary with hashes data
+    :param str_extension: SPI Flash extension
+    :param str_update: String with update requirements (ej: 'All', 'BIOS, etc.)
+    :param b_new_img: If True, assume it's a brand, new, clean image
+    :param b_force: Force overwriting file
+    :param get_1core: Use "1core" entries of JSON
+    :param get_2mb: Use "2m" entries of JSON
+    :returns Created or updated image file name, updated b_force
+    """
+    arr_upd = []
+    if str_update.lower() in ['all', 'bios']:
+        prep_update_zxdata(arr_upd,
+                           str_file,
+                           fullhash_dict,
+                           str_extension, ['BIOS'],
+                           w_progress=w_progress)
+    if str_update.lower() in ['all', 'spectrum']:
+        prep_update_zxdata(arr_upd,
+                           str_file,
+                           fullhash_dict,
+                           str_extension, ['Spectrum'],
+                           get_1core=get_1core,
+                           get_2mb=get_2mb,
+                           w_progress=w_progress)
+    if str_update.lower() in ['all', 'special']:
+        prep_update_zxdata(arr_upd,
+                           str_file,
+                           fullhash_dict,
+                           str_extension, ['Special'],
+                           w_progress=w_progress)
+    if str_update.lower() in ['all', 'cores']:
+        prep_update_cores(arr_upd,
+                          str_file,
+                          fullhash_dict,
+                          str_extension,
+                          b_new_img,
+                          get_1core=get_1core,
+                          get_2mb=get_2mb,
+                          w_progress=w_progress)
+    if b_new_img or str_update.lower() == 'roms':
+        prep_update_roms(arr_upd, fullhash_dict, str_extension, b_new_img)
+    if str_update.lower() == 'arcade':
+        prep_update_zxdata(arr_upd,
+                           str_file,
+                           fullhash_dict,
+                           str_extension, ['BIOS'],
+                           w_progress=w_progress)
+        prep_update_cores(arr_upd,
+                          str_file,
+                          fullhash_dict,
+                          str_extension,
+                          b_new_img,
+                          'arcade',
+                          w_progress=w_progress)
+        prep_update_roms(arr_upd, fullhash_dict, str_extension, b_new_img,
+                         True)
+    if str_update.lower() == 'varcade':
+        prep_update_zxdata(arr_upd,
+                           str_file,
+                           fullhash_dict,
+                           str_extension, ['BIOS'],
+                           True,
+                           w_progress=w_progress)
+        prep_update_cores(arr_upd,
+                          str_file,
+                          fullhash_dict,
+                          str_extension,
+                          b_new_img,
+                          'varcade',
+                          w_progress=w_progress)
+        prep_update_roms(arr_upd, fullhash_dict, str_extension, b_new_img,
+                         True)
+
+    if arr_upd:
+        if inject_zxfiles(str_file,
+                          arr_upd,
+                          str_output_file,
+                          fullhash_dict,
+                          str_extension,
+                          b_force=b_force,
+                          w_progress=w_progress)[0]:
+            b_force = True
+            str_file = str_output_file
+    else:
+        print('Nothing to update')
+
+    return str_file, b_force
 
 
 def expand_image(str_spi_file, str_outfile, flash_len, b_force=False):
@@ -1489,7 +1572,8 @@ def inject_zxfiles(str_spi_file,
                    boot_timer=-1,
                    default_core=-1,
                    default_rom=-1,
-                   b_force=False):
+                   b_force=False,
+                   w_progress=None):
     """
     Add binary from one or more binary files to SPI flash or ROMPackV2 file
     :param str_spi_file: Input SPI flash or ROMPack v2 file
@@ -1520,14 +1604,18 @@ def inject_zxfiles(str_spi_file,
 
     for str_in_params in arr_in_files:
         # Inject main ROMs
-        b_data, b_chg, str_err = inject_bindata(str_in_params, hash_dict,
-                                                b_data)
+        b_data, b_chg, str_err = inject_bindata(str_in_params,
+                                                hash_dict,
+                                                b_data,
+                                                w_progress=w_progress)
         b_changed |= b_chg
         if str_err:
             arr_err.append(str_err)
         # Inject Cores
-        b_data, b_chg, str_err = inject_coredata(str_in_params, hash_dict,
-                                                 b_data)
+        b_data, b_chg, str_err = inject_coredata(str_in_params,
+                                                 hash_dict,
+                                                 b_data,
+                                                 w_progress=w_progress)
         b_changed |= b_chg
         if str_err:
             arr_err.append(str_err)
@@ -2129,7 +2217,7 @@ def flag_to_bits(str_input, str_flags, i_mask=0):
 # Injection functions
 
 
-def inject_bindata(str_in_params, hash_dict, b_data):
+def inject_bindata(str_in_params, hash_dict, b_data, w_progress=None):
     """
     Add binary from one ROM binary file to SPI flash data
     :param str_in_params: String with one of BIOS, esxdos or Spectrum and,
@@ -2159,7 +2247,11 @@ def inject_bindata(str_in_params, hash_dict, b_data):
                         b_head) and os.stat(str_in_file).st_size == b_len:
                     LOGGER.debug('Looks like %s', bl_id)
                     bl_version = get_data_version(str_hash, hash_dict[bl_id])
-                    print(f'Adding {bl_id}: {bl_version}...')
+                    str_message = f'Adding {bl_id}: {bl_version}...'
+                    if w_progress:
+                        w_progress.update(str_message)
+                    else:
+                        print(str_message)
 
                     with open(str_in_file, "rb") as in_zxdata:
                         in_data = in_zxdata.read(b_len)
@@ -2174,7 +2266,7 @@ def inject_bindata(str_in_params, hash_dict, b_data):
     return br_data, b_changed, str_err
 
 
-def inject_coredata(str_in_params, hash_dict, b_data):
+def inject_coredata(str_in_params, hash_dict, b_data, w_progress=None):
     """
     Add binary from one core binary file to SPI flash data
     :param str_in_params: String with CORE, and, separated with ',': core
@@ -2227,11 +2319,14 @@ def inject_coredata(str_in_params, hash_dict, b_data):
                     core_index = len(core_list) + 2
 
                 if core_index < 2 or core_index > max_cores:
-                    str_err = f'Invalid core index: {core_index}'
+                    str_err = f'Invalid core index: {core_index} ({core_name})'
                 else:
-                    print(
-                        f'Adding core {core_index}: {core_name} ({block_version})...'
-                    )
+                    str_message = f'Adding core {core_index}:'
+                    str_message += f' {core_name} ({block_version})...'
+                    if w_progress:
+                        w_progress.update(str_message)
+                    else:
+                        print(str_message)
                     core_index -= 2
                     block_data = get_core_blockdata(core_index,
                                                     splitcore_index,
