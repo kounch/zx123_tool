@@ -131,9 +131,6 @@ class App(tk.Tk):
 
         self.fulldict_hash = fulldict_hash
 
-    def show_stats(self):
-        pass
-
     def new_image(self):
         """Create a new image file from one of the included templates"""
         filetypes = [('ZX1 Flash Image', '.zx1'),
@@ -205,16 +202,24 @@ class App(tk.Tk):
         :param get_1core: Use "1core" entries of JSON
         :param get_2mb: Use "2m" entries of JSON
         """
-        self.unbind_keys()
-        w_progress = ProgressWindow(self, f'Update {str_update}')
-        w_progress.show()
-        zx123.update_image(self.zxfilepath, self.zxfilepath,
-                           self.fulldict_hash, self.zxextension, str_update,
-                           False, True, get_1core, get_2mb, w_progress)
-        self.open_file(self.zxfilepath)
-        w_progress.close()
-        self.focus_force()
-        self.bind_keys()
+        str_title = f'Update {str_update}'
+        str_message = f'Are you sure that you want to update {str_update}?'
+        response = messagebox.askyesno(parent=self,
+                                       icon='question',
+                                       title=str_title,
+                                       message=str_message)
+        if response:
+            self.unbind_keys()
+            w_progress = ProgressWindow(self, f'Update {str_update}')
+            w_progress.show()
+            zx123.update_image(self.zxfilepath, self.zxfilepath,
+                               self.fulldict_hash, self.zxextension,
+                               str_update, False, True, get_1core, get_2mb,
+                               w_progress)
+            self.open_file(self.zxfilepath)
+            w_progress.close()
+            self.focus_force()
+            self.bind_keys()
 
     def open_file(self, *args):
         """
@@ -594,7 +599,7 @@ class App(tk.Tk):
         """Proxy to block_import for Spectrum Core export action"""
         self.block_export('spectrum')
 
-    def multi_import(self, str_name, treeview, b_core=False):
+    def multi_import(self, str_name, treeview, b_core=False, b_alt=False):
         """
         Generic core or ROM import to SPI flash Image
         :param str_name: Text to compose dialogs
@@ -643,7 +648,7 @@ class App(tk.Tk):
                 if itm_indx < 99:
                     str_dialog_name += f' {itm_indx}'
                 self.unbind_keys()
-                dialog = NewEntryDialog(self, str_dialog_name, b_core)
+                dialog = NewEntryDialog(self, str_dialog_name, b_core, b_alt)
                 self.focus_force()
                 self.bind_keys()
                 slot_name = dialog.result_name
@@ -702,9 +707,13 @@ class App(tk.Tk):
         """Proxy to multi_import for secondary Core export action"""
         self.multi_export('Core', self.core_table, True)
 
-    def rom_import(self):
+    def rom_import_n(self, *_):
         """Proxy to multi_import for ROM import action"""
-        self.multi_import('ROM', self.rom_table, False)
+        self.multi_import('ROM', self.rom_table, False, False)
+
+    def rom_import_y(self, *_):
+        """Proxy to multi_import for ROM import action"""
+        self.multi_import('ROM', self.rom_table, False, True)
 
     def rom_export(self):
         """Proxy to multi_import for ROM export action"""

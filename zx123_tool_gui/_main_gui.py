@@ -101,7 +101,7 @@ def build_menubar(self):
     json_menu = tk.Menu(self, tearoff=0)
     json_menu.add_command(label="Update Database", command=self.update_json)
     json_menu.add_separator()
-    json_menu.add_command(label="Show statistics", command=self.show_stats)
+    json_menu.add_command(label="Show statistics")
     self.json_menu = json_menu
 
     if sys.platform == 'darwin':
@@ -111,6 +111,7 @@ def build_menubar(self):
 
     self.filemenu.entryconfig(2, state='disabled')
     self.filemenu.entryconfig(4, state='disabled')
+    self.json_menu.entryconfig(2, state='disabled')
 
 
 def bind_keys(self):
@@ -163,7 +164,7 @@ def create_labels(self):
             font=('TkDefaultFont', 9),
             text=f'Database: {self.fulldict_hash["version"]}')
         version_label.grid(column=7, row=0, columnspan=8, sticky='ne')
-        version_label.bind('<Button-2>', self.json_menu_popup)
+        version_label.bind('<Shift-Button-2>', self.json_menu_popup)
 
     bios_label = ttk.Label(self.blocks_frame, text='BIOS:', padding=5)
     bios_label.grid(column=0, row=1, sticky='e')
@@ -415,9 +416,10 @@ def create_buttons(self):
 
     rom_import_button = ttk.Button(self.roms_frame,
                                    text='Add New ROM',
-                                   state='disabled',
-                                   command=self.rom_import)
+                                   state='disabled')
     rom_import_button.grid(column=0, row=2, sticky='we', padx=5, pady=10)
+    rom_import_button.bind("<Button-1>", self.rom_import_n)
+    rom_import_button.bind("<Shift-Button-1>", self.rom_import_y)
     self.rom_import_button = rom_import_button
 
     rom_export_button = ttk.Button(self.roms_frame,

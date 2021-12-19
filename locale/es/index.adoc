@@ -89,7 +89,7 @@ La interfaz de la utilidad es una única ventana con una configuración como la 
 [.text-center]
 image:../img/MainWindow.jpg[pdfwidth=70%]
 
-Además, existe un menú desde el que se accede a opciones que permiten crear un nuevo archivo de imagen SPI flash, abrir un fichero existente (de imagen o de otro tipo) para analizarlo o modificarlo (sólo si es de imagen flash), o cerrar la edición.
+Además, existe un menú desde el que se accede a opciones que permiten crear un nuevo archivo de imagen SPI flash, abrir un fichero existente (de imagen o de otro tipo) para analizarlo o modificarlo (sólo si es de imagen flash), cerrar la edición o <<#_actualizar_una_imagen,actualizar el contenido de una imagen>>.
 
 [.text-center]
 image:../img/FileMenu.jpg[pdfwidth=20%]
@@ -174,6 +174,12 @@ image:../img/ROM.jpg[pdfwidth=70%]
 
 Los indicadores de cada ROM se muestran en la lista con un código de letras que se explica en el <<#_indicadores_de_rom,apéndice al final de este manual>>.
 
+==== Actualizar una imagen
+
+Desde el menú, se pueden elegir varias opciones que permiten intentar actualizar, tanto de forma individual como conjunta, BIOS y Cores a la última versión posible según se indica en el fichero JSON, siendo posible, en el caso de la actualización de cores, elegir si se quiere buscar la versión normal para cualquier ZX-Uno, cores específicos para ZXUnCore (con soporte para DAC RGB666) o cores que utilizan 2MB de memoria (interna).
+
+<<<
+
 === Interfaz de línea de comandos
 
 ==== Todas las plataformas
@@ -221,6 +227,10 @@ Alternativamente, si no se dispone de Python 3, se puede invocar directamente al
 -w, --wipe           Borrar todas las ROMs y todos los cores secundarios
 -e, --32             Expandir, si hiciera falta la imagen a 32MiB
 -t, --convert   Convierte entre core estándar y core de Spectrum
+----
+
+[source]
+----
 -1, --1core  Usar, si los hay, cores específicos para ZXUnCore
 -2, --2mb  Usar, si los hay, cores que utilizan 2MB de memoria (interna)
 -c CORE_D, --default_core CORE_D

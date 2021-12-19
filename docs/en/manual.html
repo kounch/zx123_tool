@@ -683,6 +683,7 @@ pre.rouge {
 <li><a href="#_spectrum_core">Spectrum Core</a></li>
 <li><a href="#_secondary_cores">Secondary cores</a></li>
 <li><a href="#_spectrum_roms">Spectrum ROMs</a></li>
+<li><a href="#_update_an_image">Update an image</a></li>
 </ul>
 </li>
 <li><a href="#_command_line_interface">Command line interface</a>
@@ -722,7 +723,7 @@ pre.rouge {
 <p>ZX123 Tool is a tool that analyzes, extracts and injects data in SPI flash image files for ZX-Uno, ZXDOS and similar devices.</p>
 </div>
 <div class="paragraph">
-<p>These are the main features:</p>
+<p>These are its main features:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -830,7 +831,7 @@ pre.rouge {
 <p><span class="image"><img src="../img/MainWindow.jpg" alt="MainWindow"></span></p>
 </div>
 <div class="paragraph">
-<p>There&#8217;s also a menu wher you can access options to create a new SPI flash image file, open an existing file (either image or other kind) to anlyze or edit (only if it&#8217;s a flash image), or stop editing.</p>
+<p>There&#8217;s also a menu wher you can access options to create a new SPI flash image file, open an existing file (either image or other kind) to anlyze or edit (only if it&#8217;s a flash image), stop editing or <a href="#_update_an_image">update the contents of an image</a>.</p>
 </div>
 <div class="paragraph text-center">
 <p><span class="image"><img src="../img/FileMenu.jpg" alt="FileMenu"></span></p>
@@ -950,6 +951,13 @@ Boot Timer</p></td>
 <p>The settings for each ROM are listed with a letter code that is explained in the <a href="#_rom_parameters">appendix at the end of this manual</a>.</p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_update_an_image">Update an image</h4>
+<div class="paragraph">
+<p>From the menu, you can choose several options that try to update, either individually or all together, BIOS and cores to the latest version, according to the contents of the JSON file, being possible, when updating cores, to search for the ZX-Uno standard version, ZXUnCore (RGB666 DAC) adapted cores or 2MB internal memory adapted cores.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_command_line_interface">Command line interface</h3>
@@ -1001,8 +1009,12 @@ Boot Timer</p></td>
               ROMS,Path to RomPack file with some ROMs inside
 -w, --wipe            Wipe all ROMs and all secondary cores from image
 -e, --32              Expand, if needed, flash file to 32MiB
--t, --convert   Converts between standard and Spectrum core
--1, --1core  Use, if available, ZXUnCore cores for ZX-Uno
+-t, --convert   Converts between standard and Spectrum core</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code>-1, --1core  Use, if available, ZXUnCore cores for ZX-Uno
 -2, --2mb  Use, if available, 2MB cores for ZX-Uno
 -c DEFAULT_CORE, --default_core DEFAULT_CORE
           Default core number: 1 and up
@@ -1584,7 +1596,7 @@ All rights reserved.</p>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2021-12-17 19:39:34 +0100
+Last updated 2021-12-19 08:47:08 +0100
 </div>
 </div>
 </body>

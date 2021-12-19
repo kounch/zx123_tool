@@ -37,7 +37,7 @@ class NewEntryDialog:
         'u': 'Disable ULAPlus'
     }
 
-    def __init__(self, parent, str_name, b_core=False):
+    def __init__(self, parent, str_name, b_core=False, b_alt=False):
         self.result_name = ''
         self.extra = ''
         self.b_rom = not b_core
@@ -73,6 +73,8 @@ class NewEntryDialog:
             extra_label = ttk.Label(extra_frame, text='ROM Settings:')
             extra_label.grid(column=0, row=1, sticky='w')
             self.extra_vars = []
+            if b_alt:
+                self.dict_rom_params['*'] = 'Rooted ROM'
             for index, key in enumerate(self.dict_rom_params):
                 self.extra_vars.append(tk.IntVar())
                 check_1 = ttk.Checkbutton(extra_frame,

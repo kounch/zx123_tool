@@ -683,6 +683,7 @@ pre.rouge {
 <li><a href="#_core_de_spectrum">Core de Spectrum</a></li>
 <li><a href="#_cores_secundarios">Cores Secundarios</a></li>
 <li><a href="#_roms_de_spectrum">ROMs de Spectrum</a></li>
+<li><a href="#_actualizar_una_imagen">Actualizar una imagen</a></li>
 </ul>
 </li>
 <li><a href="#_interfaz_de_línea_de_comandos">Interfaz de línea de comandos</a>
@@ -830,7 +831,7 @@ pre.rouge {
 <p><span class="image"><img src="../img/MainWindow.jpg" alt="MainWindow"></span></p>
 </div>
 <div class="paragraph">
-<p>Además, existe un menú desde el que se accede a opciones que permiten crear un nuevo archivo de imagen SPI flash, abrir un fichero existente (de imagen o de otro tipo) para analizarlo o modificarlo (sólo si es de imagen flash), o cerrar la edición.</p>
+<p>Además, existe un menú desde el que se accede a opciones que permiten crear un nuevo archivo de imagen SPI flash, abrir un fichero existente (de imagen o de otro tipo) para analizarlo o modificarlo (sólo si es de imagen flash), cerrar la edición o <a href="#_actualizar_una_imagen">actualizar el contenido de una imagen</a>.</p>
 </div>
 <div class="paragraph text-center">
 <p><span class="image"><img src="../img/FileMenu.jpg" alt="FileMenu"></span></p>
@@ -946,6 +947,13 @@ pre.rouge {
 <p>Los indicadores de cada ROM se muestran en la lista con un código de letras que se explica en el <a href="#_indicadores_de_rom">apéndice al final de este manual</a>.</p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_actualizar_una_imagen">Actualizar una imagen</h4>
+<div class="paragraph">
+<p>Desde el menú, se pueden elegir varias opciones que permiten intentar actualizar, tanto de forma individual como conjunta, BIOS y Cores a la última versión posible según se indica en el fichero JSON, siendo posible, en el caso de la actualización de cores, elegir si se quiere buscar la versión normal para cualquier ZX-Uno, cores específicos para ZXUnCore (con soporte para DAC RGB666) o cores que utilizan 2MB de memoria (interna).</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_interfaz_de_línea_de_comandos">Interfaz de línea de comandos</h3>
@@ -997,8 +1005,12 @@ pre.rouge {
             ROMS,Ruta a un archivo RomPack con varias ROMs
 -w, --wipe           Borrar todas las ROMs y todos los cores secundarios
 -e, --32             Expandir, si hiciera falta la imagen a 32MiB
--t, --convert   Convierte entre core estándar y core de Spectrum
--1, --1core  Usar, si los hay, cores específicos para ZXUnCore
+-t, --convert   Convierte entre core estándar y core de Spectrum</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code>-1, --1core  Usar, si los hay, cores específicos para ZXUnCore
 -2, --2mb  Usar, si los hay, cores que utilizan 2MB de memoria (interna)
 -c CORE_D, --default_core CORE_D
         Número de core por defecto: 1 o superior
@@ -1578,7 +1590,7 @@ All rights reserved.</p>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2021-12-17 19:39:29 +0100
+Last updated 2021-12-19 08:47:56 +0100
 </div>
 </div>
 </body>

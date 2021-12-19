@@ -23,7 +23,7 @@ image:../img/Logo.jpg[pdfwidth=20%]
 
 ZX123 Tool is a tool that analyzes, extracts and injects data in SPI flash image files for ZX-Uno, ZXDOS and similar devices.
 
-These are the main features:
+These are its main features:
 
 - List the contents of a ZX-Uno, etc. SPI flash image, showing, if possible, the version of BIOS, esxdos, main Spectrum core and optional cores, Spectrum ROMs and several BIOS settings
 - Extract BIOS, esxdos ROM, Spectrum core and/or other cores, Spectrum ROMs to individual files
@@ -89,7 +89,7 @@ The interface is based on a single window configured like this:
 [.text-center]
 image:../img/MainWindow.jpg[pdfwidth=70%]
 
-There's also a menu wher you can access options to create a new SPI flash image file, open an existing file (either image or other kind) to anlyze or edit (only if it's a flash image), or stop editing.
+There's also a menu wher you can access options to create a new SPI flash image file, open an existing file (either image or other kind) to anlyze or edit (only if it's a flash image), stop editing or <<#_update_an_image,update the contents of an image>>.
 
 [.text-center]
 image:../img/FileMenu.jpg[pdfwidth=20%]
@@ -175,6 +175,12 @@ image:../img/ROM.jpg[pdfwidth=70%]
 
 The settings for each ROM are listed with a letter code that is explained in the <<#_rom_parameters,appendix at the end of this manual>>.
 
+==== Update an image
+
+From the menu, you can choose several options that try to update, either individually or all together, BIOS and cores to the latest version, according to the contents of the JSON file, being possible, when updating cores, to search for the ZX-Uno standard version, ZXUnCore (RGB666 DAC) adapted cores or 2MB internal memory adapted cores.
+
+<<<
+
 === Command line interface
 
 ==== All platforms
@@ -222,6 +228,10 @@ Alternatively, if your system does not have Python 3, you can call the MacOS bin
 -w, --wipe            Wipe all ROMs and all secondary cores from image
 -e, --32              Expand, if needed, flash file to 32MiB
 -t, --convert   Converts between standard and Spectrum core
+----
+
+[source]
+----
 -1, --1core  Use, if available, ZXUnCore cores for ZX-Uno
 -2, --2mb  Use, if available, 2MB cores for ZX-Uno
 -c DEFAULT_CORE, --default_core DEFAULT_CORE
