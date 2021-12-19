@@ -4,6 +4,8 @@ Copyright (c) 2020-2021, kounch
 
 All rights reserved.
 
+[![Logo](./docs/img/Logo.jpg)](https://kounch.github.io/zx123_tool/)
+
 ---
 
 Select your desired language / Elija idioma:
