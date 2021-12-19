@@ -64,6 +64,8 @@ class App(tk.Tk):
 
         self.fulldict_hash = self.load_json()
         self.zxfilepath = ''
+        self.zxextension = ''
+        self.zxsize = 0
         self.old_core = self.old_timer = self.old_keyboard = None
         self.old_video = self.old_rom = None
 
@@ -156,6 +158,42 @@ class App(tk.Tk):
             else:
                 self.open_file(str_file)
 
+    def erase_image(self):
+        """Wipes a Flash Image File, removing all cores and ROMs"""
+        str_filename = os.path.split(self.zxfilepath)[1]
+
+        str_title = f'Erase {str_filename}'
+        str_message = f'Do you really want to erase {str_filename}?'
+        response = messagebox.askyesno(parent=self,
+                                       icon='question',
+                                       title=str_title,
+                                       message=str_message)
+        if response:
+            zx123.wipe_zxdata(self.zxfilepath,
+                              self.zxfilepath,
+                              self.fulldict_hash[self.zxextension],
+                              b_force=True)
+            self.open_file(self.zxfilepath)
+
+    def expand_image(self):
+        """Expands a ZXD 16MB flash image to 32MB"""
+        str_filename = os.path.split(self.zxfilepath)[1]
+
+        str_title = f'Erase {str_filename}'
+        str_message = f'Do you really want to expand {str_filename}?'
+        response = messagebox.askyesno(parent=self,
+                                       icon='question',
+                                       title=str_title,
+                                       message=str_message)
+        if response:
+            print(f'Expand {self.zxfilepath}')
+            img_len = 33554432
+            zx123.expand_image(self.zxfilepath, self.zxfilepath, img_len, True)
+            zx123.update_image(self.zxfilepath, self.zxfilepath,
+                               self.fulldict_hash, self.zxextension, 'special',
+                               False, True, False, False)
+            self.open_file(self.zxfilepath)
+
     def full_close_image(self):
         """Restore button text and empty all fields of Main Window """
         self.core_import_button['text'] = 'Add New Core'
@@ -169,9 +207,11 @@ class App(tk.Tk):
 
         self.zxfilepath = ''
 
-        self.filemenu.entryconfig(2, state='disabled')
+        self.filemenu.entryconfig(2, state='disabled', label='Close file')
         self.filemenu.entryconfig(4, state='disabled')
-        self.filemenu.entryconfig(6, state='disabled', label='Show info')
+        self.filemenu.entryconfig(5, state='disabled')
+        self.filemenu.entryconfig(6, state='disabled')
+        self.filemenu.entryconfig(8, state='disabled', label='Show info')
         self.core_menu.entryconfig(0, state='disabled', label='Show info')
 
         self.image_label.config(text='No Image')
@@ -256,15 +296,22 @@ class App(tk.Tk):
                 self.full_close_image()
                 self.zxfilepath = str_file
                 self.zxextension = str_extension
+                self.zxsize = os.stat(str_file).st_size
                 zx123.STR_OUTDIR = os.path.dirname(str_file)
 
                 dict_flash = zx123.list_zxdata(str_file, dict_hash, False)
                 dict_roms = zx123.list_romsdata(str_file, self.fulldict_hash,
                                                 str_extension, False)
                 str_filename = f'{str_filename} ({dict_flash["description"]})'
+                str_filename += f' {int(self.zxsize / 1048576)}MB'
 
-                self.filemenu.entryconfig(2, state='normal')
+                self.filemenu.entryconfig(2,
+                                          state='normal',
+                                          label='Close image file')
                 self.filemenu.entryconfig(4, state='normal')
+                if self.zxsize < 33554432 and self.zxextension == 'ZXD':
+                    self.filemenu.entryconfig(5, state='normal')
+                self.filemenu.entryconfig(6, state='normal')
 
                 self.image_label.config(text=str_filename)
                 self.populate_blocks(dict_flash['blocks'])
@@ -408,14 +455,14 @@ class App(tk.Tk):
             else:
                 export_bttn['text'] = f'Export {str_text} {t_selection[0]}'
                 str_label = f'Show info for {str_text} {t_selection[0]}'
-                self.filemenu.entryconfig(6, state='normal', label=str_label)
+                self.filemenu.entryconfig(8, state='normal', label=str_label)
                 self.core_menu.entryconfig(0, state='normal', label=str_label)
         else:
             import_bttn['text'] = f'Add New {str_text}'
             export_bttn['text'] = f'Export {str_text}'
             export_bttn.state(['disabled'])
             str_label = 'Show info'
-            self.filemenu.entryconfig(6, state='disabled', label=str_label)
+            self.filemenu.entryconfig(8, state='disabled', label=str_label)
             self.core_menu.entryconfig(0, state='disabled', label=str_label)
 
     def coretable_selected(self, *_):
