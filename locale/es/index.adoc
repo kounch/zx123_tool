@@ -206,7 +206,7 @@ Alternativamente, si no se dispone de Python 3, se puede invocar directamente al
 -l, --list_contents Mostrar contenido del fichero de origen
 -D, --details       Mostrar características conocidas de los cores
 -r, --roms          Procesar ROMs de ZX Spectrum (listar o, en modo de
-                    extracción, extraer en vez de Core)
+                    extracción, extraer en vez de Cores)
 -q, --check_updated Para cada Core o ROM que no sea de Spectrum, comparar
                     la versión con la entrada 'latest' del JSON
 -s, --show_hashes   Mostrar los datos de hash calculados

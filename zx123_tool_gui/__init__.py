@@ -114,6 +114,13 @@ class App(tk.Tk):
         fulldict_hash = zx123.load_json_bd(base_dir=JSON_DIR)
         return fulldict_hash
 
+    def core_menu_popup(self, event):
+        """Contextual Menu Handling for core table"""
+        try:
+            self.core_menu.tk_popup(event.x_root, event.y_root, 0)
+        finally:
+            self.core_menu.grab_release()
+
     def json_menu_popup(self, event):
         """Contextual Menu Handling for JSON Version Label"""
         try:
@@ -164,6 +171,8 @@ class App(tk.Tk):
 
         self.filemenu.entryconfig(2, state='disabled')
         self.filemenu.entryconfig(4, state='disabled')
+        self.filemenu.entryconfig(6, state='disabled', label='Show info')
+        self.core_menu.entryconfig(0, state='disabled', label='Show info')
 
         self.image_label.config(text='No Image')
         self.bios.set('')
@@ -362,6 +371,25 @@ class App(tk.Tk):
                                   text='',
                                   values=[index] + list(dict_roms[index])[:6])
 
+    def show_info(self):
+        """Show extra details for current selection in core table"""
+        t_selection = self.core_table.selection()
+        if len(t_selection) == 1:
+            arr_selection = self.core_table.item(t_selection)['values']
+            str_name = f'{arr_selection[1]} ({arr_selection[2]})'
+            dict_core = self.fulldict_hash[self.zxextension]['Cores']
+            dict_core = dict_core[arr_selection[2]]
+
+            dict_res = {}
+            dict_res['kind'] = 'Core'
+            dict_res['version'] = arr_selection[3]
+            dict_res['detail'] = dict_core.get('features', {})
+
+            self.unbind_keys()
+            InfoWindow(self, str_name, dict_res)
+            self.core_table.focus_force()
+            self.bind_keys()
+
     def process_selected(self, treeview, import_bttn, export_bttn, str_text):
         """
         Configure buttons according to the selections sent by ..._selected...
@@ -379,10 +407,16 @@ class App(tk.Tk):
                 export_bttn['text'] = f'Export {str_text}s'
             else:
                 export_bttn['text'] = f'Export {str_text} {t_selection[0]}'
+                str_label = f'Show info for {str_text} {t_selection[0]}'
+                self.filemenu.entryconfig(6, state='normal', label=str_label)
+                self.core_menu.entryconfig(0, state='normal', label=str_label)
         else:
             import_bttn['text'] = f'Add New {str_text}'
             export_bttn['text'] = f'Export {str_text}'
-            export_bttn.state(['disabled'])  # Disable the button.
+            export_bttn.state(['disabled'])
+            str_label = 'Show info'
+            self.filemenu.entryconfig(6, state='disabled', label=str_label)
+            self.core_menu.entryconfig(0, state='disabled', label=str_label)
 
     def coretable_selected(self, *_):
         """
@@ -649,7 +683,7 @@ class App(tk.Tk):
                     str_dialog_name += f' {itm_indx}'
                 self.unbind_keys()
                 dialog = NewEntryDialog(self, str_dialog_name, b_core, b_alt)
-                self.focus_force()
+                treeview.focus_force()
                 self.bind_keys()
                 slot_name = dialog.result_name
                 slot_param = f'{str_name},{itm_indx},{slot_name},{str_file}'
@@ -674,6 +708,8 @@ class App(tk.Tk):
                         messagebox.showerror('Error', str_error, parent=self)
                     else:
                         self.open_file(self.zxfilepath)
+            else:
+                self.focus_force()
 
         self.menubar.entryconfig(0, state='normal')
 

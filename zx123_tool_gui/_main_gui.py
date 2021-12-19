@@ -67,7 +67,9 @@ def build_menubar(self):
     filemenu.add_cascade(label='Update Image File', menu=updatemenu)
 
     filemenu.add_separator()
-    filemenu.add_command(label='Get Info', accelerator=f'{str_accl}i')
+    filemenu.add_command(label='Get Info',
+                         command=self.show_info,
+                         accelerator=f'{str_accl}i')
 
     if sys.platform == 'win32':
         filemenu.add_separator()
@@ -98,6 +100,10 @@ def build_menubar(self):
     self.menubar = menubar
     self.config(menu=menubar)
 
+    core_menu = tk.Menu(self, tearoff=0)
+    core_menu.add_command(label="Show Info", command=self.show_info)
+    self.core_menu = core_menu
+
     json_menu = tk.Menu(self, tearoff=0)
     json_menu.add_command(label="Update Database", command=self.update_json)
     json_menu.add_separator()
@@ -111,6 +117,8 @@ def build_menubar(self):
 
     self.filemenu.entryconfig(2, state='disabled')
     self.filemenu.entryconfig(4, state='disabled')
+    self.filemenu.entryconfig(6, state='disabled')
+    self.core_menu.entryconfig(0, state='disabled')
     self.json_menu.entryconfig(2, state='disabled')
 
 
@@ -126,6 +134,7 @@ def bind_keys(self):
     self.bind_all(f'<{str_bind}n>', lambda event: self.new_image())
     self.bind_all(f'<{str_bind}o>', lambda event: self.open_file())
     self.bind_all(f'<{str_bind}w>', lambda event: self.full_close_image())
+    self.bind_all(f'<{str_bind}i>', lambda event: self.show_info())
 
     if sys.platform == 'darwin':
         self.bind_all(f'<{str_bind}q>', lambda event: self.destroy())
@@ -143,6 +152,7 @@ def unbind_keys(self):
     self.unbind_all(f'<{str_bind}n>')
     self.unbind_all(f'<{str_bind}o>')
     self.unbind_all(f'<{str_bind}w>')
+    self.unbind_all(f'<{str_bind}i>')
 
     if sys.platform == 'darwin':
         self.unbind_all(f'<{str_bind}q>')
@@ -320,6 +330,7 @@ def create_tables(self):
         core_table.column(col_name, anchor=tk.W, width=col_sizes[index])
         core_table.heading(col_name, text=col_name.upper(), anchor=tk.CENTER)
     core_table.bind('<<TreeviewSelect>>', self.coretable_selected)
+    core_table.bind('<Button-2>', self.core_menu_popup)
 
     core_scrollbar = ttk.Scrollbar(self.cores_frame,
                                    orient=tk.VERTICAL,

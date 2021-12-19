@@ -129,7 +129,7 @@ class InfoWindow:
 
         name_frame = ttk.Frame(main_frame, padding=2)
         name_frame.pack(fill='x')
-        name_label = ttk.Label(name_frame, text=f'File: {str_name}')
+        name_label = ttk.Label(name_frame, text=f'Item: {str_name}')
         name_label.pack(side='left')
 
         kind_frame = ttk.Frame(main_frame, padding=2)
