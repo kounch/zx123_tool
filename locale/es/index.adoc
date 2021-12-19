@@ -31,8 +31,8 @@ Estas son sus funciones principales:
 - Añadir o reemplazar cores de la FPGA y/o imágenes de ROM de Spectrum (desde ficheros de ROM individuales o un fichero RomPack)
 - Si se tratase de un tipo distinto de fichero (como un archivo de instalación de core o BIOS), también puede intentar identificar su versión
 - Para Cores secundarios, mostrar información sobre algunas de las características que podrían tener (Ej: Salida por VGA, uso de joystick, formato soportado de tarjeta SD o MicroSD, etc.)
+- Borrar con ceros todos los datos de los Cores y las ROMs de ZX Spectrum
 - Crear una copia de la imagen y, opcionalmente, truncar alguno (o todos) los cores opcionales (sólo desde la línea de comandos)
-- Borrar con 0s todos los datos de los Cores y las ROMs de ZX Spectrum (sólo desde la línea de comandos)
 - Mostrar, añadir o extraer ROMs de un fichero ROMPack v2 (sólo desde la línea de comandos)
 
 Utiliza internamente un fichero <<#_archivo_json,`zx123_hash.json`>> con la estructura de bloques del archivo de imagen y, opcionalmente, datos para identificar dichos bloques. Si no se encuentra, intentará descargarlo desde el repositorio en GitHub.
@@ -89,10 +89,12 @@ La interfaz de la utilidad es una única ventana con una configuración como la 
 [.text-center]
 image:../img/MainWindow.jpg[pdfwidth=70%]
 
-Además, existe un menú desde el que se accede a opciones que permiten crear un nuevo archivo de imagen SPI flash, abrir un fichero existente (de imagen o de otro tipo) para analizarlo o modificarlo (sólo si es de imagen flash), cerrar la edición, <<#_actualizar_una_imagen,actualizar el contenido de una imagen>> o mostrar detalles del core actualmente seleccionado.
+Además, existe un menú desde el que se accede a opciones que permiten crear un nuevo archivo de imagen SPI flash, abrir un fichero existente (de imagen o de otro tipo) para analizarlo o modificarlo (sólo si es de imagen flash), borrar con ceros todos los datos de los Cores y las ROMs, expandir una imagen de ZXDOS+ de 16MB a 32MB, cerrar la edición, <<#_actualizar_una_imagen,actualizar el contenido de una imagen>> o mostrar detalles del core actualmente seleccionado.
 
 [.text-center]
-image:../img/FileMenu.jpg[pdfwidth=20%]
+image:../img/FileMenu.jpg[pdfwidth=50%]
+
+<<<
 
 Al abrir un fichero que no sea de imagen, la herramienta intentará catalogarlo y mostrar los detalles conocidos del mismo:
 
@@ -141,8 +143,6 @@ Usando los botones correspondientes, es posible exportar un fichero con la versi
 [.text-center]
 image:../img/Spectrum.jpg[pdfwidth=100%]
 
-<<<
-
 ==== Cores Secundarios
 
 Si no está seleccionado ningún core secundario de la lista, es posible utilizar el botón para añadir (Add) uno nuevo.
@@ -166,6 +166,8 @@ Por otra parte, cuando está seleccionada una o más ROMs, es posible sustituir 
 
 [.text-center]
 image:../img/ROMsSelect.jpg[pdfwidth=100%]
+
+<<<
 
 Al cargar un fichero de ROM, se pueden especificar los indicadores para usar al utilizar la ROM, como la contención de memoria, DivMMC, timings de distintos modelos de Spectrum, etc.
 

@@ -1491,15 +1491,11 @@ def wipe_zxdata(str_spi_file,
     """
     Wipe all cores and ROMs
     :param str_spi_file: Input SPI flash file
-    :param arr_in_files: Array with parameters and files to inject
     :param str_outfile: New SPI flash file to create
-    :param fullhash_dict: Dictionary with hashes data
-    :param str_extension: SPI Flash extension
+    :param hash_dict: Dictionary with hashes data
     :param vid_mode: Video mode: 0 (PAL), 1 (NTSC) or 2 (VGA)
     :param keyb_layout: 0 (Auto), 1 (ES), 2 (EN) or 3 (Spectrum)
     :param boot_timer: 0 (No timer), 1, 2 (2x), 3 (4x), 4 (8x)
-    :param default_core: Default boot core (0 and up)
-    :param default_rom: :Default boot Spectrum ROM (0 or greater)
     :param b_force: Force overwriting file
     """
 

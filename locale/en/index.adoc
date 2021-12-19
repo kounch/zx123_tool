@@ -31,8 +31,8 @@ These are its main features:
 - Add or replace FPGA cores and/or Spectrum ROM images (from individual ROM files or RomPack files)
 - If supplied a different kind of file (like a core or BIOS installation file) it will also try to identify its contents
 - For secondary cores, show information about some of the features that they may have (e.g. VGA video out, joystick support, supported SD or microSD formats, etc.)
+- Wipe with zeros all Cores and ZX Spectrum ROMs data
 - Create a copy of the flash image and, optionally, and/or truncate some (or all) of the optional cores (command line only)
-- Wipe with 0s all Cores an ZX Spectrum ROMs data (command line only)
 - List, add or extract ROMs from a ROMPack v2 file (command line only)
 
 It uses internally a file <<#_json_file,`zx123_hash.json`>> with the block structure of image files and, optionally, data to identify those blocks. If it is not found, it will try to download it from the repository on GitHub.
@@ -89,10 +89,12 @@ The interface is based on a single window configured like this:
 [.text-center]
 image:../img/MainWindow.jpg[pdfwidth=70%]
 
-There's also a menu wher you can access options to create a new SPI flash image file, open an existing file (either image or other kind) to anlyze or edit (only if it's a flash image), stop editing <<#_update_an_image,update the contents of an image>>, or show details for the currently selected core.
+There's also a menu wher you can access options to create a new SPI flash image file, open an existing file (either image or other kind) to analyze or edit (only if it's a flash image), wipe with zeros all the cores and ROMs data, expand a 16MB ZXDOS+ image to 32MB, stop editing, <<#_update_an_image,update the contents of an image>>, or show details for the currently selected core.
 
 [.text-center]
-image:../img/FileMenu.jpg[pdfwidth=20%]
+image:../img/FileMenu.jpg[pdfwidth=50%]
+
+<<<
 
 When opening a non-image file, the tool will try to analyze and catalog it's contents and show the known details for it:
 
@@ -100,8 +102,6 @@ When opening a non-image file, the tool will try to analyze and catalog it's con
 image:../img/InfoWindow.jpg[pdfwidth=40%]
 
 Once an image file is open to edit, it's possible to make the following modifications.
-
-<<<
 
 ==== BIOS
 
@@ -142,8 +142,6 @@ Using the corresponding buttons, it is possible to export a file with the curren
 [.text-center]
 image:../img/Spectrum.jpg[pdfwidth=100%]
 
-<<<
-
 ==== Secondary cores
 
 If no secondary core is selected in the list, it is possible to use the button to add a new one.
@@ -174,8 +172,6 @@ When loading a ROM file, you can specify the flags to use when using the ROM, su
 image:../img/ROM.jpg[pdfwidth=70%]
 
 The settings for each ROM are listed with a letter code that is explained in the <<#_rom_parameters,appendix at the end of this manual>>.
-
-<<<
 
 ==== Update an image
 

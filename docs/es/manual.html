@@ -746,10 +746,10 @@ pre.rouge {
 <p>Para Cores secundarios, mostrar información sobre algunas de las características que podrían tener (Ej: Salida por VGA, uso de joystick, formato soportado de tarjeta SD o MicroSD, etc.)</p>
 </li>
 <li>
-<p>Crear una copia de la imagen y, opcionalmente, truncar alguno (o todos) los cores opcionales (sólo desde la línea de comandos)</p>
+<p>Borrar con ceros todos los datos de los Cores y las ROMs de ZX Spectrum</p>
 </li>
 <li>
-<p>Borrar con 0s todos los datos de los Cores y las ROMs de ZX Spectrum (sólo desde la línea de comandos)</p>
+<p>Crear una copia de la imagen y, opcionalmente, truncar alguno (o todos) los cores opcionales (sólo desde la línea de comandos)</p>
 </li>
 <li>
 <p>Mostrar, añadir o extraer ROMs de un fichero ROMPack v2 (sólo desde la línea de comandos)</p>
@@ -831,11 +831,12 @@ pre.rouge {
 <p><span class="image"><img src="../img/MainWindow.jpg" alt="MainWindow"></span></p>
 </div>
 <div class="paragraph">
-<p>Además, existe un menú desde el que se accede a opciones que permiten crear un nuevo archivo de imagen SPI flash, abrir un fichero existente (de imagen o de otro tipo) para analizarlo o modificarlo (sólo si es de imagen flash), cerrar la edición, <a href="#_actualizar_una_imagen">actualizar el contenido de una imagen</a> o mostrar detalles del core actualmente seleccionado.</p>
+<p>Además, existe un menú desde el que se accede a opciones que permiten crear un nuevo archivo de imagen SPI flash, abrir un fichero existente (de imagen o de otro tipo) para analizarlo o modificarlo (sólo si es de imagen flash), borrar con ceros todos los datos de los Cores y las ROMs, expandir una imagen de ZXDOS+ de 16MB a 32MB, cerrar la edición, <a href="#_actualizar_una_imagen">actualizar el contenido de una imagen</a> o mostrar detalles del core actualmente seleccionado.</p>
 </div>
 <div class="paragraph text-center">
 <p><span class="image"><img src="../img/FileMenu.jpg" alt="FileMenu"></span></p>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p>Al abrir un fichero que no sea de imagen, la herramienta intentará catalogarlo y mostrar los detalles conocidos del mismo:</p>
 </div>
@@ -906,7 +907,6 @@ pre.rouge {
 <div class="paragraph text-center">
 <p><span class="image"><img src="../img/Spectrum.jpg" alt="Spectrum"></span></p>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
 <h4 id="_cores_secundarios">Cores Secundarios</h4>
@@ -937,6 +937,7 @@ pre.rouge {
 <div class="paragraph text-center">
 <p><span class="image"><img src="../img/ROMsSelect.jpg" alt="ROMsSelect"></span></p>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p>Al cargar un fichero de ROM, se pueden especificar los indicadores para usar al utilizar la ROM, como la contención de memoria, DivMMC, timings de distintos modelos de Spectrum, etc.</p>
 </div>
@@ -1590,7 +1591,7 @@ All rights reserved.</p>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2021-12-19 10:48:05 +0100
+Last updated 2021-12-19 16:07:07 +0100
 </div>
 </div>
 </body>

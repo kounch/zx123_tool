@@ -746,10 +746,10 @@ pre.rouge {
 <p>For secondary cores, show information about some of the features that they may have (e.g. VGA video out, joystick support, supported SD or microSD formats, etc.)</p>
 </li>
 <li>
-<p>Create a copy of the flash image and, optionally, and/or truncate some (or all) of the optional cores (command line only)</p>
+<p>Wipe with zeros all Cores and ZX Spectrum ROMs data</p>
 </li>
 <li>
-<p>Wipe with 0s all Cores an ZX Spectrum ROMs data (command line only)</p>
+<p>Create a copy of the flash image and, optionally, and/or truncate some (or all) of the optional cores (command line only)</p>
 </li>
 <li>
 <p>List, add or extract ROMs from a ROMPack v2 file (command line only)</p>
@@ -831,11 +831,12 @@ pre.rouge {
 <p><span class="image"><img src="../img/MainWindow.jpg" alt="MainWindow"></span></p>
 </div>
 <div class="paragraph">
-<p>There&#8217;s also a menu wher you can access options to create a new SPI flash image file, open an existing file (either image or other kind) to anlyze or edit (only if it&#8217;s a flash image), stop editing <a href="#_update_an_image">update the contents of an image</a>, or show details for the currently selected core.</p>
+<p>There&#8217;s also a menu wher you can access options to create a new SPI flash image file, open an existing file (either image or other kind) to analyze or edit (only if it&#8217;s a flash image), wipe with zeros all the cores and ROMs data, expand a 16MB ZXDOS+ image to 32MB, stop editing, <a href="#_update_an_image">update the contents of an image</a>, or show details for the currently selected core.</p>
 </div>
 <div class="paragraph text-center">
 <p><span class="image"><img src="../img/FileMenu.jpg" alt="FileMenu"></span></p>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p>When opening a non-image file, the tool will try to analyze and catalog it&#8217;s contents and show the known details for it:</p>
 </div>
@@ -845,7 +846,6 @@ pre.rouge {
 <div class="paragraph">
 <p>Once an image file is open to edit, it&#8217;s possible to make the following modifications.</p>
 </div>
-<div style="page-break-after: always;"></div>
 <div class="sect3">
 <h4 id="_bios">BIOS</h4>
 <div class="paragraph">
@@ -910,7 +910,6 @@ Boot Timer</p></td>
 <div class="paragraph text-center">
 <p><span class="image"><img src="../img/Spectrum.jpg" alt="Spectrum"></span></p>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
 <h4 id="_secondary_cores">Secondary cores</h4>
@@ -950,7 +949,6 @@ Boot Timer</p></td>
 <div class="paragraph">
 <p>The settings for each ROM are listed with a letter code that is explained in the <a href="#_rom_parameters">appendix at the end of this manual</a>.</p>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
 <h4 id="_update_an_image">Update an image</h4>
@@ -1597,7 +1595,7 @@ All rights reserved.</p>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2021-12-19 10:47:26 +0100
+Last updated 2021-12-19 16:09:30 +0100
 </div>
 </div>
 </body>

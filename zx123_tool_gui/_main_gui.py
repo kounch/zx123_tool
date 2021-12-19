@@ -31,38 +31,40 @@ def build_menubar(self):
 
     menubar = tk.Menu(self)
     filemenu = tk.Menu(menubar, tearoff=0)
-    filemenu.add_command(label='New Image File...',
+    filemenu.add_command(label='New Image File…',
                          command=self.new_image,
                          accelerator=f'{str_accl}n')
-    filemenu.add_command(label='Open File...',
+    filemenu.add_command(label='Open File…',
                          command=self.open_file,
                          accelerator=f'{str_accl}O')
-    filemenu.add_command(label='Close Image File',
+    filemenu.add_command(label='Close File',
                          accelerator=f'{str_accl}w',
                          command=self.full_close_image)
     filemenu.add_separator()
 
     updatemenu = tk.Menu(menubar, tearoff=0)
-    updatemenu.add_command(label='Update All (Standard)',
+    filemenu.add_command(label='Erase Image File…', command=self.erase_image)
+    filemenu.add_command(label='Expand Image File…', command=self.expand_image)
+    updatemenu.add_command(label='Update All (Standard)…',
                            command=lambda: self.update_image('all'))
     updatemenu.add_command(
-        label='Update All (ZXUnCore)',
+        label='Update All (ZXUnCore)…',
         command=lambda: self.update_image('all', get_1core=True))
     updatemenu.add_command(
-        label='Update All (2MB)',
+        label='Update All (2MB)…',
         command=lambda: self.update_image('all', get_2mb=True))
     updatemenu.add_separator()
-    updatemenu.add_command(label='Update BIOS',
+    updatemenu.add_command(label='Update BIOS…',
                            command=lambda: self.update_image('BIOS'))
-    updatemenu.add_command(label='Update Spectrum',
+    updatemenu.add_command(label='Update Spectrum…',
                            command=lambda: self.update_image('Spectrum'))
-    updatemenu.add_command(label='Update Cores (Standard)',
+    updatemenu.add_command(label='Update Cores (Standard)…',
                            command=lambda: self.update_image('Cores'))
     updatemenu.add_command(
-        label='Update Cores (ZXUnCore)',
+        label='Update Cores (ZXUnCore)…',
         command=lambda: self.update_image('Cores', get_1core=True))
     updatemenu.add_command(
-        label='Update Cores (2MB)',
+        label='Update Cores (2MB)…',
         command=lambda: self.update_image('Cores', get_1core=True))
     filemenu.add_cascade(label='Update Image File', menu=updatemenu)
 
@@ -117,7 +119,9 @@ def build_menubar(self):
 
     self.filemenu.entryconfig(2, state='disabled')
     self.filemenu.entryconfig(4, state='disabled')
+    self.filemenu.entryconfig(5, state='disabled')
     self.filemenu.entryconfig(6, state='disabled')
+    self.filemenu.entryconfig(8, state='disabled')
     self.core_menu.entryconfig(0, state='disabled')
     self.json_menu.entryconfig(2, state='disabled')
 
