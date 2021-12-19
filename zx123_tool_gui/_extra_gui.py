@@ -76,9 +76,10 @@ class NewEntryDialog:
             if b_alt:
                 self.dict_rom_params['*'] = 'Rooted ROM'
             for index, key in enumerate(self.dict_rom_params):
+                str_check = f'({key}) {self.dict_rom_params[key]}'
                 self.extra_vars.append(tk.IntVar())
                 check_1 = ttk.Checkbutton(extra_frame,
-                                          text=self.dict_rom_params[key],
+                                          text=str_check,
                                           variable=self.extra_vars[index],
                                           onvalue=1,
                                           offvalue=0)
