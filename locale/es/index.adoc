@@ -35,7 +35,7 @@ Estas son sus funciones principales:
 - Borrar con 0s todos los datos de los Cores y las ROMs de ZX Spectrum (sólo desde la línea de comandos)
 - Mostrar, añadir o extraer ROMs de un fichero ROMPack v2 (sólo desde la línea de comandos)
 
-Utiliza internamente un fichero  <<#_archivo_json,`zx123_hash.json`>> con la estructura de bloques del archivo de imagen y, opcionalmente, datos para identificar dichos bloques. Si no se encuentra, intentará descargarlo desde el repositorio en GitHub.
+Utiliza internamente un fichero <<#_archivo_json,`zx123_hash.json`>> con la estructura de bloques del archivo de imagen y, opcionalmente, datos para identificar dichos bloques. Si no se encuentra, intentará descargarlo desde el repositorio en GitHub.
 
 == Instalación
 
@@ -89,12 +89,12 @@ La interfaz de la utilidad es una única ventana con una configuración como la 
 [.text-center]
 image:../img/MainWindow.jpg[pdfwidth=70%]
 
-Además, existe un menú desde el que se accede a opciones que permiten crear un nuevo archivo de imagen SPI flash, abrir un fichero existente (de imagen o de otro tipo) para analizarlo o modificarlo (sólo si es de imagen flash), cerrar la edición o <<#_actualizar_una_imagen,actualizar el contenido de una imagen>>.
+Además, existe un menú desde el que se accede a opciones que permiten crear un nuevo archivo de imagen SPI flash, abrir un fichero existente (de imagen o de otro tipo) para analizarlo o modificarlo (sólo si es de imagen flash), cerrar la edición, <<#_actualizar_una_imagen,actualizar el contenido de una imagen>> o mostrar detalles del core actualmente seleccionado.
 
 [.text-center]
 image:../img/FileMenu.jpg[pdfwidth=20%]
 
-Al abrir un fichero que no sea de imagen, la herramienta intentará catalogarlo y mostrar la información conocida del mismo:
+Al abrir un fichero que no sea de imagen, la herramienta intentará catalogarlo y mostrar los detalles conocidos del mismo:
 
 [.text-center]
 image:../img/InfoWindow.jpg[pdfwidth=40%]
@@ -469,7 +469,7 @@ Para `core_base`, el formato es el siguiente:
 
 [source]
 ----
-    [offset del primer core, longitud de un core, "", Primeros bytes de un fichero binario de core, offset del segundo bloque de cores]
+[offset del primer core, longitud de un core, "", Primeros bytes de un fichero binario de core, offset del segundo bloque de cores]
 ----
 
 <<<
