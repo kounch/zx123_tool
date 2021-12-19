@@ -25,7 +25,7 @@ These are the main features:
   default ROM, etc.)
 - Add or replace FPGA cores and/or Spectrum ROM images (from individual ROM
   files or ROMPack files)
-- Wipe with 0s all Cores and ZX Spectrum ROMs data
+- Wipe with zeros all Cores and ZX Spectrum ROMs data
 - List, add or extract ROM files from a ZX1 ROMPack v2 file
 - If supplied a different kind of file (like a core or BIOS installation file)
   it will also try to identify its contents
@@ -1714,7 +1714,9 @@ def convert_core(str_in_file, hash_dict, str_outfile, b_force=False):
     :param hash_dict: Dictionary with hashes for different blocks
     :param str_outfile: Path output file to save
     :param b_force: Force overwriting file
+    :return: Error string (empty when no error)
     """
+    str_err = ''
     dict_parts = hash_dict['parts']
 
     # Standard core specs
@@ -1741,13 +1743,19 @@ def convert_core(str_in_file, hash_dict, str_outfile, b_force=False):
             LOGGER.debug('Looks like a Spectrum core')
             b_data += b'\x00' * (b_corelen - b_speclen)
         else:
-            LOGGER.error('Not a valid core file: %s', str_in_file)
+            str_err = f'Not a valid core file: {str_in_file}'
             b_convert = False
+
     if b_convert:
         if b_force or check_overwrite(str_outfile):
             with open(str_outfile, "wb") as out_zxdata:
                 out_zxdata.write(b_data)
                 print(f'{str_outfile} created OK.')
+
+    if str_err:
+        LOGGER.error(str_err)
+
+    return str_err
 
 
 def find_zxfile(str_in_file,

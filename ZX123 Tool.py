@@ -22,6 +22,7 @@ These are the main features:
   default ROM, etc.)
 - Add or replace FPGA cores and/or Spectrum ROM images (from individual ROM
   files or ROMPack files)
+- Wipe with zeros all Cores and ZX Spectrum ROMs data
 - If supplied a different kind of file (like a core or BIOS installation file)
   it will also try to identify its contents
 

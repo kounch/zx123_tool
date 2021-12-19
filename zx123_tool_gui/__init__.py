@@ -363,6 +363,42 @@ class App(tk.Tk):
         # Enable File Menu
         self.menubar.entryconfig(0, state='normal')
 
+    def convert_core(self):
+        """Converts between main (spectrum) and secondary core, and back"""
+        filetypes = [('ZX1, ZX2 or ZXD file', '.zx1 .zx2 .zxd')]
+        str_file = fd.askopenfilename(parent=self,
+                                      title='Select a file to open',
+                                      filetypes=filetypes)
+
+        if str_file:
+            str_filename = os.path.split(str_file)[1]
+            str_extension, dict_hash, filetype = zx123.detect_file(
+                str_file, self.fulldict_hash)
+            if filetype == 'Unknown':
+                dict_file = zx123.find_zxfile(str_file, self.fulldict_hash,
+                                              str_extension, False, True)
+                if 'kind' in dict_file:
+                    filetype = dict_file['kind']
+
+            str_outfile = ''
+            if filetype in ['Core', 'Spectrum']:
+                filetypes = [(f'{str_extension} file', f'.{str_extension}')]
+                str_outfile = fd.asksaveasfilename(parent=self,
+                                                   title='New file to create',
+                                                   filetypes=filetypes)
+                if str_outfile:
+                    str_error = zx123.convert_core(str_file, dict_hash,
+                                                   str_outfile, True)
+                    if str_error:
+                        messagebox.showerror('Error', str_error, parent=self)
+                    else:
+                        str_msg = f'{filetype} {str_filename} converted OK'
+                        messagebox.showinfo('Converted', str_msg, parent=self)
+            else:
+                str_error = 'Wrong file type detected.\n'
+                str_error += '"{filetype}" instead of core, cannot convert.'
+                messagebox.showerror('Error', str_error, parent=self)
+
     def populate_blocks(self, dict_blocks):
         """
         Populate Blocks Data Entries texts in Main Window

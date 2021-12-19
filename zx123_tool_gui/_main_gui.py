@@ -69,9 +69,10 @@ def build_menubar(self):
     filemenu.add_cascade(label='Update Image File', menu=updatemenu)
 
     filemenu.add_separator()
-    filemenu.add_command(label='Get Info',
+    filemenu.add_command(label='Get Core Info',
                          command=self.show_info,
                          accelerator=f'{str_accl}i')
+    filemenu.add_command(label='Convert Core…', command=self.convert_core)
 
     if sys.platform == 'win32':
         filemenu.add_separator()

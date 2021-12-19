@@ -89,7 +89,7 @@ The interface is based on a single window configured like this:
 [.text-center]
 image:../img/MainWindow.jpg[pdfwidth=70%]
 
-There's also a menu wher you can access options to create a new SPI flash image file, open an existing file (either image or other kind) to analyze or edit (only if it's a flash image), wipe with zeros all the cores and ROMs data, expand a 16MB ZXDOS+ image to 32MB, stop editing, <<#_update_an_image,update the contents of an image>>, or show details for the currently selected core.
+There's also a menu where you can access options to create a new SPI flash image file, open an existing file (either image or other kind) to analyze or edit (only if it's a flash image), wipe with zeros all the cores and ROMs data, expand a 16MB ZXDOS+ image to 32MB, stop editing, <<#_update_an_image,update the contents of an image>>, convert between main and secondary core (and vice versa), or show details for the currently selected core.
 
 [.text-center]
 image:../img/FileMenu.jpg[pdfwidth=50%]

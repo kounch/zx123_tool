@@ -89,7 +89,7 @@ La interfaz de la utilidad es una única ventana con una configuración como la 
 [.text-center]
 image:../img/MainWindow.jpg[pdfwidth=70%]
 
-Además, existe un menú desde el que se accede a opciones que permiten crear un nuevo archivo de imagen SPI flash, abrir un fichero existente (de imagen o de otro tipo) para analizarlo o modificarlo (sólo si es de imagen flash), borrar con ceros todos los datos de los Cores y las ROMs, expandir una imagen de ZXDOS+ de 16MB a 32MB, cerrar la edición, <<#_actualizar_una_imagen,actualizar el contenido de una imagen>> o mostrar detalles del core actualmente seleccionado.
+Además, existe un menú desde el que se accede a opciones que permiten crear un nuevo archivo de imagen SPI flash, abrir un fichero existente (de imagen o de otro tipo) para analizarlo o modificarlo (sólo si es de imagen flash), borrar con ceros todos los datos de los Cores y las ROMs, expandir una imagen de ZXDOS+ de 16MB a 32MB, cerrar la edición, <<#_actualizar_una_imagen,actualizar el contenido de una imagen>>, convertir entre core principal y core secundario (y viceversa), o mostrar detalles del core actualmente seleccionado.
 
 [.text-center]
 image:../img/FileMenu.jpg[pdfwidth=50%]
