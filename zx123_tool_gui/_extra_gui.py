@@ -2,11 +2,14 @@
 # -*- coding: utf-8 -*-
 # -*- mode: Python; tab-width: 4; indent-tabs-mode: nil; -*-
 # Do not modify previous lines. See PEP 8, PEP 263.
+# pylint: disable=import-outside-toplevel
 """
 Copyright (c) 2021, kounch
 All rights reserved.
 
 SPDX-License-Identifier: BSD-2-Clause
+
+Center tk window Copyright (c) 2019 Jarik Marwede SPDX-License-Identifier: MIT
 
 Extra Window Classes for new entries and info display
 """
@@ -38,6 +41,9 @@ class NewEntryDialog:
     }
 
     def __init__(self, parent, str_name, b_core=False, b_alt=False):
+        self.parent = parent
+        self.parent.unbind_keys()
+
         self.result_name = ''
         self.extra = ''
         self.b_rom = not b_core
@@ -97,7 +103,7 @@ class NewEntryDialog:
                                    command=self.do_cancel)
         cancel_button.pack(fill='x', side='right', padx=10)
 
-        self.top.tk.eval(f'tk::PlaceWindow {self.top._w} center')
+        center_on_parent(parent, self.top)
         self.top.wait_window()
 
     def do_ok(self, *_):
@@ -108,15 +114,22 @@ class NewEntryDialog:
                 if self.extra_vars[index].get():
                     self.extra += key
         self.top.destroy()
+        self.parent.bind_keys()
+        self.parent.focus_force()
 
     def do_cancel(self, *_):
         """Process Cancel Button"""
         self.top.destroy()
+        self.parent.bind_keys()
+        self.parent.focus_force()
 
 
 class InfoWindow:
     """Custom Window to Show Core or ROM info"""
     def __init__(self, parent, str_name, dict_data):
+        self.parent = parent
+        self.parent.unbind_keys()
+
         self.top = tk.Toplevel(parent)
         self.top.transient(parent)
         self.top.grab_set()
@@ -168,17 +181,77 @@ class InfoWindow:
                                command=self.do_ok)
         ok_button.pack()
 
-        self.top.tk.eval(f'tk::PlaceWindow {self.top._w} center')
+        center_on_parent(parent, self.top)
         self.top.wait_window()
 
     def do_ok(self, *_):
         """Process OK Button"""
         self.top.destroy()
+        self.parent.bind_keys()
+        self.parent.focus_force()
+
+
+class ROMPWindow:
+    """Custom Window to Show ROMPack Contents"""
+    from ._main_gui import create_rom_table
+    from ._main_gui import populate_roms
+
+    def __init__(self, parent, str_name, str_kind, dict_roms):
+        self.parent = parent
+        self.parent.unbind_keys()
+
+        self.top = tk.Toplevel(parent)
+        self.top.transient(parent)
+        self.top.grab_set()
+        self.top.resizable(False, False)
+        self.top.title('ROMPack Contents')
+
+        self.top.bind('<Return>', self.do_ok)
+
+        main_frame = ttk.Frame(self.top, padding=10)
+        main_frame.pack(fill='both')
+
+        name_frame = ttk.Frame(main_frame, padding=2)
+        name_frame.pack(fill='x')
+        name_label = ttk.Label(name_frame, text=f'File: {str_name}')
+        name_label.pack(side='left')
+        kind_label = ttk.Label(name_frame, text=f'Kind: {str_kind}')
+        kind_label.pack(side='right')
+
+        self.roms_frame = ttk.Frame(main_frame, padding=5)
+        self.roms_frame.pack()
+        self.rom_table = self.create_rom_table(height=26)
+        self.rom_table.configure(selectmode='none')
+        self.populate_roms(dict_roms)
+
+        button_frame = ttk.Frame(main_frame, padding=10)
+        button_frame.pack(fill='x')
+        ok_button = ttk.Button(button_frame,
+                               text='OK',
+                               default='active',
+                               command=self.do_ok)
+        ok_button.pack()
+
+        center_on_parent(parent, self.top)
+        self.top.wait_window()
+
+    def romtable_selected(self, *_):
+        """Unused"""
+        print('Selected ROMPack Treeview')
+
+    def do_ok(self, *_):
+        """Process OK Button"""
+        self.top.destroy()
+        self.parent.bind_keys()
+        self.parent.focus_force()
 
 
 class ProgressWindow:
     """Custom Window to Show Progress"""
     def __init__(self, parent, str_title):
+        self.parent = parent
+        self.parent.unbind_keys()
+
         self.top = tk.Toplevel(parent)
         self.top.transient(parent)
         self.top.grab_set()
@@ -196,7 +269,7 @@ class ProgressWindow:
         progress_label.grid(column=0, row=0, columnspan=4, sticky='n')
         self.progress_label = progress_label
 
-        self.top.tk.eval(f'tk::PlaceWindow {self.top._w} center')
+        center_on_parent(parent, self.top)
         self.top.update()
 
     def update(self, str_message):
@@ -212,3 +285,29 @@ class ProgressWindow:
     def close(self):
         """Close and destroy window"""
         self.top.destroy()
+        self.parent.focus_force()
+        self.parent.bind_keys()
+
+
+def center_on_parent(root, window):
+    """
+    Center a window on its parent.
+    Obtained from Center tk window library
+    https://github.com/jarikmarwede/center-tk-window
+
+    MIT License
+    Copyright (c) 2019 Jarik Marwede
+
+    :param root: Reference to parent
+    :param window: Reference to window to center
+    """
+    window.update_idletasks()
+    height = window.winfo_height()
+    width = window.winfo_width()
+    parent = root.nametowidget(window.winfo_parent())
+    x_coordinate = int(parent.winfo_x() +
+                       (parent.winfo_width() / 2 - width / 2))
+    y_coordinate = int(parent.winfo_y() +
+                       (parent.winfo_height() / 2 - height / 2))
+
+    window.geometry(f"{width}x{height}+{x_coordinate}+{y_coordinate}")

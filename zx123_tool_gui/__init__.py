@@ -22,7 +22,7 @@ from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter import messagebox
 import zx123_tool as zx123
-from ._extra_gui import NewEntryDialog, InfoWindow, ProgressWindow
+from ._extra_gui import NewEntryDialog, InfoWindow, ROMPWindow, ProgressWindow
 
 MY_DIRPATH = os.path.dirname(sys.argv[0])
 MY_DIRPATH = os.path.abspath(MY_DIRPATH)
@@ -37,8 +37,9 @@ class App(tk.Tk):
     from ._main_gui import unbind_keys
     from ._main_gui import create_labels
     from ._main_gui import create_entries
-    from ._main_gui import create_tables
+    from ._main_gui import create_core_table, create_rom_table
     from ._main_gui import create_buttons
+    from ._main_gui import populate_cores, populate_roms
 
     def __init__(self):
 
@@ -69,8 +70,7 @@ class App(tk.Tk):
         self.old_core = self.old_timer = self.old_keyboard = None
         self.old_video = self.old_rom = None
 
-        # Menu
-        self.build_menubar()
+        self.unbind_keys()
 
         # Main Window
         self.title('ZX123 Tool')
@@ -87,11 +87,15 @@ class App(tk.Tk):
 
         self.image_label, self.version_label = self.create_labels()
         self.create_entries()
-        self.core_table, self.rom_table = self.create_tables()
+        self.core_table = self.create_core_table()
+        self.rom_table = self.create_rom_table()
         self.create_buttons()
 
         self.tk.eval(f'tk::PlaceWindow {self._w} center')
         self.update_idletasks()
+
+        # Menu
+        self.build_menubar()
         self.bind_keys()
 
         # Load files from command line args
@@ -258,7 +262,6 @@ class App(tk.Tk):
                                        title=str_title,
                                        message=str_message)
         if response:
-            self.unbind_keys()
             w_progress = ProgressWindow(self, f'Update {str_update}')
             w_progress.show()
             zx123.update_image(self.zxfilepath, self.zxfilepath,
@@ -267,8 +270,6 @@ class App(tk.Tk):
                                w_progress)
             self.open_file(self.zxfilepath)
             w_progress.close()
-            self.focus_force()
-            self.bind_keys()
 
     def open_file(self, *args):
         """
@@ -282,7 +283,8 @@ class App(tk.Tk):
         if args:
             str_file = args[0]
         else:
-            filetypes = [('ZX1, ZX2, ZXD or ROM files', '.zx1 .zx2 .zxd .rom')]
+            filetypes = [('ZX1, ZX2, ZXD or ROM files',
+                          '.zx1 .zx2 .zxd .rom .bin')]
             str_file = fd.askopenfilename(parent=self,
                                           title='Select a file to open',
                                           filetypes=filetypes)
@@ -311,6 +313,15 @@ class App(tk.Tk):
                 self.filemenu.entryconfig(4, state='normal')
                 if self.zxsize < 33554432 and self.zxextension == 'ZXD':
                     self.filemenu.entryconfig(5, state='normal')
+
+                if self.zxextension == 'ZX1':
+                    str_update = 'normal'
+                else:
+                    str_update = 'disabled'
+                self.updatemenu.entryconfig(1, state=str_update)
+                self.updatemenu.entryconfig(2, state=str_update)
+                self.updatemenu.entryconfig(7, state=str_update)
+                self.updatemenu.entryconfig(8, state=str_update)
                 self.filemenu.entryconfig(6, state='normal')
 
                 self.image_label.config(text=str_filename)
@@ -344,17 +355,20 @@ class App(tk.Tk):
                 if rom_number:
                     self.rompack_export_button.state(['!disabled'])
             elif filetype == 'ROMPack v2':
-                print('ROMPack V2')
-                messagebox.showinfo('ROMPackv2', str_filename, parent=self)
+                dict_roms = zx123.list_romsdata(str_file, self.fulldict_hash,
+                                                'RPv2', False, True)
+                ROMPWindow(self, str_filename, filetype, dict_roms)
             else:
                 if str_file:
                     dict_file = zx123.find_zxfile(str_file, self.fulldict_hash,
                                                   str_extension, False, True)
-                    if 'kind' in dict_file:
-                        self.unbind_keys()
+                    filetype = dict_file.get('kind', 'Unknown')
+                    if filetype == 'ROMPack':
+                        dict_roms = zx123.list_romsdata(
+                            str_file, self.fulldict_hash, 'ROMS', False, True)
+                        ROMPWindow(self, str_filename, filetype, dict_roms)
+                    elif filetype != 'Unknown':
                         InfoWindow(self, str_filename, dict_file)
-                        self.focus_force()
-                        self.bind_keys()
                     else:
                         str_error = 'ERROR\nUnknown file\nFormat Unknown'
                         str_error += ' or uncataloged content.'
@@ -429,31 +443,6 @@ class App(tk.Tk):
         self.old_rom = dict_defaults['default_rom']
         self.default_rom.set(self.old_rom)
 
-    def populate_cores(self, dict_cores):
-        """
-        Populate Cores Data Table (TreeView) in Main Window
-        :param dict_cores: Dictionary with cores data
-        """
-        for index in dict_cores:
-            self.core_table.insert(parent='',
-                                   index='end',
-                                   iid=index,
-                                   text='',
-                                   values=[index] +
-                                   list(dict_cores[index])[:3])
-
-    def populate_roms(self, dict_roms):
-        """
-        Populate ROMs Data Table (TreeView) in Main Window
-        :param dict_roms: Dictionary with ROMs data
-        """
-        for index in dict_roms:
-            self.rom_table.insert(parent='',
-                                  index='end',
-                                  iid=index,
-                                  text='',
-                                  values=[index] + list(dict_roms[index])[:6])
-
     def show_info(self):
         """Show extra details for current selection in core table"""
         t_selection = self.core_table.selection()
@@ -468,10 +457,7 @@ class App(tk.Tk):
             dict_res['version'] = arr_selection[3]
             dict_res['detail'] = dict_core.get('features', {})
 
-            self.unbind_keys()
             InfoWindow(self, str_name, dict_res)
-            self.core_table.focus_force()
-            self.bind_keys()
 
     def process_selected(self, treeview, import_bttn, export_bttn, str_text):
         """
@@ -630,7 +616,7 @@ class App(tk.Tk):
         self.changed_bios_spinbox(self.default_rom, 0,
                                   len(self.rom_table.get_children()) - 1)
 
-    def block_import(self, str_block):
+    def block_import(self, str_block, extra_exts=None):
         """
         Generic block import to SPI flash image file
         :param str_block: Name of the kind of block (e.g. 'BIOS')
@@ -638,7 +624,14 @@ class App(tk.Tk):
 
         self.menubar.entryconfig(0, state='disabled')
 
-        filetypes = [(f'{str_block} files', f'.{self.zxextension}')]
+        str_exts = f'.{self.zxextension}'
+        try:
+            for str_ext in extra_exts:
+                str_exts += f' .{str_ext}'
+        except TypeError:
+            print(f'Wrong type for {extra_exts}')
+
+        filetypes = [(f'{str_block} files', str_exts)]
         str_file = fd.askopenfilename(parent=self,
                                       title=f'Open {str_block} file',
                                       filetypes=filetypes)
@@ -666,8 +659,8 @@ class App(tk.Tk):
                     else:
                         self.open_file(self.zxfilepath)
             else:
-                str_error = f'ERROR\nFile Format not valid.\n"{filetype}"'
-                str_error += f' detected, and it should be "{str_block}".'
+                str_error = f'ERROR\nFile Format not valid.\n{filetype}'
+                str_error += f' detected, and it should be {str_block}.'
                 messagebox.showerror('Error', str_error, parent=self)
 
         self.menubar.entryconfig(0, state='normal')
@@ -702,7 +695,7 @@ class App(tk.Tk):
 
     def esxdos_import(self):
         """Proxy to block_import for esxdos import action"""
-        self.block_import('esxdos')
+        self.block_import('esxdos', extra_exts=['bin'])
 
     def esxdos_export(self):
         """Proxy to block_import for esxdos export action"""
@@ -743,8 +736,8 @@ class App(tk.Tk):
             b_block_ok, filetype = self.validate_file(str_file, arr_format)
             if not b_block_ok:
                 str_file = ''
-                str_error = f'ERROR\nFile Format not valid.\n"{filetype}"'
-                str_error += f' detected, and it should be "{str_name}".'
+                str_error = f'ERROR\nFile Format not valid.\n{filetype}'
+                str_error += f' detected, and it should be {str_name}.'
                 messagebox.showerror('Error', str_error, parent=self)
 
         if str_file:
@@ -764,10 +757,8 @@ class App(tk.Tk):
                 str_dialog_name = f'{str_name}'
                 if itm_indx < 99:
                     str_dialog_name += f' {itm_indx}'
-                self.unbind_keys()
                 dialog = NewEntryDialog(self, str_dialog_name, b_core, b_alt)
                 treeview.focus_force()
-                self.bind_keys()
                 slot_name = dialog.result_name
                 slot_param = f'{str_name},{itm_indx},{slot_name},{str_file}'
                 if not b_core:
@@ -851,7 +842,7 @@ class App(tk.Tk):
             b_block_ok, filetype = self.validate_file(str_file, ['ROMPack'])
             if b_block_ok:
                 str_title = 'Replace ROMs'
-                str_message = 'Do you want to replace all ROMs?'
+                str_message = 'Do you really want to replace all ROMs?'
                 response = messagebox.askyesno(parent=self,
                                                icon='question',
                                                title=str_title,
@@ -870,8 +861,8 @@ class App(tk.Tk):
                     else:
                         self.open_file(self.zxfilepath)
             else:
-                str_error = f'ERROR\nFile Format not valid.\n"{filetype}"'
-                str_error += ' detected, and it should be "ROMPack".'
+                str_error = f'ERROR\nFile Format not valid.\n{filetype}'
+                str_error += ' detected, and it should be ROMPack.'
                 messagebox.showerror('Error', str_error, parent=self)
 
         self.menubar.entryconfig(0, state='normal')

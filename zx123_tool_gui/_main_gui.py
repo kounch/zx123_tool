@@ -42,9 +42,9 @@ def build_menubar(self):
                          command=self.full_close_image)
     filemenu.add_separator()
 
-    updatemenu = tk.Menu(menubar, tearoff=0)
     filemenu.add_command(label='Erase Image File…', command=self.erase_image)
     filemenu.add_command(label='Expand Image File…', command=self.expand_image)
+    updatemenu = tk.Menu(menubar, tearoff=0)
     updatemenu.add_command(label='Update All (Standard)…',
                            command=lambda: self.update_image('all'))
     updatemenu.add_command(
@@ -66,6 +66,7 @@ def build_menubar(self):
     updatemenu.add_command(
         label='Update Cores (2MB)…',
         command=lambda: self.update_image('Cores', get_1core=True))
+    self.updatemenu = updatemenu
     filemenu.add_cascade(label='Update Image File', menu=updatemenu)
 
     filemenu.add_separator()
@@ -317,7 +318,7 @@ def create_entries(self):
     self.rom_spinbox = rom_spinbox
 
 
-def create_tables(self):
+def create_core_table(self):
     """
     Create Main Window Tables
     :return: References to core_table and rom_table
@@ -343,7 +344,15 @@ def create_tables(self):
     core_table.configure(yscroll=core_scrollbar.set)
     core_scrollbar.grid(column=2, row=1, rowspan=8, sticky='nse')
 
-    rom_table = ttk.Treeview(self.roms_frame, height=11)
+    return core_table
+
+
+def create_rom_table(self, height=11):
+    """
+    Create ROMs Table
+    :return: Reference to rom_table
+    """
+    rom_table = ttk.Treeview(self.roms_frame, height=height)
     rom_table.grid(column=0, row=1, columnspan=4, sticky='nswe')
     rom_table['columns'] = ('id', 'slot', 'flags', 'crc', 'name', 'size',
                             'version')
@@ -361,7 +370,7 @@ def create_tables(self):
     rom_table.configure(yscroll=rom_scrollbar.set)
     rom_scrollbar.grid(column=3, row=1, sticky='nse')
 
-    return core_table, rom_table
+    return rom_table
 
 
 def create_buttons(self):
@@ -458,3 +467,29 @@ def create_buttons(self):
                                        command=self.rompack_export)
     rompack_export_button.grid(column=3, row=2, sticky='we', padx=5, pady=10)
     self.rompack_export_button = rompack_export_button
+
+
+def populate_cores(self, dict_cores):
+    """
+    Populate Cores Data Table (TreeView) in Main Window
+    :param dict_cores: Dictionary with cores data
+    """
+    for index in dict_cores:
+        self.core_table.insert(parent='',
+                               index='end',
+                               iid=index,
+                               text='',
+                               values=[index] + list(dict_cores[index])[:3])
+
+
+def populate_roms(self, dict_roms):
+    """
+    Populate ROMs Data Table (TreeView) in Main Window
+    :param dict_roms: Dictionary with ROMs data
+    """
+    for index in dict_roms:
+        self.rom_table.insert(parent='',
+                              index='end',
+                              iid=index,
+                              text='',
+                              values=[index] + list(dict_roms[index])[:6])
