@@ -1,5 +1,5 @@
 {
-    "version": "20211220.001",
+    "version": "20211220.002",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -525,9 +525,10 @@
             },
             "Jupiter Ace": {
                 "features": {
+                    "SD": [["FAT16"], ""],
                     "Video": [["VGA"], ""],
                     "Keyboard": [["PS/2"], ""],
-                    "Other": [["Audio In Tape Load"], ""]
+                    "Other": [["Audio In Tape Load", "SD Tape Load"], ""]
                 },
                 "latest": [
                     "2019.06.19 azesmbog",
