@@ -1,5 +1,5 @@
 {
-    "version": "20211213.001",
+    "version": "20211220.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -723,7 +723,7 @@
                     "SD": [["FAT16"], "FAT with MS-DOS installed"],
                     "Video": [["VGA"], ""],
                     "Audio": [["Beeper"], ""],
-                    "Graphic Modes": [["Text 80x25", "CGA", "CGA Monochrome", "Tandy"], "Partial Tandy Support"],
+                    "Graphic Modes": [["Text 40x25", "Text 80x25", "CGA", "CGA Monochrome", "Tandy"], "Partial Tandy Support"],
                     "Keyboard": [["PS/2"], ""],
                     "Mouse": [["PS/2"], ""],
                     "Other": [["Next186 core 4.77Mhz"], ""]
