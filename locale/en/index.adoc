@@ -1,6 +1,6 @@
 = ZX123 Tool Manual
 :author: kounch
-:revnumber: 1.0.0
+:revnumber: 1.0.1
 :doctype: book
 :notitle:
 :front-cover-image: image:../img/Portada.jpg[]
@@ -176,6 +176,21 @@ The settings for each ROM are listed with a letter code that is explained in the
 ==== Update an image
 
 From the menu, you can choose several options that try to update, either individually or all together, BIOS and cores to the latest version, according to the contents of the JSON file, being possible, when updating cores, to search for the ZX-Uno standard version, ZXUnCore (RGB666 DAC) adapted cores or 2MB internal memory adapted cores.
+
+==== Preferences
+
+On the preferences window you chan change the default behaviour for some actions of the application.
+
+[.text-center]
+image:../img/PrefsWindow.jpg[pdfwidth=70%]
+
+- Automatically update the cores, ROMs, etc. database each time that the application is opened
+
+- Check for new versions of the software, also each time that the application is opened
+
+- Ask for a confirmation before applying changes when adding a new core or ROM
+
+- Ask for a confirmation before applying changes when replacing the contents of an existing core or ROM
 
 <<<
 
