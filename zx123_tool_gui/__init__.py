@@ -16,13 +16,20 @@ ZX123 Tool GUI Classes
 
 import os
 import sys
+import json
 from shutil import copy
+import ssl
 import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter import messagebox
 import zx123_tool as zx123
-from ._extra_gui import NewEntryDialog, InfoWindow, ROMPWindow, ProgressWindow
+from ._extra_gui import NewEntryDialog, InfoWindow, ROMPWindow
+from ._extra_gui import ProgressWindow, PrefWindow
+if sys.version_info.major == 3:
+    import urllib.request
+
+ssl._create_default_https_context = ssl._create_unverified_context  # pylint: disable=protected-access
 
 MY_DIRPATH = os.path.dirname(sys.argv[0])
 MY_DIRPATH = os.path.abspath(MY_DIRPATH)
@@ -45,6 +52,7 @@ class App(tk.Tk):
 
         super().__init__()
 
+        self.pref_window = None
         if sys.platform == 'win32':
             # Windows config
             str_icon_path = os.path.join(MY_DIRPATH, 'ZX123 Tool.ico')
@@ -52,6 +60,7 @@ class App(tk.Tk):
         elif sys.platform == 'darwin':
             # MacOS Open File Events
             self.createcommand('::tk::mac::OpenDocument', self.open_file)
+            self.createcommand('::tk::mac::ShowPreferences', self.open_prefs)
         else:
             # Other
             pass
@@ -63,13 +72,16 @@ class App(tk.Tk):
             self.destroy()
             return
 
-        self.fulldict_hash = self.load_json()
+        self.dict_prefs = {}
+        self.fulldict_hash = {}
         self.zxfilepath = ''
         self.zxextension = ''
         self.zxsize = 0
         self.old_core = self.old_timer = self.old_keyboard = None
         self.old_video = self.old_rom = None
 
+        self.load_json()
+        self.load_prefs()
         self.unbind_keys()
 
         # Main Window
@@ -98,9 +110,61 @@ class App(tk.Tk):
         self.build_menubar()
         self.bind_keys()
 
+        # Update JSON on startup
+        if self.dict_prefs['update_json']:
+            self.update_json()
+
+        # Check for updates on startup
+        if self.dict_prefs['check_updates']:
+            self.check_updates()
+
         # Load files from command line args
         if len(sys.argv) > 1:
             self.open_file(sys.argv[1:])
+
+    def check_updates(self):
+        """Gets the latest release version from GitHub"""
+        print("Checking for updates...")
+        result = urllib.request.urlopen(
+            'https://github.com/kounch/zx123_tool/releases/latest')
+        new_version = result.url.split('/')[-1]
+        old_version = zx123.__MY_VERSION__
+        if new_version > old_version:
+            str_msg = f'There\'s a new version ({new_version}) of'
+            str_msg += ' ZX123 Tool available to download.'
+            messagebox.showinfo('Update available', str_msg, parent=self)
+
+    def load_prefs(self):
+        """Load preferences from file if found, or set default settings"""
+        dict_prefs = {
+            'update_json': False,
+            'check_updates': False,
+            'ask_insert': False,
+            'ask_replace': True
+        }
+        str_prefs = os.path.join(JSON_DIR, 'zx123_prefs.json')
+        if not os.path.isfile(str_prefs):
+            print('Prefs not found')
+        else:
+            with open(str_prefs, 'r', encoding='utf-8') as prefs_handle:
+                dict_load = json.load(prefs_handle)
+            for key in dict_load:
+                dict_prefs[key] = dict_load[key]
+
+        self.dict_prefs = dict_prefs
+
+    def save_prefs(self):
+        """Save preferences to file"""
+        str_prefs = os.path.join(JSON_DIR, 'zx123_prefs.json')
+        with open(str_prefs, 'w', encoding='utf-8') as prefs_handle:
+            json.dump(self.dict_prefs, prefs_handle)
+
+    def open_prefs(self):
+        """Show or set focus to preferences window"""
+        if self.pref_window:
+            self.pref_window.top.focus_force()
+        else:
+            self.pref_window = PrefWindow(self)
 
     def load_json(self):
         """Initialize JSON Database"""
@@ -118,7 +182,7 @@ class App(tk.Tk):
                     copy(os.path.join(APP_RESDIR, 'zx123_hash.json'), JSON_DIR)
 
         fulldict_hash = zx123.load_json_bd(base_dir=JSON_DIR)
-        return fulldict_hash
+        self.fulldict_hash = fulldict_hash
 
     def core_menu_popup(self, event):
         """Contextual Menu Handling for core table"""
@@ -302,8 +366,9 @@ class App(tk.Tk):
                 zx123.STR_OUTDIR = os.path.dirname(str_file)
 
                 dict_flash = zx123.list_zxdata(str_file, dict_hash, False)
-                dict_roms = zx123.list_romsdata(str_file, self.fulldict_hash,
-                                                str_extension, False)
+                dict_roms, _ = zx123.list_romsdata(str_file,
+                                                   self.fulldict_hash,
+                                                   str_extension, False)
                 str_filename = f'{str_filename} ({dict_flash["description"]})'
                 str_filename += f' {int(self.zxsize / 1048576)}MB'
 
@@ -355,18 +420,20 @@ class App(tk.Tk):
                 if rom_number:
                     self.rompack_export_button.state(['!disabled'])
             elif filetype == 'ROMPack v2':
-                dict_roms = zx123.list_romsdata(str_file, self.fulldict_hash,
-                                                'RPv2', False, True)
-                ROMPWindow(self, str_filename, filetype, dict_roms)
+                dict_roms, default_rom = zx123.list_romsdata(
+                    str_file, self.fulldict_hash, 'RPv2', False, True)
+                ROMPWindow(self, str_filename, filetype, dict_roms,
+                           default_rom)
             else:
                 if str_file:
                     dict_file = zx123.find_zxfile(str_file, self.fulldict_hash,
                                                   str_extension, False, True)
                     filetype = dict_file.get('kind', 'Unknown')
                     if filetype == 'ROMPack':
-                        dict_roms = zx123.list_romsdata(
+                        dict_roms, default_rom = zx123.list_romsdata(
                             str_file, self.fulldict_hash, 'ROMS', False, True)
-                        ROMPWindow(self, str_filename, filetype, dict_roms)
+                        ROMPWindow(self, str_filename, filetype, dict_roms,
+                                   default_rom)
                     elif filetype != 'Unknown':
                         InfoWindow(self, str_filename, dict_file)
                     else:
@@ -639,12 +706,14 @@ class App(tk.Tk):
         if str_file:
             b_block_ok, filetype = self.validate_file(str_file, [str_block])
             if b_block_ok:
-                str_title = f'Replace {str_block}'
-                str_message = f'Do you want to replace {str_block}?'
-                response = messagebox.askyesno(parent=self,
-                                               icon='question',
-                                               title=str_title,
-                                               message=str_message)
+                response = True
+                if self.dict_prefs['ask_replace']:
+                    str_title = f'Replace {str_block}'
+                    str_message = f'Do you want to replace {str_block}?'
+                    response = messagebox.askyesno(parent=self,
+                                                   icon='question',
+                                                   title=str_title,
+                                                   message=str_message)
                 if response:
                     _, arr_err = zx123.inject_zxfiles(
                         self.zxfilepath, [f'{str_block},{str_file}'],
@@ -746,13 +815,22 @@ class App(tk.Tk):
             response = True
             if t_selection:
                 itm_indx = int(t_selection[0])
-                str_title = f'Replace {str_name}'
-                str_message = f'Do you want to replace {str_name} {itm_indx}?'
-                response = messagebox.askyesno(parent=self,
-                                               icon='question',
-                                               title=str_title,
-                                               message=str_message)
-
+                response = True
+                if self.dict_prefs['ask_replace']:
+                    str_title = f'Replace {str_name}'
+                    str_message = f'Do you want to replace {str_name} {itm_indx}?'
+                    response = messagebox.askyesno(parent=self,
+                                                   icon='question',
+                                                   title=str_title,
+                                                   message=str_message)
+            else:
+                if self.dict_prefs['ask_insert']:
+                    str_title = f'Insert {str_name}'
+                    str_message = f'Do you want to insert a new {str_name}?'
+                    response = messagebox.askyesno(parent=self,
+                                                   icon='question',
+                                                   title=str_title,
+                                                   message=str_message)
             if response:
                 str_dialog_name = f'{str_name}'
                 if itm_indx < 99:
@@ -841,12 +919,14 @@ class App(tk.Tk):
         if str_file:
             b_block_ok, filetype = self.validate_file(str_file, ['ROMPack'])
             if b_block_ok:
-                str_title = 'Replace ROMs'
-                str_message = 'Do you really want to replace all ROMs?'
-                response = messagebox.askyesno(parent=self,
-                                               icon='question',
-                                               title=str_title,
-                                               message=str_message)
+                response = True
+                if self.dict_prefs['ask_replace']:
+                    str_title = 'Replace ROMs'
+                    str_message = 'Do you really want to replace all ROMs?'
+                    response = messagebox.askyesno(parent=self,
+                                                   icon='question',
+                                                   title=str_title,
+                                                   message=str_message)
                 if response:
                     _, arr_err = zx123.inject_zxfiles(self.zxfilepath,
                                                       [f'ROMS,{str_file}'],

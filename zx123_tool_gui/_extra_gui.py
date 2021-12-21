@@ -196,7 +196,7 @@ class ROMPWindow:
     from ._main_gui import create_rom_table
     from ._main_gui import populate_roms
 
-    def __init__(self, parent, str_name, str_kind, dict_roms):
+    def __init__(self, parent, str_name, str_kind, dict_roms, default_rom):
         self.parent = parent
         self.parent.unbind_keys()
 
@@ -220,6 +220,9 @@ class ROMPWindow:
 
         self.roms_frame = ttk.Frame(main_frame, padding=5)
         self.roms_frame.pack()
+        rom_label = ttk.Label(self.roms_frame,
+                              text=f'Default ROM: {default_rom}')
+        rom_label.grid(column=0, row=0, columnspan=4, pady=5)
         self.rom_table = self.create_rom_table(height=26)
         self.rom_table.configure(selectmode='none')
         self.populate_roms(dict_roms)
@@ -287,6 +290,55 @@ class ProgressWindow:
         self.top.destroy()
         self.parent.focus_force()
         self.parent.bind_keys()
+
+
+class PrefWindow:
+    """Custom Window to Show Preferences"""
+    def __init__(self, parent):
+        self.parent = parent
+
+        self.top = tk.Toplevel(parent)
+        self.top.resizable(False, False)
+
+        self.top.title('ZX123 Tool Preferences')
+        self.top.protocol("WM_DELETE_WINDOW", self.do_close)
+
+        main_frame = ttk.Frame(self.top, padding=10)
+        main_frame.pack(fill='both')
+
+        settings_frame = ttk.Frame(main_frame, padding=10)
+        settings_frame.pack(fill='x')
+
+        self.dict_prefs = {
+            'update_json': 'Update Database on startup',
+            'check_updates': 'Check for App updates on startup',
+            'ask_insert': 'Ask for confirmation when inserting',
+            'ask_replace': 'Ask for confirmation when replacing'
+        }
+        self.extra_vars = []
+        for index, key in enumerate(self.dict_prefs):
+            self.extra_vars.append(tk.IntVar())
+            self.extra_vars[index].set(parent.dict_prefs[key])
+            check_1 = ttk.Checkbutton(settings_frame,
+                                      text=self.dict_prefs[key],
+                                      variable=self.extra_vars[index],
+                                      onvalue=1,
+                                      offvalue=0)
+            check_1.grid(column=0, row=index, sticky='w', padx=10, pady=2)
+
+        center_on_parent(parent, self.top)
+        self.top.update()
+
+    def do_close(self, *_):
+        """Process Cancel Button"""
+        for index, key in enumerate(self.dict_prefs):
+            self.parent.dict_prefs[key] = self.extra_vars[index].get()
+        self.parent.save_prefs()
+
+        self.top.destroy()
+        self.parent.pref_window = None
+        self.parent.bind_keys()
+        self.parent.focus_force()
 
 
 def center_on_parent(root, window):

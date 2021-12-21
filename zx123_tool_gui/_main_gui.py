@@ -75,7 +75,9 @@ def build_menubar(self):
                          accelerator=f'{str_accl}i')
     filemenu.add_command(label='Convert Core…', command=self.convert_core)
 
-    if sys.platform == 'win32':
+    if sys.platform != 'darwin':
+        filemenu.add_separator()
+        filemenu.add_command(label='Preferences…', command=self.open_prefs)
         filemenu.add_separator()
         filemenu.add_command(label='Exit', command=self.destroy)
     self.filemenu = filemenu

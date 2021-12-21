@@ -53,7 +53,7 @@ if sys.version_info.major == 3:
 if os.name == 'nt':
     import msvcrt  # pylint: disable=import-error
 
-__MY_VERSION__ = '3.2.2'
+__MY_VERSION__ = '3.3.0'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
@@ -944,6 +944,7 @@ def list_romsdata(str_in_file,
     LOGGER.debug('Listing ROMs of file: %s', str_in_file)
     roms_list = get_rom_list(str_in_file, hash_dict[in_file_ext]['parts'])
 
+    default_rom = -1
     dict_res = {}
     if roms_list:
         if roms_file:
@@ -972,7 +973,7 @@ def list_romsdata(str_in_file,
             if show_hashes:
                 print(f'Hash: {block_hash}')
 
-    return dict_res
+    return dict_res, default_rom
 
 
 def extractfrom_zxdata(str_in_file,
@@ -1844,8 +1845,8 @@ def find_zxfile(str_in_file,
         rompack = fulldict_hash['ROMS']['parts']
         i_rpck_size = int(rompack['header'][1])
         if i_rpck_size == i_file_size:
-            found = list_romsdata(str_in_file, fulldict_hash, 'ROMS',
-                                  show_hashes, True)
+            found, _ = list_romsdata(str_in_file, fulldict_hash, 'ROMS',
+                                     show_hashes, True)
             dict_res['kind'] = 'ROMPack'
             dict_res['version'] = ''
 
