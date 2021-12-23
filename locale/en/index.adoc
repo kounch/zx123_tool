@@ -1,6 +1,6 @@
 = ZX123 Tool Manual
 :author: kounch
-:revnumber: 1.0.1
+:revnumber: 1.0.2
 :doctype: book
 :notitle:
 :front-cover-image: image:../img/Portada.jpg[]
@@ -166,10 +166,12 @@ When one or more ROMs are selected, it is possible to replace the first one with
 [.text-center]
 image:../img/ROMsSelect.jpg[pdfwidth=100%]
 
+<<<
+
 When loading a ROM file, you can specify the flags to use when using the ROM, such as memory contention, DivMMC, timings of different Spectrum models, etc.
 
 [.text-center]
-image:../img/ROM.jpg[pdfwidth=70%]
+image:../img/ROM.jpg[pdfwidth=80%]
 
 The settings for each ROM are listed with a letter code that is explained in the <<#_rom_parameters,appendix at the end of this manual>>.
 
@@ -177,12 +179,14 @@ The settings for each ROM are listed with a letter code that is explained in the
 
 From the menu, you can choose several options that try to update, either individually or all together, BIOS and cores to the latest version, according to the contents of the JSON file, being possible, when updating cores, to search for the ZX-Uno standard version, ZXUnCore (RGB666 DAC) adapted cores or 2MB internal memory adapted cores.
 
+<<<
+
 ==== Preferences
 
 On the preferences window you chan change the default behaviour for some actions of the application.
 
 [.text-center]
-image:../img/PrefsWindow.jpg[pdfwidth=70%]
+image:../img/PrefsWindow.jpg[pdfwidth=60%]
 
 - Automatically update the cores, ROMs, etc. database each time that the application is opened
 
@@ -191,6 +195,8 @@ image:../img/PrefsWindow.jpg[pdfwidth=70%]
 - Ask for a confirmation before applying changes when adding a new core or ROM
 
 - Ask for a confirmation before applying changes when replacing the contents of an existing core or ROM
+
+- Remember main window and preferences window positions (if not, both windows are always centered)
 
 <<<
 

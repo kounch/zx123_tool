@@ -61,6 +61,7 @@ class App(tk.Tk):
             # MacOS Open File Events
             self.createcommand('::tk::mac::OpenDocument', self.open_file)
             self.createcommand('::tk::mac::ShowPreferences', self.open_prefs)
+            self.createcommand('::tk::mac::Quit', self.do_close)
         else:
             # Other
             pass
@@ -86,6 +87,7 @@ class App(tk.Tk):
 
         # Main Window
         self.title('ZX123 Tool')
+        self.protocol("WM_DELETE_WINDOW", self.do_close)
         self.resizable(False, False)
 
         self.main_frame = ttk.Frame(self, padding=5)
@@ -103,8 +105,14 @@ class App(tk.Tk):
         self.rom_table = self.create_rom_table()
         self.create_buttons()
 
-        self.tk.eval(f'tk::PlaceWindow {self._w} center')
         self.update_idletasks()
+        if self.dict_prefs.get('remember_pos', False):
+            height, width = self.winfo_height(), self.winfo_width()
+            x_pos, y_pos = self.dict_prefs.get('mainwindow',
+                                               (self.winfo_x, self.winfo_y))
+            self.geometry(f'{width}x{height}+{x_pos}+{y_pos}')
+        else:
+            self.tk.eval(f'tk::PlaceWindow {self._w} center')
 
         # Menu
         self.build_menubar()
@@ -121,6 +129,12 @@ class App(tk.Tk):
         # Load files from command line args
         if len(sys.argv) > 1:
             self.open_file(sys.argv[1:])
+
+    def do_close(self, *_):
+        """Destroy Event"""
+        self.dict_prefs['mainwindow'] = (self.winfo_x(), self.winfo_y())
+        self.save_prefs()
+        self.destroy()
 
     def check_updates(self):
         """Gets the latest release version from GitHub"""
@@ -140,7 +154,8 @@ class App(tk.Tk):
             'update_json': False,
             'check_updates': False,
             'ask_insert': False,
-            'ask_replace': True
+            'ask_replace': True,
+            'remember_pos': False
         }
         str_prefs = os.path.join(JSON_DIR, 'zx123_prefs.json')
         if not os.path.isfile(str_prefs):

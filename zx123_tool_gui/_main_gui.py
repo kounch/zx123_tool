@@ -144,9 +144,6 @@ def bind_keys(self):
     self.bind_all(f'<{str_bind}w>', lambda event: self.full_close_image())
     self.bind_all(f'<{str_bind}i>', lambda event: self.show_info())
 
-    if sys.platform == 'darwin':
-        self.bind_all(f'<{str_bind}q>', lambda event: self.destroy())
-
 
 def unbind_keys(self):
     """Unbind Menu Keys"""

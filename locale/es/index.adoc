@@ -1,6 +1,6 @@
 = Manual de ZX123 Tool
 :author: kounch
-:revnumber: 1.0.1
+:revnumber: 1.0.2
 :doctype: book
 :notitle:
 :front-cover-image: image:../img/Portada.jpg[]
@@ -172,7 +172,7 @@ image:../img/ROMsSelect.jpg[pdfwidth=100%]
 Al cargar un fichero de ROM, se pueden especificar los indicadores para usar al utilizar la ROM, como la contención de memoria, DivMMC, timings de distintos modelos de Spectrum, etc.
 
 [.text-center]
-image:../img/ROM.jpg[pdfwidth=70%]
+image:../img/ROM.jpg[pdfwidth=80%]
 
 Los indicadores de cada ROM se muestran en la lista con un código de letras que se explica en el <<#_indicadores_de_rom,apéndice al final de este manual>>.
 
@@ -180,12 +180,14 @@ Los indicadores de cada ROM se muestran en la lista con un código de letras que
 
 Desde el menú, se pueden elegir varias opciones que permiten intentar actualizar, tanto de forma individual como conjunta, BIOS y Cores a la última versión posible según se indica en el fichero JSON, siendo posible, en el caso de la actualización de cores, elegir si se quiere buscar la versión normal para cualquier ZX-Uno, cores específicos para ZXUnCore (con soporte para DAC RGB666) o cores que utilizan 2MB de memoria (interna).
 
+<<<
+
 ==== Preferencias
 
 La ventana de preferencias permite cambiar el comportamiento por defecto para algunas acciones de la aplicación.
 
 [.text-center]
-image:../img/PrefsWindow.jpg[pdfwidth=70%]
+image:../img/PrefsWindow.jpg[pdfwidth=60%]
 
 - Actualizar automáticamente la base de datos de cores, ROMs, ect. cada vez que se abra la aplicación (Update database...)
 
@@ -194,6 +196,8 @@ image:../img/PrefsWindow.jpg[pdfwidth=70%]
 - Pedir confirmación antes de aplicar cambios al añadir un nuevo core o ROM (Ask for confirmation when inserting)
 
 - Pedir confirmación antes de aplicar cambios al sustituir el contenido de un core o ROM existente (Ask for confirmation when replacing)
+
+- Recordar la ubicación de la ventana principal y la de preferencias, o bien mostrarlas siempre en el centro (Remember window positions)
 
 <<<
 

@@ -313,7 +313,8 @@ class PrefWindow:
             'update_json': 'Update Database on startup',
             'check_updates': 'Check for App updates on startup',
             'ask_insert': 'Ask for confirmation when inserting',
-            'ask_replace': 'Ask for confirmation when replacing'
+            'ask_replace': 'Ask for confirmation when replacing',
+            'remember_pos': 'Remember window positions'
         }
         self.extra_vars = []
         for index, key in enumerate(self.dict_prefs):
@@ -326,13 +327,23 @@ class PrefWindow:
                                       offvalue=0)
             check_1.grid(column=0, row=index, sticky='w', padx=10, pady=2)
 
-        center_on_parent(parent, self.top)
+        if self.parent.dict_prefs.get('remember_pos', False):
+            self.top.update_idletasks()
+            height, width = self.top.winfo_height(), self.top.winfo_width()
+            x_pos, y_pos = self.parent.dict_prefs.get(
+                'prefwindow', (self.top.winfo_x, self.top.winfo_y))
+            self.top.geometry(f'{width}x{height}+{x_pos}+{y_pos}')
+        else:
+            center_on_parent(parent, self.top)
         self.top.update()
 
     def do_close(self, *_):
         """Process Cancel Button"""
         for index, key in enumerate(self.dict_prefs):
             self.parent.dict_prefs[key] = self.extra_vars[index].get()
+
+        self.parent.dict_prefs['prefwindow'] = (self.top.winfo_x(),
+                                                self.top.winfo_y())
         self.parent.save_prefs()
 
         self.top.destroy()
@@ -362,4 +373,4 @@ def center_on_parent(root, window):
     y_coordinate = int(parent.winfo_y() +
                        (parent.winfo_height() / 2 - height / 2))
 
-    window.geometry(f"{width}x{height}+{x_coordinate}+{y_coordinate}")
+    window.geometry(f'{width}x{height}+{x_coordinate}+{y_coordinate}')
