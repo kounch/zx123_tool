@@ -105,18 +105,10 @@ class App(tk.Tk):
         self.rom_table = self.create_rom_table()
         self.create_buttons()
 
-        self.update_idletasks()
-        if self.dict_prefs.get('remember_pos', False):
-            height, width = self.winfo_height(), self.winfo_width()
-            x_pos, y_pos = self.dict_prefs.get('mainwindow',
-                                               (self.winfo_x, self.winfo_y))
-            self.geometry(f'{width}x{height}+{x_pos}+{y_pos}')
-        else:
-            self.tk.eval(f'tk::PlaceWindow {self._w} center')
-
         # Menu
         self.build_menubar()
-        self.bind_keys()
+        self.bind("<FocusIn>", self.bind_keys)
+        self.bind("<FocusOut>", self.unbind_keys)
 
         # Update JSON on startup
         if self.dict_prefs['update_json']:
@@ -125,6 +117,15 @@ class App(tk.Tk):
         # Check for updates on startup
         if self.dict_prefs['check_updates']:
             self.check_updates()
+
+        self.update_idletasks()
+        if self.dict_prefs.get('remember_pos', False):
+            height, width = self.winfo_height(), self.winfo_width()
+            x_pos, y_pos = self.dict_prefs.get('mainwindow',
+                                               (self.winfo_x, self.winfo_y))
+            self.geometry(f'{width}x{height}+{x_pos}+{y_pos}')
+        else:
+            self.tk.eval(f'tk::PlaceWindow {self._w} center')
 
         # Load files from command line args
         if len(sys.argv) > 1:

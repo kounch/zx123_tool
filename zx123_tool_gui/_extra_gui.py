@@ -14,6 +14,7 @@ Center tk window Copyright (c) 2019 Jarik Marwede SPDX-License-Identifier: MIT
 Extra Window Classes for new entries and info display
 """
 
+import sys
 import tkinter as tk
 from tkinter import ttk
 
@@ -42,7 +43,6 @@ class NewEntryDialog:
 
     def __init__(self, parent, str_name, b_core=False, b_alt=False):
         self.parent = parent
-        self.parent.unbind_keys()
 
         self.result_name = ''
         self.extra = ''
@@ -114,13 +114,11 @@ class NewEntryDialog:
                 if self.extra_vars[index].get():
                     self.extra += key
         self.top.destroy()
-        self.parent.bind_keys()
         self.parent.focus_force()
 
     def do_cancel(self, *_):
         """Process Cancel Button"""
         self.top.destroy()
-        self.parent.bind_keys()
         self.parent.focus_force()
 
 
@@ -128,7 +126,6 @@ class InfoWindow:
     """Custom Window to Show Core or ROM info"""
     def __init__(self, parent, str_name, dict_data):
         self.parent = parent
-        self.parent.unbind_keys()
 
         self.top = tk.Toplevel(parent)
         self.top.transient(parent)
@@ -187,7 +184,6 @@ class InfoWindow:
     def do_ok(self, *_):
         """Process OK Button"""
         self.top.destroy()
-        self.parent.bind_keys()
         self.parent.focus_force()
 
 
@@ -198,7 +194,6 @@ class ROMPWindow:
 
     def __init__(self, parent, str_name, str_kind, dict_roms, default_rom):
         self.parent = parent
-        self.parent.unbind_keys()
 
         self.top = tk.Toplevel(parent)
         self.top.transient(parent)
@@ -245,7 +240,6 @@ class ROMPWindow:
     def do_ok(self, *_):
         """Process OK Button"""
         self.top.destroy()
-        self.parent.bind_keys()
         self.parent.focus_force()
 
 
@@ -253,12 +247,12 @@ class ProgressWindow:
     """Custom Window to Show Progress"""
     def __init__(self, parent, str_title):
         self.parent = parent
-        self.parent.unbind_keys()
 
         self.top = tk.Toplevel(parent)
         self.top.transient(parent)
         self.top.grab_set()
         self.top.resizable(False, False)
+        self.top.overrideredirect(1)
 
         self.top.title(str_title)
 
@@ -273,7 +267,6 @@ class ProgressWindow:
         self.progress_label = progress_label
 
         center_on_parent(parent, self.top)
-        self.top.update()
 
     def update(self, str_message):
         """Update the text of progress_label"""
@@ -289,7 +282,6 @@ class ProgressWindow:
         """Close and destroy window"""
         self.top.destroy()
         self.parent.focus_force()
-        self.parent.bind_keys()
 
 
 class PrefWindow:
@@ -302,6 +294,8 @@ class PrefWindow:
 
         self.top.title('ZX123 Tool Preferences')
         self.top.protocol("WM_DELETE_WINDOW", self.do_close)
+        self.top.bind("<FocusIn>", self.bind_keys)
+        self.top.bind("<FocusOut>", self.save_prefs)
 
         main_frame = ttk.Frame(self.top, padding=10)
         main_frame.pack(fill='both')
@@ -335,10 +329,24 @@ class PrefWindow:
             self.top.geometry(f'{width}x{height}+{x_pos}+{y_pos}')
         else:
             center_on_parent(parent, self.top)
-        self.top.update()
 
-    def do_close(self, *_):
-        """Process Cancel Button"""
+    def bind_keys(self, *_):
+        """Bind Menu Keys"""
+
+        str_bind = 'Control-'
+        if sys.platform == 'win32':
+            str_bind = 'Control-'
+        elif sys.platform == 'darwin':
+            str_bind = 'Command-'
+
+        self.top.bind_all(f'<{str_bind}w>', lambda event: self.do_close())
+        self.parent.filemenu.entryconfig(2,
+                                         state='normal',
+                                         label='Close Preferences Window',
+                                         command=self.do_close)
+
+    def save_prefs(self, *_):
+        """Saves Preferences"""
         for index, key in enumerate(self.dict_prefs):
             self.parent.dict_prefs[key] = self.extra_vars[index].get()
 
@@ -346,9 +354,11 @@ class PrefWindow:
                                                 self.top.winfo_y())
         self.parent.save_prefs()
 
+    def do_close(self, *_):
+        """Save Preferences and close window"""
+        self.save_prefs()
         self.top.destroy()
         self.parent.pref_window = None
-        self.parent.bind_keys()
         self.parent.focus_force()
 
 

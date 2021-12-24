@@ -37,9 +37,7 @@ def build_menubar(self):
     filemenu.add_command(label='Open File…',
                          command=self.open_file,
                          accelerator=f'{str_accl}O')
-    filemenu.add_command(label='Close File',
-                         accelerator=f'{str_accl}w',
-                         command=self.full_close_image)
+    filemenu.add_command(label='Close File', accelerator=f'{str_accl}w')
     filemenu.add_separator()
 
     filemenu.add_command(label='Erase Image File…', command=self.erase_image)
@@ -130,7 +128,7 @@ def build_menubar(self):
     self.json_menu.entryconfig(2, state='disabled')
 
 
-def bind_keys(self):
+def bind_keys(self, *_):
     """Bind Menu Keys"""
 
     str_bind = 'Control-'
@@ -141,11 +139,23 @@ def bind_keys(self):
 
     self.bind_all(f'<{str_bind}n>', lambda event: self.new_image())
     self.bind_all(f'<{str_bind}o>', lambda event: self.open_file())
-    self.bind_all(f'<{str_bind}w>', lambda event: self.full_close_image())
     self.bind_all(f'<{str_bind}i>', lambda event: self.show_info())
 
+    if self.zxfilepath:
+        self.filemenu.entryconfig(2,
+                                  state='normal',
+                                  label='Close file',
+                                  command=self.full_close_image)
+        self.bind_all(f'<{str_bind}w>', lambda event: self.full_close_image())
+    else:
+        self.filemenu.entryconfig(2,
+                                  state='disabled',
+                                  label='Close file',
+                                  command=None)
+        self.unbind_all(f'<{str_bind}w>')
 
-def unbind_keys(self):
+
+def unbind_keys(self, *_):
     """Unbind Menu Keys"""
 
     str_bind = 'Control-'
