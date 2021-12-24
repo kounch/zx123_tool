@@ -317,6 +317,7 @@ class PrefWindow:
             self.extra_vars[index].set(parent.dict_prefs[key])
             check_1 = ttk.Checkbutton(settings_frame,
                                       text=self.dict_prefs[key],
+                                      command=self.save_prefs,
                                       variable=self.extra_vars[index],
                                       onvalue=1,
                                       offvalue=0)

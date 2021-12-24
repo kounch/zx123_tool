@@ -41,7 +41,6 @@ class App(tk.Tk):
 
     from ._main_gui import build_menubar
     from ._main_gui import bind_keys
-    from ._main_gui import unbind_keys
     from ._main_gui import create_labels
     from ._main_gui import create_entries
     from ._main_gui import create_core_table, create_rom_table
@@ -83,7 +82,6 @@ class App(tk.Tk):
 
         self.load_json()
         self.load_prefs()
-        self.unbind_keys()
 
         # Main Window
         self.title('ZX123 Tool')
@@ -108,7 +106,6 @@ class App(tk.Tk):
         # Menu
         self.build_menubar()
         self.bind("<FocusIn>", self.bind_keys)
-        self.bind("<FocusOut>", self.unbind_keys)
 
         # Update JSON on startup
         if self.dict_prefs['update_json']:

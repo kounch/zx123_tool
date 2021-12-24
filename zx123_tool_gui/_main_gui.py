@@ -155,24 +155,6 @@ def bind_keys(self, *_):
         self.unbind_all(f'<{str_bind}w>')
 
 
-def unbind_keys(self, *_):
-    """Unbind Menu Keys"""
-
-    str_bind = 'Control-'
-    if sys.platform == 'win32':
-        str_bind = 'Control-'
-    elif sys.platform == 'darwin':
-        str_bind = 'Command-'
-
-    self.unbind_all(f'<{str_bind}n>')
-    self.unbind_all(f'<{str_bind}o>')
-    self.unbind_all(f'<{str_bind}w>')
-    self.unbind_all(f'<{str_bind}i>')
-
-    if sys.platform == 'darwin':
-        self.unbind_all(f'<{str_bind}q>')
-
-
 def create_labels(self):
     """
     Create Main Window Labels
