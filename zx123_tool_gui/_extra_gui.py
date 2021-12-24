@@ -52,7 +52,6 @@ class NewEntryDialog:
         self.top.transient(parent)
         self.top.grab_set()
         self.top.resizable(False, False)
-
         self.top.title(f'New {str_name} Entry')
         self.top.bind('<Return>', self.do_ok)
 
@@ -128,12 +127,10 @@ class InfoWindow:
         self.parent = parent
 
         self.top = tk.Toplevel(parent)
-        self.top.transient(parent)
-        self.top.grab_set()
         self.top.resizable(False, False)
-
         self.top.title('Information')
-        self.top.bind('<Return>', self.do_ok)
+        self.top.protocol("WM_DELETE_WINDOW", self.do_close)
+        self.top.bind("<FocusIn>", self.bind_keys)
 
         main_frame = ttk.Frame(self.top, padding=10)
         main_frame.pack(fill='both')
@@ -170,21 +167,25 @@ class InfoWindow:
                                          text=f'  - {key}: {detail_str}')
                 detail_label.grid(column=0, row=index + 1, sticky='w')
 
-        button_frame = ttk.Frame(main_frame, padding=10)
-        button_frame.pack(fill='x')
-        ok_button = ttk.Button(button_frame,
-                               text='OK',
-                               default='active',
-                               command=self.do_ok)
-        ok_button.pack()
-
         center_on_parent(parent, self.top)
-        self.top.wait_window()
 
-    def do_ok(self, *_):
+    def do_close(self, *_):
         """Process OK Button"""
         self.top.destroy()
-        self.parent.focus_force()
+
+    def bind_keys(self, *_):
+        """Bind Menu Keys"""
+        str_bind = 'Control-'
+        if sys.platform == 'win32':
+            str_bind = 'Control-'
+        elif sys.platform == 'darwin':
+            str_bind = 'Command-'
+
+        self.top.bind_all(f'<{str_bind}w>', lambda event: self.do_close())
+        self.parent.filemenu.entryconfig(2,
+                                         state='normal',
+                                         label='Close Info Window',
+                                         command=self.do_close)
 
 
 class ROMPWindow:
@@ -196,12 +197,10 @@ class ROMPWindow:
         self.parent = parent
 
         self.top = tk.Toplevel(parent)
-        self.top.transient(parent)
-        self.top.grab_set()
         self.top.resizable(False, False)
         self.top.title('ROMPack Contents')
-
-        self.top.bind('<Return>', self.do_ok)
+        self.top.protocol("WM_DELETE_WINDOW", self.do_close)
+        self.top.bind("<FocusIn>", self.bind_keys)
 
         main_frame = ttk.Frame(self.top, padding=10)
         main_frame.pack(fill='both')
@@ -222,25 +221,29 @@ class ROMPWindow:
         self.rom_table.configure(selectmode='none')
         self.populate_roms(dict_roms)
 
-        button_frame = ttk.Frame(main_frame, padding=10)
-        button_frame.pack(fill='x')
-        ok_button = ttk.Button(button_frame,
-                               text='OK',
-                               default='active',
-                               command=self.do_ok)
-        ok_button.pack()
-
         center_on_parent(parent, self.top)
-        self.top.wait_window()
+
+    def bind_keys(self, *_):
+        """Bind Menu Keys"""
+        str_bind = 'Control-'
+        if sys.platform == 'win32':
+            str_bind = 'Control-'
+        elif sys.platform == 'darwin':
+            str_bind = 'Command-'
+
+        self.top.bind_all(f'<{str_bind}w>', lambda event: self.do_close())
+        self.parent.filemenu.entryconfig(2,
+                                         state='normal',
+                                         label='Close ROMPack Window',
+                                         command=self.do_close)
 
     def romtable_selected(self, *_):
         """Unused"""
         print('Selected ROMPack Treeview')
 
-    def do_ok(self, *_):
-        """Process OK Button"""
+    def do_close(self, *_):
+        """Close window"""
         self.top.destroy()
-        self.parent.focus_force()
 
 
 class ProgressWindow:
@@ -253,7 +256,6 @@ class ProgressWindow:
         self.top.grab_set()
         self.top.resizable(False, False)
         self.top.overrideredirect(1)
-
         self.top.title(str_title)
 
         main_frame = ttk.Frame(self.top)
@@ -291,7 +293,6 @@ class PrefWindow:
 
         self.top = tk.Toplevel(parent)
         self.top.resizable(False, False)
-
         self.top.title('ZX123 Tool Preferences')
         self.top.protocol("WM_DELETE_WINDOW", self.do_close)
         self.top.bind("<FocusIn>", self.bind_keys)
@@ -332,7 +333,6 @@ class PrefWindow:
 
     def bind_keys(self, *_):
         """Bind Menu Keys"""
-
         str_bind = 'Control-'
         if sys.platform == 'win32':
             str_bind = 'Control-'
