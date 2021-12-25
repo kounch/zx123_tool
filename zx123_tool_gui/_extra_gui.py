@@ -252,10 +252,14 @@ class ProgressWindow:
         self.parent = parent
 
         self.top = tk.Toplevel(parent)
+        self.top.withdraw()
+        if sys.platform == 'darwin':
+            self.top.tk.call("::tk::unsupported::MacWindowStyle", "style",
+                             self.top, "sheet", "noTitleBar")
         self.top.transient(parent)
+        self.top.deiconify()
         self.top.grab_set()
         self.top.resizable(False, False)
-        self.top.overrideredirect(1)
         self.top.title(str_title)
 
         main_frame = ttk.Frame(self.top)
