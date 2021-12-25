@@ -730,15 +730,15 @@
                     "Other": [["Next186 core 4.77Mhz"], ""]
                 },
                 "latest": [
-                    "Beta 0.1 512KB",
+                    "Beta 0.2 512KB",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUno/512KB/COREx.ZX1"
                 ],
                 "1core": [
-                    "Beta 0.1 2MB Int (RGB666)",
+                    "Beta 0.2 2MB Int (RGB666)",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUnCore/2MB/COREx.ZX1"
                 ],
                 "2m": [
-                    "Beta 0.1 2MB Int",
+                    "Beta 0.2 2MB Int",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUno/2MB/COREx.ZX1"
                 ],
                 "versions": {
