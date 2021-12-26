@@ -311,9 +311,10 @@ class PrefWindow:
         self.dict_prefs = {
             'update_json': 'Update Database on startup',
             'check_updates': 'Check for App updates on startup',
-            'ask_insert': 'Ask for confirmation when inserting',
-            'ask_replace': 'Ask for confirmation when replacing',
-            'remember_pos': 'Remember window positions'
+            'ask_insert': 'Ask for confirmation when inserting cores or ROMs',
+            'ask_replace': 'Ask for confirmation when replacing cores or ROMs',
+            'import_unknown': 'Allow import of unknown BIOS, esxdos or cores',
+            'remember_pos': 'Remember Main and Preferences window positions'
         }
         self.extra_vars = []
         for index, key in enumerate(self.dict_prefs):

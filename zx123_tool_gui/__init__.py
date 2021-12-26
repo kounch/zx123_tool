@@ -108,11 +108,11 @@ class App(tk.Tk):
         self.bind("<FocusIn>", self.bind_keys)
 
         # Update JSON on startup
-        if self.dict_prefs['update_json']:
+        if self.dict_prefs.get('update_json', False):
             self.update_json()
 
         # Check for updates on startup
-        if self.dict_prefs['check_updates']:
+        if self.dict_prefs.get('check_updates', False):
             self.check_updates()
 
         self.update_idletasks()
@@ -153,6 +153,7 @@ class App(tk.Tk):
             'check_updates': False,
             'ask_insert': False,
             'ask_replace': True,
+            'import_unknown': False,
             'remember_pos': False
         }
         str_prefs = os.path.join(JSON_DIR, 'zx123_prefs.json')
@@ -471,8 +472,7 @@ class App(tk.Tk):
             if filetype == 'Unknown':
                 dict_file = zx123.find_zxfile(str_file, self.fulldict_hash,
                                               str_extension, False, True)
-                if 'kind' in dict_file:
-                    filetype = dict_file['kind']
+                filetype = dict_file.get('kind', 'Unknown')
 
             str_outfile = ''
             if filetype in ['Core', 'Spectrum']:
@@ -590,11 +590,10 @@ class App(tk.Tk):
         """
         str_extension, _, filetype = zx123.detect_file(str_file,
                                                        self.fulldict_hash)
-        if filetype == 'Unknown':
+        if not self.dict_prefs.get('import_unknown', False):
             dict_file = zx123.find_zxfile(str_file, self.fulldict_hash,
                                           str_extension, False, True)
-            if 'kind' in dict_file:
-                filetype = dict_file['kind']
+            filetype = dict_file.get('kind', 'Unknown')
 
         return bool(filetype in arr_format), filetype
 
@@ -720,7 +719,7 @@ class App(tk.Tk):
             b_block_ok, filetype = self.validate_file(str_file, [str_block])
             if b_block_ok:
                 response = True
-                if self.dict_prefs['ask_replace']:
+                if self.dict_prefs.get('ask_replace', True):
                     str_title = f'Replace {str_block}'
                     str_message = f'Do you want to replace {str_block}?'
                     response = messagebox.askyesno(parent=self,
@@ -742,7 +741,7 @@ class App(tk.Tk):
                         self.open_file(self.zxfilepath)
             else:
                 str_error = f'ERROR\nFile Format not valid.\n{filetype}'
-                str_error += f' detected, and it should be {str_block}.'
+                str_error += f' detected, and it should be a {str_block}.'
                 messagebox.showerror('Error', str_error, parent=self)
 
         self.menubar.entryconfig(0, state='normal')
@@ -819,7 +818,7 @@ class App(tk.Tk):
             if not b_block_ok:
                 str_file = ''
                 str_error = f'ERROR\nFile Format not valid.\n{filetype}'
-                str_error += f' detected, and it should be {str_name}.'
+                str_error += f' detected, and it should be a {str_name}.'
                 messagebox.showerror('Error', str_error, parent=self)
 
         if str_file:
@@ -829,7 +828,7 @@ class App(tk.Tk):
             if t_selection:
                 itm_indx = int(t_selection[0])
                 response = True
-                if self.dict_prefs['ask_replace']:
+                if self.dict_prefs.get('ask_replace', True):
                     str_title = f'Replace {str_name}'
                     str_message = f'Do you want to replace {str_name} {itm_indx}?'
                     response = messagebox.askyesno(parent=self,
@@ -837,7 +836,7 @@ class App(tk.Tk):
                                                    title=str_title,
                                                    message=str_message)
             else:
-                if self.dict_prefs['ask_insert']:
+                if self.dict_prefs.get('ask_insert', False):
                     str_title = f'Insert {str_name}'
                     str_message = f'Do you want to insert a new {str_name}?'
                     response = messagebox.askyesno(parent=self,
@@ -933,7 +932,7 @@ class App(tk.Tk):
             b_block_ok, filetype = self.validate_file(str_file, ['ROMPack'])
             if b_block_ok:
                 response = True
-                if self.dict_prefs['ask_replace']:
+                if self.dict_prefs.get('ask_replace', True):
                     str_title = 'Replace ROMs'
                     str_message = 'Do you really want to replace all ROMs?'
                     response = messagebox.askyesno(parent=self,
@@ -955,7 +954,7 @@ class App(tk.Tk):
                         self.open_file(self.zxfilepath)
             else:
                 str_error = f'ERROR\nFile Format not valid.\n{filetype}'
-                str_error += ' detected, and it should be ROMPack.'
+                str_error += ' detected, and it should be a ROMPack.'
                 messagebox.showerror('Error', str_error, parent=self)
 
         self.menubar.entryconfig(0, state='normal')

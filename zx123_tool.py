@@ -220,7 +220,6 @@ def main():
             inject_zxfiles(str_file, arg_data['inject'], output_file,
                            fulldict_hash, 'RPv2', -1, -1, -1, -1,
                            arg_data['default_rom'], arg_data['force'])
-
     else:
         # Convert between Standard and Spectrum Core?
         if arg_data['convert_core']:
@@ -695,18 +694,30 @@ def detect_file(str_file, fulldict_hash):
     if not dict_hash:
         LOGGER.error('Unknown file extension: %s', str_extension)
     else:
+        try:
+            f_size = os.stat(str_file).st_size
+        except FileNotFoundError:
+            f_size = -1
+
         # Is the file header known?
         if validate_file(str_file, dict_hash['parts']['header'][3]):
             filetype = 'FlashImage'
         else:
+            dict_valid = {
+                'core_base': 'Core',
+                'Spectrum': 'Spectrum',
+                'BIOS': 'BIOS',
+                'exdos': 'esxdos'
+            }
+            for key_valid in dict_valid:
+                if validate_file(str_file, dict_hash['parts'][key_valid][3]):
+                    filetype = dict_valid[key_valid]
+                    break
+        if filetype == 'Unknown':
             # Check if it's ROMPack v2
             rpk_header = fulldict_hash['RPv2']['parts']['header']
-            try:
-                f_size = os.stat(str_file).st_size
-            except FileNotFoundError:
-                f_size = -1
-            if validate_file(str_file, rpk_header[3]) and int(
-                    rpk_header[1]) == f_size:
+            if validate_file(str_file, rpk_header[3]) and f_size == int(
+                    rpk_header[1]):
                 if str_extension == 'ZX1':
                     filetype = 'ROMPack v2'
 

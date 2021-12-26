@@ -193,9 +193,11 @@ image:../img/PrefsWindow.jpg[pdfwidth=60%]
 
 - Comprobar si hay versiones nuevas del software cada vez que se abra la aplicación (Check for App updates...)
 
-- Pedir confirmación antes de aplicar cambios al añadir un nuevo core o ROM (Ask for confirmation when inserting)
+- Pedir confirmación antes de aplicar cambios al añadir un nuevo core o ROM (Ask for confirmation when inserting...)
 
-- Pedir confirmación antes de aplicar cambios al sustituir el contenido de un core o ROM existente (Ask for confirmation when replacing)
+- Pedir confirmación antes de aplicar cambios al sustituir el contenido de un core o ROM existente (Ask for confirmation when replacing...)
+
+- Permitir la importación de BIOS, esxdos o cores no catalogados en la base de datos (Allow import of unknown...)
 
 - Recordar la ubicación de la ventana principal y la de preferencias, o bien mostrarlas siempre en el centro (Remember window positions)
 
