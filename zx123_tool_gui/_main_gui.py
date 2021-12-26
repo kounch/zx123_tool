@@ -95,8 +95,14 @@ def build_menubar(self):
         command=lambda: self.focus_get().event_generate('<<Paste>>'))
 
     helpmenu = tk.Menu(menubar, tearoff=0)
-    helpmenu.add_command(label="ZX123 Tool Help",
+    helpmenu.add_command(label='ZX123 Tool Help',
                          command=lambda: webbrowser.open(help_url))
+    helpmenu.add_command(
+        label='ZX-Uno Forum',
+        command=lambda: webbrowser.open('https://www.zxuno.com/forum/'))
+    helpmenu.add_command(label='ZXDOS and ZXDOS+ Forum',
+                         command=lambda: webbrowser.open(
+                             'https://www.forofpga.es/viewforum.php?f=4'))
 
     menubar.add_cascade(label='File', menu=self.filemenu)
     menubar.add_cascade(label='Edit', menu=editmenu)
