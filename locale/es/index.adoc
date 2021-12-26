@@ -1,6 +1,6 @@
 = Manual de ZX123 Tool
 :author: kounch
-:revnumber: 1.0.2
+:revnumber: 1.0.3
 :doctype: book
 :notitle:
 :front-cover-image: image:../img/Portada.jpg[]
@@ -197,7 +197,10 @@ image:../img/PrefsWindow.jpg[pdfwidth=60%]
 
 - Pedir confirmación antes de aplicar cambios al sustituir el contenido de un core o ROM existente (Ask for confirmation when replacing...)
 
-- Permitir la importación de BIOS, esxdos o cores no catalogados en la base de datos (Allow import of unknown...)
+- Permitir la importación de BIOS, esxdos o cores no catalogados en la base de datos (Allow import of unknown BIOS...)
+
+- Permitir la importación de ROMs de ZX Spectrum no catalogadas en la base de datos (Allow import of unknown ROMs )
+
 
 - Recordar la ubicación de la ventana principal y la de preferencias, o bien mostrarlas siempre en el centro (Remember window positions)
 

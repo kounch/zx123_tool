@@ -314,6 +314,7 @@ class PrefWindow:
             'ask_insert': 'Ask for confirmation when inserting cores or ROMs',
             'ask_replace': 'Ask for confirmation when replacing cores or ROMs',
             'import_unknown': 'Allow import of unknown BIOS, esxdos or cores',
+            'import_allroms': 'Allow import of unknown ROMs',
             'remember_pos': 'Remember Main and Preferences window positions'
         }
         self.extra_vars = []

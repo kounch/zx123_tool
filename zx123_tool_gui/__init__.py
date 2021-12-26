@@ -154,6 +154,7 @@ class App(tk.Tk):
             'ask_insert': False,
             'ask_replace': True,
             'import_unknown': False,
+            'import_allroms': False,
             'remember_pos': False
         }
         str_prefs = os.path.join(JSON_DIR, 'zx123_prefs.json')
@@ -590,10 +591,28 @@ class App(tk.Tk):
         """
         str_extension, _, filetype = zx123.detect_file(str_file,
                                                        self.fulldict_hash)
+
+        dict_file = zx123.find_zxfile(str_file, self.fulldict_hash,
+                                      str_extension, False, True)
+        kind = dict_file.get('kind', 'Unknown')
+        if filetype == 'Unknown':
+            filetype = kind
+
         if not self.dict_prefs.get('import_unknown', False):
-            dict_file = zx123.find_zxfile(str_file, self.fulldict_hash,
-                                          str_extension, False, True)
-            filetype = dict_file.get('kind', 'Unknown')
+            filetype = kind
+
+        if self.dict_prefs.get('import_allroms', False):
+            if filetype == 'Unknown':
+                i_file_size = os.stat(str_file).st_size
+                d_parts = self.fulldict_hash['ROM']['parts']
+                for block_id in [
+                        '16K Spectrum ROM', '32K Spectrum ROM',
+                        '64K Spectrum ROM'
+                ]:
+                    if block_id in d_parts:
+                        if i_file_size == int(d_parts[block_id][1]):
+                            filetype = block_id
+                            break
 
         return bool(filetype in arr_format), filetype
 

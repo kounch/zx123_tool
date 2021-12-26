@@ -1,6 +1,6 @@
 = ZX123 Tool Manual
 :author: kounch
-:revnumber: 1.0.2
+:revnumber: 1.0.3
 :doctype: book
 :notitle:
 :front-cover-image: image:../img/Portada.jpg[]
@@ -197,6 +197,8 @@ image:../img/PrefsWindow.jpg[pdfwidth=60%]
 - Ask for a confirmation before applying changes when replacing the contents of an existing core or ROM
 
 - Allow import of unknown versions of BIOS, esxdos or cores
+
+- Allow import of unknown versions of ZX Spectrum ROMs
 
 - Remember main window and preferences window positions (if not, both windows are always centered)
 
