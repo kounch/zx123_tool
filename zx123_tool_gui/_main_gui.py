@@ -97,12 +97,21 @@ def build_menubar(self):
     helpmenu = tk.Menu(menubar, tearoff=0)
     helpmenu.add_command(label='ZX123 Tool Help',
                          command=lambda: webbrowser.open(help_url))
+    helpmenu.add_separator()
     helpmenu.add_command(
         label='ZX-Uno Forum',
         command=lambda: webbrowser.open('https://www.zxuno.com/forum/'))
     helpmenu.add_command(label='ZXDOS and ZXDOS+ Forum',
                          command=lambda: webbrowser.open(
                              'https://www.forofpga.es/viewforum.php?f=4'))
+    helpmenu.add_separator()
+    helpmenu.add_command(label='ZXUNO+ and ZXDOS+ Manuals',
+                         command=lambda: webbrowser.open(
+                             'https://github.com/zxdos/zxuno/tree/master/doc'))
+    helpmenu.add_command(
+        label='ZXUno4All Manuals',
+        command=lambda: webbrowser.open(
+            'https://github.com/spark2k06/ZXUno4ALL/tree/main/doc'))
 
     menubar.add_cascade(label='File', menu=self.filemenu)
     menubar.add_cascade(label='Edit', menu=editmenu)
