@@ -58,7 +58,7 @@ class App(tk.Tk):
             self.iconbitmap(str_icon_path)
         elif sys.platform == 'darwin':
             # MacOS Open File Events
-            self.createcommand('::tk::mac::OpenDocument', self.open_file)
+            self.createcommand('::tk::mac::OpenDocument', self.open_files)
             self.createcommand('::tk::mac::ShowPreferences', self.open_prefs)
             self.createcommand('::tk::mac::Quit', self.do_close)
         else:
@@ -355,6 +355,12 @@ class App(tk.Tk):
                                w_progress)
             self.open_file(self.zxfilepath)
             w_progress.close()
+
+    def open_files(self, *args):
+        """Open several files"""
+        for arg in args:
+            if isinstance(arg, str):
+                self.open_file(arg)
 
     def open_file(self, *args):
         """
