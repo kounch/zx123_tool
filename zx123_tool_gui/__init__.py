@@ -134,7 +134,7 @@ class App(tk.Tk):
         self.save_prefs()
         self.destroy()
 
-    def check_updates(self):
+    def check_updates(self, confirm=False):
         """Gets the latest release version from GitHub"""
         print("Checking for updates...")
         result = urllib.request.urlopen(
@@ -145,8 +145,11 @@ class App(tk.Tk):
             str_msg = f'There\'s a new version ({new_version}) of'
             str_msg += ' ZX123 Tool available to download.'
             messagebox.showinfo('Update available', str_msg, parent=self)
+        elif confirm:
+            str_msg = 'This is the latest version of ZX123 Tool.'
+            messagebox.showinfo('No update available', str_msg, parent=self)
 
-    def load_prefs(self):
+    def load_prefs(self, restore=False):
         """Load preferences from file if found, or set default settings"""
         dict_prefs = {
             'update_json': False,
@@ -158,13 +161,16 @@ class App(tk.Tk):
             'remember_pos': False
         }
         str_prefs = os.path.join(JSON_DIR, 'zx123_prefs.json')
-        if not os.path.isfile(str_prefs):
-            print('Prefs not found')
+
+        if restore:
+            self.dict_prefs = dict_prefs
+            self.save_prefs()
         else:
-            with open(str_prefs, 'r', encoding='utf-8') as prefs_handle:
-                dict_load = json.load(prefs_handle)
-            for key in dict_load:
-                dict_prefs[key] = dict_load[key]
+            if os.path.isfile(str_prefs):
+                with open(str_prefs, 'r', encoding='utf-8') as prefs_handle:
+                    dict_load = json.load(prefs_handle)
+                for key in dict_load:
+                    dict_prefs[key] = dict_load[key]
 
         self.dict_prefs = dict_prefs
 

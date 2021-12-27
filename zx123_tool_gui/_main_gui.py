@@ -112,6 +112,9 @@ def build_menubar(self):
         label='ZXUno4All Manuals',
         command=lambda: webbrowser.open(
             'https://github.com/spark2k06/ZXUno4ALL/tree/main/doc'))
+    helpmenu.add_separator()
+    helpmenu.add_command(label='Check for App updates…',
+                         command=lambda: self.check_updates(confirm=True))
 
     menubar.add_cascade(label='File', menu=self.filemenu)
     menubar.add_cascade(label='Edit', menu=editmenu)

@@ -329,6 +329,14 @@ class PrefWindow:
                                       offvalue=0)
             check_1.grid(column=0, row=index, sticky='w', padx=10, pady=2)
 
+        bottom_frame = ttk.Frame(main_frame, padding=10)
+        bottom_frame.pack(fill='x')
+        restore_button = ttk.Button(bottom_frame,
+                                    text='Restore Default Preferences',
+                                    default='active',
+                                    command=self.restore_prefs)
+        restore_button.pack(side='right')
+
         if self.parent.dict_prefs.get('remember_pos', False):
             self.top.update_idletasks()
             height, width = self.top.winfo_height(), self.top.winfo_width()
@@ -351,6 +359,12 @@ class PrefWindow:
                                          state='normal',
                                          label='Close Preferences Window',
                                          command=self.do_close)
+
+    def restore_prefs(self):
+        """Forces default values and saves prefs"""
+        self.parent.load_prefs(restore=True)
+        for index, key in enumerate(self.dict_prefs):
+            self.extra_vars[index].set(self.parent.dict_prefs[key])
 
     def save_prefs(self, *_):
         """Saves Preferences"""
