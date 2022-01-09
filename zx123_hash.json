@@ -1,5 +1,5 @@
 {
-    "version": "20220108.001",
+    "version": "20220109.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -730,15 +730,15 @@
                     "Other": [["Next186 core 4.77Mhz"], ""]
                 },
                 "latest": [
-                    "Beta 0.3 512KB",
+                    "Beta 0.4 512KB",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUno/512KB/COREx.ZX1"
                 ],
                 "1core": [
-                    "Beta 0.3 2MB Int (RGB666)",
+                    "Beta 0.4 2MB Int (RGB666)",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUnCore/2MB/COREx.ZX1"
                 ],
                 "2m": [
-                    "Beta 0.3 2MB Int",
+                    "Beta 0.4 2MB Int",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUno/2MB/COREx.ZX1"
                 ],
                 "versions": {
@@ -769,7 +769,12 @@
                     "Beta 0.3 2MB Int (RGB666)": "dfe65e36057ed25c6e477ebc1dc9bbd1a1d78aeace34fbc0760e8130a1b9770c",
                     "Beta 0.3 512KB": "1d2b16b16025882634a0c4c9c0448999bf7e376e38f20b842a3d08c80bce49fb",
                     "Beta 0.3 2MB Ext": "85b4a38671b169c9cd4b9683650a107f78f559dd119438990b0d9ba8dec2251e",
-                    "Beta 0.3 2MB Int": "8d3c20b3217d664bab212742942161f9a9549c8007398fc6549f9a723e759a0a"
+                    "Beta 0.3 2MB Int": "8d3c20b3217d664bab212742942161f9a9549c8007398fc6549f9a723e759a0a",
+                    "Beta 0.4 512KB (RGB666)": "05f043c97ef02f33c64e1ce6de7ff47c003c3a5e463e6d76921f5db36851e00c",
+                    "Beta 0.4 2MB Int (RGB666)": "6d6cdb4bcb90076cadf09271737d41c3da877a90978630b6feb8ba9fccd2e757",
+                    "Beta 0.4 512KB": "43e00a2851143271c74efd4d98eea1cd7b66044c3a7b3fef3b1aed64ead99885",
+                    "Beta 0.4 2MB Ext": "8dae198b1da7765d22cd563753a016eeb085001ce7139ec60798f498e26db10b",
+                    "Beta 0.4 2MB Int": "36e047867a71af01807374514fb7561f8ec8af99412924ede16f21ff0d4fe7c4"
                 }
             },
             "Sam Coupe": {
