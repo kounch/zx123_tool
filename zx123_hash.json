@@ -1,5 +1,5 @@
 {
-    "version": "20220115.001",
+    "version": "20220122.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -4046,6 +4046,7 @@
                 "ZX82 by Daniel A. Nagy": "b69c8483f209e756265d1cc4b09df4e1961f7fcaa591f167a41214b61783f32f",
                 "ZX82 by Daniel A. Nagy 21.03.12": "cfa98fa4310492f522aa2b087cb866ed3247d112672357b702da5352853ddb44",
                 "ZX82 by Daniel A. Nagy 21.10.20": "b4d278b4b6c38085d62826b81ab3e662c970b0aa85eda940be835d045e4f5cbc",
+                "ZX82 by Daniel A. Nagy 22.01.15": "c4f556b91b856c476712a0c76493e4a1597985c69b1af6d7fd0bf8d99b012cd1",
                 "ZX 48K Cargando Leches": "93d98ae960fca679a84fe47bf066a4cda963366f90fd6aacabb1f206293cfd2b",
                 "ZX Emulator Mod": "937886a4fd478b86dc022721265e639d8da01b0f3d1325345786283c4865973d",
                 "ZX Spectrum Simulator Mod": "fd877e3e388ae7570c14a232abffe559fef5e5d88b12a06b92c98418a494e3b7",
@@ -4066,6 +4067,7 @@
                 "SE Basic IV 4.2 20.09.30 Iggy": "121dcf1571a9be7c83b1e28f6d313495bd89909abe65b227301bc9a4282f72c7",
                 "TS2060 by Daniel A. Nagy 2021.10.22": "af1279ce8c264b3491f31db4b249048c11bc563791c2f5293b5fb9c59a4aba54",
                 "TS2060 2021.10.27": "de8a0f0a71af9dec4f802cb5b6ec6cdba2d51cddccb5e2a53eef9f045a59691e",
+                "TS2060 by Daniel A. Nagy 22.01.15": "b51b685b0e9261bd0bae6f333d8a658bc73cfcfa4e52b2a8099064a6d2c79232",
                 "Timex Computer 2068": "c3df7f1507b2037e38ab1f8866457934bd9aa8ff4d692cd94fcd63949a372e72",
                 "Timex Sinclair 2068": "6fa699524a7e78aa547a375bae58ab32613d8e61a6f16c83be881c41cee0ac53",
                 "Timex Sinclair 2068 (Rikyarg)": "d1d1962565ca5250116a5722533e58221d2f3dbeede80b1d45b5b1f0d5a56fb5",
@@ -4074,6 +4076,7 @@
                 "ZX81 Emulator": "fdfe8b361f52aa1bcdf8fcd9318af87b58b96a44240acaa753736f8790712ee4",
                 "ZX85 by Daniel A. Nagy": "9add1a988fe9d428d26fc39ee5530a3d93df4a991969cc6b1f2e3085f25d75c1",
                 "ZX85 by Daniel A. Nagy 20.10.04": "cb25aa879274143db6d3e734ab7ecaa50ccb34b2a2904cf7f7d0c12cd045b209",
+                "ZX85 by Daniel A. Nagy 22.01.15": "6f1c64a19e688c9b66e7e3811b2697e52867abd36f579f825dc61d80c89858f0",
                 "ZX Spectrum +2": "dae0690d8b433ea22b76b62520341f784071dbde0d02f50af0e3fd20fc6bca4a",
                 "ZX Spectrum +2 FR": "6842c2f29d81af85a87b75c77c01330473ae7d903944222d0f910afb8a36e983",
                 "ZX Spectrum +2 Gris ES": "02f9cd74a3f768e60709287999d9c251288afffd796a3985f1cf840045d31f68",
