@@ -1,5 +1,5 @@
 {
-    "version": "20220122.001",
+    "version": "20220129.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -93,6 +93,7 @@
                 "0.8.9"
             ],
             "versions": {
+                "0.8.5": "9f440c39665b9333b0fed9ee1b42bd7361701cd171ee82e47ca7d35f745e5e13",
                 "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
                 "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
                 "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
@@ -2548,6 +2549,7 @@
                 "0.8.9"
             ],
             "versions": {
+                "0.8.5": "9f440c39665b9333b0fed9ee1b42bd7361701cd171ee82e47ca7d35f745e5e13",
                 "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
                 "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
                 "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
@@ -3452,6 +3454,7 @@
                 "0.8.9"
             ],
             "versions": {
+                "0.8.5": "9f440c39665b9333b0fed9ee1b42bd7361701cd171ee82e47ca7d35f745e5e13",
                 "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
                 "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
                 "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
@@ -3976,6 +3979,7 @@
         },
         "esxdos": {
             "versions": {
+                "0.8.5": "9f440c39665b9333b0fed9ee1b42bd7361701cd171ee82e47ca7d35f745e5e13",
                 "0.8.6 Beta4": "15528722a31040a1e8b52d7af9dd3d335a9df3bb7a9484696166087c27bd89b6",
                 "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
                 "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
@@ -4053,7 +4057,8 @@
                 "ZX Spectrum": "d55daa439b673b0e3f5897f99ac37ecb45f974d1862b4dadb85dec34af99cb42",
                 "ZX Spectrum 48K Cargando Leches": "895240ca1059c7f176cd6702c52c82dc2596591bdcbc9f205474db7a3110de31",
                 "ZX Spectrum 48K Cargando Leches (Ant)": "2cfbeef248657810448ec028042520311e9ec572858d71dccf1aec0c64607070",
-                "Jamma Demo": "ee87c52f38c752bd78b44d16ac4da8878ea6b4326ed81f7c2d19944f2ce8a55f"
+                "Jamma Demo": "ee87c52f38c752bd78b44d16ac4da8878ea6b4326ed81f7c2d19944f2ce8a55f",
+                "ZX Spectrum (Jozsef Laszlo FPGA Core)": "1653896cffae48bdc6d783535e7e652a027bfcb2e708c4b84b7f786d643225b7"
             }
         },
         "32K Spectrum ROM": {
@@ -4103,7 +4108,8 @@
                 "ZX Spectrum +3e EN (ZXMMC) 4.0": "2d779bac8d4f870b7c33b8f2eb06a66d257822b6811e116e11204cffc7eb159e",
                 "ZX Spectrum +3e ES (ZXMMC) 4.0": "d9be501bac8796b60deaf26cad558ef203539af18ffcbeb108a685ed46499349",
                 "ZX Spectrum 128K Derby++ 64K rom": "5fe5d6bb92b516b5f1696a52679b23cc8a5301badc033e419aedb08e7d6f8fca",
-                "ZX Spectrum Next +3e 1.53": "b9b378221d61c328b6538bbd083786ec142e21eec3f5a53bba5f51ad7790568c"
+                "ZX Spectrum Next +3e 1.53": "b9b378221d61c328b6538bbd083786ec142e21eec3f5a53bba5f51ad7790568c",
+                "ICE Felix HC2000 virtual with +3 roms": "6d19fc08a3f28258096b0b8173601049c56062124b7bf1cde86249b99707e5f1"
             }
         }
     },
