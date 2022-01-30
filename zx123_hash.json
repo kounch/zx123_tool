@@ -731,15 +731,15 @@
                     "Other": [["Next186 core 4.77Mhz"], ""]
                 },
                 "latest": [
-                    "Beta 0.5 512KB",
+                    "Release 1 512KB",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUno/512KB/COREx.ZX1"
                 ],
                 "1core": [
-                    "Beta 0.5 2MB Int (RGB666)",
+                    "Release 1 2MB Int (RGB666)",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUnCore/2MB/COREx.ZX1"
                 ],
                 "2m": [
-                    "Beta 0.5 2MB Int",
+                    "Release 1 2MB Int",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUno/2MB/COREx.ZX1"
                 ],
                 "versions": {
@@ -780,7 +780,12 @@
                     "Beta 0.5 2MB Int (RGB666)": "4f46b094215dd02540c38c15876bded38b525509c18bc7875abe800ffbe12786",
                     "Beta 0.5 512KB": "3dac589c59fb94c41293d85af362022a79d0b2c229637559e77ec5e5bb768d75",
                     "Beta 0.5 2MB Ext": "b8d41405532430779e2a12235ee76d4111d0163486c324120fe3c435b31c3f7f",
-                    "Beta 0.5 2MB Int": "0775fce1e9b39c42f4d9f9f4cb9c853528af10c8bd9fb87bc788f5281966edaf"
+                    "Beta 0.5 2MB Int": "0775fce1e9b39c42f4d9f9f4cb9c853528af10c8bd9fb87bc788f5281966edaf",
+                    "Release 1 512KB (RGB666)": "f9fa1fb974ffbf62158fd14d1bd099d326266d00ba890128ff161fc90780544c",
+                    "Release 1 2MB Int (RGB666)": "649f53a512bc1a6b6e7b0e481f30b11c1ce482563c6d80a516c71e5ee914e5f6",
+                    "Release 1 512KB": "b51d22e21f1dd69ff648287a8164aa059e731083d71349d3d470fdedc32d09d7",
+                    "Release 1 2MB Ext": "ecfea496e3a053592c3632fbb8382714bd42ff4daf033953a604dd5e9aee8eb8",
+                    "Release 1 2MB Int": "45cef299a095437994adde939e122232cfeb5784645f842c68be92d11028a836"
                 }
             },
             "Sam Coupe": {
