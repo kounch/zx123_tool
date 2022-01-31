@@ -1,5 +1,5 @@
 {
-    "version": "20220129.001",
+    "version": "20220131.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -2568,13 +2568,23 @@
             ],
             "versions": {
                 "EXP27_SVN": "33dcfc9263be150a825f77ffbbab5fc3c9ddac5cc5c733ff189c722c9384478c",
-                "EXP27_140819": "9984c095772d29192563b33855c106c58d75026719a847f325d7dc7ddcf8d078"
+                "EXP27_140819": "9984c095772d29192563b33855c106c58d75026719a847f325d7dc7ddcf8d078",
+                "N-GO": "b775e9d37d6b4c83d17438b72e78d2e06d6caec33ba0b861fd769591274fd1bd"
             }
         },
         "Special": {
             "versions": {}
         },
         "Cores": {
+            "Acorn Atom": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "versions": {
+                    "N-GO": "3e4e57b6dda13ef96453de01a30f153fb4a17742338a7626f0edb5084d44c40e"
+                }
+            },
             "Amstrad CPC464": {
                 "features": {
                     "Video": [["VGA", "RGB", "Composite"], "VGA Optional Scanlines"],
@@ -2588,6 +2598,15 @@
                 ],
                 "versions": {
                     "1.0": "3d87c1b4f02aea41645e9ff82505a44dc30f09e040d6eb08461d648b400854b2"
+                }
+            },
+            "Amstrad CPC6128": {
+                "features": {
+                    "Video": [["VGA"], "VGA Optional Scanlines"],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "versions": {
+                    "N-GO": "267c4845db218f77781fc58d2244d2d4f112b30b6d446d4d4115aec0947c7560"
                 }
             },
             "Atari 2600": {
@@ -2605,7 +2624,8 @@
                 ],
                 "versions": {
                     "2.0": "1d626327a8fda918676b2c3c2cd6c173c5d97c8be79b3808b842202398157ccf",
-                    "2.1": "b18e337c48e007ff8272624934bcc87a2173a5c06aecd8e3a493f3dff8120961"
+                    "2.1": "b18e337c48e007ff8272624934bcc87a2173a5c06aecd8e3a493f3dff8120961",
+                    "N-GO": "5d4817660a3ced5bf31ff5930107065420c2ba6e1f34c175a9bc3e686b30e2cd"
                 }
             },
             "CHIP-8": {
@@ -2638,7 +2658,8 @@
                 ],
                 "versions": {
                     "1.0 RGB": "44eb8e83e0bb6d273f194974ac270d94f5738978a779fd37f5624b19ff31a750",
-                    "1.0 VGA": "af1962514d1bb73d7ac9d83b6dcf670776ae9e2cb6c818df83b23b03042852b3"
+                    "1.0 VGA": "af1962514d1bb73d7ac9d83b6dcf670776ae9e2cb6c818df83b23b03042852b3",
+                    "N-GO": "725b26a698776292785a297c7278d4d804e82c82961d4651cc969213aa9717f6"
                 }
             },
             "Jupiter ACE": {
@@ -2662,7 +2683,17 @@
                     "https://github.com/zxdos/binaries/raw/master/MSX1FPGA.ZX2"
                 ],
                 "versions": {
-                    "1.3": "f2c9748dd988e894ccf9278702e1a6c290e74ab4ff22fd79eaba8b085b91d4ee"
+                    "1.3": "f2c9748dd988e894ccf9278702e1a6c290e74ab4ff22fd79eaba8b085b91d4ee",
+                    "1.3 (512K) N-GO": "1334327fa7e848c4c79a4664c4ee5cfced01b98b1df77dfde57302e380e19769"
+                }
+            },
+            "NES": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "versions": {
+                    "N-GO": "536b5a324a2a54995a828f1a8d3672b1b5800e006338b0005318d194c3ccf69d"
                 }
             },
             "Oric Atmos (Kyp)": {
@@ -2855,7 +2886,8 @@
                     "3.01.05 Issue2": "86a0f9ee8405c787209ded1b2a1035e47fd461c4b435f4e75ab53ede8c320531",
                     "3.01.05 Issue2 DDR3 Black": "55fa0ba05d0fdd49e35c89abc62e2f3d43f0e398b59575396d75f582231c1745",
                     "3.01.06 v11": "a7ab1245134151b5da4245c053dea2c19b200aedf4cbc1542b892007829753d3",
-                    "3.01.09 Beta": "0b9a4bc393fe1160f15e6b9960199f34835ba3867449571839202a750908f8df"
+                    "3.01.09 Beta": "0b9a4bc393fe1160f15e6b9960199f34835ba3867449571839202a750908f8df",
+                    "N-GO": "5d2602484f848a7c66a651e5e336fbb797b8fd3a844040a5eedb3b9ad76ad737"
                 }
             },
             "ArcadeV Alibaba": {
@@ -4075,6 +4107,7 @@
                 "SE Basic IV 4.0 Anya": "6193b0615732a170566367666081c79f275673f41b83cfdc520dbf5bfaabc39f",
                 "SE Basic IV 4.2 20.07.15 Morton": "5b513e45a7448f00706aaffb8db639fd7a0eda6ae9b3224af0f4d172f4792e3b",
                 "SE Basic IV 4.2 20.09.30 Iggy": "121dcf1571a9be7c83b1e28f6d313495bd89909abe65b227301bc9a4282f72c7",
+                "SE Basic IV 4.2 20.01.22 Gaff": "3949fdf325fad54c4cee421d42aef4e05e756fdb96af69b7c7e5809a0df8449e",
                 "TS2060 by Daniel A. Nagy 2021.10.22": "af1279ce8c264b3491f31db4b249048c11bc563791c2f5293b5fb9c59a4aba54",
                 "TS2060 2021.10.27": "de8a0f0a71af9dec4f802cb5b6ec6cdba2d51cddccb5e2a53eef9f045a59691e",
                 "TS2060 by Daniel A. Nagy 22.01.15": "b51b685b0e9261bd0bae6f333d8a658bc73cfcfa4e52b2a8099064a6d2c79232",
@@ -4106,6 +4139,8 @@
                 "ZX Spectrum +2A EN": "5e7d9b3355ca76f4a99cbcc0bc1c90118ecda6a1549c2cb0f02e98af17694f3e",
                 "ZX Spectrum +2e ES (DivMMC) 1.43": "5ab12a0864a18f315b25b635a5a0276b7de7a4e88ced43d8581a6d4d52fdc68e",
                 "ZX Spectrum +2e EN (DivMMC-POKE)": "ca48a99ee6cc82e0594d9148f7f074cba3f1586a52754b5e3aa31314628ac35b",
+                "ZX Spectrum +2e EN (Pokemon": "bd0f541ff9860a3286131d108e9274b01bc2c0939add3ec5ee9b90c562aefc4f",
+                "ZX Spectrum +2e EN (TAP-POKEMIN)":"2c151c08139b6c88e032ef10003d636620d20373c3c94ec80a2e27de4f49f05a",
                 "ZX Spectrum +2e ES (DivMMC-TAP)": "bd8d54c993910fc246653cbd417068c5a9cd6646108d2fd6101891cd86ffb45a",
                 "ZX Spectrum +2e ES (TAP-POKEMIN)": "720c26e34d400ae0154acf0ac9ee7f3bfb2c0e436c546dc377bbdb3038f62345",
                 "ZX Spectrum +3e EN 1.43": "2259c1f5e87bde9ddcace4e91f0f0880fd593519f5a0e676e7dc35a80aa75831",
