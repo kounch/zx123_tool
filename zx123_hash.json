@@ -1,5 +1,5 @@
 {
-    "version": "20220201.001",
+    "version": "20220202.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -134,7 +134,12 @@
                 "EXP27 spark2k06 131121 PZX (no SAA1099)": "716330403cc5a781f091d24803f4cd3d3be837a5632a2986db00ecb58ce62698",
                 "EXP27 spark2k06 141121 PZX (no SAA1099) (RGB666)": "1b52117b5debe893c3fa1e919e186d3b31af791d323d5bfb5fe34357a456e39b",
                 "EXP27 spark2k06 141121 PZX (no SAA1099)": "74c11d072acaf32e9424eeddfe63ff100f5dc4d09aeec57a31bedb23194025f4",
-                "EXP27 spark2k06 010222 Test": "40e58114cd3268b878635efe179469b79361f4f376a76489fe180d85a186ebdd"
+                "EXP27 spark2k06 010222 Test": "40e58114cd3268b878635efe179469b79361f4f376a76489fe180d85a186ebdd",
+                "EXP27 spark2k06 020222 PZX (no SAA1099) (RGB666)": "fe6844600400505d6f8fa1244770edde4149da104a45de43772a4e3c0961f7f3",
+                "EXP27 spark2k06 020222 SAA1099 (no PZX) (RGB666)": "be2cb75b19d3368da7619b7befc5424d67301959b2ddac53dbf1ff6bf60fea88",
+                "EXP27 spark2k06 020222 Ext RAM": "9dc8b35aba8327959c36c45d46813860677f6d2fe79fd1544f29362ff90a4a24",
+                "EXP27 spark2k06 020222 PZX (no SAA1099)": "a1970b2758a23cd7a5acb7e0b328f50ef123a0a1c04f223e07cc27e2de6fe8c6",
+                "EXP27 spark2k06 020222 SAA1099 (no PZX)": "b372f4a7659e9fab0143c960a9e32fd0d0dd45be98379525e03169e42aaca492"
             }
         },
         "Special": {
@@ -1065,7 +1070,12 @@
                     "EXP27 PZX (200KB Test)": "a8a6781dd0dee754cff2b94bbd6b72c230a7ebc85890767a6f0c539e4321769d",
                     "EXP27 PZX (216KB Test)": "6ca31411968b20e7630bd3760e053e647d2b138a6abe4ecc7cabdb723a9aaf07",
                     "EXP27 PZX (224KB Test)": "02a074d7089fab86ec6edb7997c9dfce602cf7248df7f201bb16ab0e955757be",
-                    "EXP27 010222 Test": "a1970b2758a23cd7a5acb7e0b328f50ef123a0a1c04f223e07cc27e2de6fe8c6"
+                    "EXP27 010222 Test": "a1970b2758a23cd7a5acb7e0b328f50ef123a0a1c04f223e07cc27e2de6fe8c6",
+                    "EXP27 PZX (no SAA1099) 020222 (RGB666)": "fe6844600400505d6f8fa1244770edde4149da104a45de43772a4e3c0961f7f3",
+                    "EXP27 SAA1099 (no PZX) 020222 (RGB666)": "be2cb75b19d3368da7619b7befc5424d67301959b2ddac53dbf1ff6bf60fea88",
+                    "EXP27 Ext RAM 020222": "9dc8b35aba8327959c36c45d46813860677f6d2fe79fd1544f29362ff90a4a24",
+                    "EXP27 PZX (no SAA1099) 020222": "a1970b2758a23cd7a5acb7e0b328f50ef123a0a1c04f223e07cc27e2de6fe8c6",
+                    "EXP27 SAA1099 (no PZX) 020222": "b372f4a7659e9fab0143c960a9e32fd0d0dd45be98379525e03169e42aaca492"
             }
             },
             "ZX TBBlue": {
