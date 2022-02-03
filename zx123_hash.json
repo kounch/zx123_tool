@@ -1,5 +1,5 @@
 {
-    "version": "20220202.002",
+    "version": "20220203.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -103,11 +103,11 @@
         },
         "Spectrum": {
             "latest": [
-                "EXP27 160820",
-                "https://github.com/mcleod-ideafix/zxuno_spectrum_core/raw/master/zxuno_v4/SPECTRUM.ZX1"
+                "EXP27 spark2k06 030222 PZX (no SAA1099)",
+                "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/sram_internal/pzx_no_saa/SPECTRUM.ZX1"
             ],
             "1core": [
-                "EXP27 spark2k06 141121 PZX (no SAA1099) (RGB666)",
+                "EXP27 spark2k06 030222 PZX (no SAA1099) (RGB666)",
                 "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/zxuncore/pzx_no_saa/SPECTRUM.ZX1"
             ],
             "versions": {
@@ -139,7 +139,12 @@
                 "EXP27 spark2k06 020222 SAA1099 (no PZX) (RGB666)": "c756295c2f4b10ecc6f3a7a67bc638c17f84d6a0aff8742ead72a7f378cd80fc",
                 "EXP27 spark2k06 020222 Ext RAM": "a249ac9ff52c47a56b349647498792fd9282e459b76cbaafd3c3b865a93739e6",
                 "EXP27 spark2k06 020222 PZX (no SAA1099)": "40e58114cd3268b878635efe179469b79361f4f376a76489fe180d85a186ebdd",
-                "EXP27 spark2k06 020222 SAA1099 (no PZX)": "60ca93a1dcb6b6b7684e3b8989a8a9a050d2174fa79d4238f5055d2aa4c7848d"
+                "EXP27 spark2k06 020222 SAA1099 (no PZX)": "60ca93a1dcb6b6b7684e3b8989a8a9a050d2174fa79d4238f5055d2aa4c7848d",
+                "EXP27 spark2k06 030222 PZX (no SAA1099) (RGB666)": "5670b5e23fcc8b8a3c884b3c0cb2bd7d0309e5754682a050f61b709f752e0037",
+                "EXP27 spark2k06 030222 SAA1099 (no PZX) (RGB666)": "51cb55077adf31b24e7f0faf663801a3ada4cdce6489d2913cff3c2e207b294c",
+                "EXP27 spark2k06 030222 Ext RAM": "9553b9b5d072ebd4745146fcad900cdc6af1dd4df2a86d4b61213c27d06a4a40",
+                "EXP27 spark2k06 030222 PZX (no SAA1099)": "4d6d57136292a62de30168fb74b1ddebbba06d1f0007f38eafc34fc1d560c418",
+                "EXP27 spark2k06 030222 SAA1099 (no PZX)": "9af0bd18b6fffdc8274504582f2aadf7f4880dd6abcd4ed2703356a77bff839b"
             }
         },
         "Special": {
@@ -1045,11 +1050,11 @@
                     "Other": [["Audio In Tape Load", "PZX"], "PZX up to 224Kb on 512K boards"]
                 },
                 "latest": [
-                    "EXP27 SAA1099 (no PZX) 130621",
+                    "EXP27 SAA1099 (no PZX) 030222",
                     "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/sram_internal/saa_no_pzx/COREx.ZX1"
                 ],
                 "1core": [
-                    "EXP27 SAA1099 (no PZX) 210521 (RGB666)",
+                    "EXP27 SAA1099 (no PZX) 030222 (RGB666)",
                     "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/zxuncore/saa_no_pzx/COREx.ZX1"
                 ],
                 "versions": {
@@ -1075,7 +1080,12 @@
                     "EXP27 SAA1099 (no PZX) 020222 (RGB666)": "be2cb75b19d3368da7619b7befc5424d67301959b2ddac53dbf1ff6bf60fea88",
                     "EXP27 Ext RAM 020222": "9dc8b35aba8327959c36c45d46813860677f6d2fe79fd1544f29362ff90a4a24",
                     "EXP27 PZX (no SAA1099) 020222": "a1970b2758a23cd7a5acb7e0b328f50ef123a0a1c04f223e07cc27e2de6fe8c6",
-                    "EXP27 SAA1099 (no PZX) 020222": "b372f4a7659e9fab0143c960a9e32fd0d0dd45be98379525e03169e42aaca492"
+                    "EXP27 SAA1099 (no PZX) 020222": "b372f4a7659e9fab0143c960a9e32fd0d0dd45be98379525e03169e42aaca492",
+                    "EXP27 PZX (no SAA1099) 030222 (RGB666)": "c64f8fc6170d895d26a6dfa22e8cb1fb747edd222e12bb73da70948731e8e708",
+                    "EXP27 SAA1099 (no PZX) 030222 (RGB666)": "1f86aa1a717e04e6ca84ecf95096b995000350681a22987ca7839e0bc36e58f7",
+                    "EXP27 Ext RAM 030222": "4d69574ba5283112e676dd3f06c1bbd00c659167470964ae4342a435149d6171",
+                    "EXP27 PZX (no SAA1099) 030222": "5382cf890347f6799b66c92d8964fd8a1ad6091ae3aa2fb1cef5c1a4d3a67931",
+                    "EXP27 SAA1099 (no PZX) 030222": "925440a37064f6ace595c03633436588077ac6fe89a1eec702627e89daca7898"
             }
             },
             "ZX TBBlue": {
