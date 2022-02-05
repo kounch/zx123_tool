@@ -1,5 +1,5 @@
 {
-    "version": "20220203.001",
+    "version": "20220205.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -103,12 +103,16 @@
         },
         "Spectrum": {
             "latest": [
-                "EXP27 spark2k06 030222 PZX (no SAA1099)",
+                "EXP27 spark2k06 050222 PZX (no SAA1099)",
                 "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/sram_internal/pzx_no_saa/SPECTRUM.ZX1"
             ],
             "1core": [
-                "EXP27 spark2k06 030222 PZX (no SAA1099) (RGB666)",
+                "EXP27 spark2k06 050222 PZX (no SAA1099) (RGB666)",
                 "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/zxuncore/pzx_no_saa/SPECTRUM.ZX1"
+            ],
+            "2m": [
+                "EXP27 spark2k06 050222 VGA-2M",
+                "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/vga2m/SPECTRUM.ZX1"               
             ],
             "versions": {
                 "T24 080117": "dab20b355cd4c63691ca8e5016e7df98894f4fac11a7da86e8b1b65f4700ab3f",
@@ -144,7 +148,13 @@
                 "EXP27 spark2k06 030222 SAA1099 (no PZX) (RGB666)": "51cb55077adf31b24e7f0faf663801a3ada4cdce6489d2913cff3c2e207b294c",
                 "EXP27 spark2k06 030222 Ext RAM": "9553b9b5d072ebd4745146fcad900cdc6af1dd4df2a86d4b61213c27d06a4a40",
                 "EXP27 spark2k06 030222 PZX (no SAA1099)": "4d6d57136292a62de30168fb74b1ddebbba06d1f0007f38eafc34fc1d560c418",
-                "EXP27 spark2k06 030222 SAA1099 (no PZX)": "9af0bd18b6fffdc8274504582f2aadf7f4880dd6abcd4ed2703356a77bff839b"
+                "EXP27 spark2k06 030222 SAA1099 (no PZX)": "9af0bd18b6fffdc8274504582f2aadf7f4880dd6abcd4ed2703356a77bff839b",
+                "EXP27 spark2k06 050222 PZX (no SAA1099) (RGB666)": "1b4f8c2ec9a1d1fe3326721d806d464dbb84382bc0adcca0c0ddbacbeec26e02",
+                "EXP27 spark2k06 050222 SAA1099 (no PZX) (RGB666)": "6be569aab938daac8765638191199c939e681910cc9ae5640be8305dd1958b6b",
+                "EXP27 spark2k06 050222 Ext RAM": "867a04f30cb86fd28e980eb4c831462000aeec805180d7f512ef2121d424bc8e",
+                "EXP27 spark2k06 050222 PZX (no SAA1099)": "f1d9b2fbab7d2dd751383c906b4d15ebd937152600790fce3f64296c0195d73a",
+                "EXP27 spark2k06 050222 SAA1099 (no PZX)": "ff009d3df71342599b0e9d4ae248a9b1ec57e6901af0c45766a0a5853028693f",
+                "EXP27 spark2k06 050222 VGA-2M": "d3c241646affe9ac24aa58b58e1f52e40e595386b2a071152fff6050f296bb70"
             }
         },
         "Special": {
@@ -854,12 +864,15 @@
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Test.ZX1"
                 ],
                 "latest": [
-                    "1.1"
+                    "1.1 spark2k06 050222",
+                    "https://github.com/spark2k06/zxuno/raw/master/cores/Test%20de%20produccion/COREn.ZX1"
                 ],
                 "versions": {
                     "0": "18ebf52a9f33e6f7af40d832d7b9d512d08964c3c8f9355234126b1662ec9d36",
                     "1": "9addac6bed7be862fc06e538b6a8455651e4bbf9dec9bd7554333a5eb6ac6226",
-                    "1.1": "bade45e4c36cda0919a8cd191a5a121a33db41046f084e6e6f57fe48861e06c4"
+                    "1.1": "bade45e4c36cda0919a8cd191a5a121a33db41046f084e6e6f57fe48861e06c4",
+                    "1.1 spark2k06 050222 Ext RAM": "222852824b1cfa0a35a83f0ea0bb9a4aa3aa2c3164c8930e26ff2ba5a13f0897",
+                    "1.1 spark2k06 050222": "d59e1f9026ff1f64f1e6729a9cab910c1ed4cabd895b1debede54ab8c56def51"
                 }
             },
             "Vectrex": {
@@ -1050,12 +1063,16 @@
                     "Other": [["Audio In Tape Load", "PZX"], "PZX up to 224Kb on 512K boards"]
                 },
                 "latest": [
-                    "EXP27 SAA1099 (no PZX) 030222",
+                    "EXP27 SAA1099 (no PZX) 050222",
                     "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/sram_internal/saa_no_pzx/COREx.ZX1"
                 ],
                 "1core": [
-                    "EXP27 SAA1099 (no PZX) 030222 (RGB666)",
+                    "EXP27 SAA1099 (no PZX) 050222 (RGB666)",
                     "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/zxuncore/saa_no_pzx/COREx.ZX1"
+                ],
+                "2m": [
+                    "EXP27 spark2k06 050222 (VGA-2M)",
+                    "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/vga2m/COREx.ZX1"
                 ],
                 "versions": {
                     "EXP27 Monocromo 220521": "9fff67427bf174f0bd9627662eb77e00161275729b02584eaf4e5e915aef94a5",
@@ -1085,8 +1102,14 @@
                     "EXP27 SAA1099 (no PZX) 030222 (RGB666)": "1f86aa1a717e04e6ca84ecf95096b995000350681a22987ca7839e0bc36e58f7",
                     "EXP27 Ext RAM 030222": "4d69574ba5283112e676dd3f06c1bbd00c659167470964ae4342a435149d6171",
                     "EXP27 PZX (no SAA1099) 030222": "5382cf890347f6799b66c92d8964fd8a1ad6091ae3aa2fb1cef5c1a4d3a67931",
-                    "EXP27 SAA1099 (no PZX) 030222": "925440a37064f6ace595c03633436588077ac6fe89a1eec702627e89daca7898"
-            }
+                    "EXP27 SAA1099 (no PZX) 030222": "925440a37064f6ace595c03633436588077ac6fe89a1eec702627e89daca7898",
+                    "EXP27 PZX (no SAA1099) 050222 (RGB666)": "de13413689f6802e2d1c6335065329e7acf2b7ff2eee2d87205f862d8b9a14e0",
+                    "EXP27 SAA1099 (no PZX) 050222 (RGB666)": "8b44f9ba6125091c091a516ee6ba1f623831076333e6c9361a0bc1e0d9878e73",
+                    "EXP27 Ext RAM 050222": "8b7c0481556c9858e97abce5d561afb1603ec4a9b2cbd33cbe17f682b9db2dc0",
+                    "EXP27 PZX (no SAA1099) 050222": "ad366a40c9c080bde2ce3ff6984176ee7e7e76e0eda5da1b94c1cef0e837f268",
+                    "EXP27 SAA1099 (no PZX) 050222": "584697b62df12f92a5e15f2bbf4dd9a26633dc8caa11355717100ce77351d345",
+                    "EXP27 VGA-2M 050222": "304678bdeb1899bf82254c3de6c8f06d5bd2b7bdfbdc4a7b171a2e56464c9060"
+                }
             },
             "ZX TBBlue": {
                 "features": {
