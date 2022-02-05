@@ -1,5 +1,5 @@
 {
-    "version": "20220205.001",
+    "version": "20220205.002",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -68,7 +68,7 @@
         },
         "BIOS": {
             "latest": [
-                "0.83",
+                "0.86",
                 "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE.ZX1"
             ],
             "vertical": [
@@ -85,7 +85,8 @@
                 "0.83": "8d086c0ef440abc89f5edf37c8d482d69619065f4d27f573d7d57a83942ea91f",
                 "0.84 Vertical": "7752bccb7272783acc7d69cc26856661ef87bface586c649069e5e970d916bb5",
                 "0.85 Beta": "9879458edee76124b99658397902b7a8513edfdcac0582b325298a12d07d8d4f",
-                "0.85": "2a9a6a9256af987e1e547d330909f75147bd1f18749efc3164a492b90bb576b9"
+                "0.85": "2a9a6a9256af987e1e547d330909f75147bd1f18749efc3164a492b90bb576b9",
+                "0.86": "60170e5b39d5f3dac1fad7ea732097c694723bb3a93aba0b3da8313e3200b860"
             }
         },
         "esxdos": {
