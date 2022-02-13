@@ -1,5 +1,5 @@
 {
-    "version": "20220208.001",
+    "version": "20220213.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -4065,6 +4065,10 @@
                 "0",
                 65536
             ],
+            "128K Spectrum ROM": [
+                "0",
+                131072
+            ],
             "esxdos": [
                 "16384",
                 8192,
@@ -4188,6 +4192,11 @@
         },
         "64K Spectrum ROM": {
             "versions": {
+                "Camelot Warriors": "5e6a7c42743392df975be0e768ddc169bbc01c43c605ec44e68683b68fb77c77",
+                "ICE Felix HC2000 virtual with +3 roms": "6d19fc08a3f28258096b0b8173601049c56062124b7bf1cde86249b99707e5f1",
+                "Phantomas": "808682cd407313efe16d5d768a5d763f09792122e730c805ac4a88e20330a902",
+                "Phantomas 2": "6492bbe3236adb7e80436b75bd7c00b65d0545fdb3d200688f4b9b7da45e03f6",
+                "Nonamed": "9ad3cbb7d7d9aa6c2214c62eb406adf78da8bb7f76a08e03382b509590fc24ce",
                 "Shadow Of The Unicorn": "d941b6128aba56744e02953dace076a68e9c2ccce01276f2584206dcf428f997",
                 "Sir Ababol": "4fd94891078dc4e4e4e5315742ee5b2a3c3b061a31b8080da90b0eabbc783fde",
                 "Souls Remaster": "4970e14bef5616995eebbcd7c267836882c1195040294ea8f6a3583bde317473",
@@ -4206,8 +4215,13 @@
                 "ZX Spectrum +3e EN (ZXMMC) 4.0": "2d779bac8d4f870b7c33b8f2eb06a66d257822b6811e116e11204cffc7eb159e",
                 "ZX Spectrum +3e ES (ZXMMC) 4.0": "d9be501bac8796b60deaf26cad558ef203539af18ffcbeb108a685ed46499349",
                 "ZX Spectrum 128K Derby++ 64K rom": "5fe5d6bb92b516b5f1696a52679b23cc8a5301badc033e419aedb08e7d6f8fca",
-                "ZX Spectrum Next +3e 1.53": "b9b378221d61c328b6538bbd083786ec142e21eec3f5a53bba5f51ad7790568c",
-                "ICE Felix HC2000 virtual with +3 roms": "6d19fc08a3f28258096b0b8173601049c56062124b7bf1cde86249b99707e5f1"
+                "ZX Spectrum Next +3e 1.53": "b9b378221d61c328b6538bbd083786ec142e21eec3f5a53bba5f51ad7790568c"
+            }
+        },
+        "128K Spectrum ROM": {
+            "versions": {
+                "Game Over 128K": "e2523c5e4484c8299a1dc09c2ddf2dc537f57d319db31deec318ea468b15bb59",
+                "Army Moves 128K": "0ae47a317594a7b3a4e854418f36c56af47b8879b2343a82812d0abdfc1ebb52"
             }
         }
     },

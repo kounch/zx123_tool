@@ -53,7 +53,7 @@ if sys.version_info.major == 3:
 if os.name == 'nt':
     import msvcrt  # pylint: disable=import-error
 
-__MY_VERSION__ = '3.4.1'
+__MY_VERSION__ = '3.5.0'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
@@ -1802,7 +1802,8 @@ def find_zxfile(str_in_file,
 
     # Check if it's a known ZX Spectrum ROM
     for block_id in [
-            '16K Spectrum ROM', '32K Spectrum ROM', '64K Spectrum ROM'
+            '16K Spectrum ROM', '32K Spectrum ROM', '64K Spectrum ROM',
+            '128K Spectrum ROM'
     ]:
         if block_id in d_parts:
             if i_file_size == int(d_parts[block_id][1]):
@@ -2020,7 +2021,8 @@ def get_romdata_version(rom_data, dict_rom_hash):
     block_hash = hashlib.sha256(rom_data).hexdigest()
 
     rom_types = [
-        '16K Spectrum ROM', '32K Spectrum ROM', '', '64K Spectrum ROM'
+        '16K Spectrum ROM', '32K Spectrum ROM', '','64K Spectrum ROM',
+        '', '', '', '128K Spectrum ROM'
     ]
     block_version = get_data_version(block_hash,
                                      dict_rom_hash[rom_types[rom_blocks - 1]])
@@ -2082,7 +2084,7 @@ def get_rom_list(str_in_file, dict_parts, b_data=None):
                     except UnicodeDecodeError:
                         LOGGER.debug('Bad ROM entry or corrupted ROM name')
             else:
-                break
+                continue
 
     return roms_list
 
@@ -2607,6 +2609,7 @@ def inject_rom_tobin(b_data,
     br_data += b_data[cur_pos:int(block_info[4])]
     cur_pos = int(block_info[4])
     br_data += b_data[cur_pos:cur_pos + rom_index]
+    print(b_data[cur_pos:cur_pos + rom_index])
     br_data += (rom_index).to_bytes(1, byteorder='little')
     cur_pos += rom_index + 1
 

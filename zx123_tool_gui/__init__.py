@@ -619,7 +619,7 @@ class App(tk.Tk):
                 d_parts = self.fulldict_hash['ROM']['parts']
                 for block_id in [
                         '16K Spectrum ROM', '32K Spectrum ROM',
-                        '64K Spectrum ROM'
+                        '64K Spectrum ROM', '128K Spectrum ROM'
                 ]:
                     if block_id in d_parts:
                         if i_file_size == int(d_parts[block_id][1]):
@@ -833,7 +833,8 @@ class App(tk.Tk):
 
         str_extension = 'ROM'
         arr_format = [
-            '16K Spectrum ROM', '32K Spectrum ROM', '64K Spectrum ROM'
+            '16K Spectrum ROM', '32K Spectrum ROM', '64K Spectrum ROM',
+            '128K Spectrum ROM'
         ]
         if b_core:
             str_extension = self.zxextension
