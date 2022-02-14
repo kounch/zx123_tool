@@ -4,7 +4,7 @@
 # Do not modify previous lines. See PEP 8, PEP 263.
 # pylint: disable=import-outside-toplevel
 """
-Copyright (c) 2021, kounch
+Copyright (c) 2021-2022, kounch
 All rights reserved.
 
 SPDX-License-Identifier: BSD-2-Clause

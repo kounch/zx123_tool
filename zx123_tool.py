@@ -4,7 +4,7 @@
 # Do not modify previous lines. See PEP 8, PEP 263.
 # pylint: disable=too-many-lines
 """
-Copyright (c) 2020-2021, kounch
+Copyright (c) 2020-2022, kounch
 All rights reserved.
 
 SPDX-License-Identifier: BSD-2-Clause
