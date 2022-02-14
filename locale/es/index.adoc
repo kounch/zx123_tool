@@ -201,7 +201,6 @@ image:../img/PrefsWindow.jpg[pdfwidth=60%]
 
 - Permitir la importación de ROMs de ZX Spectrum no catalogadas en la base de datos (Allow import of unknown ROMs )
 
-
 - Recordar la ubicación de la ventana principal y la de preferencias, o bien mostrarlas siempre en el centro (Remember window positions)
 
 <<<
@@ -407,7 +406,7 @@ Extraer las ROMs con índices 3, 5 y 6 de un fichero ROMPack v2:
 
 === Archivo JSON
 
-El archivo JSON es un objeto donde los nombres principales son extensiones de archivo (como `ZXD` o `ZX1`). Todos los datos del fichero JSON se almacenan como cadenas de texto. Para cada exension, se define otro objeto con la siguiente estructura:
+El archivo JSON es un objeto donde los nombres principales son extensiones de archivo (como `ZXD` o `ZX1`). Todos los datos del fichero JSON se almacenan como cadenas de texto. Para cada extensión, se define otro objeto con la siguiente estructura:
 
 [source]
 ----
@@ -502,7 +501,7 @@ Para `core_base`, el formato es el siguiente:
 
 === ROMPack v2
 
-Los ficheros ROMPack v2 se basan en los ficheros ROMPack clásicos, que se utilizan para extraer e insertar todas las ROM en la flash SPI de un ZX-Uno, ZXDOS, etc. Los fiheros ROMpack clásicos tienen 64 ranuras de 16K (slots) de espacio de almacenamiento, mientras que los ficheros ROMPack v2 disponen de 255 espacios. La estructura de un archivo ROMPAck es la siguiente:
+Los ficheros ROMPack v2 se basan en los ficheros ROMPack clásicos, que se utilizan para extraer e insertar todas las ROM en la flash SPI de un ZX-Uno, ZXDOS, etc. Los ficheros ROMPack clásicos tienen 64 ranuras de 16K (slots) de espacio de almacenamiento, mientras que los ficheros ROMPack v2 disponen de 255 espacios. La estructura de un archivo ROMPack es la siguiente:
 
 [align="center",width="85%",%header,cols="1,1,7",options="header"]
 |===
@@ -533,9 +532,9 @@ Cada bloque (ROM Entry), a su vez, tiene esta estructura:
 
 [align="center",width="80%",%header,cols="2,1,8",options="header"]
 |===
-|Start
-|End
-|Description
+|Inicio
+|Fin
+|Descripción
 |`0x00`
 |`0x00`
 |Offset de primer Slot utilizado

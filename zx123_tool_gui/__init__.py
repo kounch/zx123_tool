@@ -336,7 +336,7 @@ class App(tk.Tk):
     def update_image(self, str_update, get_1core=False, get_2mb=False):
         """
         Tries to update BIOS and or Core(s) of image file
-        :param str_update: Description of the udpdate ("all", "bios", etc.)
+        :param str_update: Description of the update ("all", "bios", etc.)
         :param get_1core: Use "1core" entries of JSON
         :param get_2mb: Use "2m" entries of JSON
         """

@@ -1291,13 +1291,13 @@ def check_and_update(update_file,
                      bs_urls=None,
                      w_progress=None):
     """
-    Checks if a file with the desired hashexists. If not, download from the URL
+    Checks if a file with the desired hash exists. Download from the URL if not
     :param update_file: Path to the file
     :param upd_hash: Hash to check
     :param upd_urls: array of URLs to download if not found or wrong hash
     :param upd_name: Text to show while downloading
     :param uchk: Control text to download older versions
-    :param bs_hash: Base hash (fallbak if there's not latest)
+    :param bs_hash: Base hash (fallback if there's not latest)
     :param bs_urls: Base download URIs
     :returns: True if a new file was needed, found and downloaded
     """
@@ -1380,7 +1380,7 @@ def update_image(str_file,
     :param str_outfile: New SPI flash file to create
     :param fullhash_dict: Dictionary with hashes data
     :param str_extension: SPI Flash extension
-    :param str_update: String with update requirements (ej: 'All', 'BIOS, etc.)
+    :param str_update: String with update requirements (as 'All', 'BIOS, etc.)
     :param b_new_img: If True, assume it's a brand, new, clean image
     :param b_force: Force overwriting file
     :param get_1core: Use "1core" entries of JSON
@@ -2021,8 +2021,8 @@ def get_romdata_version(rom_data, dict_rom_hash):
     block_hash = hashlib.sha256(rom_data).hexdigest()
 
     rom_types = [
-        '16K Spectrum ROM', '32K Spectrum ROM', '','64K Spectrum ROM',
-        '', '', '', '128K Spectrum ROM'
+        '16K Spectrum ROM', '32K Spectrum ROM', '', '64K Spectrum ROM', '', '',
+        '', '128K Spectrum ROM'
     ]
     block_version = get_data_version(block_hash,
                                      dict_rom_hash[rom_types[rom_blocks - 1]])
@@ -2166,7 +2166,7 @@ def new_romentry(rom_slt, rom_name, rom_len, rom_params, rom_crc):
 def get_rom_crc(rom_data):
     """
     Computes ROM crc as string
-    :param data: ByteArray wich contains the data
+    :param data: ByteArray which contains the data
     :return: String with CRC
     """
     rom_blocks = int(len(rom_data) / 16384)
@@ -2181,7 +2181,7 @@ def get_rom_crc(rom_data):
 def get_crc16(data, offset, length):
     """
     Computes CRC16
-    :param data: ByteArray wich contains the data
+    :param data: ByteArray which contains the data
     :param offset: Data offset to begin the calculation
     :param length: Number of bytes after the offset
     :return: Integer (4 bytes) with CRC or 0000 on error
@@ -2777,7 +2777,7 @@ def validate_and_export_bin(str_in_file,
                             b_force=False,
                             str_magic=None):
     """
-    Extract data block to file, optionally vallidating the header
+    Extract data block to file, optionally validating the header
     :param str_in_file: Path to file
     :param block_info: List with block offset and block length
     :param str_out_bin: Path to bin file to create

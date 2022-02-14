@@ -29,7 +29,7 @@ These are the main features:
 - Create a copy of the flash image and, optionally, and/or truncate some (or all) of the optional cores
 - Change some BIOS default options (video mode, keyboard layout, default core, default ROM, etc.)
 - Add or replace FPGA cores and/or Spectrum ROM images (from individual ROM files or RomPack files)
-- Wipe with  0s all Cores an ZX Spectrum ROMs data
+- Wipe with 0s all Cores and ZX Spectrum ROMs data
 - If supplied a different kind of file (like a core or BIOS installation file) it will also try to identify its contents
 - List, add or extract ROMs from a ROMPack v2 ROms file
 - For secondary cores, show information about some of the features that they may have (e.g. VGA video out, joystick support, supported SD or microSD formats, etc.)

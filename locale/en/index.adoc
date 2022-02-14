@@ -212,7 +212,7 @@ The CLI can be invoked directly using the script `zx123_tool.py` and Python (ver
 
 ==== MacOS
 
-Alternatively, if your system does not have Python 3, you can call the MacOS binary from Terminal, addíng the parameter `--command` (e.g. `"/Applications/ZX123 Tool.app/Contents/MacOS/ZX123 Tool" --command -l -i flash.ZX1``)
+Alternatively, if your system does not have Python 3, you can call the MacOS binary from Terminal, adding the parameter `--command` (e.g. `"/Applications/ZX123 Tool.app/Contents/MacOS/ZX123 Tool" --command -l -i flash.ZX1``)
 
 ==== Arguments
 
@@ -498,7 +498,7 @@ The JSON file is an object where the main name are file extensions (like `ZXD` o
 
 === ROMPack v2
 
-ROMPack v2 files are based on classic ROMPack files, used to extract and insert all the ROM files in a ZX-Uno, ZXDOS SPI flash. Classic ROMpack files have 64 ROM slots while ROMPack v2 files have 255 ROM slots. The file structure of a ROMPAck file is as follows:
+ROMPack v2 files are based on classic ROMPack files, used to extract and insert all the ROM files in a ZX-Uno, ZXDOS SPI flash. Classic ROMpack files have 64 ROM slots while ROMPack v2 files have 255 ROM slots. The file structure of a ROMPack file is as follows:
 
 [align="center",width="75%",%header,cols="1,1,6",options="header"]
 |===
