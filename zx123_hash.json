@@ -1,5 +1,5 @@
 {
-    "version": "20220213.001",
+    "version": "20220216.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -670,6 +670,17 @@
                     "TEST4+teclado 2M spark2k06": "665d5b6f1103ff47a70f7030b71e5637447b921bff4f2c679b80237fc4eeb42b",
                     "TEST4+teclado 512K Double Joy spark2k06": "aac71e83ca2b94800fd4fbc8a3e3c95b97a447b0a6e7aaf7393866ee87b9255f",
                     "TEST4+teclado 2M Double Joy spark2k06": "0860dedc22624a8bae4e69d6f9fcfd2a4d0b4928024889a5dabb1d4378ec7c32"
+                }
+            },
+            "Ondra SPO 186": {
+                "features": {
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "2022.02.12"
+                ],
+                "versions": {
+                    "2022.02.12": "74e5c03ce0560921a52785b8b532233d8ca6f7f0268d40303401a289140ae5a5"
                 }
             },
             "Oric Atmos": {
@@ -4173,6 +4184,7 @@
                 "TS2060 by Daniel A. Nagy 2021.10.22": "af1279ce8c264b3491f31db4b249048c11bc563791c2f5293b5fb9c59a4aba54",
                 "TS2060 2021.10.27": "de8a0f0a71af9dec4f802cb5b6ec6cdba2d51cddccb5e2a53eef9f045a59691e",
                 "TS2060 by Daniel A. Nagy 22.01.15": "b51b685b0e9261bd0bae6f333d8a658bc73cfcfa4e52b2a8099064a6d2c79232",
+                "TS2060 by Daniel A.Nagy 22.01.27": "39bbc2f29c21c3570a05dcf9e1407d0751382c31a89c666f67fff2758fd0b79a",
                 "Timex Computer 2068": "c3df7f1507b2037e38ab1f8866457934bd9aa8ff4d692cd94fcd63949a372e72",
                 "Timex Sinclair 2068": "6fa699524a7e78aa547a375bae58ab32613d8e61a6f16c83be881c41cee0ac53",
                 "Timex Sinclair 2068 (Rikyarg)": "d1d1962565ca5250116a5722533e58221d2f3dbeede80b1d45b5b1f0d5a56fb5",
