@@ -1,5 +1,5 @@
 {
-    "version": "20220216.001",
+    "version": "20220225.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -635,24 +635,16 @@
                     "SD": [["FAT16"],""],
                     "Video": [["VGA"], "Optional Scanlines"],
                     "Keyboard": [["PS/2"], ""],
-                    "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
+                    "Joystick": [["DB9", "PS/2 Keyboard", "Splitter"], "May require an AddOn with DB9"],
                     "Other": [["SD ROM Load"], "ROM support depends on board model memory"]
                 },
                 "latest": [
-                    "TEST4+teclado 512K spark2k06",
+                    "20220225 teclado spark2k06",
                     "https://github.com/spark2k06/zxuno/raw/master/cores/NES/binaries/Simple_Joystick/512KB/COREx.ZX1"
                 ],
                 "base": [
                     "TEST2 - 20160910",
                     "https://github.com/zxdos/zxuno/raw/master/cores/NES/CORE19.ZX1"
-                ],
-                "1core": [
-                    "TEST4+teclado 2M spark2k06",
-                    "https://github.com/spark2k06/zxuno/raw/master/cores/NES/binaries/Simple_Joystick/2MB/COREx.ZX1"
-                ],
-                "2m": [
-                    "TEST4+teclado 2M spark2k06",
-                    "https://github.com/spark2k06/zxuno/raw/master/cores/NES/binaries/Simple_Joystick/2MB/COREx.ZX1"
                 ],
                 "versions": {
                     "TEST2 - 20160910": "50c057349a7e9e993c841ad72b652caef060110348ce1e91b6033fb9e4bfafda",
@@ -669,7 +661,12 @@
                     "TEST4+teclado 2M Ext spark2k06": "4140bd91e0a139261d4dac94d0b7dbe052cd620c2d05c6387b75c8922dcba3d8",
                     "TEST4+teclado 2M spark2k06": "665d5b6f1103ff47a70f7030b71e5637447b921bff4f2c679b80237fc4eeb42b",
                     "TEST4+teclado 512K Double Joy spark2k06": "aac71e83ca2b94800fd4fbc8a3e3c95b97a447b0a6e7aaf7393866ee87b9255f",
-                    "TEST4+teclado 2M Double Joy spark2k06": "0860dedc22624a8bae4e69d6f9fcfd2a4d0b4928024889a5dabb1d4378ec7c32"
+                    "TEST4+teclado 2M Double Joy spark2k06": "0860dedc22624a8bae4e69d6f9fcfd2a4d0b4928024889a5dabb1d4378ec7c32",
+                    "20220225 teclado splitter spark2k06": "9e0bd711b2cb775ed78c82ea3abb526badc43b0d74ecccc2d94c21b971d15618",
+                    "20220225 teclado 2M Ext splitter spark2k06": "e6a03d9fc6074e096e69269b9103912937f318278099bbc75955397c939c8d65",
+                    "20220225 teclado spark2k06": "024f471b8cb6d09720bb2bdbff14308b5c65fa76dac3fd1b254b38f51a2579d7",
+                    "20220225 teclado 2M Ext spark2k06": "5e7d69a66e2699f609fbb6024be2bf0f4ad1cecf9b15c4e4aa2ee6108027fb93",
+                    "20220225 teclado Double Joy spark2k06": "2e6eb104bd08b9ed4eab1eb28dd3af80fb7235354f026271898a33e6ab6ba87e"
                 }
             },
             "Ondra SPO 186": {
@@ -966,7 +963,7 @@
                     "Graphic Modes": [["ULAplus", "Timex", "Radastan"], ""],
                     "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
                     "Mouse": [["PS/2"], "Kempston Protocol Emulation"],
-                    "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
+                    "Joystick": [["DB9", "PS/2 Keyboard", "Splitter"], "May require an AddOn with DB9"],
                     "Other": [["Audio In Tape Load", "PZX", "WiFi"], ""]
                 },
                 "latest": [
@@ -1077,7 +1074,7 @@
                     "Graphic Modes": [["ULAplus", "Timex", "Radastan"], ""],
                     "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
                     "Mouse": [["PS/2"], "Kempston Protocol Emulation"],
-                    "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
+                    "Joystick": [["DB9", "PS/2 Keyboard", "Splitter"], "May require an AddOn with DB9"],
                     "Other": [["Audio In Tape Load", "PZX"], "PZX up to 224Kb on 512K boards"]
                 },
                 "latest": [
@@ -1782,7 +1779,7 @@
                 "features": {
                     "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
-                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                    "Joystick": [["DB9", "Splitter"], "May require an AddOn with DB9" ]
                 },
                 "latest": [
                     "1.0",
@@ -1811,7 +1808,7 @@
                 "features": {
                     "Video": [["VGA", "RGB", "Composite"], ""],
                     "Keyboard": [["PS/2"], ""],
-                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                    "Joystick": [["DB9", "Splitter"], "May require an AddOn with DB9" ]
                 },
                 "latest": [
                     "1.0",
