@@ -2609,7 +2609,7 @@ def inject_rom_tobin(b_data,
     br_data += b_data[cur_pos:int(block_info[4])]
     cur_pos = int(block_info[4])
     br_data += b_data[cur_pos:cur_pos + rom_index]
-    print(b_data[cur_pos:cur_pos + rom_index])
+    LOGGER.debug(b_data[cur_pos:cur_pos + rom_index])
     br_data += (rom_index).to_bytes(1, byteorder='little')
     cur_pos += rom_index + 1
 
