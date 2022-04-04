@@ -1,5 +1,5 @@
 {
-    "version": "20220225.001",
+    "version": "20220404.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -158,10 +158,12 @@
                 "EXP27 spark2k06 050222 VGA-2M": "d3c241646affe9ac24aa58b58e1f52e40e595386b2a071152fff6050f296bb70",
                 "EXP27 spark2k06 080222 PZX (no SAA1099) (RGB666)": "7fce1541158a05cf7bde05ae047a7cc6890a63c8d06a70f5ccd9f7b724b039c1",
                 "EXP27 spark2k06 080222 SAA1099 (no PZX) (RGB666)": "a45f371f444e4ec63593bdce9b5c2ce6dd8e7bd8e81ddca851ce66786c8f3979",
-                "EXP27 spark2k06 080222 Ext RAM": "867a04f30cb86fd28e980eb4c831462000aeec805180d7f512ef2121d424bc8e",
                 "EXP27 spark2k06 080222 PZX (no SAA1099)": "402a6b8e4b5fcd57120c60fa2a36fc7c0c0eeaf3794125ab5c7b73356690732c",
                 "EXP27 spark2k06 080222 SAA1099 (no PZX)": "3b834fc209073942e71f23fad205aab69544f6c473208109d61b1c165224d6ca",
-                "EXP27 spark2k06 080222 VGA-2M": "d3c241646affe9ac24aa58b58e1f52e40e595386b2a071152fff6050f296bb70"
+                "EXP27 spark2k06 040422 PZX (no SAA1099) (RGB666)": "7bcd59b8235442319df20bdef8e99c39f782813314a7a1d46dc2196e1dfbaa68",
+                "EXP27 spark2k06 040422 SAA1099 (no PZX) (RGB666)": "46ac32ed96819e2510860e79807b5562cf5d91d955121277626c5f1edef73b2f",
+                "EXP27 spark2k06 040422 PZX (no SAA1099)": "a7b85fffefce2c3f2aea90fcc17a5bb13f9b6819a9f79c70f5968e31f99677aa",
+                "EXP27 spark2k06 040422 SAA1099 (no PZX)": "4246dd28b040da2ec7153bdb341f353c3901618e98eada52e2fead03351e98ed"
             }
         },
         "Special": {
@@ -829,14 +831,17 @@
                     "Video": [["VGA", "RGB", "Composite"], "VGA Optional Scanlines"],
                     "Audio": [["SAA1099"], ""],
                     "Keyboard": [["PS/2"], ""],
-                    "Other": [["Audio In Tape Load"], ""]
+                    "Mouse": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9"],
+                    "Other": [["Audio In Tape Load", "SD SDOS Disk Image Load"], ""]
                 },
                 "latest": [
                     "TEST5",
                     "https://github.com/zxdos/zxuno/raw/master/cores/SamCoupe/CORE2.ZX1"
                 ],
                 "versions": {
-                    "TEST5": "32fd2069f416ada27c7a6556b18ebd0b3813817aa6c419cc12dde046a25236f1"
+                    "TEST5": "32fd2069f416ada27c7a6556b18ebd0b3813817aa6c419cc12dde046a25236f1",
+                    "Microjack 20220403": "5f6e8f8683033cb37b2b2ec7b334c27ecfc52b0e92c81027cffeb65f6be63459"
                 }
             },
             "Sega Master System": {
@@ -1126,10 +1131,12 @@
                     "EXP27 VGA-2M 050222": "304678bdeb1899bf82254c3de6c8f06d5bd2b7bdfbdc4a7b171a2e56464c9060",
                     "EXP27 PZX (no SAA1099) 080222 (RGB666)": "4422259e10646a5972af649bee54a044c9471e13c5c544d9ddc2090bc15da56e",
                     "EXP27 SAA1099 (no PZX) 080222 (RGB666)": "fadbefa64db320275eea7b3b58efb7db5cdbddf1df9a8db07326e04d51a70a8b",
-                    "EXP27 Ext RAM 080222": "8b7c0481556c9858e97abce5d561afb1603ec4a9b2cbd33cbe17f682b9db2dc0",
                     "EXP27 PZX (no SAA1099) 080222": "d4eb276d3c14271540426a8c3ec28977775e2f62024867928ff88277abceabe3",
                     "EXP27 SAA1099 (no PZX) 080222": "2afabd74694246d53fc2846fa1d1f5e5bb5dcf352b257e034b5a6b1718583be6",
-                    "EXP27 VGA-2M 080222": "304678bdeb1899bf82254c3de6c8f06d5bd2b7bdfbdc4a7b171a2e56464c9060"
+                    "EXP27 PZX (no SAA1099) 040422 (RGB666)": "d0e29145ab44280ad232312d2677e1728101e75207b8d3390ca4264481f05584",
+                    "EXP27 SAA1099 (no PZX) 040422 (RGB666)": "9c2c2e76cc32351c646b6748c2e87ec342b00cb354138768750166bb3c6469ae",
+                    "EXP27 PZX (no SAA1099) 040422": "007cee9094a4abeb910d3d1c897b0537c1a4b281f5fc90144ecba6c7f432f93c",
+                    "EXP27 SAA1099 (no PZX) 040422": "02b2324dffb406039836d7ace7a242c2e12c90122b245021bd92c3da247b00b9"
                 }
             },
             "ZX TBBlue": {
