@@ -1,5 +1,5 @@
 {
-    "version": "20220404.001",
+    "version": "20220407.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -769,15 +769,15 @@
                     "Other": [["Next186 core 4.77Mhz"], ""]
                 },
                 "latest": [
-                    "Release 1 512KB",
+                    "Release 2 512KB",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUno/512KB/COREx.ZX1"
                 ],
                 "1core": [
-                    "Release 1 2MB Int (RGB666)",
+                    "Release 2 2MB Int (RGB666)",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUnCore/2MB/COREx.ZX1"
                 ],
                 "2m": [
-                    "Release 1 2MB Int",
+                    "Release 2 2MB Int",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUno/2MB/COREx.ZX1"
                 ],
                 "versions": {
@@ -823,7 +823,12 @@
                     "Release 1 2MB Int (RGB666)": "649f53a512bc1a6b6e7b0e481f30b11c1ce482563c6d80a516c71e5ee914e5f6",
                     "Release 1 512KB": "b51d22e21f1dd69ff648287a8164aa059e731083d71349d3d470fdedc32d09d7",
                     "Release 1 2MB Ext": "ecfea496e3a053592c3632fbb8382714bd42ff4daf033953a604dd5e9aee8eb8",
-                    "Release 1 2MB Int": "45cef299a095437994adde939e122232cfeb5784645f842c68be92d11028a836"
+                    "Release 1 2MB Int": "45cef299a095437994adde939e122232cfeb5784645f842c68be92d11028a836",
+                    "Release 2 512KB (RGB666)": "b3bd69ae57d4a94e510bf0a5c2fbe1d630729343f4b7917bf1e24431cf2762d8",
+                    "Release 2 2MB Int (RGB666)": "d26aa05b8cd5e8c91b6db6506a8288d4b2d776ae53d1cfa634444c2b04b12e69",
+                    "Release 2 512KB": "af919125bf69cf7ef9b74050ce70352f26cf4d981465e2f1f834b036f26a94cb",
+                    "Release 2 2MB Ext": "b58d337e1fa6b2ed9259a125aec1d5343ba0f3d6a589549480014a6e51bec0cc",
+                    "Release 2 2MB Int": "a52af4012a3f1ca79c3277694b685c34050f46002c484ab21b6a0f19c932953c"
                 }
             },
             "Sam Coupe": {
@@ -841,7 +846,8 @@
                 ],
                 "versions": {
                     "TEST5": "32fd2069f416ada27c7a6556b18ebd0b3813817aa6c419cc12dde046a25236f1",
-                    "Microjack 20220403": "5f6e8f8683033cb37b2b2ec7b334c27ecfc52b0e92c81027cffeb65f6be63459"
+                    "Microjack 20220403": "5f6e8f8683033cb37b2b2ec7b334c27ecfc52b0e92c81027cffeb65f6be63459",
+                    "Microjack 20220406": "ee82e65f716a501a26718b38132d7c9316e31357516d00b7fb88345d84a2300c"
                 }
             },
             "Sega Master System": {
