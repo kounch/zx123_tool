@@ -1,5 +1,5 @@
 {
-    "version": "20220407.001",
+    "version": "20220410.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -828,7 +828,12 @@
                     "Release 2 2MB Int (RGB666)": "d26aa05b8cd5e8c91b6db6506a8288d4b2d776ae53d1cfa634444c2b04b12e69",
                     "Release 2 512KB": "af919125bf69cf7ef9b74050ce70352f26cf4d981465e2f1f834b036f26a94cb",
                     "Release 2 2MB Ext": "b58d337e1fa6b2ed9259a125aec1d5343ba0f3d6a589549480014a6e51bec0cc",
-                    "Release 2 2MB Int": "a52af4012a3f1ca79c3277694b685c34050f46002c484ab21b6a0f19c932953c"
+                    "Release 2 2MB Int": "a52af4012a3f1ca79c3277694b685c34050f46002c484ab21b6a0f19c932953c",
+                    "Release 3 512KB (RGB666)": "e6dbbd980db152b7b6c7b9f0d04237d777cd953061d108848280f20972e9b413",
+                    "Release 3 2MB Int (RGB666)": "e4cf63c303fdedb3194962236ed21beda6f1b4c8c4415f530ba4ca25d739c4ac",
+                    "Release 3 512KB": "855135e2a00d0bc82cdb367acff4792191ed53f38bd384607a19335a4a5c4ddc",
+                    "Release 3 2MB Ext": "c86db89eee64cd75917352765adff22122b8182ab4fce1a91f6ad4448de9d6f7",
+                    "Release 3 2MB Int": "5972974446d4e8abe425c3e18d7b3f3305e366701c3b79e3813cb030d02f2d2e"
                 }
             },
             "Sam Coupe": {
