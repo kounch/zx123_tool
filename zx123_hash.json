@@ -1,5 +1,5 @@
 {
-    "version": "20220411.001",
+    "version": "20220412.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -769,15 +769,15 @@
                     "Other": [["Next186 core 4.77Mhz"], ""]
                 },
                 "latest": [
-                    "Release 2 512KB",
+                    "Release 3b 512KB",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUno/512KB/COREx.ZX1"
                 ],
                 "1core": [
-                    "Release 2 2MB Int (RGB666)",
+                    "Release 3b 2MB Int (RGB666)",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUnCore/2MB/COREx.ZX1"
                 ],
                 "2m": [
-                    "Release 2 2MB Int",
+                    "Release 3b 2MB Int",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUno/2MB/COREx.ZX1"
                 ],
                 "versions": {
@@ -833,7 +833,12 @@
                     "Release 3 2MB Int (RGB666)": "e4cf63c303fdedb3194962236ed21beda6f1b4c8c4415f530ba4ca25d739c4ac",
                     "Release 3 512KB": "855135e2a00d0bc82cdb367acff4792191ed53f38bd384607a19335a4a5c4ddc",
                     "Release 3 2MB Ext": "c86db89eee64cd75917352765adff22122b8182ab4fce1a91f6ad4448de9d6f7",
-                    "Release 3 2MB Int": "5972974446d4e8abe425c3e18d7b3f3305e366701c3b79e3813cb030d02f2d2e"
+                    "Release 3 2MB Int": "5972974446d4e8abe425c3e18d7b3f3305e366701c3b79e3813cb030d02f2d2e",
+                    "Release 3b 512KB (RGB666)": "b01ce6c9912d33d5c2a564d6fcea749c50a982b021e4ad84d6f5f8259a7ef98c",
+                    "Release 3b 2MB Int (RGB666)": "c7683369d2f8c62c33ded7fa50807043ba2c25526b45611f2b8b1d2239622ef2",
+                    "Release 3b 512KB": "bfbd527de923c1d1f65ab79013e73c781b10b649c10b93cd377e20fcc82d21ef",
+                    "Release 3b 2MB Ext": "af4d1bdd999dd4fe4225318f215738364d21e53f5263ecaa5b70b24b44391b5e",
+                    "Release 3b 2MB Int": "059a49e333fb11945b0028c3a2a6ff0cc05c9722b1a27f6f502f3ee7607f81f8"
                 }
             },
             "Sam Coupe": {
