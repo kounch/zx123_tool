@@ -1,5 +1,5 @@
 {
-    "version": "20220412.001",
+    "version": "20220418.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -769,15 +769,15 @@
                     "Other": [["Next186 core 4.77Mhz"], ""]
                 },
                 "latest": [
-                    "Release 3b 512KB",
+                    "Release 5 512KB",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUno/512KB/COREx.ZX1"
                 ],
                 "1core": [
-                    "Release 3b 2MB Int (RGB666)",
+                    "Release 5 2MB Int (RGB666)",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUnCore/2MB/COREx.ZX1"
                 ],
                 "2m": [
-                    "Release 3b 2MB Int",
+                    "Release 5 2MB Int",
                     "https://github.com/spark2k06/next186lite_graphics_gremlin/raw/main/binaries/ZXUno/2MB/COREx.ZX1"
                 ],
                 "versions": {
@@ -838,7 +838,17 @@
                     "Release 3b 2MB Int (RGB666)": "c7683369d2f8c62c33ded7fa50807043ba2c25526b45611f2b8b1d2239622ef2",
                     "Release 3b 512KB": "bfbd527de923c1d1f65ab79013e73c781b10b649c10b93cd377e20fcc82d21ef",
                     "Release 3b 2MB Ext": "af4d1bdd999dd4fe4225318f215738364d21e53f5263ecaa5b70b24b44391b5e",
-                    "Release 3b 2MB Int": "059a49e333fb11945b0028c3a2a6ff0cc05c9722b1a27f6f502f3ee7607f81f8"
+                    "Release 3b 2MB Int": "059a49e333fb11945b0028c3a2a6ff0cc05c9722b1a27f6f502f3ee7607f81f8",
+                    "Release 4 512KB (RGB666)":"5c0a004d27f0f14301d8f551376aa1f42a43b6db4fdb7bf426d55f6bb64dbb31",
+                    "Release 4 2MB Int (RGB666)": "467dd8f68a234ee46c10d9d9d259323e415e9e9586c58f568f3bd4352f18d52e",
+                    "Release 4 512KB": "98f0f7d6091d8a769e60e0212d8ab151c5244a87bb129fdf748b0542497b19c2",
+                    "Release 4 2MB Ext":"0e73c3aabd32cf055f9f8fb0875e8477987084a42244f6754c344764a474359e",
+                    "Release 4 2MB Int": "634cb37f357d6fa609287168a9ec010654eb80c011160a4f58411357c914ebf7",
+                    "Release 5 512KB (RGB666)": "5d5dabfe6289bdf54ad3b69266d28e142149e06951d17ec2a46ea83c154820d6",
+                    "Release 5 2MB Int (RGB666)": "a86a15abf29093fcc645fd445aa6e3e56cd38acbbf6a757b73fec2f345689b49",
+                    "Release 5 512KB": "49eaf5fd33a59ca157d82d88e10561025b1c8859e84016e00da8e81a7d72c854",
+                    "Release 5 2MB Ext": "c7cd381f9519140697f99ba9ba6bea384f8fa981c4eed65068288e2813b61f29",
+                    "Release 5 2MB Int": "475032adadce2382e6627a55a66201a7d23bceffe9f314b890c1fd63a055143a"
                 }
             },
             "Sam Coupe": {
