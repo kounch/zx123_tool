@@ -1,5 +1,5 @@
 {
-    "version": "20220419.001",
+    "version": "20220426.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -873,7 +873,8 @@
                     "TEST5": "32fd2069f416ada27c7a6556b18ebd0b3813817aa6c419cc12dde046a25236f1",
                     "Microjack 20220403": "5f6e8f8683033cb37b2b2ec7b334c27ecfc52b0e92c81027cffeb65f6be63459",
                     "Microjack 20220406": "ee82e65f716a501a26718b38132d7c9316e31357516d00b7fb88345d84a2300c",
-                    "Microjack 20220410": "03252de3da3d16090322b7912ef398d27a3bddf69e23a828a295950185b222e3"
+                    "Microjack 20220410": "03252de3da3d16090322b7912ef398d27a3bddf69e23a828a295950185b222e3",
+                    "Microjack 20220425": "bf71e7bcd71d7ba9b77b5228b63f047d60cf1e68a480b09cf2d7528b87af474b"
                 }
             },
             "Sega Master System": {
