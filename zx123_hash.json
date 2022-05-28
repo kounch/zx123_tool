@@ -1,5 +1,5 @@
 {
-    "version": "20220430.001",
+    "version": "20220528.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -714,6 +714,14 @@
                     "1.0": "303d51db6dfbe5c91a1333cf0804bc8288c634e48fdf1c059ffdadb97e004a18"
                 }
             },
+            "Orion 2010": {
+                "features": {
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "versions": {
+                    "20220528": "3af9da7e361d77c849b67574a14886bf3a1899f3e74c6b736c13ee6b06ffb5ad"
+                }              
+            },
             "PC XT": {
                 "features": {
                     "SD": [["FAT16"], "FAT with MS-DOS installed"],
@@ -855,6 +863,14 @@
                     "Release 6 2MB Ext": "ff8015880895634a6a68c2483162ec540e3aafb0c17559a37d3a8e8f2094c545",
                     "Release 6 2MB Int": "f3abe9adf38f989a8f6121b3f8c86de056bce2a04ba1631105155f53fb511a46"
                 }
+            },
+            "Radio-86RK": {
+                "features": {
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "versions": {
+                    "Azesmbog": "b0951becbd804590f9424f56991847840a74583681fb211b31e201b1b4df120d"
+                }              
             },
             "Sam Coupe": {
                 "features": {
