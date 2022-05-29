@@ -1,5 +1,5 @@
 {
-    "version": "20220528.001",
+    "version": "20220529.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -676,10 +676,12 @@
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
-                    "2022.02.12"
+                    "2022.05.29",
+                    "https://github.com/PetrM1/OndraSPO186_ZXUno/raw/master/release/Ondra_SPO186.ZX1"
                 ],
                 "versions": {
-                    "2022.02.12": "74e5c03ce0560921a52785b8b532233d8ca6f7f0268d40303401a289140ae5a5"
+                    "2022.02.12": "74e5c03ce0560921a52785b8b532233d8ca6f7f0268d40303401a289140ae5a5",
+                    "2022.05.29": "3ef7734a30a61c55704a9472a1aca9a45ef250f9379bcaf2031bd70989cb5d8b"
                 }
             },
             "Oric Atmos": {
