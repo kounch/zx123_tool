@@ -1,5 +1,5 @@
 {
-    "version": "20220529.001",
+    "version": "20220530.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -1009,7 +1009,8 @@
                     "20211010 avlixa": "48ea8f1090f82b9cb164988f2a8fe2ecf734378565f57592274e770644857f7b",
                     "20211012 avlixa": "ec6d4da0842e1bcbcad7fa7934e8ccc832f869539446784e559055d5fe9578e0",
                     "20211024 avlixa": "79d07b87c651645dbafd07dc3beddec92cc9fea7e838636bbb38e64c6c821ccf",
-                    "20211031 avlixa": "1e4e5b9b89344f4eb515a941fbe3f726b0096c03504cca4c44417a26ade74740"
+                    "20211031 avlixa": "1e4e5b9b89344f4eb515a941fbe3f726b0096c03504cca4c44417a26ade74740",
+                    "20220529 avlixa": "18caed861968aa2647b8b1f2d883d6ac4e0e8211c7ef9988ae79e61d4860f3dc"
                 }
             },
             "ZX Spectrum": {
