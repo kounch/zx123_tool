@@ -1,5 +1,5 @@
 {
-    "version": "20220604.001",
+    "version": "20220604.002",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -1006,8 +1006,8 @@
                     "https://github.com/avlixa/ZX81_MiSTer_zxdos/raw/master/releases/zx81_zxuno_lx9_20210914.ZX1"
                 ],
                 "latest": [
-                    "20211031 avlixa",
-                    "https://github.com/zxdos/zxuno/raw/master/cores/ZX81/zx81_zxuno_lx9_20211031.ZX1"
+                    "20220604 avlixa",
+                    "https://github.com/zxdos/zxuno/raw/master/cores/ZX81/zx81_zxuno_lx9_20220604.ZX1"
                 ],              
                 "versions": {
                     "20161105": "926198a4a6ba89748209e0d25ed34d35d8d51149c6ced0e9452a93440117eec4",
@@ -1021,7 +1021,8 @@
                     "20211024 avlixa": "79d07b87c651645dbafd07dc3beddec92cc9fea7e838636bbb38e64c6c821ccf",
                     "20211031 avlixa": "1e4e5b9b89344f4eb515a941fbe3f726b0096c03504cca4c44417a26ade74740",
                     "20220529 avlixa": "18caed861968aa2647b8b1f2d883d6ac4e0e8211c7ef9988ae79e61d4860f3dc",
-                    "20220603 avlixa": "f73f80e2cea224efc165af163394e6073325f43f1d7f0ec25f74e2b50f1530f6"
+                    "20220603 avlixa": "f73f80e2cea224efc165af163394e6073325f43f1d7f0ec25f74e2b50f1530f6",
+                    "20220604 avlixa": "f9ea22f76abb65b475ea38b76f9f040bd5e0c5cabd05ef57b83b3d5eb2395554"
                 }
             },
             "ZX Spectrum": {
