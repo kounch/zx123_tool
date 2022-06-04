@@ -1,5 +1,5 @@
 {
-    "version": "20220530.001",
+    "version": "20220604.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -519,6 +519,16 @@
                     "0.1 VGA": "c660052e1c945a2f41a8af00f0d89f2f938ba62301b07beae9ff7510e3d5d979"
                 }
             },
+            "Elan Enterprise": {
+                "features": {
+                    "Video": [["RGB", "Composite"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
+                "versions": {
+                    "20220526": "f59ab839a0e6965a80b599864fa5cda08c589ca3be2204a7f6febf1245796fa3"
+                }
+            },
             "Galaksija": {
                 "features": {
                     "SD": [["FAT16"], ""],
@@ -1010,7 +1020,8 @@
                     "20211012 avlixa": "ec6d4da0842e1bcbcad7fa7934e8ccc832f869539446784e559055d5fe9578e0",
                     "20211024 avlixa": "79d07b87c651645dbafd07dc3beddec92cc9fea7e838636bbb38e64c6c821ccf",
                     "20211031 avlixa": "1e4e5b9b89344f4eb515a941fbe3f726b0096c03504cca4c44417a26ade74740",
-                    "20220529 avlixa": "18caed861968aa2647b8b1f2d883d6ac4e0e8211c7ef9988ae79e61d4860f3dc"
+                    "20220529 avlixa": "18caed861968aa2647b8b1f2d883d6ac4e0e8211c7ef9988ae79e61d4860f3dc",
+                    "20220603 avlixa": "f73f80e2cea224efc165af163394e6073325f43f1d7f0ec25f74e2b50f1530f6"
                 }
             },
             "ZX Spectrum": {
