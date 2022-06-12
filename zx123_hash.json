@@ -1,5 +1,5 @@
 {
-    "version": "20220604.002",
+    "version": "20220612.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -419,7 +419,10 @@
                     "512K": "42a1c25f0c8f767677f6e3c5ebbd0bbc70eed07fc321e4d19770f348436f0c9d",
                     "1.1": "45926ae8763802ae8ed23e1904321618262e5bc2edc2fa0854aa3db4c84f96c0",
                     "1.2 (VGA+HDMI)": "e2cb44f744be56592412c0a9478c9d15ec447f8cd773d9da81219fc05619310a",
-                    "1.2 VGA 2M": "500c94aec1d196497196592dab8098cc2a5076b95fd338df1bd0349bdd9a01b0"
+                    "1.2 VGA 2M": "500c94aec1d196497196592dab8098cc2a5076b95fd338df1bd0349bdd9a01b0",
+                    "20220611 Alfa 1": "99d38cac1d30cf4412e767215da041ab6d937028a22f976a84dd4786f381c1ff",
+                    "20220611 Alfa 2": "e7e71c5748a312aa991ae39254e7d3062b76eb015796136314e732b17e3fdb5e",
+                    "20220611 Beta 1": "eb3a52ad14dee3226c90127f9898747bf0c31d7041dc3fe97245be07c9f03d19"
                 }
             },
             "Colour Genie": {
