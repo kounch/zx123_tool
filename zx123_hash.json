@@ -1,5 +1,5 @@
 {
-    "version": "20220612.001",
+    "version": "20220704.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -241,7 +241,8 @@
                 "versions": {
                     "Test 3": "00c62d213755c76feb8a27f3e98a0cafd212206bf10912b9ebf2c2e34c4a2db1",
                     "no SD support": "18b620669521a7649d78fa0c2fd057bb792ec238ab9cb9801063759a3439ac00",
-                    "SD support Renaul Helias": "c3d2f7b1c37ff08c67affba3baa9cc9e0de895cd8035782ad366d402499b54e3"
+                    "SD support Renaul Helias": "c3d2f7b1c37ff08c67affba3baa9cc9e0de895cd8035782ad366d402499b54e3",
+                    "202207627 R3 Microjack": "c509bf658cc523e69f7c1afce67b40639b42da78095075bf949770f77cefe78a"
                 }
             },
             "Apple I": {
@@ -295,7 +296,8 @@
                 ],
                 "versions": {
                     "1.1 (512K)": "760746ae75c7cf9b80752078145328dd29ba9dbff158287c503c966a41581481",
-                    "1.2 2MB Int": "58abded410ca401efc93c70fe940815f6aebc28dd52d771f480fc28678ca34a0"
+                    "1.2 2MB Int": "58abded410ca401efc93c70fe940815f6aebc28dd52d771f480fc28678ca34a0",
+                    "2MB Ext": "83d73996df2330c1ef402a61a4490c4e87ca21bc8914a5d24acd747603609a98"
                 }
             },
             "Atari 2600": {
@@ -422,7 +424,10 @@
                     "1.2 VGA 2M": "500c94aec1d196497196592dab8098cc2a5076b95fd338df1bd0349bdd9a01b0",
                     "20220611 Alfa 1": "99d38cac1d30cf4412e767215da041ab6d937028a22f976a84dd4786f381c1ff",
                     "20220611 Alfa 2": "e7e71c5748a312aa991ae39254e7d3062b76eb015796136314e732b17e3fdb5e",
-                    "20220611 Beta 1": "eb3a52ad14dee3226c90127f9898747bf0c31d7041dc3fe97245be07c9f03d19"
+                    "20220611 Beta 1": "eb3a52ad14dee3226c90127f9898747bf0c31d7041dc3fe97245be07c9f03d19",
+                    "20220617 1.3": "18218220a87f9ee050df49ef0beff71e4feaece847c2434dafd4189d0b8d8cd6",
+                    "20220627 1.3 VGA 2MB Int": "3f8ef7e658ac5fc1c0a052be7de75eb031e78160c3982bab641071038af12837",
+                    "20220617 1.3 2MB Ext": "196fb7fd59cc63f1d4ce5cd9c027ec3c0fa1e914d09e845b16cd85194871aa9b"
                 }
             },
             "Colour Genie": {
@@ -508,6 +513,27 @@
                     "TEST3b": "35638cdc8937fcfbd39b7042c0bd5598421dd9d1831ace662b94502a144a7cd3"
                 }
             },
+            "Demistify Demo": {
+                "features": {
+                    "Video": [["VGA"], ""]
+                },
+                "versions": {
+                    "20220614": "1ba16f0dd157409606974d9ef78d730f3d52acf8a7bb16935b8a2a405f409f63"
+                }
+            },
+            "Elan Enterprise": {
+                "features": {
+                    "Video": [["RGB", "Composite"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
+                "versions": {
+                    "20220526": "f59ab839a0e6965a80b599864fa5cda08c589ca3be2204a7f6febf1245796fa3",
+                    "20220619 512K": "4df9dabfe984842bffa8e32de031d0dc0ba735d17064d56383f3499ae5c56b34",
+                    "20220627": "723110e08485eabe6742f1ab45247c14166cba41287b606a97d163cd58cc154b",
+                    "20220627 2MB Ext": "f65e8322f204c9bdebd216aae635667ec7313042c15074ce641b0b2d4d4f3a0e"
+                }
+            },
             "Flappy Bird": {
                 "features": {
                     "Video": [["VGA"], ""],
@@ -520,16 +546,6 @@
                 "versions": {
                     "0.1 2MB Ext": "a2e6428546643687fb233c1030b5069cfff0a058001121a3f3e69819e7f9bb3a",
                     "0.1 VGA": "c660052e1c945a2f41a8af00f0d89f2f938ba62301b07beae9ff7510e3d5d979"
-                }
-            },
-            "Elan Enterprise": {
-                "features": {
-                    "Video": [["RGB", "Composite"], ""],
-                    "Keyboard": [["PS/2"], ""],
-                    "Other": [["Audio In Tape Load"], ""]
-                },
-                "versions": {
-                    "20220526": "f59ab839a0e6965a80b599864fa5cda08c589ca3be2204a7f6febf1245796fa3"
                 }
             },
             "Galaksija": {
@@ -763,6 +779,7 @@
                     "512KB 70 MHz 2017.02.18": "81e89e258fb00fd46f37c8d06055c23821290e265433cd24e8cd1cd0a5993202",
                     "2MB Ext Beta 75 MHz 2017.01.20": "69ec81d182134eb095a9d111966ee0e780a0410da48bdf69e6f918c5b528bfa6",
                     "2MB Ext 70 MHz 2017.02.18": "b560afa672db76b3e0476c20130e14e07f9569761cc20315a83cf6cfa8bf167a",
+                    "2MB Ext": "d85a2ab67efaea7d3680df00c39fea3d852af3bac134a5bc3c69d1f0bdd9328d",
                     "2MB Int Beta 75 MHz 2017.01.20": "de55a3817acacc55ae90fef0db6c4137ed3c13e84d927a4d7862a7ce1bf178ab",
                     "2MB Int 70 MHz 2017.02.18": "652be2ab706d2835309b84c6e52c026dea07d8d8f42e4d8b13791df14af55163",
                     "2MB Int 50 MHz": "7d9b2f72c810c5b5ad82e7401527564e3157c4902638f6fced145fa06d004de5",
@@ -4240,7 +4257,8 @@
                 "ZX Spectrum 48K Cargando Leches": "895240ca1059c7f176cd6702c52c82dc2596591bdcbc9f205474db7a3110de31",
                 "ZX Spectrum 48K Cargando Leches (Ant)": "2cfbeef248657810448ec028042520311e9ec572858d71dccf1aec0c64607070",
                 "Jamma Demo": "ee87c52f38c752bd78b44d16ac4da8878ea6b4326ed81f7c2d19944f2ce8a55f",
-                "ZX Spectrum (Jozsef Laszlo FPGA Core)": "1653896cffae48bdc6d783535e7e652a027bfcb2e708c4b84b7f786d643225b7"
+                "ZX Spectrum (Jozsef Laszlo FPGA Core)": "1653896cffae48bdc6d783535e7e652a027bfcb2e708c4b84b7f786d643225b7",
+                "ZX Spectrum 48K (R. Guerra)": "97159d8ed7aa51a5a8c6c5bffa214c145d8082641b1b423fd64ccfc5e16c9e1f"
             }
         },
         "32K Spectrum ROM": {
@@ -4253,6 +4271,7 @@
                 "SE Basic IV 4.2 20.07.15 Morton": "5b513e45a7448f00706aaffb8db639fd7a0eda6ae9b3224af0f4d172f4792e3b",
                 "SE Basic IV 4.2 20.09.30 Iggy": "121dcf1571a9be7c83b1e28f6d313495bd89909abe65b227301bc9a4282f72c7",
                 "SE Basic IV 4.2 20.01.22 Gaff": "3949fdf325fad54c4cee421d42aef4e05e756fdb96af69b7c7e5809a0df8449e",
+                "SE Basic IV 4.2-b9 Cordelia": "297e4a6b3ea9246d9966efa3e105f15b0a5c4f16589d2a71d917c170c2069593",
                 "TS2060 by Daniel A. Nagy 2021.10.22": "af1279ce8c264b3491f31db4b249048c11bc563791c2f5293b5fb9c59a4aba54",
                 "TS2060 2021.10.27": "de8a0f0a71af9dec4f802cb5b6ec6cdba2d51cddccb5e2a53eef9f045a59691e",
                 "TS2060 by Daniel A. Nagy 22.01.15": "b51b685b0e9261bd0bae6f333d8a658bc73cfcfa4e52b2a8099064a6d2c79232",
@@ -4271,7 +4290,8 @@
                 "ZX Spectrum +2 Gris ES": "02f9cd74a3f768e60709287999d9c251288afffd796a3985f1cf840045d31f68",
                 "ZX Spectrum 128K Derby+ 32K ROM": "df7181b671ff9fa739bc9f1065e7cb9b04e3f0bd04c4064189dc11f07b761634",
                 "ZX Spectrum 128K EN": "c1ff621d7910105d4ee45c31e9fd8fd0d79a545c78b66c69a562ee1ffbae8d72",
-                "ZX Spectrum 128K ES": "51d291fb08a0d4461b714114ef991e996784ec7ee6be8789382dc0781121e08e"
+                "ZX Spectrum 128K ES": "51d291fb08a0d4461b714114ef991e996784ec7ee6be8789382dc0781121e08e",
+                "ZX Spectrum 128K EN (R. Guerra)": "242a8baa69d121b64de0455ee039240e689f055877966e48c455e6a362000eae"
             }
         },
         "64K Spectrum ROM": {
@@ -4294,12 +4314,14 @@
                 "ZX Spectrum +2e EN (TAP-POKEMIN)":"2c151c08139b6c88e032ef10003d636620d20373c3c94ec80a2e27de4f49f05a",
                 "ZX Spectrum +2e ES (DivMMC-TAP)": "bd8d54c993910fc246653cbd417068c5a9cd6646108d2fd6101891cd86ffb45a",
                 "ZX Spectrum +2e ES (TAP-POKEMIN)": "720c26e34d400ae0154acf0ac9ee7f3bfb2c0e436c546dc377bbdb3038f62345",
+                "ZX Spectrum +2e ES (TAP-POKEMIN) 2": "ff4a3ee2a01f39df56cf2851bfaadc29f760a66adec56bc32d975eb99f13ee8c",
                 "ZX Spectrum +3e EN 1.43": "2259c1f5e87bde9ddcace4e91f0f0880fd593519f5a0e676e7dc35a80aa75831",
                 "ZX Spectrum +3e EN (DivMMC) 4.0": "18c35440b422535c1af598ce19899450d3dd9fd6d5d8734bd279be55943b58a6",
                 "ZX Spectrum +3e EN (ZXMMC) 4.0": "2d779bac8d4f870b7c33b8f2eb06a66d257822b6811e116e11204cffc7eb159e",
                 "ZX Spectrum +3e ES (ZXMMC) 4.0": "d9be501bac8796b60deaf26cad558ef203539af18ffcbeb108a685ed46499349",
                 "ZX Spectrum 128K Derby++ 64K rom": "5fe5d6bb92b516b5f1696a52679b23cc8a5301badc033e419aedb08e7d6f8fca",
-                "ZX Spectrum Next +3e 1.53": "b9b378221d61c328b6538bbd083786ec142e21eec3f5a53bba5f51ad7790568c"
+                "ZX Spectrum Next +3e 1.53": "b9b378221d61c328b6538bbd083786ec142e21eec3f5a53bba5f51ad7790568c",
+                "ZX Spectrum +3 EN (R. Guerra) 4.1": "9e658cd4ec407bfa09157d8730bca4b4e8f9a7e8a701cc8b7fd62051b9af7033"
             }
         },
         "128K Spectrum ROM": {
