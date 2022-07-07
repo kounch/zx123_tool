@@ -1,5 +1,5 @@
 {
-    "version": "20220704.001",
+    "version": "20220707.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -428,7 +428,8 @@
                     "20220611 Beta 1": "eb3a52ad14dee3226c90127f9898747bf0c31d7041dc3fe97245be07c9f03d19",
                     "20220617 1.3": "18218220a87f9ee050df49ef0beff71e4feaece847c2434dafd4189d0b8d8cd6",
                     "20220627 1.3 VGA 2MB Int": "3f8ef7e658ac5fc1c0a052be7de75eb031e78160c3982bab641071038af12837",
-                    "20220617 1.3 2MB Ext": "196fb7fd59cc63f1d4ce5cd9c027ec3c0fa1e914d09e845b16cd85194871aa9b"
+                    "20220617 1.3 2MB Ext": "196fb7fd59cc63f1d4ce5cd9c027ec3c0fa1e914d09e845b16cd85194871aa9b",
+                    "20220707 Demistify Beta1": "9b5fd657fc757bd829cbab290848ffb19ec417285d7683057ec385f51706eebc"
                 }
             },
             "Colour Genie": {
