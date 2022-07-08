@@ -1,5 +1,5 @@
 {
-    "version": "20220707.001",
+    "version": "20220708.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -429,7 +429,8 @@
                     "20220617 1.3": "18218220a87f9ee050df49ef0beff71e4feaece847c2434dafd4189d0b8d8cd6",
                     "20220627 1.3 VGA 2MB Int": "3f8ef7e658ac5fc1c0a052be7de75eb031e78160c3982bab641071038af12837",
                     "20220617 1.3 2MB Ext": "196fb7fd59cc63f1d4ce5cd9c027ec3c0fa1e914d09e845b16cd85194871aa9b",
-                    "20220707 Demistify Beta1": "9b5fd657fc757bd829cbab290848ffb19ec417285d7683057ec385f51706eebc"
+                    "20220707 Demistify Beta1": "9b5fd657fc757bd829cbab290848ffb19ec417285d7683057ec385f51706eebc",
+                    "20220708 Demistify Beta2": "91490b63fd73f0ef83eca545b327d87824c6d7755b7e2aa93d5ea686b2a73dc3"
                 }
             },
             "Colour Genie": {
@@ -3780,7 +3781,9 @@
                     "0.1"
                 ],
                 "versions": {
-                    "0.1": "1b640cb200434f735f749e18e34ed37ccba487f5c84ba3d4e2d321363f9aff4f"
+                    "0.1": "1b640cb200434f735f749e18e34ed37ccba487f5c84ba3d4e2d321363f9aff4f",
+                    "1.0 Beta": "83537ad45e5782c87d09ed5b9dd972466691428cee1250a16c140caba3dcc15c",
+                    "1.0.1 Beta": "910351f07b8ce027631a2d8cd46359c87220415bb7a31439624cfce7a94c3f90"
                 }
             },
             "Commodore 64": {
@@ -3796,6 +3799,16 @@
                 ],
                 "versions": {
                     "1.0": "c917efa18740920da86700ab58dd1dbf4911597faa0a4b6b532727059dd9a975"
+                }
+            },
+            "Elan Enterprise": {
+                "features": {
+                    "Video": [["RGB"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["VHD Image Support"], ""]      
+                },
+                "versions": {
+                    "20220706": "73a28cf196891ab7ec7075faa4a77ef746235513985dec6dd5643f13e1756d04"
                 }
             },
             "MSX": {
