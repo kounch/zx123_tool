@@ -1,5 +1,5 @@
 {
-    "version": "20220708.001",
+    "version": "20220709.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -1148,7 +1148,7 @@
                     "Other": [["Audio In Tape Load"], ""]
                 },
                 "latest": [
-                    "kyp 2021.04.23"
+                    "azesmbog TS-FM Fix Composite"
                 ],
                 "versions": {
                     "EXP27 azesmbog 240320": "85ff342c1a2fe0cc3a962221f37847907a5666e46183b13934b99fae4306fe69",
@@ -1156,8 +1156,23 @@
                     "azesmbog DMA 24.05.30": "6a0cd7879a98182aeec5b92c36523cf11a1ed5be9f128341609d5a4246e94ec9",
                     "azesmbog TS-FM Unknown": "c1d1183dc144588dfc3acf921b7c8fd77afaf496e12705f30c7409d8d6790635",
                     "azesmbog DMA Unknown": "8467969c0475126159e6036d62ba06c65c18045d8b4dc73451e037703eb66b67",
-                    "kyp 2021.04.23": "b65153e392e3c045ae0e50ede3ff570aa38af1e9861c7e762c1b60a553b7f4fd",
                     "azesmbog TS-FM Fix Composite": "53d561b94771c3810ffc90547f8bc63c91c19c5d8e6dd88fb28d5ed3350ce066"
+                }
+            },
+            "ZX Spectrum (Kyp)": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], "esxdos depends on core version"],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["Turbosound", "Specdrum"], ""],
+                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
+                    "Other": [["Audio In Tape Load"], ""]
+                },
+                "latest": [
+                    "20220708 (esxdos 0.8.9)"
+                ],
+                "versions": {
+                    "20210423 (esxdos 0.8.9)": "b65153e392e3c045ae0e50ede3ff570aa38af1e9861c7e762c1b60a553b7f4fd",
+                    "20220708 (esxdos 0.8.9)": "054ca43c3f78154e237a02bb7884cd61c6e22b7f34a3b4a0a7238ba8acd0e29a"
                 }
             },
             "ZX Spectrum (spark2k06)": {
