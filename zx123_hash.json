@@ -1,5 +1,5 @@
 {
-    "version": "20220709.001",
+    "version": "20220726.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -1082,7 +1082,8 @@
                     "EXP27 251021": "5cbda41b2de188057a03226bc6d80e08b395e1ad38d2d86cc90e88638f7ff184",
                     "EXP27 Test WiFi 1 Mbps": "5554de2361bff1d34c351f0ba69cac2009acd8f8f2b14b8c0b419052f139c257",
                     "EXP27 Test WiFi 1.5 Mbps": "a4544e753e287270f096d32f71f28ba519d299847908f4ea3c9f806b4a58e757",
-                    "EXP27 Test WiFi 2 Mbps": "4e6b167f39f2a41f30105c59b7347f2171c21b36ab29c26aaf055c4412eab061"
+                    "EXP27 Test WiFi 2 Mbps": "4e6b167f39f2a41f30105c59b7347f2171c21b36ab29c26aaf055c4412eab061",
+                    "EXP27 Test AY Timex & Sinclair": "f1ab0dc33e46e3decdf5431cdcedc439d4b88bbfad78450d2db6ec9133250c96"
                 }
             },
             "ZX Spectrum 48K (Kyp)": {
