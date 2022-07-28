@@ -1,5 +1,5 @@
 {
-    "version": "20220727.001",
+    "version": "20220728.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -236,14 +236,15 @@
                     "Other": [["SD DSK Image Load", "Audio In Tape Load"], ""]
                 },
                 "latest": [
-                    "Test 3",
-                    "https://github.com/zxdos/zxuno/raw/master/modflash/cores/CPC6128.ZX1"
+                    "20220725 R4 Microjack",
+                    "https://github.com/ZXMicroJack/amstrad-cpc/releases/download/r4/amstradcpc-r4.zip"
                 ],
                 "versions": {
                     "Test 3": "00c62d213755c76feb8a27f3e98a0cafd212206bf10912b9ebf2c2e34c4a2db1",
                     "no SD support": "18b620669521a7649d78fa0c2fd057bb792ec238ab9cb9801063759a3439ac00",
                     "SD support Renaul Helias": "c3d2f7b1c37ff08c67affba3baa9cc9e0de895cd8035782ad366d402499b54e3",
-                    "202207627 R3 Microjack": "c509bf658cc523e69f7c1afce67b40639b42da78095075bf949770f77cefe78a"
+                    "20220627 R3 Microjack": "c509bf658cc523e69f7c1afce67b40639b42da78095075bf949770f77cefe78a",
+                    "20220725 R4 Microjack": "d77ec7d4170712045fa3c1a31e6d57af4f8816b19ac364ad1a26fc99b1a0ab71"
                 }
             },
             "Apple I": {
@@ -1085,7 +1086,8 @@
                     "EXP27 Test WiFi 2 Mbps": "4e6b167f39f2a41f30105c59b7347f2171c21b36ab29c26aaf055c4412eab061",
                     "EXP27 20220725 AY Timex & Sinclair": "f1ab0dc33e46e3decdf5431cdcedc439d4b88bbfad78450d2db6ec9133250c96",
                     "EXP27 20220726 AY Timex & Sinclair": "9457bed0a8c821a50b614e2335ac8e61cd7d9b0eb8cccdd9312e8b59a429d201",
-                    "EXP27 20220727 AY Timex & Sinclair": "f10dd04f44b17a052adb3c879b6dd418bf67496c152fb95b13610f384050ed78"
+                    "EXP27 20220727 AY Timex & Sinclair": "f10dd04f44b17a052adb3c879b6dd418bf67496c152fb95b13610f384050ed78",
+                    "EXP27 20220728 AY Timex & Sinclair": "311e57e415718a6e2cf80bf79cfb6d0fd642e32bc869a5e5066f1419c05f3330"
                 }
             },
             "ZX Spectrum 48K (Kyp)": {
