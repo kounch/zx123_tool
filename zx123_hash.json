@@ -1,5 +1,5 @@
 {
-    "version": "20220728.001",
+    "version": "20220729.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -1087,7 +1087,8 @@
                     "EXP27 20220725 AY Timex & Sinclair": "f1ab0dc33e46e3decdf5431cdcedc439d4b88bbfad78450d2db6ec9133250c96",
                     "EXP27 20220726 AY Timex & Sinclair": "9457bed0a8c821a50b614e2335ac8e61cd7d9b0eb8cccdd9312e8b59a429d201",
                     "EXP27 20220727 AY Timex & Sinclair": "f10dd04f44b17a052adb3c879b6dd418bf67496c152fb95b13610f384050ed78",
-                    "EXP27 20220728 AY Timex & Sinclair": "311e57e415718a6e2cf80bf79cfb6d0fd642e32bc869a5e5066f1419c05f3330"
+                    "EXP27 20220728 AY Timex & Sinclair": "311e57e415718a6e2cf80bf79cfb6d0fd642e32bc869a5e5066f1419c05f3330",
+                    "EXP27 20220728-02 AY Timex & Sinclair": "8e1df3e5221316735a06f93304f5ac5ff92240ab0d905d6c2e2be23b23a893b1"
                 }
             },
             "ZX Spectrum 48K (Kyp)": {
