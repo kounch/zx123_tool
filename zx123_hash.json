@@ -1,5 +1,5 @@
 {
-    "version": "20220729.001",
+    "version": "20220823.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -104,15 +104,15 @@
         },
         "Spectrum": {
             "latest": [
-                "EXP27 spark2k06 080222 PZX (no SAA1099)",
+                "EXP27 spark2k06 060822 PZX (no SAA1099)",
                 "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/sram_internal/pzx_no_saa/SPECTRUM.ZX1"
             ],
             "1core": [
-                "EXP27 spark2k06 080222 PZX (no SAA1099) (RGB666)",
+                "EXP27 spark2k06 060822 PZX (no SAA1099) (RGB666)",
                 "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/zxuncore/pzx_no_saa/SPECTRUM.ZX1"
             ],
             "2m": [
-                "EXP27 spark2k06 080222 VGA-2M",
+                "EXP27 spark2k06 060822 VGA-2M PZX (no SAA1099)",
                 "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/vga2m/SPECTRUM.ZX1"               
             ],
             "versions": {
@@ -163,7 +163,17 @@
                 "EXP27 spark2k06 040422 PZX (no SAA1099) (RGB666)": "7bcd59b8235442319df20bdef8e99c39f782813314a7a1d46dc2196e1dfbaa68",
                 "EXP27 spark2k06 040422 SAA1099 (no PZX) (RGB666)": "46ac32ed96819e2510860e79807b5562cf5d91d955121277626c5f1edef73b2f",
                 "EXP27 spark2k06 040422 PZX (no SAA1099)": "a7b85fffefce2c3f2aea90fcc17a5bb13f9b6819a9f79c70f5968e31f99677aa",
-                "EXP27 spark2k06 040422 SAA1099 (no PZX)": "4246dd28b040da2ec7153bdb341f353c3901618e98eada52e2fead03351e98ed"
+                "EXP27 spark2k06 040422 SAA1099 (no PZX)": "4246dd28b040da2ec7153bdb341f353c3901618e98eada52e2fead03351e98ed",
+                "EXP27 spark2k06 060822 PZX (no SAA1099) (RGB666)": "5b0631a954d13fee51adf2277cf2f5c4be8f1cb3b5dae96e20a78599097689ee",
+                "EXP27 spark2k06 060822 SAA1099 (no PZX) (RGB666)": "19266d2e8f09063b11a0d4788d7d8a998360191768281b34614544d852dd1a60",
+                "EXP27 spark2k06 060822 PZX (no SAA1099)": "4085bbfe62805055103e42084d222cdb9f8c40b5437ced5013d426c018287735",
+                "EXP27 spark2k06 060822 SAA1099 (no PZX)": "ea75acd74803d09f603f98a51bbb7a92a3edcc7fa130c086ccb06e4ee243dc4a",
+                "EXP27 spark2k06 060822 Ext RAM PZX (no SAA1099)": "ada2ca74d360ec16dfa895166034401cc6317bf64fb13aa7ceb977732c7c40bd",
+                "EXP27 spark2k06 060822 Ext RAM SAA1099 (no PZX)": "65b6a545e9d4d1376191592e08ab77e086377901cd8df948a16d8bee61290160",
+                "EXP27 spark2k06 060822 VGA-2M PZX (no SAA1099)": "ca689ba4cb802753d8cdb3d32cffa185ad8d3ad65def7da48e468afb8d0fa954",
+                "EXP27 spark2k06 060822 VGA-2M SAA1099 (no PZX)": "f29105a1b26ffddcf3662744b7412c30aae93fccc5f6be03dd5f6f6f5fbc7f36",
+                "EXP27 spark2k06 210822 PZX (no SAA1099) (VGA-WiFi)": "62cb5d0f83c4129c025d9ad52f259081a828521797f538d9b309128a7a167df9",
+                "EXP27 spark2k06 210822 SAA1099 (no PZX) (VGA-WiFi)": "ac35c363334f9ab6813fbc652dfc0931b201e9eb2c9dda3576578ac69c521b1b"
             }
         },
         "Special": {
@@ -1088,7 +1098,11 @@
                     "EXP27 20220726 AY Timex & Sinclair": "9457bed0a8c821a50b614e2335ac8e61cd7d9b0eb8cccdd9312e8b59a429d201",
                     "EXP27 20220727 AY Timex & Sinclair": "f10dd04f44b17a052adb3c879b6dd418bf67496c152fb95b13610f384050ed78",
                     "EXP27 20220728 AY Timex & Sinclair": "311e57e415718a6e2cf80bf79cfb6d0fd642e32bc869a5e5066f1419c05f3330",
-                    "EXP27 20220728-02 AY Timex & Sinclair": "8e1df3e5221316735a06f93304f5ac5ff92240ab0d905d6c2e2be23b23a893b1"
+                    "EXP27 20220728-02 AY Timex & Sinclair": "8e1df3e5221316735a06f93304f5ac5ff92240ab0d905d6c2e2be23b23a893b1",
+                    "EXP27 20220729 AY Timex & Sinclair": "a3bff34575fb2da9307f28e6d171bd5e50a53a377d1b0ea4fa1d0375251c1c94",
+                    "EXP27 20220730 AY Timex & Sinclair": "285cc82d5e90667f2a24e60ae7c4dde30c294aeba4d4c7b4fd2d77f82ace2a73",
+                    "EXP27 20220731 AY Timex & Sinclair": "bc9af5d1bd08a4238561e07bcd36a9f668882ffcd44865e20edfc1b37fd96c78",
+                    "EXP27 20220805 AY Timex & Sinclair": "f54d35b054942e90a38001782d50b7ba8c5173a8a0d4057073a0b1b0dc605c2f"
                 }
             },
             "ZX Spectrum 48K (Kyp)": {
@@ -1193,15 +1207,15 @@
                     "Other": [["Audio In Tape Load", "PZX"], "PZX up to 224Kb on 512K boards"]
                 },
                 "latest": [
-                    "EXP27 SAA1099 (no PZX) 080222",
+                    "EXP27 SAA1099 (no PZX) 060822",
                     "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/sram_internal/saa_no_pzx/COREx.ZX1"
                 ],
                 "1core": [
-                    "EXP27 SAA1099 (no PZX) 080222 (RGB666)",
+                    "EXP27 SAA1099 (no PZX) 060822 (RGB666)",
                     "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/zxuncore/saa_no_pzx/COREx.ZX1"
                 ],
                 "2m": [
-                    "EXP27 VGA-2M 080222",
+                    "EXP27 VGA-2M SAA1099 (no PZX) 060822",
                     "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/vga2m/COREx.ZX1"
                 ],
                 "versions": {
@@ -1246,7 +1260,21 @@
                     "EXP27 PZX (no SAA1099) 040422 (RGB666)": "d0e29145ab44280ad232312d2677e1728101e75207b8d3390ca4264481f05584",
                     "EXP27 SAA1099 (no PZX) 040422 (RGB666)": "9c2c2e76cc32351c646b6748c2e87ec342b00cb354138768750166bb3c6469ae",
                     "EXP27 PZX (no SAA1099) 040422": "007cee9094a4abeb910d3d1c897b0537c1a4b281f5fc90144ecba6c7f432f93c",
-                    "EXP27 SAA1099 (no PZX) 040422": "02b2324dffb406039836d7ace7a242c2e12c90122b245021bd92c3da247b00b9"
+                    "EXP27 SAA1099 (no PZX) 040422": "02b2324dffb406039836d7ace7a242c2e12c90122b245021bd92c3da247b00b9",
+                    "EXP27 Ext RAM PZX (no SAA1099) 050822": "a29f38a7c53290a21db07e118c4a527ac3a75e1ce5e9a231477be56129bb360b",
+                    "EXP27 Ext RAM SAA1099 (no PZX) 050822": "c274988524b4500f09797204de8ee88c1663025cfa913afb01987e3636963f48",
+                    "EXP27 Ext RAM 060822": "88d1055e1d275c113ca079d72c7623f11dcae7300109cdc30ad16b5069a8f167",
+                    "EXP27 Ext RAM 060822 (no ULA Snow)": "20b3e37527b6c52f19745420ff06c431fe1e05e81fa58fb2e50eb250fb2901e2",
+                    "EXP27 PZX (no SAA1099) 060822 (RGB666)": "99af999314680f9ad0a2b63529090febfde9dee7614a5c5566a79a042a5f2c39",
+                    "EXP27 SAA1099 (no PZX) 060822 (RGB666)": "5fab480e06db3294a82d1c4f9c48c053777779fb2045d34d8c9cdeaf13e2da79",
+                    "EXP27 PZX (no SAA1099) 060822": "571fd14f7d6ea516b1def2cf401fd740aaa05331f0148e45d3045dc821fe0aea",
+                    "EXP27 SAA1099 (no PZX) 060822": "f1ab6c8a26ad3f48f92df981bdf320ac08bf0af3f120cd726d255325df891766",
+                    "EXP27 Ext RAM PZX (no SAA1099) 060822": "9e3e4c40407cfaaa8987ab3ebc3828011830b4f54d1183b5698c3fedfc6dc5aa",
+                    "EXP27 Ext RAM SAA1099 (no PZX) 060822": "734df496b927b96b64e0f951cc067663879ffa99d9fdffe1a072bd83b1a2ea52",
+                    "EXP27 VGA-2M PZX (no SAA1099) 060822": "d1e4221c109ab2dfee34f71d5fa13c0dfda1889252e8abb6277f507b13f80d39",
+                    "EXP27 VGA-2M SAA1099 (no PZX) 060822": "ac5906c619a1be35af7686b73de6c8b80c4be27a9fdab07e182ba7832a6c855a",
+                    "EXP27 PZX (no SAA1099) 210822 (VGA-WiFi)": "38b4c51cf8554d7a2748855300a84028e1c54c3988086a3cfce56907363352e3",
+                    "EXP27 SAA1099 (no PZX) 210822 (VGA-WiFi)": "be728d1669171001dad331436e5361132aa888c061f4b874ed1c03bd02353dc6"
                 }
             },
             "ZX TBBlue": {
@@ -4295,7 +4323,8 @@
                 "ZX Spectrum 48K Cargando Leches (Ant)": "2cfbeef248657810448ec028042520311e9ec572858d71dccf1aec0c64607070",
                 "Jamma Demo": "ee87c52f38c752bd78b44d16ac4da8878ea6b4326ed81f7c2d19944f2ce8a55f",
                 "ZX Spectrum (Jozsef Laszlo FPGA Core)": "1653896cffae48bdc6d783535e7e652a027bfcb2e708c4b84b7f786d643225b7",
-                "ZX Spectrum 48K (R. Guerra)": "97159d8ed7aa51a5a8c6c5bffa214c145d8082641b1b423fd64ccfc5e16c9e1f"
+                "ZX Spectrum 48K (R. Guerra)": "97159d8ed7aa51a5a8c6c5bffa214c145d8082641b1b423fd64ccfc5e16c9e1f",
+                "ZX Spectrum 48K (R. Guerra V2)": "9e369df6257473518a8c12cf967fa3ea5f7e3ad018cdd5c32c0b118648345c09"
             }
         },
         "32K Spectrum ROM": {
@@ -4328,7 +4357,9 @@
                 "ZX Spectrum 128K Derby+ 32K ROM": "df7181b671ff9fa739bc9f1065e7cb9b04e3f0bd04c4064189dc11f07b761634",
                 "ZX Spectrum 128K EN": "c1ff621d7910105d4ee45c31e9fd8fd0d79a545c78b66c69a562ee1ffbae8d72",
                 "ZX Spectrum 128K ES": "51d291fb08a0d4461b714114ef991e996784ec7ee6be8789382dc0781121e08e",
-                "ZX Spectrum 128K EN (R. Guerra)": "242a8baa69d121b64de0455ee039240e689f055877966e48c455e6a362000eae"
+                "ZX Spectrum 128K (R. Guerra)": "242a8baa69d121b64de0455ee039240e689f055877966e48c455e6a362000eae",
+                "ZX Spectrum 128K (R. Guerra V2)": "f5a1ffe7a916b9ef273eed833d9168b4be2a87a84030f2cb3a3f8d4b0e3bb57d"
+
             }
         },
         "64K Spectrum ROM": {
@@ -4358,7 +4389,8 @@
                 "ZX Spectrum +3e ES (ZXMMC) 4.0": "d9be501bac8796b60deaf26cad558ef203539af18ffcbeb108a685ed46499349",
                 "ZX Spectrum 128K Derby++ 64K rom": "5fe5d6bb92b516b5f1696a52679b23cc8a5301badc033e419aedb08e7d6f8fca",
                 "ZX Spectrum Next +3e 1.53": "b9b378221d61c328b6538bbd083786ec142e21eec3f5a53bba5f51ad7790568c",
-                "ZX Spectrum +3 EN (R. Guerra) 4.1": "9e658cd4ec407bfa09157d8730bca4b4e8f9a7e8a701cc8b7fd62051b9af7033"
+                "ZX Spectrum +3 (R. Guerra) 4.1": "9e658cd4ec407bfa09157d8730bca4b4e8f9a7e8a701cc8b7fd62051b9af7033",
+                "ZX Spectrum +3 (R. Guerra V2) 4.1": "939e2cf888a6d5b22107b49e960c85433bd0c3e08923195d3118171c85d2bc9b"
             }
         },
         "128K Spectrum ROM": {
