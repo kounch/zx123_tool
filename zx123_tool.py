@@ -53,7 +53,7 @@ if sys.version_info.major == 3:
 if os.name == 'nt':
     import msvcrt  # pylint: disable=import-error
 
-__MY_VERSION__ = '3.5.0'
+__MY_VERSION__ = '3.5.1'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
@@ -709,11 +709,15 @@ def detect_file(str_file, fulldict_hash):
                 'BIOS': 'BIOS',
                 'exdos': 'esxdos'
             }
-            for key_valid in dict_valid:
+            for key_valid,filetype_valid in dict_valid.items():
                 if key_valid in dict_hash['parts']:
                     if validate_file(str_file,
                                      dict_hash['parts'][key_valid][3]):
-                        filetype = dict_valid[key_valid]
+                        if f_size:
+                            if dict_hash['parts'][key_valid][3] == f_size:
+                                filetype = filetype_valid
+                        else:
+                            filetype = filetype_valid
                         break
         if filetype == 'Unknown':
             # Check if it's ROMPack v2
