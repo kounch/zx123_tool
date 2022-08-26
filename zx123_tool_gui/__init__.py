@@ -735,11 +735,12 @@ class App(tk.Tk):
         self.menubar.entryconfig(0, state='disabled')
 
         str_exts = f'.{self.zxextension}'
-        try:
-            for str_ext in extra_exts:
-                str_exts += f' .{str_ext}'
-        except TypeError:
-            print(f'Wrong type for {extra_exts}')
+        if extra_exts:
+            try:
+                for str_ext in extra_exts:
+                    str_exts += f' .{str_ext}'
+            except TypeError:
+                print(f'Wrong type for {extra_exts}')
 
         filetypes = [(f'{str_block} files', str_exts)]
         str_file = fd.askopenfilename(parent=self,
