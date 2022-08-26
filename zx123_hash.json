@@ -1,5 +1,5 @@
 {
-    "version": "20220823.001",
+    "version": "20220826.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -444,6 +444,21 @@
                     "20220708 Demistify Beta2": "91490b63fd73f0ef83eca545b327d87824c6d7755b7e2aa93d5ea686b2a73dc3"
                 }
             },
+            "ColecoVision/SG-1000": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], ""],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ],
+                    "Other": [["SD ROM Image Load ( .COL, .BIN .ROM and .SG", "megacart support"], ""]
+                },
+                "latest": [
+                    "20220710 Demistify (Rampa)"
+                ],
+                "versions": {
+                    "20220710 Demistify (Rampa)": "7ccb5e7e20c51fb2115526ef2eb0bef42257bc15ab9c82a8b36857a88d8b127d"
+                }
+            },
             "Colour Genie": {
                 "features": {
                     "Video": [["RGB", "Composite"], ""],
@@ -758,6 +773,21 @@
                 ],
                 "versions": {
                     "1.0": "303d51db6dfbe5c91a1333cf0804bc8288c634e48fdf1c059ffdadb97e004a18"
+                }
+            },
+            "Oric Atmos (Rampa)": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["AY-3-8910"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["PS/2 Keyboard"], ""],
+                    "Other": [["Audio In Tape Load", "Audio Out Tape Save", "EDSK Disk Image Support", "Sedoric/OricDOS compatible"], ""]
+                },
+                "latest": [
+                    "2022.08.02"
+                ],
+                "versions": {
+                    "2022.08.02": "0685dc14b9ea7d490d4e4c84c95a426bdebacfd3c314ca1979f61a4dc707d9e7"
                 }
             },
             "Orion 2010": {
