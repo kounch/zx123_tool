@@ -1,5 +1,5 @@
 {
-    "version": "20220827.002",
+    "version": "20220827.003",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -4080,7 +4080,8 @@
                     "Beta 000": "ef3d13962a1defac4f85302426479c7b44161c5e5902af066fc04c773aa30c01",
                     "2021.07.31": "b06a1f754a2c8f87abc1a70cb0aca94cec423d241ad152336cbd57e59f8e5de3",
                     "2021.09.14": "2faa23d9cb1a54fb97bdda94e7a41996b16ac3f02a02092791322dcd6e149d42",
-                    "2021.10.31": "cd6420913ba086abca798e463dc65e5d7d2a4679548ef92f447be9ba579871da"
+                    "2021.10.31": "cd6420913ba086abca798e463dc65e5d7d2a4679548ef92f447be9ba579871da",
+                    "2022.06.04": "4adf94a7db647ef1cf6062151c4cd43b69939468d73326955766a0dabeeb68c2"
                 }
             },
             "ZX Spectrum": {
