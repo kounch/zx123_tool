@@ -53,7 +53,7 @@ if sys.version_info.major == 3:
 if os.name == 'nt':
     import msvcrt  # pylint: disable=import-error
 
-__MY_VERSION__ = '3.5.2'
+__MY_VERSION__ = '3.5.3'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
@@ -714,7 +714,7 @@ def detect_file(str_file, fulldict_hash):
                     if validate_file(str_file,
                                      dict_hash['parts'][key_valid][3]):
                         if f_size:
-                            if dict_hash['parts'][key_valid][3] == f_size:
+                            if f_size == int(dict_hash['parts'][key_valid][1]):
                                 filetype = filetype_valid
                         else:
                             filetype = filetype_valid
