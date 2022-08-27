@@ -201,8 +201,12 @@ def main():
                 b_force = arg_data['force']
                 if not output_file:
                     output_file = str_file
-                rename_zxfiles(str_file, arg_data['rename'], output_file,
-                               fulldict_hash, str_extension, b_force)
+                inject_zxfiles(str_file,
+                               arg_data['rename'],
+                               output_file,
+                               fulldict_hash,
+                               str_extension,
+                               b_force=b_force)
             else:
                 LOGGER.error('Not a valid filetype: %s', str_extension)
 
@@ -1611,8 +1615,9 @@ def inject_zxfiles(str_spi_file,
                    w_progress=None):
     """
     Add binary from one or more binary files to SPI flash or ROMPackV2 file
+    or rename cores/ROMs
     :param str_spi_file: Input SPI flash or ROMPack v2 file
-    :param arr_in_files: Array with parameters and files to inject
+    :param arr_in_files: Array with parameters and files to inject or rename
     :param str_outfile: New SPI flash file to create
     :param fullhash_dict: Dictionary with hashes data
     :param str_extension: SPI Flash extension (or RPv2 for ROMPack v2)
@@ -1680,66 +1685,6 @@ def inject_zxfiles(str_spi_file,
     b_changed |= b_chg
     if arr_bios_err:
         arr_err += arr_bios_err
-
-    if b_changed:
-        if b_force or check_overwrite(str_outfile):
-            b_force = True
-            with open(str_outfile, "wb") as out_zxdata:
-                out_zxdata.write(b_data)
-                print(f'{str_outfile} created OK.')
-
-    return b_force, arr_err
-
-
-def rename_zxfiles(str_spi_file,
-                   arr_in_files,
-                   str_outfile,
-                   fullhash_dict,
-                   str_extension,
-                   b_force=False,
-                   w_progress=None):
-    """
-    Rename Core or ROM in SPI flash or ROMPackV2 file
-    :param str_spi_file: Input SPI flash or ROMPack v2 file
-    :param arr_in_files: Array with items to rename
-    :param str_outfile: New SPI flash file to create
-    :param fullhash_dict: Dictionary with hashes data
-    :param str_extension: SPI Flash extension (or RPv2 for ROMPack v2)
-    :param b_force: Force overwriting file
-    :return: Updated b_force and string array with errors (if any)
-    """
-    arr_err = []
-    b_changed = False
-    hash_dict = fullhash_dict[str_extension]
-
-    LOGGER.debug('Reading Destination File...')
-    b_len = os.stat(str_spi_file).st_size
-    with open(str_spi_file, "rb") as in_zxdata:
-        b_data = in_zxdata.read(b_len)
-
-    for str_in_params in arr_in_files:
-        # Rename Cores
-        b_data, b_chg, str_err = rename_coredata(str_in_params,
-                                                 hash_dict,
-                                                 b_data,
-                                                 w_progress=w_progress)
-        b_changed |= b_chg
-        if str_err:
-            arr_err.append(str_err)
-        # Rename ZX Spectrum ROMs
-        #b_data, b_chg, str_err = rename_romdata(str_spi_file, str_in_params,
-        #                                        fullhash_dict, str_extension,
-        #                                        b_data)
-        #b_changed |= b_chg
-        #if str_err:
-        #    arr_err.append(str_err)
-        ## Rename ZX Spectrum ROMs from ROMPack
-        #b_data, b_chg, str_err = rename_romszx1data(str_in_params,
-        #                                            fullhash_dict,
-        #                                            str_extension, b_data)
-        #b_changed |= b_chg
-        #if str_err:
-        #    arr_err.append(str_err)
 
     if b_changed:
         if b_force or check_overwrite(str_outfile):
@@ -2373,9 +2318,9 @@ def inject_bindata(str_in_params, hash_dict, b_data, w_progress=None):
 
 def inject_coredata(str_in_params, hash_dict, b_data, w_progress=None):
     """
-    Add binary from one core binary file to SPI flash data
+    Add binary from one core binary file to SPI flash data or rename core
     :param str_in_params: String with CORE, and, separated with ',': core
-     number, core name and file path to the core file
+     number, core name and (optionally) file path to the core file
     :param hash_dict: Dictionary with hashes for different blocks
     :param b_data: SPI flash data
     :return: Altered binary data, boolean indicating changed and error string
@@ -2400,34 +2345,41 @@ def inject_coredata(str_in_params, hash_dict, b_data, w_progress=None):
                          int(block_info[1])]
         core_list = get_core_list_bindata(bl_data, dict_parts)
 
-        if len(arr_params) != 4:
+        if len(arr_params) < 3 or len(arr_params) > 4:
             str_err = f'Invalid argument: {str_in_params}'
         else:
             core_index = int(arr_params[1])
             str_name = f'{arr_params[2][:32]:<32}'
-            str_in_file = arr_params[3]
-            str_hash = get_file_hash(str_in_file)
+            str_in_file = None
+            if len(arr_params) == 4:
+                str_in_file = arr_params[3]
+                str_hash = get_file_hash(str_in_file)
             # Check header and length
-            if validate_file(str_in_file,
-                             b_head) and os.stat(str_in_file).st_size == b_len:
+            if not str_in_file or (validate_file(str_in_file, b_head)
+                                   and os.stat(str_in_file).st_size == b_len):
                 LOGGER.debug('Looks like a core')
                 core_name = ''
-                block_version = 'Unknown'
-                for core_item in hash_dict['Cores']:
-                    block_version = get_data_version(
-                        str_hash, hash_dict['Cores'][core_item])
-                    if block_version != 'Unknown':
-                        core_name = core_item
-                        break
+                if str_in_file:
+                    block_version = 'Unknown'
+                    for core_item in hash_dict['Cores']:
+                        block_version = get_data_version(
+                            str_hash, hash_dict['Cores'][core_item])
+                        if block_version != 'Unknown':
+                            core_name = core_item
+                            break
 
                 if core_index > len(core_list) + 1:
                     core_index = len(core_list) + 2
 
-                if core_index < 2 or core_index > max_cores:
+                if core_index < 2 or core_index > max_cores or (
+                        not str_in_file and core_index > len(core_list) + 1):
                     str_err = f'Invalid core index: {core_index} ({core_name})'
                 else:
-                    str_message = f'Adding core {core_index}:'
-                    str_message += f' {core_name} ({block_version})...'
+                    if str_in_file:
+                        str_message = f'Adding core {core_index}:'
+                        str_message += f' {core_name} ({block_version})...'
+                    else:
+                        str_message = f'Renaming core {core_index}'
                     if w_progress:
                         w_progress.update(str_message)
                     else:
@@ -2450,78 +2402,13 @@ def inject_coredata(str_in_params, hash_dict, b_data, w_progress=None):
                         br_data += b_data[int(block_info[0]) +
                                           int(block_info[1]):]
 
-                        with open(str_in_file, "rb") as in_zxdata:
-                            in_data = in_zxdata.read()
-                            br_data = br_data[:b_offset] + in_data
+                        if str_in_file:
+                            with open(str_in_file, "rb") as in_zxdata:
+                                in_data = in_zxdata.read()
+                                br_data = br_data[:b_offset] + in_data
+                            br_data += b_data[b_offset + b_len:]
 
-                        br_data += b_data[b_offset + b_len:]
                         b_changed = True
-
-    if str_err:
-        LOGGER.error(str_err)
-    return br_data, b_changed, str_err
-
-
-def rename_coredata(str_in_params, hash_dict, b_data, w_progress=None):
-    """
-    Rename core in SPI flash data
-    :param str_in_params: String with CORE, and, separated with ',': core
-     number and core name
-    :param hash_dict: Dictionary with hashes for different blocks
-    :param b_data: SPI flash data
-    :return: Altered binary data, boolean indicating changed and error string
-    """
-    str_err = ''
-    b_changed = False
-    dict_parts = hash_dict['parts']
-
-    arr_params = str_in_params.split(',')
-    br_data = b_data
-
-    if arr_params[0].upper() == 'CORE':  # Number, Name
-        block_info = dict_parts.get('cores_dir', [])
-        max_cores = splitcore_index = int(block_info[4])
-        if len(block_info) > 5:
-            max_cores += int(block_info[5])
-        core_bases = dict_parts['core_base']
-        b_len = int(core_bases[1])
-
-        bl_data = b_data[int(block_info[0]):int(block_info[0]) +
-                         int(block_info[1])]
-        core_list = get_core_list_bindata(bl_data, dict_parts)
-
-        if len(arr_params) != 3:
-            str_err = f'Invalid argument: {str_in_params}'
-        else:
-            core_index = int(arr_params[1])
-            str_name = f'{arr_params[2][:32]:<32}'
-
-            if core_index < 2 or core_index > len(core_list) + 1:
-                str_err = f'Invalid core index: {core_index})'
-            else:
-                str_message = f'Renaming core {core_index}:'
-                # ----> str_message += f' {core_name} ({block_version})...'
-                if w_progress:
-                    w_progress.update(str_message)
-                else:
-                    print(str_message)
-                core_index -= 2
-                block_data = get_core_blockdata(core_index, splitcore_index,
-                                                core_bases)
-                b_offset, b_len = block_data
-                LOGGER.debug('Offset: %X (%i)', b_offset, b_offset)
-
-                if b_offset + b_len > len(b_data):
-                    str_err = 'Flash image too small for data'
-                else:
-                    core_index = 0x100 + core_index * 32
-                    bl_data = bl_data[:core_index] + bytes(
-                        str_name, 'utf-8') + bl_data[core_index + 32:]
-
-                    br_data = b_data[:int(block_info[0])] + bl_data
-                    br_data += b_data[int(block_info[0]) + int(block_info[1]):]
-
-                    b_changed = True
 
     if str_err:
         LOGGER.error(str_err)
@@ -2532,10 +2419,11 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
                    b_data):
     """
     Add binary from one Spectrum ROM binary file to SPI flash or RPv2 data
+    or rename (and optionally change params) of existing ROM data
     :param str_in_file: File with SPI flash (or ROMPackV2) data
     :param str_in_params: String with ROM, and, separated with ',': ROM slot
-     number, ROM params (icdnptsmhl172arxu), ROM name to use and file path to
-     the ROM file
+     number, ROM params (icdnptsmhl172arxu), ROM name to use and (optionally)
+     file path to the ROM file
     :param fullhash_dict: Dictionary with hashes data
     :param str_extension: SPI Flash extension
     :param b_data: SPI flash data obtained from str_in_file
@@ -2560,12 +2448,27 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
     block_bases = dict_parts['roms_data']
 
     if arr_params[0].upper() == 'ROM':  # Slot, Params, Name, Filename
-        if len(arr_params) != 5:
+        if len(arr_params) < 4 or len(arr_params) > 5:
             str_err = f'Invalid argument: {str_in_params}'
         else:
+            rom_slt = int(arr_params[1])
+            rom_params = arr_params[2]
+            str_name = arr_params[3]
+            str_rom_file = None
+            rom_crc = None
+            b_len = 0
+            if len(arr_params) == 5:
+                str_rom_file = arr_params[4]
+                b_len = os.stat(str_rom_file).st_size
+
             roms_list = get_rom_list(str_in_file, dict_parts, br_data)
             slot_use = []
             for rom_entry in roms_list:
+                if not str_rom_file and rom_entry[1] == rom_slt:
+                    b_len = rom_entry[3] * 16384
+                    if rom_params == '-':
+                        rom_params = rom_entry[4]
+                    rom_crc = rom_entry[5]
                 if rom_entry[1] + 1 > free_slot:
                     free_slot = rom_entry[1] + 1
                 i_slot = rom_entry[1] + 1
@@ -2575,25 +2478,18 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
                     if i_slot > free_slot:
                         free_slot = i_slot
 
-            rom_slt = int(arr_params[1])
-            rom_params = arr_params[2]
-            str_name = arr_params[3]
-            str_rom_file = arr_params[4]
-
-            if rom_slt == 99:
+            if rom_slt == 99 and str_rom_file:
                 rom_slt = free_slot
-
-            b_len = os.stat(str_rom_file).st_size
             if b_len != 0 and b_len % 16384 == 0:
                 LOGGER.debug('Looks like a ROM')
+
                 b_len = int(b_len / 16384)
+                if rom_slt + b_len > max_slots:
+                    str_err = f'Slot number too high ({rom_slt})'
+                    rom_slt = -1
 
                 if rom_slt in slot_use or rom_slt < 0 or rom_slt > max_slots:
                     str_err = f'Invalid slot number: {rom_slt}'
-                    rom_slt = -1
-
-                if rom_slt + b_len > max_slots:
-                    str_err = f'Slot number too high ({rom_slt})'
                     rom_slt = -1
 
                 rom_index = len(roms_list)
@@ -2606,21 +2502,20 @@ def inject_romdata(str_in_file, str_in_params, fullhash_dict, str_extension,
                         break
 
                 if rom_slt > -1:
-                    with open(str_rom_file, "rb") as in_zxdata:
-                        rom_data = in_zxdata.read()
+                    rom_data = None
+                    if str_rom_file:
+                        with open(str_rom_file, "rb") as in_zxdata:
+                            rom_data = in_zxdata.read()
 
-                    r_v = get_romdata_version(rom_data, fullhash_dict['ROM'])
-                    print(f'Injecting ROM {rom_slt} ({r_v[0]})...')
+                        r_v = get_romdata_version(rom_data,
+                                                  fullhash_dict['ROM'])
+                        print(f'Injecting ROM in slot {rom_slt} ({r_v[0]})...')
+                    else:
+                        print(f'Renaming ROM in slot {rom_slt}...')
 
-                    br_data, b_changed = inject_rom_tobin(b_data,
-                                                          block_info,
-                                                          block_bases,
-                                                          rom_index,
-                                                          rom_slt,
-                                                          str_name,
-                                                          rom_params,
-                                                          rom_data,
-                                                          roms_file=b_roms)
+                    br_data, b_changed = inject_rom_tobin(
+                        b_data, block_info, block_bases, rom_index, rom_slt,
+                        str_name, rom_params, rom_data, rom_crc, b_roms, b_len)
 
     if str_err:
         LOGGER.error(str_err)
@@ -2724,30 +2619,34 @@ def inject_rom_tobin(b_data,
                      rom_slt,
                      rom_name,
                      rom_params,
-                     rom_data,
+                     rom_data=None,
                      rom_crc=None,
-                     roms_file=False):
+                     roms_file=False,
+                     rom_len=0):
     """
-    Add binary data of a ROM to binary file data (SPI Flash or ROMS.ZX1)
+    Add binary data of a ROM to binary file data (SPI Flash or ROMS.ZX1) or
+    rename (and optionally change params) of existing ROM data
     :param b_data: SPI flash data obtained from str_in_file
     :param block_info: 'roms_dir' entry of hashes dict
     :param block_bases: 'roms_data' entry of hashes dict
     :param rom_index: ROM index number
     :param rom_slt: ROM slot number
     :param rom_name: String with ROM name
-    :param rom_params: String tiwh ROM params (icdnptsmhl172arxu)
-    :param rom_data: ROM binary data
+    :param rom_params: String with ROM params (icdnptsmhl172arxu)
+    :param rom_data: Optional ROM binary data (not needed to rename)
     :param rom_crc: Optional string with ROM crc16
     :param roms_file: If True, parse output data as ROMS.ZX1 file
+    :param rom_len: ROM size in 16K blocks (needed to rename)
     :return: Altered binary file data and boolean indicating if it changed
     """
     b_changed = False
     rom_split = int(block_info[5])
 
     rom_name = f'{rom_name[:32]:<32}'
-    rom_len = int(len(rom_data) / 16384)
-    if not rom_crc:
-        rom_crc = get_rom_crc(rom_data)
+    if rom_data:
+        rom_len = int(len(rom_data) / 16384)
+        if not rom_crc:
+            rom_crc = get_rom_crc(rom_data)
     rom_entry = new_romentry(rom_slt, rom_name, rom_len, rom_params, rom_crc)
 
     # Inject ROM entry
@@ -2765,20 +2664,23 @@ def inject_rom_tobin(b_data,
     cur_pos += rom_index + 1
 
     # Inject ROM binary data
-    for i in range(rom_len):
-        rom_offset = get_romb_offset(rom_slt + i, rom_split, block_bases,
-                                     roms_file)
-        if rom_offset > cur_pos:
-            if rom_offset + 16384 <= len(b_data):
-                br_data += b_data[cur_pos:rom_offset]
-                b_changed = True
-            else:
-                LOGGER.error('Flash image too small for: %s', rom_name)
-                b_changed = False
-                break
+    if rom_data:
+        for i in range(rom_len):
+            rom_offset = get_romb_offset(rom_slt + i, rom_split, block_bases,
+                                         roms_file)
+            if rom_offset > cur_pos:
+                if rom_offset + 16384 <= len(b_data):
+                    br_data += b_data[cur_pos:rom_offset]
+                    b_changed = True
+                else:
+                    LOGGER.error('Flash image too small for: %s', rom_name)
+                    b_changed = False
+                    break
 
-        br_data += rom_data[i * 16384:(i + 1) * 16384]
-        cur_pos = rom_offset + 16384
+            br_data += rom_data[i * 16384:(i + 1) * 16384]
+            cur_pos = rom_offset + 16384
+    else:
+        b_changed = True
 
     if b_changed:
         br_data += b_data[cur_pos:]
