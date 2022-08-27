@@ -43,20 +43,23 @@ Existen varias versiones de la utilidad, una que funciona en muchas plataformas 
 
 === MacOS
 
-El binario para MacOS no está firmado digitalmente, así que es necesario autorizar al sistema operativo para que abra la aplicación, usando el menú contextual del Finder y eligiendo "Abrir".
+El binario para MacOS no está firmado digitalmente, por lo que las versiones más recientes del sistema seguramente no confíen en él y muestren un aviso diciendo que el archivo está dañado y debe ser movido a la papelera.
 
 [.text-center]
 image:../img/MacOpenES.jpg[pdfwidth=50%]
 
-Alternativamente, se puede eliminar el atributo de cuarentena desde la Terminal con un comando como `xattr -d com.apple.quarantine "ZX123 Tool.app"`.
+Para poder utilizar la aplicación, asegúrese de que la ha obtenido de un lugar de confianza, y luego use Terminal con un comando como `xattr -d com.apple.quarantine "ZX123 Tool.app"` para ignorar el aviso.
+
+[.text-center]
+image:../img/RemoveQuarantine.jpg[pdfwidth=75%]
+
+<<<
 
 === Windows
 
 La versión de Windows requiere tener instalado Microsoft Visual C++ Redistributable 2015 en el sistema, y para Windows 7, además, las actualizaciones del paquete acumulativo KB4457144 o una versión superior.
 
 Una vez descomprimido el fichero descargado, se debe ejecutar el programa (`ZX123 Tool.exe`).
-
-<<<
 
 === Todas las plataformas
 

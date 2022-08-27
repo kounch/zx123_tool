@@ -43,20 +43,23 @@ There are different versions of the tool, one that works in a lot of platforms, 
 
 === MacOS
 
-The MacOS binary isn't digitally signed, so you have to authorize the operating system to open de app, using the Finder contextual menu and choosing "Open".
+The MacOS binary isn't digitally signed or notarized, so recent versions of MacOS may not trust it and report that the file is damaged, and should be moved to the bin.
 
 [.text-center]
 image:../img/MacOpenEN.jpg[pdfwidth=50%]
 
-Alternatively, you can remove the quarantine attribute from the Terminal with a command like `xattr -d com.apple.quarantine "ZX123 Tool.app"`.
+In order to use the app, make sure that you have downloaded it from a trusted source, and then use the Terminal with a command like `xattr -d com.apple.quarantine "ZX123 Tool.app"` to ignore the warning.
+
+[.text-center]
+image:../img/RemoveQuarantine.jpg[pdfwidth=75%]
+
+<<<
 
 === Windows
 
 The Windows binary release requires Microsoft Visual C++ Redistributable 2015 installed on your system and, for Windows 7, also Microsoft Quality Rollup KB4457144 or later.
 
 Once extracted, you have to run from the program (`ZX123 Tool.exe`) using Python 3.
-
-<<<
 
 === All platforms
 

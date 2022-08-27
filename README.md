@@ -34,7 +34,7 @@ These are the main features:
 - List, add or extract ROMs from a ROMPack v2 ROms file
 - For secondary cores, show information about some of the features that they may have (e.g. VGA video out, joystick support, supported SD or microSD formats, etc.)
 
-Please read [the user manual](https://kounch.github.io/zx123_tool/manual.html) available on [the official website](https://kounch.github.io/zx123_tool/) for more information.
+Please read [the user manual](https://kounch.github.io/zx123_tool/manual.html) available on [the official website](https://kounch.github.io/zx123_tool/) for installation instructions and more information.
 
 ## Castellano
 
@@ -54,7 +54,7 @@ Estas son sus funciones principales:
 - Mostrar, añadir o extraer ROMs de un fichero ROMPack v2
 - Para Cores secundarios, mostrar información sobre algunas de las características que podrían tener (Ej: Salida por VGA, uso de joystick, formato soportado de tarjeta SD o MicroSD, etc.)
 
-Por favor, lea [el manual de uso](https://kounch.github.io/zx123_tool/manual.html) disponible en [la web oficial](https://kounch.github.io/zx123_tool/) para más información.
+Por favor, lea [el manual de uso](https://kounch.github.io/zx123_tool/manual.html) disponible en [la web oficial](https://kounch.github.io/zx123_tool/) para obtener instrucciones de como instalarla y más información.
 
 ## License
 
