@@ -41,7 +41,12 @@ class NewEntryDialog:
         'u': 'Disable ULAPlus'
     }
 
-    def __init__(self, parent, str_name, b_core=False, b_alt=False):
+    def __init__(self,
+                 parent,
+                 str_name,
+                 b_core=False,
+                 b_alt=False,
+                 b_rename=False):
         self.parent = parent
 
         self.result_name = ''
@@ -52,7 +57,10 @@ class NewEntryDialog:
         self.top.transient(parent)
         self.top.grab_set()
         self.top.resizable(False, False)
-        self.top.title(f'New {str_name} Entry')
+        if b_rename:
+            self.top.title(f'Rename {str_name} Entry')
+        else:
+            self.top.title(f'New {str_name} Entry')
         self.top.bind('<Return>', self.do_ok)
 
         main_frame = ttk.Frame(self.top, padding=10)

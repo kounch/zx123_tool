@@ -301,7 +301,9 @@ class App(tk.Tk):
         self.filemenu.entryconfig(5, state='disabled')
         self.filemenu.entryconfig(6, state='disabled')
         self.filemenu.entryconfig(8, state='disabled', label='Show info')
+        self.filemenu.entryconfig(9, state='disabled', label='Rename')
         self.core_menu.entryconfig(0, state='disabled', label='Show info')
+        self.core_menu.entryconfig(1, state='disabled', label='Rename')
 
         self.image_label.config(text='No Image')
         self.bios.set('')
@@ -536,7 +538,7 @@ class App(tk.Tk):
         self.old_rom = dict_defaults['default_rom']
         self.default_rom.set(self.old_rom)
 
-    def show_info(self):
+    def show_core_info(self):
         """Show extra details for current selection in core table"""
         t_selection = self.core_table.selection()
         if len(t_selection) == 1:
@@ -572,6 +574,10 @@ class App(tk.Tk):
                 str_label = f'Show info for {str_text} {t_selection[0]}'
                 self.filemenu.entryconfig(8, state='normal', label=str_label)
                 self.core_menu.entryconfig(0, state='normal', label=str_label)
+                str_label = f'Rename {str_text} {t_selection[0]}'
+                self.filemenu.entryconfig(9, state='normal', label=str_label)
+                self.core_menu.entryconfig(1, state='normal', label=str_label)
+
         else:
             import_bttn['text'] = f'Add New {str_text}'
             export_bttn['text'] = f'Export {str_text}'
@@ -579,6 +585,9 @@ class App(tk.Tk):
             str_label = 'Show info'
             self.filemenu.entryconfig(8, state='disabled', label=str_label)
             self.core_menu.entryconfig(0, state='disabled', label=str_label)
+            str_label = 'Rename'
+            self.filemenu.entryconfig(9, state='disabled', label=str_label)
+            self.core_menu.entryconfig(1, state='disabled', label=str_label)
 
     def coretable_selected(self, *_):
         """
@@ -822,12 +831,18 @@ class App(tk.Tk):
         """Proxy to block_import for Spectrum Core export action"""
         self.block_export('spectrum')
 
-    def multi_import(self, str_name, treeview, b_core=False, b_alt=False):
+    def multi_import(self,
+                     str_name,
+                     treeview,
+                     b_core=False,
+                     b_alt=False,
+                     b_rename=False):
         """
         Generic core or ROM import to SPI flash Image
         :param str_name: Text to compose dialogs
         :param treeview: Reference to the table with (maybe) a selection
         :param b_core: If True, the selection is a Core, or else a ROM
+        :param b_rename: If True, only renaming. Do not ask for a file
         """
 
         self.menubar.entryconfig(0, state='disabled')
@@ -842,9 +857,11 @@ class App(tk.Tk):
             arr_format = [str_name]
         filetypes = [(f'{self.zxextension} {str_name} files',
                       f'.{str_extension}')]
-        str_file = fd.askopenfilename(parent=self,
-                                      title=f'Open a {str_name} file',
-                                      filetypes=filetypes)
+        str_file = None
+        if not b_rename:
+            str_file = fd.askopenfilename(parent=self,
+                                          title=f'Open a {str_name} file',
+                                          filetypes=filetypes)
 
         if str_file:
             b_block_ok, filetype = self.validate_file(str_file, arr_format)
@@ -854,14 +871,14 @@ class App(tk.Tk):
                 str_error += f' detected, and it should be a {str_name}.'
                 messagebox.showerror('Error', str_error, parent=self)
 
-        if str_file:
+        if b_rename or str_file:
             itm_indx = 99
             t_selection = treeview.selection()
             response = True
             if t_selection:
                 itm_indx = int(t_selection[0])
                 response = True
-                if self.dict_prefs.get('ask_replace', True):
+                if not b_rename and self.dict_prefs.get('ask_replace', True):
                     str_title = f'Replace {str_name}'
                     str_message = f'Do you want to replace {str_name} {itm_indx}?'
                     response = messagebox.askyesno(parent=self,
@@ -869,21 +886,27 @@ class App(tk.Tk):
                                                    title=str_title,
                                                    message=str_message)
             else:
-                if self.dict_prefs.get('ask_insert', False):
-                    str_title = f'Insert {str_name}'
-                    str_message = f'Do you want to insert a new {str_name}?'
-                    response = messagebox.askyesno(parent=self,
-                                                   icon='question',
-                                                   title=str_title,
-                                                   message=str_message)
+                if not b_rename:
+                    if self.dict_prefs.get('ask_insert', False):
+                        str_title = f'Insert {str_name}'
+                        str_message = f'Do you want to insert a new {str_name}?'
+                        response = messagebox.askyesno(parent=self,
+                                                       icon='question',
+                                                       title=str_title,
+                                                       message=str_message)
+                else:
+                    response = False
             if response:
                 str_dialog_name = f'{str_name}'
                 if itm_indx < 99:
                     str_dialog_name += f' {itm_indx}'
-                dialog = NewEntryDialog(self, str_dialog_name, b_core, b_alt)
+                dialog = NewEntryDialog(self, str_dialog_name, b_core, b_alt,
+                                        b_rename)
                 treeview.focus_force()
                 slot_name = dialog.result_name
-                slot_param = f'{str_name},{itm_indx},{slot_name},{str_file}'
+                slot_param = f'{str_name},{itm_indx},{slot_name}'
+                if str_file:
+                    slot_param += f',{str_file}'
                 if not b_core:
                     if itm_indx == 99:
                         slot_number = 99
@@ -891,7 +914,9 @@ class App(tk.Tk):
                         slot_number = treeview.item(itm_indx)['values'][1]
                     slot_extra = dialog.extra
                     slot_param = f'{str_name},{slot_number},{slot_extra}'
-                    slot_param += f',{slot_name},{str_file}'
+                    slot_param += f',{slot_name}'
+                    if str_file:
+                        slot_param += f',{str_file}'
                 if slot_name:
                     _, arr_err = zx123.inject_zxfiles(self.zxfilepath,
                                                       [slot_param],
@@ -935,6 +960,12 @@ class App(tk.Tk):
     def core_import(self):
         """Proxy to multi_import for secondary Core import action"""
         self.multi_import('Core', self.core_table, True)
+
+    def core_rename(self):
+        """Proxy to multi_import for secondary Core rename action"""
+        t_selection = self.core_table.selection()
+        if len(t_selection) == 1:
+            self.multi_import('Core', self.core_table, True, b_rename=True)
 
     def core_export(self):
         """Proxy to multi_import for secondary Core export action"""

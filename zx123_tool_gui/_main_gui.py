@@ -69,8 +69,11 @@ def build_menubar(self):
 
     filemenu.add_separator()
     filemenu.add_command(label='Get Core Info',
-                         command=self.show_info,
+                         command=self.show_core_info,
                          accelerator=f'{str_accl}i')
+    filemenu.add_command(label='Rename Core…',
+                         command=self.core_rename,
+                         accelerator=f'{str_accl}r')
     filemenu.add_command(label='Convert Core…', command=self.convert_core)
 
     if sys.platform != 'darwin':
@@ -123,7 +126,8 @@ def build_menubar(self):
     self.config(menu=menubar)
 
     core_menu = tk.Menu(self, tearoff=0)
-    core_menu.add_command(label="Show Info", command=self.show_info)
+    core_menu.add_command(label="Show Info", command=self.show_core_info)
+    core_menu.add_command(label="Rename", command=self.core_rename)
     self.core_menu = core_menu
 
     json_menu = tk.Menu(self, tearoff=0)
@@ -142,7 +146,9 @@ def build_menubar(self):
     self.filemenu.entryconfig(5, state='disabled')
     self.filemenu.entryconfig(6, state='disabled')
     self.filemenu.entryconfig(8, state='disabled')
+    self.filemenu.entryconfig(9, state='disabled')
     self.core_menu.entryconfig(0, state='disabled')
+    self.core_menu.entryconfig(1, state='disabled')
     self.json_menu.entryconfig(2, state='disabled')
 
 
@@ -157,7 +163,8 @@ def bind_keys(self, *_):
 
     self.bind_all(f'<{str_bind}n>', lambda event: self.new_image())
     self.bind_all(f'<{str_bind}o>', lambda event: self.open_file())
-    self.bind_all(f'<{str_bind}i>', lambda event: self.show_info())
+    self.bind_all(f'<{str_bind}i>', lambda event: self.show_core_info())
+    self.bind_all(f'<{str_bind}r>', lambda event: self.core_rename())
 
     if self.zxfilepath:
         self.filemenu.entryconfig(2,
