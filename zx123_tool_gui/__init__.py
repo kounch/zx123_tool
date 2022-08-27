@@ -118,8 +118,8 @@ class App(tk.Tk):
         self.update_idletasks()
         if self.dict_prefs.get('remember_pos', False):
             height, width = self.winfo_height(), self.winfo_width()
-            x_pos, y_pos = self.dict_prefs.get('mainwindow',
-                                               (self.winfo_x, self.winfo_y))
+            x_pos, y_pos = self.dict_prefs.get(
+                'mainwindow', (self.winfo_x(), self.winfo_y()))
             self.geometry(f'{width}x{height}+{x_pos}+{y_pos}')
         else:
             self.tk.eval(f'tk::PlaceWindow {self._w} center')

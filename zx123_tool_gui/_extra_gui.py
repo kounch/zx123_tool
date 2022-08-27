@@ -123,6 +123,7 @@ class NewEntryDialog:
 
 class InfoWindow:
     """Custom Window to Show Core or ROM info"""
+
     def __init__(self, parent, str_name, dict_data):
         self.parent = parent
 
@@ -248,6 +249,7 @@ class ROMPWindow:
 
 class ProgressWindow:
     """Custom Window to Show Progress"""
+
     def __init__(self, parent, str_title):
         self.parent = parent
 
@@ -292,6 +294,7 @@ class ProgressWindow:
 
 class PrefWindow:
     """Custom Window to Show Preferences"""
+
     def __init__(self, parent):
         self.parent = parent
 
@@ -341,7 +344,7 @@ class PrefWindow:
             self.top.update_idletasks()
             height, width = self.top.winfo_height(), self.top.winfo_width()
             x_pos, y_pos = self.parent.dict_prefs.get(
-                'prefwindow', (self.top.winfo_x, self.top.winfo_y))
+                'prefwindow', (self.top.winfo_x(), self.top.winfo_y()))
             self.top.geometry(f'{width}x{height}+{x_pos}+{y_pos}')
         else:
             center_on_parent(parent, self.top)

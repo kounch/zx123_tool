@@ -53,7 +53,7 @@ if sys.version_info.major == 3:
 if os.name == 'nt':
     import msvcrt  # pylint: disable=import-error
 
-__MY_VERSION__ = '3.5.1'
+__MY_VERSION__ = '3.5.2'
 
 MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
 MY_DIRPATH = os.path.dirname(sys.argv[0])
@@ -290,7 +290,7 @@ def parse_args():
     Parses command line
     :return: Dictionary with different options
     """
-    global LOGGER  # pylint: disable=global-statement
+    global LOGGER  # pylint: disable=global-variable-not-assigned
     global IS_COL_TERM  # pylint: disable=global-statement
 
     values = {}
@@ -709,7 +709,7 @@ def detect_file(str_file, fulldict_hash):
                 'BIOS': 'BIOS',
                 'exdos': 'esxdos'
             }
-            for key_valid,filetype_valid in dict_valid.items():
+            for key_valid, filetype_valid in dict_valid.items():
                 if key_valid in dict_hash['parts']:
                     if validate_file(str_file,
                                      dict_hash['parts'][key_valid][3]):
