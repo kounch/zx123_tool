@@ -1,5 +1,5 @@
 {
-    "version": "20220826.001",
+    "version": "20220827.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -3952,6 +3952,21 @@
                 "versions": {
                     "2021.08.12": "014e8ba922e3ee5410c7b8280dfb46157e8a421687592dace05b650179ad095f",
                     "1.0": "9721cfba865c7c34b6d14598154b43d601bf548940fc87ee828fae0258901ace"
+                }
+            },
+            "Oric Atmos (Rampa)": {
+                "features": {
+                    "Video": [["VGA", "RGB"], ""],
+                    "Audio": [["AY-3-8910"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["PS/2 Keyboard"], ""],
+                    "Other": [["Audio In Tape Load", "Audio Out Tape Save", "EDSK Disk Image Support", "Sedoric/OricDOS compatible"], ""]
+                },
+                "latest": [
+                    "2022.08.27"
+                ],
+                "versions": {
+                    "2022.08.27": "aabe03e254f1db7dea3e72bc328854ddad123102c0565067cf4f847d9fbda20f"
                 }
             },
             "PC XT": {
