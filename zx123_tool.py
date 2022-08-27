@@ -195,6 +195,17 @@ def main():
             else:
                 LOGGER.error('Not a valid filetype: %s', str_extension)
 
+        # Rename Cores and/or ROMs
+        if arg_data['rename']:
+            if str_extension in supported_exts:
+                b_force = arg_data['force']
+                if not output_file:
+                    output_file = str_file
+                rename_zxfiles(str_file, arg_data['rename'], output_file,
+                               fulldict_hash, str_extension, b_force)
+            else:
+                LOGGER.error('Not a valid filetype: %s', str_extension)
+
         # Truncate image
         elif arg_data['output_file'] and not arg_data['wipe_flash']:
             savefrom_zxdata(str_file, dict_hash, arg_data['output_file'],
@@ -306,6 +317,7 @@ def parse_args():
     values['extract'] = []
     values['n_cores'] = -1
     values['inject'] = []
+    values['rename'] = []
     values['wipe_flash'] = False
     values['expand_flash'] = False
     values['convert_core'] = False
@@ -394,6 +406,12 @@ def parse_args():
                         action='append',
                         dest='inject',
                         help='Item to inject')
+    parser.add_argument('-R',
+                        '--rename',
+                        required=False,
+                        action='append',
+                        dest='rename',
+                        help='Item to rename')
     parser.add_argument('-w',
                         '--wipe',
                         required=False,
@@ -532,6 +550,9 @@ def parse_args():
 
     if arguments.inject:
         values['inject'] = arguments.inject
+
+    if arguments.rename:
+        values['rename'] = arguments.rename
 
     if arguments.wipe_flash:
         values['wipe_flash'] = arguments.wipe_flash
@@ -1670,6 +1691,66 @@ def inject_zxfiles(str_spi_file,
     return b_force, arr_err
 
 
+def rename_zxfiles(str_spi_file,
+                   arr_in_files,
+                   str_outfile,
+                   fullhash_dict,
+                   str_extension,
+                   b_force=False,
+                   w_progress=None):
+    """
+    Rename Core or ROM in SPI flash or ROMPackV2 file
+    :param str_spi_file: Input SPI flash or ROMPack v2 file
+    :param arr_in_files: Array with items to rename
+    :param str_outfile: New SPI flash file to create
+    :param fullhash_dict: Dictionary with hashes data
+    :param str_extension: SPI Flash extension (or RPv2 for ROMPack v2)
+    :param b_force: Force overwriting file
+    :return: Updated b_force and string array with errors (if any)
+    """
+    arr_err = []
+    b_changed = False
+    hash_dict = fullhash_dict[str_extension]
+
+    LOGGER.debug('Reading Destination File...')
+    b_len = os.stat(str_spi_file).st_size
+    with open(str_spi_file, "rb") as in_zxdata:
+        b_data = in_zxdata.read(b_len)
+
+    for str_in_params in arr_in_files:
+        # Rename Cores
+        b_data, b_chg, str_err = rename_coredata(str_in_params,
+                                                 hash_dict,
+                                                 b_data,
+                                                 w_progress=w_progress)
+        b_changed |= b_chg
+        if str_err:
+            arr_err.append(str_err)
+        # Rename ZX Spectrum ROMs
+        #b_data, b_chg, str_err = rename_romdata(str_spi_file, str_in_params,
+        #                                        fullhash_dict, str_extension,
+        #                                        b_data)
+        #b_changed |= b_chg
+        #if str_err:
+        #    arr_err.append(str_err)
+        ## Rename ZX Spectrum ROMs from ROMPack
+        #b_data, b_chg, str_err = rename_romszx1data(str_in_params,
+        #                                            fullhash_dict,
+        #                                            str_extension, b_data)
+        #b_changed |= b_chg
+        #if str_err:
+        #    arr_err.append(str_err)
+
+    if b_changed:
+        if b_force or check_overwrite(str_outfile):
+            b_force = True
+            with open(str_outfile, "wb") as out_zxdata:
+                out_zxdata.write(b_data)
+                print(f'{str_outfile} created OK.')
+
+    return b_force, arr_err
+
+
 def savefrom_zxdata(str_in_file,
                     hash_dict,
                     str_outfile,
@@ -2375,6 +2456,72 @@ def inject_coredata(str_in_params, hash_dict, b_data, w_progress=None):
 
                         br_data += b_data[b_offset + b_len:]
                         b_changed = True
+
+    if str_err:
+        LOGGER.error(str_err)
+    return br_data, b_changed, str_err
+
+
+def rename_coredata(str_in_params, hash_dict, b_data, w_progress=None):
+    """
+    Rename core in SPI flash data
+    :param str_in_params: String with CORE, and, separated with ',': core
+     number and core name
+    :param hash_dict: Dictionary with hashes for different blocks
+    :param b_data: SPI flash data
+    :return: Altered binary data, boolean indicating changed and error string
+    """
+    str_err = ''
+    b_changed = False
+    dict_parts = hash_dict['parts']
+
+    arr_params = str_in_params.split(',')
+    br_data = b_data
+
+    if arr_params[0].upper() == 'CORE':  # Number, Name
+        block_info = dict_parts.get('cores_dir', [])
+        max_cores = splitcore_index = int(block_info[4])
+        if len(block_info) > 5:
+            max_cores += int(block_info[5])
+        core_bases = dict_parts['core_base']
+        b_len = int(core_bases[1])
+
+        bl_data = b_data[int(block_info[0]):int(block_info[0]) +
+                         int(block_info[1])]
+        core_list = get_core_list_bindata(bl_data, dict_parts)
+
+        if len(arr_params) != 3:
+            str_err = f'Invalid argument: {str_in_params}'
+        else:
+            core_index = int(arr_params[1])
+            str_name = f'{arr_params[2][:32]:<32}'
+
+            if core_index < 2 or core_index > len(core_list) + 1:
+                str_err = f'Invalid core index: {core_index})'
+            else:
+                str_message = f'Renaming core {core_index}:'
+                # ----> str_message += f' {core_name} ({block_version})...'
+                if w_progress:
+                    w_progress.update(str_message)
+                else:
+                    print(str_message)
+                core_index -= 2
+                block_data = get_core_blockdata(core_index, splitcore_index,
+                                                core_bases)
+                b_offset, b_len = block_data
+                LOGGER.debug('Offset: %X (%i)', b_offset, b_offset)
+
+                if b_offset + b_len > len(b_data):
+                    str_err = 'Flash image too small for data'
+                else:
+                    core_index = 0x100 + core_index * 32
+                    bl_data = bl_data[:core_index] + bytes(
+                        str_name, 'utf-8') + bl_data[core_index + 32:]
+
+                    br_data = b_data[:int(block_info[0])] + bl_data
+                    br_data += b_data[int(block_info[0]) + int(block_info[1]):]
+
+                    b_changed = True
 
     if str_err:
         LOGGER.error(str_err)
