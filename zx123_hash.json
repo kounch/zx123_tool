@@ -1,5 +1,5 @@
 {
-    "version": "20220827.001",
+    "version": "20220827.002",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -787,7 +787,8 @@
                     "2022.08.02"
                 ],
                 "versions": {
-                    "2022.08.02": "0685dc14b9ea7d490d4e4c84c95a426bdebacfd3c314ca1979f61a4dc707d9e7"
+                    "2022.08.02": "0685dc14b9ea7d490d4e4c84c95a426bdebacfd3c314ca1979f61a4dc707d9e7",
+                    "2022.08.27": "a5c85773e31043474643118a5e192199d8a37d21e93ac5e805166cdd048e2a58"
                 }
             },
             "Orion 2010": {
