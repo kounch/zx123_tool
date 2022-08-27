@@ -252,6 +252,9 @@ Alternativamente, si no se dispone de Python 3, se puede invocar directamente al
             CORE,Número,Nombre a usar,Ruta a fichero de core
             ROM,Slot,Parámetros,Nombre a usar,Ruta a ROM de Spectrum
             ROMS,Ruta a un archivo RomPack con varias ROMs
+  -R DATOS, --rename Datos
+        Datos de un elemento a renombrar (core o ROM) con el mismo formato
+        que al añadir, pero sin nombre de fichero
 -w, --wipe           Borrar todas las ROMs y todos los cores secundarios
 -e, --32             Expandir, si hiciera falta la imagen a 32MiB
 -t, --convert   Convierte entre core estándar y core de Spectrum
