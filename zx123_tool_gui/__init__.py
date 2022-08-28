@@ -42,6 +42,7 @@ class App(tk.Tk):
     from ._main_gui import build_menubar
     from ._main_gui import bind_keys
     from ._main_gui import core_menu_popup
+    from ._main_gui import rom_menu_popup
     from ._main_gui import json_menu_popup
     from ._main_gui import create_labels
     from ._main_gui import create_entries
@@ -54,6 +55,9 @@ class App(tk.Tk):
     from ._main_gui import changed_keyboard_spinbox
     from ._main_gui import changed_video_spinbox
     from ._main_gui import changed_rom_spinbox
+    from ._main_gui import process_selected
+    from ._main_gui import coretable_selected
+    from ._main_gui import romtable_selected
 
     def __init__(self):
 
@@ -298,6 +302,7 @@ class App(tk.Tk):
         self.filemenu.entryconfig(9, state='disabled', label='Rename')
         self.core_menu.entryconfig(0, state='disabled', label='Show info')
         self.core_menu.entryconfig(1, state='disabled', label='Rename')
+        self.rom_menu.entryconfig(0, state='disabled', label='Rename')
 
         self.image_label.config(text='No Image')
         self.bios.set('')
@@ -547,65 +552,6 @@ class App(tk.Tk):
             dict_res['detail'] = dict_core.get('features', {})
 
             InfoWindow(self, str_name, dict_res)
-
-    def process_selected(self, treeview, import_bttn, export_bttn, str_text):
-        """
-        Configure buttons according to the selections sent by ..._selected...
-        :param treeview: Origin of the selection event
-        :param import_bttn: Associated import button
-        :param export_bttn: Associated export button
-        :param str_text: Associated text to compose the buttons content
-        """
-
-        t_selection = treeview.selection()
-        if t_selection:
-            import_bttn['text'] = f'Replace {str_text} {t_selection[0]}'
-            export_bttn.state(['!disabled'])
-            if len(t_selection) > 1:
-                export_bttn['text'] = f'Export {str_text}s'
-                str_label = 'Show info'
-                self.filemenu.entryconfig(8, state='disabled', label=str_label)
-                self.core_menu.entryconfig(0,
-                                           state='disabled',
-                                           label=str_label)
-                str_label = 'Rename'
-                self.filemenu.entryconfig(9, state='disabled', label=str_label)
-                self.core_menu.entryconfig(1,
-                                           state='disabled',
-                                           label=str_label)
-            else:
-                export_bttn['text'] = f'Export {str_text} {t_selection[0]}'
-                str_label = f'Show info for {str_text} {t_selection[0]}'
-                self.filemenu.entryconfig(8, state='normal', label=str_label)
-                self.core_menu.entryconfig(0, state='normal', label=str_label)
-                str_label = f'Rename {str_text} {t_selection[0]}'
-                self.filemenu.entryconfig(9, state='normal', label=str_label)
-                self.core_menu.entryconfig(1, state='normal', label=str_label)
-
-        else:
-            import_bttn['text'] = f'Add New {str_text}'
-            export_bttn['text'] = f'Export {str_text}'
-            export_bttn.state(['disabled'])
-            str_label = 'Show info'
-            self.filemenu.entryconfig(8, state='disabled', label=str_label)
-            self.core_menu.entryconfig(0, state='disabled', label=str_label)
-            str_label = 'Rename'
-            self.filemenu.entryconfig(9, state='disabled', label=str_label)
-            self.core_menu.entryconfig(1, state='disabled', label=str_label)
-
-    def coretable_selected(self, *_):
-        """
-        Configure Cores Data Table buttons depending on selected cores
-        """
-        self.process_selected(self.core_table, self.core_import_button,
-                              self.core_export_button, 'Core')
-
-    def romtable_selected(self, *_):
-        """
-        Configure ROMs Data Table buttons depending on selected ROMs
-        """
-        self.process_selected(self.rom_table, self.rom_import_button,
-                              self.rom_export_button, 'ROM')
 
     def validate_file(self, str_file, arr_format):
         """
@@ -941,6 +887,12 @@ class App(tk.Tk):
     def rom_import_y(self, *_):
         """Proxy to multi_import for ROM import action"""
         self.multi_import('ROM', self.rom_table, False, True)
+
+    def rom_rename(self):
+        """Proxy to multi_import for ROM rename action"""
+        t_selection = self.rom_table.selection()
+        if len(t_selection) == 1:
+            self.multi_import('ROM', self.rom_table, False, b_rename=True)
 
     def rom_export(self):
         """Proxy to multi_import for ROM export action"""

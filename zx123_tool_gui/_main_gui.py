@@ -130,6 +130,10 @@ def build_menubar(self):
     core_menu.add_command(label="Rename", command=self.core_rename)
     self.core_menu = core_menu
 
+    rom_menu = tk.Menu(self, tearoff=0)
+    rom_menu.add_command(label="Rename", command=self.rom_rename)
+    self.rom_menu = rom_menu
+
     json_menu = tk.Menu(self, tearoff=0)
     json_menu.add_command(label="Update Database", command=self.update_json)
     json_menu.add_separator()
@@ -149,6 +153,7 @@ def build_menubar(self):
     self.filemenu.entryconfig(9, state='disabled')
     self.core_menu.entryconfig(0, state='disabled')
     self.core_menu.entryconfig(1, state='disabled')
+    self.rom_menu.entryconfig(0, state='disabled')
     self.json_menu.entryconfig(2, state='disabled')
 
 
@@ -186,6 +191,14 @@ def core_menu_popup(self, event):
         self.core_menu.tk_popup(event.x_root, event.y_root, 0)
     finally:
         self.core_menu.grab_release()
+
+
+def rom_menu_popup(self, event):
+    """Contextual Menu Handling for ROM table"""
+    try:
+        self.rom_menu.tk_popup(event.x_root, event.y_root, 0)
+    finally:
+        self.rom_menu.grab_release()
 
 
 def json_menu_popup(self, event):
@@ -395,6 +408,7 @@ def create_rom_table(self, height=11):
         rom_table.column(col_name, anchor=tk.W, width=col_sizes[index])
         rom_table.heading(col_name, text=col_name.upper(), anchor=tk.CENTER)
     rom_table.bind('<<TreeviewSelect>>', self.romtable_selected)
+    rom_table.bind('<Button-2>', self.rom_menu_popup)
 
     rom_scrollbar = ttk.Scrollbar(self.roms_frame,
                                   orient=tk.VERTICAL,
@@ -570,3 +584,83 @@ def changed_rom_spinbox(self, *_):
     """Proxy to changed_bios_spinbox for default ROM changed action"""
     self.changed_bios_spinbox(self.default_rom, 0,
                               len(self.rom_table.get_children()) - 1)
+
+
+def process_selected(self, treeview, treeview_menu, import_bttn, export_bttn,
+                     str_text):
+    """
+        Configure buttons according to the selections sent by ..._selected...
+        :param treeview: Origin of the selection event
+        :param import_bttn: Associated import button
+        :param export_bttn: Associated export button
+        :param str_text: Associated text to compose the buttons content
+        """
+
+    t_selection = treeview.selection()
+    if t_selection:
+        import_bttn['text'] = f'Replace {str_text} {t_selection[0]}'
+        export_bttn.state(['!disabled'])
+        if len(t_selection) > 1:
+            export_bttn['text'] = f'Export {str_text}s'
+            str_label = 'Show info'
+            n_entry = 0
+            if treeview_menu == self.core_menu:
+                self.filemenu.entryconfig(8, state='disabled', label=str_label)
+                treeview_menu.entryconfig(n_entry,
+                                          state='disabled',
+                                          label=str_label)
+                n_entry = 1
+            str_label = 'Rename'
+            if treeview_menu == self.core_menu:
+                self.filemenu.entryconfig(9, state='disabled', label=str_label)
+            treeview_menu.entryconfig(n_entry,
+                                      state='disabled',
+                                      label=str_label)
+        else:
+            export_bttn['text'] = f'Export {str_text} {t_selection[0]}'
+            n_entry = 0
+            if treeview_menu == self.core_menu:
+                str_label = f'Show info for {str_text} {t_selection[0]}'
+                self.filemenu.entryconfig(8, state='normal', label=str_label)
+                treeview_menu.entryconfig(n_entry,
+                                          state='normal',
+                                          label=str_label)
+                n_entry = 1
+            str_label = f'Rename {str_text} {t_selection[0]}'
+            if treeview_menu == self.core_menu:
+                self.filemenu.entryconfig(9, state='normal', label=str_label)
+            treeview_menu.entryconfig(n_entry, state='normal', label=str_label)
+    else:
+        import_bttn['text'] = f'Add New {str_text}'
+        export_bttn['text'] = f'Export {str_text}'
+        export_bttn.state(['disabled'])
+        str_label = 'Show info'
+        n_entry = 0
+        if treeview_menu == self.core_menu:
+            self.filemenu.entryconfig(8, state='disabled', label=str_label)
+            treeview_menu.entryconfig(n_entry,
+                                      state='disabled',
+                                      label=str_label)
+            n_entry = 1
+        str_label = 'Rename'
+        if treeview_menu == self.core_menu:
+            self.filemenu.entryconfig(9, state='disabled', label=str_label)
+        treeview_menu.entryconfig(n_entry, state='disabled', label=str_label)
+
+
+def coretable_selected(self, *_):
+    """
+    Configure Cores Data Table buttons depending on selected cores
+    """
+    self.process_selected(self.core_table, self.core_menu,
+                          self.core_import_button, self.core_export_button,
+                          'Core')
+
+
+def romtable_selected(self, *_):
+    """
+    Configure ROMs Data Table buttons depending on selected ROMs
+    """
+    self.process_selected(self.rom_table, self.rom_menu,
+                          self.rom_import_button, self.rom_export_button,
+                          'ROM')
