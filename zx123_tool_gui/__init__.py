@@ -41,11 +41,23 @@ class App(tk.Tk):
 
     from ._main_gui import build_menubar
     from ._main_gui import bind_keys
+    from ._main_gui import core_menu_popup
+    from ._main_gui import rom_menu_popup
+    from ._main_gui import json_menu_popup
     from ._main_gui import create_labels
     from ._main_gui import create_entries
     from ._main_gui import create_core_table, create_rom_table
     from ._main_gui import create_buttons
     from ._main_gui import populate_cores, populate_roms
+    from ._main_gui import changed_bios_spinbox
+    from ._main_gui import changed_core_spinbox
+    from ._main_gui import changed_timer_spinbox
+    from ._main_gui import changed_keyboard_spinbox
+    from ._main_gui import changed_video_spinbox
+    from ._main_gui import changed_rom_spinbox
+    from ._main_gui import process_selected
+    from ._main_gui import coretable_selected
+    from ._main_gui import romtable_selected
 
     def __init__(self):
 
@@ -205,20 +217,6 @@ class App(tk.Tk):
         fulldict_hash = zx123.load_json_bd(base_dir=JSON_DIR)
         self.fulldict_hash = fulldict_hash
 
-    def core_menu_popup(self, event):
-        """Contextual Menu Handling for core table"""
-        try:
-            self.core_menu.tk_popup(event.x_root, event.y_root, 0)
-        finally:
-            self.core_menu.grab_release()
-
-    def json_menu_popup(self, event):
-        """Contextual Menu Handling for JSON Version Label"""
-        try:
-            self.json_menu.tk_popup(event.x_root, event.y_root, 0)
-        finally:
-            self.json_menu.grab_release()
-
     def update_json(self):
         """Update JSON Database and show in GUI"""
         fulldict_hash = zx123.load_json_bd(base_dir=JSON_DIR,
@@ -301,7 +299,10 @@ class App(tk.Tk):
         self.filemenu.entryconfig(5, state='disabled')
         self.filemenu.entryconfig(6, state='disabled')
         self.filemenu.entryconfig(8, state='disabled', label='Show info')
+        self.filemenu.entryconfig(9, state='disabled', label='Rename')
         self.core_menu.entryconfig(0, state='disabled', label='Show info')
+        self.core_menu.entryconfig(1, state='disabled', label='Rename')
+        self.rom_menu.entryconfig(0, state='disabled', label='Rename')
 
         self.image_label.config(text='No Image')
         self.bios.set('')
@@ -536,7 +537,7 @@ class App(tk.Tk):
         self.old_rom = dict_defaults['default_rom']
         self.default_rom.set(self.old_rom)
 
-    def show_info(self):
+    def show_core_info(self):
         """Show extra details for current selection in core table"""
         t_selection = self.core_table.selection()
         if len(t_selection) == 1:
@@ -551,48 +552,6 @@ class App(tk.Tk):
             dict_res['detail'] = dict_core.get('features', {})
 
             InfoWindow(self, str_name, dict_res)
-
-    def process_selected(self, treeview, import_bttn, export_bttn, str_text):
-        """
-        Configure buttons according to the selections sent by ..._selected...
-        :param treeview: Origin of the selection event
-        :param import_bttn: Associated import button
-        :param export_bttn: Associated export button
-        :param str_text: Associated text to compose the buttons content
-        """
-
-        t_selection = treeview.selection()
-        if t_selection:
-            import_bttn['text'] = f'Replace {str_text} {t_selection[0]}'
-            export_bttn.state(['!disabled'])
-            if len(t_selection) > 1:
-                export_bttn['text'] = f'Export {str_text}s'
-            else:
-                export_bttn['text'] = f'Export {str_text} {t_selection[0]}'
-                str_label = f'Show info for {str_text} {t_selection[0]}'
-                self.filemenu.entryconfig(8, state='normal', label=str_label)
-                self.core_menu.entryconfig(0, state='normal', label=str_label)
-        else:
-            import_bttn['text'] = f'Add New {str_text}'
-            export_bttn['text'] = f'Export {str_text}'
-            export_bttn.state(['disabled'])
-            str_label = 'Show info'
-            self.filemenu.entryconfig(8, state='disabled', label=str_label)
-            self.core_menu.entryconfig(0, state='disabled', label=str_label)
-
-    def coretable_selected(self, *_):
-        """
-        Configure Cores Data Table buttons depending on selected cores
-        """
-        self.process_selected(self.core_table, self.core_import_button,
-                              self.core_export_button, 'Core')
-
-    def romtable_selected(self, *_):
-        """
-        Configure ROMs Data Table buttons depending on selected ROMs
-        """
-        self.process_selected(self.rom_table, self.rom_import_button,
-                              self.rom_export_button, 'ROM')
 
     def validate_file(self, str_file, arr_format):
         """
@@ -684,47 +643,6 @@ class App(tk.Tk):
         self.old_rom = self.set_default_bios(
             self.default_rom, 0, self.old_rom,
             len(self.rom_table.get_children()) - 1, 'rom')
-
-    def changed_bios_spinbox(self, bios_value, min_val, max_val):
-        """
-        Process default bios setting change event, and enforce limits if needed
-        :param bios_value: Variable associated to spinbox content
-        :param min_val: Minimum valid value
-        :param max_val: Maximum valid value
-        """
-        new_val = bios_value.get()
-        if new_val.isnumeric():
-            new_val = int(new_val)
-            if new_val < min_val:
-                new_val = min_val
-            if new_val > max_val:
-                new_val = max_val
-        else:
-            new_val = min_val
-
-        bios_value.set(new_val)
-
-    def changed_core_spinbox(self, *_):
-        """Proxy to changed_bios_spinbox for default Core changed action"""
-        self.changed_bios_spinbox(self.default_core, 1,
-                                  len(self.core_table.get_children()) + 1)
-
-    def changed_timer_spinbox(self, *_):
-        """Proxy to changed_bios_spinbox for default timer changed action"""
-        self.changed_bios_spinbox(self.default_timer, 0, 4)
-
-    def changed_keyboard_spinbox(self, *_):
-        """Proxy to changed_bios_spinbox for default keyboard changed action"""
-        self.changed_bios_spinbox(self.default_keyboard, 0, 3)
-
-    def changed_video_spinbox(self, *_):
-        """Proxy to changed_bios_spinbox for default video changed action"""
-        self.changed_bios_spinbox(self.default_video, 0, 2)
-
-    def changed_rom_spinbox(self, *_):
-        """Proxy to changed_bios_spinbox for default ROM changed action"""
-        self.changed_bios_spinbox(self.default_rom, 0,
-                                  len(self.rom_table.get_children()) - 1)
 
     def block_import(self, str_block, extra_exts=None):
         """
@@ -822,12 +740,18 @@ class App(tk.Tk):
         """Proxy to block_import for Spectrum Core export action"""
         self.block_export('spectrum')
 
-    def multi_import(self, str_name, treeview, b_core=False, b_alt=False):
+    def multi_import(self,
+                     str_name,
+                     treeview,
+                     b_core=False,
+                     b_alt=False,
+                     b_rename=False):
         """
         Generic core or ROM import to SPI flash Image
         :param str_name: Text to compose dialogs
         :param treeview: Reference to the table with (maybe) a selection
         :param b_core: If True, the selection is a Core, or else a ROM
+        :param b_rename: If True, only renaming. Do not ask for a file
         """
 
         self.menubar.entryconfig(0, state='disabled')
@@ -842,9 +766,11 @@ class App(tk.Tk):
             arr_format = [str_name]
         filetypes = [(f'{self.zxextension} {str_name} files',
                       f'.{str_extension}')]
-        str_file = fd.askopenfilename(parent=self,
-                                      title=f'Open a {str_name} file',
-                                      filetypes=filetypes)
+        str_file = None
+        if not b_rename:
+            str_file = fd.askopenfilename(parent=self,
+                                          title=f'Open a {str_name} file',
+                                          filetypes=filetypes)
 
         if str_file:
             b_block_ok, filetype = self.validate_file(str_file, arr_format)
@@ -854,14 +780,14 @@ class App(tk.Tk):
                 str_error += f' detected, and it should be a {str_name}.'
                 messagebox.showerror('Error', str_error, parent=self)
 
-        if str_file:
+        if b_rename or str_file:
             itm_indx = 99
             t_selection = treeview.selection()
             response = True
             if t_selection:
                 itm_indx = int(t_selection[0])
                 response = True
-                if self.dict_prefs.get('ask_replace', True):
+                if not b_rename and self.dict_prefs.get('ask_replace', True):
                     str_title = f'Replace {str_name}'
                     str_message = f'Do you want to replace {str_name} {itm_indx}?'
                     response = messagebox.askyesno(parent=self,
@@ -869,21 +795,27 @@ class App(tk.Tk):
                                                    title=str_title,
                                                    message=str_message)
             else:
-                if self.dict_prefs.get('ask_insert', False):
-                    str_title = f'Insert {str_name}'
-                    str_message = f'Do you want to insert a new {str_name}?'
-                    response = messagebox.askyesno(parent=self,
-                                                   icon='question',
-                                                   title=str_title,
-                                                   message=str_message)
+                if not b_rename:
+                    if self.dict_prefs.get('ask_insert', False):
+                        str_title = f'Insert {str_name}'
+                        str_message = f'Do you want to insert a new {str_name}?'
+                        response = messagebox.askyesno(parent=self,
+                                                       icon='question',
+                                                       title=str_title,
+                                                       message=str_message)
+                else:
+                    response = False
             if response:
                 str_dialog_name = f'{str_name}'
                 if itm_indx < 99:
                     str_dialog_name += f' {itm_indx}'
-                dialog = NewEntryDialog(self, str_dialog_name, b_core, b_alt)
+                dialog = NewEntryDialog(self, str_dialog_name, b_core, b_alt,
+                                        b_rename)
                 treeview.focus_force()
                 slot_name = dialog.result_name
-                slot_param = f'{str_name},{itm_indx},{slot_name},{str_file}'
+                slot_param = f'{str_name},{itm_indx},{slot_name}'
+                if str_file:
+                    slot_param += f',{str_file}'
                 if not b_core:
                     if itm_indx == 99:
                         slot_number = 99
@@ -891,7 +823,9 @@ class App(tk.Tk):
                         slot_number = treeview.item(itm_indx)['values'][1]
                     slot_extra = dialog.extra
                     slot_param = f'{str_name},{slot_number},{slot_extra}'
-                    slot_param += f',{slot_name},{str_file}'
+                    slot_param += f',{slot_name}'
+                    if str_file:
+                        slot_param += f',{str_file}'
                 if slot_name:
                     _, arr_err = zx123.inject_zxfiles(self.zxfilepath,
                                                       [slot_param],
@@ -936,6 +870,12 @@ class App(tk.Tk):
         """Proxy to multi_import for secondary Core import action"""
         self.multi_import('Core', self.core_table, True)
 
+    def core_rename(self):
+        """Proxy to multi_import for secondary Core rename action"""
+        t_selection = self.core_table.selection()
+        if len(t_selection) == 1:
+            self.multi_import('Core', self.core_table, True, b_rename=True)
+
     def core_export(self):
         """Proxy to multi_import for secondary Core export action"""
         self.multi_export('Core', self.core_table, True)
@@ -947,6 +887,12 @@ class App(tk.Tk):
     def rom_import_y(self, *_):
         """Proxy to multi_import for ROM import action"""
         self.multi_import('ROM', self.rom_table, False, True)
+
+    def rom_rename(self):
+        """Proxy to multi_import for ROM rename action"""
+        t_selection = self.rom_table.selection()
+        if len(t_selection) == 1:
+            self.multi_import('ROM', self.rom_table, False, b_rename=True)
 
     def rom_export(self):
         """Proxy to multi_import for ROM export action"""

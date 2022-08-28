@@ -1,11 +1,11 @@
 = Manual de ZX123 Tool
 :author: kounch
-:revnumber: 1.0.3
+:revnumber: 1.1.0
 :doctype: book
 :notitle:
 :front-cover-image: image:../img/Portada.jpg[]
 :email: kounch@users.noreply.github.com
-:Revision: 1.0
+:Revision: 1.1
 :description: Manual en Castellano de ZX123 Tool
 :keywords: Manual, Castellano, ZX123 Tool, ZX-Uno, ZXDOS, ZXDOS+
 :icons: font
@@ -158,6 +158,13 @@ Por otra parte, cuando está seleccionado uno o más cores, es posible sustituir
 [.text-center]
 image:../img/CoresSelect.jpg[pdfwidth=25%]
 
+También, cuando sólo se ha seleccionado un único core, es posible obtener información del mismo o cambiar el nombre que se muestra, bien utilizando las opciones en el menú, o bien haciendo un clic secundario sobre la lista de cores.
+
+[.text-center]
+image:../img/CoreRename.jpg[pdfwidth=25%]
+
+<<<
+
 ==== ROMs de Spectrum
 
 Si no está seleccionada ninguna ROM de la lista correspondiente, es posible utilizar el botón para añadir (Add) una nueva. También es posible reemplazar o exportar todas las ROMs de la imagen usando un único un fichero ROMPack (v1).
@@ -170,7 +177,10 @@ Por otra parte, cuando está seleccionada una o más ROMs, es posible sustituir 
 [.text-center]
 image:../img/ROMsSelect.jpg[pdfwidth=100%]
 
-<<<
+Como en caso anterior, cuando sólo se ha seleccionado una única ROM, es cambiar el nombre que se muestra y sus parámetros haciendo un clic secundario sobre la lista de ROMs.
+
+[.text-center]
+image:../img/ROMRename.jpg[pdfwidth=25%]
 
 Al cargar un fichero de ROM, se pueden especificar los indicadores para usar al utilizar la ROM, como la contención de memoria, DivMMC, timings de distintos modelos de Spectrum, etc.
 
@@ -179,11 +189,11 @@ image:../img/ROM.jpg[pdfwidth=80%]
 
 Los indicadores de cada ROM se muestran en la lista con un código de letras que se explica en el <<#_indicadores_de_rom,apéndice al final de este manual>>.
 
+<<<
+
 ==== Actualizar una imagen
 
 Desde el menú, se pueden elegir varias opciones que permiten intentar actualizar, tanto de forma individual como conjunta, BIOS y Cores a la última versión posible según se indica en el fichero JSON, siendo posible, en el caso de la actualización de cores, elegir si se quiere buscar la versión normal para cualquier ZX-Uno, cores específicos para ZXUnCore (con soporte para DAC RGB666) o cores que utilizan 2MB de memoria (interna).
-
-<<<
 
 ==== Preferencias
 
@@ -213,10 +223,6 @@ image:../img/PrefsWindow.jpg[pdfwidth=60%]
 ==== Todas las plataformas
 
 La interfaz de comandos se puede invocar directamente usando el script `zx123_tool.py` y Python (versión 3.6 o superior), (por ej. `python3 zx123_tool.py -l -i FLASH.ZX1`)
-
-==== MacOS
-
-Alternativamente, si no se dispone de Python 3, se puede invocar directamente al binario de MacOS desde Terminal, añadiendo el parámetro `--command` (por ej. `"/Applications/ZX123 Tool.app/Contents/MacOS/ZX123 Tool" --command -l -i flash.ZX1``)
 
 ==== Argumentos
 
@@ -252,15 +258,18 @@ Alternativamente, si no se dispone de Python 3, se puede invocar directamente al
             CORE,Número,Nombre a usar,Ruta a fichero de core
             ROM,Slot,Parámetros,Nombre a usar,Ruta a ROM de Spectrum
             ROMS,Ruta a un archivo RomPack con varias ROMs
+  -R DATOS, --rename Datos
+        Datos de un elemento a renombrar (core o ROM) con el mismo formato
+        que al añadir, pero sin nombre de fichero
 -w, --wipe           Borrar todas las ROMs y todos los cores secundarios
 -e, --32             Expandir, si hiciera falta la imagen a 32MiB
 -t, --convert   Convierte entre core estándar y core de Spectrum
+-1, --1core  Usar, si los hay, cores específicos para ZXUnCore
+-2, --2mb  Usar, si los hay, cores que utilizan 2MB de memoria (interna)
 ----
 
 [source]
 ----
--1, --1core  Usar, si los hay, cores específicos para ZXUnCore
--2, --2mb  Usar, si los hay, cores que utilizan 2MB de memoria (interna)
 -c CORE_D, --default_core CORE_D
         Número de core por defecto: 1 o superior
 -z ROM_D, --default_rom ROM_D
@@ -296,6 +305,8 @@ Listar los cores instalados en una imagen, incluyendo información de caracterí
 Extraer un fichero `FIRMWARE.ZXD` del archivo de imagen `FLASH32.ZXD` (en Windows):
 
     py -3 zx123_tool.py -i FLASH32.ZXD -x BIOS
+
+<<<
 
 Extraer la tercera ROM de ZX Spectrum a un fichero:
 
@@ -443,6 +454,12 @@ El archivo JSON es un objeto donde los nombres principales son extensiones de ar
                                         "(Descripción de versión)": "(Hash)"
                     }
     },
+----
+
+<<<
+
+[source]
+----
     "Spectrum": {   -> Diccionario con hashes para distintas versiones del core principal de Spectrum, con el formato:
                         "latest" -> Nombre de la última versión y (opcionalmente) URL de descarga
                         "versions":  {   -> Diccionario con hashes
