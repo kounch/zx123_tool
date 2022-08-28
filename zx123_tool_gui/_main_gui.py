@@ -226,6 +226,7 @@ def create_labels(self):
             text=f'Database: {self.fulldict_hash["version"]}')
         version_label.grid(column=7, row=0, columnspan=8, sticky='ne')
         version_label.bind('<Shift-Button-2>', self.json_menu_popup)
+        version_label.bind('<Shift-Button-3>', self.json_menu_popup)
 
     bios_label = ttk.Label(self.blocks_frame, text='BIOS:', padding=5)
     bios_label.grid(column=0, row=1, sticky='e')
@@ -382,6 +383,7 @@ def create_core_table(self):
         core_table.heading(col_name, text=col_name.upper(), anchor=tk.CENTER)
     core_table.bind('<<TreeviewSelect>>', self.coretable_selected)
     core_table.bind('<Button-2>', self.core_menu_popup)
+    core_table.bind('<Button-3>', self.core_menu_popup)
 
     core_scrollbar = ttk.Scrollbar(self.cores_frame,
                                    orient=tk.VERTICAL,
@@ -409,6 +411,7 @@ def create_rom_table(self, height=11):
         rom_table.heading(col_name, text=col_name.upper(), anchor=tk.CENTER)
     rom_table.bind('<<TreeviewSelect>>', self.romtable_selected)
     rom_table.bind('<Button-2>', self.rom_menu_popup)
+    rom_table.bind('<Button-3>', self.rom_menu_popup)
 
     rom_scrollbar = ttk.Scrollbar(self.roms_frame,
                                   orient=tk.VERTICAL,
