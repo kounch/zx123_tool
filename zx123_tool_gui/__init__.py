@@ -41,11 +41,19 @@ class App(tk.Tk):
 
     from ._main_gui import build_menubar
     from ._main_gui import bind_keys
+    from ._main_gui import core_menu_popup
+    from ._main_gui import json_menu_popup
     from ._main_gui import create_labels
     from ._main_gui import create_entries
     from ._main_gui import create_core_table, create_rom_table
     from ._main_gui import create_buttons
     from ._main_gui import populate_cores, populate_roms
+    from ._main_gui import changed_bios_spinbox
+    from ._main_gui import changed_core_spinbox
+    from ._main_gui import changed_timer_spinbox
+    from ._main_gui import changed_keyboard_spinbox
+    from ._main_gui import changed_video_spinbox
+    from ._main_gui import changed_rom_spinbox
 
     def __init__(self):
 
@@ -204,20 +212,6 @@ class App(tk.Tk):
 
         fulldict_hash = zx123.load_json_bd(base_dir=JSON_DIR)
         self.fulldict_hash = fulldict_hash
-
-    def core_menu_popup(self, event):
-        """Contextual Menu Handling for core table"""
-        try:
-            self.core_menu.tk_popup(event.x_root, event.y_root, 0)
-        finally:
-            self.core_menu.grab_release()
-
-    def json_menu_popup(self, event):
-        """Contextual Menu Handling for JSON Version Label"""
-        try:
-            self.json_menu.tk_popup(event.x_root, event.y_root, 0)
-        finally:
-            self.json_menu.grab_release()
 
     def update_json(self):
         """Update JSON Database and show in GUI"""
@@ -569,6 +563,16 @@ class App(tk.Tk):
             export_bttn.state(['!disabled'])
             if len(t_selection) > 1:
                 export_bttn['text'] = f'Export {str_text}s'
+                str_label = 'Show info'
+                self.filemenu.entryconfig(8, state='disabled', label=str_label)
+                self.core_menu.entryconfig(0,
+                                           state='disabled',
+                                           label=str_label)
+                str_label = 'Rename'
+                self.filemenu.entryconfig(9, state='disabled', label=str_label)
+                self.core_menu.entryconfig(1,
+                                           state='disabled',
+                                           label=str_label)
             else:
                 export_bttn['text'] = f'Export {str_text} {t_selection[0]}'
                 str_label = f'Show info for {str_text} {t_selection[0]}'
@@ -693,47 +697,6 @@ class App(tk.Tk):
         self.old_rom = self.set_default_bios(
             self.default_rom, 0, self.old_rom,
             len(self.rom_table.get_children()) - 1, 'rom')
-
-    def changed_bios_spinbox(self, bios_value, min_val, max_val):
-        """
-        Process default bios setting change event, and enforce limits if needed
-        :param bios_value: Variable associated to spinbox content
-        :param min_val: Minimum valid value
-        :param max_val: Maximum valid value
-        """
-        new_val = bios_value.get()
-        if new_val.isnumeric():
-            new_val = int(new_val)
-            if new_val < min_val:
-                new_val = min_val
-            if new_val > max_val:
-                new_val = max_val
-        else:
-            new_val = min_val
-
-        bios_value.set(new_val)
-
-    def changed_core_spinbox(self, *_):
-        """Proxy to changed_bios_spinbox for default Core changed action"""
-        self.changed_bios_spinbox(self.default_core, 1,
-                                  len(self.core_table.get_children()) + 1)
-
-    def changed_timer_spinbox(self, *_):
-        """Proxy to changed_bios_spinbox for default timer changed action"""
-        self.changed_bios_spinbox(self.default_timer, 0, 4)
-
-    def changed_keyboard_spinbox(self, *_):
-        """Proxy to changed_bios_spinbox for default keyboard changed action"""
-        self.changed_bios_spinbox(self.default_keyboard, 0, 3)
-
-    def changed_video_spinbox(self, *_):
-        """Proxy to changed_bios_spinbox for default video changed action"""
-        self.changed_bios_spinbox(self.default_video, 0, 2)
-
-    def changed_rom_spinbox(self, *_):
-        """Proxy to changed_bios_spinbox for default ROM changed action"""
-        self.changed_bios_spinbox(self.default_rom, 0,
-                                  len(self.rom_table.get_children()) - 1)
 
     def block_import(self, str_block, extra_exts=None):
         """

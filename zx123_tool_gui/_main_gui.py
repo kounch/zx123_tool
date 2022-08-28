@@ -180,6 +180,22 @@ def bind_keys(self, *_):
         self.unbind_all(f'<{str_bind}w>')
 
 
+def core_menu_popup(self, event):
+    """Contextual Menu Handling for core table"""
+    try:
+        self.core_menu.tk_popup(event.x_root, event.y_root, 0)
+    finally:
+        self.core_menu.grab_release()
+
+
+def json_menu_popup(self, event):
+    """Contextual Menu Handling for JSON Version Label"""
+    try:
+        self.json_menu.tk_popup(event.x_root, event.y_root, 0)
+    finally:
+        self.json_menu.grab_release()
+
+
 def create_labels(self):
     """
     Create Main Window Labels
@@ -509,3 +525,48 @@ def populate_roms(self, dict_roms):
                               iid=index,
                               text='',
                               values=[index] + list(dict_roms[index])[:6])
+
+
+def changed_bios_spinbox(self, bios_value, min_val, max_val):  # pylint: disable=unused-argument
+    """
+    Process default bios setting change event, and enforce limits if needed
+    :param bios_value: Variable associated to spinbox content
+    :param min_val: Minimum valid value
+    :param max_val: Maximum valid value
+    """
+    new_val = bios_value.get()
+    if new_val.isnumeric():
+        new_val = int(new_val)
+        new_val = max(new_val, min_val)
+        new_val = min(new_val, max_val)
+    else:
+        new_val = min_val
+
+    bios_value.set(new_val)
+
+
+def changed_core_spinbox(self, *_):
+    """Proxy to changed_bios_spinbox for default Core changed action"""
+    self.changed_bios_spinbox(self.default_core, 1,
+                              len(self.core_table.get_children()) + 1)
+
+
+def changed_timer_spinbox(self, *_):
+    """Proxy to changed_bios_spinbox for default timer changed action"""
+    self.changed_bios_spinbox(self.default_timer, 0, 4)
+
+
+def changed_keyboard_spinbox(self, *_):
+    """Proxy to changed_bios_spinbox for default keyboard changed action"""
+    self.changed_bios_spinbox(self.default_keyboard, 0, 3)
+
+
+def changed_video_spinbox(self, *_):
+    """Proxy to changed_bios_spinbox for default video changed action"""
+    self.changed_bios_spinbox(self.default_video, 0, 2)
+
+
+def changed_rom_spinbox(self, *_):
+    """Proxy to changed_bios_spinbox for default ROM changed action"""
+    self.changed_bios_spinbox(self.default_rom, 0,
+                              len(self.rom_table.get_children()) - 1)
