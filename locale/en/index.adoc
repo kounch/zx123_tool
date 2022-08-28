@@ -1,11 +1,11 @@
 = ZX123 Tool Manual
 :author: kounch
-:revnumber: 1.0.3
+:revnumber: 1.1.0
 :doctype: book
 :notitle:
 :front-cover-image: image:../img/Portada.jpg[]
 :email: kounch@users.noreply.github.com
-:Revision: 1.0
+:Revision: 1.1
 :description: English ZX123 Tool Manual
 :keywords: Manual, English, ZX123 Tool, ZX-Uno, ZXDOS, ZXDOS+
 :icons: font
@@ -157,6 +157,13 @@ When one or more cores are selected, it is possible to replace the first one wit
 [.text-center]
 image:../img/CoresSelect.jpg[pdfwidth=25%]
 
+Also, when only a single core has been selected, it is possible to obtain some information or change the name displayed, either by using the options in the menu or with a secondary click on the core list.
+
+[.text-center]
+image:../img/CoreRename.jpg[pdfwidth=25%]
+
+<<<
+
 ==== Spectrum ROMs
 
 If no ROM is selected from the corresponding list, it is possible to use the Add button to add a new one. You can also replace or export all ROMs in the image using a single ROMPack file (v1).
@@ -169,7 +176,10 @@ When one or more ROMs are selected, it is possible to replace the first one with
 [.text-center]
 image:../img/ROMsSelect.jpg[pdfwidth=100%]
 
-<<<
+As in the previous case, when only one ROM has been selected, you can change the displayed name and its parameters with the menu shown with a secondary click on the ROMs list.
+
+[.text-center]
+image:../img/ROMRename.jpg[pdfwidth=25%]
 
 When loading a ROM file, you can specify the flags to use when using the ROM, such as memory contention, DivMMC, timings of different Spectrum models, etc.
 
@@ -213,10 +223,6 @@ image:../img/PrefsWindow.jpg[pdfwidth=60%]
 
 The CLI can be invoked directly using the script `zx123_tool.py` and Python (version 3.6 or later), (e.g. `python3 zx123_tool.py -l -i FLASH.ZX1`)
 
-==== MacOS
-
-Alternatively, if your system does not have Python 3, you can call the MacOS binary from Terminal, adding the parameter `--command` (e.g. `"/Applications/ZX123 Tool.app/Contents/MacOS/ZX123 Tool" --command -l -i flash.ZX1``)
-
 ==== Arguments
 
 [source]
@@ -257,12 +263,12 @@ Alternatively, if your system does not have Python 3, you can call the MacOS bin
 -w, --wipe            Wipe all ROMs and all secondary cores from image
 -e, --32              Expand, if needed, flash file to 32MiB
 -t, --convert   Converts between standard and Spectrum core
+-1, --1core  Use, if available, ZXUnCore cores for ZX-Uno
+-2, --2mb  Use, if available, 2MB cores for ZX-Uno
 ----
 
 [source]
 ----
--1, --1core  Use, if available, ZXUnCore cores for ZX-Uno
--2, --2mb  Use, if available, 2MB cores for ZX-Uno
 -c DEFAULT_CORE, --default_core DEFAULT_CORE
           Default core number: 1 and up
 -z DEFAULT_ROM, --default_rom DEFAULT_ROM
@@ -340,6 +346,8 @@ Wipe all ROMs data and all secondary cores data:
 Wipe all ROMs data and all secondary cores data, and then add file `48.rom` (Spectrum ROM) in slot `0`, with name `ZX Spectrum`:
 
     ...zx123_tool.py -i FLASH.ZXD -w -o FLASHnew.ZXD -a "ROM,0,xdnlh17,ZX Spectrum,48.rom"
+
+<<<
 
 Create a copy of `FLASH32.ZXD`, but removing all cores and setting BIOS default to VGA and Spectrum keyboard layout:
 
@@ -450,6 +458,12 @@ The JSON file is an object where the main name are file extensions (like `ZXD` o
                         "versions":  {   -> Hash Dictionary
                                             "(Version Description)": "(Hash)",
                         }
+----
+
+<<<
+
+[source]
+----
     "Special": {   -> Dictionary of hashes for different Special core versions in the format:
                       "latest" -> Name of the latest version and (optionally) download URL
                       "versions":  {   -> Hash Dictionary

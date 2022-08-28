@@ -660,7 +660,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">kounch</span><br>
 <span id="email" class="email"><a href="mailto:kounch@users.noreply.github.com">kounch@users.noreply.github.com</a></span><br>
-<span id="revnumber">version 1.0.3</span>
+<span id="revnumber">version 1.1.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Index</div>
@@ -689,7 +689,6 @@ pre.rouge {
 <li><a href="#_command_line_interface">Command line interface</a>
 <ul class="sectlevel3">
 <li><a href="#_all_platforms_2">All platforms</a></li>
-<li><a href="#_macos_2">MacOS</a></li>
 <li><a href="#_arguments">Arguments</a></li>
 <li><a href="#_examples">Examples</a></li>
 </ul>
@@ -928,6 +927,13 @@ Boot Timer</p></td>
 <div class="paragraph text-center">
 <p><span class="image"><img src="../img/CoresSelect.jpg" alt="CoresSelect"></span></p>
 </div>
+<div class="paragraph">
+<p>Also, when only a single core has been selected, it is possible to obtain some information or change the name displayed, either by using the options in the menu or with a secondary click on the core list.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/CoreRename.jpg" alt="CoreRename"></span></p>
+</div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
 <h4 id="_spectrum_roms">Spectrum ROMs</h4>
@@ -943,7 +949,12 @@ Boot Timer</p></td>
 <div class="paragraph text-center">
 <p><span class="image"><img src="../img/ROMsSelect.jpg" alt="ROMsSelect"></span></p>
 </div>
-<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>As in the previous case, when only one ROM has been selected, you can change the displayed name and its parameters with the menu shown with a secondary click on the ROMs list.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/ROMRename.jpg" alt="ROMRename"></span></p>
+</div>
 <div class="paragraph">
 <p>When loading a ROM file, you can specify the flags to use when using the ROM, such as memory contention, DivMMC, timings of different Spectrum models, etc.</p>
 </div>
@@ -1006,12 +1017,6 @@ Boot Timer</p></td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_macos_2">MacOS</h4>
-<div class="paragraph">
-<p>Alternatively, if your system does not have Python 3, you can call the MacOS binary from Terminal, adding the parameter <code>--command</code> (e.g. <code>"/Applications/ZX123 Tool.app/Contents/MacOS/ZX123 Tool" --command -l -i flash.ZX1`</code>)</p>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_arguments">Arguments</h4>
 <div class="listingblock">
 <div class="content">
@@ -1045,16 +1050,19 @@ Boot Timer</p></td>
               CORE,Core Number,Name to use,Path to core binary
               ROM,Slot,Parameters,Name to use,Path to Spectrum ROM binary
               ROMS,Path to RomPack file with some ROMs inside
+  -R RENAME_DATA, --rename RENAME_DATA
+        Data of an item to rename (core or ROM) with the same fomat used
+        to inject, but without a file path
 -w, --wipe            Wipe all ROMs and all secondary cores from image
 -e, --32              Expand, if needed, flash file to 32MiB
--t, --convert   Converts between standard and Spectrum core</code></pre>
+-t, --convert   Converts between standard and Spectrum core
+-1, --1core  Use, if available, ZXUnCore cores for ZX-Uno
+-2, --2mb  Use, if available, 2MB cores for ZX-Uno</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code>-1, --1core  Use, if available, ZXUnCore cores for ZX-Uno
--2, --2mb  Use, if available, 2MB cores for ZX-Uno
--c DEFAULT_CORE, --default_core DEFAULT_CORE
+<pre class="rouge highlight"><code>-c DEFAULT_CORE, --default_core DEFAULT_CORE
           Default core number: 1 and up
 -z DEFAULT_ROM, --default_rom DEFAULT_ROM
           Index of default Spectrum ROM: 0 and up
@@ -1193,6 +1201,7 @@ Boot Timer</p></td>
 <pre>...zx123_tool.py -i FLASH.ZXD -w -o FLASHnew.ZXD -a "ROM,0,xdnlh17,ZX Spectrum,48.rom"</pre>
 </div>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p>Create a copy of <code>FLASH32.ZXD</code>, but removing all cores and setting BIOS default to VGA and Spectrum keyboard layout:</p>
 </div>
@@ -1372,8 +1381,13 @@ Boot Timer</p></td>
                         "latest" -&gt; Name of the latest version and (optionally) download URL
                         "versions":  {   -&gt; Hash Dictionary
                                             "(Version Description)": "(Hash)",
-                        }
-    "Special": {   -&gt; Dictionary of hashes for different Special core versions in the format:
+                        }</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code>    "Special": {   -&gt; Dictionary of hashes for different Special core versions in the format:
                       "latest" -&gt; Name of the latest version and (optionally) download URL
                       "versions":  {   -&gt; Hash Dictionary
                                           "(Version Description)": "(Hash)",
@@ -1651,8 +1665,8 @@ All rights reserved.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.0.3<br>
-Last updated 2022-08-27 11:31:34 +0200
+Version 1.1.0<br>
+Last updated 2022-08-28 13:18:34 +0200
 </div>
 </div>
 </body>

@@ -660,7 +660,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">kounch</span><br>
 <span id="email" class="email"><a href="mailto:kounch@users.noreply.github.com">kounch@users.noreply.github.com</a></span><br>
-<span id="revnumber">version 1.0.3</span>
+<span id="revnumber">version 1.1.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Índice</div>
@@ -689,7 +689,6 @@ pre.rouge {
 <li><a href="#_interfaz_de_línea_de_comandos">Interfaz de línea de comandos</a>
 <ul class="sectlevel3">
 <li><a href="#_todas_las_plataformas_2">Todas las plataformas</a></li>
-<li><a href="#_macos_2">MacOS</a></li>
 <li><a href="#_argumentos">Argumentos</a></li>
 <li><a href="#_ejemplos">Ejemplos</a></li>
 </ul>
@@ -925,6 +924,13 @@ pre.rouge {
 <div class="paragraph text-center">
 <p><span class="image"><img src="../img/CoresSelect.jpg" alt="CoresSelect"></span></p>
 </div>
+<div class="paragraph">
+<p>También, cuando sólo se ha seleccionado un único core, es posible obtener información del mismo o cambiar el nombre que se muestra, bien utilizando las opciones en el menú, o bien haciendo un clic secundario sobre la lista de cores.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/CoreRename.jpg" alt="CoreRename"></span></p>
+</div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
 <h4 id="_roms_de_spectrum">ROMs de Spectrum</h4>
@@ -940,7 +946,12 @@ pre.rouge {
 <div class="paragraph text-center">
 <p><span class="image"><img src="../img/ROMsSelect.jpg" alt="ROMsSelect"></span></p>
 </div>
-<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>Como en caso anterior, cuando sólo se ha seleccionado una única ROM, es cambiar el nombre que se muestra y sus parámetros haciendo un clic secundario sobre la lista de ROMs.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../img/ROMRename.jpg" alt="ROMRename"></span></p>
+</div>
 <div class="paragraph">
 <p>Al cargar un fichero de ROM, se pueden especificar los indicadores para usar al utilizar la ROM, como la contención de memoria, DivMMC, timings de distintos modelos de Spectrum, etc.</p>
 </div>
@@ -950,13 +961,13 @@ pre.rouge {
 <div class="paragraph">
 <p>Los indicadores de cada ROM se muestran en la lista con un código de letras que se explica en el <a href="#_indicadores_de_rom">apéndice al final de este manual</a>.</p>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
 <h4 id="_actualizar_una_imagen">Actualizar una imagen</h4>
 <div class="paragraph">
 <p>Desde el menú, se pueden elegir varias opciones que permiten intentar actualizar, tanto de forma individual como conjunta, BIOS y Cores a la última versión posible según se indica en el fichero JSON, siendo posible, en el caso de la actualización de cores, elegir si se quiere buscar la versión normal para cualquier ZX-Uno, cores específicos para ZXUnCore (con soporte para DAC RGB666) o cores que utilizan 2MB de memoria (interna).</p>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
 <h4 id="_preferencias">Preferencias</h4>
@@ -1003,12 +1014,6 @@ pre.rouge {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_macos_2">MacOS</h4>
-<div class="paragraph">
-<p>Alternativamente, si no se dispone de Python 3, se puede invocar directamente al binario de MacOS desde Terminal, añadiendo el parámetro <code>--command</code> (por ej. <code>"/Applications/ZX123 Tool.app/Contents/MacOS/ZX123 Tool" --command -l -i flash.ZX1`</code>)</p>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_argumentos">Argumentos</h4>
 <div class="listingblock">
 <div class="content">
@@ -1042,16 +1047,19 @@ pre.rouge {
             CORE,Número,Nombre a usar,Ruta a fichero de core
             ROM,Slot,Parámetros,Nombre a usar,Ruta a ROM de Spectrum
             ROMS,Ruta a un archivo RomPack con varias ROMs
+  -R DATOS, --rename Datos
+        Datos de un elemento a renombrar (core o ROM) con el mismo formato
+        que al añadir, pero sin nombre de fichero
 -w, --wipe           Borrar todas las ROMs y todos los cores secundarios
 -e, --32             Expandir, si hiciera falta la imagen a 32MiB
--t, --convert   Convierte entre core estándar y core de Spectrum</code></pre>
+-t, --convert   Convierte entre core estándar y core de Spectrum
+-1, --1core  Usar, si los hay, cores específicos para ZXUnCore
+-2, --2mb  Usar, si los hay, cores que utilizan 2MB de memoria (interna)</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code>-1, --1core  Usar, si los hay, cores específicos para ZXUnCore
--2, --2mb  Usar, si los hay, cores que utilizan 2MB de memoria (interna)
--c CORE_D, --default_core CORE_D
+<pre class="rouge highlight"><code>-c CORE_D, --default_core CORE_D
         Número de core por defecto: 1 o superior
 -z ROM_D, --default_rom ROM_D
         Índice de ROM de Spectrum por defecto: 0 o superior
@@ -1104,6 +1112,7 @@ pre.rouge {
 <pre>py -3 zx123_tool.py -i FLASH32.ZXD -x BIOS</pre>
 </div>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p>Extraer la tercera ROM de ZX Spectrum a un fichero:</p>
 </div>
@@ -1361,8 +1370,13 @@ pre.rouge {
                     "versions":  {   -&gt; Diccionario con hashes
                                         "(Descripción de versión)": "(Hash)"
                     }
-    },
-    "Spectrum": {   -&gt; Diccionario con hashes para distintas versiones del core principal de Spectrum, con el formato:
+    },</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code>    "Spectrum": {   -&gt; Diccionario con hashes para distintas versiones del core principal de Spectrum, con el formato:
                         "latest" -&gt; Nombre de la última versión y (opcionalmente) URL de descarga
                         "versions":  {   -&gt; Diccionario con hashes
                                             "(Descripción de versión)": "(Hash)"
@@ -1646,8 +1660,8 @@ All rights reserved.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.0.3<br>
-Last updated 2022-08-27 11:31:29 +0200
+Version 1.1.0<br>
+Last updated 2022-08-28 13:18:42 +0200
 </div>
 </div>
 </body>
