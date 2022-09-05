@@ -1,5 +1,5 @@
 {
-    "version": "20220905.001",
+    "version": "20220905.002",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -3968,7 +3968,8 @@
                     "2022.08.27"
                 ],
                 "versions": {
-                    "2022.08.27": "aabe03e254f1db7dea3e72bc328854ddad123102c0565067cf4f847d9fbda20f"
+                    "2022.08.27": "aabe03e254f1db7dea3e72bc328854ddad123102c0565067cf4f847d9fbda20f",
+                    "2022.09.05": "e24c41849ea07e9742f9baae61d39d77265e5a73789d6563c0a727b56024128c"
                 }
             },
             "PC XT": {
