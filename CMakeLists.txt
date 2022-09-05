@@ -4,9 +4,12 @@
 cmake_minimum_required(VERSION 3.24)
 project("ZX123 Tool")
 
+list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMake/Find")
+
 set(BASENAME ${PROJECT_NAME})
 set(OUTPUT_DIR ${CMAKE_BINARY_DIR})
 
+# Get Current version
 execute_process(
     COMMAND python3 zx123_tool.py --version
     WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
@@ -20,9 +23,7 @@ else()
     message(FATAL_ERROR "Cannot determine ZX123 Tool version")
 endif()
 
-
-list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMake/Find")
-
+# Check module availability
 find_package(nuitka)
 
 if (WIN32)
@@ -36,14 +37,17 @@ elseif (APPLE)
     set(APP_CONTENT "${PROJECT_SOURCE_DIR}/MacOS")
     set(APP_RESOURCES "${APP_CONTENT}/Resources")
 
+    # Check asciidoctor availability
     find_package(asciidoctor)
     find_package(asciidoctor-pdf)
 endif()
 
+# Main Target
 add_custom_target(zx213gui ALL
     DEPENDS ${OUTPUT_DIR}/docs
     )
 
+# Function to build PDF files
 function(MAKE_PDF PDF_LANG)
     if(PDF_LANG STREQUAL "es")
         set(PDF_NAME "Manual de ZX123 Tool.pdf")
@@ -61,6 +65,7 @@ function(MAKE_PDF PDF_LANG)
     )
 endfunction()   
 
+# Build localized PDFs
 if(ASCIIDOCTOR-PDF_FOUND)
     message("Prepare docs build")
     set(PDF_DIR "${OUTPUT_DIR}/docs")
@@ -83,6 +88,7 @@ if(ASCIIDOCTOR-PDF_FOUND)
     endforeach(file_i)
 endif()
 
+# Function to build Mac binaries
 function(BUILD_MAC ARCH_TO_BUILD)
     set(MAC_BUILD_DIR "${OUTPUT_DIR}/mac_${ARCH_TO_BUILD}")
     file(MAKE_DIRECTORY ${MAC_BUILD_DIR})
@@ -114,12 +120,14 @@ function(BUILD_MAC ARCH_TO_BUILD)
         COMMAND ${CMAKE_COMMAND} -E copy ${APP_CONTENT}/Info.plist ${MAC_BUILD_DIR}/${APP_NAME}/Contents
         COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/zx123_hash.json ${MAC_BUILD_DIR}/${APP_NAME}/Contents/Resources
         COMMAND sed -i '' "s/VERSION_STRING/${VERSION}/" ${MAC_BUILD_DIR}/${APP_NAME}/Contents/Info.plist
+        #Fix rpath (needed with Nuitka 1.0 and later)
         COMMAND install_name_tool -change '/Library/Frameworks/Python.framework/Versions/3.10/Python' '@executable_path/Python' ${MAC_BUILD_DIR}/${APP_NAME}/Contents/MacOS/${PROJECT_NAME}
         )
 endfunction()
 
+# Build MacOS binaries
 if(NUITKA_FOUND)
-    message("Prepare binary build")
+    message("Prepare MacOS binary builds")
 
     build_mac("arm64")
     build_mac("x86_64")
