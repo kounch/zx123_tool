@@ -9,6 +9,11 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMake/Find")
 set(BASENAME ${PROJECT_NAME})
 set(OUTPUT_DIR ${CMAKE_BINARY_DIR})
 
+set(EXTRA_DOCS
+    LICENSE
+    README.md
+    )
+
 set(EXTRA_CONTENT
     ${PROJECT_SOURCE_DIR}/zx123_hash.json
     ${PROJECT_SOURCE_DIR}/FLASH16_empty.ZX1.zip
@@ -35,10 +40,7 @@ endif()
 find_package(nuitka)
 
 if (WIN32)
-    SET_TARGET_PROPERTIES(zx123gui
-    PROPERTIES
-    OUTPUT_NAME "ZX123 Tool.exe"
-    )
+    set(APP_NAME "ZX123 Tool.exe")
 elseif (APPLE)
     set(APP_NAME "ZX123 Tool.app")
     set(ARCH_TO_BUILD "arm64" )
@@ -48,14 +50,9 @@ elseif (APPLE)
     # Check asciidoctor availability
     find_package(asciidoctor)
     find_package(asciidoctor-pdf)
-
+    # Check create-dmg availability
     find_package(create-dmg)
 endif()
-
-# Main Target
-add_custom_target(zx123gui ALL
-    DEPENDS ${OUTPUT_DIR}/docs
-    )
 
 # Function to build PDF files
 function(MAKE_PDF PDF_LANG)
@@ -87,13 +84,10 @@ if(ASCIIDOCTOR-PDF_FOUND)
     add_custom_target(extra_docs ALL
         DEPENDS ${OUTPUT_DIR}/docs
     )
-    set(EXTRA_DOCS
-        ${PROJECT_SOURCE_DIR}/LICENSE
-        ${PROJECT_SOURCE_DIR}/README.md
-    )
     foreach(file_i ${EXTRA_DOCS})
         add_custom_command(TARGET extra_docs
-            COMMAND ${CMAKE_COMMAND} ARGS -E copy ${file_i} ${OUTPUT_DIR}/docs
+            COMMAND ${CMAKE_COMMAND} ARGS -E copy ${PROJECT_SOURCE_DIR}/${file_i} ${OUTPUT_DIR}/docs
+            BYPRODUCTS ${OUTPUT_DIR}/docs/${file_i}
         )
     endforeach(file_i)
 endif()
@@ -143,33 +137,21 @@ if(NUITKA_FOUND)
     build_mac("x86_64")
 endif()
 
-# https://stackoverflow.com/questions/7050997/zip-files-using-cmake
-function(create_zip output_file input_files working_dir)
-    add_custom_command(
-        COMMAND ${CMAKE_COMMAND} -E remove ${output_file}
-        COMMAND ${CMAKE_COMMAND} -E tar "cf" "${output_file}" --format=zip -- ${input_files}
-        WORKING_DIRECTORY "${working_dir}"
-        OUTPUT  "${output_file}"
-        DEPENDS ${input_files}
-        COMMENT "Compress ${output_file}."
-    )
-endfunction()
-
 # Function to build Windows packages
 function(BUILD_WIN ARCH_TO_PACKAGE)
     set(WIN_BUILD_DIR "${OUTPUT_DIR}/win_${ARCH_TO_PACKAGE}")
     set(WIN_ZIP_FILE "${OUTPUT_DIR}/${BASENAME} Windows ${ARCH_TO_PACKAGE} v${VERSION}.zip")
 
-    file(GLOB ZIP_FILES "${WIN_BUILD_DIR}/*")
-    create_zip("${WIN_ZIP_FILE}" "${ZIP_FILES}" "${WIN_BUILD_DIR}")
-
     add_custom_target("zx123gui_win_${ARCH_TO_PACKAGE}" ALL
-        DEPENDS ${WIN_ZIP_FILE}
-        )
-
-    add_custom_command(TARGET "zx123gui_win_${ARCH_TO_PACKAGE}" PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory ${OUTPUT_DIR}/docs ${WIN_BUILD_DIR}
         COMMAND ${CMAKE_COMMAND} -E copy ${EXTRA_CONTENT} ${WIN_BUILD_DIR}
+        )
+
+    add_custom_command(TARGET "zx123gui_win_${ARCH_TO_PACKAGE}" POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E remove ${WIN_ZIP_FILE}
+        COMMAND ${CMAKE_COMMAND} -E tar "cf" "${WIN_ZIP_FILE}" --format=zip -- .
+        WORKING_DIRECTORY ${WIN_BUILD_DIR}
+        COMMENT "Compressing"
         )
 endfunction()
 
@@ -192,13 +174,11 @@ function(BUILD_PYTHON)
         COMMAND ${CMAKE_COMMAND} -E copy_directory ${OUTPUT_DIR}/docs ${PYTHON_BUILD_DIR}
         COMMAND ${CMAKE_COMMAND} -E copy ${EXTRA_CONTENT} ${PYTHON_BUILD_DIR}
         )
-
-    file(GLOB ZIP_FILES "${PYTHON_BUILD_DIR}/*")
     add_custom_command(
         TARGET "zx123gui_python" 
         POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E remove ${PYTHON_ZIP_FILE}
-        COMMAND ${CMAKE_COMMAND} -E tar "cf" "${PYTHON_ZIP_FILE}" --format=zip -- ${ZIP_FILES}
+        COMMAND ${CMAKE_COMMAND} -E tar "cf" "${PYTHON_ZIP_FILE}" --format=zip -- .
         WORKING_DIRECTORY ${PYTHON_BUILD_DIR}
         COMMENT "Compressing"
         )
