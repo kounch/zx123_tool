@@ -1,11 +1,11 @@
 = Manual de ZX123 Tool
 :author: kounch
-:revnumber: 1.1.0
+:revnumber: 1.2.0
 :doctype: book
 :notitle:
 :front-cover-image: image:../img/Portada.jpg[]
 :email: kounch@users.noreply.github.com
-:Revision: 1.1
+:Revision: 1.2
 :description: Manual en Castellano de ZX123 Tool
 :keywords: Manual, Castellano, ZX123 Tool, ZX-Uno, ZXDOS, ZXDOS+
 :icons: font
@@ -616,6 +616,93 @@ Cada bloque (ROM Entry), a su vez, tiene esta estructura:
 |`0x3F`
 |Nombre de la ROM en ASCII (rellenar con espacios hasta el final)
 |===
+
+<<<
+
+=== Compilar ZX123 Tool
+
+==== Compilar los ficheros binarios en Windows
+
+==== Compilar y generar la distribución en MacOS
+
+===== Preparación del entorno
+
+Para poder generar los binarios en MacOS, así como poder generar todos los ficheros de la distribución (imágenes DMG, ficheros ZIP, etc.) se necesitan los siguientes pasos previos:
+
+. Instalar, al menos, las heramientas de desarrollador de la línea de comandos
+
+[source,shell]
+----
+xcode-select --install
+----
+
+[start=2]
+. Instalar Python 3.x (no es necesario que esté disponible para todos los usuarios o en PATH), por ejemplo, usando el instalador disponible en la https://www.python.org/downloads/macos/[web oficial].
+
+[WARNING]
+====
+La versión de Python incluida con las herramientas de desarrollador no funciona correctamente con Nuitka.
+====
+
+[start=3]
+. Crear un directorio con espacio suficiente, o crear una imagen de disco donde guardar todos los datos del proyecto:
+
+[source,shell]
+----
+hdiutil create -size 1G -type SPARSE -fs 'Case-sensitive APFS' -volname zx123build -attach zx123build
+----
+
+[start=4]
+. Instalar https://cmake.org/download/[CMake], por ejemplo, en la imagen de disco creada anteriormente (en /Volumes/zx123build/Applications/CMake.app)
+
+[start=5]
+. Crear un entorno virtual de Python para Nuitka y el resto de módulos asociados. Por ejemplo, para Python 3.10 y usando la imagen de disco definida anteriormente:
+
+[source,shell]
+----
+/Library/Frameworks/Python.framework/Versions/3.10/bin/python3 -m venv /Volumes/zx123build/
+----
+
+[start=6]
+. Instalar los módulos de Python necesarios
+
+[source,shell]
+----
+/Volumes/zx123build/bin/python3 -m pip install pip setuptools --upgrade
+/Volumes/zx123build/bin/python3 -m pip install wheel nuitka zstandard ordered-set
+----
+
+[start=7]
+. Obtener la heramienta https://github.com/create-dmg/create-dmg/releases[create-dmg] e instalar, por ejemplo, junto a CMake (en /Volumes/zx123build/Applications/create-dmg)
+
+. Crear un directorio donde guardar todos los ficheros necesarios para compilar, así como el resultado. Por ejemplo, si se ha creado la imagen de disco
+
+[source,shell]
+----
+mkdir /Volumes/zx123build/build
+----
+
+[start=9]
+. Copiar los directorios `win_x86_32` y `win_x86_64` generados en Windows en este nuevo directorio.
+
+===== Uso del entorno
+
+Ahora, cada vez que se quiera generar binarios, paquetes, etc. se debe dar acceso al directorio donde está el entorno preparado antes (si se trata de una imagen de disco, asegurarse de que está montada)
+
+[source,shell]
+----
+export PATH=/Volumes/zx123build/bin:/Volumes/zx123build/Applications/CMake.app/Contents/bin:/Volumes/zx123build/Applications/create-dmg:${PATH}
+----
+
+Acceder al directorio de compilación e inicializar CMake contra el código fuente
+
+[source,shell]
+----
+cd /Volumes/zx123build/build
+cmake -G "Unix Makefiles" .../zx123_tool 
+----
+
+Finalmente, usar el comando `make` para compilar y generar todos los ficheros
 
 == Copyright
 
