@@ -623,13 +623,51 @@ Cada bloque (ROM Entry), a su vez, tiene esta estructura:
 
 ==== Compilar los ficheros binarios en Windows
 
+==== Preparación del entorno
+
+Para poder generar los binarios en Windows:
+
+. Instalar, las herramientas de desarrollo de Microsoft (https://visualstudio.microsoft.com/es/[Visual Studio]). Basta con instalar "Build Tools para Visual Studio".
+
+. Instalar Python 3.x (no es necesario que esté disponible para todos los usuarios o en PATH), por ejemplo, usando el instalador disponible en la https://www.python.org/downloads/windows/[web oficial].
+
+. Crear un entorno virtual de Python para Nuitka y el resto de módulos asociados. Por ejemplo:
+
+[source,shell]
+----
+py -3 -m venv zx123build
+----
+
+[start=6]
+. Instalar los módulos de Python necesarios
+
+[source,shell]
+----
+.\zx123build\Scripts\python3.exe -m pip install pip setuptools --upgrade
+.\zx123build\Scripts\python3.exe -m pip install wheel nuitka zstandard ordered-set
+----
+
+[NOTE]
+====
+Si se desea generar ficheros binarios para 32-bit, utilizar una instalación de Python de 32-bit, y un entorno independiente. Si se desea generar de 64-bit, será necesario otro entorno aparte, con una instalación de Python de 64-bit.
+====
+
+===== Uso del entorno
+
+Utilizar Nuitka para generar los ficheros, por ejemplo con un comando como:
+
+[source,shell]
+-----
+.\zx123build\Scripts\python3.exe -m nuitka "...\zx123_tool\ZX123 Tool.py" --output-dir=.\zx123build\win_x86_64 --standalone --lto=yes --enable-plugin=tk-inter --windows-disable-console --windows-icon-from-ico="...\zx123_tool\ZX123 Tool.ico" --windows-company-name="kounch" --windows-product-name="ZX123 Tool" --windows-file-version="3.6.1.0" --windows-product-version="3.6.1.0" --windows-file-description="ZX123 Tool"
+-----
+
 ==== Compilar y generar la distribución en MacOS
 
 ===== Preparación del entorno
 
 Para poder generar los binarios en MacOS, así como poder generar todos los ficheros de la distribución (imágenes DMG, ficheros ZIP, etc.) se necesitan los siguientes pasos previos:
 
-. Instalar, al menos, las heramientas de desarrollador de la línea de comandos
+. Instalar, al menos, las herramientas de desarrollador de la línea de comandos
 
 [source,shell]
 ----
@@ -653,7 +691,7 @@ hdiutil create -size 1G -type SPARSE -fs 'Case-sensitive APFS' -volname zx123bui
 ----
 
 [start=4]
-. Instalar https://cmake.org/download/[CMake], por ejemplo, en la imagen de disco creada anteriormente (en /Volumes/zx123build/Applications/CMake.app)
+. Instalar https://cmake.org/download/[CMake], por ejemplo, en la imagen de disco creada anteriormente (en `/Volumes/zx123build/Applications/CMake.app`)
 
 [start=5]
 . Crear un entorno virtual de Python para Nuitka y el resto de módulos asociados. Por ejemplo, para Python 3.10 y usando la imagen de disco definida anteriormente:
@@ -673,7 +711,7 @@ hdiutil create -size 1G -type SPARSE -fs 'Case-sensitive APFS' -volname zx123bui
 ----
 
 [start=7]
-. Obtener la heramienta https://github.com/create-dmg/create-dmg/releases[create-dmg] e instalar, por ejemplo, junto a CMake (en /Volumes/zx123build/Applications/create-dmg)
+. Obtener la herramienta https://github.com/create-dmg/create-dmg/releases[create-dmg] e instalar, por ejemplo, junto a CMake (en `/Volumes/zx123build/Applications/create-dmg`)
 
 . Crear un directorio donde guardar todos los ficheros necesarios para compilar, así como el resultado. Por ejemplo, si se ha creado la imagen de disco
 
@@ -683,7 +721,7 @@ mkdir /Volumes/zx123build/build
 ----
 
 [start=9]
-. Copiar los directorios `win_x86_32` y `win_x86_64` generados en Windows en este nuevo directorio.
+. Copiar en dos subdirectorios llamados `win_x86_32` (para 32-bit) y `win_x86_64` (para 64-bit) los ficheros generados en Windows, dentro de este nuevo directorio.
 
 ===== Uso del entorno
 
