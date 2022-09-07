@@ -623,11 +623,11 @@ Cada bloque (ROM Entry), a su vez, tiene esta estructura:
 
 ==== Compilar los ficheros binarios en Windows
 
-==== Preparación del entorno
+===== Preparación del entorno
 
-Para poder generar los binarios en Windows:
+Para poder generar los binarios en Windows, se han de seguir estos pasos para tener un entorno adecuado:
 
-. Instalar, las herramientas de desarrollo de Microsoft (https://visualstudio.microsoft.com/es/[Visual Studio]). Basta con instalar "Build Tools para Visual Studio".
+. Instalar las herramientas de desarrollo de Microsoft (https://visualstudio.microsoft.com/es/[Visual Studio]). Basta con instalar "Build Tools para Visual Studio".
 
 . Instalar Python 3.x (no es necesario que esté disponible para todos los usuarios o en PATH), por ejemplo, usando el instalador disponible en la https://www.python.org/downloads/windows/[web oficial].
 
@@ -638,8 +638,8 @@ Para poder generar los binarios en Windows:
 py -3 -m venv zx123build
 ----
 
-[start=6]
-. Instalar los módulos de Python necesarios
+[start=4]
+. Instalar los módulos de Python necesarios:
 
 [source,shell]
 ----
@@ -649,7 +649,7 @@ py -3 -m venv zx123build
 
 [NOTE]
 ====
-Si se desea generar ficheros binarios para 32-bit, utilizar una instalación de Python de 32-bit, y un entorno independiente. Si se desea generar de 64-bit, será necesario otro entorno aparte, con una instalación de Python de 64-bit.
+Si se desea generar ficheros binarios para 32-bit, utilizar una instalación de Python de 32-bit, y un entorno independiente. Si se desea generar de 64-bit, será necesario otro entorno aparte, con una instalación de Python de 64-bit. Ambos entornos pueden estar en el mismo sistema.
 ====
 
 ===== Uso del entorno
@@ -661,13 +661,15 @@ Utilizar Nuitka para generar los ficheros, por ejemplo con un comando como:
 .\zx123build\Scripts\python3.exe -m nuitka "...\zx123_tool\ZX123 Tool.py" --output-dir=.\zx123build\win_x86_64 --standalone --lto=yes --enable-plugin=tk-inter --windows-disable-console --windows-icon-from-ico="...\zx123_tool\ZX123 Tool.ico" --windows-company-name="kounch" --windows-product-name="ZX123 Tool" --windows-file-version="3.6.1.0" --windows-product-version="3.6.1.0" --windows-file-description="ZX123 Tool"
 -----
 
+Este ejemplo crearía todos los ficheros dentro del directorio `.\zx123build\win_x86_64`.
+
 ==== Compilar y generar la distribución en MacOS
 
 ===== Preparación del entorno
 
-Para poder generar los binarios en MacOS, así como poder generar todos los ficheros de la distribución (imágenes DMG, ficheros ZIP, etc.) se necesitan los siguientes pasos previos:
+Para tener un entorno donde generar los binarios de MacOS, así como poder generar todos los ficheros de la distribución (imágenes DMG, ficheros ZIP, etc.) se han de seguir los siguientes pasos.
 
-. Instalar, al menos, las herramientas de desarrollador de la línea de comandos
+. Instalar la herramientas de línea de comandos de Xcode
 
 [source,shell]
 ----
@@ -679,11 +681,11 @@ xcode-select --install
 
 [WARNING]
 ====
-La versión de Python incluida con las herramientas de desarrollador no funciona correctamente con Nuitka.
+La versión de Python incluida con las herramientas de Xcode no funciona correctamente con Nuitka.
 ====
 
 [start=3]
-. Crear un directorio con espacio suficiente, o crear una imagen de disco donde guardar todos los datos del proyecto:
+. Crear un directorio con espacio suficiente (800MB o más), o crear una imagen de disco donde guardar todos los datos del proyecto:
 
 [source,shell]
 ----
@@ -702,7 +704,7 @@ hdiutil create -size 1G -type SPARSE -fs 'Case-sensitive APFS' -volname zx123bui
 ----
 
 [start=6]
-. Instalar los módulos de Python necesarios
+. Instalar los módulos de Python necesarios dentro del entorno virtual:
 
 [source,shell]
 ----
@@ -713,7 +715,7 @@ hdiutil create -size 1G -type SPARSE -fs 'Case-sensitive APFS' -volname zx123bui
 [start=7]
 . Obtener la herramienta https://github.com/create-dmg/create-dmg/releases[create-dmg] e instalar, por ejemplo, junto a CMake (en `/Volumes/zx123build/Applications/create-dmg`)
 
-. Crear un directorio donde guardar todos los ficheros necesarios para compilar, así como el resultado. Por ejemplo, si se ha creado la imagen de disco
+. Crear un nuevo directorio donde guardar todos los ficheros necesarios para compilar, así como el resultado. Por ejemplo, si se ha creado la imagen de disco:
 
 [source,shell]
 ----
@@ -725,14 +727,14 @@ mkdir /Volumes/zx123build/build
 
 ===== Uso del entorno
 
-Ahora, cada vez que se quiera generar binarios, paquetes, etc. se debe dar acceso al directorio donde está el entorno preparado antes (si se trata de una imagen de disco, asegurarse de que está montada)
+Ahora, cada vez que se quiera generar binarios, paquetes, etc. se debe dar acceso al directorio donde está el entorno preparado antes (si se trata de una imagen de disco, asegurarse de que está montada):
 
 [source,shell]
 ----
 export PATH=/Volumes/zx123build/bin:/Volumes/zx123build/Applications/CMake.app/Contents/bin:/Volumes/zx123build/Applications/create-dmg:${PATH}
 ----
 
-Acceder al directorio de compilación e inicializar CMake contra el código fuente
+Acceder al directorio de compilación e inicializar CMake contra el código fuente:
 
 [source,shell]
 ----
@@ -740,7 +742,7 @@ cd /Volumes/zx123build/build
 cmake -G "Unix Makefiles" .../zx123_tool 
 ----
 
-Finalmente, usar el comando `make` para compilar y generar todos los ficheros
+Finalmente, usar el comando `make` para compilar y generar todos los ficheros.
 
 == Copyright
 
