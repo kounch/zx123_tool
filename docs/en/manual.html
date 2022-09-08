@@ -660,7 +660,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">kounch</span><br>
 <span id="email" class="email"><a href="mailto:kounch@users.noreply.github.com">kounch@users.noreply.github.com</a></span><br>
-<span id="revnumber">version 1.1.0</span>
+<span id="revnumber">version 1.2.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Index</div>
@@ -700,6 +700,22 @@ pre.rouge {
 <li><a href="#_rom_parameters">ROM parameters</a></li>
 <li><a href="#_json_file">JSON file</a></li>
 <li><a href="#_rompack_v2">ROMPack v2</a></li>
+<li><a href="#_compiling_zx123_tool">Compiling ZX123 Tool</a>
+<ul class="sectlevel3">
+<li><a href="#_compiling_on_windows">Compiling on windows</a>
+<ul class="sectlevel4">
+<li><a href="#_preparing_the_environment">Preparing the environment</a></li>
+<li><a href="#_using_the_environment">Using the environment</a></li>
+</ul>
+</li>
+<li><a href="#_compiling_and_building_the_distribution_in_macos">Compiling and building the distribution in MacOS</a>
+<ul class="sectlevel4">
+<li><a href="#_preparing_the_environment_2">Preparing the environment</a></li>
+<li><a href="#_using_the_environment_2">Using the environment</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_copyright">Copyright</a></li>
@@ -1613,6 +1629,209 @@ Boot Timer</p></td>
 </tr>
 </tbody>
 </table>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_compiling_zx123_tool">Compiling ZX123 Tool</h3>
+<div class="sect3">
+<h4 id="_compiling_on_windows">Compiling on windows</h4>
+<div class="sect4">
+<h5 id="_preparing_the_environment">Preparing the environment</h5>
+<div class="paragraph">
+<p>In order to build binary executables on Windows, you have to follow these steps have a valid environment:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Install Microsoft development tools (<a href="https://visualstudio.microsoft.com/es/">Visual Studio</a>). It is enough to install only "Visual Studio Build Tools".</p>
+</li>
+<li>
+<p>Install Python 3.x (not necessarily for all users or included in PATH), for example, with the installer available at the <a href="https://www.python.org/downloads/windows/">official web</a>.</p>
+</li>
+<li>
+<p>Create a virtual environment for Nuitka and associatede modules. For example:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">py <span class="nt">-3</span> <span class="nt">-m</span> venv zx123build</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>Install all the needed modules:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">.<span class="se">\z</span>x123build<span class="se">\S</span>cripts<span class="se">\p</span>ython3.exe <span class="nt">-m</span> pip <span class="nb">install </span>pip setuptools <span class="nt">--upgrade</span>
+.<span class="se">\z</span>x123build<span class="se">\S</span>cripts<span class="se">\p</span>ython3.exe <span class="nt">-m</span> pip <span class="nb">install </span>wheel nuitka zstandard ordered-set</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you want to build 32-bit binary files, you have to use a 32-bit Python installation, with its own environment. If you want 64-bit, you will need another different environment, with a 64-bit Python installation. Both environments can be in the same computer.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_using_the_environment">Using the environment</h5>
+<div class="paragraph">
+<p>Use Nuitka to make the files, for example with a command like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">.<span class="se">\z</span>x123build<span class="se">\S</span>cripts<span class="se">\p</span>ython3.exe <span class="nt">-m</span> nuitka <span class="s2">"...</span><span class="se">\z</span><span class="s2">x123_tool</span><span class="se">\Z</span><span class="s2">X123 Tool.py"</span> <span class="nt">--output-dir</span><span class="o">=</span>.<span class="se">\z</span>x123build<span class="se">\w</span>in_x86_64 <span class="nt">--standalone</span> <span class="nt">--lto</span><span class="o">=</span><span class="nb">yes</span> <span class="nt">--enable-plugin</span><span class="o">=</span>tk-inter <span class="nt">--windows-disable-console</span> <span class="nt">--windows-icon-from-ico</span><span class="o">=</span><span class="s2">"...</span><span class="se">\z</span><span class="s2">x123_tool</span><span class="se">\Z</span><span class="s2">X123 Tool.ico"</span> <span class="nt">--windows-company-name</span><span class="o">=</span><span class="s2">"kounch"</span> <span class="nt">--windows-product-name</span><span class="o">=</span><span class="s2">"ZX123 Tool"</span> <span class="nt">--windows-file-version</span><span class="o">=</span><span class="s2">"3.6.1.0"</span> <span class="nt">--windows-product-version</span><span class="o">=</span><span class="s2">"3.6.1.0"</span> <span class="nt">--windows-file-description</span><span class="o">=</span><span class="s2">"ZX123 Tool"</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This example would create all the binary files inside the directory <code>.\zx123build\win_x86_64</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_compiling_and_building_the_distribution_in_macos">Compiling and building the distribution in MacOS</h4>
+<div class="sect4">
+<h5 id="_preparing_the_environment_2">Preparing the environment</h5>
+<div class="paragraph">
+<p>To have an environment than can build all MacOS binaries and also all the distribution files (DMG image files, ZIP files, etc.) you have to follow these steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Install Xcode Command Line Tools</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">xcode-select <span class="nt">--install</span></code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>Install Python 3.x (doesn&#8217;t need to be for all users or added to the PATH), for example, using the installer from the <a href="https://www.python.org/downloads/macos/">official website</a>.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The Python version included with the command line tools does not work with Nuitka.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>Create a directory with enough space (800MB or more), or create a disk image file to keep all the project data:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">hdiutil create <span class="nt">-size</span> 1G <span class="nt">-type</span> SPARSE <span class="nt">-fs</span> <span class="s1">'Case-sensitive APFS'</span> <span class="nt">-volname</span> zx123build <span class="nt">-attach</span> zx123build</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>Install <a href="https://cmake.org/download/">CMake</a>, for example, inside the previously created disk image (inside <code>/Volumes/zx123build/Applications/CMake.app</code>)</p>
+</li>
+</ol>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="5">
+<li>
+<p>Create a Python virtual environment for Nuitka and other modules. For example, with Python 3.10 and the disk image:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">/Library/Frameworks/Python.framework/Versions/3.10/bin/python3 <span class="nt">-m</span> venv /Volumes/zx123build/</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="6">
+<li>
+<p>Install all required modules inside the virtual environment:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">/Volumes/zx123build/bin/python3 <span class="nt">-m</span> pip <span class="nb">install </span>pip setuptools <span class="nt">--upgrade</span>
+/Volumes/zx123build/bin/python3 <span class="nt">-m</span> pip <span class="nb">install </span>wheel nuitka zstandard ordered-set</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="7">
+<li>
+<p>Obtain the <a href="https://github.com/create-dmg/create-dmg/releases">create-dmg</a> tool and install, for example, next to CMake (inside <code>/Volumes/zx123build/Applications/create-dmg</code>)</p>
+</li>
+<li>
+<p>Create a new directory for all the compilation neede files, and the results. For example, inside disk image:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell"><span class="nb">mkdir</span> /Volumes/zx123build/build</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="9">
+<li>
+<p>Copy into two subdirectories named <code>win_x86_32</code> (32-bit) and <code>win_x86_64</code> (64-bit) the files previously built with Windows.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_using_the_environment_2">Using the environment</h5>
+<div class="paragraph">
+<p>Now, whenever you want to build binary files, etc. you have to give acces to the directory where the environment is (if it&#8217;s inside a disk image, make sure that it is mounted).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell"><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/Volumes/zx123build/bin:/Volumes/zx123build/Applications/CMake.app/Contents/bin:/Volumes/zx123build/Applications/create-dmg:<span class="k">${</span><span class="nv">PATH</span><span class="k">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Get inside the build directory, and initialize CMake using the project source code.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell"><span class="nb">cd</span> /Volumes/zx123build/build
+cmake <span class="nt">-G</span> <span class="s2">"Unix Makefiles"</span> .../zx123_tool</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, use the <code>make</code> command to build and make all the files.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1665,8 +1884,8 @@ All rights reserved.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.1.0<br>
-Last updated 2022-08-28 13:18:34 +0200
+Version 1.2.0<br>
+Last updated 2022-09-07 15:14:28 +0200
 </div>
 </div>
 </body>

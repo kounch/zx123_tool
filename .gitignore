@@ -5,3 +5,4 @@
 .vscode/
 build/
 __pycache__/
+test/

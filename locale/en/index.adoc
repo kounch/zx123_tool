@@ -1,11 +1,11 @@
 = ZX123 Tool Manual
 :author: kounch
-:revnumber: 1.1.0
+:revnumber: 1.2.0
 :doctype: book
 :notitle:
 :front-cover-image: image:../img/Portada.jpg[]
 :email: kounch@users.noreply.github.com
-:Revision: 1.1
+:Revision: 1.2
 :description: English ZX123 Tool Manual
 :keywords: Manual, English, ZX123 Tool, ZX-Uno, ZXDOS, ZXDOS+
 :icons: font
@@ -613,6 +613,133 @@ Each ROM Entry block has this internal structure:
 |`0x3F`
 |Name of ROM in ASCII, space padded
 |===
+
+<<<
+
+=== Compiling ZX123 Tool
+
+==== Compiling on windows
+
+===== Preparing the environment
+
+In order to build binary executables on Windows, you have to follow these steps have a valid environment:
+
+. Install Microsoft development tools (https://visualstudio.microsoft.com/es/[Visual Studio]). It is enough to install only "Visual Studio Build Tools".
+
+. Install Python 3.x (not necessarily for all users or included in PATH), for example, with the installer available at the https://www.python.org/downloads/windows/[official web].
+
+. Create a virtual environment for Nuitka and associatede modules. For example:
+
+[source,shell]
+----
+py -3 -m venv zx123build
+----
+
+[start=4]
+. Install all the needed modules:
+
+[source,shell]
+----
+.\zx123build\Scripts\python3.exe -m pip install pip setuptools --upgrade
+.\zx123build\Scripts\python3.exe -m pip install wheel nuitka zstandard ordered-set
+----
+
+[NOTE]
+====
+If you want to build 32-bit binary files, you have to use a 32-bit Python installation, with its own environment. If you want 64-bit, you will need another different environment, with a 64-bit Python installation. Both environments can be in the same computer.
+====
+
+===== Using the environment
+
+Use Nuitka to make the files, for example with a command like:
+
+[source,shell]
+-----
+.\zx123build\Scripts\python3.exe -m nuitka "...\zx123_tool\ZX123 Tool.py" --output-dir=.\zx123build\win_x86_64 --standalone --lto=yes --enable-plugin=tk-inter --windows-disable-console --windows-icon-from-ico="...\zx123_tool\ZX123 Tool.ico" --windows-company-name="kounch" --windows-product-name="ZX123 Tool" --windows-file-version="3.6.1.0" --windows-product-version="3.6.1.0" --windows-file-description="ZX123 Tool"
+-----
+
+This example would create all the binary files inside the directory `.\zx123build\win_x86_64`.
+
+==== Compiling and building the distribution in MacOS
+
+===== Preparing the environment
+
+To have an environment than can build all MacOS binaries and also all the distribution files (DMG image files, ZIP files, etc.) you have to follow these steps:
+
+. Install Xcode Command Line Tools
+
+[source,shell]
+----
+xcode-select --install
+----
+
+[start=2]
+. Install Python 3.x (doesn't need to be for all users or added to the PATH), for example, using the installer from the https://www.python.org/downloads/macos/[official website].
+
+[WARNING]
+====
+The Python version included with the command line tools does not work with Nuitka.
+====
+
+[start=3]
+. Create a directory with enough space (800MB or more), or create a disk image file to keep all the project data:
+
+[source,shell]
+----
+hdiutil create -size 1G -type SPARSE -fs 'Case-sensitive APFS' -volname zx123build -attach zx123build
+----
+
+[start=4]
+. Install https://cmake.org/download/[CMake], for example, inside the previously created disk image (inside `/Volumes/zx123build/Applications/CMake.app`)
+
+[start=5]
+. Create a Python virtual environment for Nuitka and other modules. For example, with Python 3.10 and the disk image:
+
+[source,shell]
+----
+/Library/Frameworks/Python.framework/Versions/3.10/bin/python3 -m venv /Volumes/zx123build/
+----
+
+[start=6]
+. Install all required modules inside the virtual environment:
+
+[source,shell]
+----
+/Volumes/zx123build/bin/python3 -m pip install pip setuptools --upgrade
+/Volumes/zx123build/bin/python3 -m pip install wheel nuitka zstandard ordered-set
+----
+
+[start=7]
+. Obtain the https://github.com/create-dmg/create-dmg/releases[create-dmg] tool and install, for example, next to CMake (inside `/Volumes/zx123build/Applications/create-dmg`)
+
+. Create a new directory for all the compilation neede files, and the results. For example, inside disk image:
+
+[source,shell]
+----
+mkdir /Volumes/zx123build/build
+----
+
+[start=9]
+. Copy into two subdirectories named `win_x86_32` (32-bit) and `win_x86_64` (64-bit) the files previously built with Windows.
+
+===== Using the environment
+
+Now, whenever you want to build binary files, etc. you have to give acces to the directory where the environment is (if it's inside a disk image, make sure that it is mounted).
+
+[source,shell]
+----
+export PATH=/Volumes/zx123build/bin:/Volumes/zx123build/Applications/CMake.app/Contents/bin:/Volumes/zx123build/Applications/create-dmg:${PATH}
+----
+
+Get inside the build directory, and initialize CMake using the project source code.
+
+[source,shell]
+----
+cd /Volumes/zx123build/build
+cmake -G "Unix Makefiles" .../zx123_tool 
+----
+
+Finally, use the `make` command to build and make all the files.
 
 == Copyright
 
