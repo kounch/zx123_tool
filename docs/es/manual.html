@@ -660,7 +660,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">kounch</span><br>
 <span id="email" class="email"><a href="mailto:kounch@users.noreply.github.com">kounch@users.noreply.github.com</a></span><br>
-<span id="revnumber">version 1.1.0</span>
+<span id="revnumber">version 1.2.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Índice</div>
@@ -700,6 +700,22 @@ pre.rouge {
 <li><a href="#_indicadores_de_rom">Indicadores de ROM</a></li>
 <li><a href="#_archivo_json">Archivo JSON</a></li>
 <li><a href="#_rompack_v2">ROMPack v2</a></li>
+<li><a href="#_compilar_zx123_tool">Compilar ZX123 Tool</a>
+<ul class="sectlevel3">
+<li><a href="#_compilar_los_ficheros_binarios_en_windows">Compilar los ficheros binarios en Windows</a>
+<ul class="sectlevel4">
+<li><a href="#_preparación_del_entorno">Preparación del entorno</a></li>
+<li><a href="#_uso_del_entorno">Uso del entorno</a></li>
+</ul>
+</li>
+<li><a href="#_compilar_y_generar_la_distribución_en_macos">Compilar y generar la distribución en MacOS</a>
+<ul class="sectlevel4">
+<li><a href="#_preparación_del_entorno_2">Preparación del entorno</a></li>
+<li><a href="#_uso_del_entorno_2">Uso del entorno</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_copyright">Copyright</a></li>
@@ -1608,6 +1624,209 @@ pre.rouge {
 </tr>
 </tbody>
 </table>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_compilar_zx123_tool">Compilar ZX123 Tool</h3>
+<div class="sect3">
+<h4 id="_compilar_los_ficheros_binarios_en_windows">Compilar los ficheros binarios en Windows</h4>
+<div class="sect4">
+<h5 id="_preparación_del_entorno">Preparación del entorno</h5>
+<div class="paragraph">
+<p>Para poder generar los binarios en Windows, se han de seguir estos pasos para tener un entorno adecuado:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Instalar las herramientas de desarrollo de Microsoft (<a href="https://visualstudio.microsoft.com/es/">Visual Studio</a>). Basta con instalar "Build Tools para Visual Studio".</p>
+</li>
+<li>
+<p>Instalar Python 3.x (no es necesario que esté disponible para todos los usuarios o en PATH), por ejemplo, usando el instalador disponible en la <a href="https://www.python.org/downloads/windows/">web oficial</a>.</p>
+</li>
+<li>
+<p>Crear un entorno virtual de Python para Nuitka y el resto de módulos asociados. Por ejemplo:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">py <span class="nt">-3</span> <span class="nt">-m</span> venv zx123build</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>Instalar los módulos de Python necesarios:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">.<span class="se">\z</span>x123build<span class="se">\S</span>cripts<span class="se">\p</span>ython3.exe <span class="nt">-m</span> pip <span class="nb">install </span>pip setuptools <span class="nt">--upgrade</span>
+.<span class="se">\z</span>x123build<span class="se">\S</span>cripts<span class="se">\p</span>ython3.exe <span class="nt">-m</span> pip <span class="nb">install </span>wheel nuitka zstandard ordered-set</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Si se desea generar ficheros binarios para 32-bit, utilizar una instalación de Python de 32-bit, y un entorno independiente. Si se desea generar de 64-bit, será necesario otro entorno aparte, con una instalación de Python de 64-bit. Ambos entornos pueden estar en el mismo sistema.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_uso_del_entorno">Uso del entorno</h5>
+<div class="paragraph">
+<p>Utilizar Nuitka para generar los ficheros, por ejemplo con un comando como:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">.<span class="se">\z</span>x123build<span class="se">\S</span>cripts<span class="se">\p</span>ython3.exe <span class="nt">-m</span> nuitka <span class="s2">"...</span><span class="se">\z</span><span class="s2">x123_tool</span><span class="se">\Z</span><span class="s2">X123 Tool.py"</span> <span class="nt">--output-dir</span><span class="o">=</span>.<span class="se">\z</span>x123build<span class="se">\w</span>in_x86_64 <span class="nt">--standalone</span> <span class="nt">--lto</span><span class="o">=</span><span class="nb">yes</span> <span class="nt">--enable-plugin</span><span class="o">=</span>tk-inter <span class="nt">--windows-disable-console</span> <span class="nt">--windows-icon-from-ico</span><span class="o">=</span><span class="s2">"...</span><span class="se">\z</span><span class="s2">x123_tool</span><span class="se">\Z</span><span class="s2">X123 Tool.ico"</span> <span class="nt">--windows-company-name</span><span class="o">=</span><span class="s2">"kounch"</span> <span class="nt">--windows-product-name</span><span class="o">=</span><span class="s2">"ZX123 Tool"</span> <span class="nt">--windows-file-version</span><span class="o">=</span><span class="s2">"3.6.1.0"</span> <span class="nt">--windows-product-version</span><span class="o">=</span><span class="s2">"3.6.1.0"</span> <span class="nt">--windows-file-description</span><span class="o">=</span><span class="s2">"ZX123 Tool"</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Este ejemplo crearía todos los ficheros dentro del directorio <code>.\zx123build\win_x86_64</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_compilar_y_generar_la_distribución_en_macos">Compilar y generar la distribución en MacOS</h4>
+<div class="sect4">
+<h5 id="_preparación_del_entorno_2">Preparación del entorno</h5>
+<div class="paragraph">
+<p>Para tener un entorno donde generar los binarios de MacOS, así como poder generar todos los ficheros de la distribución (imágenes DMG, ficheros ZIP, etc.) se han de seguir los siguientes pasos.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Instalar la herramientas de línea de comandos de Xcode</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">xcode-select <span class="nt">--install</span></code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>Instalar Python 3.x (no es necesario que esté disponible para todos los usuarios o en PATH), por ejemplo, usando el instalador disponible en la <a href="https://www.python.org/downloads/macos/">web oficial</a>.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>La versión de Python incluida con las herramientas de Xcode no funciona correctamente con Nuitka.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>Crear un directorio con espacio suficiente (800MB o más), o crear una imagen de disco donde guardar todos los datos del proyecto:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">hdiutil create <span class="nt">-size</span> 1G <span class="nt">-type</span> SPARSE <span class="nt">-fs</span> <span class="s1">'Case-sensitive APFS'</span> <span class="nt">-volname</span> zx123build <span class="nt">-attach</span> zx123build</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>Instalar <a href="https://cmake.org/download/">CMake</a>, por ejemplo, en la imagen de disco creada anteriormente (en <code>/Volumes/zx123build/Applications/CMake.app</code>)</p>
+</li>
+</ol>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="5">
+<li>
+<p>Crear un entorno virtual de Python para Nuitka y el resto de módulos asociados. Por ejemplo, para Python 3.10 y usando la imagen de disco definida anteriormente:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">/Library/Frameworks/Python.framework/Versions/3.10/bin/python3 <span class="nt">-m</span> venv /Volumes/zx123build/</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="6">
+<li>
+<p>Instalar los módulos de Python necesarios dentro del entorno virtual:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">/Volumes/zx123build/bin/python3 <span class="nt">-m</span> pip <span class="nb">install </span>pip setuptools <span class="nt">--upgrade</span>
+/Volumes/zx123build/bin/python3 <span class="nt">-m</span> pip <span class="nb">install </span>wheel nuitka zstandard ordered-set</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="7">
+<li>
+<p>Obtener la herramienta <a href="https://github.com/create-dmg/create-dmg/releases">create-dmg</a> e instalar, por ejemplo, junto a CMake (en <code>/Volumes/zx123build/Applications/create-dmg</code>)</p>
+</li>
+<li>
+<p>Crear un nuevo directorio donde guardar todos los ficheros necesarios para compilar, así como el resultado. Por ejemplo, si se ha creado la imagen de disco:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell"><span class="nb">mkdir</span> /Volumes/zx123build/build</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="9">
+<li>
+<p>Copiar en dos subdirectorios llamados <code>win_x86_32</code> (para 32-bit) y <code>win_x86_64</code> (para 64-bit) los ficheros generados en Windows, dentro de este nuevo directorio.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_uso_del_entorno_2">Uso del entorno</h5>
+<div class="paragraph">
+<p>Ahora, cada vez que se quiera generar binarios, paquetes, etc. se debe dar acceso al directorio donde está el entorno preparado antes (si se trata de una imagen de disco, asegurarse de que está montada):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell"><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/Volumes/zx123build/bin:/Volumes/zx123build/Applications/CMake.app/Contents/bin:/Volumes/zx123build/Applications/create-dmg:<span class="k">${</span><span class="nv">PATH</span><span class="k">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Acceder al directorio de compilación e inicializar CMake contra el código fuente:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell"><span class="nb">cd</span> /Volumes/zx123build/build
+cmake <span class="nt">-G</span> <span class="s2">"Unix Makefiles"</span> .../zx123_tool</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finalmente, usar el comando <code>make</code> para compilar y generar todos los ficheros.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1660,8 +1879,8 @@ All rights reserved.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.1.0<br>
-Last updated 2022-08-28 13:18:42 +0200
+Version 1.2.0<br>
+Last updated 2022-09-07 15:14:24 +0200
 </div>
 </div>
 </body>
