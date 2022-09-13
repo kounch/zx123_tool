@@ -1,5 +1,5 @@
 {
-    "version": "20220905.002",
+    "version": "20220913.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -1225,6 +1225,22 @@
                 "versions": {
                     "20210423 (esxdos 0.8.9)": "b65153e392e3c045ae0e50ede3ff570aa38af1e9861c7e762c1b60a553b7f4fd",
                     "20220708 (esxdos 0.8.9)": "054ca43c3f78154e237a02bb7884cd61c6e22b7f34a3b4a0a7238ba8acd0e29a"
+                }
+            },
+            "zx (Kyp)": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], ""],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["Turbosound", "Specdrum"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["VHD Image Support"], ""]
+                },
+                "latest": [
+                    "20220913",
+                    "https://github.com/Kyp069/zx/releases/download/RC1/COREnn.zx-20220913.ZX1"
+                ],
+                "versions": {
+                    "20220913": "5fbcac4ce2908d84ce3ce50379bdb231ebc9b13884c1c3f4f128faf2fb5bfc6d"
                 }
             },
             "ZX Spectrum (spark2k06)": {
@@ -4195,6 +4211,22 @@
                     "2021.07.29 (esxdos 0.8.9) Test": "ccd50f1f655b5e2f3617bfa7a4d11aeeddf42078a6fdf5b571b3beb940f7d519",
                     "2021.07.29 (esxdos 0.8.9)": "792b44f109ee21780fa1fd6c92205efcd12d02d6d21aa3c1c95e84c92651794d",
                     "2021.08.03 (esxdos 0.8.9)": "1615fa59a1b43080ed41fd3d29f0ffcde8909c3040a4520283b062c1eaa5efa8"
+                }
+            },
+            "zx (Kyp)": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], ""],
+                    "Video": [["VGA", "RGB"], ""],
+                    "Audio": [["Turbosound", "Specdrum"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["VHD Image Support"], ""]
+                },
+                "latest": [
+                    "20220913",
+                    "https://github.com/Kyp069/zx/releases/download/RC1/COREnn.zx-20220913.ZXD"
+                ],
+                "versions": {
+                    "20220913": "fa653c466b5cf84dd995054b8ad4b38e7fb55f051d50221023bb8bc185c6a186"
                 }
             },
             "ZX Spectrum Next": {
