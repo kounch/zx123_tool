@@ -1,5 +1,5 @@
 {
-    "version": "20220913.001",
+    "version": "20220925.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -173,7 +173,8 @@
                 "EXP27 spark2k06 060822 VGA-2M PZX (no SAA1099)": "ca689ba4cb802753d8cdb3d32cffa185ad8d3ad65def7da48e468afb8d0fa954",
                 "EXP27 spark2k06 060822 VGA-2M SAA1099 (no PZX)": "f29105a1b26ffddcf3662744b7412c30aae93fccc5f6be03dd5f6f6f5fbc7f36",
                 "EXP27 spark2k06 210822 PZX (no SAA1099) (VGA-WiFi)": "62cb5d0f83c4129c025d9ad52f259081a828521797f538d9b309128a7a167df9",
-                "EXP27 spark2k06 210822 SAA1099 (no PZX) (VGA-WiFi)": "ac35c363334f9ab6813fbc652dfc0931b201e9eb2c9dda3576578ac69c521b1b"
+                "EXP27 spark2k06 210822 SAA1099 (no PZX) (VGA-WiFi)": "ac35c363334f9ab6813fbc652dfc0931b201e9eb2c9dda3576578ac69c521b1b",
+                "EXP27 20220923 PZX (no SAA1099) rooted": "0c587ef6ef0f86d848d65290b63202676948dc8c758c55f38c3a43c378f8c4f2"
             }
         },
         "Special": {
@@ -1240,7 +1241,9 @@
                     "https://github.com/Kyp069/zx/releases/download/RC1/COREnn.zx-20220913.ZX1"
                 ],
                 "versions": {
-                    "20220913": "5fbcac4ce2908d84ce3ce50379bdb231ebc9b13884c1c3f4f128faf2fb5bfc6d"
+                    "20220913": "5fbcac4ce2908d84ce3ce50379bdb231ebc9b13884c1c3f4f128faf2fb5bfc6d",
+                    "20220920": "3f82b38754835758c0f16c1c6ed3843c85514ea47b8472d406bff427fd4b8f5b",
+                    "20220924": "a1b9515d3854f57922039029051aa8d548610d7e5463172392538da13038b67b"
                 }
             },
             "ZX Spectrum (spark2k06)": {
@@ -1322,7 +1325,8 @@
                     "EXP27 VGA-2M PZX (no SAA1099) 060822": "d1e4221c109ab2dfee34f71d5fa13c0dfda1889252e8abb6277f507b13f80d39",
                     "EXP27 VGA-2M SAA1099 (no PZX) 060822": "ac5906c619a1be35af7686b73de6c8b80c4be27a9fdab07e182ba7832a6c855a",
                     "EXP27 PZX (no SAA1099) 210822 (VGA-WiFi)": "38b4c51cf8554d7a2748855300a84028e1c54c3988086a3cfce56907363352e3",
-                    "EXP27 SAA1099 (no PZX) 210822 (VGA-WiFi)": "be728d1669171001dad331436e5361132aa888c061f4b874ed1c03bd02353dc6"
+                    "EXP27 SAA1099 (no PZX) 210822 (VGA-WiFi)": "be728d1669171001dad331436e5361132aa888c061f4b874ed1c03bd02353dc6",
+                    "EXP27 20220923 PZX (no SAA1099) rooted": "df98608738459af48aaace38073dfabbe1a07c4f70d1485db9ef7fd68f5808ce"
                 }
             },
             "ZX TBBlue": {
