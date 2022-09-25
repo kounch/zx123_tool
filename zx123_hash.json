@@ -1,5 +1,5 @@
 {
-    "version": "20220925.001",
+    "version": "20220925.002",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -561,7 +561,10 @@
                     "20220526": "f59ab839a0e6965a80b599864fa5cda08c589ca3be2204a7f6febf1245796fa3",
                     "20220619 512K": "4df9dabfe984842bffa8e32de031d0dc0ba735d17064d56383f3499ae5c56b34",
                     "20220627": "723110e08485eabe6742f1ab45247c14166cba41287b606a97d163cd58cc154b",
-                    "20220627 2MB Ext": "f65e8322f204c9bdebd216aae635667ec7313042c15074ce641b0b2d4d4f3a0e"
+                    "20220627 2MB Ext": "f65e8322f204c9bdebd216aae635667ec7313042c15074ce641b0b2d4d4f3a0e",
+                    "20220921 512K": "ae90c391005b7e3a53c412f13ce7c15e28833f222bed4f2ed41afc2ed5419742",
+                    "20220921": "a65560ee0a65c6c9cb3b00b7fabe2524d3d56991d5d76f1c712133d272d1d6fc",
+                    "20220921 2MB Ext": "ba4c91a24e66e69a6b8761035074fc696514c67652b9629f5471d448660711bc"
                 }
             },
             "Flappy Bird": {
@@ -1396,7 +1399,8 @@
                     "1.0"
                 ],
                 "versions": {
-                    "1.0": "5dc7afb8ac88ccff49aa8559c4f5400a0f48caa67dac13c94bc52a8ea2c4a26d"
+                    "1.0": "5dc7afb8ac88ccff49aa8559c4f5400a0f48caa67dac13c94bc52a8ea2c4a26d",
+                    "1.1": "5dc7afb8ac88ccff49aa8559c4f5400a0f48caa67dac13c94bc52a8ea2c4a26d"
                 }
             },
             "Arcade New Rally X": {
@@ -1470,7 +1474,8 @@
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/mooncresta.ZX1"
                 ],
                 "versions": {
-                    "1.0": "0e2302451a4214b15b700633e29cdf940e8f81cf3dcf295d6c8a6956915cbaa6"
+                    "1.0": "0e2302451a4214b15b700633e29cdf940e8f81cf3dcf295d6c8a6956915cbaa6",
+                    "1.1": "7f1afb93aa8f6218b036d189ab3f7f4d7603d5a5e37568db0b3d07e07b67bad0"
                 }
             },
             "ArcadeV Scramble": {
@@ -1725,7 +1730,21 @@
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/cavenger.ZX1"
                 ],
                 "versions": {
-                    "1.0": "9bd6476cd287e141d95c5de15ddda221a57140170f02b26897e97ff89735b68d"
+                    "1.0": "9bd6476cd287e141d95c5de15ddda221a57140170f02b26897e97ff89735b68d",
+                    "1.1": "ff7a8976bf7fe90df94d6b8793a8e37b610aa32e17ccfc800f1e676d1e3b2ca6"
+                }
+            },
+            "Arcade Crazy Climber": {
+                "features": {
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], "May require an AddOn with DB9" ]
+                },
+                "latest": [
+                    "1.0"
+                ],
+                "versions": {
+                    "1.0": "7299958212ff3142674591c965e555d7b1d6309c86ad43a96969e604c9b5e434"
                 }
             },
             "ArcadeV Crazy Kong": {
@@ -2027,7 +2046,8 @@
                 ],
                 "versions": {
                     "1.0": "e8c121d9897c16d326c577c1b45501e53812026c87d203a3b71a5163d722f38b",
-                    "1.1": "9b2a6fcecc92c0615d73ad0d1a4047d2aa298ba9159de3406275638b68d65ee2"
+                    "1.1": "9b2a6fcecc92c0615d73ad0d1a4047d2aa298ba9159de3406275638b68d65ee2",
+                    "1.2": "e8c121d9897c16d326c577c1b45501e53812026c87d203a3b71a5163d722f38b"
                 }
             },
             "Arcade Lunar Rescue": {
@@ -2217,7 +2237,8 @@
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/ponpoko.ZX1"
                 ],
                 "versions": {
-                    "1.0": "c49cd99eb61945f575980a4ed7d3edb7e0f7154133844545dffbc3b9834b7859"
+                    "1.0": "c49cd99eb61945f575980a4ed7d3edb7e0f7154133844545dffbc3b9834b7859",
+                    "1.1": "834bdf8a54d060510f5eed7475b30b182424f7f2e2707c1d5e1a071bc398ef06"
                 }
             },
             "ArcadeV Pooyan": {
@@ -2287,7 +2308,8 @@
                     "https://github.com/zxdos/zxuno/raw/master/modflash/cores/Arcades/snapjack.ZX1"
                 ],
                 "versions": {
-                    "1.0": "4b8987c1a0fda0b3cd9d17d23e5642ff209377fb34468f0bcc24d61fdf1922e8"
+                    "1.0": "4b8987c1a0fda0b3cd9d17d23e5642ff209377fb34468f0bcc24d61fdf1922e8",
+                    "1.1": "4af4c003212b7a1204a6198af558c405f764e72840046545018649bf2f3d40a3"
                 }
             },
             "Arcade Space Laser": {
@@ -2718,11 +2740,12 @@
                     "Joystick": [["DB9"], "May require an AddOn with DB9" ]
                 },
                 "latest": [
-                    "1.0",
+                    "1.1",
                     ""
                 ],
                 "versions": {
-                    "1.0": "9803832a7756fa1c1b572dd8af13edd3329cebff087d8ce10a7fc03fe88b7d5a"
+                    "1.0": "9803832a7756fa1c1b572dd8af13edd3329cebff087d8ce10a7fc03fe88b7d5a",
+                    "1.1": "ce93383509fcc1d5630b88a92623532af97eb9d569767955c98a98e2781e9003"
                 }
             }
         }
