@@ -1,5 +1,5 @@
 {
-    "version": "20220925.002",
+    "version": "20220926.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -174,7 +174,17 @@
                 "EXP27 spark2k06 060822 VGA-2M SAA1099 (no PZX)": "f29105a1b26ffddcf3662744b7412c30aae93fccc5f6be03dd5f6f6f5fbc7f36",
                 "EXP27 spark2k06 210822 PZX (no SAA1099) (VGA-WiFi)": "62cb5d0f83c4129c025d9ad52f259081a828521797f538d9b309128a7a167df9",
                 "EXP27 spark2k06 210822 SAA1099 (no PZX) (VGA-WiFi)": "ac35c363334f9ab6813fbc652dfc0931b201e9eb2c9dda3576578ac69c521b1b",
-                "EXP27 20220923 PZX (no SAA1099) rooted": "0c587ef6ef0f86d848d65290b63202676948dc8c758c55f38c3a43c378f8c4f2"
+                "EXP27 20220923 rooted PZX (no SAA1099)": "0c587ef6ef0f86d848d65290b63202676948dc8c758c55f38c3a43c378f8c4f2",
+                "EXP27 spark2k06 250922 rooted PZX (no SAA1099) (RGB666)": "3519d8c2bf7f57f96eda7708c416e5429a65528801c7b652e5e5624762bf7958",
+                "EXP27 spark2k06 250922 rooted SAA1099 (no PZX) (RGB666)": "dce65d083798974214cac54dd3e292544e18de97780f37155f2bbbe48836c9c7",
+                "EXP27 spark2k06 250922 rooted PZX (no SAA1099)": "5862d2e2e688e25b566b194699d12f83924bc97eba65f498bbf9932e8d0fdd19",
+                "EXP27 spark2k06 250922 rooted SAA1099 (no PZX)": "98164c12fa5be7d0ae06108d72ab3bc52940dbf3d66f651146b5ecbd392a4e32",
+                "EXP27 spark2k06 250922 rooted Ext RAM PZX (no SAA1099)": "2baa5ad6b2f2402b62df9516e8959c4c8b6b04ee6ab6dabb01a8c10a51fe2f04",
+                "EXP27 spark2k06 250922 rooted Ext RAM SAA1099 (no PZX)": "eff3afe0d02bd70174b26b1a004f86e2fdcf928160a3f4ef04d003fab5e0088e",
+                "EXP27 spark2k06 250922 rooted VGA-2M PZX (no SAA1099)": "9e8a3a5de334acddb85a82bf267a3da5a583827da089158f15e2459b3b17954c",
+                "EXP27 spark2k06 250922 rooted VGA-2M SAA1099 (no PZX)": "fe5e284e80b77c6e72bedd5d3d83d9e2f6508b93ab351ce00c795c476c69fa15",
+                "EXP27 spark2k06 250922 rooted PZX (no SAA1099) (VGA-WiFi)": "57ae52b45f3385ba4735918366d9e3bd426b008a17ea7c7e2e71fe6bdcc515d9",
+                "EXP27 spark2k06 250922 rooted SAA1099 (no PZX) (VGA-WiFi)": "5e4683fba97823563650a1ef747051dc4b6f7019fa551d141c75e7b938d0093b"
             }
         },
         "Special": {
@@ -1329,7 +1339,17 @@
                     "EXP27 VGA-2M SAA1099 (no PZX) 060822": "ac5906c619a1be35af7686b73de6c8b80c4be27a9fdab07e182ba7832a6c855a",
                     "EXP27 PZX (no SAA1099) 210822 (VGA-WiFi)": "38b4c51cf8554d7a2748855300a84028e1c54c3988086a3cfce56907363352e3",
                     "EXP27 SAA1099 (no PZX) 210822 (VGA-WiFi)": "be728d1669171001dad331436e5361132aa888c061f4b874ed1c03bd02353dc6",
-                    "EXP27 20220923 PZX (no SAA1099) rooted": "df98608738459af48aaace38073dfabbe1a07c4f70d1485db9ef7fd68f5808ce"
+                    "EXP27 rooted 20220923 PZX (no SAA1099)": "df98608738459af48aaace38073dfabbe1a07c4f70d1485db9ef7fd68f5808ce",
+                    "EXP27 rooted PZX (no SAA1099) 250922 (RGB666)": "822583e3d9cb3ce08e0ad9d80e0ba8192c3a020d87330f39b31bb0be0f914bdc",
+                    "EXP27 rooted SAA1099 (no PZX) 250922 (RGB666)": "c23f9114bff4dfa015ba1c6adc4bd4e62551013fcbf40c64ec919536c702c483",
+                    "EXP27 rooted PZX (no SAA1099) 250922": "07af9b1d06f2a2ae4dedb380e0b751ed22d215d9901987ff5c67ee49f31743b5",
+                    "EXP27 rooted SAA1099 (no PZX) 250922": "a54378a6a0be61d8814b621a0f0d7433054f8ffb388df33a35f9189aa3923880",
+                    "EXP27 rooted Ext RAM PZX (no SAA1099) 250922": "4e574bd6a56d7dd04c1263e7f352b2239d3a7bb6f32d42d6cfe1ea9b373d0863",
+                    "EXP27 rooted Ext RAM SAA1099 (no PZX) 250922": "bc02121f8db7e994430747a81368b88358cf529f0626b3e515f42608c8622b9c",
+                    "EXP27 rooted VGA-2M PZX (no SAA1099) 250922": "20daf8c265f360404d231376f4d565debb41d81f8fa82532d4475f523e23b7a0",
+                    "EXP27 rooted VGA-2M SAA1099 (no PZX) 250922": "3f9ed73d65760dac6493bebd485fb35ff30489d33b471ed235fb70096b332e6a",
+                    "EXP27 rooted PZX (no SAA1099) 250922 (VGA-WiFi)": "539755d3f6ef02178ac49fef941c11e37179f06d20d3837c6a7151aba687c863",
+                    "EXP27 rooted SAA1099 (no PZX) 250922 (VGA-WiFi)": "7f91d858e8b8b41a4727bb30137a3ba13097c79baa47aebf387d91b2a5ed97e9"
                 }
             },
             "ZX TBBlue": {
