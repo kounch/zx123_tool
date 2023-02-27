@@ -35,6 +35,7 @@ file (e.g.: ZXD) and, optionally, hashes to identify the blocks inside.
 """
 
 from __future__ import print_function
+from typing import List, Dict
 import logging
 import sys
 import argparse
@@ -50,16 +51,17 @@ import shutil
 import ctypes
 if sys.version_info.major == 3:
     import urllib.request
+    from urllib.error import HTTPError
 if os.name == 'nt':
     import msvcrt  # pylint: disable=import-error
 
 __MY_VERSION__ = '3.6.1'
 
-MAIN_URL = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
-MY_DIRPATH = os.path.dirname(sys.argv[0])
+MAIN_URL: str = 'https://raw.githubusercontent.com/kounch/zx123_tool/main'
+MY_DIRPATH: str = os.path.dirname(sys.argv[0])
 MY_DIRPATH = os.path.abspath(MY_DIRPATH)
-STR_OUTDIR = ''
-IS_COL_TERM = False
+STR_OUTDIR: str = ''
+IS_COL_TERM: bool = False
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
@@ -84,13 +86,14 @@ def main():
     enable_term_col()
 
     LOGGER.debug('Starting up...')
-    arg_data = parse_args()
+    arg_data: Dict = parse_args()
 
-    str_file = arg_data['input_file']
+    str_file: str = arg_data['input_file']
     STR_OUTDIR = arg_data['output_dir']
-    output_file = arg_data['output_file']
+    output_file: str = arg_data['output_file']
 
-    fulldict_hash = load_json_bd(str_file, output_file, arg_data['update'])
+    fulldict_hash: Dict = load_json_bd(str_file, output_file,
+                                       arg_data['update'])
     if not fulldict_hash:
         LOGGER.error("There's no JSON data")
         sys.exit(2)
@@ -100,7 +103,7 @@ def main():
         sys.exit(0)
 
     # Analyze/initialize input file and output dir location and extension
-    b_new_img = False
+    b_new_img: bool = False
     if not str_file:
         if arg_data['output_file']:
             str_file, _ = unzip_image(MY_DIRPATH, arg_data['output_file'],
@@ -283,16 +286,16 @@ def enable_term_col():
 # https://ozzmaker.com/add-colour-to-text-in-python/
 class Colours:
     """Colour handling for terminal"""
-    RED = '\033[1;31m'
-    GREEN = '\033[1;32m'
-    YELLOW = '\033[1;33m'
-    BLUE = '\033[1;34m'
-    PURPLE = '\033[1;35m'
-    CYAN = '\033[1;36m'
-    ENDC = '\033[m'
+    RED: str = '\033[1;31m'
+    GREEN: str = '\033[1;32m'
+    YELLOW: str = '\033[1;33m'
+    BLUE: str = '\033[1;34m'
+    PURPLE: str = '\033[1;35m'
+    CYAN: str = '\033[1;36m'
+    ENDC: str = '\033[m'
 
 
-def printcol(str_col, str_txt, end=''):
+def printcol(str_col: str, str_txt: str, end: str = ''):
     """Print with TERM colour"""
     if IS_COL_TERM:
         print(f'{str_col}{str_txt}{Colours.ENDC}', end=end)
@@ -300,7 +303,7 @@ def printcol(str_col, str_txt, end=''):
         print(str_txt, end=end)
 
 
-def parse_args():
+def parse_args() -> Dict:
     """
     Parses command line
     :return: Dictionary with different options
@@ -308,7 +311,7 @@ def parse_args():
     global LOGGER  # pylint: disable=global-variable-not-assigned
     global IS_COL_TERM  # pylint: disable=global-statement
 
-    values = {}
+    values: Dict = {}
     values['input_file'] = ''
     values['output_dir'] = ''
     values['output_file'] = ''
@@ -600,7 +603,10 @@ def parse_args():
 # Main Functions
 
 
-def load_json_bd(str_file='', output_file='', str_update='', base_dir=None):
+def load_json_bd(str_file: str = '',
+                 output_file: str = '',
+                 str_update: str = '',
+                 base_dir: str = '') -> Dict:
     """
     Loads the Hash Database
     :param str_file: Input file (to determine if update)
@@ -613,7 +619,7 @@ def load_json_bd(str_file='', output_file='', str_update='', base_dir=None):
     if base_dir:
         str_json = os.path.join(base_dir, 'zx123_hash.json')
 
-    fulldict_hash = {}
+    fulldict_hash: Dict = {}
     # Update JSON
     if str_update != '':
         if str_update == 'json' or (not str_file and not STR_OUTDIR
@@ -622,7 +628,7 @@ def load_json_bd(str_file='', output_file='', str_update='', base_dir=None):
                 os.remove(str_json)
 
     if not os.path.isfile(str_json):
-        dl_url = MAIN_URL + '/zx123_hash.json'
+        dl_url: str = MAIN_URL + '/zx123_hash.json'
         print('\nDownloading JSON database...', end='')
         urllib.request.urlretrieve(dl_url, str_json)
         print('OK')
@@ -637,7 +643,8 @@ def load_json_bd(str_file='', output_file='', str_update='', base_dir=None):
     return fulldict_hash
 
 
-def unzip_image(str_path, str_output, hash_dict, b_force):
+def unzip_image(str_path: str, str_output: str, hash_dict: Dict,
+                b_force: bool) -> tuple[str, str]:
     """
     Extract base image file from ZIP. Download ZIP from repository if needed.
     :param str_path: Directory where ZIP files are
@@ -646,24 +653,24 @@ def unzip_image(str_path, str_output, hash_dict, b_force):
     :param b_force: Force overwriting file
     :return: New image file path if created or else an empty string
     """
-    str_file = ''
-    str_err = ''
-    str_extension = os.path.splitext(str_output)[1]
+    str_file: str = ''
+    str_err: str = ''
+    str_extension: str = os.path.splitext(str_output)[1]
     str_extension = str_extension[1:].upper()
 
     if str_extension in hash_dict:
-        str_image = f'FLASH16_empty.{str_extension}'
-        str_zip = f'{str_image}.zip'
-        str_zipfile = os.path.join(str_path, str_zip)
+        str_image: str = f'FLASH16_empty.{str_extension}'
+        str_zip: str = f'{str_image}.zip'
+        str_zipfile: str = os.path.join(str_path, str_zip)
         if not os.path.isfile(str_zipfile):
-            dl_url = f'{MAIN_URL}/{str_zip}'
+            dl_url: str = f'{MAIN_URL}/{str_zip}'
             print('\nDownloading base image ZIP file...', end='')
             urllib.request.urlretrieve(dl_url, str_zipfile)
             print('OK')
 
         if is_zipfile(str_zipfile):
             with ZipFile(str_zipfile, 'r') as zip_obj:
-                arr_files = zip_obj.namelist()
+                arr_files: List[str] = zip_obj.namelist()
                 for str_name in arr_files:
                     if str_name == str_image:
                         with tempfile.TemporaryDirectory() as str_tmpdir:
@@ -1142,7 +1149,7 @@ def prep_update_zxdata(arr_in_files,
                        fullhash_dict,
                        str_extension,
                        block_list,
-                       b_varcade='',
+                       b_varcade=False,
                        get_1core=False,
                        get_2mb=False,
                        w_progress=None):
@@ -1387,7 +1394,7 @@ def check_and_update(update_file,
                 os.remove(str_zipfile)
             print('OK')
             dl_result = True
-        except urllib.error.HTTPError:
+        except HTTPError:
             print('Error! Is the JSON file up to date?')
 
     return dl_result
@@ -1416,7 +1423,7 @@ def update_image(str_file,
     :param get_2mb: Use "2m" entries of JSON
     :returns Created or updated image file name, updated b_force
     """
-    arr_upd = []
+    arr_upd: List = []
     if str_update.lower() in ['all', 'bios']:
         prep_update_zxdata(arr_upd,
                            str_file,
@@ -1818,7 +1825,7 @@ def find_zxfile(str_in_file,
     hash_dict = fulldict_hash[str_extension]
     d_parts = hash_dict['parts']
 
-    dict_res = {}
+    dict_res: Dict = {}
     dict_res['detail'] = {}
 
     str_name = os.path.basename(str_in_file)
@@ -2328,6 +2335,8 @@ def inject_coredata(str_in_params, hash_dict, b_data, w_progress=None):
     str_err = ''
     b_changed = False
     dict_parts = hash_dict['parts']
+    str_hash = ''
+    block_version = ''
 
     arr_params = str_in_params.split(',')
     br_data = b_data
