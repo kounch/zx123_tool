@@ -3,7 +3,7 @@
 # -*- mode: Python; tab-width: 4; indent-tabs-mode: nil; -*-
 # Do not modify previous lines. See PEP 8, PEP 263.
 """
-Copyright (c) 2021-2022, kounch
+Copyright (c) 2021-2023, kounch
 All rights reserved.
 
 SPDX-License-Identifier: BSD-2-Clause
@@ -30,6 +30,7 @@ Requires a zx123_hash.json file with block structure for a kind of SPI flash
 file (e.g.: ZXD) and, optionally, hashes to identify the blocks inside.
 """
 
+from __future__ import annotations
 import os
 import sys
 import pathlib
@@ -37,16 +38,19 @@ from shutil import copy
 import zx123_tool as zx123
 import zx123_tool_gui
 
-MY_DIRPATH = os.path.dirname(sys.argv[0])
-MY_DIRPATH = os.path.abspath(MY_DIRPATH)
-JSON_DIR = APP_RESDIR = MY_DIRPATH
+MY_BASEPATH: str = os.path.dirname(sys.argv[0])
+MY_DIRPATH: str = os.path.abspath(MY_BASEPATH)
 if sys.platform == 'darwin':
-    JSON_DIR = os.path.join(os.environ.get('HOME'), 'Library',
-                            'Application Support', 'ZX123 Tool')
-    APP_RESDIR = os.path.abspath(os.path.join(MY_DIRPATH, '..', 'Resources'))
+    JSON_DIR: str = os.path.join(str(os.environ.get('HOME')), 'Library',
+                                 'Application Support', 'ZX123 Tool')
+    APP_RESDIR: str = os.path.abspath(
+        os.path.join(MY_DIRPATH, '..', 'Resources'))
 elif sys.platform == 'win32':
     JSON_DIR = os.path.join(os.path.expandvars('%LOCALAPPDATA%'), 'ZX123 Tool')
     APP_RESDIR = MY_DIRPATH
+else:
+    APP_RESDIR = MY_DIRPATH
+    JSON_DIR = APP_RESDIR
 
 
 def main():
@@ -71,7 +75,7 @@ def main():
     zx123_tool_gui.JSON_DIR = JSON_DIR
     zx123_tool_gui.APP_RESDIR = APP_RESDIR
 
-    app = zx123_tool_gui.App()
+    app: zx123_tool_gui.App = zx123_tool_gui.App()
     app.mainloop()
 
 
