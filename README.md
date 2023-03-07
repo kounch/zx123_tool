@@ -1,6 +1,6 @@
 # ZX123 Tool
 
-Copyright (c) 2020-2022, kounch
+Copyright (c) 2020-2023, kounch
 
 All rights reserved.
 
@@ -60,7 +60,7 @@ Por favor, lea [el manual de uso](https://kounch.github.io/zx123_tool/manual.htm
 
 BSD 2-Clause License
 
-Copyright (c) 2020-2022, kounch
+Copyright (c) 2020-2023, kounch
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

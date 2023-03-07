@@ -746,7 +746,7 @@ Finalmente, usar el comando `make` para compilar y generar todos los ficheros.
 
 == Copyright
 
-Copyright (c) 2020-2022, kounch
+Copyright (c) 2020-2023, kounch
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
