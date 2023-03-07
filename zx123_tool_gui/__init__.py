@@ -4,7 +4,7 @@
 # Do not modify previous lines. See PEP 8, PEP 263.
 # pylint: disable=import-outside-toplevel
 """
-Copyright (c) 2021-2022, kounch
+Copyright (c) 2021-2023, kounch
 All rights reserved.
 
 SPDX-License-Identifier: BSD-2-Clause
@@ -14,6 +14,8 @@ ZX123 Tool GUI Classes
     Extra Windows defined in ._extra_gui
 """
 
+from __future__ import annotations
+from typing import Any, Optional
 import os
 import sys
 import json
@@ -31,8 +33,8 @@ if sys.version_info.major == 3:
 
 ssl._create_default_https_context = ssl._create_unverified_context  # pylint: disable=protected-access
 
-MY_DIRPATH = os.path.dirname(sys.argv[0])
-MY_DIRPATH = os.path.abspath(MY_DIRPATH)
+MY_BASEPATH = os.path.dirname(sys.argv[0])
+MY_DIRPATH = os.path.abspath(MY_BASEPATH)
 JSON_DIR = APP_RESDIR = MY_DIRPATH
 
 
@@ -59,14 +61,13 @@ class App(tk.Tk):
     from ._main_gui import coretable_selected
     from ._main_gui import romtable_selected
 
-    def __init__(self):
-
+    def __init__(self: Any):
         super().__init__()
 
         self.pref_window = None
         if sys.platform == 'win32':
             # Windows config
-            str_icon_path = os.path.join(MY_DIRPATH, 'ZX123 Tool.ico')
+            str_icon_path: str = os.path.join(MY_DIRPATH, 'ZX123 Tool.ico')
             self.iconbitmap(str_icon_path)
         elif sys.platform == 'darwin':
             # MacOS Open File Events
@@ -78,19 +79,22 @@ class App(tk.Tk):
             pass
 
         if sys.version_info < (3, 8, 0):
-            str_error = 'ERROR\n'
+            str_error: str = 'ERROR\n'
             str_error += 'This software requires at least Python version 3.8'
             messagebox.showerror('Error', str_error, parent=self)
             self.destroy()
             return
 
-        self.dict_prefs = {}
-        self.fulldict_hash = {}
-        self.zxfilepath = ''
-        self.zxextension = ''
-        self.zxsize = 0
-        self.old_core = self.old_timer = self.old_keyboard = None
-        self.old_video = self.old_rom = None
+        self.dict_prefs: dict[str, bool | tuple[int, int]] = {}
+        self.fulldict_hash: dict[str, Any] = {}
+        self.zxfilepath: str = ''
+        self.zxextension: str = ''
+        self.zxsize: int = 0
+        self.old_core: int = 0
+        self.old_timer: int = 0
+        self.old_keyboard: int = 0
+        self.old_video: int = 0
+        self.old_rom: int = 0
 
         self.load_json()
         self.load_prefs()
@@ -140,30 +144,30 @@ class App(tk.Tk):
         if len(sys.argv) > 1:
             self.open_file(sys.argv[1:])
 
-    def do_close(self, *_):
+    def do_close(self: Any, *_: Any):
         """Destroy Event"""
         self.dict_prefs['mainwindow'] = (self.winfo_x(), self.winfo_y())
         self.save_prefs()
         self.destroy()
 
-    def check_updates(self, confirm=False):
+    def check_updates(self: Any, confirm: bool = False):
         """Gets the latest release version from GitHub"""
         print("Checking for updates...")
-        result = urllib.request.urlopen(
+        result: Any = urllib.request.urlopen(
             'https://github.com/kounch/zx123_tool/releases/latest')
-        new_version = result.url.split('/')[-1]
-        old_version = zx123.__MY_VERSION__
+        new_version: str = result.url.split('/')[-1]
+        old_version: str = zx123.__MY_VERSION__
         if new_version > old_version:
-            str_msg = f'There\'s a new version ({new_version}) of'
+            str_msg: str = f'There\'s a new version ({new_version}) of'
             str_msg += ' ZX123 Tool available to download.'
             messagebox.showinfo('Update available', str_msg, parent=self)
         elif confirm:
             str_msg = 'This is the latest version of ZX123 Tool.'
             messagebox.showinfo('No update available', str_msg, parent=self)
 
-    def load_prefs(self, restore=False):
+    def load_prefs(self: Any, restore: bool = False):
         """Load preferences from file if found, or set default settings"""
-        dict_prefs = {
+        dict_prefs: dict[str, bool | tuple[int, int]] = {
             'update_json': False,
             'check_updates': False,
             'ask_insert': False,
@@ -172,7 +176,7 @@ class App(tk.Tk):
             'import_allroms': False,
             'remember_pos': False
         }
-        str_prefs = os.path.join(JSON_DIR, 'zx123_prefs.json')
+        str_prefs: str = os.path.join(JSON_DIR, 'zx123_prefs.json')
 
         if restore:
             self.dict_prefs = dict_prefs
@@ -186,28 +190,28 @@ class App(tk.Tk):
 
         self.dict_prefs = dict_prefs
 
-    def save_prefs(self):
+    def save_prefs(self: Any):
         """Save preferences to file"""
-        str_prefs = os.path.join(JSON_DIR, 'zx123_prefs.json')
+        str_prefs: str = os.path.join(JSON_DIR, 'zx123_prefs.json')
         with open(str_prefs, 'w', encoding='utf-8') as prefs_handle:
             json.dump(self.dict_prefs, prefs_handle)
 
-    def open_prefs(self):
+    def open_prefs(self: Any):
         """Show or set focus to preferences window"""
         if self.pref_window:
             self.pref_window.top.focus_force()
         else:
             self.pref_window = PrefWindow(self)
 
-    def load_json(self):
+    def load_json(self: Any):
         """Initialize JSON Database"""
 
-        fulldict_hash = zx123.load_json_bd(base_dir=JSON_DIR)
+        fulldict_hash: dict[str, Any] = zx123.load_json_bd(base_dir=JSON_DIR)
         if os.path.isdir(APP_RESDIR):
-            tmp_hash = zx123.load_json_bd(base_dir=APP_RESDIR)
+            tmp_hash: dict[str, Any] = zx123.load_json_bd(base_dir=APP_RESDIR)
             if 'version' in tmp_hash:
-                old_version = '20211201.001'
-                my_version = tmp_hash['version']
+                old_version: str = '20211201.001'
+                my_version: str = tmp_hash['version']
                 if 'version' in fulldict_hash:
                     old_version = fulldict_hash['version']
                 if old_version < my_version:
@@ -217,44 +221,44 @@ class App(tk.Tk):
         fulldict_hash = zx123.load_json_bd(base_dir=JSON_DIR)
         self.fulldict_hash = fulldict_hash
 
-    def update_json(self):
+    def update_json(self: Any):
         """Update JSON Database and show in GUI"""
-        fulldict_hash = zx123.load_json_bd(base_dir=JSON_DIR,
-                                           str_update='json')
+        fulldict_hash: dict[str, Any] = zx123.load_json_bd(base_dir=JSON_DIR,
+                                                           str_update='json')
         if 'version' in fulldict_hash:
-            str_text = f'Database: {fulldict_hash["version"]}'
+            str_text: str = f'Database: {fulldict_hash["version"]}'
             self.version_label.config(text=str_text)
 
         self.fulldict_hash = fulldict_hash
 
-    def new_image(self):
+    def new_image(self: Any):
         """Create a new image file from one of the included templates"""
-        filetypes = [('ZX1 Flash Image', '.zx1'),
-                     ('ZXDOS Flash Image', '.zx2'),
-                     ('ZXDOS+ Flash Image', '.zxd')]
-        str_file = fd.asksaveasfilename(parent=self,
-                                        title='New file to create',
-                                        filetypes=filetypes)
+        filetypes: list[tuple[str, str]] = [('ZX1 Flash Image', '.zx1'),
+                                            ('ZXDOS Flash Image', '.zx2'),
+                                            ('ZXDOS+ Flash Image', '.zxd')]
+        str_file: str = fd.asksaveasfilename(parent=self,
+                                             title='New file to create',
+                                             filetypes=filetypes)
         if str_file:
             _, str_err = zx123.unzip_image(JSON_DIR, str_file,
                                            self.fulldict_hash, True)
             if str_err:
-                str_error = 'ERROR\nCannot create new image file.\n'
+                str_error: str = 'ERROR\nCannot create new image file.\n'
                 str_error += f'{str_err}\n'
                 messagebox.showerror('Error', str_error, parent=self)
             else:
                 self.open_file(str_file)
 
-    def erase_image(self):
+    def erase_image(self: Any):
         """Wipes a Flash Image File, removing all cores and ROMs"""
-        str_filename = os.path.split(self.zxfilepath)[1]
+        str_filename: str = os.path.split(self.zxfilepath)[1]
 
-        str_title = f'Erase {str_filename}'
-        str_message = f'Do you really want to erase {str_filename}?'
-        response = messagebox.askyesno(parent=self,
-                                       icon='question',
-                                       title=str_title,
-                                       message=str_message)
+        str_title: str = f'Erase {str_filename}'
+        str_message: str = f'Do you really want to erase {str_filename}?'
+        response: bool = messagebox.askyesno(parent=self,
+                                             icon='question',
+                                             title=str_title,
+                                             message=str_message)
         if response:
             zx123.wipe_zxdata(self.zxfilepath,
                               self.zxfilepath,
@@ -262,26 +266,28 @@ class App(tk.Tk):
                               b_force=True)
             self.open_file(self.zxfilepath)
 
-    def expand_image(self):
+    def expand_image(self: Any):
         """Expands a ZXD 16MB flash image to 32MB"""
-        str_filename = os.path.split(self.zxfilepath)[1]
+        str_filename: str = os.path.split(self.zxfilepath)[1]
+        str_outdir: str = os.path.split(self.zxfilepath)[0]
 
-        str_title = f'Erase {str_filename}'
-        str_message = f'Do you really want to expand {str_filename}?'
-        response = messagebox.askyesno(parent=self,
-                                       icon='question',
-                                       title=str_title,
-                                       message=str_message)
+        str_title: str = f'Erase {str_filename}'
+        str_message: str = f'Do you really want to expand {str_filename}?'
+        response: bool = messagebox.askyesno(parent=self,
+                                             icon='question',
+                                             title=str_title,
+                                             message=str_message)
         if response:
             print(f'Expand {self.zxfilepath}')
-            img_len = 33554432
+            img_len: int = 33554432
             zx123.expand_image(self.zxfilepath, self.zxfilepath, img_len, True)
             zx123.update_image(self.zxfilepath, self.zxfilepath,
-                               self.fulldict_hash, self.zxextension, 'special',
-                               False, True, False, False)
+                               self.fulldict_hash, self.zxextension,
+                               str_outdir, 'special', False, True, False,
+                               False)
             self.open_file(self.zxfilepath)
 
-    def full_close_image(self):
+    def full_close_image(self: Any):
         """Restore button text and empty all fields of Main Window """
         self.core_import_button['text'] = 'Add New Core'
         self.core_export_button['text'] = 'Export Core'
@@ -289,10 +295,10 @@ class App(tk.Tk):
         self.rom_export_button['text'] = 'Export ROM'
         self.close_image()
 
-    def close_image(self):
+    def close_image(self: Any):
         """Empty all fields of Main Window"""
 
-        self.zxfilepath = ''
+        self.zxfilepath: str = ''
 
         self.filemenu.entryconfig(2, state='disabled', label='Close file')
         self.filemenu.entryconfig(4, state='disabled')
@@ -334,36 +340,40 @@ class App(tk.Tk):
         self.video_spinbox.state(['disabled'])
         self.rom_spinbox.state(['disabled'])
 
-    def update_image(self, str_update, get_1core=False, get_2mb=False):
+    def update_image(self: Any,
+                     str_update: str,
+                     get_1core: bool = False,
+                     get_2mb: bool = False):
         """
         Tries to update BIOS and or Core(s) of image file
         :param str_update: Description of the update ("all", "bios", etc.)
         :param get_1core: Use "1core" entries of JSON
         :param get_2mb: Use "2m" entries of JSON
         """
-        str_title = f'Update {str_update}'
-        str_message = f'Are you sure that you want to update {str_update}?'
-        response = messagebox.askyesno(parent=self,
-                                       icon='question',
-                                       title=str_title,
-                                       message=str_message)
+        str_title: str = f'Update {str_update}'
+        str_message: str = f'Are you sure that you want to update {str_update}?'
+        response: bool = messagebox.askyesno(parent=self,
+                                             icon='question',
+                                             title=str_title,
+                                             message=str_message)
         if response:
-            w_progress = ProgressWindow(self, f'Update {str_update}')
+            w_progress: Any = ProgressWindow(self, f'Update {str_update}')
             w_progress.show()
+            str_outdir: str = os.path.split(self.zxfilepath)[0]
             zx123.update_image(self.zxfilepath, self.zxfilepath,
                                self.fulldict_hash, self.zxextension,
-                               str_update, False, True, get_1core, get_2mb,
-                               w_progress)
+                               str_outdir, str_update, False, True, get_1core,
+                               get_2mb, w_progress)
             self.open_file(self.zxfilepath)
             w_progress.close()
 
-    def open_files(self, *args):
+    def open_files(self: Any, *args: list[Any]):
         """Open several files"""
         for arg in args:
             if isinstance(arg, str):
                 self.open_file(arg)
 
-    def open_file(self, *args):
+    def open_file(self: Any, *args: list[Any]):
         """
         Open the first file received. If there's no file, ask for it
         :param args: Array of file paths. Only the first element is analyzed
@@ -373,16 +383,16 @@ class App(tk.Tk):
         self.menubar.entryconfig(0, state='disabled')
 
         if args:
-            str_file = args[0]
+            str_file: Any = args[0]
         else:
-            filetypes = [('ZX1, ZX2, ZXD or ROM files',
-                          '.zx1 .zx2 .zxd .rom .bin')]
+            filetypes: list[tuple[str, str]] = [('ZX1, ZX2, ZXD or ROM files',
+                                                 '.zx1 .zx2 .zxd .rom .bin')]
             str_file = fd.askopenfilename(parent=self,
                                           title='Select a file to open',
                                           filetypes=filetypes)
 
         if isinstance(str_file, str):  # To avoid MacOS quarantine events
-            str_filename = os.path.split(str_file)[1]
+            str_filename: str = os.path.split(str_file)[1]
             str_extension, dict_hash, filetype = zx123.detect_file(
                 str_file, self.fulldict_hash)
 
@@ -391,9 +401,9 @@ class App(tk.Tk):
                 self.zxfilepath = str_file
                 self.zxextension = str_extension
                 self.zxsize = os.stat(str_file).st_size
-                zx123.STR_OUTDIR = os.path.dirname(str_file)
 
-                dict_flash = zx123.list_zxdata(str_file, dict_hash, False)
+                dict_flash: dict[str, Any] = zx123.list_zxdata(
+                    str_file, dict_hash, False)
                 dict_roms, _ = zx123.list_romsdata(str_file,
                                                    self.fulldict_hash,
                                                    str_extension, False)
@@ -408,7 +418,7 @@ class App(tk.Tk):
                     self.filemenu.entryconfig(5, state='normal')
 
                 if self.zxextension == 'ZX1':
-                    str_update = 'normal'
+                    str_update: str = 'normal'
                 else:
                     str_update = 'disabled'
                 self.updatemenu.entryconfig(1, state=str_update)
@@ -439,7 +449,7 @@ class App(tk.Tk):
                 self.timer_spinbox.state(['!disabled'])
                 self.keyboard_spinbox.state(['!disabled'])
                 self.video_spinbox.state(['!disabled'])
-                rom_number = len(self.rom_table.get_children())
+                rom_number: int = len(self.rom_table.get_children())
                 self.rom_spinbox.config(from_=0)
                 self.rom_spinbox.config(to=rom_number - 1)
                 self.rom_spinbox.state(['!disabled'])
@@ -456,7 +466,7 @@ class App(tk.Tk):
                 if str_file:
                     dict_file = zx123.find_zxfile(str_file, self.fulldict_hash,
                                                   str_extension, False, True)
-                    filetype = dict_file.get('kind', 'Unknown')
+                    filetype: str = dict_file.get('kind', 'Unknown')
                     if filetype == 'ROMPack':
                         dict_roms, default_rom = zx123.list_romsdata(
                             str_file, self.fulldict_hash, 'ROMS', False, True)
@@ -465,38 +475,41 @@ class App(tk.Tk):
                     elif filetype != 'Unknown':
                         InfoWindow(self, str_filename, dict_file)
                     else:
-                        str_error = 'ERROR\nUnknown file\nFormat Unknown'
+                        str_error: str = 'ERROR\nUnknown file\nFormat Unknown'
                         str_error += ' or uncataloged content.'
                         messagebox.showerror('Error', str_error, parent=self)
 
         # Enable File Menu
         self.menubar.entryconfig(0, state='normal')
 
-    def convert_core(self):
+    def convert_core(self: Any):
         """Converts between main (spectrum) and secondary core, and back"""
-        filetypes = [('ZX1, ZX2 or ZXD file', '.zx1 .zx2 .zxd')]
-        str_file = fd.askopenfilename(parent=self,
-                                      title='Select a file to open',
-                                      filetypes=filetypes)
+        filetypes: list[tuple[str, str]] = [('ZX1, ZX2 or ZXD file',
+                                             '.zx1 .zx2 .zxd')]
+        str_file: str = fd.askopenfilename(parent=self,
+                                           title='Select a file to open',
+                                           filetypes=filetypes)
 
         if str_file:
-            str_filename = os.path.split(str_file)[1]
+            str_filename: str = os.path.split(str_file)[1]
             str_extension, dict_hash, filetype = zx123.detect_file(
                 str_file, self.fulldict_hash)
             if filetype == 'Unknown':
-                dict_file = zx123.find_zxfile(str_file, self.fulldict_hash,
-                                              str_extension, False, True)
-                filetype = dict_file.get('kind', 'Unknown')
+                dict_file: dict[str, Any] = zx123.find_zxfile(
+                    str_file, self.fulldict_hash, str_extension, False, True)
+                filetype: str = dict_file.get('kind', 'Unknown')
 
             str_outfile = ''
             if filetype in ['Core', 'Spectrum']:
-                filetypes = [(f'{str_extension} file', f'.{str_extension}')]
-                str_outfile = fd.asksaveasfilename(parent=self,
-                                                   title='New file to create',
-                                                   filetypes=filetypes)
+                filetypes: list[tuple[str, str]] = [(f'{str_extension} file',
+                                                     f'.{str_extension}')]
+                str_outfile: str = fd.asksaveasfilename(
+                    parent=self,
+                    title='New file to create',
+                    filetypes=filetypes)
                 if str_outfile:
-                    str_error = zx123.convert_core(str_file, dict_hash,
-                                                   str_outfile, True)
+                    str_error: str = zx123.convert_core(
+                        str_file, dict_hash, str_outfile, True)
                     if str_error:
                         messagebox.showerror('Error', str_error, parent=self)
                     else:
@@ -507,7 +520,7 @@ class App(tk.Tk):
                 str_error += '"{filetype}" instead of core, cannot convert.'
                 messagebox.showerror('Error', str_error, parent=self)
 
-    def populate_blocks(self, dict_blocks):
+    def populate_blocks(self: Any, dict_blocks: dict[str, Any]):
         """
         Populate Blocks Data Entries texts in Main Window
         :param dict_blocks: Array with different blocks data
@@ -520,7 +533,7 @@ class App(tk.Tk):
         if 'Spectrum' in dict_blocks:
             self.spectrum.set(dict_blocks['Spectrum'][0])
 
-    def populate_defaults(self, dict_defaults):
+    def populate_defaults(self: Any, dict_defaults: dict[str, Any]):
         """
         Populate Defaults Data texts in Main Window and old_... properties
         :param dict_defaults: Dictionary with values for defaults
@@ -537,23 +550,26 @@ class App(tk.Tk):
         self.old_rom = dict_defaults['default_rom']
         self.default_rom.set(self.old_rom)
 
-    def show_core_info(self):
+    def show_core_info(self: Any):
         """Show extra details for current selection in core table"""
-        t_selection = self.core_table.selection()
+        t_selection: Any = self.core_table.selection()
         if len(t_selection) == 1:
-            arr_selection = self.core_table.item(t_selection)['values']
-            str_name = f'{arr_selection[1]} ({arr_selection[2]})'
-            dict_core = self.fulldict_hash[self.zxextension]['Cores']
-            dict_core = dict_core[arr_selection[2]]
+            arr_selection: list[Any] = self.core_table.item(
+                t_selection)['values']
+            str_name: str = f'{arr_selection[1]} ({arr_selection[2]})'
+            dict_core: dict[str, Any] = self.fulldict_hash[
+                self.zxextension]['Cores']
+            dict_core: dict[str, Any] = dict_core[arr_selection[2]]
 
-            dict_res = {}
+            dict_res: dict[str, str | dict[str, Any]] = {}
             dict_res['kind'] = 'Core'
             dict_res['version'] = arr_selection[3]
             dict_res['detail'] = dict_core.get('features', {})
 
             InfoWindow(self, str_name, dict_res)
 
-    def validate_file(self, str_file, arr_format):
+    def validate_file(self: Any, str_file: str,
+                      arr_format: list[str]) -> tuple[bool, str]:
         """
         Checks if a file matches the selected format list
         :param str_file: File to analyze
@@ -563,9 +579,10 @@ class App(tk.Tk):
         str_extension, _, filetype = zx123.detect_file(str_file,
                                                        self.fulldict_hash)
 
-        dict_file = zx123.find_zxfile(str_file, self.fulldict_hash,
-                                      str_extension, False, True)
-        kind = dict_file.get('kind', 'Unknown')
+        dict_file: dict[str,
+                        Any] = zx123.find_zxfile(str_file, self.fulldict_hash,
+                                                 str_extension, False, True)
+        kind: str = dict_file.get('kind', 'Unknown')
         if filetype == 'Unknown':
             filetype = kind
 
@@ -574,8 +591,8 @@ class App(tk.Tk):
 
         if self.dict_prefs.get('import_allroms', False):
             if filetype == 'Unknown':
-                i_file_size = os.stat(str_file).st_size
-                d_parts = self.fulldict_hash['ROM']['parts']
+                i_file_size: int = os.stat(str_file).st_size
+                d_parts: dict[str, Any] = self.fulldict_hash['ROM']['parts']
                 for block_id in [
                         '16K Spectrum ROM', '32K Spectrum ROM',
                         '64K Spectrum ROM', '128K Spectrum ROM'
@@ -587,7 +604,8 @@ class App(tk.Tk):
 
         return bool(filetype in arr_format), filetype
 
-    def set_default_bios(self, bios_value, old_val, min_val, max_val, str_val):
+    def set_default_bios(self: Any, bios_value: tk.StringVar, old_val: int,
+                         min_val: int, max_val: int, str_val: str) -> int:
         """
         Changes BIOS settings of flash image if the value is different
         :param bios_value: Variable associated to spinbox content
@@ -598,16 +616,18 @@ class App(tk.Tk):
         :return: The final value evaluated, either the old or the new
         """
         self.changed_bios_spinbox(bios_value, min_val, max_val)
-        new_val = bios_value.get()
-        if new_val.isnumeric():
-            new_val = int(new_val)
+        str_new_val: str = bios_value.get()
+        if str_new_val.isnumeric():
+            new_val = int(str_new_val) - min_val
             if new_val != old_val:
-                arr_val = ['video', 'keyboard', 'timer', 'core', 'rom']
-                for elem in enumerate(arr_val):
+                arr_str_val: list[str] = [
+                    'video', 'keyboard', 'timer', 'core', 'rom'
+                ]
+                arr_val: list[int] = [-1, -1, -1, -1, -1]
+                for elem in enumerate(arr_str_val):
                     if str_val == elem[1]:
                         arr_val[elem[0]] = new_val
-                    else:
-                        arr_val[elem[0]] = -1
+
                 zx123.inject_zxfiles(self.zxfilepath, [], self.zxfilepath,
                                      self.fulldict_hash, self.zxextension,
                                      arr_val[0], arr_val[1], arr_val[2],
@@ -616,35 +636,35 @@ class App(tk.Tk):
 
         return old_val
 
-    def set_default_core(self, *_):
+    def set_default_core(self: Any, *_: Any):
         """Proxy to set_default_bios for default Core set action"""
         self.old_core = self.set_default_bios(
             self.default_core, self.old_core, 1,
             len(self.core_table.get_children()) + 1, 'core')
 
-    def set_default_timer(self, *_):
+    def set_default_timer(self: Any, *_: Any):
         """Proxy to set_default_bios for default timer set action"""
         self.old_timer = self.set_default_bios(self.default_timer,
                                                self.old_timer, 0, 4, 'timer')
 
-    def set_default_keyboard(self, *_):
+    def set_default_keyboard(self: Any, *_: Any):
         """Proxy to set_default_bios for default keyboard set action"""
         self.old_keyboard = self.set_default_bios(self.default_keyboard,
                                                   self.old_keyboard, 0, 3,
                                                   'keyboard')
 
-    def set_default_video(self, *_):
+    def set_default_video(self: Any, *_: Any):
         """Proxy to set_default_bios for default video set action"""
         self.old_video = self.set_default_bios(self.default_video,
                                                self.old_video, 0, 2, 'video')
 
-    def set_default_rom(self, *_):
+    def set_default_rom(self: Any, *_: Any):
         """Proxy to set_default_bios for default ROM set action"""
         self.old_rom = self.set_default_bios(
-            self.default_rom, 0, self.old_rom,
+            self.default_rom, self.old_rom, 0,
             len(self.rom_table.get_children()) - 1, 'rom')
 
-    def block_import(self, str_block, extra_exts=None):
+    def block_import(self: Any, str_block: str, extra_exts: Optional[list[str]] = None):
         """
         Generic block import to SPI flash image file
         :param str_block: Name of the kind of block (e.g. 'BIOS')
@@ -652,7 +672,7 @@ class App(tk.Tk):
 
         self.menubar.entryconfig(0, state='disabled')
 
-        str_exts = f'.{self.zxextension}'
+        str_exts: str = f'.{self.zxextension}'
         if extra_exts:
             try:
                 for str_ext in extra_exts:
@@ -660,22 +680,22 @@ class App(tk.Tk):
             except TypeError:
                 print(f'Wrong type for {extra_exts}')
 
-        filetypes = [(f'{str_block} files', str_exts)]
-        str_file = fd.askopenfilename(parent=self,
-                                      title=f'Open {str_block} file',
-                                      filetypes=filetypes)
+        filetypes: list[tuple[str, str]] = [(f'{str_block} files', str_exts)]
+        str_file: str = fd.askopenfilename(parent=self,
+                                           title=f'Open {str_block} file',
+                                           filetypes=filetypes)
 
         if str_file:
             b_block_ok, filetype = self.validate_file(str_file, [str_block])
             if b_block_ok:
-                response = True
+                response: bool = True
                 if self.dict_prefs.get('ask_replace', True):
-                    str_title = f'Replace {str_block}'
-                    str_message = f'Do you want to replace {str_block}?'
-                    response = messagebox.askyesno(parent=self,
-                                                   icon='question',
-                                                   title=str_title,
-                                                   message=str_message)
+                    str_title: str = f'Replace {str_block}'
+                    str_message: str = f'Do you want to replace {str_block}?'
+                    response: bool = messagebox.askyesno(parent=self,
+                                                         icon='question',
+                                                         title=str_title,
+                                                         message=str_message)
                 if response:
                     _, arr_err = zx123.inject_zxfiles(
                         self.zxfilepath, [f'{str_block},{str_file}'],
@@ -684,7 +704,7 @@ class App(tk.Tk):
                         self.zxextension,
                         b_force=True)
                     if arr_err:
-                        str_error = f'ERROR\nCannot insert {str_block}.\n'
+                        str_error: str = f'ERROR\nCannot insert {str_block}.\n'
                         str_error += '\n'.join(arr_err)
                         messagebox.showerror('Error', str_error, parent=self)
                     else:
@@ -696,7 +716,7 @@ class App(tk.Tk):
 
         self.menubar.entryconfig(0, state='normal')
 
-    def block_export(self, str_block):
+    def block_export(self: Any, str_block: str):
         """
         Generic block export from SPI flash image file
         :param str_block: Name of the kind of block (e.g. 'BIOS')
@@ -704,7 +724,7 @@ class App(tk.Tk):
 
         self.menubar.entryconfig(0, state='disabled')
 
-        str_directory = os.path.dirname(self.zxfilepath)
+        str_directory: str = os.path.dirname(self.zxfilepath)
         str_directory = fd.askdirectory(
             parent=self,
             initialdir=str_directory,
@@ -712,40 +732,40 @@ class App(tk.Tk):
         if str_directory:
             zx123.extractfrom_zxdata(self.zxfilepath, str_block,
                                      self.fulldict_hash, str_directory,
-                                     self.zxextension, True)
+                                     self.zxextension, True, False)
 
         self.menubar.entryconfig(0, state='normal')
 
-    def bios_import(self):
+    def bios_import(self: Any):
         """Proxy to block_import for BIOS import action"""
         self.block_import('BIOS')
 
-    def bios_export(self):
+    def bios_export(self: Any):
         """Proxy to block_import for BIOS export action"""
         self.block_export('BIOS')
 
-    def esxdos_import(self):
+    def esxdos_import(self: Any):
         """Proxy to block_import for esxdos import action"""
         self.block_import('esxdos', extra_exts=['bin'])
 
-    def esxdos_export(self):
+    def esxdos_export(self: Any):
         """Proxy to block_import for esxdos export action"""
         self.block_export('esxdos')
 
-    def spectrum_import(self):
+    def spectrum_import(self: Any):
         """Proxy to block_import for Spectrum Core import action"""
         self.block_import('Spectrum')
 
-    def spectrum_export(self):
+    def spectrum_export(self: Any):
         """Proxy to block_import for Spectrum Core export action"""
         self.block_export('spectrum')
 
-    def multi_import(self,
-                     str_name,
-                     treeview,
-                     b_core=False,
-                     b_alt=False,
-                     b_rename=False):
+    def multi_import(self: Any,
+                     str_name: str,
+                     treeview: ttk.Treeview,
+                     b_core: bool = False,
+                     b_alt: bool = False,
+                     b_rename: bool = False):
         """
         Generic core or ROM import to SPI flash Image
         :param str_name: Text to compose dialogs
@@ -756,17 +776,18 @@ class App(tk.Tk):
 
         self.menubar.entryconfig(0, state='disabled')
 
-        str_extension = 'ROM'
-        arr_format = [
+        str_extension: str = 'ROM'
+        arr_format: list[str] = [
             '16K Spectrum ROM', '32K Spectrum ROM', '64K Spectrum ROM',
             '128K Spectrum ROM'
         ]
         if b_core:
             str_extension = self.zxextension
             arr_format = [str_name]
-        filetypes = [(f'{self.zxextension} {str_name} files',
-                      f'.{str_extension}')]
-        str_file = None
+        filetypes: list[tuple[str, str]] = [
+            (f'{self.zxextension} {str_name} files', f'.{str_extension}')
+        ]
+        str_file: str = ''
         if not b_rename:
             str_file = fd.askopenfilename(parent=self,
                                           title=f'Open a {str_name} file',
@@ -776,20 +797,20 @@ class App(tk.Tk):
             b_block_ok, filetype = self.validate_file(str_file, arr_format)
             if not b_block_ok:
                 str_file = ''
-                str_error = f'ERROR\nFile Format not valid.\n{filetype}'
+                str_error: str = f'ERROR\nFile Format not valid.\n{filetype}'
                 str_error += f' detected, and it should be a {str_name}.'
                 messagebox.showerror('Error', str_error, parent=self)
 
         if b_rename or str_file:
-            itm_indx = 99
-            t_selection = treeview.selection()
-            response = True
+            itm_indx: int = 99
+            t_selection: Any = treeview.selection()
+            response: bool = True
             if t_selection:
                 itm_indx = int(t_selection[0])
                 response = True
                 if not b_rename and self.dict_prefs.get('ask_replace', True):
-                    str_title = f'Replace {str_name}'
-                    str_message = f'Do you want to replace {str_name} {itm_indx}?'
+                    str_title: str = f'Replace {str_name}'
+                    str_message: str = f'Do you want to replace {str_name} {itm_indx}?'
                     response = messagebox.askyesno(parent=self,
                                                    icon='question',
                                                    title=str_title,
@@ -806,21 +827,21 @@ class App(tk.Tk):
                 else:
                     response = False
             if response:
-                str_dialog_name = f'{str_name}'
+                str_dialog_name: str = f'{str_name}'
                 if itm_indx < 99:
                     str_dialog_name += f' {itm_indx}'
-                dialog = NewEntryDialog(self, str_dialog_name, b_core, b_alt,
-                                        b_rename)
+                dialog: NewEntryDialog = NewEntryDialog(
+                    self, str_dialog_name, b_core, b_alt, b_rename)
                 treeview.focus_force()
-                slot_name = dialog.result_name
-                slot_param = f'{str_name},{itm_indx},{slot_name}'
+                slot_name: str = dialog.result_name
+                slot_param: str = f'{str_name},{itm_indx},{slot_name}'
                 if str_file:
                     slot_param += f',{str_file}'
                 if not b_core:
                     if itm_indx == 99:
-                        slot_number = 99
+                        slot_number: int = 99
                     else:
-                        slot_number = treeview.item(itm_indx)['values'][1]
+                        slot_number = int(treeview.item(itm_indx)['values'][1])
                     slot_extra = dialog.extra
                     slot_param = f'{str_name},{slot_number},{slot_extra}'
                     slot_param += f',{slot_name}'
@@ -834,7 +855,7 @@ class App(tk.Tk):
                                                       self.zxextension,
                                                       b_force=True)
                     if arr_err:
-                        str_error = f'ERROR\nCannot insert {str_extension}.\n'
+                        str_error: str = f'ERROR\nCannot insert {str_extension}.\n'
                         str_error += '\n'.join(arr_err)
                         messagebox.showerror('Error', str_error, parent=self)
                     else:
@@ -844,7 +865,10 @@ class App(tk.Tk):
 
         self.menubar.entryconfig(0, state='normal')
 
-    def multi_export(self, str_name, treeview, b_core=False):
+    def multi_export(self: Any,
+                     str_name: str,
+                     treeview: ttk.Treeview,
+                     b_core: bool = False):
         """
         Generic core(s) or ROM(s) export from SPI flash Image
         :param str_name: Text to compose dialogs
@@ -853,12 +877,13 @@ class App(tk.Tk):
         """
         self.menubar.entryconfig(0, state='disabled')
 
-        str_directory = os.path.dirname(self.zxfilepath)
-        str_directory = fd.askdirectory(parent=self,
-                                        initialdir=str_directory,
-                                        title=f'Select {str_name} Export Path')
+        str_directory: str = os.path.dirname(self.zxfilepath)
+        str_directory: str = fd.askdirectory(
+            parent=self,
+            initialdir=str_directory,
+            title=f'Select {str_name} Export Path')
         if str_directory:
-            t_selection = treeview.selection()
+            t_selection: Any = treeview.selection()
             for x_item in t_selection:
                 zx123.extractfrom_zxdata(self.zxfilepath, x_item,
                                          self.fulldict_hash, str_directory,
@@ -866,58 +891,58 @@ class App(tk.Tk):
 
         self.menubar.entryconfig(0, state='normal')
 
-    def core_import(self):
+    def core_import(self: Any):
         """Proxy to multi_import for secondary Core import action"""
         self.multi_import('Core', self.core_table, True)
 
-    def core_rename(self):
+    def core_rename(self: Any):
         """Proxy to multi_import for secondary Core rename action"""
-        t_selection = self.core_table.selection()
+        t_selection: Any = self.core_table.selection()
         if len(t_selection) == 1:
             self.multi_import('Core', self.core_table, True, b_rename=True)
 
-    def core_export(self):
+    def core_export(self: Any):
         """Proxy to multi_import for secondary Core export action"""
         self.multi_export('Core', self.core_table, True)
 
-    def rom_import_n(self, *_):
+    def rom_import_n(self: Any, *_: Any):
         """Proxy to multi_import for ROM import action"""
         self.multi_import('ROM', self.rom_table, False, False)
 
-    def rom_import_y(self, *_):
+    def rom_import_y(self: Any, *_: Any):
         """Proxy to multi_import for ROM import action"""
         self.multi_import('ROM', self.rom_table, False, True)
 
-    def rom_rename(self):
+    def rom_rename(self: Any):
         """Proxy to multi_import for ROM rename action"""
-        t_selection = self.rom_table.selection()
+        t_selection: Any = self.rom_table.selection()
         if len(t_selection) == 1:
             self.multi_import('ROM', self.rom_table, False, b_rename=True)
 
-    def rom_export(self):
+    def rom_export(self: Any):
         """Proxy to multi_import for ROM export action"""
         self.multi_export('ROM', self.rom_table, False)
 
-    def rompack_import(self):
+    def rompack_import(self: Any):
         """"ROMPack v1 import to SPI flash Image"""
         self.menubar.entryconfig(0, state='disabled')
 
-        filetypes = [('ROMPack v1 files', '.zx1')]
-        str_file = fd.askopenfilename(parent=self,
-                                      title='Open ROMPack v1 file',
-                                      filetypes=filetypes)
+        filetypes: list[tuple[str, str]] = [('ROMPack v1 files', '.zx1')]
+        str_file: str = fd.askopenfilename(parent=self,
+                                           title='Open ROMPack v1 file',
+                                           filetypes=filetypes)
 
         if str_file:
             b_block_ok, filetype = self.validate_file(str_file, ['ROMPack'])
             if b_block_ok:
-                response = True
+                response: bool = True
                 if self.dict_prefs.get('ask_replace', True):
-                    str_title = 'Replace ROMs'
-                    str_message = 'Do you really want to replace all ROMs?'
-                    response = messagebox.askyesno(parent=self,
-                                                   icon='question',
-                                                   title=str_title,
-                                                   message=str_message)
+                    str_title: str = 'Replace ROMs'
+                    str_message: str = 'Do you really want to replace all ROMs?'
+                    response: bool = messagebox.askyesno(parent=self,
+                                                         icon='question',
+                                                         title=str_title,
+                                                         message=str_message)
                 if response:
                     _, arr_err = zx123.inject_zxfiles(self.zxfilepath,
                                                       [f'ROMS,{str_file}'],
@@ -926,7 +951,7 @@ class App(tk.Tk):
                                                       self.zxextension,
                                                       b_force=True)
                     if arr_err:
-                        str_error = 'ERROR\nCannot insert ROMPack.\n'
+                        str_error: str = 'ERROR\nCannot insert ROMPack.\n'
                         str_error += '\n'.join(arr_err)
                         messagebox.showerror('Error', str_error, parent=self)
                     else:
@@ -938,6 +963,6 @@ class App(tk.Tk):
 
         self.menubar.entryconfig(0, state='normal')
 
-    def rompack_export(self):
+    def rompack_export(self: Any):
         """Proxy to block_export for ROMPack v1 file"""
         self.block_export('ROMS')
