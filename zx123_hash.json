@@ -1,5 +1,5 @@
 {
-    "version": "20220926.001",
+    "version": "20230320.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -104,16 +104,16 @@
         },
         "Spectrum": {
             "latest": [
-                "EXP27 spark2k06 060822 PZX (no SAA1099)",
-                "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/sram_internal/pzx_no_saa/SPECTRUM.ZX1"
+                "EXP27 031122 RTC PZX (no SAA1099)",
+                "https://github.com/antoniovillena/zxuno/raw/master/cores/spectrum/exp27/binaries/sram_internal/pzx_no_saa/SPECTRUM.ZX1"
             ],
             "1core": [
-                "EXP27 spark2k06 060822 PZX (no SAA1099) (RGB666)",
-                "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/zxuncore/pzx_no_saa/SPECTRUM.ZX1"
+                "EXP27 spark2k06 250922 rooted PZX (no SAA1099) (RGB666)",
+                "https://github.com/antoniovillena/zxuno/raw/master/cores/spectrum/exp27/binaries/zxuncore/pzx_no_saa/SPECTRUM.ZX1"
             ],
             "2m": [
-                "EXP27 spark2k06 060822 VGA-2M PZX (no SAA1099)",
-                "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/vga2m/SPECTRUM.ZX1"               
+                "EXP27 spark2k06 250922 rooted VGA-2M PZX (no SAA1099)",
+                "https://github.com/antoniovillena/zxuno/raw/master/cores/spectrum/exp27/binaries/vga2m/SPECTRUM.ZX1"               
             ],
             "versions": {
                 "T24 080117": "dab20b355cd4c63691ca8e5016e7df98894f4fac11a7da86e8b1b65f4700ab3f",
@@ -184,7 +184,10 @@
                 "EXP27 spark2k06 250922 rooted VGA-2M PZX (no SAA1099)": "9e8a3a5de334acddb85a82bf267a3da5a583827da089158f15e2459b3b17954c",
                 "EXP27 spark2k06 250922 rooted VGA-2M SAA1099 (no PZX)": "fe5e284e80b77c6e72bedd5d3d83d9e2f6508b93ab351ce00c795c476c69fa15",
                 "EXP27 spark2k06 250922 rooted PZX (no SAA1099) (VGA-WiFi)": "57ae52b45f3385ba4735918366d9e3bd426b008a17ea7c7e2e71fe6bdcc515d9",
-                "EXP27 spark2k06 250922 rooted SAA1099 (no PZX) (VGA-WiFi)": "5e4683fba97823563650a1ef747051dc4b6f7019fa551d141c75e7b938d0093b"
+                "EXP27 spark2k06 250922 rooted SAA1099 (no PZX) (VGA-WiFi)": "5e4683fba97823563650a1ef747051dc4b6f7019fa551d141c75e7b938d0093b",
+                "EXP27 20220311 RTC PZX (no SAA1099)":"c76e99f98da342913d50ac17124f08b1906d9492005174ab37f678c55c9a605d",
+                "EXP27 031122 RTC PZX (no SAA1099)": "e9eee563b3041edbbbc51076bb8a41f4803f1624d3460b1810ed568696f28791",
+                "EXP27 031122 RTC SAA1099 (no PZX)": "52ec93ed6569effff3cdf90a91870f1eb226bf83c4a3991310dc4a9bf319fc0e"
             }
         },
         "Special": {
@@ -605,6 +608,21 @@
                     "0.2 SDOS8.1": "cc23b953fc5eb7914f1d5fb1b9140aacce997a61277a14fb9b8b1e3ca40a092f"
                 }
             },
+            "Galaksija (microjack)": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], ""],
+                    "Video": [["VGA", "Composite"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["Audio In Tape Load","Audio Out Tape Save", "SD GTP Load/Save"], ""]
+                },
+                "latest": [
+                    "R1 - 2022.12.29",
+                    "https://github.com/ZXMicroJack/galaksija/releases/download/r1/release1.zip"
+                ],
+                "versions": {
+                    "R1 - 2022.12.29": "5e14b821c3f62300090c12ed7b66c282ad3262d8b2cd4d879b78239428dd906d"
+                }
+            },
             "HT-1080Z - TRS80 M1L2": {
                 "features": {
                     "SD": [["FAT16"], ""],
@@ -749,12 +767,13 @@
                     "Other": [["SD Load"], ""]
                 },
                 "latest": [
-                    "2022.05.29",
+                    "2022.10.27",
                     "https://github.com/PetrM1/OndraSPO186_ZXUno/raw/master/release/Ondra_SPO186.ZX1"
                 ],
                 "versions": {
                     "2022.02.12": "74e5c03ce0560921a52785b8b532233d8ca6f7f0268d40303401a289140ae5a5",
-                    "2022.05.29": "3ef7734a30a61c55704a9472a1aca9a45ef250f9379bcaf2031bd70989cb5d8b"
+                    "2022.05.29": "3ef7734a30a61c55704a9472a1aca9a45ef250f9379bcaf2031bd70989cb5d8b",
+                    "2022.10.27": "5201ea0031c0be076a3baad600ceedd5f2baf62111aa90a1c1f65bc874e6da16"
                 }
             },
             "Oric Atmos": {
@@ -1256,7 +1275,38 @@
                 "versions": {
                     "20220913": "5fbcac4ce2908d84ce3ce50379bdb231ebc9b13884c1c3f4f128faf2fb5bfc6d",
                     "20220920": "3f82b38754835758c0f16c1c6ed3843c85514ea47b8472d406bff427fd4b8f5b",
-                    "20220924": "a1b9515d3854f57922039029051aa8d548610d7e5463172392538da13038b67b"
+                    "20220924": "a1b9515d3854f57922039029051aa8d548610d7e5463172392538da13038b67b",
+                    "20220914": "3526d2383baf35b4e18e4e1b53aed102d5f2836f0cfeb9c2b48e74270cd30f54"
+                }
+            },
+            "ZX Spectrum +3 (Kyp)": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], ""],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["Turbosound", "Specdrum"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["+3DOS Support"], ""]
+                },
+                "latest": [
+                    "2023.01.11"
+                ],
+                "versions": {
+                    "2023.01.11": "b228cd61a21f4e636857909450537df904e441a2968291741d8963e195c4932d"
+                }
+            },
+            "ZX Spectrum +3 MCU (Kyp)": {
+                "features": {
+                    "SD": [["FAT16", "FAT32"], ""],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["Turbosound", "Specdrum"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Other": [["VHD Image Support"], ""]
+                },
+                "latest": [
+                    "2023.03.07"
+                ],
+                "versions": {
+                    "2023.03.07": "9b38cd5d11efa12ad2386d0df9f3a2ba7d0d09effbca5c766f67262876d3c10f"
                 }
             },
             "ZX Spectrum (spark2k06)": {
@@ -1272,15 +1322,15 @@
                 },
                 "latest": [
                     "EXP27 SAA1099 (no PZX) 060822",
-                    "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/sram_internal/saa_no_pzx/COREx.ZX1"
+                    "https://github.com/antoniovillena/zxuno/raw/master/cores/spectrum/exp27/binaries/sram_internal/saa_no_pzx/COREx.ZX1"
                 ],
                 "1core": [
                     "EXP27 SAA1099 (no PZX) 060822 (RGB666)",
-                    "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/zxuncore/saa_no_pzx/COREx.ZX1"
+                    "https://github.com/antoniovillena/zxuno/raw/master/cores/spectrum/exp27/binaries/zxuncore/saa_no_pzx/COREx.ZX1"
                 ],
                 "2m": [
                     "EXP27 VGA-2M SAA1099 (no PZX) 060822",
-                    "https://github.com/spark2k06/zxuno/raw/master/cores/spectrum/exp27/binaries/vga2m/COREx.ZX1"
+                    "https://github.com/antoniovillena/zxuno/raw/master/cores/spectrum/exp27/binaries/vga2m/COREx.ZX1"
                 ],
                 "versions": {
                     "EXP27 Monocromo 220521": "9fff67427bf174f0bd9627662eb77e00161275729b02584eaf4e5e915aef94a5",
@@ -1346,10 +1396,16 @@
                     "EXP27 rooted SAA1099 (no PZX) 250922": "a54378a6a0be61d8814b621a0f0d7433054f8ffb388df33a35f9189aa3923880",
                     "EXP27 rooted Ext RAM PZX (no SAA1099) 250922": "4e574bd6a56d7dd04c1263e7f352b2239d3a7bb6f32d42d6cfe1ea9b373d0863",
                     "EXP27 rooted Ext RAM SAA1099 (no PZX) 250922": "bc02121f8db7e994430747a81368b88358cf529f0626b3e515f42608c8622b9c",
-                    "EXP27 rooted VGA-2M PZX (no SAA1099) 250922": "20daf8c265f360404d231376f4d565debb41d81f8fa82532d4475f523e23b7a0",
-                    "EXP27 rooted VGA-2M SAA1099 (no PZX) 250922": "3f9ed73d65760dac6493bebd485fb35ff30489d33b471ed235fb70096b332e6a",
+                    "EXP27 VGA-2M PZX (no SAA1099) 250922": "20daf8c265f360404d231376f4d565debb41d81f8fa82532d4475f523e23b7a0",
+                    "EXP27 VGA-2M SAA1099 (no PZX) 250922": "3f9ed73d65760dac6493bebd485fb35ff30489d33b471ed235fb70096b332e6a",
                     "EXP27 rooted PZX (no SAA1099) 250922 (VGA-WiFi)": "539755d3f6ef02178ac49fef941c11e37179f06d20d3837c6a7151aba687c863",
-                    "EXP27 rooted SAA1099 (no PZX) 250922 (VGA-WiFi)": "7f91d858e8b8b41a4727bb30137a3ba13097c79baa47aebf387d91b2a5ed97e9"
+                    "EXP27 rooted SAA1099 (no PZX) 250922 (VGA-WiFi)": "7f91d858e8b8b41a4727bb30137a3ba13097c79baa47aebf387d91b2a5ed97e9",
+                    "EXP27 rooted RTC PZX (no SAA1099) 031122": "84e906811d4ffa640ff74154d3fec36df679a6d7ef250b6971e4e253b0d05ffe",
+                    "EXP27 RTC PZX (no SAA1099) 031122 (RGB666)": "822583e3d9cb3ce08e0ad9d80e0ba8192c3a020d87330f39b31bb0be0f914bdc",
+                    "EXP27 RTC PZX (no SAA1099) 031122": "874a8136e203e5cf8263bdb293b4833fbab8c2858b122a3c999f2e44470a4ecc",
+                    "EXP27 RTC SAA1099 (no PZX) 031122": "f58254c82a82914e9dc5dfbf6941570c8f7725a15f8d4c3c41fd691d1f954b87",
+                    "EXP27 RTC Ext RAM PZX (no SAA1099) 031122": "5d3c4dd0d2e56688ef06d6f19cf8d5143040b13b2098d9fabe6c8dd1e230e1c6",
+                    "EXP27 RTC Ext RAM SAA1099 (no PZX) 031122": "0489d0a5c4c22a39b55dddab51a6ac78153d8319f0acb86c580ef458fc8904fe"
                 }
             },
             "ZX TBBlue": {
