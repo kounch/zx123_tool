@@ -1,5 +1,5 @@
 {
-    "version": "20230328.001",
+    "version": "20230328.002",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -987,22 +987,27 @@
                     "Other": [["MCL86 core"], "286 equivalent in real mode"]
                 },
                 "latest": [
-                    "512KB 20230327",
+                    "512KB 20230328",
                     "https://github.com/spark2k06/PCXT_ZXUno/raw/main/releases/zxuno_512Kb/CORExx.ZX1"
                 ],
                 "1core": [
-                    "2MB Int (RGB666) 20230327",
+                    "2MB Int (RGB666) 20230328",
                     "https://github.com/spark2k06/PCXT_ZXUno/raw/main/releases/zxuncore_2Mb/CORExx.ZX1"
                 ],
                 "2m": [
-                    "2MB Int 20230327",
+                    "2MB Int 20230328",
                     "https://github.com/spark2k06/PCXT_ZXUno/raw/main/releases/zxuno_2Mb/CORExx.ZX1"
                 ],
                 "versions": {
                     "512KB 20230327": "73bfcbf91f5a686e61d8ec54c81b57c232008ee02472e88cd65350725292a64d",
                     "512KB (RGB666) 20230327": "875acb57a9cc0c104beb4cd878e5fe0bedf71806eae23dbee07aa4225c60ecf1",
                     "2MB Int (RGB666) 20230327": "0f64b492a416c0e28d1b8a6e2e5dac40dae4d15c19a2e56360d87dec7e2c6fe9",
-                    "2MB Int 20230327": "3f37c3ef513f1c720ad77b1af37a3dd2d7784e277613b2fa27970b6072e40b90"
+                    "2MB Int 20230327": "3f37c3ef513f1c720ad77b1af37a3dd2d7784e277613b2fa27970b6072e40b90",
+                    "512KB 20230328": "78ee66770d17fd2414b5e90709cc6c987a8c5f5a51a18d917a28954e6542d9b1",
+                    "512KB (RGB666) 20230328": "f198bf7758e59ea5ca334064aa1fcf676de05712afbfdc52bab98bfc0538b84f",
+                    "2MB Int (RGB666) 20230328": "9530b3a854266e761fea4c78e34d882c5610fe3d1b69a220c75dbd106625b3e0",
+                    "2MB Int 20230328": "d580fba29dcc08d6262c13dcacee232f18de07e417fc79f962b7d4c11f6acb03",
+                    "2MB Ext 20230328": "5d863c16f23e317934cd7ea46b3f73ed559b404986dc974f24f9cbe4af32c0a4"
                 }
             },
             "Radio-86RK": {
