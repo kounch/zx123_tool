@@ -1,5 +1,5 @@
 {
-    "version": "20230328.002",
+    "version": "20230405.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -1007,7 +1007,8 @@
                     "512KB (RGB666) 20230328": "f198bf7758e59ea5ca334064aa1fcf676de05712afbfdc52bab98bfc0538b84f",
                     "2MB Int (RGB666) 20230328": "9530b3a854266e761fea4c78e34d882c5610fe3d1b69a220c75dbd106625b3e0",
                     "2MB Int 20230328": "d580fba29dcc08d6262c13dcacee232f18de07e417fc79f962b7d4c11f6acb03",
-                    "2MB Ext 20230328": "5d863c16f23e317934cd7ea46b3f73ed559b404986dc974f24f9cbe4af32c0a4"
+                    "2MB Ext 20230328": "5d863c16f23e317934cd7ea46b3f73ed559b404986dc974f24f9cbe4af32c0a4",
+                    "vgawifi 20230402": "967d8a18039e7661019582e307c49ab089e980c50fa5854ea038110266633376"
                 }
             },
             "Radio-86RK": {
@@ -3125,6 +3126,26 @@
                     "Next186 DDR3 v1": "66beafd187d6cce0e5b4a945b2348154bda300961eb2b9f27393c86a1ef7cffe"
                 }
             },
+            "PC XT ZXUno": {
+                "features": {
+                    "SD": [["FAT16"], "FAT with MS-DOS installed"],
+                    "Video": [["VGA"], ""],
+                    "Audio": [["Beeper", "Tandy 3 voice"], ""],
+                    "Graphic Modes": [["Text 80x25", "EGA 320x200x16", "MCGA 320x200x256"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Mouse": [["PS/2"], ""],
+                    "Other": [["MCL86 core"], "286 equivalent in real mode"]
+                },
+                "latest": [
+                    "512KB 20230401",
+                    "https://github.com/spark2k06/PCXT_ZXUno/raw/main/releases/zxdos_512Kb/CORExx.zx2"
+                ],
+                "versions": {
+                    "512KB 20230401": "8b1fb16dbb25909731fd6ea05fdfdeee17047dd25a2181a24d586c572d0f1d39",
+                    "1MB Green 20230402": "532e3f2a2e524771fe0303a7d7ecfd1863b66835eef48c645241667dc9e0bd6c",
+                    "1MB Black 20230402": "18e646fa9f8ad23c12a2222e707891e45062cb39c2e1f09c669fa7fbf054a945"
+                }
+            },
             "Phoenix": {
                 "features": {
                     "Video": [["VGA", "RGB"], "VGA Optional Scanlines"],
@@ -4142,6 +4163,24 @@
                 "versions": {
                     "Next186 DDR3 Test1": "b01f7b892fcedafa9f067cc3449a9d7142f4e2d7e8a5ee53ecbe1d8be96725a9",
                     "Next186 DDR3 v1": "3468f9ccc441828e16243edaabfd9fe30b5125a0e1dc5591f9e0137ad9402e63"
+                }
+            },
+            "PC XT ZXUno": {
+                "features": {
+                    "SD": [["FAT16"], "FAT with MS-DOS installed"],
+                    "Video": [["VGA"], ""],
+                    "Audio": [["Beeper", "Tandy 3 voice"], ""],
+                    "Graphic Modes": [["Text 80x25", "EGA 320x200x16", "MCGA 320x200x256"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Mouse": [["PS/2"], ""],
+                    "Other": [["MCL86 core"], "286 equivalent in real mode"]
+                },
+                "latest": [
+                    "20230403",
+                    "https://github.com/spark2k06/PCXT_ZXUno/raw/main/releases/zxdosplus/coreXX.xzd"
+                ],
+                "versions": {
+                    "20230403": "7eb6d020205ae4adb66d08aa5a0560889ac16a3368a341fc920319d4c7dcfc84"
                 }
             },
             "Phoenix": {
