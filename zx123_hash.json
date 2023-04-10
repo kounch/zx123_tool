@@ -1,5 +1,5 @@
 {
-    "version": "20230405.002",
+    "version": "20230410.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -976,7 +976,7 @@
                     "Release 6 2MB Int": "f3abe9adf38f989a8f6121b3f8c86de056bce2a04ba1631105155f53fb511a46"
                 }
             },
-            "PC XT ZXUno": {
+            "IBM PC/XT Xilinx Spartan 6": {
                 "features": {
                     "SD": [["FAT16"], "FAT with MS-DOS installed"],
                     "Video": [["VGA"], ""],
@@ -988,15 +988,15 @@
                 },
                 "latest": [
                     "512KB 20230328",
-                    "https://github.com/spark2k06/PCXT_ZXUno/raw/main/releases/zxuno_512Kb/CORExx.ZX1"
+                    "https://github.com/spark2k06/PCXT_Xilinx_Spartan_6/raw/main/releases/zxuno_512Kb/CORExx.ZX1"
                 ],
                 "1core": [
                     "2MB Int (RGB666) 20230328",
-                    "https://github.com/spark2k06/PCXT_ZXUno/raw/main/releases/zxuncore_2Mb/CORExx.ZX1"
+                    "https://github.com/spark2k06/PCXT_Xilinx_Spartan_6/raw/main/releases/zxuncore_2Mb/CORExx.ZX1"
                 ],
                 "2m": [
-                    "2MB Int 20230328",
-                    "https://github.com/spark2k06/PCXT_ZXUno/raw/main/releases/zxuno_2Mb/CORExx.ZX1"
+                    "2MB Int 20230407",
+                    "https://github.com/spark2k06/PCXT_Xilinx_Spartan_6/raw/main/releases/zxuno_2Mb/CORExx.ZX1"
                 ],
                 "versions": {
                     "512KB 20230327": "73bfcbf91f5a686e61d8ec54c81b57c232008ee02472e88cd65350725292a64d",
@@ -1008,7 +1008,9 @@
                     "2MB Int (RGB666) 20230328": "9530b3a854266e761fea4c78e34d882c5610fe3d1b69a220c75dbd106625b3e0",
                     "2MB Int 20230328": "d580fba29dcc08d6262c13dcacee232f18de07e417fc79f962b7d4c11f6acb03",
                     "2MB Ext 20230328": "5d863c16f23e317934cd7ea46b3f73ed559b404986dc974f24f9cbe4af32c0a4",
-                    "vgawifi 20230402": "967d8a18039e7661019582e307c49ab089e980c50fa5854ea038110266633376"
+                    "vgawifi 20230402": "967d8a18039e7661019582e307c49ab089e980c50fa5854ea038110266633376",
+                    "2MB Int 20230407": "8edc66d45299950ee50e1d027a540ccef8f1ca2cb895f8b1c7a813a5085a972c",
+                    "2MB Ext 20230407": "b4000b36c95a9335e7f9f98bf461d3db084bc94cd75734819ba811b2ac944343"
                 }
             },
             "Radio-86RK": {
@@ -3126,7 +3128,7 @@
                     "Next186 DDR3 v1": "66beafd187d6cce0e5b4a945b2348154bda300961eb2b9f27393c86a1ef7cffe"
                 }
             },
-            "PC XT ZXUno": {
+            "IBM PC/XT Xilinx Spartan 6": {
                 "features": {
                     "SD": [["FAT16"], "FAT with MS-DOS installed"],
                     "Video": [["VGA"], ""],
@@ -3137,11 +3139,12 @@
                     "Other": [["MCL86 core"], "286 equivalent in real mode"]
                 },
                 "latest": [
-                    "512KB 20230401",
-                    "https://github.com/spark2k06/PCXT_ZXUno/raw/main/releases/zxdos_512Kb/CORExx.zx2"
+                    "512KB 20230407",
+                    "https://github.com/spark2k06/PCXT_Xilinx_Spartan_6/raw/main/releases/zxdos_512Kb/CORExx.zx2"
                 ],
                 "versions": {
                     "512KB 20230401": "8b1fb16dbb25909731fd6ea05fdfdeee17047dd25a2181a24d586c572d0f1d39",
+                    "512KB 20230407": "1acfee53b0ad63a7e2be0fe2cfa9eb1be0408638fcc01d69b2856120b78f99f3",
                     "1MB Green 20230402": "532e3f2a2e524771fe0303a7d7ecfd1863b66835eef48c645241667dc9e0bd6c",
                     "1MB Black 20230402": "18e646fa9f8ad23c12a2222e707891e45062cb39c2e1f09c669fa7fbf054a945"
                 }
@@ -4166,7 +4169,7 @@
                     "Next186 DDR3 v1": "3468f9ccc441828e16243edaabfd9fe30b5125a0e1dc5591f9e0137ad9402e63"
                 }
             },
-            "PC XT ZXUno": {
+            "IBM PC/XT Xilinx Spartan 6": {
                 "features": {
                     "SD": [["FAT16"], "FAT with MS-DOS installed"],
                     "Video": [["VGA"], ""],
@@ -4178,7 +4181,7 @@
                 },
                 "latest": [
                     "20230403",
-                    "https://github.com/spark2k06/PCXT_ZXUno/raw/main/releases/zxdosplus/coreXX.xzd"
+                    "https://github.com/spark2k06/PCXT_Xilinx_Spartan_6/raw/main/releases/zxdosplus/coreXX.xzd"
                 ],
                 "versions": {
                     "20230403": "7eb6d020205ae4adb66d08aa5a0560889ac16a3368a341fc920319d4c7dcfc84"
@@ -4449,7 +4452,10 @@
                     "3.01.10 2x16": "5fbc10cceb57dab41d62944ac42bb61dd2f5aa725c991ac2c9f20b888e81807b",
                     "EDGE Beta01 (1x8_sM1)": "d1fe861f00ba91ff5c0ac213157ccba980b40ca7d5ac0f47357d192c86634009",
                     "EDGE Beta02 (1x8_sM1)": "2cfdb072f26b80d637b09f7b813b4a609a78722f54659a00e949eab7d4ec49be",
-                    "EDGE Beta03 (2x16_cM1)": "eab771dcd624d66e0e1924c510bf6333388f00687902cfbf0718579c97274260"
+                    "EDGE Beta03 (2x16_cM1)": "eab771dcd624d66e0e1924c510bf6333388f00687902cfbf0718579c97274260",
+                    "3.01.10 1x16 20230407": "5998b60bacc379132933f3a831aa4703aea558c633a9fb3d8d281c8382f8a072",
+                    "3.01.11 1x16 20230407": "133b747ef05a8a55d9b763b68394dac7bdaa588e761ae6e2b2dead8280a79da1",
+                    "3.01.11 2x16 EDGE 20230407": "a7b0bf9c1ff748dddde75313b716bac2036fa6589bc64d7829ca228bab39d975"
                 }
             }
         },
