@@ -72,6 +72,27 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
+				<string>zx3</string>
+				<string>ZX3</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>zx3</string>
+			<key>CFBundleTypeName</key>
+			<string>ZXTRES SPI Flash Image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.kounch.ZX1213Tool.zx3</string>
+			</array>
+			<key>NSDocumentClass</key>
+			<string>FileDataDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
 				<string>rom</string>
 				<string>ROM</string>
 			</array>
@@ -188,6 +209,25 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>zxd</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>ZXTRES SPI Flash Image</string>
+			<key>UTTypeIconFile</key>
+			<string>zx3</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.kounch.ZX1213Tool.zx3</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>zx3</string>
 				</array>
 			</dict>
 		</dict>

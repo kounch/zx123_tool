@@ -235,7 +235,8 @@ class App(tk.Tk):
         """Create a new image file from one of the included templates"""
         filetypes: list[tuple[str, str]] = [('ZX1 Flash Image', '.zx1'),
                                             ('ZXDOS Flash Image', '.zx2'),
-                                            ('ZXDOS+ Flash Image', '.zxd')]
+                                            ('ZXDOS+ Flash Image', '.zxd'),
+                                            ('ZXTRES Flash Image', '.zx3')]
         str_file: str = fd.asksaveasfilename(parent=self,
                                              title='New file to create',
                                              filetypes=filetypes)
@@ -385,8 +386,9 @@ class App(tk.Tk):
         if args:
             str_file: Any = args[0]
         else:
-            filetypes: list[tuple[str, str]] = [('ZX1, ZX2, ZXD or ROM files',
-                                                 '.zx1 .zx2 .zxd .rom .bin')]
+            filetypes: list[tuple[str,
+                                  str]] = [('ZX1, ZX2, ZXD, ZX3 or ROM files',
+                                            '.zx1 .zx2 .zxd .zx3 .rom .bin')]
             str_file = fd.askopenfilename(parent=self,
                                           title='Select a file to open',
                                           filetypes=filetypes)
@@ -484,8 +486,8 @@ class App(tk.Tk):
 
     def convert_core(self: Any):
         """Converts between main (spectrum) and secondary core, and back"""
-        filetypes: list[tuple[str, str]] = [('ZX1, ZX2 or ZXD file',
-                                             '.zx1 .zx2 .zxd')]
+        filetypes: list[tuple[str, str]] = [('ZX1, ZX2, ZXD or ZX3 file',
+                                             '.zx1 .zx2 .zxd .zx3')]
         str_file: str = fd.askopenfilename(parent=self,
                                            title='Select a file to open',
                                            filetypes=filetypes)
@@ -664,7 +666,9 @@ class App(tk.Tk):
             self.default_rom, self.old_rom, 0,
             len(self.rom_table.get_children()) - 1, 'rom')
 
-    def block_import(self: Any, str_block: str, extra_exts: Optional[list[str]] = None):
+    def block_import(self: Any,
+                     str_block: str,
+                     extra_exts: Optional[list[str]] = None):
         """
         Generic block import to SPI flash image file
         :param str_block: Name of the kind of block (e.g. 'BIOS')

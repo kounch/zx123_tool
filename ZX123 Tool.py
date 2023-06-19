@@ -60,7 +60,7 @@ def main():
         print('Initializing Resources...')
         pathlib.Path(JSON_DIR).mkdir(parents=True, exist_ok=True)
         copy(os.path.join(APP_RESDIR, 'zx123_hash.json'), JSON_DIR)
-        for str_ext in ['ZX1', 'ZX2', 'ZXD']:
+        for str_ext in ['ZX1', 'ZX2', 'ZXD', 'ZX3']:
             copy(os.path.join(APP_RESDIR, f'FLASH16_empty.{str_ext}.zip'),
                  JSON_DIR)
 

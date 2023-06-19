@@ -123,7 +123,7 @@ def main():
     str_extension, dict_hash, filetype = detect_file(str_file, fulldict_hash)
 
     if filetype == 'FlashImage':
-        supported_exts = ['ZX1', 'ZX2', 'ZXD', 'ZXT']
+        supported_exts = ['ZX1', 'ZX2', 'ZXD', 'ZX3', 'ZXT']
 
         # List main ROMs, Cores and BIOS settings
         if arg_data['list']:
@@ -2138,7 +2138,7 @@ def get_rom_list(str_in_file: str,
             if rom_index != 0xff:
                 b_start = int(block_info[0]) + i * 64
                 b_len = 64
-                rom_data:bytes = b''
+                rom_data: bytes = b''
                 if b_data:
                     rom_data = b_data[b_start:b_start + b_len]
                 else:

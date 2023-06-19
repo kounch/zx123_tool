@@ -1,5 +1,5 @@
 {
-    "version": "20230410.001",
+    "version": "20230619.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -4465,6 +4465,133 @@
             ],
             "versions": {
                 "1.0": "fe077527253fe618452205a945fcdef5eab1c59d72dd0edafd54c09ccd713ba7"
+            }
+        }
+    },
+    "ZX3": {
+        "description": "ZXTRES",
+        "hashtype": "sha256sum",
+        "parts": {
+            "header": [
+                "0",
+                "16384",
+                "",
+                "FFFFFFFFAA995566"
+            ],
+            "esxdos": [
+                "16384",
+                "8192",
+                "ESXDOS.ZX1",
+                "F331005EC30101FFC3"
+            ],
+            "roms_dir": [
+                "24576",
+                "4096",
+                "",
+                "",
+                "28672",
+                "61",
+                "23"
+            ],
+            "cores_dir": [
+                "28672",
+                "2560",
+                "",
+                "",
+                "20",
+                "19"
+            ],
+            "reserved": [
+                "31232",
+                "1536",
+                "",
+                ""
+            ],
+            "BIOS": [
+                "32768",
+                "16384",
+                "FIRMWARE.ZX3",
+                "31B0AA3E04013BFCED7904ED70F521"
+            ],
+            "roms_data": [
+                "49152",
+                "671744",
+                "",
+                "",
+                "16777216"
+            ],
+            "Spectrum": [
+                "1048576",
+                "1507328",
+                "SPECTRUM.ZX3",
+                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+            ],
+            "core_base": [
+                "2555904",
+                "1179648",
+                "",
+                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+                ""
+            ]
+        },
+        "BIOS": {
+            "latest": [
+                "0.86",
+                "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE.ZX3"
+            ],
+            "versions": {
+                "0.86": "4a73600b3f02881973b0aa57bd9e4dc85bb885788d6ae0f91cceca6a1ffa7711"
+            }
+        },
+        "esxdos": {
+            "latest": [
+                "0.8.9"
+            ],
+            "versions": {
+                "0.8.6": "38b89d27d4c59c7f92e26a5dff0fa8a0a107ae8b656edcc6864a2a163bd65e09",
+                "0.8.7": "afd8517c57a2514f115d82828d781809f58364dbdf78931b8a9f5b66ebb93441",
+                "0.8.8": "36ebccdd338b99d2c90b70f6ec3fbaeb81a2b0ad1936f44618add672958c22c8",
+                "0.8.9": "89706de560d66432fe19ddb895e7cde49e252e932687dcb57fb92259a0259339"
+            }
+        },
+        "Spectrum": {
+            "latest": [
+                "EXP27_Test"
+            ],
+            "versions": {
+                "EXP27_Test": "13f1fa51811e437b7e46bb73dece4b5cc49a6d05b91855e603a3605cdbe613bf"
+            }
+        },
+        "Cores": {
+            "ZX Spectrum": {
+                "features": {
+                    "SD": [["FAT16", "FAT32", "+3e"], ""],
+                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Audio": [["Turbosound", "Specdrum", "Covox", "I2S", "MIDI"], "I2S and MIDI require AddOn"],
+                    "Graphic Modes": [["ULAplus", "Timex", "Radastan"], ""],
+                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
+                    "Mouse": [["PS/2"], "Kempston Protocol Emulation"],
+                    "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
+                    "Other": [["Audio In Tape Load", "PZX"], ""]
+                },
+                "latest": [
+                    "EXP27_Test"
+                ],
+                "versions": {
+                    "EXP27_Test": "13f1fa51811e437b7e46bb73dece4b5cc49a6d05b91855e603a3605cdbe613bf"
+                }
+            },
+            "Test DP VGA": {
+                "features": {
+                    "Video": [["VGA", "RGB", "DisplayPort"], ""],
+                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"]
+                },
+                "latest": [
+                    "20230507"
+                ],
+                "versions": {
+                    "20230507": "bad1c3c5609e56afa064db3c4fcc0171f8da3ddb5e7067b75920eb1aa2f830d2"
+                }
             }
         }
     },
