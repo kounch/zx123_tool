@@ -4592,6 +4592,23 @@
                 "versions": {
                     "20230507": "bad1c3c5609e56afa064db3c4fcc0171f8da3ddb5e7067b75920eb1aa2f830d2"
                 }
+            },
+            "ZX81": {
+                "features": {
+                    "microSD": [["FAT16", "FAT32"],""],
+                    "Video": [["VGA", "RGB"], ""],
+                    "Graphic Modes": [["PAL", "NTSC"], ""],
+                    "Audio": [["YM2149"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], ""],
+                    "Other": [["microSD ROM and Tape Load", "Audio In Tape Load"], ""]
+                },
+                "latest": [
+                    "A35T 20230521"
+                ],
+                "versions": {
+                    "A35T 20230521": "9f12a1b5a39fd5132043c76bfbafc2a4969d03f3f621c71b8660cb1d1df1da62"
+                }
             }
         }
     },
