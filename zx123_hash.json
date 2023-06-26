@@ -1,5 +1,5 @@
 {
-    "version": "20230619.001",
+    "version": "20230626.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -4491,15 +4491,15 @@
                 "",
                 "28672",
                 "61",
-                "23"
+                "0"
             ],
             "cores_dir": [
                 "28672",
-                "2560",
+                "655365",
                 "",
                 "",
-                "20",
-                "19"
+                "23",
+                "18"
             ],
             "reserved": [
                 "31232",
@@ -4531,7 +4531,7 @@
                 "1179648",
                 "",
                 "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
-                ""
+                "0"
             ]
         },
         "BIOS": {
@@ -4540,7 +4540,8 @@
                 "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE.ZX3"
             ],
             "versions": {
-                "0.86": "4a73600b3f02881973b0aa57bd9e4dc85bb885788d6ae0f91cceca6a1ffa7711"
+                "0.86 Beta": "4a73600b3f02881973b0aa57bd9e4dc85bb885788d6ae0f91cceca6a1ffa7711",
+                "0.86": "23d6b78b63520cbd7799108050c5549aca3998d09ae68059a4ba8cd367b5d7c2"
             }
         },
         "esxdos": {
@@ -4559,7 +4560,8 @@
                 "EXP27_Test"
             ],
             "versions": {
-                "EXP27_Test": "13f1fa51811e437b7e46bb73dece4b5cc49a6d05b91855e603a3605cdbe613bf"
+                "EXP27_Test": "13f1fa51811e437b7e46bb73dece4b5cc49a6d05b91855e603a3605cdbe613bf",
+                "EXP28 250623": "43e5f6ea0430f6bfd1340bafde3540f592ce373d87b835856d7f0dbb86ef9786"
             }
         },
         "Cores": {
@@ -4569,28 +4571,42 @@
                     "Video": [["VGA", "RGB", "Composite"], ""],
                     "Audio": [["Turbosound", "Specdrum", "Covox", "I2S", "MIDI"], "I2S and MIDI require AddOn"],
                     "Graphic Modes": [["ULAplus", "Timex", "Radastan"], ""],
-                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"],
+                    "Keyboard": [["PS/2"], ""],
                     "Mouse": [["PS/2"], "Kempston Protocol Emulation"],
                     "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
                     "Other": [["Audio In Tape Load", "PZX"], ""]
                 },
                 "latest": [
-                    "EXP27_Test"
+                    "EXP28 250623"
                 ],
                 "versions": {
-                    "EXP27_Test": "13f1fa51811e437b7e46bb73dece4b5cc49a6d05b91855e603a3605cdbe613bf"
+                    "EXP27_Test": "13f1fa51811e437b7e46bb73dece4b5cc49a6d05b91855e603a3605cdbe613bf",
+                    "EXP28 250623": "6c8c546ca15f2b0cf240116be84afd164c0f7c1f69e1101fab4bcf1993f2c794"
                 }
             },
             "Test DP VGA": {
                 "features": {
                     "Video": [["VGA", "RGB", "DisplayPort"], ""],
-                    "Keyboard": [["PS/2", "Native"], "Native requires PS/2 converter"]
+                    "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
-                    "20230507"
+                    "640x480 20230625"
                 ],
                 "versions": {
-                    "20230507": "bad1c3c5609e56afa064db3c4fcc0171f8da3ddb5e7067b75920eb1aa2f830d2"
+                    "20230507": "bad1c3c5609e56afa064db3c4fcc0171f8da3ddb5e7067b75920eb1aa2f830d2",
+                    "640x480 20230625": "4a8fc5804055a277ed004d22ef16bdda317916971d292b04d669c09a9d0367d0"
+                }
+            },
+            "Test FPGA Temp": {
+                "features": {
+                    "Video": [["VGA", "DisplayPort"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "20230625"
+                ],
+                "versions": {
+                    "20230625": "30993f5e53da1d6d86901444d1ae6319eed6ad1772f088dfd147e346ee29a33b"
                 }
             },
             "ZX81": {
