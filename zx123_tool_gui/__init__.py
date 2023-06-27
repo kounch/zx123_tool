@@ -395,20 +395,21 @@ class App(tk.Tk):
 
         if isinstance(str_file, str):  # To avoid MacOS quarantine events
             str_filename: str = os.path.split(str_file)[1]
-            str_extension, dict_hash, filetype = zx123.detect_file(
+            str_extension, dict_hash, filetype, str_kind = zx123.detect_file(
                 str_file, self.fulldict_hash)
 
             if filetype == 'FlashImage':
                 self.full_close_image()
                 self.zxfilepath = str_file
                 self.zxextension = str_extension
+                self.zxkind = str_kind
                 self.zxsize = os.stat(str_file).st_size
 
                 dict_flash: dict[str, Any] = zx123.list_zxdata(
                     str_file, dict_hash, False)
                 dict_roms, _ = zx123.list_romsdata(str_file,
                                                    self.fulldict_hash,
-                                                   str_extension, False)
+                                                   str_kind, False)
                 str_filename = f'{str_filename} ({dict_flash["description"]})'
                 str_filename += f' {int(self.zxsize / 1048576)}MB'
 
@@ -467,7 +468,8 @@ class App(tk.Tk):
             else:
                 if str_file:
                     dict_file = zx123.find_zxfile(str_file, self.fulldict_hash,
-                                                  str_extension, False, True)
+                                                  str_extension, str_kind,
+                                                  False, True)
                     filetype: str = dict_file.get('kind', 'Unknown')
                     if filetype == 'ROMPack':
                         dict_roms, default_rom = zx123.list_romsdata(
@@ -475,6 +477,8 @@ class App(tk.Tk):
                         ROMPWindow(self, str_filename, filetype, dict_roms,
                                    default_rom)
                     elif filetype != 'Unknown':
+                        str_desc = self.fulldict_hash[str_kind]['description']
+                        dict_file['kind'] = f'{str_desc} {dict_file["kind"]}'
                         InfoWindow(self, str_filename, dict_file)
                     else:
                         str_error: str = 'ERROR\nUnknown file\nFormat Unknown'
@@ -494,11 +498,11 @@ class App(tk.Tk):
 
         if str_file:
             str_filename: str = os.path.split(str_file)[1]
-            str_extension, dict_hash, filetype = zx123.detect_file(
+            str_extension, dict_hash, filetype, str_kind = zx123.detect_file(
                 str_file, self.fulldict_hash)
             if filetype == 'Unknown':
                 dict_file: dict[str, Any] = zx123.find_zxfile(
-                    str_file, self.fulldict_hash, str_extension, False, True)
+                    str_file, self.fulldict_hash, str_kind, False, True)
                 filetype: str = dict_file.get('kind', 'Unknown')
 
             str_outfile = ''
@@ -559,12 +563,13 @@ class App(tk.Tk):
             arr_selection: list[Any] = self.core_table.item(
                 t_selection)['values']
             str_name: str = f'{arr_selection[1]} ({arr_selection[2]})'
-            dict_core: dict[str, Any] = self.fulldict_hash[
-                self.zxextension]['Cores']
+            dict_core: dict[str,
+                            Any] = self.fulldict_hash[self.zxkind]['Cores']
             dict_core: dict[str, Any] = dict_core[arr_selection[2]]
 
             dict_res: dict[str, str | dict[str, Any]] = {}
-            dict_res['kind'] = 'Core'
+            str_desc = self.fulldict_hash[self.zxkind]['description']
+            dict_res['kind'] = f'{str_desc} Core'
             dict_res['version'] = arr_selection[3]
             dict_res['detail'] = dict_core.get('features', {})
 
@@ -578,12 +583,12 @@ class App(tk.Tk):
         :arr_format: List of formats considered valid (e.g. ['ROMPack'])
         :return: True if valid
         """
-        str_extension, _, filetype = zx123.detect_file(str_file,
-                                                       self.fulldict_hash)
-
+        str_extension, _, filetype, str_kind = zx123.detect_file(
+            str_file, self.fulldict_hash)
         dict_file: dict[str,
                         Any] = zx123.find_zxfile(str_file, self.fulldict_hash,
-                                                 str_extension, False, True)
+                                                 str_extension, str_kind,
+                                                 False, True)
         kind: str = dict_file.get('kind', 'Unknown')
         if filetype == 'Unknown':
             filetype = kind
@@ -736,7 +741,8 @@ class App(tk.Tk):
         if str_directory:
             zx123.extractfrom_zxdata(self.zxfilepath, str_block,
                                      self.fulldict_hash, str_directory,
-                                     self.zxextension, True, False)
+                                     self.zxextension, self.zxkind, True,
+                                     False)
 
         self.menubar.entryconfig(0, state='normal')
 
@@ -856,7 +862,7 @@ class App(tk.Tk):
                                                       [slot_param],
                                                       self.zxfilepath,
                                                       self.fulldict_hash,
-                                                      self.zxextension,
+                                                      self.zxkind,
                                                       b_force=True)
                     if arr_err:
                         str_error: str = f'ERROR\nCannot insert {str_extension}.\n'
@@ -891,7 +897,8 @@ class App(tk.Tk):
             for x_item in t_selection:
                 zx123.extractfrom_zxdata(self.zxfilepath, x_item,
                                          self.fulldict_hash, str_directory,
-                                         self.zxextension, True, b_core)
+                                         self.zxextension, self.zxkind, True,
+                                         b_core)
 
         self.menubar.entryconfig(0, state='normal')
 
