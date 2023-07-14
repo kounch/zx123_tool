@@ -1,5 +1,5 @@
 {
-    "version": "20230627.001",
+    "version": "20230713.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -577,7 +577,9 @@
                     "20220627 2MB Ext": "f65e8322f204c9bdebd216aae635667ec7313042c15074ce641b0b2d4d4f3a0e",
                     "20220921 512K": "ae90c391005b7e3a53c412f13ce7c15e28833f222bed4f2ed41afc2ed5419742",
                     "20220921": "a65560ee0a65c6c9cb3b00b7fabe2524d3d56991d5d76f1c712133d272d1d6fc",
-                    "20220921 2MB Ext": "ba4c91a24e66e69a6b8761035074fc696514c67652b9629f5471d448660711bc"
+                    "20220921 2MB Ext": "ba4c91a24e66e69a6b8761035074fc696514c67652b9629f5471d448660711bc",
+                    "20230703 512K": "3b71fec654e57accab17bbfe60f9b47614cb81c4614dad9e7e4109a16ffb5919",
+                    "20230703": "50c1daa55ac8924439cfc5765357a3101aa011cb8765fca9606b0428c0905bfb"
                 }
             },
             "Flappy Bird": {
@@ -987,15 +989,15 @@
                     "Other": [["MCL86 core"], "286 equivalent in real mode"]
                 },
                 "latest": [
-                    "512KB 20230328",
+                    "512KB 20230514",
                     "https://github.com/spark2k06/PCXT_Xilinx_Spartan_6/raw/main/releases/zxuno_512Kb/CORExx.ZX1"
                 ],
                 "1core": [
-                    "2MB Int (RGB666) 20230328",
+                    "2MB Int (RGB666) 20230514",
                     "https://github.com/spark2k06/PCXT_Xilinx_Spartan_6/raw/main/releases/zxuncore_2Mb/CORExx.ZX1"
                 ],
                 "2m": [
-                    "2MB Int 20230407",
+                    "2MB Int 20230514",
                     "https://github.com/spark2k06/PCXT_Xilinx_Spartan_6/raw/main/releases/zxuno_2Mb/CORExx.ZX1"
                 ],
                 "versions": {
@@ -1010,7 +1012,13 @@
                     "2MB Ext 20230328": "5d863c16f23e317934cd7ea46b3f73ed559b404986dc974f24f9cbe4af32c0a4",
                     "vgawifi 20230402": "967d8a18039e7661019582e307c49ab089e980c50fa5854ea038110266633376",
                     "2MB Int 20230407": "8edc66d45299950ee50e1d027a540ccef8f1ca2cb895f8b1c7a813a5085a972c",
-                    "2MB Ext 20230407": "b4000b36c95a9335e7f9f98bf461d3db084bc94cd75734819ba811b2ac944343"
+                    "2MB Ext 20230407": "b4000b36c95a9335e7f9f98bf461d3db084bc94cd75734819ba811b2ac944343",
+                    "512KB 20230514": "b1ede0929fcd66bc455f29834aa79ca76f58481561204c949a2aada94f147d8e",
+                    "512KB (RGB666) 20230514": "2dc41c702653e492d4db0580b7adb695cef4b79be1e4908c66ac5e6dfe64bbb6",
+                    "2MB Int (RGB666) 20230514": "d32c7d4a80035ee3d4bac911afefd71b3d67486de4c70af77ca3ddef52e275b5",
+                    "2MB Int 20230514": "a25bfee5a654069acf0f49116c81eda019b7888dc3714c23dae5ae850a9b651b",
+                    "2MB Ext 20230514": "75344981e1c63db7ec4c6b943742b28b63eb3fe2fa966e1f691d25229f5e3d31",
+                    "vgawifi 20230514": "d6e94b03e134aa54345875050f14c205135884e43dc4ae81e496a19b6aae9dfb"
                 }
             },
             "Radio-86RK": {
@@ -1325,10 +1333,11 @@
                     "Other": [["+3DOS Support"], ""]
                 },
                 "latest": [
-                    "2023.01.11"
+                    "2023.07.03"
                 ],
                 "versions": {
-                    "2023.01.11": "b228cd61a21f4e636857909450537df904e441a2968291741d8963e195c4932d"
+                    "2023.01.11": "b228cd61a21f4e636857909450537df904e441a2968291741d8963e195c4932d",
+                    "2023.07.03": "6d37c40bebc2c20205205d97160d9d09a3218a7bdbab1607f7ca2c1ba4e365e5"
                 }
             },
             "ZX Spectrum +3 MCU (Kyp)": {
@@ -3146,7 +3155,10 @@
                     "512KB 20230401": "8b1fb16dbb25909731fd6ea05fdfdeee17047dd25a2181a24d586c572d0f1d39",
                     "512KB 20230407": "1acfee53b0ad63a7e2be0fe2cfa9eb1be0408638fcc01d69b2856120b78f99f3",
                     "1MB Green 20230402": "532e3f2a2e524771fe0303a7d7ecfd1863b66835eef48c645241667dc9e0bd6c",
-                    "1MB Black 20230402": "18e646fa9f8ad23c12a2222e707891e45062cb39c2e1f09c669fa7fbf054a945"
+                    "1MB Black 20230402": "18e646fa9f8ad23c12a2222e707891e45062cb39c2e1f09c669fa7fbf054a945",
+                    "512KB 20230514": "63466a34aeb0f1837a8f1c609ad6b679bc921e698dbb16a3fbe0d41508552f7c",
+                    "1MB Green 20230514": "62c650093f1c135a4b41c7df1fc7914d853b9064e5a3232c58f622bd03a0a554",
+                    "1MB Black 20230514": "af97604dba68c2a2aec25bcd10feb8aa8b90244225693379a749c87cfdc324a2"
                 }
             },
             "Phoenix": {
@@ -4184,7 +4196,8 @@
                     "https://github.com/spark2k06/PCXT_Xilinx_Spartan_6/raw/main/releases/zxdosplus/coreXX.xzd"
                 ],
                 "versions": {
-                    "20230403": "7eb6d020205ae4adb66d08aa5a0560889ac16a3368a341fc920319d4c7dcfc84"
+                    "20230403": "7eb6d020205ae4adb66d08aa5a0560889ac16a3368a341fc920319d4c7dcfc84",
+                    "20230514": "948e558635e8bc323f74906daaf82950b5cbe829c65eb6ea8613330668adffb7"
                 }
             },
             "Phoenix": {
@@ -5058,6 +5071,7 @@
                 "SE Basic IV 4.2 20.09.30 Iggy": "121dcf1571a9be7c83b1e28f6d313495bd89909abe65b227301bc9a4282f72c7",
                 "SE Basic IV 4.2 20.01.22 Gaff": "3949fdf325fad54c4cee421d42aef4e05e756fdb96af69b7c7e5809a0df8449e",
                 "SE Basic IV 4.2-b9 Cordelia": "297e4a6b3ea9246d9966efa3e105f15b0a5c4f16589d2a71d917c170c2069593",
+                "SE Basic IV 4.2-b10 2023.06.05": "9525ea5c6462872c7f5b4184d0e41506b0d6a9a108781cb17229b8ece1042ec0",
                 "TS2060 by Daniel A. Nagy 2021.10.22": "af1279ce8c264b3491f31db4b249048c11bc563791c2f5293b5fb9c59a4aba54",
                 "TS2060 2021.10.27": "de8a0f0a71af9dec4f802cb5b6ec6cdba2d51cddccb5e2a53eef9f045a59691e",
                 "TS2060 by Daniel A. Nagy 22.01.15": "b51b685b0e9261bd0bae6f333d8a658bc73cfcfa4e52b2a8099064a6d2c79232",
