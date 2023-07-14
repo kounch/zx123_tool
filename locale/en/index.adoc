@@ -497,7 +497,7 @@ The JSON file is an object where the main name are file extensions (like `ZXD` o
 
 [source]
 ----
-[cores directory offset, directory block size, "", "", first cores block length, second cores block length]
+[cores directory offset, directory block size, "", "", first cores block length, second cores block length, directory index skip]
 ----
 
 `roms_data` format:

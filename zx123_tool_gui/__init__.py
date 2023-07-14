@@ -609,7 +609,12 @@ class App(tk.Tk):
                             filetype = block_id
                             break
 
-        return bool(filetype in arr_format), filetype
+        is_valid: bool = filetype in arr_format
+        if is_valid and str_kind:
+            if str_kind != self.zxkind:
+                is_valid = False
+                filetype = f'{str_kind} {filetype}'
+        return is_valid, filetype
 
     def set_default_bios(self: Any, bios_value: tk.StringVar, old_val: int,
                          min_val: int, max_val: int, str_val: str) -> int:
@@ -808,7 +813,10 @@ class App(tk.Tk):
             if not b_block_ok:
                 str_file = ''
                 str_error: str = f'ERROR\nFile Format not valid.\n{filetype}'
-                str_error += f' detected, and it should be a {str_name}.'
+                str_kind: str = ''
+                if self.zxkind:
+                    str_kind = f'{self.zxkind} '
+                str_error += f' detected, and it should be a {str_kind}{str_name}.'
                 messagebox.showerror('Error', str_error, parent=self)
 
         if b_rename or str_file:
