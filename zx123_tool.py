@@ -182,6 +182,16 @@ def main():
                             arg_data['keyboard_layout'],
                             arg_data['boot_timer'], arg_data['force'])
 
+        # Truncate image
+        if arg_data['truncate_flash']:
+            if not output_file:
+                output_file = str_file
+            if truncate_image(str_file, output_file, dict_hash,
+                              arg_data['force']):
+                arg_data['force'] = True
+                str_file = output_file
+                sys.exit(0)
+
         # Inject Cores and/or ROMs
         if arg_data['inject']:
             if str_extension in supported_exts:
@@ -216,8 +226,9 @@ def main():
             else:
                 LOGGER.error('Not a valid filetype: %s', str_extension)
 
-        # Truncate image
-        elif arg_data['output_file'] and not arg_data['wipe_flash']:
+        # Save image
+        elif arg_data['output_file'] and not arg_data[
+                'wipe_flash'] and not arg_data['truncate_flash']:
             savefrom_zxdata(str_file, dict_hash, arg_data['output_file'],
                             arg_data['n_cores'], arg_data['video_mode'],
                             arg_data['keyboard_layout'],
@@ -330,6 +341,7 @@ def parse_args() -> dict[str, Any]:
     values['rename'] = []
     values['wipe_flash'] = False
     values['expand_flash'] = False
+    values['truncate_flash'] = False
     values['convert_core'] = False
     values['1core'] = False
     values['2mb'] = False
@@ -434,6 +446,12 @@ def parse_args() -> dict[str, Any]:
                         action='store_true',
                         dest='expand_flash',
                         help='Expand, if needed, flash file to 32MiB')
+    parser.add_argument('-T',
+                        '--truncate',
+                        required=False,
+                        action='store_true',
+                        dest='truncate_flash',
+                        help='Truncate flash file to minimum size')
     parser.add_argument('-t',
                         '--convert',
                         required=False,
@@ -569,6 +587,9 @@ def parse_args() -> dict[str, Any]:
 
     if arguments.expand_flash:
         values['expand_flash'] = arguments.expand_flash
+
+    if arguments.truncate_flash:
+        values['truncate_flash'] = arguments.truncate_flash
 
     if arguments.convert_core:
         values['convert_core'] = arguments.convert_core
@@ -742,7 +763,9 @@ def detect_file(
             # Is the file header known?
             str_member: str = ''
             if validate_file(str_file, dict_hash['parts']['header'][3]):
-                filetype = 'FlashImage'
+                LOGGER.debug(str_kind)
+                if str_kind != 'ROM':
+                    filetype = 'FlashImage'
                 if 'extra' in dict_hash:
                     i_spect: int = int(dict_hash['parts']['Spectrum'][0])
                     d_family: dict[str, Any] = dict_hash['extra']
@@ -1167,9 +1190,9 @@ def extractfrom_zxdata(str_in_file: str,
                 str_bin += f'_{block_name.replace(" ", "_")}_v{block_version}'
                 str_bin += f'.{str_extension}'
                 str_bin = os.path.join(str_dir, str_bin)
-                core_magic: str = core_bases[3]
+                # core_magic: str = core_bases[3]
                 validate_and_export_bin(str_in_file, block_data, str_bin,
-                                        b_force, core_magic)
+                                        b_force, '')
             else:
                 LOGGER.error('Invalid core number: %i', core_number)
     else:
@@ -1212,7 +1235,7 @@ def extractfrom_zxdata(str_in_file: str,
 
             rom_version, _, rom_data = get_rom(str_in_file, rom_slt,
                                                rom_item[3], fullhash_dict,
-                                               str_extension)
+                                               str_kind)
 
             roms_data, _ = inject_rom_tobin(roms_data, blk_info, blk_bases,
                                             rom_index, rom_slt, rom_name,
@@ -1266,6 +1289,7 @@ def prep_update_zxdata(arr_in_files: list[str],
                     latest = hash_dict[block]['vertical']
                 latest_hash: str = hash_versions[latest[0]]
 
+                str_extension: str = hash_dict['extensions'][0]
                 str_file: str = f'{block}_{latest[0]}.{str_extension}'
                 str_file = os.path.join(str_outdir, str_file)
 
@@ -1341,6 +1365,7 @@ def prep_update_cores(arr_in_files: list[str],
             base_hash: str = hash_dict['Cores'][block_name]['versions'].get(
                 base[0], '')
 
+            str_extension: str = hash_dict['extensions'][0]
             str_file: str = f'CORE{index:0>2}_{block_name}_{latest[0]}.{str_extension}'
             str_file = os.path.join(str_outdir, str_file)
 
@@ -1621,6 +1646,39 @@ def expand_image(str_spi_file: str,
 
             # Extra 0s
             b_data += b'\x00' * extra_len
+
+            with open(str_outfile, "wb") as out_zxdata:
+                out_zxdata.write(b_data)
+                print(f'{str_outfile} created OK.')
+                b_force = True
+
+    return b_force
+
+
+def truncate_image(str_spi_file: str,
+                   str_outfile: str,
+                   hash_dict: dict[str, Any],
+                   b_force: bool = False) -> bool:
+    """
+    Truncate, an image file
+    :param str_spi_file: Input SPI flash file
+    :param str_outfile: New truncated SPI flash file to create
+    :param hash_dict: Dictionary with hashes data
+    :param b_force: Force overwriting file
+    """
+
+    b_len: int = os.stat(str_spi_file).st_size
+    core_list: list[str] = get_core_list(str_spi_file, hash_dict['parts'])
+    n_cores: int = len(core_list)
+    core_base: list[str] = hash_dict['parts']['core_base']
+    LOGGER.debug('Detected %i Cores', n_cores)
+    new_len: int = int(core_base[0]) + n_cores * int(core_base[1])
+    LOGGER.debug('New size: %i bytes...', new_len)
+    if new_len < b_len:
+        print('Truncating image file...')
+        if b_force or check_overwrite(str_outfile):
+            with open(str_spi_file, "rb") as in_zxdata:
+                b_data: bytes = in_zxdata.read(new_len)
 
             with open(str_outfile, "wb") as out_zxdata:
                 out_zxdata.write(b_data)
@@ -1951,8 +2009,8 @@ def find_zxfile(str_in_file: str,
         if block_id in d_parts:
             if i_file_size == int(d_parts[block_id][1]):
                 LOGGER.debug('Looks like %s', block_id)
-                block_version: str = get_data_version(str_file_hash,
-                                                      hash_dict[block_id])
+                block_version, _ = get_data_version(str_file_hash,
+                                                    hash_dict[block_id])
                 if block_version != 'Unknown':
                     print(f'{block_id} -  Version: {block_version}')
                     dict_res['kind'] = block_id
@@ -1965,8 +2023,8 @@ def find_zxfile(str_in_file: str,
             if i_file_size == int(d_parts[block_id][1]) and validate_file(
                     str_in_file, d_parts[block_id][3]):
                 LOGGER.debug('Looks like %s', block_id)
-                block_version = get_data_version(str_file_hash,
-                                                 hash_dict[block_id])
+                block_version, _ = get_data_version(str_file_hash,
+                                                    hash_dict[block_id])
                 if block_version != 'Unknown':
                     print(f'{block_id} -  Version: {block_version}')
                     dict_res['kind'] = block_id
@@ -1975,27 +2033,64 @@ def find_zxfile(str_in_file: str,
 
     # Check if it's a Core
     if not found and 'core_base' in d_parts:
+        i_part = -1
         if validate_file(str_in_file,
                          d_parts['core_base'][3]) and i_file_size == int(
                              d_parts['core_base'][1]):
             LOGGER.debug('Looks like a core')
             for core_item in hash_dict['Cores']:
-                block_version = get_data_version(str_file_hash,
-                                                 hash_dict['Cores'][core_item])
+                block_version, b_ispart = get_data_version(
+                    str_file_hash, hash_dict['Cores'][core_item])
                 if block_version != 'Unknown':
-                    print(f'Core: {core_item} - Version: {block_version}')
-                    dict_res['kind'] = 'Core'
-                    dict_res['version'] = f'{core_item}: {block_version}'
                     found = True
-                    if b_detail:
-                        printcol(Colours.BLUE,
-                                 f' Features of "{core_item}" Cores:',
-                                 end='\n')
-                        dict_det = hash_dict['Cores'][core_item].get(
-                            'features', {})
-                        print_detail(core_item, dict_det)
-                        dict_res['detail'] = dict_det
+                    if b_ispart:
+                        i_part = 0
                     break
+        if not found:
+            for core_item in hash_dict['Cores']:
+                if 'split' in hash_dict['Cores'][core_item]:
+                    dict_split = hash_dict['Cores'][core_item]['split']
+                    for split_item in dict_split:
+                        if i_file_size == int(d_parts['core_base'][1]):
+                            LOGGER.debug("Split part?")
+                            for s_i, s_p in enumerate(
+                                    dict_split[split_item]['parts']):
+                                if str_file_hash == s_p:
+                                    block_version = split_item
+                                    i_part = s_i
+                                    found = True
+                                    break
+                        elif i_file_size == int(
+                                dict_split[split_item]['size']):
+                            LOGGER.debug("ZX3 Plugin file?")
+                            block_version, _ = get_data_version(
+                                str_file_hash, hash_dict['Cores'][core_item])
+                            if block_version == split_item:
+                                found = True
+                                break
+                if found:
+                    break
+
+        if found:
+            if i_part > -1:
+                print(
+                    f'Core Part {i_part + 1}: {core_item} - Version: {block_version}'
+                )
+                dict_res['kind'] = 'CorePart'
+                dict_res[
+                    'version'] = f'{core_item}: {block_version}) Part {i_part + 1}'
+            else:
+                print(f'Core: {core_item} - Version: {block_version}')
+                dict_res['kind'] = 'Core'
+                dict_res['version'] = f'{core_item}: {block_version}'
+            found = True
+            if b_detail:
+                printcol(Colours.BLUE,
+                         f' Features of "{core_item}" Cores:',
+                         end='\n')
+                dict_det = hash_dict['Cores'][core_item].get('features', {})
+                print_detail(core_item, dict_det)
+                dict_res['detail'] = dict_det
 
     # Check if it's a ROMPack ROMs file
     if not found and str_extension == 'ZX1':
@@ -2117,7 +2212,7 @@ def get_core_list_bindata(bin_data: bytes, dict_parts: dict[str,
     if len(block_info) > 5:
         max_cores += int(block_info[5])
     skip: int = 0
-    if len(block_info) > 5:
+    if len(block_info) > 6:
         skip = int(block_info[6])
 
     name_offset: int = 0x100
@@ -2178,7 +2273,7 @@ def get_romdata_version(rom_data: bytes,
         '16K Spectrum ROM', '32K Spectrum ROM', '', '64K Spectrum ROM', '', '',
         '', '128K Spectrum ROM'
     ]
-    block_version: str = get_data_version(
+    block_version, _ = get_data_version(
         block_hash, dict_rom_hash[rom_types[rom_blocks - 1]])
 
     return block_version, block_hash
@@ -2433,8 +2528,8 @@ def inject_bindata(str_in_params: str,
                         str_in_file,
                         b_head) and os.stat(str_in_file).st_size == b_len:
                     LOGGER.debug('Looks like %s', bl_id)
-                    bl_version: str = get_data_version(str_hash,
-                                                       hash_dict[bl_id])
+                    bl_version, _ = get_data_version(str_hash,
+                                                     hash_dict[bl_id])
                     str_message: str = f'Adding {bl_id}: {bl_version}...'
                     if w_progress:
                         w_progress.update(str_message)
@@ -2483,6 +2578,7 @@ def inject_coredata(str_in_params: str,
         core_bases: list[str] = dict_parts['core_base']
         b_len: int = int(core_bases[1])
         b_head: str = core_bases[3]
+        b_head = ''
 
         bl_data: bytes = b_data[int(block_info[0]):int(block_info[0]) +
                                 int(block_info[1])]
@@ -2505,7 +2601,7 @@ def inject_coredata(str_in_params: str,
                 if str_in_file:
                     block_version = 'Unknown'
                     for core_item in hash_dict['Cores']:
-                        block_version = get_data_version(
+                        block_version, _ = get_data_version(
                             str_hash, hash_dict['Cores'][core_item])
                         if block_version != 'Unknown':
                             core_name = core_item
@@ -2932,14 +3028,15 @@ def get_version(str_in_file: str, block_info: tuple[int, int, str, str],
             str_hash = hashlib.sha256(bin_data).hexdigest()
             del bin_data
 
-        str_version = get_data_version(str_hash, hash_dict)
+        str_version, _ = get_data_version(str_hash, hash_dict)
     else:
         LOGGER.debug('File too small to check version')
 
     return str_version, str_hash
 
 
-def get_data_version(str_hash: str, hash_dict: dict[str, Any]) -> str:
+def get_data_version(str_hash: str, hash_dict: dict[str,
+                                                    Any]) -> tuple[str, bool]:
     """
     Obtain version string from hash
     :param str_hash: Hash string to check
@@ -2947,16 +3044,30 @@ def get_data_version(str_hash: str, hash_dict: dict[str, Any]) -> str:
     :return: List with version string and hash string
     """
     str_version: str = 'Unknown'
+    b_part = False
 
     if 'versions' in hash_dict:
-        hash_dict = hash_dict['versions']
+        tmp_hash_dict = hash_dict['versions']
 
-    for hash_elem in hash_dict:
-        if str_hash == hash_dict[hash_elem]:
+    for hash_elem in tmp_hash_dict:
+        if str_hash == tmp_hash_dict[hash_elem]:
             str_version = hash_elem
             break
 
-    return str_version
+    if str_version == 'Unknown':
+        if 'split' in hash_dict:
+            tmp_hash_dict = hash_dict['split']
+            for split_part in tmp_hash_dict:
+                for i_part, i_hash in enumerate(
+                        tmp_hash_dict[split_part]['parts']):
+                    if str_hash == i_hash:
+                        str_version = f'{split_part} Part {i_part +1 }'
+                        b_part = True
+                        break
+                if str_version != 'Unknown':
+                    break
+
+    return str_version, b_part
 
 
 def get_peek(str_in_file: str, block_offset: int) -> int:
@@ -3026,7 +3137,7 @@ def validate_file(str_in_file: str, str_magic: str) -> bool:
 
         return b_validate
 
-    return False
+    return True
 
 
 def validate_bin(bin_data: bytes, str_magic: str) -> bool:
