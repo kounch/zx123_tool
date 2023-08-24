@@ -69,6 +69,7 @@ def build_menubar(self: Any):
         command=lambda: self.update_image('Cores', get_1core=True))
     self.updatemenu = updatemenu
     filemenu.add_cascade(label='Update Image File', menu=updatemenu)
+    filemenu.add_command(label='Truncate Image File…', command=self.truncate_image)
 
     filemenu.add_separator()
     filemenu.add_command(label='Get Core Info',
@@ -152,8 +153,9 @@ def build_menubar(self: Any):
     self.filemenu.entryconfig(4, state='disabled')
     self.filemenu.entryconfig(5, state='disabled')
     self.filemenu.entryconfig(6, state='disabled')
-    self.filemenu.entryconfig(8, state='disabled')
+    self.filemenu.entryconfig(7, state='disabled')
     self.filemenu.entryconfig(9, state='disabled')
+    self.filemenu.entryconfig(10, state='disabled')
     self.core_menu.entryconfig(0, state='disabled')
     self.core_menu.entryconfig(1, state='disabled')
     self.rom_menu.entryconfig(0, state='disabled')
@@ -632,14 +634,14 @@ def process_selected(self: Any, treeview: ttk.Treeview, treeview_menu: tk.Menu,
             str_label: str = 'Show info'
             n_entry: int = 0
             if treeview_menu == self.core_menu:
-                self.filemenu.entryconfig(8, state='disabled', label=str_label)
+                self.filemenu.entryconfig(9, state='disabled', label=str_label)
                 treeview_menu.entryconfig(n_entry,
                                           state='disabled',
                                           label=str_label)
                 n_entry = 1
             str_label = 'Rename'
             if treeview_menu == self.core_menu:
-                self.filemenu.entryconfig(9, state='disabled', label=str_label)
+                self.filemenu.entryconfig(10, state='disabled', label=str_label)
             treeview_menu.entryconfig(n_entry,
                                       state='disabled',
                                       label=str_label)
@@ -648,14 +650,14 @@ def process_selected(self: Any, treeview: ttk.Treeview, treeview_menu: tk.Menu,
             n_entry = 0
             if treeview_menu == self.core_menu:
                 str_label = f'Show info for {str_text} {t_selection[0]}'
-                self.filemenu.entryconfig(8, state='normal', label=str_label)
+                self.filemenu.entryconfig(9, state='normal', label=str_label)
                 treeview_menu.entryconfig(n_entry,
                                           state='normal',
                                           label=str_label)
                 n_entry = 1
             str_label = f'Rename {str_text} {t_selection[0]}'
             if treeview_menu == self.core_menu:
-                self.filemenu.entryconfig(9, state='normal', label=str_label)
+                self.filemenu.entryconfig(10, state='normal', label=str_label)
             treeview_menu.entryconfig(n_entry, state='normal', label=str_label)
     else:
         import_bttn['text'] = f'Add New {str_text}'
@@ -664,14 +666,14 @@ def process_selected(self: Any, treeview: ttk.Treeview, treeview_menu: tk.Menu,
         str_label = 'Show info'
         n_entry = 0
         if treeview_menu == self.core_menu:
-            self.filemenu.entryconfig(8, state='disabled', label=str_label)
+            self.filemenu.entryconfig(9, state='disabled', label=str_label)
             treeview_menu.entryconfig(n_entry,
                                       state='disabled',
                                       label=str_label)
             n_entry = 1
         str_label = 'Rename'
         if treeview_menu == self.core_menu:
-            self.filemenu.entryconfig(9, state='disabled', label=str_label)
+            self.filemenu.entryconfig(10, state='disabled', label=str_label)
         treeview_menu.entryconfig(n_entry, state='disabled', label=str_label)
 
 

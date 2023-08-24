@@ -263,7 +263,7 @@ class App(tk.Tk):
         if response:
             zx123.wipe_zxdata(self.zxfilepath,
                               self.zxfilepath,
-                              self.fulldict_hash[self.zxextension],
+                              self.fulldict_hash[self.zxkind],
                               b_force=True)
             self.open_file(self.zxfilepath)
 
@@ -288,6 +288,30 @@ class App(tk.Tk):
                                False)
             self.open_file(self.zxfilepath)
 
+    def truncate_image(self: Any):
+        """Truncates a flash image to the minimum (latest core)"""
+        str_filename: str = os.path.split(self.zxfilepath)[1]
+
+        str_title: str = f'Truncate {str_filename}'
+        str_message: str = f'Do you really want to truncate {str_filename}?'
+        response: bool = messagebox.askyesno(parent=self,
+                                             icon='question',
+                                             title=str_title,
+                                             message=str_message)
+        if response:
+            str_outfile: str = ''
+            filetypes: list[tuple[str, str]] = [(f'{self.zxextension} file',
+                                                 f'.{self.zxextension}')]
+            str_outfile = fd.asksaveasfilename(parent=self,
+                                                    title='New file to create',
+                                                    filetypes=filetypes)
+            if str_outfile:
+                print(f'Truncate {self.zxfilepath}')
+                zx123.truncate_image(self.zxfilepath, str_outfile,
+                                     self.fulldict_hash[self.zxkind], True)
+
+            self.open_file(self.zxfilepath)
+
     def full_close_image(self: Any):
         """Restore button text and empty all fields of Main Window """
         self.core_import_button['text'] = 'Add New Core'
@@ -305,8 +329,9 @@ class App(tk.Tk):
         self.filemenu.entryconfig(4, state='disabled')
         self.filemenu.entryconfig(5, state='disabled')
         self.filemenu.entryconfig(6, state='disabled')
-        self.filemenu.entryconfig(8, state='disabled', label='Show info')
-        self.filemenu.entryconfig(9, state='disabled', label='Rename')
+        self.filemenu.entryconfig(7, state='disabled')
+        self.filemenu.entryconfig(9, state='disabled', label='Show info')
+        self.filemenu.entryconfig(10, state='disabled', label='Rename')
         self.core_menu.entryconfig(0, state='disabled', label='Show info')
         self.core_menu.entryconfig(1, state='disabled', label='Rename')
         self.rom_menu.entryconfig(0, state='disabled', label='Rename')
@@ -429,6 +454,7 @@ class App(tk.Tk):
                 self.updatemenu.entryconfig(7, state=str_update)
                 self.updatemenu.entryconfig(8, state=str_update)
                 self.filemenu.entryconfig(6, state='normal')
+                self.filemenu.entryconfig(7, state='normal')
 
                 self.image_label.config(text=str_filename)
                 self.populate_blocks(dict_flash['blocks'])
@@ -595,6 +621,8 @@ class App(tk.Tk):
 
         if not self.dict_prefs.get('import_unknown', False):
             filetype = kind
+        elif filetype == 'Unknown' and 'CorePart' in arr_format:
+            filetype = 'CorePart'
 
         if self.dict_prefs.get('import_allroms', False):
             if filetype == 'Unknown':
@@ -610,7 +638,7 @@ class App(tk.Tk):
                             break
 
         is_valid: bool = filetype in arr_format
-        if is_valid and str_kind:
+        if not 'ROM' in filetype and is_valid and str_kind:
             if str_kind != self.zxkind:
                 is_valid = False
                 filetype = f'{str_kind} {filetype}'
@@ -715,7 +743,7 @@ class App(tk.Tk):
                         self.zxfilepath, [f'{str_block},{str_file}'],
                         self.zxfilepath,
                         self.fulldict_hash,
-                        self.zxextension,
+                        self.zxkind,
                         b_force=True)
                     if arr_err:
                         str_error: str = f'ERROR\nCannot insert {str_block}.\n'
@@ -798,7 +826,7 @@ class App(tk.Tk):
         ]
         if b_core:
             str_extension = self.zxextension
-            arr_format = [str_name]
+            arr_format = ['Core', 'CorePart']
         filetypes: list[tuple[str, str]] = [
             (f'{self.zxextension} {str_name} files', f'.{str_extension}')
         ]
@@ -808,6 +836,7 @@ class App(tk.Tk):
                                           title=f'Open a {str_name} file',
                                           filetypes=filetypes)
 
+        filetype: str = ''
         if str_file:
             b_block_ok, filetype = self.validate_file(str_file, arr_format)
             if not b_block_ok:
@@ -845,13 +874,17 @@ class App(tk.Tk):
                 else:
                     response = False
             if response:
-                str_dialog_name: str = f'{str_name}'
-                if itm_indx < 99:
-                    str_dialog_name += f' {itm_indx}'
-                dialog: NewEntryDialog = NewEntryDialog(
-                    self, str_dialog_name, b_core, b_alt, b_rename)
-                treeview.focus_force()
-                slot_name: str = dialog.result_name
+                slot_name: str  = ''
+                if filetype != 'CorePart':
+                    str_dialog_name: str = f'{str_name}'
+                    if itm_indx < 99:
+                        str_dialog_name += f' {itm_indx}'
+                    dialog: NewEntryDialog = NewEntryDialog(
+                        self, str_dialog_name, b_core, b_alt, b_rename)
+                    treeview.focus_force()
+                    slot_name = dialog.result_name
+                else:
+                    slot_name = 'DO NOT USE THIS!'
                 slot_param: str = f'{str_name},{itm_indx},{slot_name}'
                 if str_file:
                     slot_param += f',{str_file}'
@@ -952,7 +985,8 @@ class App(tk.Tk):
                                            filetypes=filetypes)
 
         if str_file:
-            b_block_ok, filetype = self.validate_file(str_file, ['ROMPack'])
+            b_block_ok, filetype = self.validate_file(
+                str_file, ['ROMPack', 'ZX-Uno RomPack'])
             if b_block_ok:
                 response: bool = True
                 if self.dict_prefs.get('ask_replace', True):
@@ -967,7 +1001,7 @@ class App(tk.Tk):
                                                       [f'ROMS,{str_file}'],
                                                       self.zxfilepath,
                                                       self.fulldict_hash,
-                                                      self.zxextension,
+                                                      self.zxkind,
                                                       b_force=True)
                     if arr_err:
                         str_error: str = 'ERROR\nCannot insert ROMPack.\n'
