@@ -1,5 +1,5 @@
 {
-    "version": "20230824.001",
+    "version": "20230909.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -4559,8 +4559,8 @@
                 "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE.ZX3"
             ],
             "versions": {
-                "0.86 Beta": "4a73600b3f02881973b0aa57bd9e4dc85bb885788d6ae0f91cceca6a1ffa7711",
-                "0.86": "23d6b78b63520cbd7799108050c5549aca3998d09ae68059a4ba8cd367b5d7c2"
+                "0.86 Beta": "23d6b78b63520cbd7799108050c5549aca3998d09ae68059a4ba8cd367b5d7c2",
+                "0.86": "5e07fd6da18c57e7d7ddb721a932fc0b78ab139888cc96ea91f1d5cc02c112f3"
             }
         },
         "esxdos": {
@@ -4576,7 +4576,7 @@
         },
         "Spectrum": {
             "latest": [
-                "EXP27_Test"
+                "EXP28 090923"
             ],
             "versions": {
                 "EXP27_Test": "13f1fa51811e437b7e46bb73dece4b5cc49a6d05b91855e603a3605cdbe613bf",
@@ -4722,10 +4722,11 @@
         "BIOS": {
             "latest": [
                 "0.86",
-                "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE.ZX3++"
+                "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE.ZX3"
             ],
             "versions": {
-                "0.86": "23d6b78b63520cbd7799108050c5549aca3998d09ae68059a4ba8cd367b5d7c2"
+                "0.86 Beta": "23d6b78b63520cbd7799108050c5549aca3998d09ae68059a4ba8cd367b5d7c2",
+                "0.86": "5e07fd6da18c57e7d7ddb721a932fc0b78ab139888cc96ea91f1d5cc02c112f3"
             }
         },
         "esxdos": {
@@ -4744,7 +4745,8 @@
                 "EXP28 250623"
             ],
             "versions": {
-                "EXP28 250623": "d6e380f1ccf76db3ab240f1e617c25ae107922b0c48ab09b3092bf964f4acd6d"
+                "EXP28 250623": "d6e380f1ccf76db3ab240f1e617c25ae107922b0c48ab09b3092bf964f4acd6d",
+                "EXP28 090923": "7ee642d761f98ffd52bbdab985e2f540749a2c32efb7b02125ba0420a22592ad"
             }
         },
         "Cores": {
@@ -4763,7 +4765,89 @@
                     "EXP28 250623"
                 ],
                 "versions": {
-                    "EXP28 250623": "cc091267de7d3ece8c9808ce9ed3d008e0ab35613b521b6430e2474fbc9a551e"
+                    "EXP28 250623": "cc091267de7d3ece8c9808ce9ed3d008e0ab35613b521b6430e2474fbc9a551e",
+                    "EXP28 090923": "000000000000000000000000000000000000000000000000000000000000000f"
+                },
+                "split": {
+                    "EXP28 250623": {
+                        "size": "3702784",
+                        "parts": [
+                            "000000000000000000000000000000000000000000000000000000000000000f",
+                            "1a9b450d4e70aa2c30f3b26d26828feed252f67ec2e3463352ee3711dc1e0e22"
+                        ]
+                    },
+                    "EXP28 090923": {
+                        "size": "3702784",
+                        "parts": [
+                            "000000000000000000000000000000000000000000000000000000000000000f",
+                            "0a39d08d5e49d53d9787518c2d9923c4e2c4af59db1d543a2b0266505ed9d204"
+                        ]
+                    }
+                }
+            },
+            "Amstrad CPC": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "20230809"
+                ],
+                "versions": {
+                    "20230809": "dfff755fd5313fb6c9cf6ec30068326c496cbdb6167ee83401dad3a8173f5fa0"
+                },
+                "split": {
+                    "20230809": {
+                        "size": "1389388",
+                        "parts": [
+                            "05b277b37a18cb534355c7a37427332852f2e4f2632f029d6117ed7bbb530a1e",
+                            "0bb8d098956d26a0a0a4d69a1ec798e321b8bb92a113505ad45018db49669000"
+                        ]
+                    }
+                }
+            },
+            "Neo-Geo": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "20230828"
+                ],
+                "versions": {
+                    "20230828": "4d1139569a46510c5c05f90eebc5be355e233626c3d59374d995ee760a923282"
+                },
+                "split": {
+                    "20230828": {
+                        "size": "2920316",
+                        "parts": [
+                            "9c409557a6c0d97aba3a2c7d6a489570a17f60034386c717ceac01763dd1151a",
+                            "c6957d4a57965d7467f7663426a1b371c6b9119e67bf7a0b60fb0aa4a851ebcf",
+                            "039f51d6b5d43ff13d436ef5dfab74c170db983226f027b8a8654a5aacd2f480"
+                        ]
+                    }
+                }
+            },
+            "PC XT": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "20230909"
+                ],
+                "versions": {
+                    "20230909": "040b6b33a8dc928c847798a13b95974d5b202d6b39f3a142bb6d04bc5ab8167f"
+                },
+                "split": {
+                    "20230909": {
+                        "size": "2704496",
+                        "parts": [
+                            "30c4c25012c08d933ed61b7a6d5e21f39c5c1ce02811e131cf6d63f367baad84",
+                            "aaf0eeb9c560cf43cb049ef4391cfe13f8f66659b4b53b0e6d51d86644d87a25",
+                            "c6976cec2ded74c869441107597116b7e6695681b1081a726e3aace0a912c7e8"
+                        ]
+                    }
                 }
             },
             "Test DP VGA": {
@@ -4775,7 +4859,16 @@
                     "640x480 20230625"
                 ],
                 "versions": {
-                    "640x480 20230625": "7c0c5cc7b6dbcd0533183477cde5b824913ca133906aecc57274f1ae0cedf667"
+                    "640x480 20230625": "000000000000000000000000000000000000000000000000000000000000000f"
+                },
+                "split": {
+                    "640x480 20230625": {
+                        "size": "3702784",
+                        "parts": [
+                            "b91dd70d99b14d0ef791b1f9948340e6f245bb8b7b2d6bb7da9bff8a37bcd720",
+                            "6e219d4b563eabaeced36838ee1e2b41af5dd75f11c55ad43e929f21ce51da42"
+                        ]
+                    }
                 }
             },
             "Test FPGA Temp": {
@@ -4787,7 +4880,28 @@
                     "20230625"
                 ],
                 "versions": {
-                    "20230625": "ce6c72879646aef0e628522b2bed7389de5482011ce0cbef1081d240cae31fba"
+                    "20230625": "12185b99341441d3490830670043b544dcde7c042ae0feadf5f4f018a7d101fa"
+                }
+            },
+            "zxp3": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "20230808"
+                ],
+                "versions": {
+                    "20230808": "678e381dd4e8dfdeb616e30031b420f2e6468e7c86cae555f398e93bbe70462f"
+                },
+                "split": {
+                    "20230808": {
+                        "size": "2316576",
+                        "parts": [
+                            "7074f8f8bc29fc92486a0815785a65fb6afc61335fa0680e453d2639a86a95b6",
+                            "3718aec5262bccc47d2578961e909798d971f5cc5f411a642335a39fbd82d45a"
+                        ]
+                    }
                 }
             }
         }
@@ -4867,7 +4981,7 @@
         "BIOS": {
             "latest": [
                 "0.86",
-                "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE.ZX3++"
+                "https://github.com/zxdos/zxuno/raw/master/firmware/FIRMWARE.ZX3"
             ],
             "versions": {
                 "0.86 Beta": "23d6b78b63520cbd7799108050c5549aca3998d09ae68059a4ba8cd367b5d7c2",
@@ -4892,7 +5006,9 @@
             "versions": {
                 "EXP28 250623": "d2d450180307d7b01a390597c2bf9fa056eb84ecdcf37d488028da40fc3a9ad3",
                 "EXP28 300623":"2919868723a5ac3305cccfae514d7ec730c356dcbade87461d8b2564be285095",
-                "EXP28 290723": "6ae32849b065a8449b2220239185d8aed906a36a7d8a2ee06e8514a1a283187d"
+                "EXP28 290723": "6ae32849b065a8449b2220239185d8aed906a36a7d8a2ee06e8514a1a283187d",
+                "EXP28 070823": "3bfbefb6d3d828a1fa050ea661347f5da669c97dd7e8e6ad25b20c02dcf19f15",
+                "EXP28 090923": "1729ceeb2c70c76b0606046c71301de251b3131624d33a85e732ce1c5b442685"
             }
         },
         "Cores": {
@@ -4913,7 +5029,9 @@
                 "versions": {
                     "EXP28 250623": "000000000000000000000000000000000000000000000000000000000000000f",
                     "EXP28 300623": "000000000000000000000000000000000000000000000000000000000000000f",
-                    "EXP28 290723": "000000000000000000000000000000000000000000000000000000000000000f"
+                    "EXP28 290723": "000000000000000000000000000000000000000000000000000000000000000f",
+                    "EXP28 070823": "000000000000000000000000000000000000000000000000000000000000000f",
+                    "EXP28 090923": "000000000000000000000000000000000000000000000000000000000000000f"
                 },
                 "split": {
                     "EXP28 250623": {
@@ -4936,6 +5054,20 @@
                             "000000000000000000000000000000000000000000000000000000000000000f",
                             "959c5a7248621947544e9020a1df5a4e44f9e1a8b87bd608e11fb9d808d7ae18"
                         ]
+                    },
+                    "EXP28 070823": {
+                        "size": "3702784",
+                        "parts": [
+                            "000000000000000000000000000000000000000000000000000000000000000f",
+                            "3cf084a2749b50a8e1da0a41395c52be037098b7fe33726604a43d3080fc74e4"
+                        ]
+                    },
+                    "EXP28 090923": {
+                        "size": "3702784",
+                        "parts": [
+                            "000000000000000000000000000000000000000000000000000000000000000f",
+                            "3099f1ff407ac602de3e253e1fddb41aa37ef7b45f52a8c81b532407b407bb0f"
+                        ]
                     }
                 }
             },
@@ -4955,6 +5087,71 @@
                 ],
                 "versions": {
                     "EXP28 250623": "289ff5544558d96100173b6e84444e3ee1a0befe206b0db8143c40e3a702f956"
+                }
+            },
+            "Amiga Minimig": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "2023908"
+                ],
+                "versions": {
+                    "2023908": "bbe775f86d4fe4281e165037f6c15df0e58f388387a51cf162b13516063e015d"
+                },
+                "split": {
+                    "2023908": {
+                        "size": "2995724",
+                        "parts": [
+                            "6f128080f8739d3410ccfdfc2503349cd368524a623518cf403a02c711552cbf",
+                            "a9290cc433d6a59625be23861f922cede1d6c6596a99f5209b6dfa78e0a181fb",
+                            "f1b540dfe5024ea73ae75bfe55d3f5eb5e17f5e55e1d869b60c47035249ca5dc"
+                        ]
+                    }
+                }
+            },
+            "Amstrad CPC": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "20230809"
+                ],
+                "versions": {
+                    "20230809": "bf0f749a9d58941b4b14a807114d82efc3b52b84edb187dc0dd53a46a984a2d9"
+                },
+                "split": {
+                    "20230809": {
+                        "size": "2462540",
+                        "parts": [
+                            "a543be9fc6bb8b952fd0462e1312c4c20a79137afd7c4d991eff79f14411e565",
+                            "2cc3f191fa348a3bc0c7c7d83cd590c2319f8eec60fca1e6f0927205026eb090",
+                            "61da572d66d51740eff6d6a7fe4e617164fcee65899a1e38964b3e2e414adbcd"
+                        ]
+                    }
+                }
+            },            
+            "Atari 2600": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "20230903"
+                ],
+                "versions": {
+                    "20230903": "0b1fd8a53fb70cd169173e3eab9aa04c26cbfe2b249f89c0219a090d45e2416d"
+                },
+                "split": {
+                    "20230903": {
+                        "size": "1835668",
+                        "parts": [
+                            "6866a44c207dc72623bdc1f444a616e4f20b508f95cc0cd85c3793fec6505efb",
+                            "646fe5273d3d1b48aa14046d2fe83c8a49e917191e3695aa796264416dfd7498"
+                        ]
+                    }
                 }
             },
             "ColecoVision": {
@@ -4978,16 +5175,81 @@
                     }
                 }
             },
+            "Elan Enterprise": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "20230908"
+                ],
+                "versions": {
+                    "20230908": "53729bea5030aa1bae36a2c6b88541644d629bf04069275fc820c5a83886279d"
+                },
+                "split": {
+                    "20230908": {
+                        "size": "3057332",
+                        "parts": [
+                            "2825b3a41c2b94125780083709424f0c5f9bf1f38eb4500fdbb340c287921fa6",
+                            "de87061a44f47eb92380eb422e642e521d78b88d21d7a9ef915a7dd933d05cdb",
+                            "78670362759b8dc276688e057d67a3eaebcafd044230f4f9fda637f6a5cd98e6"
+                        ]
+                    }
+                }
+            },
+            "Jupiter ACE": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "20230808"
+                ],
+                "versions": {
+                    "20230808": "21f74803bed8894c9650b3294fdb47c88dd13e2aca73de13dd5e0d4e825f253e"
+                },
+                "split": {
+                    "20230808": {
+                        "size": "2076964",
+                        "parts": [
+                            "30eafffb88caeeae0e40d9176de547f71f7a61b6c2ed41774762b4ad23b29266",
+                            "ed480b3c8950f91d5b9590cc12175a4e30154711541d43a39d3a65ee02b42172"
+                        ]
+                    }
+                }
+            },
+            "Middle Board Upgrade": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "R9 20230907"
+                ],
+                "versions": {
+                    "R9 20230907": "610106c8afbcbca4e4496ab2a933ccec77f813d09b0b93dd8ccb0f0efa13b3df"
+                },
+                "split": {
+                    "R9 20230907": {
+                        "size": "2228224",
+                        "parts": [
+                            "88a8b71fbdbde798fa75d98cdca1ec47a743a096c890c2f48eabaafd70405348",
+                            "5b46c090068534736abdac35f3cb120bd403651e4fdcf2b16038111c819455e5"
+                        ]
+                    }
+                }
+            },
             "Neo-Geo": {
                 "features": {
                     "Video": [["VGA"], ""],
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
-                    "20230819"
+                    "20230828"
                 ],
                 "versions": {
-                    "20230819": "c37a1823c00bc5b7cc62c08e4e774c1d3321d5a319d60669eaef0a6ae96c9d9a"
+                    "20230819": "c37a1823c00bc5b7cc62c08e4e774c1d3321d5a319d60669eaef0a6ae96c9d9a",
+                    "20230828": "8890a237fa2400580795cdd3653c21a4d84bd6af35ba1378a9f1d434141dc050"
                 },
                 "split": {
                     "20230819": {
@@ -4997,6 +5259,38 @@
                             "aaf45351c9651a07e40707ac04f467462b0c509dd1043608c871339762991c2d",
                             "f1ea84c97d249357bd048d5d18277ce8e864bc5ec4d0ae71ea1a31d6baba101c",
                             "63b8ec7453c86f14bbcf7de8f3b4276f1cc276fe2c26a4166fb11d74666f9e5e"
+                        ]
+                    },
+                    "20230828": {
+                        "size": "4377876",
+                        "parts": [
+                            "97583d4d1f6ce9757b7ebef57bcba41b8515cbaa1b982f00ced37e3252a481a3",
+                            "0c4abe88205bbe4f0175ff29c6fde454942555cd86b0d96ba1804707f4025b7b",
+                            "fa5d0621cd6e98ce97f453a5ec6962d0a4ec9b702ff61a79ade8fa194637b376",
+                            "49c71d8a381894c4fab2a6e849ffce638ff678103c61cbdba8814ed8dca2a980"
+                        ]
+                    }
+                }
+            },
+            "PC XT": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "20230909"
+                ],
+                "versions": {
+                    "20230909": "10cb8eb2b5357be429c1e0d0b5e594c11fbd1bd0c357d8c1f16fac225401f10a"
+                },
+                "split": {
+                    "20230909": {
+                        "size": "4100004",
+                        "parts": [
+                            "a392f2ffec1267fca6c1ab62db5f9cfe85c4e2b3b80e4bf381a69ebd2520c140",
+                            "aedca8ddfd28f708d785cd2d0972dbf28a0e99950ca08b5343382327cbf9bfee",
+                            "850404c6baf40e9f6bd6662e8abeda800fd0727db1ffc5b4278779a24bfe8743",
+                            "0862c904c99f6ee13d4f6f28c8beff6b0943e05732db6d286b86c438ded7c1d8"
                         ]
                     }
                 }
