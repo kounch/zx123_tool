@@ -1,5 +1,5 @@
 {
-    "version": "20230909.001",
+    "version": "20230912.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -4580,7 +4580,8 @@
             ],
             "versions": {
                 "EXP27_Test": "13f1fa51811e437b7e46bb73dece4b5cc49a6d05b91855e603a3605cdbe613bf",
-                "EXP28 250623": "43e5f6ea0430f6bfd1340bafde3540f592ce373d87b835856d7f0dbb86ef9786"
+                "EXP28 250623": "43e5f6ea0430f6bfd1340bafde3540f592ce373d87b835856d7f0dbb86ef9786",
+                "EXP28 090923": "7d7e696ec286471a155ba83d1100ab05d227aae9d2d599b5ecef38c462ae4d70"
             }
         },
         "Cores": {
@@ -4601,6 +4602,90 @@
                 "versions": {
                     "EXP27_Test": "13f1fa51811e437b7e46bb73dece4b5cc49a6d05b91855e603a3605cdbe613bf",
                     "EXP28 250623": "6c8c546ca15f2b0cf240116be84afd164c0f7c1f69e1101fab4bcf1993f2c794"
+                }
+            },
+            "Amiga Minimig": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "20230907"
+                ],
+                "versions": {
+                    "20230907": "a2a6ad9d6e7aa7eb91f3878c2932111f925ed566a1b6f0189b53caffe221aac0"
+                },
+                "split": {
+                    "20230907": {
+                        "size": "1461264",
+                        "parts": [
+                            "a0ca9f8c4652d1e1c5310bcfaa3f295ad37abd65fa50252f9a51e2bba1c6a25a",
+                            "3ae6b3abb11a28dd28e8f9e5a99d5ce58d9c9afa9b1e8501e00734e2ed77b691"
+                        ]
+                    }
+                }
+            },
+            "Amstrad CPC": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "20230809"
+                ],
+                "versions": {
+                    "20230809": "3d7839482110dcfd086f774f4f6ebc00d6828c511d6ae08576bd41a16f87a308"
+                },
+                "split": {
+                    "20230809": {
+                        "size": "1241068",
+                        "parts": [
+                            "5c774a46eb58f69e3b0da7d39ebbe135032d254c5b03c6b6b8f99a68ab14fec7",
+                            "291bed301a94a2c07f6c9e6c9c012032299986695bbf6a4e838ad3cc074fcaa6"
+                        ]
+                    }
+                }
+            },
+            "Neo-Geo": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "20230828"
+                ],
+                "versions": {
+                    "20230828": "b36bd930dd15f0310b9c99027bab80b36a4e1df32dbc04b30a28caf1f837a0bc"
+                },
+                "split": {
+                    "20230828": {
+                        "size": "1714532",
+                        "parts": [
+                            "fdee4aedd0d005171b0e24dd70d7ae38ec4749675e8d36e27440e21b64d90464",
+                            "70f4e81aee7cf58371b197411cb1aff8a7d6eddb44d28a7eb99a2e1e0cfdd25e"
+                        ]
+                    }
+                }
+            },
+            "PC XT": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "20230909"
+                ],
+                "versions": {
+                    "20230909": "0a0ca2d9e93b61873e19e88cabc618d0a0ac4b6380f021b21f440906169ddd1b"
+                },
+                "split": {
+                    "20230909": {
+                        "size": "1740232",
+                        "parts": [
+                            "1ac2a0a620456861d8a2da647010452d49089861f027edc3ed134e659f246800",
+                            "b0fad028a9ba703515669d10de563cb25e7f1aaf16f10c5b23c6c835bf352a48"
+                        ]
+                    }
                 }
             },
             "Test DP VGA": {
@@ -4643,6 +4728,27 @@
                 ],
                 "versions": {
                     "20230521": "9f12a1b5a39fd5132043c76bfbafc2a4969d03f3f621c71b8660cb1d1df1da62"
+                }
+            },
+            "zxp3": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "20230808"
+                ],
+                "versions": {
+                    "20230808": "00cd1f2de6db9d7bf9721f0a77197ede7494b7ba2a09706fb9cb6d8e580e2622"
+                },
+                "split": {
+                    "20230808": {
+                        "size": "1662304",
+                        "parts": [
+                            "a55a42a50c83a60136e994a0b12330b30ddcf5e47fb98c533ff208bb69d881a3",
+                            "c98890d92865be7c15d4af920f22bf215a5901e75e60fabd3f2470ca86a27619"
+                        ]
+                    }
                 }
             }
         }
@@ -5249,7 +5355,8 @@
                 ],
                 "versions": {
                     "20230819": "c37a1823c00bc5b7cc62c08e4e774c1d3321d5a319d60669eaef0a6ae96c9d9a",
-                    "20230828": "8890a237fa2400580795cdd3653c21a4d84bd6af35ba1378a9f1d434141dc050"
+                    "20230828": "8890a237fa2400580795cdd3653c21a4d84bd6af35ba1378a9f1d434141dc050",
+                    "230915 (VRAM)": "b8e9e03a4a46a4c045c22c33e2e4e074dbc3cb1d1c12b186203e50248b5af828"
                 },
                 "split": {
                     "20230819": {
@@ -5268,6 +5375,15 @@
                             "0c4abe88205bbe4f0175ff29c6fde454942555cd86b0d96ba1804707f4025b7b",
                             "fa5d0621cd6e98ce97f453a5ec6962d0a4ec9b702ff61a79ade8fa194637b376",
                             "49c71d8a381894c4fab2a6e849ffce638ff678103c61cbdba8814ed8dca2a980"
+                        ]
+                    },
+                    "230915 (VRAM)": {
+                        "size": "3821492",
+                        "parts": [
+                            "a47309a3b7569bdea205f884db26080ffbdf0050a2e795a07838e7c6aca7fb9f",
+                            "a7c759fe185b2cbe683a3ccfd809560938a92e7082bb625e67d1b22c479ab0d3",
+                            "f40d5756776f49066278e3ea4172b6da3fec227d3babb7a2eb75ab8ddff655d7",
+                            "72f48ab4848630ed08fce6123a99160d583240186d018e175017019c59d118fe"
                         ]
                     }
                 }
