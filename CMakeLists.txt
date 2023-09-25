@@ -23,6 +23,7 @@ set(EXTRA_CONTENT
     ${PROJECT_SOURCE_DIR}/FLASH16_empty.ZX1.zip
     ${PROJECT_SOURCE_DIR}/FLASH16_empty.ZX2.zip
     ${PROJECT_SOURCE_DIR}/FLASH16_empty.ZXD.zip
+    ${PROJECT_SOURCE_DIR}/FLASH16_empty.ZX3.zip
     ${PROJECT_SOURCE_DIR}/ROMS_255_Empty.ZX1.zip
     )
 
@@ -177,6 +178,7 @@ function(BUILD_PYTHON)
         COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/zx123_tool_gui ${PYTHON_BUILD_DIR}/zx123_tool_gui
         COMMAND ${CMAKE_COMMAND} -E copy_directory ${OUTPUT_DIR}/docs ${PYTHON_BUILD_DIR}
         COMMAND ${CMAKE_COMMAND} -E copy ${EXTRA_CONTENT} ${PYTHON_BUILD_DIR}
+        COMMAND ${CMAKE_COMMAND} -E copy "${PROJECT_SOURCE_DIR}/ZX123 Tool.ico" ${PYTHON_BUILD_DIR}
         )
     add_custom_command(
         TARGET "zx123gui_python" 
