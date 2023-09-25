@@ -1,5 +1,5 @@
 {
-    "version": "20230912.001",
+    "version": "20230923.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -5356,7 +5356,8 @@
                 "versions": {
                     "20230819": "c37a1823c00bc5b7cc62c08e4e774c1d3321d5a319d60669eaef0a6ae96c9d9a",
                     "20230828": "8890a237fa2400580795cdd3653c21a4d84bd6af35ba1378a9f1d434141dc050",
-                    "230915 (VRAM)": "b8e9e03a4a46a4c045c22c33e2e4e074dbc3cb1d1c12b186203e50248b5af828"
+                    "230915 (VRAM)": "b8e9e03a4a46a4c045c22c33e2e4e074dbc3cb1d1c12b186203e50248b5af828",
+                    "20230920": "868fa706419d01d303deef06fe53eb3f5fcf942a8c13e71ad1011c4ed63722d2"
                 },
                 "split": {
                     "20230819": {
@@ -5384,6 +5385,15 @@
                             "a7c759fe185b2cbe683a3ccfd809560938a92e7082bb625e67d1b22c479ab0d3",
                             "f40d5756776f49066278e3ea4172b6da3fec227d3babb7a2eb75ab8ddff655d7",
                             "72f48ab4848630ed08fce6123a99160d583240186d018e175017019c59d118fe"
+                        ]
+                    },
+                    "20230920": {
+                        "size": "4026832",
+                        "parts": [
+                            "973eaf8e3f600dc8648845ef8aaff7c32bb98f6ec3420ebf854caf5112c80116",
+                            "522893988779b3a9f7268bc8d85aca8f04fb4f6b51cfe73028415b6934ec0613",
+                            "869a39d6ef6971f88b0553d0b928c1299ff659122b4ef21ce6440fd28e70d58f",
+                            "9fd01999437c590ea7a3401782aee043a90a64ede7809aa0fd541d435f267984"
                         ]
                     }
                 }
@@ -5484,6 +5494,37 @@
                         "parts": [
                             "c052bc8f6953d52cc047c59187dfdad1211c8bf11790411b61b134f97d10bb4e",
                             "293ec95dc258d31b4ad8c10582aba57b21792f7c648ef56e934426c2fdee0716"
+                        ]
+                    }
+                }
+            },
+            "ZX Spectrum Next": {
+                "features": {
+                    "Video": [["VGA"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "3_01_11_20230917"
+                ],
+                "versions": {
+                    "3_01_11_20230917": "0f00a11c53c5de87c76d0548dbecb27876956caf2a9e785d49aef5b7587b820e",
+                    "3_01_11_20230923": "6bc36910599e51dd8989404de387a49b8a066fb477f5eabc4a22c0ca28cffe42"
+                },
+                "split": {
+                    "3_01_11_20230917": {
+                        "size": "2749772",
+                        "parts": [
+                            "d2a78a9efff2d7de3e798f45cda14786ffafd93507b7df0d59308df23ce594ad",
+                            "a5377309d44a004c6e3ca34219dc31802a516a4a458ac57629ea36f97ea8b545",
+                            "a488a1eaaf8ea021d443f42f4234722d0af44e58aa1e9adbbe09c9462c645648"
+                        ]
+                    },
+                    "3_01_11_20230923": {
+                        "size": "2803932",
+                        "parts": [
+                            "3ba7740f7ddd1a4e5a189749f88dd14068188b2489e0709d8cd410595b5cfcc6",
+                            "a4869b49984a3b79444622bf725d2be720a5f14bde6df3f43c650cf8f76a59a2",
+                            "ba62ac6989df595e9bd49323a2d08bec9c5d748432d6af5c43184417a3362393"
                         ]
                     }
                 }
@@ -5625,6 +5666,7 @@
                 "SE Basic IV 4.2 20.01.22 Gaff": "3949fdf325fad54c4cee421d42aef4e05e756fdb96af69b7c7e5809a0df8449e",
                 "SE Basic IV 4.2-b9 Cordelia": "297e4a6b3ea9246d9966efa3e105f15b0a5c4f16589d2a71d917c170c2069593",
                 "SE Basic IV 4.2-b10 2023.06.05": "9525ea5c6462872c7f5b4184d0e41506b0d6a9a108781cb17229b8ece1042ec0",
+                "SE Basic IV RC3 20230923": "fc984b34229a5013c82005fa16418afe3f2e175bce90bfaa5bfb65cbca725bb4",
                 "TS2060 by Daniel A. Nagy 2021.10.22": "af1279ce8c264b3491f31db4b249048c11bc563791c2f5293b5fb9c59a4aba54",
                 "TS2060 2021.10.27": "de8a0f0a71af9dec4f802cb5b6ec6cdba2d51cddccb5e2a53eef9f045a59691e",
                 "TS2060 by Daniel A. Nagy 22.01.15": "b51b685b0e9261bd0bae6f333d8a658bc73cfcfa4e52b2a8099064a6d2c79232",

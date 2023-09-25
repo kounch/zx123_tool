@@ -2,6 +2,7 @@
 *.zx1
 *.zx2
 *.zxd
+*.zx3
 .vscode/
 build/
 __pycache__/
