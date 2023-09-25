@@ -143,8 +143,17 @@ def main():
                                str_extension, str_kind, arg_data['force'],
                                not arg_data['roms'])
 
-        # Expand image file if needed
-        if arg_data['expand_flash']:
+        # Expand image file if needed (16 MiB)
+        if arg_data['expand_flash_16']:
+            if not output_file:
+                output_file = str_file
+            img_len = 16777216
+            if expand_image(str_file, output_file, img_len, arg_data['force']):
+                arg_data['force'] = True
+                str_file = output_file
+
+        # Expand image file if needed (32 MiB)
+        if arg_data['expand_flash_32']:
             if not output_file:
                 output_file = str_file
             img_len = 33554432
@@ -340,7 +349,8 @@ def parse_args() -> dict[str, Any]:
     values['inject'] = []
     values['rename'] = []
     values['wipe_flash'] = False
-    values['expand_flash'] = False
+    values['expand_flash_16'] = False
+    values['expand_flash_32'] = False
     values['truncate_flash'] = False
     values['convert_core'] = False
     values['1core'] = False
@@ -440,12 +450,18 @@ def parse_args() -> dict[str, Any]:
                         action='store_true',
                         dest='wipe_flash',
                         help='Wipe all secondary cores and ROM data')
+    parser.add_argument('-E',
+                        '--16',
+                        required=False,
+                        action='store_true',
+                        dest='expand_flash_16',
+                        help='Expand, if needed, flash file to 16 MiB')
     parser.add_argument('-e',
                         '--32',
                         required=False,
                         action='store_true',
-                        dest='expand_flash',
-                        help='Expand, if needed, flash file to 32MiB')
+                        dest='expand_flash_32',
+                        help='Expand, if needed, flash file to 32 MiB')
     parser.add_argument('-T',
                         '--truncate',
                         required=False,
@@ -585,8 +601,11 @@ def parse_args() -> dict[str, Any]:
     if arguments.wipe_flash:
         values['wipe_flash'] = arguments.wipe_flash
 
-    if arguments.expand_flash:
-        values['expand_flash'] = arguments.expand_flash
+    if arguments.expand_flash_16:
+        values['expand_flash_16'] = arguments.expand_flash_16
+
+    if arguments.expand_flash_32:
+        values['expand_flash_32'] = arguments.expand_flash_32
 
     if arguments.truncate_flash:
         values['truncate_flash'] = arguments.truncate_flash

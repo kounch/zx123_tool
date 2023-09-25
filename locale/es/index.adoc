@@ -262,6 +262,7 @@ La interfaz de comandos se puede invocar directamente usando el script `zx123_to
         Datos de un elemento a renombrar (core o ROM) con el mismo formato
         que al añadir, pero sin nombre de fichero
 -w, --wipe           Borrar todas las ROMs y todos los cores secundarios
+-E, --16             Expandir, si hiciera falta la imagen a 16MiB
 -e, --32             Expandir, si hiciera falta la imagen a 32MiB
 -t, --convert   Convierte entre core estándar y core de Spectrum
 -1, --1core  Usar, si los hay, cores específicos para ZXUnCore

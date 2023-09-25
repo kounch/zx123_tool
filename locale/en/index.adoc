@@ -261,6 +261,7 @@ The CLI can be invoked directly using the script `zx123_tool.py` and Python (ver
         Data of an item to rename (core or ROM) with the same fomat used
         to inject, but without a file path
 -w, --wipe            Wipe all ROMs and all secondary cores from image
+-E, --16              Expand, if needed, flash file to 16MiB
 -e, --32              Expand, if needed, flash file to 32MiB
 -t, --convert   Converts between standard and Spectrum core
 -1, --1core  Use, if available, ZXUnCore cores for ZX-Uno

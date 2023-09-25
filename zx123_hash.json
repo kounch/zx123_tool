@@ -1,5 +1,5 @@
 {
-    "version": "20230923.001",
+    "version": "20230925.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -4856,7 +4856,7 @@
             }
         },
         "Cores": {
-            "ZX Spectrum": {
+            "Main ZX Spectrum": {
                 "features": {
                     "SD": [["FAT16", "FAT32", "+3e"], ""],
                     "Video": [["VGA", "RGB", "Composite"], ""],
