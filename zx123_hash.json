@@ -1,5 +1,5 @@
 {
-    "version": "20230925.002",
+    "version": "20230926.001",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -4598,11 +4598,12 @@
                     "Other": [["Audio In Tape Load", "PZX"], ""]
                 },
                 "latest": [
-                    "EXP28 250623"
+                    "EXP28 090923"
                 ],
                 "versions": {
                     "EXP27_Test": "13f1fa51811e437b7e46bb73dece4b5cc49a6d05b91855e603a3605cdbe613bf",
-                    "EXP28 250623": "6c8c546ca15f2b0cf240116be84afd164c0f7c1f69e1101fab4bcf1993f2c794"
+                    "EXP28 250623": "6c8c546ca15f2b0cf240116be84afd164c0f7c1f69e1101fab4bcf1993f2c794",
+                    "EXP28 090923": "bb288cd97cb5e16fa5fcebd1e1747f865ac26ee7df767ca6943e5e368a20bca5"
                 }
             },
             "Amiga Minimig": {
@@ -4653,10 +4654,11 @@
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
-                    "20230828"
+                    "20230924"
                 ],
                 "versions": {
-                    "20230828": "b36bd930dd15f0310b9c99027bab80b36a4e1df32dbc04b30a28caf1f837a0bc"
+                    "20230828": "b36bd930dd15f0310b9c99027bab80b36a4e1df32dbc04b30a28caf1f837a0bc",
+                    "20230924": "a6163e0e5b3c2e6d5456cdfb157ba19a44f4ccf68d0fa2e8320462670fceb742"
                 },
                 "split": {
                     "20230828": {
@@ -4664,6 +4666,13 @@
                         "parts": [
                             "fdee4aedd0d005171b0e24dd70d7ae38ec4749675e8d36e27440e21b64d90464",
                             "70f4e81aee7cf58371b197411cb1aff8a7d6eddb44d28a7eb99a2e1e0cfdd25e"
+                        ]
+                    },
+                    "20230924": {
+                        "size": "1731288",
+                        "parts": [
+                            "6a00a72e34edb15fb96016e2a2e3372c555d88e737747b8ff6aadccc06bf1e72",
+                            "5767173180156ef5eb1d116d3dd8b5a07d5ac55c56b2a525fe064c8bba714d56"
                         ]
                     }
                 }
@@ -4761,7 +4770,7 @@
                     "3_01_11_20230924"
                 ],
                 "versions": {
-                    "3_01_11_20230924": "fcf917e8a6a4625559c8595bf772903a62de17693d774c8d3043622fb646ef1e"
+                    "3_01_11_20230924": "3af62bc534774e3aa7e8d12aed9dfe5f53b5347ab4ca1b2a02e2044895296f65"
                 }
             }
         }
@@ -4862,7 +4871,7 @@
         },
         "Spectrum": {
             "latest": [
-                "EXP28 250623"
+                "EXP28 090923"
             ],
             "versions": {
                 "EXP28 250623": "d6e380f1ccf76db3ab240f1e617c25ae107922b0c48ab09b3092bf964f4acd6d",
@@ -4882,7 +4891,7 @@
                     "Other": [["Audio In Tape Load", "PZX"], ""]
                 },
                 "latest": [
-                    "EXP28 250623"
+                    "EXP28 090923"
                 ],
                 "versions": {
                     "EXP28 250623": "cc091267de7d3ece8c9808ce9ed3d008e0ab35613b521b6430e2474fbc9a551e",
@@ -4932,10 +4941,11 @@
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
-                    "20230828"
+                    "20230924"
                 ],
                 "versions": {
-                    "20230828": "4d1139569a46510c5c05f90eebc5be355e233626c3d59374d995ee760a923282"
+                    "20230828": "4d1139569a46510c5c05f90eebc5be355e233626c3d59374d995ee760a923282",
+                    "20230924": "6d47ece51682de7d7c4cd9bd65d622b34b106db084937f6875ddab8fecfd545e"
                 },
                 "split": {
                     "20230828": {
@@ -4944,6 +4954,14 @@
                             "9c409557a6c0d97aba3a2c7d6a489570a17f60034386c717ceac01763dd1151a",
                             "c6957d4a57965d7467f7663426a1b371c6b9119e67bf7a0b60fb0aa4a851ebcf",
                             "039f51d6b5d43ff13d436ef5dfab74c170db983226f027b8a8654a5aacd2f480"
+                        ]
+                    },
+                    "20230924": {
+                        "size": "2870428",
+                        "parts": [
+                            "89d92130e64bb4eb5dd7a5790999c4035dc50e1b027da5b5a10e4940948e7bba",
+                            "da00a2cf51129202bf5bb1257c997b1e61dc941b99131dd0d6c3134b2e6ac98e",
+                            "b0185311bcd861c1673a089fa2ce9c8b5a8f59d95b5cd4839312b154cd1c8b82"
                         ]
                     }
                 }
@@ -5020,6 +5038,27 @@
                         "parts": [
                             "7074f8f8bc29fc92486a0815785a65fb6afc61335fa0680e453d2639a86a95b6",
                             "3718aec5262bccc47d2578961e909798d971f5cc5f411a642335a39fbd82d45a"
+                        ]
+                    }
+                }
+            },
+            "ZX Spectrum Next": {
+                "features": {
+                    "Video": [["VGA", "RGB"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "3_01_11_20230924"
+                ],
+                "versions": {
+                    "3_01_11_20230924": "cc3cbd4bf72dc6782d5b2b9a3e8e603ceb164d5decbda30c6a97730e603c29c8"
+                },
+                "split": {
+                    "3_01_11_20230924": {
+                        "size": "1499280",
+                        "parts": [
+                            "bdb40f1fcf41a5a3a0f6b5cef4bc22cfdd96fe56bcfc3972fdee4e39a80e7e5b",
+                            "1acf5cdf83401bed3206454722bd554c0dd2298522a7219d8856e2e97225f549"
                         ]
                     }
                 }
@@ -5122,7 +5161,7 @@
         },
         "Spectrum": {
             "latest": [
-                "EXP28 290723"
+                "EXP28 090923"
             ],
             "versions": {
                 "EXP28 250623": "d2d450180307d7b01a390597c2bf9fa056eb84ecdcf37d488028da40fc3a9ad3",
@@ -5145,7 +5184,7 @@
                     "Other": [["Audio In Tape Load", "PZX"], ""]
                 },
                 "latest": [
-                    "EXP28 290723"
+                    "EXP28 090923"
                 ],
                 "versions": {
                     "EXP28 250623": "000000000000000000000000000000000000000000000000000000000000000f",
@@ -5190,24 +5229,6 @@
                             "3099f1ff407ac602de3e253e1fddb41aa37ef7b45f52a8c81b532407b407bb0f"
                         ]
                     }
-                }
-            },
-            "ZX Spectrum": {
-                "features": {
-                    "SD": [["FAT16", "FAT32", "+3e"], ""],
-                    "Video": [["VGA", "RGB", "DisplayPort"], ""],
-                    "Audio": [["Turbosound", "Specdrum", "Covox", "I2S", "MIDI"], "I2S and MIDI require AddOn"],
-                    "Graphic Modes": [["ULAplus", "Timex", "Radastan"], ""],
-                    "Keyboard": [["PS/2"], ""],
-                    "Mouse": [["PS/2"], "Kempston Protocol Emulation"],
-                    "Joystick": [["DB9", "PS/2 Keyboard"], "May require an AddOn with DB9"],
-                    "Other": [["Audio In Tape Load", "PZX"], ""]
-                },
-                "latest": [
-                    "EXP28 250623"
-                ],
-                "versions": {
-                    "EXP28 250623": "289ff5544558d96100173b6e84444e3ee1a0befe206b0db8143c40e3a702f956"
                 }
             },
             "Amiga Minimig": {
@@ -5366,13 +5387,14 @@
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
-                    "20230828"
+                    "20230924"
                 ],
                 "versions": {
                     "20230819": "c37a1823c00bc5b7cc62c08e4e774c1d3321d5a319d60669eaef0a6ae96c9d9a",
                     "20230828": "8890a237fa2400580795cdd3653c21a4d84bd6af35ba1378a9f1d434141dc050",
                     "230915 (VRAM)": "b8e9e03a4a46a4c045c22c33e2e4e074dbc3cb1d1c12b186203e50248b5af828",
-                    "20230920": "868fa706419d01d303deef06fe53eb3f5fcf942a8c13e71ad1011c4ed63722d2"
+                    "20230920": "868fa706419d01d303deef06fe53eb3f5fcf942a8c13e71ad1011c4ed63722d2",
+                    "20230924": "4c08b65ffefbb5fe146aa193a9d5db5cfcba5abed2b8b3022871157a69f11f02"
                 },
                 "split": {
                     "20230819": {
@@ -5409,6 +5431,15 @@
                             "522893988779b3a9f7268bc8d85aca8f04fb4f6b51cfe73028415b6934ec0613",
                             "869a39d6ef6971f88b0553d0b928c1299ff659122b4ef21ce6440fd28e70d58f",
                             "9fd01999437c590ea7a3401782aee043a90a64ede7809aa0fd541d435f267984"
+                        ]
+                    },
+                    "20230924": {
+                        "size": "4008688",
+                        "parts": [
+                            "da4e526c85e9d4bddeb8643a77c53423f0eab867b84b85cc8df9e6d3e6560f09",
+                            "35f9dd2123b6f2c32691eb0bf7f8e5701c0ebd238a6fc722b0f74476f36df165",
+                            "309b1b56b26c654e5e9fd86ba980e89bdfbb2dbf0dd288aaba370a8e48292ed3",
+                            "dc73204701ef8723aa427eeeaa40326c423dcc8efcf38af36893cf77886ad617"
                         ]
                     }
                 }
@@ -5519,12 +5550,12 @@
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
-                    "3_01_11_20230917"
+                    "3_01_11_20230924"
                 ],
                 "versions": {
                     "3_01_11_20230917": "0f00a11c53c5de87c76d0548dbecb27876956caf2a9e785d49aef5b7587b820e",
                     "3_01_11_20230923": "6bc36910599e51dd8989404de387a49b8a066fb477f5eabc4a22c0ca28cffe42",
-                    "3_01_11_20230924": "cc3cbd4bf72dc6782d5b2b9a3e8e603ceb164d5decbda30c6a97730e603c29c8"
+                    "3_01_11_20230924": "5f92c8337a7193be2f8e051c62f206479ab9a41f2a14e9044feff4a8b713b5ab"
                 },
                 "split": {
                     "3_01_11_20230917": {
@@ -5544,10 +5575,11 @@
                         ]
                     },
                     "3_01_11_20230924": {
-                        "size": "1499280",
+                        "size": "2512416",
                         "parts": [
-                            "bdb40f1fcf41a5a3a0f6b5cef4bc22cfdd96fe56bcfc3972fdee4e39a80e7e5b",
-                            "1acf5cdf83401bed3206454722bd554c0dd2298522a7219d8856e2e97225f549"
+                            "98f0f805d454169b16ec351d0fe062fcfffb338913dd705c83ab39f53a426c0d",
+                            "f488882da73c41b5d224e3840fd291e7fea83ae06039a34ca879decbc1f91bc5",
+                            "48ecb7593310c5906d863113034a21e20a62b20556369d852a1f618710464d4e"
                         ]
                     }
                 }
