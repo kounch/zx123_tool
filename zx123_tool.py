@@ -49,6 +49,7 @@ from zipfile import ZipFile, is_zipfile
 import tempfile
 import shutil
 import ctypes
+import re
 if sys.version_info.major == 3:
     import urllib.request
     from urllib.error import HTTPError
@@ -1080,8 +1081,9 @@ def update_check(hash_dict: dict[str, Any],
     if get_1core and '1core' in hash_dict:
         last_version = hash_dict['1core'][0]
 
+    clean_version: str = re.sub(r' Part \d$', '', block_version)
     if last_version:
-        if block_version == last_version:
+        if clean_version == last_version:
             printcol(Colours.GREEN, '  >> Up to date', end='')
         else:
             printcol(Colours.YELLOW,
