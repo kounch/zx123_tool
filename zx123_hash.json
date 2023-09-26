@@ -1,5 +1,5 @@
 {
-    "version": "20230925.001",
+    "version": "20230925.002",
     "ZX1": {
         "description": "ZX-Uno",
         "hashtype": "sha256sum",
@@ -4560,7 +4560,8 @@
             ],
             "versions": {
                 "0.86 Beta": "23d6b78b63520cbd7799108050c5549aca3998d09ae68059a4ba8cd367b5d7c2",
-                "0.86": "5e07fd6da18c57e7d7ddb721a932fc0b78ab139888cc96ea91f1d5cc02c112f3"
+                "0.86b2": "5e07fd6da18c57e7d7ddb721a932fc0b78ab139888cc96ea91f1d5cc02c112f3",
+                "0.86": "3170efb08ed53e3a0154fdffa1531fcd4ded05a08c4d3c2511a46cc4a6a56ad2"
             }
         },
         "esxdos": {
@@ -4588,7 +4589,7 @@
             "ZX Spectrum": {
                 "features": {
                     "SD": [["FAT16", "FAT32", "+3e"], ""],
-                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Video": [["VGA", "RGB", "DisplayPort"], ""],
                     "Audio": [["Turbosound", "Specdrum", "Covox", "I2S", "MIDI"], "I2S and MIDI require AddOn"],
                     "Graphic Modes": [["ULAplus", "Timex", "Radastan"], ""],
                     "Keyboard": [["PS/2"], ""],
@@ -4627,7 +4628,7 @@
             },
             "Amstrad CPC": {
                 "features": {
-                    "Video": [["VGA"], ""],
+                    "Video": [["VGA", "RGB", "DisplayPort"], ""],
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
@@ -4648,7 +4649,7 @@
             },
             "Neo-Geo": {
                 "features": {
-                    "Video": [["VGA"], ""],
+                    "Video": [["VGA", "RGB"], ""],
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
@@ -4713,26 +4714,9 @@
                     "20230625": "30993f5e53da1d6d86901444d1ae6319eed6ad1772f088dfd147e346ee29a33b"
                 }
             },
-            "ZX81": {
-                "features": {
-                    "microSD": [["FAT16", "FAT32"],""],
-                    "Video": [["VGA", "RGB"], ""],
-                    "Graphic Modes": [["PAL", "NTSC"], ""],
-                    "Audio": [["YM2149"], ""],
-                    "Keyboard": [["PS/2"], ""],
-                    "Joystick": [["DB9"], ""],
-                    "Other": [["microSD ROM and Tape Load", "Audio In Tape Load"], ""]
-                },
-                "latest": [
-                    "20230521"
-                ],
-                "versions": {
-                    "20230521": "9f12a1b5a39fd5132043c76bfbafc2a4969d03f3f621c71b8660cb1d1df1da62"
-                }
-            },
             "zxp3": {
                 "features": {
-                    "Video": [["VGA"], ""],
+                    "Video": [["VGA", "RGB"], ""],
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
@@ -4749,6 +4733,35 @@
                             "c98890d92865be7c15d4af920f22bf215a5901e75e60fabd3f2470ca86a27619"
                         ]
                     }
+                }
+            },
+            "zx81": {
+                "features": {
+                    "microSD": [["FAT16", "FAT32"],""],
+                    "Video": [["VGA", "RGB"], ""],
+                    "Graphic Modes": [["PAL", "NTSC"], ""],
+                    "Audio": [["YM2149"], ""],
+                    "Keyboard": [["PS/2"], ""],
+                    "Joystick": [["DB9"], ""],
+                    "Other": [["microSD ROM and Tape Load", "Audio In Tape Load"], ""]
+                },
+                "latest": [
+                    "20230521"
+                ],
+                "versions": {
+                    "20230521": "9f12a1b5a39fd5132043c76bfbafc2a4969d03f3f621c71b8660cb1d1df1da62"
+                }
+            },
+            "ZX Spectrum Next": {
+                "features": {
+                    "Video": [["VGA", "RGB"], ""],
+                    "Keyboard": [["PS/2"], ""]
+                },
+                "latest": [
+                    "3_01_11_20230924"
+                ],
+                "versions": {
+                    "3_01_11_20230924": "fcf917e8a6a4625559c8595bf772903a62de17693d774c8d3043622fb646ef1e"
                 }
             }
         }
@@ -4832,7 +4845,8 @@
             ],
             "versions": {
                 "0.86 Beta": "23d6b78b63520cbd7799108050c5549aca3998d09ae68059a4ba8cd367b5d7c2",
-                "0.86": "5e07fd6da18c57e7d7ddb721a932fc0b78ab139888cc96ea91f1d5cc02c112f3"
+                "0.86b2": "5e07fd6da18c57e7d7ddb721a932fc0b78ab139888cc96ea91f1d5cc02c112f3",
+                "0.86": "3170efb08ed53e3a0154fdffa1531fcd4ded05a08c4d3c2511a46cc4a6a56ad2"
             }
         },
         "esxdos": {
@@ -4859,7 +4873,7 @@
             "Main ZX Spectrum": {
                 "features": {
                     "SD": [["FAT16", "FAT32", "+3e"], ""],
-                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Video": [["VGA", "RGB", "DisplayPort"], ""],
                     "Audio": [["Turbosound", "Specdrum", "Covox", "I2S", "MIDI"], "I2S and MIDI require AddOn"],
                     "Graphic Modes": [["ULAplus", "Timex", "Radastan"], ""],
                     "Keyboard": [["PS/2"], ""],
@@ -4893,7 +4907,7 @@
             },
             "Amstrad CPC": {
                 "features": {
-                    "Video": [["VGA"], ""],
+                    "Video": [["VGA", "RGB", "DisplayPort"], ""],
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
@@ -4914,7 +4928,7 @@
             },
             "Neo-Geo": {
                 "features": {
-                    "Video": [["VGA"], ""],
+                    "Video": [["VGA", "RGB"], ""],
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
@@ -4991,7 +5005,7 @@
             },
             "zxp3": {
                 "features": {
-                    "Video": [["VGA"], ""],
+                    "Video": [["VGA", "RGB"], ""],
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
@@ -5091,7 +5105,8 @@
             ],
             "versions": {
                 "0.86 Beta": "23d6b78b63520cbd7799108050c5549aca3998d09ae68059a4ba8cd367b5d7c2",
-                "0.86": "5e07fd6da18c57e7d7ddb721a932fc0b78ab139888cc96ea91f1d5cc02c112f3"
+                "0.86b2": "5e07fd6da18c57e7d7ddb721a932fc0b78ab139888cc96ea91f1d5cc02c112f3",
+                "0.86": "3170efb08ed53e3a0154fdffa1531fcd4ded05a08c4d3c2511a46cc4a6a56ad2"
             }
         },
         "esxdos": {
@@ -5121,7 +5136,7 @@
             "Main ZX Spectrum": {
                 "features": {
                     "SD": [["FAT16", "FAT32", "+3e"], ""],
-                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Video": [["VGA", "RGB", "DisplayPort"], ""],
                     "Audio": [["Turbosound", "Specdrum", "Covox", "I2S", "MIDI"], "I2S and MIDI require AddOn"],
                     "Graphic Modes": [["ULAplus", "Timex", "Radastan"], ""],
                     "Keyboard": [["PS/2"], ""],
@@ -5180,7 +5195,7 @@
             "ZX Spectrum": {
                 "features": {
                     "SD": [["FAT16", "FAT32", "+3e"], ""],
-                    "Video": [["VGA", "RGB", "Composite"], ""],
+                    "Video": [["VGA", "RGB", "DisplayPort"], ""],
                     "Audio": [["Turbosound", "Specdrum", "Covox", "I2S", "MIDI"], "I2S and MIDI require AddOn"],
                     "Graphic Modes": [["ULAplus", "Timex", "Radastan"], ""],
                     "Keyboard": [["PS/2"], ""],
@@ -5197,7 +5212,7 @@
             },
             "Amiga Minimig": {
                 "features": {
-                    "Video": [["VGA"], ""],
+                    "Video": [["VGA", "RGB"], ""],
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
@@ -5219,7 +5234,7 @@
             },
             "Amstrad CPC": {
                 "features": {
-                    "Video": [["VGA"], ""],
+                    "Video": [["VGA", "RGB", "DisplayPort"], ""],
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
@@ -5241,7 +5256,7 @@
             },            
             "Atari 2600": {
                 "features": {
-                    "Video": [["VGA"], ""],
+                    "Video": [["VGA", "RGB"], ""],
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
@@ -5283,7 +5298,7 @@
             },
             "Elan Enterprise": {
                 "features": {
-                    "Video": [["VGA"], ""],
+                    "Video": [["VGA", "RGB"], ""],
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
@@ -5305,7 +5320,7 @@
             },
             "Jupiter ACE": {
                 "features": {
-                    "Video": [["VGA"], ""],
+                    "Video": [["VGA", "RGB", "DisplayPort"], ""],
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
@@ -5326,7 +5341,7 @@
             },
             "Middle Board Upgrade": {
                 "features": {
-                    "Video": [["VGA"], ""],
+                    "Video": [["VGA", "RGB"], ""],
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
@@ -5347,7 +5362,7 @@
             },
             "Neo-Geo": {
                 "features": {
-                    "Video": [["VGA"], ""],
+                    "Video": [["VGA", "RGB"], ""],
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
@@ -5500,7 +5515,7 @@
             },
             "ZX Spectrum Next": {
                 "features": {
-                    "Video": [["VGA"], ""],
+                    "Video": [["VGA", "RGB"], ""],
                     "Keyboard": [["PS/2"], ""]
                 },
                 "latest": [
@@ -5508,7 +5523,8 @@
                 ],
                 "versions": {
                     "3_01_11_20230917": "0f00a11c53c5de87c76d0548dbecb27876956caf2a9e785d49aef5b7587b820e",
-                    "3_01_11_20230923": "6bc36910599e51dd8989404de387a49b8a066fb477f5eabc4a22c0ca28cffe42"
+                    "3_01_11_20230923": "6bc36910599e51dd8989404de387a49b8a066fb477f5eabc4a22c0ca28cffe42",
+                    "3_01_11_20230924": "cc3cbd4bf72dc6782d5b2b9a3e8e603ceb164d5decbda30c6a97730e603c29c8"
                 },
                 "split": {
                     "3_01_11_20230917": {
@@ -5525,6 +5541,13 @@
                             "3ba7740f7ddd1a4e5a189749f88dd14068188b2489e0709d8cd410595b5cfcc6",
                             "a4869b49984a3b79444622bf725d2be720a5f14bde6df3f43c650cf8f76a59a2",
                             "ba62ac6989df595e9bd49323a2d08bec9c5d748432d6af5c43184417a3362393"
+                        ]
+                    },
+                    "3_01_11_20230924": {
+                        "size": "1499280",
+                        "parts": [
+                            "bdb40f1fcf41a5a3a0f6b5cef4bc22cfdd96fe56bcfc3972fdee4e39a80e7e5b",
+                            "1acf5cdf83401bed3206454722bd554c0dd2298522a7219d8856e2e97225f549"
                         ]
                     }
                 }
